@@ -123,10 +123,17 @@ public class PolyglotCoreStepsDefinition {
     @When("^(.*) starts to practice in (.*)-(.*) (normal|reverse) order, (\\d+) exercises, adding a new word every (\\d+) turns$")
     public void tomStartsToPracticeInNormalOrderExercisesAddingANewWordEveryTurns(String username, String languageFrom, String languageTo, String order, int numberOfExercises, int addingNewEveryX1) {
         UserTO user = findUser.byUsername(username).orElseThrow(() -> new IllegalStateException("Verwacht dat user bestaat"));
+        updateUserSettings.forUser(UserSettingsUpdateTO.newBuilder()
+                .withUserId(user.id())
+                .withFlagAsKnowWhenWinningStreakHitsX(5)
+                .withInitialNumberOnPracticeWords(5)
+                .withNewWordEveryXexcersises(addingNewEveryX1)
+                .build());
 
 
         for(int i = 0; i < numberOfExercises; i++){
             PracticeWordTO practiceWordTO = practiceWords.nextWord(user.id(), languageFrom, languageTo);
+
             practiceWords.practiced(user.id(), practiceWordTO.translationId(), practiceWordTO.reversed());
         }
 

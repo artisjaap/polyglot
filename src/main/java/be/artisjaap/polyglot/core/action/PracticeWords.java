@@ -41,19 +41,23 @@ public class PracticeWords {
 
         LanguagePairTO languagePairTO = findLanguagePair.pairForUser(userId, languageFrom, languageTo).orElseThrow(() -> new IllegalStateException(""));
 
-        if(languagePairTO.turnsDone() % 20 == 0){
+        if(languagePairTO.turnsDone()> 0 && languagePairTO.turnsDone() % 20 == 0){
             Optional<TranslationPractice> translationPractice = introduceNewWordForPractice.forUserInLanguage(userId, languagePairTO.id());
             if(translationPractice.isPresent()){
                 TranslationPractice practice = translationPractice.get();
                 Translation translation = translationRepository.findById(practice.getTranslationId()).orElseThrow(() -> new IllegalStateException("expected to find translation"));
-                return merge(practice, translation, languagePairTO, languageFrom, languageTo);
+                PracticeWordTO merge = merge(practice, translation, languagePairTO, languageFrom, languageTo);
+                System.out.println("New word:" + merge.question());
+                return merge;
             }
 
         }
 
         List<PracticeWordTO> practiceWordTOS = giveCurrentListToPractice(userId, languageFrom, languageTo);
         int index = (int)Math.floor(Math.random() * practiceWordTOS.size());
-        return practiceWordTOS.get(index);
+        PracticeWordTO practiceWordTO = practiceWordTOS.get(index);
+        System.out.println(practiceWordTO.question());
+        return practiceWordTO;
 
 
     }
@@ -93,7 +97,7 @@ public class PracticeWords {
 
     private void addNewWordToPracticeList(List<TranslationPractice> translationPractices, Integer initialNumberOnPracticeWords, LanguagePairTO languagePair) {
         for(int i =0; i < initialNumberOnPracticeWords; i++){
-            introduceNewWordForPractice.forUserInLanguage(languagePair.userId(), languagePair.id()).ifPresent(t -> translationPractices.add(t));
+            introduceNewWordForPractice.forUserInLanguage(languagePair.userId(), languagePair.id()).ifPresent(translationPractices::add);
         }
     }
 
