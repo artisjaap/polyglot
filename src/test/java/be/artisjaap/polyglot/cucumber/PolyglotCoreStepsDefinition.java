@@ -3,11 +3,14 @@ package be.artisjaap.polyglot.cucumber;
 import be.artisjaap.polyglot.PolyglotApplication;
 import be.artisjaap.polyglot.core.action.*;
 import be.artisjaap.polyglot.core.action.to.*;
+import be.artisjaap.polyglot.core.action.to.test.*;
+import be.artisjaap.polyglot.core.model.Lesson;
 import be.artisjaap.polyglot.core.model.LessonRepository;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import cucumber.api.junit.Cucumber;
+import org.bson.types.ObjectId;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -47,7 +50,8 @@ public class PolyglotCoreStepsDefinition {
     @Autowired
     private LessonRepository lessonRepository;
 
-
+    @Autowired
+    private TestForLesson testForLesson;
 
     @Given("^a user named (.*)$")
     public void eenGebruikerMetNaam(String naam)  {
@@ -161,7 +165,34 @@ public class PolyglotCoreStepsDefinition {
                 .withUserId(user.id())
                 .build();
         createLesson.automaticallyFor(newAutomaticLessonTO);
-
         lessonRepository.findAll();
+    }
+
+    @And("^(.*) does test with name '(.*)' without making any mistake$")
+    public void tomDoesTestWithNameTESTWithoutMakingAnyMistake(String username, String name) {
+        UserTO user = findUser.byUsername(username).orElseThrow(() -> new IllegalStateException("Verwacht dat user bestaat"));
+        ObjectId userId = new ObjectId(user.id());
+        Lesson lesson = lessonRepository.findByUserIdAndName(userId, name).orElseThrow(() -> new IllegalStateException("Verwacht dat user bestaat"));
+
+        TestAssignmentTO testAssignmentTO = testForLesson.asSimpleTestForLesson(CreateTestTO.newBuilder()
+                .withLessonId(lesson.getId().toString())
+                .withOrderType(OrderType.RANDOM)
+                .withUserId(user.id())
+                .build());
+
+
+        List<WordSolutionTO> solutions = testAssignmentTO.words().stream().map(word ->
+                WordSolutionTO.newBuilder()
+                        .withAnswerLanguage(word.anwserLanguage())
+                        .withQuestion(word.question())
+                        .withAnswer("een")
+                        .withTranslationId(word.translationId())
+                        .build())
+                .collect(Collectors.toList());
+
+        TestResultTO testResultTO = testForLesson.correctTest(TestSolutionTO.newBuilder()
+                .withLessonId(testAssignmentTO.lessonId())
+                .withSolutions(solutions)
+                .build());
     }
 }

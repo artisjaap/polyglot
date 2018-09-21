@@ -15,4 +15,6 @@ public interface TranslationPracticeRepository extends MongoRepository<Translati
     TranslationPractice findByUserIdAndTranslationId(ObjectId userId, ObjectId translationId);
 
     List<TranslationPractice> findByUserIdAndLanguagePairIdAndProgressStatusIn(ObjectId userId, ObjectId languagePairId, List<ProgressStatus> progressStatuses);
+
+    List<TranslationPractice> findByUserIdAndTranslationIdIn(ObjectId userId, List<ObjectId> translationId);
 }

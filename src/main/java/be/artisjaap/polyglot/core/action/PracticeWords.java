@@ -60,6 +60,33 @@ public class PracticeWords {
         return practiceWordTOS.get(index);
     }
 
+    //todo wrap return with result of check
+    public PracticeWordTO checkAnswerAndGiveNext(String userId, String translationId, String languageFrom, String languageTo, String answerGiven) {
+        TranslationPractice translationPractice = translationPracticeRepository.findByUserIdAndTranslationId(new ObjectId(userId), new ObjectId(translationId));
+        LanguagePairTO languagePairTO = findLanguagePair.pairForUser(userId, languageFrom, languageTo).orElseThrow(() -> new IllegalStateException(""));
+        Translation translation = translationRepository.findById(new ObjectId(translationId)).orElseThrow(IllegalStateException::new);
+
+
+        if (languageFrom.equals(languagePairTO.languageFrom())) {
+            if (translation.getLanguageB().equalsIgnoreCase(answerGiven)) {
+                translationPractice.answerCorrect();
+            } else {
+                translationPractice.answerIncorrect();
+            }
+
+        } else if (languageTo.equals(languagePairTO.languageFrom())) {
+            if (translation.getLanguageB().equalsIgnoreCase(answerGiven)) {
+                translationPractice.answerCorrectReverse();
+            } else {
+                translationPractice.answerIncorrectReverse();
+            }
+
+        }
+
+        translationPracticeRepository.save(translationPractice);
+
+        return nextWord(userId, languageFrom, languageTo);
+    }
 
     public void practiced(String userId, String translationId, Boolean reversed){
         TranslationPractice translationPractice = translationPracticeRepository.findByUserIdAndTranslationId(new ObjectId(userId), new ObjectId(translationId));
@@ -95,6 +122,17 @@ public class PracticeWords {
 
     public List<TranslationPracticeTO> allPracticedWords(String userId, String languagePairId, List<ProgressStatus> progressStatuses) {
         return translationPracticeAssembler.assembleTOs(translationPracticeRepository.findByUserIdAndLanguagePairIdAndProgressStatusIn(new ObjectId(userId), new ObjectId(languagePairId), progressStatuses));
+    }
+
+    public List<PracticeWordTO> givePracticeWordsForTranslations(String userId, String languageFrom, String languageTo, List<String> translationIds) {
+        List<ObjectId> translationIdsObject = translationIds.stream().map(ObjectId::new).collect(Collectors.toList());
+        List<Translation> translations = StreamSupport.stream(translationRepository
+                .findAllById(translationIdsObject).spliterator(), false).collect(Collectors.toList());
+
+        List<TranslationPractice> translationPractices = translationPracticeRepository.findByUserIdAndTranslationIdIn(new ObjectId(userId), translationIdsObject);
+        LanguagePairTO languagePair = findLanguagePair.pairForUserOrCreate(userId, languageFrom, languageTo);
+
+        return merge(translationPractices, translations, languagePair, languageFrom, languageTo);
     }
 
     private void addNewWordToPracticeList(List<TranslationPractice> translationPractices, Integer initialNumberOnPracticeWords, LanguagePairTO languagePair) {

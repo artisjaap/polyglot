@@ -9,6 +9,7 @@ import be.artisjaap.polyglot.core.action.to.TranslationPracticeTO;
 import be.artisjaap.polyglot.core.model.Lesson;
 import be.artisjaap.polyglot.core.model.LessonRepository;
 import be.artisjaap.polyglot.core.model.ProgressStatus;
+import be.artisjaap.polyglot.core.model.TranslationPracticeRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -33,6 +34,9 @@ public class CreateLesson {
 
     @Autowired
     private PracticeWords practiceWords;
+
+    @Autowired
+    private TranslationPracticeRepository translationPracticeRepository;
 
 
     public LessonTO create(NewLessonTO to){
@@ -67,7 +71,7 @@ public class CreateLesson {
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
         List<ObjectId> wordsNeverUsed = translationPracticeTOS.stream()
-                .map(TranslationPracticeTO::id)
+                .map(TranslationPracticeTO::translationId)
                 .map(ObjectId::new)
                 .filter(to -> !translationsUsedOrderedByOccurence.containsKey(to))
                 .limit(newLessonTO.maxNumberOfWords())
@@ -84,7 +88,7 @@ public class CreateLesson {
 
         }
 
+//        return StreamSupport.stream(translationPracticeRepository.findAllById(wordsNeverUsed).spliterator(), false).map(TranslationPractice::getTranslationId).collect(Collectors.toList());
         return wordsNeverUsed;
-
     }
 }

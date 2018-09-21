@@ -125,6 +125,26 @@ public class TranslationPractice extends AbstractDocument{
         answerCheckedReverse++;
     }
 
+    public void answerCorrect() {
+        knowledgeCounterSuccess++;
+        lastSuccess = LocalDateTime.now();
+    }
+
+    public void answerCorrectReverse() {
+        knowledgeCounterSuccessReverse++;
+        lastSuccessReverse = LocalDateTime.now();
+    }
+
+    public void answerIncorrect() {
+        knowledgeCounterMiss++;
+        lastMiss = LocalDateTime.now();
+    }
+
+    public void answerIncorrectReverse() {
+        knowledgeCounterMissReverse++;
+        lastMissReverse = LocalDateTime.now();
+    }
+
     public static final class Builder extends AbstractBuilder<Builder> {
         private ObjectId translationId;
         private ObjectId userId;
