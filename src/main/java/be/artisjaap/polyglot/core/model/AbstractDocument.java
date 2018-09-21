@@ -32,20 +32,19 @@ public class AbstractDocument {
         private ObjectId id;
         private LocalDateTime timestamp;
 
-
-        public T withId(ObjectId id) {
+        private T withId(ObjectId id) {
             this.id = id;
             return (T)this;
         }
 
-        public T withTimeStamp(LocalDateTime timeStamp) {
+        private T withTimeStamp(LocalDateTime timeStamp) {
             this.timestamp = timeStamp;
             return (T)this;
         }
 
-        public T forDocument(AbstractDocument document){
-            withId(document.getId());
-            withTimeStamp(document.getTimestamp());
+        public T forDocument(ReferenceableTO document) {
+            withId(new ObjectId(document.id()));
+            withTimeStamp(document.timeStamp());
             return (T)this;
         }
     }

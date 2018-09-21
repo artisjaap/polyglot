@@ -5,6 +5,7 @@ public class PracticeWordTO {
     private String translationId;
     private String question;
     private String questionLanguage;
+    private String answer;
     private String anwserLanguage;
     private WordStatsTO wordStatsTO;
 
@@ -28,10 +29,6 @@ public class PracticeWordTO {
         return anwserLanguage;
     }
 
-    public WordStatsTO wordStatsTO() {
-        return wordStatsTO;
-    }
-
     private PracticeWordTO(Builder builder) {
         isReversed = builder.isReversed;
         translationId = builder.translationId;
@@ -39,17 +36,39 @@ public class PracticeWordTO {
         questionLanguage = builder.questionLanguage;
         anwserLanguage = builder.anwserLanguage;
         wordStatsTO = builder.wordStatsTO;
+        answer = builder.answer;
+    }
+
+    public WordStatsTO wordStatsTO() {
+        return wordStatsTO;
+    }
+
+    public String answer() {
+        return answer;
+    }
+
+    @Override
+    public String toString() {
+        return "PracticeWordTO{" +
+                "isReversed=" + isReversed +
+                ", translationId='" + translationId + '\'' +
+                ", question='" + question + '\'' +
+                ", questionLanguage='" + questionLanguage + '\'' +
+                ", answer='" + answer + '\'' +
+                ", anwserLanguage='" + anwserLanguage + '\'' +
+                ", wordStatsTO=" + wordStatsTO +
+                '}';
     }
 
     public static Builder newBuilder() {
         return new Builder();
     }
 
-
     public static final class Builder {
         private Boolean isReversed;
         private String translationId;
         private String question;
+        private String answer;
         private String questionLanguage;
         private String anwserLanguage;
         private WordStatsTO wordStatsTO;
@@ -86,6 +105,13 @@ public class PracticeWordTO {
             this.isReversed = isReversed;
             return this;
         }
+
+
+        public Builder withAnswer(String answer) {
+            this.answer = answer;
+            return this;
+        }
+
 
         public PracticeWordTO build() {
             return new PracticeWordTO(this);

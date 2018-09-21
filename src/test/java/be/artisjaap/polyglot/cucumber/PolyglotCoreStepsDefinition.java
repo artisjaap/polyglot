@@ -3,6 +3,7 @@ package be.artisjaap.polyglot.cucumber;
 import be.artisjaap.polyglot.PolyglotApplication;
 import be.artisjaap.polyglot.core.action.*;
 import be.artisjaap.polyglot.core.action.to.*;
+import be.artisjaap.polyglot.core.model.LessonRepository;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
@@ -42,6 +43,10 @@ public class PolyglotCoreStepsDefinition {
 
     @Autowired
     private UpdateUserSettings updateUserSettings;
+
+    @Autowired
+    private LessonRepository lessonRepository;
+
 
 
     @Given("^a user named (.*)$")
@@ -134,10 +139,29 @@ public class PolyglotCoreStepsDefinition {
         for(int i = 0; i < numberOfExercises; i++){
             PracticeWordTO practiceWordTO = practiceWords.nextWord(user.id(), languageFrom, languageTo);
 
+            System.out.println(practiceWordTO);
+
             practiceWords.practiced(user.id(), practiceWordTO.translationId(), practiceWordTO.reversed());
         }
 
         List<PracticeWordTO> practiceWordTOS = practiceWords.giveCurrentListToPractice(user.id(), languageFrom, languageTo);
 
+    }
+
+    @And("^(.*) creates lesson with name '(.*)' for (.*)-(.*) aumatically with (\\d+) words from practice list$")
+    public void createTestLessonWithNameTESTAumaticallyWithWordsFromPracticeList(String username, String name, String languageFrom, String languageTo, int numberOfWords) {
+        UserTO user = findUser.byUsername(username).orElseThrow(() -> new IllegalStateException("Verwacht dat user bestaat"));
+        LanguagePairTO languagePair = findLanguagePair.pairForUser(user.id(), languageFrom, languageTo).orElseThrow(() -> new IllegalStateException("Expected language pair for user"));
+
+
+        NewAutomaticLessonTO newAutomaticLessonTO = NewAutomaticLessonTO.newBuilder()
+                .withLanguagePairId(languagePair.id())
+                .withLessonTitle(name)
+                .withMaxNumberOfWords(numberOfWords)
+                .withUserId(user.id())
+                .build();
+        createLesson.automaticallyFor(newAutomaticLessonTO);
+
+        lessonRepository.findAll();
     }
 }

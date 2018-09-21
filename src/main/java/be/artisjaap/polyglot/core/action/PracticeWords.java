@@ -1,9 +1,7 @@
 package be.artisjaap.polyglot.core.action;
 
-import be.artisjaap.polyglot.core.action.to.LanguagePairTO;
-import be.artisjaap.polyglot.core.action.to.PracticeWordTO;
-import be.artisjaap.polyglot.core.action.to.UserTO;
-import be.artisjaap.polyglot.core.action.to.WordStatsTO;
+import be.artisjaap.polyglot.core.action.assembler.TranslationPracticeAssembler;
+import be.artisjaap.polyglot.core.action.to.*;
 import be.artisjaap.polyglot.core.model.*;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +35,12 @@ public class PracticeWords {
     @Autowired
     private LanguagePairTurn languagePairTurn;
 
+    @Autowired
+    private TranslationPracticeAssembler translationPracticeAssembler;
+
+
+
+
     public PracticeWordTO nextWord(String userId, String languageFrom, String languageTo ){
 
         LanguagePairTO languagePairTO = findLanguagePair.pairForUser(userId, languageFrom, languageTo).orElseThrow(() -> new IllegalStateException(""));
@@ -46,20 +50,14 @@ public class PracticeWords {
             if(translationPractice.isPresent()){
                 TranslationPractice practice = translationPractice.get();
                 Translation translation = translationRepository.findById(practice.getTranslationId()).orElseThrow(() -> new IllegalStateException("expected to find translation"));
-                PracticeWordTO merge = merge(practice, translation, languagePairTO, languageFrom, languageTo);
-                System.out.println("New word:" + merge.question());
-                return merge;
+                return merge(practice, translation, languagePairTO, languageFrom, languageTo);
             }
 
         }
 
         List<PracticeWordTO> practiceWordTOS = giveCurrentListToPractice(userId, languageFrom, languageTo);
         int index = (int)Math.floor(Math.random() * practiceWordTOS.size());
-        PracticeWordTO practiceWordTO = practiceWordTOS.get(index);
-        System.out.println(practiceWordTO.question());
-        return practiceWordTO;
-
-
+        return practiceWordTOS.get(index);
     }
 
 
@@ -93,6 +91,10 @@ public class PracticeWords {
         List<Translation> translations = StreamSupport.stream(translationRepository.findAllById(translationPractices.stream().map(TranslationPractice::getTranslationId).collect(Collectors.toList())).spliterator(), false).collect(Collectors.toList());
 
         return merge(translationPractices, translations, languagePair, languageFrom, languageTo);
+    }
+
+    public List<TranslationPracticeTO> allPracticedWords(String userId, String languagePairId, List<ProgressStatus> progressStatuses) {
+        return translationPracticeAssembler.assembleTOs(translationPracticeRepository.findByUserIdAndLanguagePairIdAndProgressStatusIn(new ObjectId(userId), new ObjectId(languagePairId), progressStatuses));
     }
 
     private void addNewWordToPracticeList(List<TranslationPractice> translationPractices, Integer initialNumberOnPracticeWords, LanguagePairTO languagePair) {
@@ -144,12 +146,17 @@ public class PracticeWords {
                 .withTranslationId(translation.getId().toString())
                 .withWordStatsTO(stats)
                 .withIsReversed(languagePairTO.languageFrom().equals(languageAnswer))
+                .withAnswer(deriveAnswer(translation, languagePairTO, languageQuestion))
                 .build();
 
     }
 
     private String deriveQuestion(Translation translation, LanguagePairTO languagePairTO, String languageQuestion) {
         return languagePairTO.languageFrom().equals(languageQuestion)?translation.getLanguageA():translation.getLanguageB();
+    }
+
+    private String deriveAnswer(Translation translation, LanguagePairTO languagePairTO, String languageQuestion) {
+        return languagePairTO.languageFrom().equals(languageQuestion) ? translation.getLanguageB() : translation.getLanguageA();
     }
 
     private List<TranslationPractice> findWordToPracticeFor(ObjectId userId, LanguagePairTO languagePairTO) {

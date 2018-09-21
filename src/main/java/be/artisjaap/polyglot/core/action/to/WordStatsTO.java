@@ -92,6 +92,25 @@ public class WordStatsTO {
         return new Builder();
     }
 
+    @Override
+    public String toString() {
+        return "WordStatsTO{" +
+                "progressStatus=" + progressStatus +
+                ", knowledgeStatus=" + knowledgeStatus +
+                ", knowledgeStatusReverse=" + knowledgeStatusReverse +
+                ", knowledgeCounterSuccess=" + knowledgeCounterSuccess +
+                ", knowledgeCounterSuccessReverse=" + knowledgeCounterSuccessReverse +
+                ", knowledgeCounterMiss=" + knowledgeCounterMiss +
+                ", knowledgeCounterMissReverse=" + knowledgeCounterMissReverse +
+                ", answerChecked=" + answerChecked +
+                ", answerCheckedReverse=" + answerCheckedReverse +
+                ", lastSuccess=" + lastSuccess +
+                ", lastSuccessReverse=" + lastSuccessReverse +
+                ", lastMiss=" + lastMiss +
+                ", lastMissReverse=" + lastMissReverse +
+                '}';
+    }
+
 
     public static final class Builder {
         private ProgressStatus progressStatus;

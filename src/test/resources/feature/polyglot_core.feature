@@ -25,3 +25,9 @@ Feature: core polyglot features
   Scenario: Manual practicing words by flipping cards
     Given a user Tom with default dataset
     When Tom starts to practice in NL-FR normal order, 100 exercises, adding a new word every 20 turns
+
+
+  Scenario: Autosave lesson from practiced words
+    Given a user Tom with default dataset
+    When Tom starts to practice in NL-FR normal order, 100 exercises, adding a new word every 20 turns
+    And Tom creates lesson with name 'TEST 1' for NL-FR aumatically with 5 words from practice list

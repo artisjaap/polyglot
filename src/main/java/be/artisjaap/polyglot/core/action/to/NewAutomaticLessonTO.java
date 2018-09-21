@@ -1,19 +1,16 @@
 package be.artisjaap.polyglot.core.action.to;
 
-import java.util.List;
-
-public class NewLessonTO {
-    private String name;
+public class NewAutomaticLessonTO {
     private String userId;
     private String languagePairId;
-    private List<String> translationsIds;
+    private String lessonTitle;
+    private Integer maxNumberOfWords;
 
-
-    private NewLessonTO(Builder builder) {
-        name = builder.name;
+    private NewAutomaticLessonTO(Builder builder) {
         userId = builder.userId;
         languagePairId = builder.languagePairId;
-        translationsIds = builder.translationsIds;
+        lessonTitle = builder.lessonTitle;
+        maxNumberOfWords = builder.maxNumberOfWords;
     }
 
     public static Builder newBuilder() {
@@ -28,19 +25,20 @@ public class NewLessonTO {
         return languagePairId;
     }
 
-    public String name() {
-        return name;
+    public String lessonTitle() {
+        return lessonTitle;
     }
 
-    public List<String> translationsIds() {
-        return translationsIds;
+    public Integer maxNumberOfWords() {
+        return maxNumberOfWords;
     }
+
 
     public static final class Builder {
-        private String name;
         private String userId;
         private String languagePairId;
-        private List<String> translationsIds;
+        private String lessonTitle;
+        private Integer maxNumberOfWords;
 
         private Builder() {
         }
@@ -55,18 +53,18 @@ public class NewLessonTO {
             return this;
         }
 
-        public Builder withTranslationsIds(List<String> val) {
-            translationsIds = val;
+        public Builder withLessonTitle(String val) {
+            lessonTitle = val;
             return this;
         }
 
-        public Builder withName(String val) {
-            name = val;
+        public Builder withMaxNumberOfWords(Integer val) {
+            maxNumberOfWords = val;
             return this;
         }
 
-        public NewLessonTO build() {
-            return new NewLessonTO(this);
+        public NewAutomaticLessonTO build() {
+            return new NewAutomaticLessonTO(this);
         }
     }
 }
