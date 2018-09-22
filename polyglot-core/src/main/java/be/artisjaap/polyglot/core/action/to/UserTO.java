@@ -1,7 +1,5 @@
 package be.artisjaap.polyglot.core.action.to;
 
-import be.artisjaap.polyglot.core.model.UserSettings;
-
 public class UserTO extends ReferenceableTO{
 
     private String username;

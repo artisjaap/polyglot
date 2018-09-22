@@ -1,6 +1,5 @@
 package be.artisjaap.polyglot.core.action;
 
-import be.artisjaap.polyglot.core.model.KnowledgeStatus;
 import be.artisjaap.polyglot.core.model.ProgressStatus;
 import be.artisjaap.polyglot.core.model.TranslationPractice;
 import be.artisjaap.polyglot.core.model.TranslationPracticeRepository;

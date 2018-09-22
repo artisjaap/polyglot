@@ -3,7 +3,6 @@ package be.artisjaap.polyglot.core.action;
 import be.artisjaap.polyglot.core.action.assembler.LanguagePairAssembler;
 import be.artisjaap.polyglot.core.action.to.LanguagePairTO;
 import be.artisjaap.polyglot.core.action.to.NewLanguagePairTO;
-import be.artisjaap.polyglot.core.model.LanguagePair;
 import be.artisjaap.polyglot.core.model.LanguagePairRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;

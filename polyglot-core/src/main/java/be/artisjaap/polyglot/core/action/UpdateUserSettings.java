@@ -1,7 +1,6 @@
 package be.artisjaap.polyglot.core.action;
 
 import be.artisjaap.polyglot.core.action.assembler.UserAssembler;
-import be.artisjaap.polyglot.core.action.to.UserSettingsTO;
 import be.artisjaap.polyglot.core.action.to.UserSettingsUpdateTO;
 import be.artisjaap.polyglot.core.action.to.UserTO;
 import be.artisjaap.polyglot.core.model.User;
@@ -9,8 +8,6 @@ import be.artisjaap.polyglot.core.model.UserRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.Optional;
 
 @Component
 public class UpdateUserSettings {
