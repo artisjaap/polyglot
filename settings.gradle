@@ -1,3 +1,5 @@
 rootProject.name = 'polyglot'
 
 include 'polyglot-core'
+include 'polyglot-web'
+include 'polyglot-scenarios'

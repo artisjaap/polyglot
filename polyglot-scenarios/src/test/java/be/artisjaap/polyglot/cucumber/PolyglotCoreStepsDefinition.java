@@ -6,6 +6,7 @@ import be.artisjaap.polyglot.core.action.to.*;
 import be.artisjaap.polyglot.core.action.to.test.*;
 import be.artisjaap.polyglot.core.model.Lesson;
 import be.artisjaap.polyglot.core.model.LessonRepository;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
@@ -15,6 +16,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 
+import java.io.FileReader;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -193,6 +196,18 @@ public class PolyglotCoreStepsDefinition {
         TestResultTO testResultTO = testForLesson.correctTest(TestSolutionTO.newBuilder()
                 .withLessonId(testAssignmentTO.lessonId())
                 .withSolutions(solutions)
+                .build());
+    }
+
+    @And("^(.*) uploads a list (.*) for language pair (.*)-(.*)$")
+    public void tomUploadsAListTranslationsNumbersCsvForLanguagePairNLFR(String username, String file, String languageFrom, String languageTo) throws Throwable {
+        UserTO user = findUser.byUsername(username).orElseThrow(() -> new IllegalStateException("Verwacht dat user bestaat"));
+        LanguagePairTO languagePair = findLanguagePair.pairForUser(user.id(), languageFrom, languageTo).orElseThrow(() -> new IllegalStateException("Expected language pair for user"));
+
+        registerTranslation.forAllWords(NewTranslationForUserFromFileTO.newBuilder()
+                .withUserId(user.id())
+                .withLanguagePairId(languagePair.id())
+                .withReader(new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream("data/" + file)))
                 .build());
     }
 }

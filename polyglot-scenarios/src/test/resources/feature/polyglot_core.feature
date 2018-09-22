@@ -37,3 +37,8 @@ Feature: core polyglot features
     When Tom starts to practice in NL-FR normal order, 100 exercises, adding a new word every 20 turns
     And Tom creates lesson with name 'TEST 1' for NL-FR aumatically with 5 words from practice list
     And Tom does test with name 'TEST 1' without making any mistake
+
+  Scenario: upload a list of words
+    Given a user named Tom
+    And Tom creates language pair NL-FR
+    And Tom uploads a list translations-numbers.csv for language pair NL-FR

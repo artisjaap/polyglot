@@ -25,6 +25,19 @@ repositories {
     mavenCentral()
 }
 
+task testJar(type: Jar, dependsOn: testClasses) {
+    baseName = "test-${project.archivesBaseName}"
+    from sourceSets.test.output
+}
+
+configurations {
+    tests
+}
+
+artifacts {
+    tests testJar
+}
+
 
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-aop')
@@ -38,10 +51,6 @@ dependencies {
     testCompile('de.flapdoodle.embed:de.flapdoodle.embed.mongo')
     testCompile('org.springframework.security:spring-security-test')
 
-    //cucumber
-    testCompile "info.cukes:cucumber-java8:1.2.4"
-    testCompile "info.cukes:cucumber-spring:1.2.4"
-    testCompile "info.cukes:cucumber-junit:1.2.4"
-    compile group: 'net.masterthought', name: 'cucumber-reporting', version: '3.1.0'
-
+    compile('com.opencsv:opencsv:4.2')
+    
 }
