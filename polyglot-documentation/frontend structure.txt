@@ -1,0 +1,14 @@
+/                                                           --> redirect /login /main
+
+/login                                                      --> login with username/passord and redirect to /main
+/main                                                       --> landing page
+/main/manage                                                --> manage landing page
+/main/manage/languagepairs                                  --> pairs
+/main/manage/languagepairs/:languagepairId/words            --> registered words for the pairs
+/main/manage/lessons                                        --> lessons
+/main/practice/:languagepair
+...
+/main/test                                                  --> tests
+/main/test/:testid                                          --> test with id landing
+/main/test/:testid/type                                     --> start test as type
+/main/test/result                                           --> result of test taken
