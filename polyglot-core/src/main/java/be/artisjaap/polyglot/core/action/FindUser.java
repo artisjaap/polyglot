@@ -25,4 +25,8 @@ public class FindUser {
     public UserTO byUserId(String userId) {
         return userRepository.findById(new ObjectId(userId)).map(userAssembler::assembleTO).orElseThrow(() -> new UnsupportedOperationException("user not found"));
     }
+
+    public Optional<UserTO> byUsernameAndPassword(String username, String password) {
+        return userRepository.findByUsernameAndPassword(username, password).map(userAssembler::assembleTO);
+    }
 }

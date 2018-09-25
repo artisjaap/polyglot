@@ -29,4 +29,7 @@ repositories {
 dependencies {
 
     compile project(':polyglot-core')
+
+    //jwt
+    compile('io.jsonwebtoken:jjwt:0.7.0')
 }
