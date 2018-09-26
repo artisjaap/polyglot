@@ -1,4 +1,4 @@
-package be.artisjaap.polyglot.core.validation;
+package be.artisjaap.core.validation;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

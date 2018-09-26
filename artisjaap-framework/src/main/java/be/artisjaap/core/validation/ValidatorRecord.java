@@ -1,4 +1,4 @@
-package be.artisjaap.polyglot.core.validators;
+package be.artisjaap.core.validation;
 
 public interface ValidatorRecord {
     String key();

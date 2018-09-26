@@ -1,5 +1,7 @@
 package be.artisjaap.polyglot.core.validators;
 
+import be.artisjaap.core.validation.ValidatorRecord;
+
 public enum DefaultValidations implements ValidatorRecord {
 
 

@@ -1,6 +1,8 @@
 package be.artisjaap.polyglot.core.action.to;
 
-public class UserTO extends ReferenceableTO{
+import be.artisjaap.core.model.ReferenceableTO;
+
+public class UserTO extends ReferenceableTO {
 
     private String username;
     private String password;

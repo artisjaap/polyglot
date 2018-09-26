@@ -3,7 +3,6 @@ package be.artisjaap.polyglot.web;
 import be.artisjaap.polyglot.PolyglotApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 public class PolyglotWebApplication {

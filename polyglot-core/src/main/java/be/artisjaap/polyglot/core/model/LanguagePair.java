@@ -1,10 +1,11 @@
 package be.artisjaap.polyglot.core.model;
 
+import be.artisjaap.core.model.AbstractDocument;
 import org.bson.types.ObjectId;
 
 import java.time.LocalDateTime;
 
-public class LanguagePair extends AbstractDocument{
+public class LanguagePair extends AbstractDocument {
     private ObjectId userId;
     private String languageFrom;
     private String languageTo;

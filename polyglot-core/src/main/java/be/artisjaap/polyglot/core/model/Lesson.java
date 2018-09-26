@@ -1,10 +1,11 @@
 package be.artisjaap.polyglot.core.model;
 
+import be.artisjaap.core.model.AbstractDocument;
 import org.bson.types.ObjectId;
 
 import java.util.List;
 
-public class Lesson extends AbstractDocument{
+public class Lesson extends AbstractDocument {
 
     private String name;
     private ObjectId languagePairId;

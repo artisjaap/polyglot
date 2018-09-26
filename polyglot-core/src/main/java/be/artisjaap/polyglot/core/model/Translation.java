@@ -1,8 +1,9 @@
 package be.artisjaap.polyglot.core.model;
 
+import be.artisjaap.core.model.AbstractDocument;
 import org.bson.types.ObjectId;
 
-public class Translation extends AbstractDocument{
+public class Translation extends AbstractDocument {
 
     private ObjectId languagePairId;
 

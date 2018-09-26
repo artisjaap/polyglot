@@ -1,5 +1,7 @@
 package be.artisjaap.polyglot.core.action.to;
 
+import be.artisjaap.core.model.ReferenceableTO;
+
 import java.time.LocalDateTime;
 
 public class LanguagePairTO extends ReferenceableTO {

@@ -1,4 +1,4 @@
-package be.artisjaap.polyglot.core.validation;
+package be.artisjaap.core.validation;
 
 import java.util.HashSet;
 import java.util.Set;

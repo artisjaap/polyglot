@@ -14,6 +14,7 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -48,7 +49,7 @@ public class CreateLesson {
 
     public LessonTO automaticallyFor(NewAutomaticLessonTO newLesson) {
         List<Lesson> allLessons = lessonRepository.findByUserIdAndLanguagePairId(new ObjectId(newLesson.userId()), new ObjectId(newLesson.languagePairId()));
-        List<ProgressStatus> status = List.of(ProgressStatus.IN_PROGRESS, ProgressStatus.KNOWN);
+        List<ProgressStatus> status = Arrays.asList(ProgressStatus.IN_PROGRESS, ProgressStatus.KNOWN);
         List<TranslationPracticeTO> translationPracticeTOS = practiceWords.allPracticedWords(newLesson.userId(), newLesson.languagePairId(), status);
 
 

@@ -1,9 +1,9 @@
 package be.artisjaap.polyglot.core.validators;
 
+import be.artisjaap.core.validation.ValidationMessage;
+import be.artisjaap.core.validation.Validator;
 import be.artisjaap.polyglot.core.model.User;
 import be.artisjaap.polyglot.core.model.UserRepository;
-import be.artisjaap.polyglot.core.validation.ValidationMessage;
-import be.artisjaap.polyglot.core.validation.Validator;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.repository.MongoRepository;

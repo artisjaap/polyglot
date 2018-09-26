@@ -1,12 +1,11 @@
-package be.artisjaap.polyglot.core.validation;
+package be.artisjaap.core.validation;
+
+import be.artisjaap.core.model.Referenceable;
+import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.HashSet;
 import java.util.Set;
-
-import be.artisjaap.polyglot.core.model.Referenceable;
-import be.artisjaap.polyglot.core.validators.ValidatorRecord;
-import org.bson.types.ObjectId;
-import org.springframework.data.mongodb.repository.MongoRepository;
 
 
 public abstract class Validator<T extends Referenceable> {

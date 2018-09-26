@@ -19,7 +19,7 @@ jar {
     version = '0.0.1-SNAPSHOT'
 
 }
-sourceCompatibility = 1.10
+sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
@@ -30,6 +30,17 @@ dependencies {
 
     compile project(':polyglot-core')
 
+    compile('org.springframework.boot:spring-boot-starter-security')
+
     //jwt
-    compile('io.jsonwebtoken:jjwt:0.7.0')
+    compile('io.jsonwebtoken:jjwt:0.9.1')
+    compile group: 'javax.xml', name: 'jaxb-api', version: '2.1'
+
+
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('de.flapdoodle.embed:de.flapdoodle.embed.mongo')
+    testCompile('org.springframework.security:spring-security-test')
+
 }

@@ -1,6 +1,8 @@
 package be.artisjaap.polyglot.core.model;
 
-public class User extends AbstractDocument{
+import be.artisjaap.core.model.AbstractDocument;
+
+public class User extends AbstractDocument {
 
     private String username;
     private String password;

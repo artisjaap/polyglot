@@ -1,7 +1,4 @@
-package be.artisjaap.polyglot.core.action.to;
-
-
-import be.artisjaap.polyglot.core.model.AbstractDocument;
+package be.artisjaap.core.model;
 
 import java.time.LocalDateTime;
 
@@ -18,7 +15,7 @@ public class ReferenceableTO {
         return timeStamp;
     }
 
-    protected void buildCommon(AbstractBuilder<?> builder){
+    protected void buildCommon(AbstractBuilder<?> builder) {
         id = builder.id;
         timeStamp = builder.timeStamp;
     }
@@ -31,18 +28,18 @@ public class ReferenceableTO {
 
         public T withId(String id) {
             this.id = id;
-            return (T)this;
+            return (T) this;
         }
 
         public T withTimeStamp(LocalDateTime timeStamp) {
             this.timeStamp = timeStamp;
-            return (T)this;
+            return (T) this;
         }
 
-        public T forDocument(AbstractDocument document){
+        public T forDocument(AbstractDocument document) {
             withId(document.getId().toString());
             withTimeStamp(document.getTimestamp());
-            return (T)this;
+            return (T) this;
         }
 
 

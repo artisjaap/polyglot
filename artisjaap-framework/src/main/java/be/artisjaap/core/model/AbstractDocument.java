@@ -1,6 +1,5 @@
-package be.artisjaap.polyglot.core.model;
+package be.artisjaap.core.model;
 
-import be.artisjaap.polyglot.core.action.to.ReferenceableTO;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -8,13 +7,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.LocalDateTime;
 
 @Document
-public class AbstractDocument implements Referenceable{
+public class AbstractDocument implements Referenceable {
     @Id
     private ObjectId id;
 
+
     private LocalDateTime timestamp = LocalDateTime.now();
 
-    protected void buildCommon(AbstractBuilder<?> builder){
+    protected void buildCommon(AbstractBuilder<?> builder) {
         id = builder.id;
         timestamp = builder.timestamp;
     }
@@ -34,18 +34,18 @@ public class AbstractDocument implements Referenceable{
 
         private T withId(ObjectId id) {
             this.id = id;
-            return (T)this;
+            return (T) this;
         }
 
         private T withTimeStamp(LocalDateTime timeStamp) {
             this.timestamp = timeStamp;
-            return (T)this;
+            return (T) this;
         }
 
         public T forDocument(ReferenceableTO document) {
             withId(new ObjectId(document.id()));
             withTimeStamp(document.timeStamp());
-            return (T)this;
+            return (T) this;
         }
     }
 }

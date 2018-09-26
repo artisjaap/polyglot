@@ -25,6 +25,7 @@ public class LoginController {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
+
     @RequestMapping(value = "/api/login/{username}/{password}", method = RequestMethod.GET)
     public @ResponseBody
     ResponseEntity<UserLoginResponse> login(@PathVariable String username, @PathVariable String password){
@@ -37,7 +38,7 @@ public class LoginController {
 
     }
 
-    @RequestMapping(value = "/api/register", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/register", method = RequestMethod.POST)
     public @ResponseBody
     ResponseEntity<UserLoginResponse> login(@RequestBody NewUserRequest newUserRequest){
         UserTO userTO = registerUser.newUser(NewUserTO.newBuilder().withUsername(newUserRequest.getUsername())
@@ -48,7 +49,6 @@ public class LoginController {
         return ResponseEntity.ok(UserLoginResponse.from(userTO, token));
 
     }
-
 
 
     private JwtUser createJwtUser(UserTO userTO) {

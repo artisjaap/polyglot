@@ -1,5 +1,6 @@
 rootProject.name = 'polyglot'
 
+include 'artisjaap-framework'
 include 'polyglot-core'
 include 'polyglot-web'
 include 'polyglot-scenarios'

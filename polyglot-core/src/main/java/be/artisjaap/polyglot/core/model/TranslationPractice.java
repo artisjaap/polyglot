@@ -1,10 +1,11 @@
 package be.artisjaap.polyglot.core.model;
 
+import be.artisjaap.core.model.AbstractDocument;
 import org.bson.types.ObjectId;
 
 import java.time.LocalDateTime;
 
-public class TranslationPractice extends AbstractDocument{
+public class TranslationPractice extends AbstractDocument {
 
     private ObjectId translationId;
     private ObjectId languagePairId;

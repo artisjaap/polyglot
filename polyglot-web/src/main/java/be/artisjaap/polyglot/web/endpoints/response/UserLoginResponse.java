@@ -8,6 +8,22 @@ public class UserLoginResponse {
     private String password;
     private String token;
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
     private UserLoginResponse(Builder builder) {
         userId = builder.userId;
         username = builder.username;
