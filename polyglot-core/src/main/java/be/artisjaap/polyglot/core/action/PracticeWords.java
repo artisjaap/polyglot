@@ -1,7 +1,9 @@
 package be.artisjaap.polyglot.core.action;
 
+import be.artisjaap.core.validation.ValidationException;
 import be.artisjaap.polyglot.core.action.assembler.TranslationPracticeAssembler;
 import be.artisjaap.polyglot.core.action.to.*;
+import be.artisjaap.polyglot.core.action.to.test.OrderType;
 import be.artisjaap.polyglot.core.model.*;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,25 +41,40 @@ public class PracticeWords {
     private TranslationPracticeAssembler translationPracticeAssembler;
 
 
+    public PracticeWordTO nextWord(String userId, String languagePairId, OrderType orderType) {
+        LanguagePairTO languagePairTO = findLanguagePair.byId(languagePairId).orElseThrow(() -> new ValidationException(""));
 
-
-    public PracticeWordTO nextWord(String userId, String languageFrom, String languageTo ){
-
-        LanguagePairTO languagePairTO = findLanguagePair.pairForUser(userId, languageFrom, languageTo).orElseThrow(() -> new IllegalStateException(""));
-
-        if(languagePairTO.turnsDone()> 0 && languagePairTO.turnsDone() % 20 == 0){
+        if (languagePairTO.turnsDone() > 0 && languagePairTO.turnsDone() % 20 == 0) {
             Optional<TranslationPractice> translationPractice = introduceNewWordForPractice.forUserInLanguage(userId, languagePairTO.id());
-            if(translationPractice.isPresent()){
+            if (translationPractice.isPresent()) {
                 TranslationPractice practice = translationPractice.get();
                 Translation translation = translationRepository.findById(practice.getTranslationId()).orElseThrow(() -> new IllegalStateException("expected to find translation"));
-                return merge(practice, translation, languagePairTO, languageFrom, languageTo);
+                return merge(practice, translation, languagePairTO, orderType);
             }
 
         }
 
-        List<PracticeWordTO> practiceWordTOS = giveCurrentListToPractice(userId, languageFrom, languageTo);
-        int index = (int)Math.floor(Math.random() * practiceWordTOS.size());
+        List<PracticeWordTO> practiceWordTOS = giveCurrentListToPractice(userId, languagePairTO, orderType);
+        int index = (int) Math.floor(Math.random() * practiceWordTOS.size());
         return practiceWordTOS.get(index);
+    }
+
+
+
+
+
+
+
+
+    @Deprecated()
+    //use above method
+    public PracticeWordTO nextWord(String userId, String languageFrom, String languageTo) {
+
+        LanguagePairTO languagePairTO = findLanguagePair.pairForUser(userId, languageFrom, languageTo).orElseThrow(() -> new IllegalStateException(""));
+        OrderType orderType = languagePairTO.languageFrom().equalsIgnoreCase(languageFrom) ? OrderType.NORMAL : OrderType.REVERSE;
+
+        return nextWord(userId, languagePairTO.id(), orderType);
+
     }
 
     //todo wrap return with result of check
@@ -88,7 +105,7 @@ public class PracticeWords {
         return nextWord(userId, languageFrom, languageTo);
     }
 
-    public void practiced(String userId, String translationId, Boolean reversed){
+    public void practiced(String userId, String translationId, Boolean reversed) {
         TranslationPractice translationPractice = translationPracticeRepository.findByUserIdAndTranslationId(new ObjectId(userId), new ObjectId(translationId));
         saveTranslationTurn(translationPractice, reversed);
         languagePairTurn.saveTurnOn(translationPractice.getLanguagePairId().toString(), reversed);
@@ -98,26 +115,34 @@ public class PracticeWords {
     private void saveTranslationTurn(TranslationPractice translationPractice, Boolean reversed) {
         if (reversed) {
             translationPractice.increaseAnswerChecked();
-        }else {
+        } else {
             translationPractice.increaseAnswerCheckedReverse();
         }
         translationPracticeRepository.save(translationPractice);
     }
 
-    public List<PracticeWordTO> giveCurrentListToPractice(String userId, String languageFrom, String languageTo ) {
-
+    public List<PracticeWordTO> giveCurrentListToPractice(String userId, LanguagePairTO languagePairTO, OrderType order) {
         UserTO user = findUser.byUserId(userId);
-        LanguagePairTO languagePair = findLanguagePair.pairForUserOrCreate(userId, languageFrom, languageTo);
 
-        List<TranslationPractice> translationPractices = findWordToPracticeFor(new ObjectId(userId), languagePair);
+        List<TranslationPractice> translationPractices = findWordToPracticeFor(new ObjectId(userId), languagePairTO);
 
-        if(translationPractices.isEmpty()){
-            addNewWordToPracticeList(translationPractices, user.userSettings().initialNumberOnPracticeWords(), languagePair);
+        if (translationPractices.isEmpty()) {
+            addNewWordToPracticeList(translationPractices, user.userSettings().initialNumberOnPracticeWords(), languagePairTO);
         }
         //if no words find to practice, check new words and add
         List<Translation> translations = StreamSupport.stream(translationRepository.findAllById(translationPractices.stream().map(TranslationPractice::getTranslationId).collect(Collectors.toList())).spliterator(), false).collect(Collectors.toList());
 
-        return merge(translationPractices, translations, languagePair, languageFrom, languageTo);
+        return merge(translationPractices, translations, languagePairTO, order);
+    }
+
+    @Deprecated
+    public List<PracticeWordTO> giveCurrentListToPractice(String userId, String languageFrom, String languageTo) {
+
+        LanguagePairTO languagePairTO = findLanguagePair.pairForUserOrCreate(userId, languageFrom, languageTo);
+
+        OrderType orderType = languagePairTO.languageFrom().equalsIgnoreCase(languageFrom) ? OrderType.NORMAL : OrderType.REVERSE;
+
+        return giveCurrentListToPractice(userId, languagePairTO, orderType);
     }
 
     public List<TranslationPracticeTO> allPracticedWords(String userId, String languagePairId, List<ProgressStatus> progressStatuses) {
@@ -136,13 +161,27 @@ public class PracticeWords {
     }
 
     private void addNewWordToPracticeList(List<TranslationPractice> translationPractices, Integer initialNumberOnPracticeWords, LanguagePairTO languagePair) {
-        for(int i =0; i < initialNumberOnPracticeWords; i++){
+        for (int i = 0; i < initialNumberOnPracticeWords; i++) {
             introduceNewWordForPractice.forUserInLanguage(languagePair.userId(), languagePair.id()).ifPresent(translationPractices::add);
         }
     }
 
+    private List<PracticeWordTO> merge(List<TranslationPractice> translationPractices, List<Translation> translations, LanguagePairTO languagePairTO, OrderType orderType) {
+        switch (orderType) {
+            case NORMAL:
+                return merge(translationPractices, translations, languagePairTO, languagePairTO.languageFrom(), languagePairTO.languageTo());
+            case REVERSE:
+                return merge(translationPractices, translations, languagePairTO, languagePairTO.languageTo(), languagePairTO.languageFrom());
+            case RANDOM: // TODO randomize
+                return merge(translationPractices, translations, languagePairTO, languagePairTO.languageFrom(), languagePairTO.languageTo());
+
+        }
+        return new ArrayList<>();
+    }
+
+    @Deprecated
     private List<PracticeWordTO> merge(List<TranslationPractice> translationPractices, List<Translation> translations, LanguagePairTO languagePairTO, String languageFrom, String languageTo) {
-        if(translationPractices.size() != translations.size()){
+        if (translationPractices.size() != translations.size()) {
             return new ArrayList<>();
         }
 
@@ -150,7 +189,7 @@ public class PracticeWords {
         translations.sort(Comparator.comparing(Translation::getId));
 
         List<PracticeWordTO> result = new ArrayList<>();
-        for(int i = 0; i < translationPractices.size(); i++){
+        for (int i = 0; i < translationPractices.size(); i++) {
             TranslationPractice translationPractice = translationPractices.get(i);
             Translation translation = translations.get(i);
             PracticeWordTO merge = merge(translationPractice, translation, languagePairTO, languageFrom, languageTo);
@@ -160,7 +199,22 @@ public class PracticeWords {
 
     }
 
-    private PracticeWordTO merge(TranslationPractice translationPractice, Translation translation, LanguagePairTO languagePairTO, String languageQuestion, String languageAnswer){
+
+    private PracticeWordTO merge(TranslationPractice translationPractice, Translation translation, LanguagePairTO languagePairTO, OrderType orderType) {
+        switch (orderType) {
+            case NORMAL:
+                return merge(translationPractice, translation, languagePairTO, languagePairTO.languageFrom(), languagePairTO.languageTo());
+            case REVERSE:
+                return merge(translationPractice, translation, languagePairTO, languagePairTO.languageTo(), languagePairTO.languageFrom());
+            case RANDOM: // TODO randomize
+                return merge(translationPractice, translation, languagePairTO, languagePairTO.languageFrom(), languagePairTO.languageTo());
+
+        }
+        return null;//FIXME throw exception
+    }
+
+    @Deprecated
+    private PracticeWordTO merge(TranslationPractice translationPractice, Translation translation, LanguagePairTO languagePairTO, String languageQuestion, String languageAnswer) {
         WordStatsTO stats = WordStatsTO.newBuilder()
                 .withAnswerChecked(translationPractice.getAnswerChecked())
                 .withAnswerCheckedReverse(translationPractice.getAnswerCheckedReverse())
@@ -190,7 +244,7 @@ public class PracticeWords {
     }
 
     private String deriveQuestion(Translation translation, LanguagePairTO languagePairTO, String languageQuestion) {
-        return languagePairTO.languageFrom().equals(languageQuestion)?translation.getLanguageA():translation.getLanguageB();
+        return languagePairTO.languageFrom().equals(languageQuestion) ? translation.getLanguageA() : translation.getLanguageB();
     }
 
     private String deriveAnswer(Translation translation, LanguagePairTO languagePairTO, String languageQuestion) {
@@ -201,7 +255,7 @@ public class PracticeWords {
         return translationPracticeRepository.findByUserIdAndLanguagePairIdAndProgressStatus(userId, new ObjectId(languagePairTO.id()), ProgressStatus.IN_PROGRESS);
     }
 
-    public PracticeWordTO answerWord(String translationId, String anwserLanguage, String answer){
+    public PracticeWordTO answerWord(String translationId, String anwserLanguage, String answer) {
         return null;
     }
 }

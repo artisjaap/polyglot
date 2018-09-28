@@ -2,10 +2,13 @@ package be.artisjaap.polyglot.web.endpoints;
 
 import be.artisjaap.polyglot.core.action.FindLanguagePair;
 import be.artisjaap.polyglot.core.action.RegisterLanguagePair;
-import be.artisjaap.polyglot.core.action.to.LanguagePairTO;
-import be.artisjaap.polyglot.core.action.to.NewLanguagePairTO;
+import be.artisjaap.polyglot.core.action.RegisterTranslation;
+import be.artisjaap.polyglot.core.action.to.*;
 import be.artisjaap.polyglot.web.endpoints.request.LanguagePairRequest;
+import be.artisjaap.polyglot.web.endpoints.request.NewSimpleTranslationRequest;
+import be.artisjaap.polyglot.web.endpoints.request.NewTranslationsForUserRequest;
 import be.artisjaap.polyglot.web.endpoints.response.LanguagePairResponse;
+import be.artisjaap.polyglot.web.endpoints.response.TranslationsForUserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +26,9 @@ public class ManageTranslationController {
     @Autowired
     private RegisterLanguagePair registerLanguagePair;
 
+    @Autowired
+    private RegisterTranslation registerTranslation;
+
     @RequestMapping(value = "/pairs/{userId}", method = RequestMethod.GET)
     public @ResponseBody
     ResponseEntity<List<LanguagePairResponse>> findAllLanguagePairsForUser(@PathVariable String userId) {
@@ -31,7 +37,7 @@ public class ManageTranslationController {
 
     @RequestMapping(value = "/pairs", method = RequestMethod.POST)
     public @ResponseBody
-    ResponseEntity<?> createNewPairForUser(@RequestBody LanguagePairRequest languagePairRequest) {
+    ResponseEntity<LanguagePairResponse> createNewPairForUser(@RequestBody LanguagePairRequest languagePairRequest) {
         LanguagePairTO languagePairTO = registerLanguagePair.forUser(NewLanguagePairTO.newBuilder()
                 .withLanguageFrom(languagePairRequest.getLanguageFrom())
                 .withLanguageTo(languagePairRequest.getLanguageTo())
@@ -40,5 +46,21 @@ public class ManageTranslationController {
 
         return ResponseEntity.ok(LanguagePairResponse.from(languagePairTO));
     }
+
+    @RequestMapping(value = "/pairs/translations", method = RequestMethod.POST)
+    public @ResponseBody
+    ResponseEntity<TranslationsForUserResponse> createNewTranslationsForExistingPair(@RequestBody NewTranslationsForUserRequest translation) {
+        TranslationsForUserTO translationsForUserTO = registerTranslation.forAllWords(NewTranslationForUserTO.newBuilder()
+                .withUserId(translation.getUserId())
+                .withLanguagePairId(translation.getLanguagePairId())
+                .withTranslations(translation.getTranslations().stream().map(t -> NewSimpleTranslationPairTO.newBuilder()
+                        .withLanguageFrom(t.getLanguageFrom())
+                        .withLanguageTO(t.getLanguageTO())
+                        .build()).collect(Collectors.toList()))
+                .build());
+
+        return ResponseEntity.ok(TranslationsForUserResponse.from(translationsForUserTO));
+    }
+
 
 }

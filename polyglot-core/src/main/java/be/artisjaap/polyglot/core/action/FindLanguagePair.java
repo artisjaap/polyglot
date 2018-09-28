@@ -52,4 +52,7 @@ public class FindLanguagePair {
     }
 
 
+    public Optional<LanguagePairTO> byId(String languagePairId) {
+        return languagePairRepository.findById(new ObjectId(languagePairId)).map(languagePairAssembler::assembleTO);
+    }
 }
