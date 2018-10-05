@@ -1,15 +1,14 @@
 package be.artisjaap.polyglot.core.action.to;
 
 import be.artisjaap.core.model.ReferenceableTO;
-import org.bson.types.ObjectId;
 
 import java.util.List;
 
 public class LessonTO extends ReferenceableTO {
     private String name;
     private String languagePairId;
-    private List<String> translations;
-    private ObjectId userId;
+    private List<LessonTranslationPairTO> translations;
+    private String userId;
 
     private LessonTO(Builder builder) {
         buildCommon(builder);
@@ -31,19 +30,19 @@ public class LessonTO extends ReferenceableTO {
         return languagePairId;
     }
 
-    public List<String> translations() {
+    public List<LessonTranslationPairTO> translations() {
         return translations;
     }
 
-    public ObjectId userId() {
+    public String userId() {
         return userId;
     }
 
     public static final class Builder extends AbstractBuilder<Builder> {
         private String name;
         private String languagePairId;
-        private List<String> translations;
-        private ObjectId userId;
+        private List<LessonTranslationPairTO> translations;
+        private String userId;
 
         private Builder() {
         }
@@ -58,12 +57,12 @@ public class LessonTO extends ReferenceableTO {
             return this;
         }
 
-        public Builder withTranslations(List<String> val) {
+        public Builder withTranslations(List<LessonTranslationPairTO> val) {
             translations = val;
             return this;
         }
 
-        public Builder withUserId(ObjectId val) {
+        public Builder withUserId(String val) {
             userId = val;
             return this;
         }

@@ -56,8 +56,8 @@ public class TestForLesson {
         List<String> part1 = translationIds.subList(0, translationIds.size() / 2);
         List<String> part2 = translationIds.subList(translationIds.size() / 2, translationIds.size());
 
-        List<PracticeWordTO> practiceWordTOS = practiceWords.givePracticeWordsForTranslations(userId, languagePair.getLanguageTo(), languagePair.getLanguageFrom(), part1);
-        practiceWordTOS.addAll(practiceWords.givePracticeWordsForTranslations(userId, languagePair.getLanguageFrom(), languagePair.getLanguageTo(), part2));
+        List<PracticeWordTO> practiceWordTOS = practiceWords.givePracticeWordsForTranslations(userId, OrderType.NORMAL, part1);
+        practiceWordTOS.addAll(practiceWords.givePracticeWordsForTranslations(userId, OrderType.REVERSE, part2));
 
         return TestAssignmentTO.newBuilder()
                 .withLessonName(lesson.getName())
@@ -68,7 +68,7 @@ public class TestForLesson {
 
 
     private TestAssignmentTO reverseOrderTest(String userId, Lesson lesson, LanguagePair languagePair, List<String> translationIds) {
-        List<PracticeWordTO> practiceWordTOS = practiceWords.givePracticeWordsForTranslations(userId, languagePair.getLanguageTo(), languagePair.getLanguageFrom(), translationIds);
+        List<PracticeWordTO> practiceWordTOS = practiceWords.givePracticeWordsForTranslations(userId, OrderType.REVERSE, translationIds);
 
         return TestAssignmentTO.newBuilder()
                 .withLessonName(lesson.getName())
@@ -79,7 +79,7 @@ public class TestForLesson {
 
     private TestAssignmentTO normalOrderTest(String userId, Lesson lesson, LanguagePair languagePair, List<String> translationIds) {
 
-        List<PracticeWordTO> practiceWordTOS = practiceWords.givePracticeWordsForTranslations(userId, languagePair.getLanguageFrom(), languagePair.getLanguageTo(), translationIds);
+        List<PracticeWordTO> practiceWordTOS = practiceWords.givePracticeWordsForTranslations(userId, OrderType.NORMAL, translationIds);
 
         return TestAssignmentTO.newBuilder()
                 .withLessonName(lesson.getName())

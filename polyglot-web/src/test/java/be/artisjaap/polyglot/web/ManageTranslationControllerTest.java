@@ -19,9 +19,12 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.isEmptyOrNullString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class ManageTranslationControllerTest extends RestControllerTest {
@@ -43,14 +46,20 @@ public class ManageTranslationControllerTest extends RestControllerTest {
     @Test
     public void findLanguagePairs() {
         UserTO userTO = registerUser.newUser(NewUserTO.newBuilder().withUsername("test").withPassword("password").build());
+        registerLanguagePair.forUser(NewLanguagePairTO.newBuilder().withUserId(userTO.id()).withLanguageFrom("FROM").withLanguageTo("TO").build());
         try {
             mockMvc.perform(
                     get("/api/translations/pairs/" + userTO.id()))
                     .andExpect(status().isOk())
-//                    .andExpect(content().string(""))
                     .andExpect(content().contentType(APPLICATION_JSON_UTF8))
-//                    .andExpect(jsonPath("$.id", not(isEmptyString())))
+                    .andExpect(jsonPath("$[0].languageFrom", equalTo("FROM")))
+                    .andExpect(jsonPath("$[0].languageTo", equalTo("TO")))
+                    .andExpect(jsonPath("$[0].turnsDone", equalTo(0)))
+                    .andExpect(jsonPath("$[0].turnsDoneReverse", equalTo(0)))
+                    .andExpect(jsonPath("$[0].lastTurn", isEmptyOrNullString()))
+                    .andExpect(jsonPath("$[0].lastTurnReverse", isEmptyOrNullString()))
             ;
+
         } catch (Exception e) {
             Assert.fail(e.getMessage());
         }

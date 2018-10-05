@@ -5,7 +5,6 @@ import be.artisjaap.polyglot.core.action.RegisterLanguagePair;
 import be.artisjaap.polyglot.core.action.RegisterTranslation;
 import be.artisjaap.polyglot.core.action.to.*;
 import be.artisjaap.polyglot.web.endpoints.request.LanguagePairRequest;
-import be.artisjaap.polyglot.web.endpoints.request.NewSimpleTranslationRequest;
 import be.artisjaap.polyglot.web.endpoints.request.NewTranslationsForUserRequest;
 import be.artisjaap.polyglot.web.endpoints.response.LanguagePairResponse;
 import be.artisjaap.polyglot.web.endpoints.response.TranslationsForUserResponse;
@@ -61,6 +60,9 @@ public class ManageTranslationController {
 
         return ResponseEntity.ok(TranslationsForUserResponse.from(translationsForUserTO));
     }
+
+
+
 
 
 }

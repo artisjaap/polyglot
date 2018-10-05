@@ -18,6 +18,10 @@ public class Translation extends AbstractDocument {
         return languageB;
     }
 
+    public ObjectId getLanguagePairId() {
+        return languagePairId;
+    }
+
     private Translation(){}
 
     private Translation(Builder builder) {

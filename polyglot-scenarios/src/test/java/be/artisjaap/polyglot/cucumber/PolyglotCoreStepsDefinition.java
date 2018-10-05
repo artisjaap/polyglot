@@ -6,7 +6,6 @@ import be.artisjaap.polyglot.core.action.to.*;
 import be.artisjaap.polyglot.core.action.to.test.*;
 import be.artisjaap.polyglot.core.model.Lesson;
 import be.artisjaap.polyglot.core.model.LessonRepository;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
@@ -16,7 +15,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 
-import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -123,17 +121,18 @@ public class PolyglotCoreStepsDefinition {
 
         String languageFrom = settings.get("question lanquage");
         String languageTo = settings.get("answer language");
+        LanguagePairTO languagePairTO = findLanguagePair.pairForUser(user.id(), languageFrom, languageTo).orElseThrow(IllegalStateException::new);
+        OrderType orderType = languagePairTO.languageFrom().equalsIgnoreCase(languageFrom)?OrderType.NORMAL:OrderType.REVERSE;
 
-
-        List<PracticeWordTO> practiceWordTOS = practiceWords.giveCurrentListToPractice(user.id(), languageFrom, languageTo);
+        List<PracticeWordTO> practiceWordTOS = practiceWords.giveCurrentListToPractice(user.id(), languagePairTO.id(), orderType);
     }
 
     private Integer propertyAsInteger(Map<String, String> map, String key, String defaultValue){
         return Integer.parseInt(map.getOrDefault(key, defaultValue));
     }
 
-    @When("^(.*) starts to practice in (.*)-(.*) (normal|reverse) order, (\\d+) exercises, adding a new word every (\\d+) turns$")
-    public void tomStartsToPracticeInNormalOrderExercisesAddingANewWordEveryTurns(String username, String languageFrom, String languageTo, String order, int numberOfExercises, int addingNewEveryX1) {
+    @When("^(.*) starts to practice in (.*)-(.*) (NORMAL|REVERSE|RANDOM) order, (\\d+) exercises, adding a new word every (\\d+) turns$")
+    public void tomStartsToPracticeInNormalOrderExercisesAddingANewWordEveryTurns(String username, String languageFrom, String languageTo, OrderType orderType, int numberOfExercises, int addingNewEveryX1) {
         UserTO user = findUser.byUsername(username).orElseThrow(() -> new IllegalStateException("Verwacht dat user bestaat"));
         updateUserSettings.forUser(UserSettingsUpdateTO.newBuilder()
                 .withUserId(user.id())
@@ -142,16 +141,17 @@ public class PolyglotCoreStepsDefinition {
                 .withNewWordEveryXexcersises(addingNewEveryX1)
                 .build());
 
+        LanguagePairTO languagePairTO = findLanguagePair.pairForUser(user.id(), languageFrom, languageTo).orElseThrow(IllegalAccessError::new);
 
         for(int i = 0; i < numberOfExercises; i++){
-            PracticeWordTO practiceWordTO = practiceWords.nextWord(user.id(), languageFrom, languageTo);
+            PracticeWordTO practiceWordTO = practiceWords.nextWord(user.id(), languagePairTO.id(), orderType);
 
             System.out.println(practiceWordTO);
 
             practiceWords.practiced(user.id(), practiceWordTO.translationId(), practiceWordTO.reversed());
         }
 
-        List<PracticeWordTO> practiceWordTOS = practiceWords.giveCurrentListToPractice(user.id(), languageFrom, languageTo);
+        List<PracticeWordTO> practiceWordTOS = practiceWords.giveCurrentListToPractice(user.id(), languagePairTO.id(), orderType);
 
     }
 

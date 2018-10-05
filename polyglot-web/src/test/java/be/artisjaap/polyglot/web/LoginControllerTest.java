@@ -10,7 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import static org.hamcrest.Matchers.isEmptyString;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.not;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -33,11 +34,15 @@ public class LoginControllerTest extends RestControllerTest {
     public void createUser() {
         try {
             mockMvc.perform(
-                    post("/public/api/register", NewUserRequest.newBuilder().withUsername("Tom").withPassword("secret").build()))
+                    post("/public/api/register")
+                            .contentType(APPLICATION_JSON_UTF8).content(convertObjectToJsonBytes(NewUserRequest.newBuilder().withUsername("Tom").withPassword("secret").build())))
                     .andExpect(status().isOk())
-                    .andExpect(content().string(""))
+//                    .andExpect(content().string(""))
                     .andExpect(content().contentType(APPLICATION_JSON_UTF8))
-                    .andExpect(jsonPath("$.id", not(isEmptyString())));
+                    .andExpect(jsonPath("$.username", equalTo("Tom")))
+                    .andExpect(jsonPath("$.userId", not(empty())))
+                    .andExpect(jsonPath("$.token", not(empty())))
+            ;
         } catch (Exception e) {
             Assert.fail(e.getMessage());
         }
@@ -49,10 +54,11 @@ public class LoginControllerTest extends RestControllerTest {
 
         mockMvc.perform(
                 get("/public/api/login/Tom/secret"))
-//                .andExpect(content().string(""))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(APPLICATION_JSON_UTF8))
-//                .andExpect(jsonPath("$.id", equalTo(null)))
+                .andExpect(jsonPath("$.username", equalTo("Tom")))
+                .andExpect(jsonPath("$.userId", not(empty())))
+                .andExpect(jsonPath("$.token", not(empty())))
         ;
 
     }

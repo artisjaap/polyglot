@@ -1,0 +1,13 @@
+.main-menu li {
+  list-style: none;
+  margin: 1px;
+
+}
+
+.main-menu {
+  padding: 0
+}
+
+.main-menu .active {
+  text-decoration: underline;
+}

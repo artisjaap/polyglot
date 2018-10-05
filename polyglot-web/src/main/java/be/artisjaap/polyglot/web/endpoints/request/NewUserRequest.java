@@ -4,6 +4,8 @@ public class NewUserRequest {
     private String username;
     private String password;
 
+    private NewUserRequest(){}
+
     private NewUserRequest(Builder builder) {
         username = builder.username;
         password = builder.password;
