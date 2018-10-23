@@ -1,0 +1,9 @@
+<div *ngIf="!isAuthenticated()">
+  <input type="text" placeholder="username" #username>
+  <input type="text" placeholder="password" #password>
+  <button class="btn btn-default" (click)="login(username, password)">login</button>
+</div>
+<div *ngIf="isAuthenticated()">
+  {{userInfo?.username}}
+  <button class="btn btn-default" (click)="logout()">logout</button>
+</div>

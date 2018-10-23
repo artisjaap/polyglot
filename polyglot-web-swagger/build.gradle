@@ -1,0 +1,22 @@
+
+jar {
+    baseName = 'polyglot-web-swagger'
+    version = '0.0.1-SNAPSHOT'
+
+}
+
+
+dependencies {
+
+    compile project(':polyglot-web')
+
+    compile('org.springframework.boot:spring-boot-starter-security')
+    
+
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('de.flapdoodle.embed:de.flapdoodle.embed.mongo')
+    testCompile('org.springframework.security:spring-security-test')
+
+}

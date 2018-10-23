@@ -28,10 +28,16 @@ public class ManageTranslationController {
     @Autowired
     private RegisterTranslation registerTranslation;
 
-    @RequestMapping(value = "/pairs/{userId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/pairs/user/{userId}", method = RequestMethod.GET)
     public @ResponseBody
     ResponseEntity<List<LanguagePairResponse>> findAllLanguagePairsForUser(@PathVariable String userId) {
         return ResponseEntity.ok(findLanguagePair.allPairsForUserId(userId).stream().map(LanguagePairResponse::from).collect(Collectors.toList()));
+    }
+
+    @RequestMapping(value = "/pairs/{languagePairId}", method = RequestMethod.GET)
+    public @ResponseBody
+    ResponseEntity<LanguagePairResponse> findLanguagePairWithId(@PathVariable String languagePairId) {
+        return ResponseEntity.ok(LanguagePairResponse.from(findLanguagePair.byId(languagePairId)));
     }
 
     @RequestMapping(value = "/pairs", method = RequestMethod.POST)

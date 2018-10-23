@@ -28,8 +28,6 @@ public class TestForLesson {
     @Autowired
     private LanguagePairRepository languagePairRepository;
 
-    @Autowired
-    private FindLanguagePair findLanguagePair;
 
     public TestAssignmentTO asSimpleTestForLesson(CreateTestTO createTestTO) {
         Lesson lesson = lessonRepository.findById(new ObjectId(createTestTO.lessonId())).orElseThrow(() -> new IllegalStateException(""));
@@ -38,11 +36,11 @@ public class TestForLesson {
 
         switch (createTestTO.orderType()) {
             case NORMAL:
-                return normalOrderTest(createTestTO.userId(), lesson, languagePair, translationIds);
+                return normalOrderTest(lesson.getUserId().toString(), lesson, languagePair, translationIds);
             case RANDOM:
-                return randomOrderTest(createTestTO.userId(), lesson, languagePair, translationIds);
+                return randomOrderTest(lesson.getUserId().toString(), lesson, languagePair, translationIds);
             case REVERSE:
-                return reverseOrderTest(createTestTO.userId(), lesson, languagePair, translationIds);
+                return reverseOrderTest(lesson.getUserId().toString(), lesson, languagePair, translationIds);
 
         }
 

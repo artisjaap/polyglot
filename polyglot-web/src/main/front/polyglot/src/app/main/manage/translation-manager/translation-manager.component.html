@@ -1,0 +1,10 @@
+<p>
+  defined words for language pair [{{ languagePair.languageFrom }} - {{ languagePair.languageTo }}]
+</p>
+<pol-translation-simple-add [translationPairId]="languagePair?.id"></pol-translation-simple-add>
+
+<span>Translations...</span>
+<div *ngFor="let t of filteredTranslations.data">
+  {{t.languageA}} - {{t.languageB}}
+
+</div>

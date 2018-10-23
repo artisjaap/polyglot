@@ -25,7 +25,9 @@ public class LoginController {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
-
+    /**
+     * Registered user can login with this URL
+     * */
     @RequestMapping(value = "/api/login/{username}/{password}", method = RequestMethod.GET)
     public @ResponseBody
     ResponseEntity<UserLoginResponse> login(@PathVariable String username, @PathVariable String password){

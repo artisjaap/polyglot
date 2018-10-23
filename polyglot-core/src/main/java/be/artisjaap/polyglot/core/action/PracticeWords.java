@@ -1,6 +1,5 @@
 package be.artisjaap.polyglot.core.action;
 
-import be.artisjaap.core.validation.ValidationException;
 import be.artisjaap.polyglot.core.action.assembler.TranslationPracticeAssembler;
 import be.artisjaap.polyglot.core.action.to.*;
 import be.artisjaap.polyglot.core.action.to.test.OrderType;
@@ -45,7 +44,7 @@ public class PracticeWords {
 
 
     public PracticeWordTO nextWord(String userId, String languagePairId, OrderType orderType) {
-        LanguagePairTO languagePairTO = findLanguagePair.byId(languagePairId).orElseThrow(() -> new ValidationException(""));
+        LanguagePairTO languagePairTO = findLanguagePair.byId(languagePairId);
 
         if (languagePairTO.turnsDone() > 0 && languagePairTO.turnsDone() % 20 == 0) {
             Optional<TranslationPractice> translationPractice = introduceNewWordForPractice.forUserInLanguage(userId, languagePairTO.id());
@@ -63,32 +62,58 @@ public class PracticeWords {
     }
 
 
-    //todo wrap return with result of check
-    public PracticeWordTO checkAnswerAndGiveNext(String userId, String translationId, String answerGiven, OrderType answerOrderType, OrderType nextOrderType) {
-        TranslationPractice translationPractice = translationPracticeRepository.findByUserIdAndTranslationId(new ObjectId(userId), new ObjectId(translationId));
-        Translation translation = translationRepository.findById(new ObjectId(translationId)).orElseThrow(IllegalStateException::new);
-        LanguagePairTO languagePairTO = findLanguagePair.byId(translation.getLanguagePairId().toString()).orElseThrow(IllegalStateException::new);
+    public AnswerAndNextWordTO checkAnswerAndGiveNext(PracticeWordCheckTO practiceWordCheckTO) {
+        TranslationPractice translationPractice = translationPracticeRepository.findByUserIdAndTranslationId(new ObjectId(practiceWordCheckTO.userId()), new ObjectId(practiceWordCheckTO.translationId()));
+        Translation translation = translationRepository.findById(new ObjectId(practiceWordCheckTO.translationId())).orElseThrow(IllegalStateException::new);
+        LanguagePairTO languagePairTO = findLanguagePair.byId(translation.getLanguagePairId().toString());
 
 
-        if (answerOrderType == NORMAL) {
-            if (translation.getLanguageB().equalsIgnoreCase(answerGiven)) {
+        AnswerTO.Builder answerTO = AnswerTO.newBuilder()
+                .withTranslationId(practiceWordCheckTO.translationId())
+                .withGivenAnswer(practiceWordCheckTO.answerGiven());
+
+        if (practiceWordCheckTO.answerOrderType() == NORMAL) {
+            if (translation.getLanguageB().equalsIgnoreCase(practiceWordCheckTO.answerGiven())) {
                 translationPractice.answerCorrect();
+                answerTO.withCorrectAnswer(true)
+                        .withExpectedAnswer(translation.getLanguageB())
+                        .withQuestion(translation.getLanguageA());
+
             } else {
                 translationPractice.answerIncorrect();
+                answerTO.withCorrectAnswer(false)
+                        .withExpectedAnswer(translation.getLanguageB())
+                        .withQuestion(translation.getLanguageA());
+
             }
 
-        } else if (answerOrderType == REVERSE) {
-            if (translation.getLanguageB().equalsIgnoreCase(answerGiven)) {
+        } else if (practiceWordCheckTO.answerOrderType() == REVERSE) {
+            if (translation.getLanguageA().equalsIgnoreCase(practiceWordCheckTO.answerGiven())) {
                 translationPractice.answerCorrectReverse();
+                answerTO.withCorrectAnswer(true)
+                        .withExpectedAnswer(translation.getLanguageA())
+                        .withQuestion(translation.getLanguageB());
+
             } else {
                 translationPractice.answerIncorrectReverse();
+                answerTO.withCorrectAnswer(false)
+                        .withExpectedAnswer(translation.getLanguageA())
+                        .withQuestion(translation.getLanguageB());
+
             }
 
         }
 
         translationPracticeRepository.save(translationPractice);
 
-        return nextWord(userId, languagePairTO.id(), nextOrderType);
+        PracticeWordTO practiceWordTO = nextWord(practiceWordCheckTO.userId(), languagePairTO.id(), practiceWordCheckTO.nextOrderType());
+
+
+        return AnswerAndNextWordTO.newBuilder()
+                .withAnswer(answerTO.build())
+                .withPracticeWord(practiceWordTO)
+                .build();
+
     }
 
 
@@ -227,7 +252,7 @@ public class PracticeWords {
         for (int i = 0; i < translationPractices.size(); i++) {
             TranslationPractice translationPractice = translationPractices.get(i);
             Translation translation = translations.get(i);
-            LanguagePairTO languagePairTO = findLanguagePair.byId(translation.getLanguagePairId().toString()).orElseThrow(IllegalStateException::new);
+            LanguagePairTO languagePairTO = findLanguagePair.byId(translation.getLanguagePairId().toString());
             PracticeWordTO merge = merge(translationPractice, translation, languagePairTO, orderType);
             result.add(merge);
         }
@@ -238,7 +263,7 @@ public class PracticeWords {
 
 
     private void addNewWordToPracticeList(List<TranslationPractice> translationPractices, Integer initialNumberOnPracticeWords, String languagePairId) {
-        LanguagePairTO languagePair = findLanguagePair.byId(languagePairId).orElseThrow(IllegalStateException::new);
+        LanguagePairTO languagePair = findLanguagePair.byId(languagePairId);
         for (int i = 0; i < initialNumberOnPracticeWords; i++) {
             introduceNewWordForPractice.forUserInLanguage(languagePair.userId(), languagePair.id()).ifPresent(translationPractices::add);
         }

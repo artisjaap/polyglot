@@ -6,6 +6,8 @@ public class NewAutomaticLessonRequest {
     private String lessonTitle;
     private Integer maxNumberOfWords;
 
+    private NewAutomaticLessonRequest(){}
+
     private NewAutomaticLessonRequest(Builder builder) {
         userId = builder.userId;
         languagePairId = builder.languagePairId;

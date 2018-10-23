@@ -1,0 +1,13 @@
+<p>
+  language-pairs works!
+</p>
+<button class="btn btn-primary" (click)="createLanguagePair(languageFrom, languageTo)"> Create language pair </button>
+
+<input type="text" #languageFrom>
+<input type="text" #languageTo>
+
+<hr>
+
+<div *ngFor="let pair of languagePairs">
+  <a [routerLink]="['/manage', 'translations', pair.id]">{{pair.languageFrom}} - {{pair.languageTo}}</a>
+</div>

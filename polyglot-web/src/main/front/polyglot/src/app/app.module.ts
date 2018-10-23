@@ -12,6 +12,10 @@ import { TranslationCardComponent } from './main/common/components/translation-c
 import { TranslationManagerComponent } from './main/manage/translation-manager/translation-manager.component';
 import { TranslationSimpleAddComponent } from './main/manage/translation-simple-add/translation-simple-add.component';
 import {AppRoutingModule} from "./app-routing-module";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import { LoginComponent } from './main/common/components/login/login.component';
+import {AuthenticationInterceptor} from "./main/common/services/interceptors/authentication-interceptor";
+import { CreateUserComponent } from './main/common/components/create-user/create-user.component';
 
 
 
@@ -26,13 +30,19 @@ import {AppRoutingModule} from "./app-routing-module";
     TranslationCardComponent,
     TranslationManagerComponent,
     TranslationSimpleAddComponent,
+    LoginComponent,
+    CreateUserComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {provide: "API_URL", useValue: "http://localhost:8080/"},
+    {provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi:true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

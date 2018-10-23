@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {TranslationManagerService} from "../common/services/translation-manager.service";
+import {ManagerTranslationService} from "../common/services/manager-translation.service";
 import {TranslationPracticeDTO} from "../common/services/dto/translation-practice-dto";
 
 @Component({
@@ -11,7 +11,7 @@ export class PracticeComponent implements OnInit {
   practiceList:TranslationPracticeDTO[] = [];
 
 
-  constructor(private translationService:TranslationManagerService) {
+  constructor(private translationService:ManagerTranslationService) {
     //listen to practice word created event and add to practice list
 
   }

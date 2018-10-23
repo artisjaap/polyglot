@@ -5,9 +5,9 @@ package be.artisjaap.polyglot.web.security;
  */
 public class UserDetails {
 
-    public Integer userId;
+    public String userId;
 
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
@@ -21,12 +21,12 @@ public class UserDetails {
 
 
     public static final class Builder {
-        private Integer userId;
+        private String userId;
 
         private Builder() {
         }
 
-        public Builder withUserId(Integer val) {
+        public Builder withUserId(String val) {
             userId = val;
             return this;
         }

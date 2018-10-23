@@ -26,7 +26,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
-    @Value("${jwt.header:}")
+    @Value("${jwt.header:authorization}")
     private String tokenHeader;
 
     @Override
@@ -35,7 +35,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
         String username = null;
         String authToken = null;
-        Integer userId = null;
+        String userId = null;
         if (requestHeader != null && requestHeader.startsWith("Bearer ")) {
             authToken = requestHeader.substring(7);
             try {

@@ -56,6 +56,7 @@ public class PolyglotCoreStepsDefinition {
 
     @Given("^a user named (.*)$")
     public void eenGebruikerMetNaam(String naam)  {
+
         registerUser.newUser(NewUserTO.newBuilder()
                 .withUsername(naam)
                 .build());

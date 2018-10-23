@@ -1,35 +1,16 @@
-buildscript {
-    ext {
-        springBootVersion = '2.0.4.RELEASE'
-    }
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-    }
-}
-
-apply plugin: 'java'
-apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'
 
 jar {
     baseName = 'polyglot-scenarios'
     version = '0.0.1-SNAPSHOT'
 
 }
-sourceCompatibility = 1.8
-
-repositories {
-    mavenCentral()
-}
 
 
 dependencies {
     compile project(':polyglot-core')
-//    testCompile project(path: ':polyglot-core', configuration: 'tests')
 
+    compile project(':polyglot-test-helper')
+    testCompile project (path: ":polyglot-test-helper", configuration: 'testArtifacts')
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('de.flapdoodle.embed:de.flapdoodle.embed.mongo')

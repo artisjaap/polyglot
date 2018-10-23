@@ -27,6 +27,22 @@ public class LessonResponse {
 
     }
 
+    public String getLanguagePairId() {
+        return languagePairId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public List<LessonTranslationPairResponse> getTranslations() {
+        return translations;
+    }
+
     public static Builder newBuilder() {
         return new Builder();
     }

@@ -1,5 +1,7 @@
 package be.artisjaap.polyglot.core.action;
 
+import be.artisjaap.core.validation.ValidationException;
+import be.artisjaap.core.validation.ValidationMessage;
 import be.artisjaap.polyglot.core.action.assembler.LanguagePairAssembler;
 import be.artisjaap.polyglot.core.action.to.LanguagePairTO;
 import be.artisjaap.polyglot.core.action.to.NewLanguagePairTO;
@@ -52,7 +54,8 @@ public class FindLanguagePair {
     }
 
 
-    public Optional<LanguagePairTO> byId(String languagePairId) {
-        return languagePairRepository.findById(new ObjectId(languagePairId)).map(languagePairAssembler::assembleTO);
+    public LanguagePairTO byId(String languagePairId) {
+        return languagePairRepository.findById(new ObjectId(languagePairId)).map(languagePairAssembler::assembleTO)
+                .orElseThrow(() -> new ValidationException(new ValidationMessage("NOT_FOUD", "language pair not found")));
     }
 }

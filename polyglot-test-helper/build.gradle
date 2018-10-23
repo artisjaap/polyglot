@@ -1,0 +1,18 @@
+
+jar {
+    baseName = 'polyglot-test-helper'
+    version = '0.0.1-SNAPSHOT'
+
+}
+
+dependencies {
+    compile project(':polyglot-core')
+    testCompile project (path: ":polyglot-core", configuration: 'testArtifacts')
+
+
+    // https://mvnrepository.com/artifact/io.codearte.jfairy/jfairy
+    testCompile group: 'io.codearte.jfairy', name: 'jfairy', version: '0.5.9'
+
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+
+}

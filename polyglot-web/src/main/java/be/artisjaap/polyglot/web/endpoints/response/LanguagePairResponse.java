@@ -4,7 +4,7 @@ import be.artisjaap.polyglot.core.action.to.LanguagePairTO;
 
 import java.time.LocalDateTime;
 
-public class LanguagePairResponse {
+public class LanguagePairResponse extends AbstractReferenceableResponse{
 
     private String userId;
     private String languageFrom;
@@ -15,6 +15,7 @@ public class LanguagePairResponse {
     private LocalDateTime lastTurnReverse;
 
     private LanguagePairResponse(Builder builder) {
+        buildCommon(builder);
         userId = builder.userId;
         languageFrom = builder.languageFrom;
         languageTo = builder.languageTo;
@@ -25,7 +26,9 @@ public class LanguagePairResponse {
     }
 
     public static LanguagePairResponse from(LanguagePairTO to) {
-        return newBuilder().withLanguageFrom(to.languageFrom())
+        return newBuilder()
+                .forDocument(to)
+                .withLanguageFrom(to.languageFrom())
                 .withLanguageTo(to.languageTo())
                 .withLastTurn(to.lastTurn())
                 .withLastTurnReverse(to.lastTurnReverse())
@@ -67,7 +70,7 @@ public class LanguagePairResponse {
         return lastTurnReverse;
     }
 
-    public static final class Builder {
+    public static final class Builder extends AbstractBuilder<Builder>{
         private String userId;
         private String languageFrom;
         private String languageTo;

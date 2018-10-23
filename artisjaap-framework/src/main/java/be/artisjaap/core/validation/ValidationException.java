@@ -24,6 +24,16 @@ public class ValidationException extends RuntimeException {
 		this.messages.add(new ValidationMessage(ValidationMessage.ALGEMEEN, message));
 	}
 
+	public ValidationException(ValidationMessage message) {
+		super(message.getMessage());
+		this.messages = new HashSet<>();
+		this.messages.add(message);
+	}
+
+	public ValidationException(String key, String message){
+		this(new ValidationMessage(key, message));
+	}
+
 	public Set<ValidationMessage> getMessages() {
 		return messages;
 	}
