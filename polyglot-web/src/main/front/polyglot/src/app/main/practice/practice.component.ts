@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ManagerTranslationService} from "../common/services/manager-translation.service";
 import {TranslationPracticeDTO} from "../common/services/dto/translation-practice-dto";
+import {PracticeWordResponse} from "../common/services/response/practice-word-response";
 
 @Component({
   selector: 'pol-practice',
@@ -8,7 +9,7 @@ import {TranslationPracticeDTO} from "../common/services/dto/translation-practic
   styleUrls: ['./practice.component.css']
 })
 export class PracticeComponent implements OnInit {
-  practiceList:TranslationPracticeDTO[] = [];
+  practiceList:PracticeWordResponse[] = [];
 
 
   constructor(private translationService:ManagerTranslationService) {
@@ -17,7 +18,8 @@ export class PracticeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.practiceList = this.translationService.currentListToPracticeForLanguage("test");
+    this.translationService.currentListToPracticeForLanguage("test")
+      .subscribe(result => {this.practiceList = result;});
   }
 
 }

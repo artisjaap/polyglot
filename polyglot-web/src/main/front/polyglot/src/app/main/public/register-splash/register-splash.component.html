@@ -1,0 +1,20 @@
+<div class="main">
+  <div class="login front " [ngClass]="{'active' : loginActive}">
+    <div class="title">Register</div>
+    <div class="content">
+      <label> <span>Username </span><input type="text" placeholder="username" #username></label>
+      <label> <span>Password </span><input type="password" placeholder="password" #password></label>
+    </div>
+
+    <div class="navigation">
+      <button class="btn btn-primary" (click)="login(username, password)">Login</button>
+      <button class="btn btn-primary" (click)="toggle()">Register</button>
+    </div>
+  </div>
+
+  <div class="register back " [ngClass]="{'active' : !loginActive}">
+    <pol-create-user></pol-create-user>
+
+    <button class="btn btn-default" (click)="toggle()">Cancel</button>
+  </div>
+</div>

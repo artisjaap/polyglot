@@ -16,6 +16,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { LoginComponent } from './main/common/components/login/login.component';
 import {AuthenticationInterceptor} from "./main/common/services/interceptors/authentication-interceptor";
 import { CreateUserComponent } from './main/common/components/create-user/create-user.component';
+import { RegisterSplashComponent } from './main/public/register-splash/register-splash.component';
 
 
 
@@ -32,6 +33,7 @@ import { CreateUserComponent } from './main/common/components/create-user/create
     TranslationSimpleAddComponent,
     LoginComponent,
     CreateUserComponent,
+    RegisterSplashComponent,
   ],
   imports: [
     BrowserModule,
