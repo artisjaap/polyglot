@@ -20,10 +20,7 @@ dependencies {
     compile group: 'javax.xml', name: 'jaxb-api', version: '2.1'
 
 
-    // swagger 
-    compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
-    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
-
+   
 
 
     testCompile('org.springframework.boot:spring-boot-starter-test')

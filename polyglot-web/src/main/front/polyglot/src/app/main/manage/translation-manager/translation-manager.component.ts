@@ -12,7 +12,7 @@ import {TranslationResponse} from "../../common/services/request/translation-res
 @Component({
   selector: 'pol-translation-manager',
   templateUrl: './translation-manager.component.html',
-  styleUrls: ['./translation-manager.component.css']
+  styleUrls: ['./translation-manager.component.scss']
 })
 export class TranslationManagerComponent implements OnInit {
   languagePair: LanguagePairDTO;

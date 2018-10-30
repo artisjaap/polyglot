@@ -1,0 +1,10 @@
+@import "global-mixins";
+
+input {
+  @include transparent-input;
+}
+
+.username {
+  color: $main-color;
+  margin: 0 5px;
+}

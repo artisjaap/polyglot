@@ -1,0 +1,46 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "globalstyles/colors-main";
+
+body {
+
+  background: url("assets/background-concept.jpg") no-repeat;
+  background-size: cover;
+  font-family: 'Roboto', sans-serif;
+  color: $main-color;
+
+}
+
+a {
+  color: $main-color;
+  font-weight: bold;
+  margin: 5px 5px;
+  padding: 5px;
+  border: 0.5px solid $main-color-20;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+
+  }
+
+}
+
+.box {
+  padding: 5px;
+  background-color: $transparent-50;
+  margin: 5px 20px;
+}
+
+.main-menu {
+  background-color: $transparent-20;
+
+  display: flex;
+  list-style-type: none;
+  padding: 3px 10px;
+
+  li {
+    margin: 0 5px;
+  }
+
+}

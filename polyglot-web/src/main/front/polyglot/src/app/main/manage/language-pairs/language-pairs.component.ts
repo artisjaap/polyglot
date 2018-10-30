@@ -7,7 +7,7 @@ import {LanguagePairResponse} from "../../common/services/response/language-pair
 @Component({
   selector: 'pol-language-pairs',
   templateUrl: './language-pairs.component.html',
-  styleUrls: ['./language-pairs.component.css']
+  styleUrls: ['./language-pairs.component.scss']
 })
 export class LanguagePairsComponent implements OnInit {
   languagePairs:LanguagePairResponse[] = [];

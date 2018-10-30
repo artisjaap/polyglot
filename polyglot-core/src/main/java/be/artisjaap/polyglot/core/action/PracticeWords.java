@@ -129,8 +129,8 @@ public class PracticeWords {
 
         List<TranslationPractice> translationPractices = findWordToPracticeFor(new ObjectId(userId), languagePairId);
 
-        if (translationPractices.isEmpty()) {
-            addNewWordToPracticeList(translationPractices, user.userSettings().initialNumberOnPracticeWords(), languagePairId);
+        if (translationPractices.size() < user.userSettings().initialNumberOnPracticeWords()) {
+            addNewWordToPracticeList(translationPractices, user.userSettings().initialNumberOnPracticeWords() - translationPractices.size(), languagePairId);
         }
         //if no words find to practice, check new words and add
         List<Translation> translations = StreamSupport.stream(translationRepository.findAllById(translationPractices.stream().map(TranslationPractice::getTranslationId).collect(Collectors.toList())).spliterator(), false).collect(Collectors.toList());

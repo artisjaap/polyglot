@@ -42,7 +42,7 @@ export class PracticeTranslationService {
   }
 
   allWordsForLanguagePair(textFilter:string, languagePairId: string):Observable<PagedResponse<TranslationResponse>> {
-    const body: TranslationsFilterRequest = new TranslationsFilterRequest(textFilter, languagePairId, 10, 0);
+    const body: TranslationsFilterRequest = new TranslationsFilterRequest(textFilter, languagePairId, 1000, 0);
     return this.httpClient.post<PagedResponse<TranslationResponse>>(this.apiurl + "api/translations/practice/list/all/filterd", body);
   }
 }

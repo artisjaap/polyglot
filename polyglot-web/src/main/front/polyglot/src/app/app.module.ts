@@ -17,6 +17,10 @@ import { LoginComponent } from './main/common/components/login/login.component';
 import {AuthenticationInterceptor} from "./main/common/services/interceptors/authentication-interceptor";
 import { CreateUserComponent } from './main/common/components/create-user/create-user.component';
 import { RegisterSplashComponent } from './main/public/register-splash/register-splash.component';
+import { MainHeaderComponent } from './main/common/components/main-header/main-header.component';
+import { PracticeListComponent } from './main/practice/practice-list/practice-list.component';
+import { PracticeMainComponent } from './main/practice/practice-main/practice-main.component';
+import { PracticeContinuousComponent } from './main/practice/practice-continuous/practice-continuous.component';
 
 
 
@@ -34,6 +38,10 @@ import { RegisterSplashComponent } from './main/public/register-splash/register-
     LoginComponent,
     CreateUserComponent,
     RegisterSplashComponent,
+    MainHeaderComponent,
+    PracticeListComponent,
+    PracticeMainComponent,
+    PracticeContinuousComponent,
   ],
   imports: [
     BrowserModule,

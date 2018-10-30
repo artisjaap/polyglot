@@ -1,6 +1,118 @@
-body {
-  background: radial-gradient(ellipse at center, #ffa84c 0%, #ff7b0d 100%);
+@import "colors-main";
+
+$height: 170px;
+$width: 250px;
+
+.main {
+  width: $width;
+  height: $height;
+  margin: 15px 0;
+  position: relative;
+
+  //setup card + animation
+  .front, .back {
+    background: rgba(0,0,0,0.5);
+    border: 1px solid;
+    position: absolute;
+    height: $height;
+    width: $width;
+    transition: 0.5s all ease;
+    transform-style: preserve-3d;
+    transform: rotateY(0deg);
+    backface-visibility: hidden;
+
+    .language {
+      font-size: 0.8em;
+      color: white;
+      text-align: center;
+      border-bottom: 1px solid white;
+    }
+
+    .navigation {
+      text-align: right;
+
+      position: absolute;
+
+      bottom: 20px;
+      height: 20px;
+      left: 5px;
+      right:5px;
+
+      button {
+        font-size: 10px;
+      }
+    }
+
+  }
+  //
+  .front {
+    transform: rotateY(180deg);
+
+    &.active {
+      transform: rotateY(0deg);
+    }
+
+
+    .word {
+      color: darkseagreen;
+      font-size: 1.5em;
+      text-align: center;
+      min-height: 70px;
+    }
+
+    .progress {
+      position: absolute;
+      bottom: 0;
+      height: 8px;
+      left: 0;
+      right: 0;
+      background-color: red;
+      border-radius: 0;
+    }
+
+    .data {
+      padding: 10px;
+      font-size: 0.6em;
+
+      .title {
+        color: yellow;
+      }
+      .stats {
+        display: flex;
+        align-content: space-between;
+        color: white;
+        flex-wrap: wrap;
+
+        .row {
+          flex-direction: row;
+
+        }
+
+        label {
+          flex: 1
+        }
+      }
+
+    }
+  }
+
+  .back {
+    transform: rotateY(180deg);
+
+    h2 {
+      color:tomato;
+      text-align: center;
+    }
+
+    &.active {
+      transform: rotateY(0deg);
+    }
+  }
+
+
 }
+
+/*
 .container {
   margin: 10vh auto;
   justify-content: center;
@@ -114,10 +226,11 @@ body {
   padding: 1.5em;
 }
 
-.main:hover .front {
+.main .front .active {
   transform: rotateY(180deg);
   z-index: 2;
 }
-.main:hover .back {
+.main .back .active {
   transform: rotateY(0deg);
 }
+*/

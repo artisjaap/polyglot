@@ -1,10 +1,38 @@
-<p>
-  defined words for language pair [{{ languagePair.languageFrom }} - {{ languagePair.languageTo }}]
-</p>
-<pol-translation-simple-add [translationPairId]="languagePair?.id"></pol-translation-simple-add>
+<div class="box">
+  <h1>
+    Woorden beheren voor [{{ languagePair.languageFrom }} - {{ languagePair.languageTo }}]
+  </h1>
+</div>
 
-<span>Translations...</span>
-<div *ngFor="let t of filteredTranslations.data">
-  {{t.languageA}} - {{t.languageB}}
+<div class="create box">
+  <pol-translation-simple-add [translationPair]="languagePair"></pol-translation-simple-add>
+</div>
+
+
+<div class=" box">
+  <h2>Beschikbare woorden</h2>
+  <div class="controls">
+    <label><input type="text" #search><span class="fa fa-search"></span></label>
+    <span class="fa fa-backward"></span>
+    <span class="fa fa-step-backward"></span>
+    <span class="fa fa-step-forward"></span>
+    <span class="fa fa-forward"></span>
+  </div>
+  <div class="table-row header">
+    <div class="wrapper text-2">
+      <div class="text">{{ languagePair.languageFrom }}</div>
+      <div class="text">{{ languagePair.languageTo }}</div>
+    </div>
+    <div class="text">Options</div>
+  </div>
+
+  <div class="table-row" *ngFor="let t of filteredTranslations.data">
+    <div class="wrapper text-2">
+      <div class="text">{{t.languageA}}</div>
+      <div class="text">{{t.languageB}}</div>
+    </div>
+    <div class="text"></div>
+  </div>
+
 
 </div>

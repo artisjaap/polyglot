@@ -1,9 +1,9 @@
 <div *ngIf="!isAuthenticated()">
-  <input type="text" placeholder="username" #username>
-  <input type="text" placeholder="password" #password>
-  <button class="btn btn-default" (click)="login(username, password)">login</button>
+  <input type="text" placeholder="username" #username value="tom">
+  <input type="password" placeholder="password" #password value="abc">
+  <button class="btn btn-primary" (click)="login(username, password)"><span class="fa fa-sign-in"></span></button>
 </div>
 <div *ngIf="isAuthenticated()">
-  {{userInfo?.username}}
-  <button class="btn btn-default" (click)="logout()">logout</button>
+  <span class="username">Welkom, {{userInfo?.username}}</span>
+  <button class="btn btn-primary" (click)="logout()"> <span class="fa fa-sign-out"></span></button>
 </div>

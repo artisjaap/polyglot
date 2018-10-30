@@ -1,4 +1,4 @@
-import {Inject, Injectable} from '@angular/core';
+import {EventEmitter, Inject, Injectable} from '@angular/core';
 import {User} from "../model/user";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {UserLoginResponse} from "./response/user-login-response";
@@ -16,6 +16,8 @@ export class AuthenticationService {
 
   user: UserLoginResponse;
 
+  userLoginUpdated = new EventEmitter<UserLoginResponse>();
+
   constructor(private logger:LogService,
               private httpClient:HttpClient,
               @Inject('API_URL') private apiurl: string) { }
@@ -25,6 +27,7 @@ export class AuthenticationService {
     return this.httpClient.get<UserLoginResponse>(this.apiurl + "public/api/login/" + username + "/" + password)
       .pipe(map(r=> {
         this.user = r;
+        this.userLoginUpdated.emit(r);
         return r;
       }));
   }

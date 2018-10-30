@@ -1,0 +1,19 @@
+@import "global-mixins";
+
+:host {
+  display: flex;
+  flex-direction: column;
+
+  .create {
+    .form {
+      input {
+        @include transparent-input;
+      }
+    }
+  }
+
+  .pairs {
+
+  }
+}
+

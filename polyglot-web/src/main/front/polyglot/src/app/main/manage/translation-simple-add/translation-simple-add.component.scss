@@ -1,0 +1,10 @@
+@import "global-mixins";
+
+:host {
+
+}
+
+input {
+  @include transparent-input;
+
+}

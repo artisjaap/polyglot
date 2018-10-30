@@ -181,7 +181,6 @@ public class PolyglotCoreStepsDefinition {
         TestAssignmentTO testAssignmentTO = testForLesson.asSimpleTestForLesson(CreateTestTO.newBuilder()
                 .withLessonId(lesson.getId().toString())
                 .withOrderType(OrderType.RANDOM)
-                .withUserId(user.id())
                 .build());
 
 
