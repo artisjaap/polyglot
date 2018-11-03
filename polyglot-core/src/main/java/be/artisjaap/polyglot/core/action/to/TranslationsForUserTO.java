@@ -5,7 +5,7 @@ import java.util.List;
 public class TranslationsForUserTO {
     private String userId;
     private String languagePairId;
-    private List<TranslationPairTO> translations;
+    private List<TranslationTO> translations;
 
     public String userId() {
         return userId;
@@ -15,7 +15,7 @@ public class TranslationsForUserTO {
         return languagePairId;
     }
 
-    public List<TranslationPairTO> translations() {
+    public List<TranslationTO> translations() {
         return translations;
     }
 
@@ -33,7 +33,7 @@ public class TranslationsForUserTO {
     public static final class Builder {
         private String userId;
         private String languagePairId;
-        private List<TranslationPairTO> translations;
+        private List<TranslationTO> translations;
 
         private Builder() {
         }
@@ -48,7 +48,7 @@ public class TranslationsForUserTO {
             return this;
         }
 
-        public Builder withTranslations(List<TranslationPairTO> translations) {
+        public Builder withTranslations(List<TranslationTO> translations) {
             this.translations = translations;
             return this;
         }

@@ -2,6 +2,9 @@ package be.artisjaap.polyglot.web.endpoints.response;
 
 import be.artisjaap.polyglot.core.action.to.TranslationTO;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class TranslationResponse {
     private String languagePairId;
     private String languageA;
@@ -21,6 +24,10 @@ public class TranslationResponse {
                 .withLanguageB(t.languageB())
                 .withLanguagePairId(t.languagePairId())
                 .build();
+    }
+
+    public static List<TranslationResponse> from(List<TranslationTO> translations){
+        return translations.stream().map(TranslationResponse::from).collect(Collectors.toList());
     }
 
     public static Builder newBuilder() {

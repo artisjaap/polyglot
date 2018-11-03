@@ -210,4 +210,23 @@ public class PolyglotCoreStepsDefinition {
                 .withReader(new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream("data/" + file)))
                 .build());
     }
+
+    @When("^(.*) practiced (\\d+) words for language pair (.*)-(.*)$")
+    public void tomPracticedWords(String username, int numerOfPracticing, String languageFrom, String languageTo) throws Throwable {
+        UserTO user = findUser.byUsername(username).orElseThrow(() -> new IllegalStateException("Verwacht dat user bestaat"));
+        LanguagePairTO languagePair = findLanguagePair.pairForUser(user.id(), languageFrom, languageTo).orElseThrow(() -> new IllegalStateException("Expected language pair for user"));
+
+        PracticeWordTO practiceWordTO = practiceWords.nextWord(user.id(), languagePair.id(), OrderType.NORMAL);
+        for(int i = 0; i < numerOfPracticing; i++) {
+            AnswerAndNextWordTO answerAndNextWordTO = practiceWords.checkAnswerAndGiveNext(PracticeWordCheckTO.newBuilder()
+                    .withUserId(user.id())
+                    .withTranslationId(practiceWordTO.translationId())
+                    .withAnswerOrderType(OrderType.NORMAL)
+                    .withAnswerGiven(practiceWordTO.answer())
+                    .withNextOrderType(OrderType.NORMAL)
+                    .build());
+            practiceWordTO = answerAndNextWordTO.practiceWord();
+        }
+
+    }
 }

@@ -2,10 +2,7 @@ package be.artisjaap.polyglot.core.action;
 
 import be.artisjaap.polyglot.core.action.assembler.NewTranslationForUserAssembler;
 import be.artisjaap.polyglot.core.action.assembler.TranslationForUserAssembler;
-import be.artisjaap.polyglot.core.action.to.NewSimpleTranslationPairTO;
-import be.artisjaap.polyglot.core.action.to.NewTranslationForUserFromFileTO;
-import be.artisjaap.polyglot.core.action.to.NewTranslationForUserTO;
-import be.artisjaap.polyglot.core.action.to.TranslationsForUserTO;
+import be.artisjaap.polyglot.core.action.to.*;
 import be.artisjaap.polyglot.core.action.to.translationsfromfile.TranslationRecord;
 import be.artisjaap.polyglot.core.model.Translation;
 import be.artisjaap.polyglot.core.model.TranslationRepository;
@@ -31,16 +28,31 @@ public class RegisterTranslation {
     @Autowired
     private InitTranslationForPractice initTranslationForPractice;
 
+    @Autowired
+    private FindTranslations findTranslations;
 
     public TranslationsForUserTO forAllWords(NewTranslationForUserTO to){
         List<Translation> translations = newTranslationForUserAssembler.assembleAllEntities(to);
-        translationRepository.saveAll(translations);
+
+        List<String> languageA = translations.stream().map(Translation::getLanguageA).collect(Collectors.toList());
+        List<TranslationTO> duplicates = findTranslations.containing(to.languagePairId(), languageA);
+
+        List<Translation> newTranslations = filterDuplicate(translations, duplicates);
+
+        translationRepository.saveAll(newTranslations);
 
         TranslationsForUserTO translationsForUserTO = translationForUserAssembler.assembleTO(to, translations);
 
         initTranslationForPractice.forAll(translationsForUserTO);
 
         return translationsForUserTO;
+    }
+
+    private List<Translation> filterDuplicate(List<Translation> translations, List<TranslationTO> duplicates) {
+        List<String> languageA = duplicates.stream().map(TranslationTO::languageA).collect(Collectors.toList());
+
+        return translations.stream().filter(translation -> !languageA.contains(translation.getLanguageA()))
+                .collect(Collectors.toList());
     }
 
     public TranslationsForUserTO forAllWords(NewTranslationForUserFromFileTO to){

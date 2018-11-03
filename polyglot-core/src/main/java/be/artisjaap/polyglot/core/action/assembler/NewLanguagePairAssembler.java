@@ -2,6 +2,7 @@ package be.artisjaap.polyglot.core.action.assembler;
 
 import be.artisjaap.polyglot.core.action.to.NewLanguagePairTO;
 import be.artisjaap.polyglot.core.model.LanguagePair;
+import be.artisjaap.polyglot.core.model.PracticeHealth;
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Component;
 
@@ -21,6 +22,7 @@ public class NewLanguagePairAssembler implements Assembler<NewLanguagePairTO, La
                 .withLanguageTo(newLanguagePairTO.languageTo())
                 .withTurnsDone(0)
                 .withTurnsDoneReverse(0)
+                .withPracticeHealth(PracticeHealth.newBuilder().build())
                 .build();
     }
 }

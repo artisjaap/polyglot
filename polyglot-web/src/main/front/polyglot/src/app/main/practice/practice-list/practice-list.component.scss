@@ -1,0 +1,19 @@
+:host {
+  margin: 20px;
+
+}
+
+.language-row {
+  display: flex;
+  flex-direction: row;
+
+  .pair {
+    flex: 1;
+  }
+
+  .actions {
+    a {
+      margin: 0 5px;
+    }
+  }
+}

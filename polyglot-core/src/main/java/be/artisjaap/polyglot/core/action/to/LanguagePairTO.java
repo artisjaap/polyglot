@@ -10,6 +10,7 @@ public class LanguagePairTO extends ReferenceableTO {
     private String languageTo;
     private Integer turnsDone;
     private Integer turnsDoneReverse;
+    private PracticeHealthTO practiceHealth;
     private LocalDateTime lastTurn;
     private LocalDateTime lastTurnReverse;
 
@@ -26,6 +27,9 @@ public class LanguagePairTO extends ReferenceableTO {
         return languageTo;
     }
 
+    public PracticeHealthTO practiceHealth(){
+        return practiceHealth;
+    }
 
     public Integer turnsDone() {
         return turnsDone;
@@ -52,6 +56,7 @@ public class LanguagePairTO extends ReferenceableTO {
         turnsDoneReverse = builder.turnsDoneReverse;
         lastTurn = builder.lastTurn;
         lastTurnReverse = builder.lastTurnReverse;
+        practiceHealth = builder.practiceHealth;
     }
 
     public static Builder newBuilder() {
@@ -65,6 +70,7 @@ public class LanguagePairTO extends ReferenceableTO {
         private String languageTo;
         private Integer turnsDone;
         private Integer turnsDoneReverse;
+        private PracticeHealthTO practiceHealth;
         private LocalDateTime lastTurn;
         private LocalDateTime lastTurnReverse;
 
@@ -105,6 +111,13 @@ public class LanguagePairTO extends ReferenceableTO {
             this.lastTurnReverse = lastTurnReverse;
             return this;
         }
+
+        public Builder withPracticeHealth(PracticeHealthTO practiceHealth) {
+            this.practiceHealth = practiceHealth;
+            return this;
+        }
+
+
 
         public LanguagePairTO build() {
             return new LanguagePairTO(this);

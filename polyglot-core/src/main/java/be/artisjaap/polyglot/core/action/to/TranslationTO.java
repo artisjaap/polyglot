@@ -1,6 +1,9 @@
 package be.artisjaap.polyglot.core.action.to;
 
-public class TranslationTO {
+import be.artisjaap.core.model.ReferenceableTO;
+
+public class TranslationTO extends ReferenceableTO {
+
     private String languagePairId;
     private String languageA;
     private String languageB;
@@ -18,6 +21,7 @@ public class TranslationTO {
     }
 
     private TranslationTO(Builder builder) {
+        buildCommon(builder);
         languagePairId = builder.languagePairId;
         languageA = builder.languageA;
         languageB = builder.languageB;
@@ -28,7 +32,7 @@ public class TranslationTO {
     }
 
 
-    public static final class Builder {
+    public static final class Builder extends AbstractBuilder<Builder> {
         private String languagePairId;
         private String languageA;
         private String languageB;

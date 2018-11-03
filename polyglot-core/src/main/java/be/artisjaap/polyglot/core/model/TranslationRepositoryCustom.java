@@ -6,4 +6,5 @@ import org.springframework.data.domain.Page;
 public interface TranslationRepositoryCustom {
 
     Page<Translation> findTranslationsForFilter(TranslationFilterTO filter);
+
 }

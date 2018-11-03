@@ -13,8 +13,14 @@ public class LanguagePair extends AbstractDocument {
     private LocalDateTime lastTurnReverse;
     private Integer turnsDone;
     private Integer turnsDoneReverse;
+    private PracticeHealth practiceHealth;
+
 
     private LanguagePair(){}
+
+    public PracticeHealth getPracticeHealth() {
+        return practiceHealth;
+    }
 
     public ObjectId getUserId() {
         return userId;
@@ -52,6 +58,7 @@ public class LanguagePair extends AbstractDocument {
         lastTurnReverse = builder.lastTurnReverse;
         turnsDone = builder.turnsDone;
         turnsDoneReverse = builder.turnsDoneReverse;
+        practiceHealth = builder.practiceHealth;
     }
 
     public static Builder newBuilder() {
@@ -75,6 +82,7 @@ public class LanguagePair extends AbstractDocument {
         private LocalDateTime lastTurnReverse;
         private Integer turnsDone;
         private Integer turnsDoneReverse;
+        private PracticeHealth practiceHealth;
 
         private Builder() {
         }
@@ -111,6 +119,11 @@ public class LanguagePair extends AbstractDocument {
 
         public Builder withTurnsDoneReverse(Integer turnsDoneReverse) {
             this.turnsDoneReverse = turnsDoneReverse;
+            return this;
+        }
+
+        public Builder withPracticeHealth(PracticeHealth practiceHealth) {
+            this.practiceHealth = practiceHealth;
             return this;
         }
 

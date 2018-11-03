@@ -35,7 +35,7 @@ public class Translation extends AbstractDocument {
     }
 
 
-    public static final class Builder {
+    public static final class Builder extends AbstractBuilder<Builder>{
         private ObjectId languagePairId;
         private String languageA;
         private String languageB;

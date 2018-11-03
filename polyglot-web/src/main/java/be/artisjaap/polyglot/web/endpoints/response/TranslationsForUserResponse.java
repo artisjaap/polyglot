@@ -7,7 +7,7 @@ import java.util.List;
 public class TranslationsForUserResponse {
     private String userId;
     private String languagePairId;
-    private List<TranslationPairResponse> translations;
+    private List<TranslationResponse> translations;
 
 
     private TranslationsForUserResponse(Builder builder) {
@@ -20,7 +20,7 @@ public class TranslationsForUserResponse {
         return TranslationsForUserResponse.newBuilder()
                 .withUserId(translationsForUserTO.userId())
                 .withLanguagePairId(translationsForUserTO.languagePairId())
-                .withTranslations(TranslationPairResponse.from(translationsForUserTO.translations()))
+                .withTranslations(TranslationResponse.from(translationsForUserTO.translations()))
                 .build();
     }
 
@@ -36,14 +36,14 @@ public class TranslationsForUserResponse {
         return languagePairId;
     }
 
-    public List<TranslationPairResponse> getTranslations() {
+    public List<TranslationResponse> getTranslations() {
         return translations;
     }
 
     public static final class Builder {
         private String userId;
         private String languagePairId;
-        private List<TranslationPairResponse> translations;
+        private List<TranslationResponse> translations;
 
         private Builder() {
         }
@@ -58,7 +58,7 @@ public class TranslationsForUserResponse {
             return this;
         }
 
-        public Builder withTranslations(List<TranslationPairResponse> val) {
+        public Builder withTranslations(List<TranslationResponse> val) {
             translations = val;
             return this;
         }

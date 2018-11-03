@@ -11,7 +11,7 @@ import java.util.List;
 @Component
 public class TranslationForUserAssembler {
     @Autowired
-    private TranslationPairAssembler translationPairAssembler;
+    private TranslationAssembler translationPairAssembler;
 
     public TranslationsForUserTO assembleTO(NewTranslationForUserTO to, List<Translation> translations) {
         return TranslationsForUserTO.newBuilder()

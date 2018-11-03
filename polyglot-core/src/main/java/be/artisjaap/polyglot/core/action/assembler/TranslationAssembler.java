@@ -12,6 +12,7 @@ public class TranslationAssembler implements Assembler<TranslationTO, Translatio
     @Override
     public TranslationTO assembleTO(Translation doc) {
         return TranslationTO.newBuilder()
+                .forDocument(doc)
                 .withLanguageA(doc.getLanguageA())
                 .withLanguageB(doc.getLanguageB())
                 .withLanguagePairId(doc.getLanguagePairId().toString())
@@ -21,6 +22,7 @@ public class TranslationAssembler implements Assembler<TranslationTO, Translatio
     @Override
     public Translation assembleEntity(TranslationTO translationTO) {
         return Translation.newBuilder()
+                .forDocument(translationTO)
                 .withLanguageA(translationTO.languageA())
                 .withLanguageB(translationTO.languageB())
                 .withLanguagePairId(new ObjectId(translationTO.languagePairId()))
