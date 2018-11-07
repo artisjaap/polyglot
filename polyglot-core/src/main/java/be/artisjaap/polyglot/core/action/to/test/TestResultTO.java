@@ -4,6 +4,8 @@ import java.util.List;
 
 public class TestResultTO {
     private String lessonName;
+    private String lessonId;
+    private String userId;
     private int score;
     private List<WordResultTO> wordResults;
 
@@ -11,6 +13,8 @@ public class TestResultTO {
         lessonName = builder.lessonName;
         score = builder.score;
         wordResults = builder.wordResults;
+        userId = builder.userId;
+        lessonId = builder.lessonId;
     }
 
     public static Builder newBuilder() {
@@ -25,6 +29,14 @@ public class TestResultTO {
         return score;
     }
 
+    public String lessonId() {
+        return lessonId;
+    }
+
+    public String userId() {
+        return userId;
+    }
+
     public List<WordResultTO> wordResults() {
         return wordResults;
     }
@@ -32,6 +44,8 @@ public class TestResultTO {
 
     public static final class Builder {
         private String lessonName;
+        private String lessonId;
+        private String userId;
         private int score;
         private List<WordResultTO> wordResults;
 
@@ -50,6 +64,18 @@ public class TestResultTO {
 
         public Builder withWordResults(List<WordResultTO> val) {
             wordResults = val;
+            return this;
+        }
+
+
+        public Builder withUserId(String val) {
+            userId = val;
+            return this;
+        }
+
+
+        public Builder withLessonId(String val) {
+            lessonId = val;
             return this;
         }
 

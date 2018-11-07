@@ -1,5 +1,6 @@
 package be.artisjaap.polyglot.core.model;
 
+import be.artisjaap.core.validation.ValidationException;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
@@ -10,4 +11,7 @@ public interface TranslationRepository extends MongoRepository<Translation, Obje
 
     List<Translation> findByLanguagePairIdAndLanguageAIn(ObjectId languagePairId, List<String> languageA);
 
+    default Translation findByIdOrThrow(ObjectId toObjectId){
+        return findById(toObjectId).orElseThrow(() -> new ValidationException("TRANSLATION_NOT_FOUND"));
+    }
 }

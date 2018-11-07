@@ -21,6 +21,7 @@ import { MainHeaderComponent } from './main/common/components/main-header/main-h
 import { PracticeListComponent } from './main/practice/practice-list/practice-list.component';
 import { PracticeMainComponent } from './main/practice/practice-main/practice-main.component';
 import { PracticeContinuousComponent } from './main/practice/practice-continuous/practice-continuous.component';
+import { HistoryForLanguagePairComponent } from './main/manage/history-for-language-pair/history-for-language-pair.component';
 
 
 
@@ -42,6 +43,7 @@ import { PracticeContinuousComponent } from './main/practice/practice-continuous
     PracticeListComponent,
     PracticeMainComponent,
     PracticeContinuousComponent,
+    HistoryForLanguagePairComponent,
   ],
   imports: [
     BrowserModule,

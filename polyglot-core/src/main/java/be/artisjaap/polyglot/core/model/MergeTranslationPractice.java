@@ -1,16 +1,20 @@
 package be.artisjaap.polyglot.core.model;
 
+import be.artisjaap.core.validation.ValidationException;
 import be.artisjaap.polyglot.core.action.FindLanguagePair;
 import be.artisjaap.polyglot.core.action.to.LanguagePairTO;
 import be.artisjaap.polyglot.core.action.to.PracticeWordTO;
 import be.artisjaap.polyglot.core.action.to.WordStatsTO;
 import be.artisjaap.polyglot.core.action.to.test.OrderType;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import static be.artisjaap.polyglot.core.action.to.test.OrderType.NORMAL;
 import static be.artisjaap.polyglot.core.action.to.test.OrderType.REVERSE;
@@ -19,6 +23,28 @@ import static be.artisjaap.polyglot.core.action.to.test.OrderType.REVERSE;
 public class MergeTranslationPractice {
     @Autowired
     private FindLanguagePair findLanguagePair;
+
+    @Autowired
+    private TranslationPracticeRepository translationPracticeRepository;
+
+    @Autowired
+    private TranslationRepository translationRepository;
+
+    public List<PracticeWordTO> mergeForTranslations(List<String> translations){
+        List<ObjectId> translationObjectIds = translations.stream().map(ObjectId::new).collect(Collectors.toList());
+        List<Translation> translationList = StreamSupport.stream(translationRepository.findAllById(translationObjectIds).spliterator(), false).collect(Collectors.toList());
+        List<TranslationPractice> translationPracticeList = translationPracticeRepository.findByTranslationIdIn(translationObjectIds);
+        return merge(translationPracticeList, translationList, OrderType.NORMAL);
+    }
+
+    public PracticeWordTO mergeForTranslation(String translationId){
+        ObjectId translationObjectId = new ObjectId(translationId);
+        TranslationPractice translationPractice = translationPracticeRepository.findByTranslationId(translationObjectId).orElseThrow(() -> new ValidationException("TRANSLATION NOT FOUD"));
+        Translation translation = translationRepository.findById(translationObjectId).orElseThrow(() -> new ValidationException("TRANSLATION NOT FOUD"));
+
+        LanguagePairTO languagePairTO = findLanguagePair.byId(translation.getLanguagePairId().toString());
+        return merge(translationPractice, translation, languagePairTO, OrderType.NORMAL);
+    }
 
     public List<PracticeWordTO> merge(List<TranslationPractice> translationPractices, List<Translation> translations, OrderType orderType) {
         if (translationPractices.size() != translations.size()) {

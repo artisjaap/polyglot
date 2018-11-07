@@ -53,6 +53,18 @@ public class PagedTO<T> {
 
     }
 
+    public static <T,D> PagedTO<T> from(Page<D> page, List<T> data){
+        return newBuilder()
+                .withNumberOfPages(page.getTotalPages())
+                .withPage(page.getNumber())
+                .withPageSize(page.getSize())
+                .withData(data)
+                .withLastPage(page.getNumber()+1 == page.getTotalPages() || page.getTotalPages() == 0)
+                .build();
+
+
+    }
+
     public static Builder newBuilder() {
         return new Builder();
     }

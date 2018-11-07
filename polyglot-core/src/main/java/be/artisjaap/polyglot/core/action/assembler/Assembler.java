@@ -12,4 +12,8 @@ public interface Assembler<TO, D> {
     default List<TO> assembleTOs(List<D> docs){
         return docs.stream().map(this::assembleTO).collect(Collectors.toList());
     }
+
+    default List<D> assembleDocuments(List<TO> tos){
+        return tos.stream().map(this::assembleEntity).collect(Collectors.toList());
+    }
 }

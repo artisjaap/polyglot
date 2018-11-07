@@ -1,9 +1,8 @@
 package be.artisjaap.polyglot.testhelper;
 
 import be.artisjaap.polyglot.core.model.Lesson;
+import com.google.common.collect.Sets;
 import org.bson.types.ObjectId;
-
-import java.util.Arrays;
 
 public class LessonMother extends AbstractMother {
 
@@ -12,6 +11,6 @@ public class LessonMother extends AbstractMother {
                 .withUserId(new ObjectId())
                 .withName(fairy.textProducer().word())
                 .withLanguagePairId(new ObjectId())
-                .withTranslations(Arrays.asList(new ObjectId()));
+                .withTranslations(Sets.newHashSet(new ObjectId()));
     }
 }

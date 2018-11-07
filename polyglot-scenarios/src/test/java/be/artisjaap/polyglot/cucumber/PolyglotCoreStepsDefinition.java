@@ -54,6 +54,9 @@ public class PolyglotCoreStepsDefinition {
     @Autowired
     private TestForLesson testForLesson;
 
+    @Autowired
+    private SimpleNextWordStrategy simpleNextWordStrategy;
+
     @Given("^a user named (.*)$")
     public void eenGebruikerMetNaam(String naam)  {
 
@@ -124,8 +127,6 @@ public class PolyglotCoreStepsDefinition {
         String languageTo = settings.get("answer language");
         LanguagePairTO languagePairTO = findLanguagePair.pairForUser(user.id(), languageFrom, languageTo).orElseThrow(IllegalStateException::new);
         OrderType orderType = languagePairTO.languageFrom().equalsIgnoreCase(languageFrom)?OrderType.NORMAL:OrderType.REVERSE;
-
-        List<PracticeWordTO> practiceWordTOS = practiceWords.giveCurrentListToPractice(user.id(), languagePairTO.id(), orderType);
     }
 
     private Integer propertyAsInteger(Map<String, String> map, String key, String defaultValue){
@@ -152,7 +153,7 @@ public class PolyglotCoreStepsDefinition {
             practiceWords.practiced(user.id(), practiceWordTO.translationId(), practiceWordTO.reversed());
         }
 
-        List<PracticeWordTO> practiceWordTOS = practiceWords.giveCurrentListToPractice(user.id(), languagePairTO.id(), orderType);
+        List<PracticeWordTO> practiceWordTOS = simpleNextWordStrategy.giveCurrentListToPractice(user.id(), languagePairTO.id(), orderType);
 
     }
 
@@ -188,13 +189,14 @@ public class PolyglotCoreStepsDefinition {
                 WordSolutionTO.newBuilder()
                         .withAnswerLanguage(word.anwserLanguage())
                         .withQuestion(word.question())
-                        .withAnswer("een")
+                        .withAnswer(word.answer())
                         .withTranslationId(word.translationId())
                         .build())
                 .collect(Collectors.toList());
 
         TestResultTO testResultTO = testForLesson.correctTest(TestSolutionTO.newBuilder()
                 .withLessonId(testAssignmentTO.lessonId())
+                .withUserId(user.id())
                 .withSolutions(solutions)
                 .build());
     }

@@ -1,5 +1,6 @@
 package be.artisjaap.polyglot.core.action;
 
+import be.artisjaap.polyglot.core.action.assembler.TestResultAssembler;
 import be.artisjaap.polyglot.core.action.to.PracticeWordTO;
 import be.artisjaap.polyglot.core.action.to.test.*;
 import be.artisjaap.polyglot.core.model.*;
@@ -27,6 +28,12 @@ public class TestForLesson {
 
     @Autowired
     private LanguagePairRepository languagePairRepository;
+
+    @Autowired
+    private TestResultAssembler testResultAssembler;
+
+    @Autowired
+    private TestResultRepository testResultRepository;
 
 
     public TestAssignmentTO asSimpleTestForLesson(CreateTestTO createTestTO) {
@@ -114,10 +121,22 @@ public class TestForLesson {
 
         }).collect(Collectors.toList());
 
-        return TestResultTO.newBuilder()
+
+        TestResultTO testResult = TestResultTO.newBuilder()
                 .withLessonName(lesson.getName())
+                .withUserId(testSolutionTO.userId())
+                .withLessonId(testSolutionTO.lessonId())
                 .withWordResults(results)
                 .withScore(Long.valueOf(results.stream().filter(WordResultTO::correct).count()).intValue())
                 .build();
+
+        saveTestResult(testResult);
+
+        return testResult;
+    }
+
+    private void saveTestResult(TestResultTO testResultTO) {
+        TestResult testResult = testResultAssembler.assembleEntity(testResultTO);
+        testResultRepository.save(testResult);
     }
 }

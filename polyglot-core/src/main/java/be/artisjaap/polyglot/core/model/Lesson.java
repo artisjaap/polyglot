@@ -3,13 +3,13 @@ package be.artisjaap.polyglot.core.model;
 import be.artisjaap.core.model.AbstractDocument;
 import org.bson.types.ObjectId;
 
-import java.util.List;
+import java.util.Set;
 
 public class Lesson extends AbstractDocument {
 
     private String name;
     private ObjectId languagePairId;
-    private List<ObjectId> translations;
+    private Set<ObjectId> translations;
     private ObjectId userId;
 
     private Lesson() {
@@ -35,7 +35,7 @@ public class Lesson extends AbstractDocument {
         return languagePairId;
     }
 
-    public List<ObjectId> getTranslations() {
+    public Set<ObjectId> getTranslations() {
         return translations;
     }
 
@@ -43,10 +43,18 @@ public class Lesson extends AbstractDocument {
         return userId;
     }
 
+    public void addTranslations(Set<ObjectId> translationIds) {
+        translations.addAll(translationIds);
+    }
+
+    public void removeTranslations(Set<ObjectId> translationIds) {
+        translations.removeAll(translationIds);
+    }
+
     public static final class Builder extends AbstractBuilder<Builder> {
         private String name;
         private ObjectId languagePairId;
-        private List<ObjectId> translations;
+        private Set<ObjectId> translations;
         private ObjectId userId;
 
         private Builder() {
@@ -62,7 +70,7 @@ public class Lesson extends AbstractDocument {
             return this;
         }
 
-        public Builder withTranslations(List<ObjectId> val) {
+        public Builder withTranslations(Set<ObjectId> val) {
             translations = val;
             return this;
         }

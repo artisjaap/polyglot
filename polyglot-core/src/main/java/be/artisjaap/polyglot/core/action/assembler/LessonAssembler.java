@@ -62,7 +62,7 @@ public class LessonAssembler implements Assembler<LessonTO, Lesson> {
                 .withLanguagePairId(new ObjectId(lessonTO.languagePairId()))
                 .withTranslations(lessonTO.translations().stream()
                         .map(LessonTranslationPairTO::translationId)
-                        .map(ObjectId::new).collect(Collectors.toList()))
+                        .map(ObjectId::new).collect(Collectors.toSet()))
                 .withUserId(new ObjectId(lessonTO.id()))
                 .build();
     }

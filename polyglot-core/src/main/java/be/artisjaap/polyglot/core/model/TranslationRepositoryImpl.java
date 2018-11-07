@@ -24,8 +24,9 @@ public class TranslationRepositoryImpl implements TranslationRepositoryCustom {
                 .is(new ObjectId(filter.languagePairId())));
 
         if (hasText(filter.textFilter())) {
-            q.addCriteria(Criteria.where("languageA").regex(filter.textFilter())
-                    .orOperator(Criteria.where("languageB").regex(filter.textFilter())));
+            q.addCriteria(new Criteria().orOperator(
+                    Criteria.where("languageA").regex(filter.textFilter(), "i"),
+                    Criteria.where("languageB").regex(filter.textFilter(), "i")));
         }
 
         long count = mongoTemplate.count(q, Translation.class);

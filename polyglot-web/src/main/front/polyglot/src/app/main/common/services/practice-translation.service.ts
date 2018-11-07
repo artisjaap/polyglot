@@ -41,8 +41,8 @@ export class PracticeTranslationService {
     return this.httpClient.post<AnswerAndNextWordResponse>(this.apiurl +"api/translations/practice/check-and-next", body);
   }
 
-  allWordsForLanguagePair(textFilter:string, languagePairId: string):Observable<PagedResponse<TranslationResponse>> {
-    const body: TranslationsFilterRequest = new TranslationsFilterRequest(textFilter, languagePairId, 1000, 0);
-    return this.httpClient.post<PagedResponse<TranslationResponse>>(this.apiurl + "api/translations/practice/list/all/filterd", body);
+  allWordsForLanguagePair(textFilter:string, languagePairId: string, page:number, pageSize:number):Observable<PagedResponse<PracticeWordResponse>> {
+    const body: TranslationsFilterRequest = new TranslationsFilterRequest(textFilter, languagePairId, pageSize, page);
+    return this.httpClient.post<PagedResponse<PracticeWordResponse>>(this.apiurl + "api/translations/practice/list/all/filterd", body);
   }
 }

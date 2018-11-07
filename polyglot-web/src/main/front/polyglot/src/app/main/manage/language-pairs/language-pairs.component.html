@@ -22,6 +22,9 @@
   </h2>
   <div *ngFor="let pair of languagePairs">
 
-    <a [routerLink]="['/manage', 'translations', pair.id]" class="fa fa-arrows-h"></a> <span>{{pair.languageFrom}} - {{pair.languageTo}}</span>
+    <a [routerLink]="['/manage', 'translations', pair.id]" class="fa fa-arrows-h"></a>
+    <a [routerLink]="['/manage', 'history', pair.id]" class="fa fa-history"></a>
+
+    <span>{{pair.languageFrom}} - {{pair.languageTo}}</span>
   </div>
 </div>

@@ -4,10 +4,12 @@ import java.util.List;
 
 public class TestSolutionTO {
     private String lessonId;
+    private String userId;
     private List<WordSolutionTO> solutions;
 
     private TestSolutionTO(Builder builder) {
         lessonId = builder.lessonId;
+        userId = builder.userId;
         solutions = builder.solutions;
     }
 
@@ -23,9 +25,13 @@ public class TestSolutionTO {
         return solutions;
     }
 
+    public String userId() {
+        return userId;
+    }
 
     public static final class Builder {
         private String lessonId;
+        private String userId;
         private List<WordSolutionTO> solutions;
 
         private Builder() {
@@ -38,6 +44,11 @@ public class TestSolutionTO {
 
         public Builder withSolutions(List<WordSolutionTO> val) {
             solutions = val;
+            return this;
+        }
+
+        public Builder withUserId(String val) {
+            userId = val;
             return this;
         }
 

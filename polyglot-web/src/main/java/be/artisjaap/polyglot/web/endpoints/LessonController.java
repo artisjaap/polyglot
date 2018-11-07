@@ -64,6 +64,7 @@ public class LessonController {
     public @ResponseBody
     ResponseEntity<TestResultResponse> lessonForTesting(@RequestBody TestSolutionRequest testSolutionRequest) {
         TestSolutionTO testSolutionTO = TestSolutionTO.newBuilder()
+                .withUserId(testSolutionRequest.getUserId())
                 .withSolutions(testSolutionRequest.getSolutions().stream()
                         .map(s -> WordSolutionTO.newBuilder()
                                 .withTranslationId(s.getTranslationId())

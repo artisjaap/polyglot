@@ -1,5 +1,6 @@
 package be.artisjaap.polyglot.core.action.to;
 
+
 public class PracticeWordTO {
     private Boolean isReversed;
     private String translationId;

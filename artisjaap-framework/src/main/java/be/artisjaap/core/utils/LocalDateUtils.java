@@ -16,4 +16,8 @@ public class LocalDateUtils {
     public static LocalDateTime now() {
         return LocalDateTime.now();
     }
+
+    public static YearMonth parseYearMonthFromYYYYMMString(String yearMonth) {
+        return YearMonth.parse(yearMonth);
+    }
 }
