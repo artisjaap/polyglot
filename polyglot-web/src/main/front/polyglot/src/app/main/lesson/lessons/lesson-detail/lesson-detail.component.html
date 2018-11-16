@@ -1,0 +1,71 @@
+<p>
+  lesson-detail works!
+</p>
+
+<div class="box">
+
+  <div style="display: flex;">
+    <div>
+      <h2>Lesson {{lessonData?.name}}</h2>
+
+      <div>
+        <div class="table-row header">
+          <div class="wrapper text-2">
+            <div class="text">Question</div>
+            <div class="text">Answer</div>
+          </div>
+
+        </div>
+
+        <div class="table-row" *ngFor="let t of lessonData?.translations; index as i">
+          <div class="wrapper text-2">
+            <div class="text">{{t.question}}</div>
+            <div class="text">{{t.solution}}</div>
+            <div class="fa fa-remove" (click)="removeWordFromLesson(t.translationId, i)"></div>
+          </div>
+
+        </div>
+      </div>
+
+
+    </div>
+    <div>
+      <h2> add words</h2>
+      <pol-page-navigation [control]="getControl()"></pol-page-navigation>
+
+      <div class="table-row header">
+        <div class="wrapper text-2">
+          <!--<div class="text">{{ languagePair?.languageFrom }}</div>-->
+          <!--<div class="text">{{ languagePair?.languageTo }}</div>-->
+        </div>
+        <div class="text">Options</div>
+      </div>
+
+      <div class="table-row" *ngFor="let t of filteredTranslations?.data; index as i">
+        <div class="wrapper text-2">
+          <div class="text">{{t.question}}</div>
+          <div class="text">{{t.answer}}</div>
+          <!--<div class="text">{{t.wordStatsTO.progressStatus}}</div>-->
+          <!--<div class="text">{{t.wordStatsTO.knowledgeCounterSuccess}}</div>-->
+          <!--<div class="text">{{t.wordStatsTO.knowledgeCounterMiss}}</div>-->
+          <!--<div class="text">{{t.wordStatsTO.lastSuccess}}</div>-->
+        </div>
+        <div class="actions">
+          <span class="fa fa-arrows-h" (click)="addWordToLesson(t.translationId)"></span>
+          <!--<span class="fa fa-battery-0" [ngClass]="{'active':t.wordStatsTO.progressStatus == 'NEW'}" (click)="updateTranslationToStatusNew(t.translationId, i)"></span>-->
+          <!--<span class="fa fa-battery-1" [ngClass]="{'active':t.wordStatsTO.progressStatus == 'IN_PROGRESS'}" (click)="updateTranslationToStatusInProgress(t.translationId, i)"></span>-->
+          <!--<span class="fa fa-battery-4" [ngClass]="{'active':t.wordStatsTO.progressStatus == 'KNOWN'}" (click)="updateTranslationToStatusKnown(t.translationId, i)"></span>-->
+          <!--<span class="fa fa-pause"     [ngClass]="{'active':t.wordStatsTO.progressStatus == 'ON_HOLD'}" (click)="updateTranslationToStatusHold(t.translationId, i)"></span>-->
+        </div>
+      </div>
+
+
+      - display all words of language pair per 10
+      - standard paging
+      - filter on knowledge type
+      - add action to add word to lesson
+    </div>
+
+  </div>
+
+</div>

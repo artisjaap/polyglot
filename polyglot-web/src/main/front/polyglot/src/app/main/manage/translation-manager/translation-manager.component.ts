@@ -4,8 +4,9 @@ import {ManagerTranslationService} from "../../common/services/manager-translati
 import {LanguagePairDTO} from "../../common/services/dto/language-pair-dto";
 import {PracticeTranslationService} from "../../common/services/practice-translation.service";
 import {PagedResponse} from "../../common/services/request/paged-response";
-import {TranslationResponse} from "../../common/services/request/translation-response";
 import {PracticeWordResponse} from "../../common/services/response/practice-word-response";
+import {PageNavigation} from "../../common/components/page-navigation/page-navigation";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'pol-translation-manager',
@@ -16,6 +17,7 @@ export class TranslationManagerComponent implements OnInit {
   languagePair: LanguagePairDTO;
   filteredTranslations: PagedResponse<PracticeWordResponse>;
   @ViewChild("search") search:ElementRef;
+  pageNav: PageNavigationImpl;
 
   constructor(private route: ActivatedRoute,
               private translationService: ManagerTranslationService,
@@ -24,12 +26,15 @@ export class TranslationManagerComponent implements OnInit {
 
   ngOnInit() {
     let languagePairId = this.route.snapshot.params['pairId'];
+    this.pageNav = new PageNavigationImpl(0, 10, this.practiceTranslationService, languagePairId);
+
     this.translationService.languagePairWithId(languagePairId).subscribe(response => {
       this.languagePair = response;
     });
 
-    this.practiceTranslationService.allWordsForLanguagePair("", languagePairId, 0, 10)
-      .subscribe(result => this.filteredTranslations = result);
+
+    // this.practiceTranslationService.allWordsForLanguagePair("", languagePairId, 0, 10)
+    //   .subscribe(result => this.filteredTranslations = result);
 
     this.translationService.event.subscribe(t => {
       t.translations.forEach(trans => {
@@ -38,35 +43,48 @@ export class TranslationManagerComponent implements OnInit {
         //this.filteredTranslations.data.push({question:trans.languageA, answer:trans.languageB})
 
       })
-    })
+    });
+
+    this.pageNav.event.subscribe(r => {
+      this.filteredTranslations = r
+    });
   }
 
-  firstPage(){
-    this.practiceTranslationService.allWordsForLanguagePair("", this.languagePair.id, 0, 10)
-      .subscribe(result => this.filteredTranslations = result);
 
+  updateTranslationToStatusKnown(translationId:string, index:number) {
+    this.practiceTranslationService.updateStatusOfTranslationToKnown(translationId)
+      .subscribe(r => this.filteredTranslations.data[index] = r);
   }
 
-  lastPage(){
-    this.practiceTranslationService.allWordsForLanguagePair("", this.languagePair.id, this.filteredTranslations.numberOfPages-1, 10)
-      .subscribe(result => this.filteredTranslations = result);
+  updateTranslationToStatusHold(translationId:string, index:number) {
+    this.practiceTranslationService.updateStatusOfTranslationToHold(translationId)
+      .subscribe(r => this.filteredTranslations.data[index] = r);
+  }
+  updateTranslationToStatusInProgress(translationId:string, index:number) {
+    this.practiceTranslationService.updateStatusOfTranslationToInProgress(translationId)
+      .subscribe(r => this.filteredTranslations.data[index] = r);
+  }
+  updateTranslationToStatusNew(translationId:string, index:number) {
+    this.practiceTranslationService.updateStatusOfTranslationToNew(translationId)
+      .subscribe(r => this.filteredTranslations.data[index] = r);
   }
 
-  previousPage(){
-    this.practiceTranslationService.allWordsForLanguagePair("", this.languagePair.id, Math.max(0, this.filteredTranslations.page-1), 10)
-      .subscribe(result => this.filteredTranslations = result);
 
+  getControl() : PageNavigation<PracticeWordResponse> {
+    return this.pageNav;
   }
 
-  nextPage(){
-    this.practiceTranslationService.allWordsForLanguagePair("", this.languagePair.id, Math.min(this.filteredTranslations.numberOfPages-1, this.filteredTranslations.page+1), 10)
-      .subscribe(result => this.filteredTranslations = result);
+}
 
+class PageNavigationImpl extends PageNavigation<PracticeWordResponse> {
+
+  constructor(page:number, pageSize:number, private practiceTranslationService:PracticeTranslationService, private languagePairId:string){
+    super(page, pageSize);
   }
 
-  doSearch(){
-    this.practiceTranslationService.allWordsForLanguagePair(this.search.nativeElement.value, this.languagePair.id, 0, 10)
-      .subscribe(result => this.filteredTranslations = result);
+  doSearch(page: number, pageSize: number, text: string): Observable<PagedResponse<PracticeWordResponse>> {
+    return this.practiceTranslationService.allWordsForLanguagePair(text, this.languagePairId, page, pageSize);
+
   }
 
 }

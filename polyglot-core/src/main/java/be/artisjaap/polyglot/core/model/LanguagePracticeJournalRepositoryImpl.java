@@ -6,9 +6,20 @@ import com.mongodb.client.result.UpdateResult;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
+import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
+import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.*;
 
 
 public class LanguagePracticeJournalRepositoryImpl implements LanguagePracticeJournalRepositoryCustom {
@@ -19,8 +30,9 @@ public class LanguagePracticeJournalRepositoryImpl implements LanguagePracticeJo
     private LanguagePracticeJournalRepository languagePracticeJournalRepository;
 
     @Override
-    public void addAnswerToList(AnswerTO answer) {
+    public void addAnswerToList(AnswerTO answer, ObjectId lessonId) {
         TranslationJournal journal = TranslationJournal.newBuilder()
+                .withLessonId(lessonId)
                 .withCorrect(answer.correctAnswer())
                 .withExpectedAnswer(answer.expectedAnswer())
                 .withGivenAnswer(answer.givenAnswer())
@@ -47,6 +59,27 @@ public class LanguagePracticeJournalRepositoryImpl implements LanguagePracticeJo
                     .build();
             languagePracticeJournalRepository.save(languagePracticeJournal);
         }
+
+    }
+
+    @Override
+    public Optional<LanguagePracticeJournal> findByUserIdAndLessonId(ObjectId userId, ObjectId lessonId) {
+        List<AggregationOperation> operations = new ArrayList<>();
+        operations.add(match(Criteria.where("userId").is(userId).and("translationJournalList.lessonId").is(lessonId)));
+        operations.add(unwind("translationJournalList"));
+        operations.add(match(Criteria.where("userId").is(userId).and("translationJournalList.lessonId").is(lessonId)));
+        operations.add(group().first("userId").as("").addToSet("translationJournalList").as("translationJournalList"));
+        Aggregation agg = newAggregation(operations);
+
+        AggregationResults<LanguagePracticeJournal> groupResults = mongoTemplate.aggregate(agg, LanguagePracticeJournal.class, LanguagePracticeJournal.class);
+        List<LanguagePracticeJournal> journals = StreamSupport.stream(groupResults.spliterator(),false).collect(Collectors.toList());
+        if(journals.size() == 1){
+            return Optional.of(journals.get(0));
+        } else if (journals.size() == 0) {
+            return Optional.empty();
+        }
+
+        throw new UnsupportedOperationException("Resultset is > 0");
 
     }
 }

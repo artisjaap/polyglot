@@ -9,4 +9,5 @@ public interface LanguagePracticeJournalRepository extends MongoRepository<Langu
 
     Optional<LanguagePracticeJournal> findByUserIdAndLanguagePairIdAndYearMonth(ObjectId userId, ObjectId languagePairId, String yearMonth);
 
+
 }

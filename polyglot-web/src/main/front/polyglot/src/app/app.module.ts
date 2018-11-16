@@ -22,6 +22,13 @@ import { PracticeListComponent } from './main/practice/practice-list/practice-li
 import { PracticeMainComponent } from './main/practice/practice-main/practice-main.component';
 import { PracticeContinuousComponent } from './main/practice/practice-continuous/practice-continuous.component';
 import { HistoryForLanguagePairComponent } from './main/manage/history-for-language-pair/history-for-language-pair.component';
+import { PageNavigationComponent } from './main/common/components/page-navigation/page-navigation.component';
+import { LessonComponent } from './main/lesson/lessons/lesson.component';
+import { LessonListComponent } from './main/lesson/lessons/lesson-list/lesson-list.component';
+import { LessonDetailComponent } from './main/lesson/lessons/lesson-detail/lesson-detail.component';
+import { LessonLanguagePairComponent } from './main/lesson/lessons/lesson-language-pair/lesson-language-pair.component';
+import { LessonTakeComponent } from './main/lesson/lessons/lesson-take/lesson-take.component';
+import { LessonPracticeComponent } from './main/lesson/lessons/lesson-practice/lesson-practice.component';
 
 
 
@@ -44,6 +51,13 @@ import { HistoryForLanguagePairComponent } from './main/manage/history-for-langu
     PracticeMainComponent,
     PracticeContinuousComponent,
     HistoryForLanguagePairComponent,
+    PageNavigationComponent,
+    LessonComponent,
+    LessonListComponent,
+    LessonDetailComponent,
+    LessonLanguagePairComponent,
+    LessonTakeComponent,
+    LessonPracticeComponent,
   ],
   imports: [
     BrowserModule,

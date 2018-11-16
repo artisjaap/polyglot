@@ -1,12 +1,27 @@
 package be.artisjaap.core.utils;
 
-import java.time.LocalDateTime;
-import java.time.YearMonth;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
 
 public class LocalDateUtils {
+    private  static DateTimeFormatter dateFormatYYYYMMDD = DateTimeFormatter.ofPattern("YYYY-MM-DD");
+
+    private static Clock clock = Clock.systemDefaultZone();
+
+    public static void useFixedDate(LocalDate date) {
+        clock = Clock.fixed(Instant.from(date.atStartOfDay()), ZoneId.systemDefault());
+    }
+
+    public static void useFixedDate(LocalDateTime dateTime) {
+        clock = Clock.fixed(Instant.from(dateTime), ZoneId.systemDefault());
+    }
+
+    public static void resetFixedDate() {
+        clock = Clock.systemDefaultZone();
+    }
 
     public static YearMonth nowYearMonth() {
-        return YearMonth.now();
+        return YearMonth.now(clock);
     }
 
     public static String nowYearMonthAsString() {
@@ -14,10 +29,24 @@ public class LocalDateUtils {
     }
 
     public static LocalDateTime now() {
-        return LocalDateTime.now();
+        return LocalDateTime.now(clock);
     }
 
     public static YearMonth parseYearMonthFromYYYYMMString(String yearMonth) {
         return YearMonth.parse(yearMonth);
+    }
+
+    public static LocalDate parseDateFromYYYYMMDDString(String date) {
+        return LocalDate.parse(date, dateFormatYYYYMMDD);
+    }
+
+    public static boolean timestampInDay(LocalDateTime timestamp, LocalDate date){
+        return timestamp.isAfter(date.atStartOfDay()) && timestamp.isBefore(date.plusDays(1).atStartOfDay());
+    }
+
+    public static boolean timestampInMonth(LocalDateTime timestamp, YearMonth month){
+        LocalDateTime firstOfMonth = month.atDay(1).atStartOfDay();
+        LocalDateTime endOfMonth = firstOfMonth.plusMonths(1).minusSeconds(1);
+        return timestamp.isAfter(firstOfMonth) && timestamp.isBefore(endOfMonth);
     }
 }

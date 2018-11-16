@@ -3,6 +3,7 @@ package be.artisjaap.polyglot.web.endpoints.request;
 import be.artisjaap.polyglot.core.action.to.test.OrderType;
 
 public class PracticeWordCheckRequest {
+    private String lessonId;
     private String userId;
     private String translationId;
     private String answerGiven;
@@ -12,6 +13,7 @@ public class PracticeWordCheckRequest {
     private PracticeWordCheckRequest(){}
 
     private PracticeWordCheckRequest(Builder builder) {
+        lessonId = builder.lessonId;
         userId = builder.userId;
         translationId = builder.translationId;
         answerGiven = builder.answerGiven;
@@ -43,8 +45,12 @@ public class PracticeWordCheckRequest {
         return nextOrderType;
     }
 
+    public String getLessonId() {
+        return lessonId;
+    }
 
     public static final class Builder {
+        private String lessonId;
         private String userId;
         private String translationId;
         private String answerGiven;
@@ -76,6 +82,11 @@ public class PracticeWordCheckRequest {
 
         public Builder withNextOrderType(OrderType val) {
             nextOrderType = val;
+            return this;
+        }
+
+        public Builder withLessonId(String val) {
+            lessonId = val;
             return this;
         }
 

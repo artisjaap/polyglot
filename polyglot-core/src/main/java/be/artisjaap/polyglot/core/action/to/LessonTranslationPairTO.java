@@ -1,6 +1,7 @@
 package be.artisjaap.polyglot.core.action.to;
 
 public class LessonTranslationPairTO {
+    private Boolean isReverse;
     private String translationId;
     private String languageFrom;
     private String languageTo;
@@ -39,7 +40,12 @@ public class LessonTranslationPairTO {
         return solution;
     }
 
+    public Boolean isReverse() {
+        return isReverse;
+    }
+
     public static final class Builder {
+        private Boolean isReverse;
         private String translationId;
         private String languageFrom;
         private String languageTo;
@@ -71,6 +77,11 @@ public class LessonTranslationPairTO {
 
         public Builder withSolution(String val) {
             solution = val;
+            return this;
+        }
+
+        public Builder withIsReverse(Boolean val) {
+            isReverse = val;
             return this;
         }
 

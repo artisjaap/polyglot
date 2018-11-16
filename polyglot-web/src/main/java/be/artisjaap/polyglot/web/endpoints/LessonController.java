@@ -7,14 +7,14 @@ import be.artisjaap.polyglot.core.action.to.LessonTO;
 import be.artisjaap.polyglot.core.action.to.NewAutomaticLessonTO;
 import be.artisjaap.polyglot.core.action.to.test.*;
 import be.artisjaap.polyglot.web.endpoints.request.NewAutomaticLessonRequest;
+import be.artisjaap.polyglot.web.endpoints.request.NewLessonRequest;
 import be.artisjaap.polyglot.web.endpoints.request.TestSolutionRequest;
-import be.artisjaap.polyglot.web.endpoints.response.LessonResponse;
-import be.artisjaap.polyglot.web.endpoints.response.TestAssignmentResponse;
-import be.artisjaap.polyglot.web.endpoints.response.TestResultResponse;
+import be.artisjaap.polyglot.web.endpoints.response.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
@@ -42,10 +42,29 @@ public class LessonController {
         return ResponseEntity.ok(LessonResponse.from(lessonTO));
     }
 
+
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    public @ResponseBody
+    ResponseEntity<LessonResponse> create(@RequestBody NewLessonRequest newLessonRequest) {
+        LessonTO lessonTO = createLesson.automaticallyFor(NewAutomaticLessonTO.newBuilder()
+                .withUserId(newLessonRequest.getUserId())
+                .withLessonTitle(newLessonRequest.getLessonTitle())
+                .withLanguagePairId(newLessonRequest.getLanguagePairId())
+                .build());
+
+        return ResponseEntity.ok(LessonResponse.from(lessonTO));
+    }
+
     @RequestMapping(value = "/practice/{lessonId}", method = RequestMethod.GET)
     public @ResponseBody
     ResponseEntity<LessonResponse> lessonForPracticing(@PathVariable String lessonId) {
         return ResponseEntity.ok(LessonResponse.from(findLesson.forPracticing(lessonId)));
+    }
+
+    @RequestMapping(value = "/{languagePairId}", method = RequestMethod.GET)
+    public @ResponseBody
+    ResponseEntity<List<LessonHeaderResponse>> allLessonsForLanguagePair(@PathVariable String languagePairId) {
+        return ResponseEntity.ok(LessonHeaderResponse.from(findLesson.forLanguagePair(languagePairId)));
     }
 
     @RequestMapping(value = "/test/{lessonId}/{orderType}", method = RequestMethod.GET)
@@ -78,6 +97,15 @@ public class LessonController {
 
     }
 
+    @RequestMapping(value = "/add/{lessonId}/{translationId}", method = RequestMethod.PUT)
+    public @ResponseBody
+    ResponseEntity<LessonTranslationPairResponse> addTranslationToLesson(@PathVariable String lessonId, @PathVariable String translationId) {
+        return ResponseEntity.ok(LessonTranslationPairResponse.from(createLesson.addTranslationToLesson(lessonId, translationId)));
+    }
 
-
+    @RequestMapping(value = "/remove/{lessonId}/{translationId}", method = RequestMethod.DELETE)
+    public @ResponseBody
+    ResponseEntity<LessonTranslationPairResponse> removeTranslationToLesson(@PathVariable String lessonId, @PathVariable String translationId) {
+        return ResponseEntity.ok(LessonTranslationPairResponse.from(createLesson.removeTranslationFromLesson(lessonId, translationId)));
+    }
 }

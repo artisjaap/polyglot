@@ -29,7 +29,7 @@ public class SimpleNextWordStrategy implements NextRandomWord {
     private TranslationRepository translationRepository;
 
     @Autowired
-    private MergeTranslationPractice mergeTranslationPractice;
+    private FindPracticeWord findPracticeWord;
 
     @Autowired
     private FindUser findUser;
@@ -38,6 +38,7 @@ public class SimpleNextWordStrategy implements NextRandomWord {
     private TranslationPracticeRepository translationPracticeRepository;
 
 
+    //TODO can be simpler
     @Override
     public PracticeWordTO nextWord(String userId, String languagePairId, OrderType orderType) {
         LanguagePairTO languagePairTO = findLanguagePair.byId(languagePairId);
@@ -48,7 +49,7 @@ public class SimpleNextWordStrategy implements NextRandomWord {
             if (translationPractice.isPresent()) {
                 TranslationPractice practice = translationPractice.get();
                 Translation translation = translationRepository.findById(practice.getTranslationId()).orElseThrow(() -> new IllegalStateException("expected to find translation"));
-                return mergeTranslationPractice.merge(practice, translation, languagePairTO, orderType);
+                return findPracticeWord.forTranslation(translation.getId().toString(), orderType);
             }
 
         }
@@ -58,6 +59,7 @@ public class SimpleNextWordStrategy implements NextRandomWord {
         return practiceWordTOS.get(index);
     }
 
+    //TODO can be simpler
     public List<PracticeWordTO> giveCurrentListToPractice(String userId, String languagePairId, OrderType order) {
         UserTO user = findUser.byUserId(userId);
 
@@ -69,7 +71,7 @@ public class SimpleNextWordStrategy implements NextRandomWord {
         //if no words find to practice, check new words and add
         List<Translation> translations = StreamSupport.stream(translationRepository.findAllById(translationPractices.stream().map(TranslationPractice::getTranslationId).collect(Collectors.toList())).spliterator(), false).collect(Collectors.toList());
 
-        return mergeTranslationPractice.merge(translationPractices, translations, order);
+        return findPracticeWord.forTranslations(translations.stream().map(Translation::getId).map(ObjectId::toString).collect(Collectors.toList()), order);
     }
 
     private void addNewWordToPracticeList(List<TranslationPractice> translationPractices, Integer initialNumberOnPracticeWords, String languagePairId) {

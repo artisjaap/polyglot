@@ -1,11 +1,14 @@
-package be.artisjaap.polyglot.core.model;
+package be.artisjaap.polyglot.core.action;
 
 import be.artisjaap.core.validation.ValidationException;
-import be.artisjaap.polyglot.core.action.FindLanguagePair;
 import be.artisjaap.polyglot.core.action.to.LanguagePairTO;
 import be.artisjaap.polyglot.core.action.to.PracticeWordTO;
 import be.artisjaap.polyglot.core.action.to.WordStatsTO;
 import be.artisjaap.polyglot.core.action.to.test.OrderType;
+import be.artisjaap.polyglot.core.model.Translation;
+import be.artisjaap.polyglot.core.model.TranslationPractice;
+import be.artisjaap.polyglot.core.model.TranslationPracticeRepository;
+import be.artisjaap.polyglot.core.model.TranslationRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,7 +23,8 @@ import static be.artisjaap.polyglot.core.action.to.test.OrderType.NORMAL;
 import static be.artisjaap.polyglot.core.action.to.test.OrderType.REVERSE;
 
 @Component
-public class MergeTranslationPractice {
+public class FindPracticeWord {
+
     @Autowired
     private FindLanguagePair findLanguagePair;
 
@@ -30,23 +34,26 @@ public class MergeTranslationPractice {
     @Autowired
     private TranslationRepository translationRepository;
 
-    public List<PracticeWordTO> mergeForTranslations(List<String> translations){
-        List<ObjectId> translationObjectIds = translations.stream().map(ObjectId::new).collect(Collectors.toList());
-        List<Translation> translationList = StreamSupport.stream(translationRepository.findAllById(translationObjectIds).spliterator(), false).collect(Collectors.toList());
-        List<TranslationPractice> translationPracticeList = translationPracticeRepository.findByTranslationIdIn(translationObjectIds);
-        return merge(translationPracticeList, translationList, OrderType.NORMAL);
-    }
 
-    public PracticeWordTO mergeForTranslation(String translationId){
+    public PracticeWordTO forTranslation(String translationId, OrderType orderType){
         ObjectId translationObjectId = new ObjectId(translationId);
         TranslationPractice translationPractice = translationPracticeRepository.findByTranslationId(translationObjectId).orElseThrow(() -> new ValidationException("TRANSLATION NOT FOUD"));
         Translation translation = translationRepository.findById(translationObjectId).orElseThrow(() -> new ValidationException("TRANSLATION NOT FOUD"));
 
         LanguagePairTO languagePairTO = findLanguagePair.byId(translation.getLanguagePairId().toString());
-        return merge(translationPractice, translation, languagePairTO, OrderType.NORMAL);
+        return merge(translationPractice, translation, languagePairTO, orderType);
     }
 
-    public List<PracticeWordTO> merge(List<TranslationPractice> translationPractices, List<Translation> translations, OrderType orderType) {
+    public List<PracticeWordTO> forTranslations(List<String> translations, OrderType orderType){
+        List<ObjectId> translationObjectIds = translations.stream().map(ObjectId::new).collect(Collectors.toList());
+        List<Translation> translationList = StreamSupport.stream(translationRepository.findAllById(translationObjectIds).spliterator(), false).collect(Collectors.toList());
+        List<TranslationPractice> translationPracticeList = translationPracticeRepository.findByTranslationIdIn(translationObjectIds);
+        return merge(translationPracticeList, translationList, orderType);
+    }
+
+
+
+    private List<PracticeWordTO> merge(List<TranslationPractice> translationPractices, List<Translation> translations, OrderType orderType) {
         if (translationPractices.size() != translations.size()) {
             return new ArrayList<>();
         }
@@ -66,7 +73,8 @@ public class MergeTranslationPractice {
 
     }
 
-    public PracticeWordTO merge(TranslationPractice translationPractice, Translation translation, LanguagePairTO languagePairTO, OrderType orderType) {
+
+    private PracticeWordTO merge(TranslationPractice translationPractice, Translation translation, LanguagePairTO languagePairTO, OrderType orderType) {
         OrderType orderWithoutRandom = toOrderTypeWithoutRandom(orderType);
         String languageFrom;
         String languageTo;

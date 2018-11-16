@@ -1,20 +1,15 @@
 package be.artisjaap.polyglot.web.endpoints;
 
 
-import be.artisjaap.polyglot.core.action.ChangeStatusTranslation;
-import be.artisjaap.polyglot.core.action.PracticeWords;
-import be.artisjaap.polyglot.core.action.PracticeWordsFiltered;
-import be.artisjaap.polyglot.core.action.SimpleNextWordStrategy;
+import be.artisjaap.polyglot.core.action.*;
 import be.artisjaap.polyglot.core.action.to.*;
 import be.artisjaap.polyglot.core.action.to.test.OrderType;
-import be.artisjaap.polyglot.core.model.MergeTranslationPractice;
 import be.artisjaap.polyglot.core.model.ProgressStatus;
 import be.artisjaap.polyglot.web.endpoints.request.PracticeWordCheckRequest;
 import be.artisjaap.polyglot.web.endpoints.request.TranslationsFilterRequest;
 import be.artisjaap.polyglot.web.endpoints.response.AnswerAndNextWordResponse;
 import be.artisjaap.polyglot.web.endpoints.response.PagedResponse;
 import be.artisjaap.polyglot.web.endpoints.response.PracticeWordResponse;
-import be.artisjaap.polyglot.web.endpoints.response.TranslationResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,7 +33,7 @@ public class PracticeTranslationController {
     private ChangeStatusTranslation changeStatusTranslation;
 
     @Autowired
-    private MergeTranslationPractice mergeTranslationPractice;
+    private FindPracticeWord findPracticeWord;
 
     @RequestMapping(value = "/list/{userId}/{languagePairId}/{orderType}", method = RequestMethod.GET)
     public @ResponseBody
@@ -72,6 +67,7 @@ public class PracticeTranslationController {
     public @ResponseBody
     ResponseEntity<AnswerAndNextWordResponse> nextCheckAnswerAndGiveNext(@RequestBody PracticeWordCheckRequest practiceWordCheck) {
         PracticeWordCheckTO practiceWordCheckTO = PracticeWordCheckTO.newBuilder()
+                .withLessonId(practiceWordCheck.getLessonId())
                 .withAnswerGiven(practiceWordCheck.getAnswerGiven())
                 .withAnswerOrderType(practiceWordCheck.getAnswerOrderType())
                 .withNextOrderType(practiceWordCheck.getNextOrderType())
@@ -87,8 +83,10 @@ public class PracticeTranslationController {
     public @ResponseBody
     ResponseEntity<PracticeWordResponse> updateStatus(@PathVariable String translationId, @PathVariable ProgressStatus status) {
         changeStatusTranslation.toStatus(translationId, status);
-        return ResponseEntity.ok(PracticeWordResponse.from(mergeTranslationPractice.mergeForTranslation(translationId)));
+        return ResponseEntity.ok(PracticeWordResponse.from(findPracticeWord.forTranslation(translationId, OrderType.NORMAL)));
     }
 
 
 }
+
+

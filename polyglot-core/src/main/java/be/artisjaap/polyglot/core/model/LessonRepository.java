@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface LessonRepository extends MongoRepository<Lesson, ObjectId> {
 
-
+    List<Lesson> findByLanguagePairId(ObjectId languagePairId);
 
     List<Lesson> findByUserIdAndLanguagePairId(ObjectId userId, ObjectId languageId);
 

@@ -38,4 +38,8 @@ public class FindLesson {
         Lesson lesson = lessonRepository.findById(new ObjectId(lessonId)).orElseThrow(() -> new ValidationException("LESSON_NOT_FOUND", "les niet gevonden"));
         return lessonAssembler.assembleTO(lesson);
     }
+
+    public List<LessonHeaderTO> forLanguagePair(String languagePairId) {
+        return lessonHeaderAssembler.assembleTOs(lessonRepository.findByLanguagePairId(new ObjectId(languagePairId)));
+    }
 }

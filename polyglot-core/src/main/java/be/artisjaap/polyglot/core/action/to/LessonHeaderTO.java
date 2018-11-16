@@ -1,12 +1,15 @@
 package be.artisjaap.polyglot.core.action.to;
 
-public class LessonHeaderTO {
+import be.artisjaap.core.model.ReferenceableTO;
+
+public class LessonHeaderTO extends ReferenceableTO {
 
     private String name;
     private String languagePairId;
     private String userId;
 
     private LessonHeaderTO(Builder builder) {
+        buildCommon(builder);
         name = builder.name;
         languagePairId = builder.languagePairId;
         userId = builder.userId;
@@ -28,7 +31,7 @@ public class LessonHeaderTO {
         return userId;
     }
 
-    public static final class Builder {
+    public static final class Builder extends AbstractBuilder<Builder> {
         private String name;
         private String languagePairId;
         private String userId;

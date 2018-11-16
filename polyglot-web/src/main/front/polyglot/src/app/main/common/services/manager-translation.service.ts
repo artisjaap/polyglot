@@ -33,7 +33,7 @@ export class ManagerTranslationService {
   }
 
 
-  allLanugagePairs(): Observable<LanguagePairResponse[]> {
+  allLanguagePairs(): Observable<LanguagePairResponse[]> {
     const user = this.authenticationService.user;
     return this.httpClient.get<LanguagePairResponse[]>(this.apiurl + "api/translations/pairs/user/" + user.userId);
   }
@@ -98,7 +98,7 @@ export class ManagerTranslationService {
        return languagePairFromCache;
      }
 
-     this.allLanugagePairs(true);
+     this.allLanguagePairs(true);
      return this.languagePairsCached.findById(languagePairId);
    }
 

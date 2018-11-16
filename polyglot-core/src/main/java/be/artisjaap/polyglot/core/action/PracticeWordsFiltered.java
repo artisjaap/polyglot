@@ -1,10 +1,9 @@
 package be.artisjaap.polyglot.core.action;
 
-import be.artisjaap.polyglot.core.action.assembler.TranslationAssembler;
 import be.artisjaap.polyglot.core.action.to.PagedTO;
 import be.artisjaap.polyglot.core.action.to.PracticeWordTO;
 import be.artisjaap.polyglot.core.action.to.TranslationFilterTO;
-import be.artisjaap.polyglot.core.model.MergeTranslationPractice;
+import be.artisjaap.polyglot.core.action.to.test.OrderType;
 import be.artisjaap.polyglot.core.model.Translation;
 import be.artisjaap.polyglot.core.model.TranslationRepository;
 import org.bson.types.ObjectId;
@@ -21,15 +20,12 @@ public class PracticeWordsFiltered {
     private TranslationRepository translationRepository;
 
     @Autowired
-    private TranslationAssembler translationAssembler;
-
-    @Autowired
-    private MergeTranslationPractice mergeTranslationPractice;
+    private FindPracticeWord findPracticeWord;
 
     public PagedTO<PracticeWordTO> withFilter(TranslationFilterTO translationFilterTO){
         Page<Translation> translationsForFilter = translationRepository.findTranslationsForFilter(translationFilterTO);
 
-        List<PracticeWordTO> practiceWordTOS = mergeTranslationPractice.mergeForTranslations(translationsForFilter.stream().map(Translation::getId).map(ObjectId::toString).collect(Collectors.toList()));
+        List<PracticeWordTO> practiceWordTOS = findPracticeWord.forTranslations(translationsForFilter.stream().map(Translation::getId).map(ObjectId::toString).collect(Collectors.toList()), OrderType.NORMAL);
 
         return PagedTO.from(translationsForFilter, practiceWordTOS);
     }

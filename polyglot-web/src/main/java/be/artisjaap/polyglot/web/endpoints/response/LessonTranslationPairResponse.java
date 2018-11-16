@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 public class LessonTranslationPairResponse {
 
+    private Boolean isReverse;
     private String languageFrom;
     private String languageTo;
     private String question;
@@ -20,6 +21,7 @@ public class LessonTranslationPairResponse {
         question = builder.question;
         solution = builder.solution;
         translationId = builder.translationId;
+        isReverse = builder.isReverse;
     }
     public static List<LessonTranslationPairResponse> from(List<LessonTranslationPairTO> to) {
         return to.stream().map(LessonTranslationPairResponse::from).collect(Collectors.toList());
@@ -31,6 +33,7 @@ public class LessonTranslationPairResponse {
                 .withQuestion(to.question())
                 .withSolution(to.solution())
                 .withTranslationId(to.translationId())
+                .withIsReverse(to.isReverse())
             .build();
 
     }
@@ -55,11 +58,16 @@ public class LessonTranslationPairResponse {
         return translationId;
     }
 
+    public Boolean getIsReverse() {
+        return isReverse;
+    }
+
     public static Builder newBuilder() {
         return new Builder();
     }
 
     public static final class Builder {
+        private Boolean isReverse;
         private String languageFrom;
         private String languageTo;
         private String question;
@@ -91,6 +99,11 @@ public class LessonTranslationPairResponse {
 
         public Builder withTranslationId(String val) {
             translationId = val;
+            return this;
+        }
+
+        public Builder withIsReverse(Boolean val) {
+            isReverse = val;
             return this;
         }
 

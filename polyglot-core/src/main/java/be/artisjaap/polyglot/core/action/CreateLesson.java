@@ -1,14 +1,10 @@
 package be.artisjaap.polyglot.core.action;
 
 import be.artisjaap.polyglot.core.action.assembler.LessonAssembler;
+import be.artisjaap.polyglot.core.action.assembler.LessonTranslationPairAssembler;
 import be.artisjaap.polyglot.core.action.assembler.NewLessonAssembler;
-import be.artisjaap.polyglot.core.action.to.LessonTO;
-import be.artisjaap.polyglot.core.action.to.NewAutomaticLessonTO;
-import be.artisjaap.polyglot.core.action.to.NewLessonTO;
-import be.artisjaap.polyglot.core.action.to.TranslationPracticeTO;
-import be.artisjaap.polyglot.core.model.Lesson;
-import be.artisjaap.polyglot.core.model.LessonRepository;
-import be.artisjaap.polyglot.core.model.ProgressStatus;
+import be.artisjaap.polyglot.core.action.to.*;
+import be.artisjaap.polyglot.core.model.*;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -27,11 +23,16 @@ public class CreateLesson {
     private LessonAssembler lessonAssembler;
 
     @Autowired
+    private LessonTranslationPairAssembler lessonTranslationPairAssembler;
+
+    @Autowired
     private NewLessonAssembler newLessonAssembler;
 
     @Autowired
     private PracticeWords practiceWords;
 
+    @Autowired
+    private TranslationRepository translationRepository;
 
 
     public LessonTO create(NewLessonTO to){
@@ -86,5 +87,21 @@ public class CreateLesson {
 
 //        return StreamSupport.stream(translationPracticeRepository.findAllById(wordsNeverUsed).spliterator(), false).map(TranslationPractice::getTranslationId).collect(Collectors.toList());
         return wordsNeverUsed;
+    }
+
+    public LessonTranslationPairTO addTranslationToLesson(String lessonId, String translationId) {
+        Lesson lesson = lessonRepository.findById(new ObjectId(lessonId)).orElseThrow(() -> new UnsupportedOperationException(""));
+        Translation translation = translationRepository.findById(new ObjectId(translationId)).orElseThrow(() -> new UnsupportedOperationException(""));
+        lesson.addTranslation(translation.getId());
+        lessonRepository.save(lesson);
+        return lessonTranslationPairAssembler.assembleTO(translation);
+    }
+
+    public LessonTranslationPairTO removeTranslationFromLesson(String lessonId, String translationId) {
+        Lesson lesson = lessonRepository.findById(new ObjectId(lessonId)).orElseThrow(() -> new UnsupportedOperationException(""));
+        Translation translation = translationRepository.findById(new ObjectId(translationId)).orElseThrow(() -> new UnsupportedOperationException(""));
+        lesson.removeTranslation(translation.getId());
+        lessonRepository.save(lesson);
+        return lessonTranslationPairAssembler.assembleTO(translation);
     }
 }

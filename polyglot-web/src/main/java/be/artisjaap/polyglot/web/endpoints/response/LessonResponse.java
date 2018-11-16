@@ -5,12 +5,14 @@ import be.artisjaap.polyglot.core.action.to.LessonTO;
 import java.util.List;
 
 public class LessonResponse {
+    private String id;
     private String languagePairId;
     private String name;
     private String userId;
     private List<LessonTranslationPairResponse> translations;
 
     private LessonResponse(Builder builder) {
+        id = builder.id;
         languagePairId = builder.languagePairId;
         name = builder.name;
         userId = builder.userId;
@@ -19,6 +21,7 @@ public class LessonResponse {
 
     public static LessonResponse from(LessonTO lessonTO){
         return newBuilder().withLanguagePairId(lessonTO.languagePairId())
+                .withId(lessonTO.id())
                 .withName(lessonTO.name())
                 .withUserId(lessonTO.userId())
                 .withTranslations(LessonTranslationPairResponse.from(lessonTO.translations()))
@@ -39,6 +42,10 @@ public class LessonResponse {
         return userId;
     }
 
+    public String getId(){
+        return id;
+    }
+
     public List<LessonTranslationPairResponse> getTranslations() {
         return translations;
     }
@@ -48,6 +55,7 @@ public class LessonResponse {
     }
 
     public static final class Builder {
+        private String id;
         private String languagePairId;
         private String name;
         private String userId;
@@ -73,6 +81,11 @@ public class LessonResponse {
 
         public Builder withTranslations(List<LessonTranslationPairResponse> val) {
             translations = val;
+            return this;
+        }
+
+        public Builder withId(String val) {
+            id = val;
             return this;
         }
 

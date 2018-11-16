@@ -36,9 +36,27 @@ export class PracticeTranslationService {
       checkAnswer.translationId,
       checkAnswer.answerGiven,
       checkAnswer.answerOrderType,
-      checkAnswer.nextOrderType
+      checkAnswer.nextOrderType,
+      checkAnswer.lessonId
     );
     return this.httpClient.post<AnswerAndNextWordResponse>(this.apiurl +"api/translations/practice/check-and-next", body);
+  }
+
+  private updateStatusOfTranslation(translationId:string, status:string):Observable<PracticeWordResponse> {
+    return this.httpClient.patch<PracticeWordResponse>(this.apiurl + "api/translations/practice/update-status/"+translationId+"/"+status, null);
+  }
+
+  updateStatusOfTranslationToKnown(translationId:string):Observable<PracticeWordResponse> {
+    return this.updateStatusOfTranslation(translationId, "KNOWN");
+  }
+  updateStatusOfTranslationToInProgress(translationId:string):Observable<PracticeWordResponse> {
+    return this.updateStatusOfTranslation(translationId, "IN_PROGRESS");
+  }
+  updateStatusOfTranslationToNew(translationId:string):Observable<PracticeWordResponse> {
+    return this.updateStatusOfTranslation(translationId, "NEW");
+  }
+  updateStatusOfTranslationToHold(translationId:string):Observable<PracticeWordResponse> {
+    return this.updateStatusOfTranslation(translationId, "ON_HOLD");
   }
 
   allWordsForLanguagePair(textFilter:string, languagePairId: string, page:number, pageSize:number):Observable<PagedResponse<PracticeWordResponse>> {

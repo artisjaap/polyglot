@@ -1,0 +1,15 @@
+<p>
+  lesson-take works!
+</p>
+<div class="box">
+  <h2>{{lessonForTesting?.lessonName}}</h2>
+
+  <div>
+    <div *ngFor="let t of lessonForTesting?.words">
+      <div>{{t.question}}</div>
+      <div><input type="text"></div>
+    </div>
+  </div>
+
+  <button class="btn btn-primary">DONE</button>
+</div>

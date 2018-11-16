@@ -19,7 +19,7 @@ export class LanguagePairsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.translationService.allLanugagePairs().subscribe(result => this.languagePairs = result);
+    this.translationService.allLanguagePairs().subscribe(result => this.languagePairs = result);
   }
 
   createLanguagePair(languageFrom:HTMLInputElement, languageTo:HTMLInputElement) {

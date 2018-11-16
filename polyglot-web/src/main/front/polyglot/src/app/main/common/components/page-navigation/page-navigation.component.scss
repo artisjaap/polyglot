@@ -1,0 +1,12 @@
+@import "colors-main";
+@import "global-mixins";
+
+.controls {
+  text-align: right;
+  span {
+    margin: 0 5px;
+  }
+  input {
+    @include transparent-input;
+  }
+}

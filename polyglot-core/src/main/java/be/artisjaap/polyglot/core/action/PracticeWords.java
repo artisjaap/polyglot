@@ -9,8 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
+import java.util.Optional;
 
 import static be.artisjaap.polyglot.core.action.to.test.OrderType.NORMAL;
 import static be.artisjaap.polyglot.core.action.to.test.OrderType.REVERSE;
@@ -28,12 +27,6 @@ public class PracticeWords {
     private TranslationRepository translationRepository;
 
     @Autowired
-    private FindUser findUser;
-
-    @Autowired
-    private IntroduceNewWordForPractice introduceNewWordForPractice;
-
-    @Autowired
     private LanguagePairTurn languagePairTurn;
 
     @Autowired
@@ -49,7 +42,7 @@ public class PracticeWords {
     private NextRandomWord nextRandomWord;
 
     @Autowired
-    private MergeTranslationPractice mergeTranslationPractice;
+    private FindPracticeWord findPracticeWord;
 
 
     public PracticeWordTO nextWord(String userId, String languagePairId, OrderType orderType) {
@@ -113,7 +106,7 @@ public class PracticeWords {
 
 
         AnswerTO answerTO = answerTOBuilder.build();
-        journalPracticeResults.forResult(answerTO);
+        journalPracticeResults.forResult(answerTO, Optional.ofNullable(practiceWordCheckTO.lessonId()));
 
         return AnswerAndNextWordTO.newBuilder()
                 .withAnswer(answerTO)
@@ -136,14 +129,8 @@ public class PracticeWords {
         return translationPracticeAssembler.assembleTOs(translationPracticeRepository.findByUserIdAndLanguagePairIdAndProgressStatusIn(new ObjectId(userId), new ObjectId(languagePairId), progressStatuses));
     }
 
-    public List<PracticeWordTO> givePracticeWordsForTranslations(String userId, OrderType orderType, List<String> translationIds) {
-        List<ObjectId> translationIdsObject = translationIds.stream().map(ObjectId::new).collect(Collectors.toList());
-        List<Translation> translations = StreamSupport.stream(translationRepository
-                .findAllById(translationIdsObject).spliterator(), false).collect(Collectors.toList());
-
-        List<TranslationPractice> translationPractices = translationPracticeRepository.findByUserIdAndTranslationIdIn(new ObjectId(userId), translationIdsObject);
-
-        return mergeTranslationPractice.merge(translationPractices, translations, orderType);
+    public List<PracticeWordTO> givePracticeWordsForTranslations(OrderType orderType, List<String> translationIds) {
+        return findPracticeWord.forTranslations(translationIds, orderType);
     }
 
 

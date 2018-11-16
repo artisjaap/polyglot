@@ -38,7 +38,7 @@ public class NewAutomaticLessonTO {
         private String userId;
         private String languagePairId;
         private String lessonTitle;
-        private Integer maxNumberOfWords;
+        private Integer maxNumberOfWords = 0;
 
         private Builder() {
         }

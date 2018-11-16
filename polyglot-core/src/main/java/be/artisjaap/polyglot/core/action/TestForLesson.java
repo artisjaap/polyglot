@@ -43,11 +43,11 @@ public class TestForLesson {
 
         switch (createTestTO.orderType()) {
             case NORMAL:
-                return normalOrderTest(lesson.getUserId().toString(), lesson, languagePair, translationIds);
+                return normalOrderTest( lesson, translationIds);
             case RANDOM:
-                return randomOrderTest(lesson.getUserId().toString(), lesson, languagePair, translationIds);
+                return randomOrderTest( lesson,  translationIds);
             case REVERSE:
-                return reverseOrderTest(lesson.getUserId().toString(), lesson, languagePair, translationIds);
+                return reverseOrderTest( lesson, translationIds);
 
         }
 
@@ -56,13 +56,13 @@ public class TestForLesson {
 
     }
 
-    private TestAssignmentTO randomOrderTest(String userId, Lesson lesson, LanguagePair languagePair, List<String> translationIds) {
+    private TestAssignmentTO randomOrderTest( Lesson lesson, List<String> translationIds) {
 
         List<String> part1 = translationIds.subList(0, translationIds.size() / 2);
         List<String> part2 = translationIds.subList(translationIds.size() / 2, translationIds.size());
 
-        List<PracticeWordTO> practiceWordTOS = practiceWords.givePracticeWordsForTranslations(userId, OrderType.NORMAL, part1);
-        practiceWordTOS.addAll(practiceWords.givePracticeWordsForTranslations(userId, OrderType.REVERSE, part2));
+        List<PracticeWordTO> practiceWordTOS = practiceWords.givePracticeWordsForTranslations(OrderType.NORMAL, part1);
+        practiceWordTOS.addAll(practiceWords.givePracticeWordsForTranslations(OrderType.REVERSE, part2));
 
         return TestAssignmentTO.newBuilder()
                 .withLessonName(lesson.getName())
@@ -72,8 +72,8 @@ public class TestForLesson {
     }
 
 
-    private TestAssignmentTO reverseOrderTest(String userId, Lesson lesson, LanguagePair languagePair, List<String> translationIds) {
-        List<PracticeWordTO> practiceWordTOS = practiceWords.givePracticeWordsForTranslations(userId, OrderType.REVERSE, translationIds);
+    private TestAssignmentTO reverseOrderTest( Lesson lesson, List<String> translationIds) {
+        List<PracticeWordTO> practiceWordTOS = practiceWords.givePracticeWordsForTranslations( OrderType.REVERSE, translationIds);
 
         return TestAssignmentTO.newBuilder()
                 .withLessonName(lesson.getName())
@@ -82,9 +82,9 @@ public class TestForLesson {
                 .build();
     }
 
-    private TestAssignmentTO normalOrderTest(String userId, Lesson lesson, LanguagePair languagePair, List<String> translationIds) {
+    private TestAssignmentTO normalOrderTest(Lesson lesson, List<String> translationIds) {
 
-        List<PracticeWordTO> practiceWordTOS = practiceWords.givePracticeWordsForTranslations(userId, OrderType.NORMAL, translationIds);
+        List<PracticeWordTO> practiceWordTOS = practiceWords.givePracticeWordsForTranslations( OrderType.NORMAL, translationIds);
 
         return TestAssignmentTO.newBuilder()
                 .withLessonName(lesson.getName())

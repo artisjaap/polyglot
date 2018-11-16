@@ -51,6 +51,14 @@ public class Lesson extends AbstractDocument {
         translations.removeAll(translationIds);
     }
 
+    public void addTranslation(ObjectId translationId) {
+        translations.add(translationId);
+    }
+
+    public void removeTranslation(ObjectId translationId) {
+        translations.remove(translationId);
+    }
+
     public static final class Builder extends AbstractBuilder<Builder> {
         private String name;
         private ObjectId languagePairId;

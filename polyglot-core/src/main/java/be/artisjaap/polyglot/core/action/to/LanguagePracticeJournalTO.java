@@ -12,15 +12,24 @@ public class LanguagePracticeJournalTO extends ReferenceableTO {
     private List<TranslationJournalTO> translationJournalList;
 
     private LanguagePracticeJournalTO(Builder builder) {
-        buildCommon(builder);
         userId = builder.userId;
         languagePairId = builder.languagePairId;
         yearMonth = builder.yearMonth;
         translationJournalList = builder.translationJournalList;
     }
 
+
     public static Builder newBuilder() {
         return new Builder();
+    }
+
+    public static Builder newBuilder(LanguagePracticeJournalTO copy) {
+        Builder builder = new Builder();
+        builder.userId = copy.userId;
+        builder.languagePairId = copy.languagePairId;
+        builder.yearMonth = copy.yearMonth;
+        builder.translationJournalList = copy.translationJournalList;
+        return builder;
     }
 
     public String userId() {

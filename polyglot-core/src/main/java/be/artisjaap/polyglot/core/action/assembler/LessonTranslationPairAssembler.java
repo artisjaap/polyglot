@@ -24,6 +24,7 @@ public class LessonTranslationPairAssembler implements Assembler<LessonTranslati
         return LessonTranslationPairTO.newBuilder()
                 .withLanguageFrom(languagePair.getLanguageFrom())
                 .withLanguageTo(languagePair.getLanguageTo())
+                .withIsReverse(false)
                 .withQuestion(translation.getLanguageA())
                 .withSolution(includeSolution?translation.getLanguageB():"")
                 .withTranslationId(translation.getId().toString())

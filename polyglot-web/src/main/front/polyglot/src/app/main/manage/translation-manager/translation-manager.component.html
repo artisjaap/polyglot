@@ -1,6 +1,6 @@
 <div class="box">
   <h1>
-    Woorden beheren voor [{{ languagePair.languageFrom }} - {{ languagePair.languageTo }}]
+    Woorden beheren voor [{{ languagePair?.languageFrom }} - {{ languagePair?.languageTo }}]
   </h1>
 </div>
 
@@ -11,22 +11,23 @@
 
 <div class=" box">
   <h2>Beschikbare woorden</h2>
-  <div class="controls">
-    <label><input type="text" #search><span class="fa fa-search" (click)="doSearch(search)"></span></label>
-    <span class="fa fa-backward" (click)="firstPage()"></span>
-    <span class="fa fa-step-backward" (click)="previousPage()"></span>
-    <span class="fa fa-step-forward" (click)="nextPage()"></span>
-    <span class="fa fa-forward" (click)="lastPage()"></span>
-  </div>
+  <!--<div class="controls">-->
+    <!--<label><input type="text" #search><span class="fa fa-search" (click)="doSearch(search)"></span></label>-->
+    <!--<span class="fa fa-backward" (click)="firstPage()"></span>-->
+    <!--<span class="fa fa-step-backward" (click)="previousPage()"></span>-->
+    <!--<span class="fa fa-step-forward" (click)="nextPage()"></span>-->
+    <!--<span class="fa fa-forward" (click)="lastPage()"></span>-->
+  <!--</div>-->
+  <pol-page-navigation [control]="getControl()"></pol-page-navigation>
   <div class="table-row header">
     <div class="wrapper text-2">
-      <div class="text">{{ languagePair.languageFrom }}</div>
-      <div class="text">{{ languagePair.languageTo }}</div>
+      <div class="text">{{ languagePair?.languageFrom }}</div>
+      <div class="text">{{ languagePair?.languageTo }}</div>
     </div>
     <div class="text">Options</div>
   </div>
 
-  <div class="table-row" *ngFor="let t of filteredTranslations?.data">
+  <div class="table-row" *ngFor="let t of filteredTranslations?.data; index as i">
     <div class="wrapper text-2">
       <div class="text">{{t.question}}</div>
       <div class="text">{{t.answer}}</div>
@@ -35,7 +36,12 @@
       <div class="text">{{t.wordStatsTO.knowledgeCounterMiss}}</div>
       <div class="text">{{t.wordStatsTO.lastSuccess}}</div>
     </div>
-    <div class="text"></div>
+    <div class="actions">
+      <span class="fa fa-battery-0" [ngClass]="{'active':t.wordStatsTO.progressStatus == 'NEW'}" (click)="updateTranslationToStatusNew(t.translationId, i)"></span>
+      <span class="fa fa-battery-1" [ngClass]="{'active':t.wordStatsTO.progressStatus == 'IN_PROGRESS'}" (click)="updateTranslationToStatusInProgress(t.translationId, i)"></span>
+      <span class="fa fa-battery-4" [ngClass]="{'active':t.wordStatsTO.progressStatus == 'KNOWN'}" (click)="updateTranslationToStatusKnown(t.translationId, i)"></span>
+      <span class="fa fa-pause"     [ngClass]="{'active':t.wordStatsTO.progressStatus == 'ON_HOLD'}" (click)="updateTranslationToStatusHold(t.translationId, i)"></span>
+    </div>
   </div>
 
 

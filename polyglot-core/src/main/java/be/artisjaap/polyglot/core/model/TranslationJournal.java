@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 public class TranslationJournal {
     private LocalDateTime timestamp;
     private ObjectId translationId;
+    private ObjectId lessonId;
     private String question;
     private String givenAnswer;
     private String expectedAnswer;
@@ -39,8 +40,13 @@ public class TranslationJournal {
         return correct;
     }
 
+    public ObjectId getLessonId() {
+        return lessonId;
+    }
+
     private TranslationJournal(Builder builder) {
         timestamp = builder.timestamp;
+        lessonId = builder.lessonId;
         translationId = builder.translationId;
         question = builder.question;
         givenAnswer = builder.givenAnswer;
@@ -56,6 +62,7 @@ public class TranslationJournal {
     public static final class Builder {
         private LocalDateTime timestamp = LocalDateUtils.now();
         private ObjectId translationId;
+        private ObjectId lessonId;
         private String question;
         private String givenAnswer;
         private String expectedAnswer;
@@ -91,6 +98,11 @@ public class TranslationJournal {
 
         public Builder withCorrect(Boolean val) {
             correct = val;
+            return this;
+        }
+
+        public Builder withLessonId(ObjectId val) {
+            lessonId = val;
             return this;
         }
 

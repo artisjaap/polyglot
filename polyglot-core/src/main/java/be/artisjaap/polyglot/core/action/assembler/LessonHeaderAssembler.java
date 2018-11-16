@@ -9,6 +9,7 @@ public class LessonHeaderAssembler implements Assembler<LessonHeaderTO, Lesson> 
     @Override
     public LessonHeaderTO assembleTO(Lesson doc) {
         return LessonHeaderTO.newBuilder()
+                .forDocument(doc)
                 .withLanguagePairId(doc.getLanguagePairId().toString())
                 .withUserId(doc.getUserId().toString())
                 .withName(doc.getName())

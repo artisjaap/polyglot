@@ -32,7 +32,8 @@ export class PracticeContinuousComponent implements OnInit {
       this.currentWord.translationId,
       answerGiven.value,
       "NORMAL",
-      "NORMAL"
+      "NORMAL",
+      null
     )).subscribe(r => {
       answerGiven.value = "";
       this.currentWord = r.practiceWordResponse;
