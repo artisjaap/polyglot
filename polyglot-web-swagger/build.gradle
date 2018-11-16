@@ -11,7 +11,7 @@ dependencies {
     compile project(':polyglot-web')
 
     compile('org.springframework.boot:spring-boot-starter-security')
-    
+    compile('org.springframework.boot:spring-boot-starter-actuator')
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
 
