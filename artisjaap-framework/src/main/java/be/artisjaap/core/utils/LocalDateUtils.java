@@ -5,6 +5,8 @@ import java.time.format.DateTimeFormatter;
 
 public class LocalDateUtils {
     private  static DateTimeFormatter dateFormatYYYYMMDD = DateTimeFormatter.ofPattern("YYYY-MM-DD");
+    public static final DateTimeFormatter DATE_FORMATTED_DDMMYYYY_MET_SLASHES = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    public static final DateTimeFormatter DATE_FORMAT_YYYYMMDDHHMMSS = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
 
     private static Clock clock = Clock.systemDefaultZone();
 
@@ -48,5 +50,14 @@ public class LocalDateUtils {
         LocalDateTime firstOfMonth = month.atDay(1).atStartOfDay();
         LocalDateTime endOfMonth = firstOfMonth.plusMonths(1).minusSeconds(1);
         return timestamp.isAfter(firstOfMonth) && timestamp.isBefore(endOfMonth);
+    }
+
+    public static String format(LocalDate localDate, DateTimeFormatter format) {
+        return localDate.format(format);
+    }
+
+
+    public static String format(LocalDateTime localDate, DateTimeFormatter format) {
+        return localDate.format(format);
     }
 }

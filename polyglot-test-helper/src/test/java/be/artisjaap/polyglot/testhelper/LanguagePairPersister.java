@@ -14,6 +14,7 @@ public class LanguagePairPersister {
     @Autowired
     private UserPersister userPersister;
 
+
     public LanguagePair randomForUser(User user){
         return languagePairRepository.save(LanguagePairMother.initRandom()
                 .withUserId(user.getId())

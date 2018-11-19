@@ -73,41 +73,6 @@ export class ManagerTranslationService {
 
   }
 
-  // allWordsPaginatedAndFiltered(filters:TranslationFilter, pagination:PaginationOptions): TranslationPracticeDTO[]{
-  //   return this.currentListToPracticeForLanguage(""); //FIXME replace with real call to server and filters
-  // }
-
-
-  /* public currentListToPracticeForLanguage(languagePairId:string): TranslationPracticeDTO[]{
-     let user = this.authenticationService.user;
-     this.logger.logInfo("get list for user " + user.userId + " and language pair " + languagePairId);
-
-     if(!this.translationPracticesCached.isLoaded()){
-       this.translationPracticesCached.loadData([
-
-       ]);
-     }
-
-     return this.translationPracticesCached.getData();
-
-   }
-
-   languagePairWithId(languagePairId: string):LanguagePairDTO {
-     let languagePairFromCache = this.languagePairsCached.findById(languagePairId);
-     if(languagePairFromCache){
-       return languagePairFromCache;
-     }
-
-     this.allLanguagePairs(true);
-     return this.languagePairsCached.findById(languagePairId);
-   }
-
-
-
-   autogenerateLesson(lessonName:string, languagePairId:string): string{
-     //return lessonID from server
-     return "1a";
-   }*/
   uploadTranslations(translationPairId: string, files: Set<File>) {
     const user = this.authenticationService.user;
 

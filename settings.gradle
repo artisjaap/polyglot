@@ -1,6 +1,7 @@
 rootProject.name = 'polyglot'
 
 include 'artisjaap-framework'
+include 'artisjaap-document'
 include 'polyglot-core'
 include 'polyglot-web'
 include 'polyglot-web-swagger'

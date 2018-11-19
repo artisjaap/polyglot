@@ -9,6 +9,7 @@ public class LanguagePairMother extends AbstractMother {
         return LanguagePair.newBuilder()
                 .withLanguageFrom(fairy.baseProducer().letterify("F????"))
                 .withLanguageTo(fairy.baseProducer().letterify("T????"))
-                .withUserId(new ObjectId());
+                .withUserId(new ObjectId())
+                .withPracticeHealth(PracticeHealthMother.initRandom().build());
     }
 }
