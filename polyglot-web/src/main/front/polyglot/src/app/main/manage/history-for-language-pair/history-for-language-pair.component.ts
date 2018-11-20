@@ -20,23 +20,9 @@ export class HistoryForLanguagePairComponent implements OnInit {
     let date = new Date();
     let month = date.getFullYear() + "-" + ((date.getMonth()+1 < 10) ? "0" : "") + (date.getMonth()+1);
 
-    this.languagePairJournalService.findJournalForLanguageInYearMonth(languagePairId, month)
+    this.languagePairJournalService.findAllJournalForFilter(languagePairId, null, "2018-11-01", "2018-11-30")
       .subscribe(r => this.languagePracticeJournal = r);
 
-    // this.languagePairJournalService.findJournalForLanguagePairOnDate(languagePairId, "2018-11-15")
-    //   .subscribe(r => {});
-    //
-    // this.languagePairJournalService.findJournalForLesson("5be74e3c9b72fa2e88516e8e")
-    //   .subscribe(r => {});
-    //
-    // this.languagePairJournalService.findJournalForLessonInYearMonth("5be74e3c9b72fa2e88516e8e", month)
-    //   .subscribe(r => {});
-    //
-    // this.languagePairJournalService.findJournalForLanguagePairOnDate(languagePairId, "2018-11-15")
-    //   .subscribe(r => {});
-    //
-    // this.languagePairJournalService.findJournalForLessonOnDate("5be74e3c9b72fa2e88516e8e", "2018-11-15")
-    //   .subscribe(r => {});
 
   }
 

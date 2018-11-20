@@ -1,21 +1,24 @@
 package be.artisjaap.polyglot.web.endpoints;
 
 import be.artisjaap.core.utils.LocalDateUtils;
+import be.artisjaap.core.utils.WebUtils;
 import be.artisjaap.polyglot.core.action.GenerateReportForJournal;
 import be.artisjaap.polyglot.core.action.JournalPracticeResults;
+import be.artisjaap.polyglot.core.action.to.JournalFilterTO;
 import be.artisjaap.polyglot.core.action.to.LanguagePracticeJournalTO;
+import be.artisjaap.polyglot.web.endpoints.request.JournalReportRequest;
 import be.artisjaap.polyglot.web.endpoints.response.LanguagePracticeJournalResponse;
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.io.File;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Optional;
 
 @Controller
@@ -28,79 +31,97 @@ public class LanguagePairJournalController {
     @Autowired
     private GenerateReportForJournal generateReportForJournal;
 
-    @RequestMapping(value = "/user/{userId}/translation-pair/{translationPairId}/year-month/{yearMonth}", method = RequestMethod.GET)
+    @RequestMapping(value = "/result", method = RequestMethod.POST)
     public @ResponseBody
-    ResponseEntity<LanguagePracticeJournalResponse> findAllJournalForUserInYearMonth(@PathVariable String userId, @PathVariable String translationPairId, @PathVariable String yearMonth) throws IOException {
-        LanguagePracticeJournalTO journalFor = journalPracticeResults.findJournalFor(userId, translationPairId, LocalDateUtils.parseYearMonthFromYYYYMMString(yearMonth));
+    ResponseEntity<LanguagePracticeJournalResponse> findAllJournalForFilter(@RequestBody JournalReportRequest reportRequest)  {
+        LanguagePracticeJournalTO journalFor = journalPracticeResults.findJournalFor(JournalFilterTO.newBuilder()
+                .withFrom(LocalDateUtils.parseDateFromYYYYMMDDString(reportRequest.getFrom()))
+                .withLanguagePairId(reportRequest.getLanguagePairId())
+                .withLessonId(reportRequest.getLessonId())
+                .withUntil(LocalDateUtils.parseDateFromYYYYMMDDString(reportRequest.getUntil()))
+                .withUserId(reportRequest.getUserId())
+                .build());
+        return ResponseEntity.ok(LanguagePracticeJournalResponse.from(journalFor));
+    }
 
+    @RequestMapping(value = "/result/pdf", method = RequestMethod.POST)
+    public void findAllJournalForFilterToPDF(HttpServletResponse response, @RequestBody JournalReportRequest reportRequest) throws IOException {
+        LanguagePracticeJournalTO journalFor = journalPracticeResults.findJournalFor(JournalFilterTO.newBuilder()
+                .withFrom(LocalDateUtils.parseDateFromYYYYMMDDString(reportRequest.getFrom()))
+                .withLanguagePairId(reportRequest.getLanguagePairId())
+                .withLessonId(reportRequest.getLessonId())
+                .withUntil(LocalDateUtils.parseDateFromYYYYMMDDString(reportRequest.getUntil()))
+                .withUserId(reportRequest.getUserId())
+                .build());
         Optional<byte[]> bytes = generateReportForJournal.withData(journalFor);
-        FileUtils.writeByteArrayToFile(new File("c:/temp/test.pdf"), bytes.get());
 
-        return ResponseEntity.ok(LanguagePracticeJournalResponse.from(journalFor));
+        OutputStream outputStream = WebUtils.maakOutputstreamVoorXlsxFile(response, "test");
+        outputStream.write(bytes.orElse(null));
+
+        response.flushBuffer();
     }
 
 
+//    @RequestMapping(value = "/gebruiker/xls-export", method = RequestMethod.POST)
+//    public void exportAll(HttpServletResponse response, @RequestBody GebruikerZoekTO filter) throws Exception{
+//        OutputStream out = maakOutputstreamVoorXlsxFile(response, "gebruiker-export");
+//        Stream<GebruikerTO> atleten = gebruikerService.findGebruikersFor(filter);
+//        XlsExport.forData(atleten, DefaultExporter.create(GebruikerTO.class)).get(out);
+//        response.flushBuffer();
+//    }
 
-    @RequestMapping(value = "/user/{userId}/translation-pair/{translationPairId}/date/{date}", method = RequestMethod.GET)
-    public @ResponseBody
-    ResponseEntity<LanguagePracticeJournalResponse> findAllJournalForUserOnDate(@PathVariable String userId,
-                                                                                      @PathVariable String translationPairId,
-                                                                                      @PathVariable String date) {
-        LanguagePracticeJournalTO journalFor = journalPracticeResults.findJournalFor(userId, translationPairId, LocalDateUtils.parseDateFromYYYYMMDDString(date));
-        return ResponseEntity.ok(LanguagePracticeJournalResponse.from(journalFor));
-    }
-
-    @RequestMapping(value = "/user/{userId}/lesson/{lessonId}", method = RequestMethod.GET)
-    public @ResponseBody
-    ResponseEntity<LanguagePracticeJournalResponse> findAllJournalForUserAndLesson(@PathVariable String userId,
-                                                                                      @PathVariable String lessonId) {
-        LanguagePracticeJournalTO journalFor = journalPracticeResults.findJournalForUserAndLesson(userId, lessonId);
-        return ResponseEntity.ok(LanguagePracticeJournalResponse.from(journalFor));
-    }
-
-    @RequestMapping(value = "/user/{userId}/lesson/{lessonId}/year-month/{yearMonth}", method = RequestMethod.GET)
-    public @ResponseBody
-    ResponseEntity<LanguagePracticeJournalResponse> findJournalForUserAndLessonInYearMonth(@PathVariable String userId,
-                                                                                      @PathVariable String lessonId,
-                                                                                      @PathVariable String yearMonth) {
-        LanguagePracticeJournalTO journalFor = journalPracticeResults.findJournalForUserAndLesson(userId, lessonId, LocalDateUtils.parseYearMonthFromYYYYMMString(yearMonth));
-        return ResponseEntity.ok(LanguagePracticeJournalResponse.from(journalFor));
-    }
-
-    @RequestMapping(value = "/user/{userId}/lesson/{lessonId}/date/{date}", method = RequestMethod.GET)
-    public @ResponseBody
-    ResponseEntity<LanguagePracticeJournalResponse> findJournalForUserAndLessonOnDay(@PathVariable String userId,
-                                                                                      @PathVariable String lessonId,
-                                                                                      @PathVariable String date) {
-
-        LanguagePracticeJournalTO journalFor = journalPracticeResults.findJournalForUserAndLesson(userId, lessonId, LocalDateUtils.parseDateFromYYYYMMDDString(date));
-        return ResponseEntity.ok(LanguagePracticeJournalResponse.from(journalFor));
-    }
+//
+//    @RequestMapping(value = "/user/{userId}/translation-pair/{translationPairId}/year-month/{yearMonth}", method = RequestMethod.GET)
+//    public @ResponseBody
+//    ResponseEntity<LanguagePracticeJournalResponse> findAllJournalForUserInYearMonth(@PathVariable String userId, @PathVariable String translationPairId, @PathVariable String yearMonth) throws IOException {
+//        LanguagePracticeJournalTO journalFor = journalPracticeResults.findJournalFor(JournalFilterTO.newBuilder()
+//                .withFrom(LocalDateUtils.parseYearMonthFromYYYYMMString(yearMonth).atDay(1))
+//                .withLanguagePairId(translationPairId)
+////                .withLessonId(reportRequest.getLessonId())
+//                .withUntil(LocalDateUtils.parseYearMonthFromYYYYMMString(yearMonth).atEndOfMonth())
+//                .withUserId(userId)
+//                .build());
+//        return ResponseEntity.ok(LanguagePracticeJournalResponse.from(journalFor));
+//    }
+//
+//
+//
+//    @RequestMapping(value = "/user/{userId}/translation-pair/{translationPairId}/date/{date}", method = RequestMethod.GET)
+//    public @ResponseBody
+//    ResponseEntity<LanguagePracticeJournalResponse> findAllJournalForUserOnDate(@PathVariable String userId,
+//                                                                                      @PathVariable String translationPairId,
+//                                                                                      @PathVariable String date) {
+//        LanguagePracticeJournalTO journalFor = journalPracticeResults.findJournalFor(userId, translationPairId, LocalDateUtils.parseDateFromYYYYMMDDString(date));
+//        return ResponseEntity.ok(LanguagePracticeJournalResponse.from(journalFor));
+//    }
+//
+//    @RequestMapping(value = "/user/{userId}/lesson/{lessonId}", method = RequestMethod.GET)
+//    public @ResponseBody
+//    ResponseEntity<LanguagePracticeJournalResponse> findAllJournalForUserAndLesson(@PathVariable String userId,
+//                                                                                      @PathVariable String lessonId) {
+//        LanguagePracticeJournalTO journalFor = journalPracticeResults.findJournalForUserAndLesson(userId, lessonId);
+//        return ResponseEntity.ok(LanguagePracticeJournalResponse.from(journalFor));
+//    }
+//
+//    @RequestMapping(value = "/user/{userId}/lesson/{lessonId}/year-month/{yearMonth}", method = RequestMethod.GET)
+//    public @ResponseBody
+//    ResponseEntity<LanguagePracticeJournalResponse> findJournalForUserAndLessonInYearMonth(@PathVariable String userId,
+//                                                                                      @PathVariable String lessonId,
+//                                                                                      @PathVariable String yearMonth) {
+//        LanguagePracticeJournalTO journalFor = journalPracticeResults.findJournalForUserAndLesson(userId, lessonId, LocalDateUtils.parseYearMonthFromYYYYMMString(yearMonth));
+//        return ResponseEntity.ok(LanguagePracticeJournalResponse.from(journalFor));
+//    }
+//
+//    @RequestMapping(value = "/user/{userId}/lesson/{lessonId}/date/{date}", method = RequestMethod.GET)
+//    public @ResponseBody
+//    ResponseEntity<LanguagePracticeJournalResponse> findJournalForUserAndLessonOnDay(@PathVariable String userId,
+//                                                                                      @PathVariable String lessonId,
+//                                                                                      @PathVariable String date) {
+//
+//        LanguagePracticeJournalTO journalFor = journalPracticeResults.findJournalForUserAndLesson(userId, lessonId, LocalDateUtils.parseDateFromYYYYMMDDString(date));
+//        return ResponseEntity.ok(LanguagePracticeJournalResponse.from(journalFor));
+//    }
 
 
 
 }
-
-/*
-        LanguagePair languagePair = languagePairPersister.randomLanguagePair();
-        Translation translation = translationPersister.randomTranslationForLanguagePair(languagePair);
-
-        Optional<byte[]> bytes = generateReportForJournal.withData(JournalResultTO.newBuilder()
-                .withLanguagePairId(languagePair.getId().toString())
-                .withAnswerTOList(Arrays.asList(AnswerJournalTO.newBuilder()
-                        .withTranslationId(translation.getId().toString())
-                        .withQuestion(translation.getLanguageA())
-                        .withGivenAnswer(translation.getLanguageB())
-                        .withExpectedAnswer(translation.getLanguageB())
-                        .withCorrect(false)
-                        .build(),AnswerJournalTO.newBuilder()
-                                .withTranslationId(translation.getId().toString())
-                                .withQuestion(translation.getLanguageA())
-                                .withGivenAnswer(translation.getLanguageB())
-                                .withExpectedAnswer(translation.getLanguageB())
-                                .withCorrect(true)
-                                .build())
-                        )
-                .build());
-        FileUtils.writeByteArrayToFile(new File("c:/temp/test.pdf"), bytes.get());
- */

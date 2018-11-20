@@ -4,6 +4,7 @@ import be.artisjaap.core.utils.LocalDateUtils;
 import be.artisjaap.core.utils.MongoUtils;
 import be.artisjaap.polyglot.core.action.assembler.LanguagePracticeJournalAssembler;
 import be.artisjaap.polyglot.core.action.to.AnswerTO;
+import be.artisjaap.polyglot.core.action.to.JournalFilterTO;
 import be.artisjaap.polyglot.core.action.to.LanguagePracticeJournalTO;
 import be.artisjaap.polyglot.core.action.to.TranslationJournalTO;
 import be.artisjaap.polyglot.core.model.LanguagePracticeJournalRepository;
@@ -28,6 +29,12 @@ public class JournalPracticeResults {
 
     public void forResult(AnswerTO answerTO, Optional<String> lessonId){
         languagePracticeJournalRepository.addAnswerToList(answerTO, lessonId.map(ObjectId::new).orElse(null));
+    }
+
+    public LanguagePracticeJournalTO findJournalFor(JournalFilterTO journalFilterTO){
+        return languagePracticeJournalRepository.findByFilters(journalFilterTO)
+                .map(languagePracticeJournalAssembler::assembleTO)
+                .orElseGet(() -> LanguagePracticeJournalTO.newBuilder().build());
     }
 
     public LanguagePracticeJournalTO findJournalFor(String userId, String languagePairId, YearMonth yearMonth){

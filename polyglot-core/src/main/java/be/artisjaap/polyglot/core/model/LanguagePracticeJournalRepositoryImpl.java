@@ -2,6 +2,7 @@ package be.artisjaap.polyglot.core.model;
 
 import be.artisjaap.core.utils.LocalDateUtils;
 import be.artisjaap.polyglot.core.action.to.AnswerTO;
+import be.artisjaap.polyglot.core.action.to.JournalFilterTO;
 import com.mongodb.client.result.UpdateResult;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,5 +82,41 @@ public class LanguagePracticeJournalRepositoryImpl implements LanguagePracticeJo
 
         throw new UnsupportedOperationException("Resultset is > 0");
 
+    }
+
+    @Override
+    public Optional<LanguagePracticeJournal> findByFilters(JournalFilterTO journalFilterTO) {
+        Criteria criteria = Criteria.where("userId").is(new ObjectId(journalFilterTO.userId()));
+        if(journalFilterTO.lessonId() != null) {
+            criteria.and("translationJournalList.lessonId").is(new ObjectId(journalFilterTO.lessonId()));
+        }
+        if(journalFilterTO.from() != null){
+            if(journalFilterTO.until() != null){
+                criteria.and("translationJournalList.timestamp").gte(journalFilterTO.from()).lte(journalFilterTO.until());
+            }else {
+                criteria.and("translationJournalList.timestamp").gte(journalFilterTO.from());
+            }
+        }else if(journalFilterTO.until() != null){
+            criteria.and("translationJournalList.timestamp").lte(journalFilterTO.until());
+        }
+
+        List<AggregationOperation> operations = new ArrayList<>();
+        operations.add(match(criteria));
+        operations.add(unwind("translationJournalList"));
+        operations.add(match(criteria));
+        operations.add(group().first("userId").as("userId")
+                .first("languagePairId").as("languagePairId")
+                .addToSet("translationJournalList").as("translationJournalList"));
+        Aggregation agg = newAggregation(operations);
+
+        AggregationResults<LanguagePracticeJournal> groupResults = mongoTemplate.aggregate(agg, LanguagePracticeJournal.class, LanguagePracticeJournal.class);
+        List<LanguagePracticeJournal> journals = StreamSupport.stream(groupResults.spliterator(),false).collect(Collectors.toList());
+        if(journals.size() == 1){
+            return Optional.of(journals.get(0));
+        } else if (journals.size() == 0) {
+            return Optional.empty();
+        }
+
+        throw new UnsupportedOperationException("Resultset is > 0");
     }
 }
