@@ -8,6 +8,7 @@ import be.artisjaap.document.action.to.BriefNieuwTO;
 import be.artisjaap.document.action.to.BriefTO;
 import be.artisjaap.document.action.to.TemplateNieuwTO;
 import be.artisjaap.document.action.to.TemplateTO;
+import be.artisjaap.polyglot.core.action.documebts.docconfig.DocumentCode;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -41,7 +42,7 @@ public class CreateJournalDocument {
         }
 
         TemplateTO templateTO = eenvoudigeTemplateToevoegen.voor(TemplateNieuwTO.newBuilder()
-                .withCode("JOURNAL_REPORT")
+                .withCode(DocumentCode.REPORT_FOR_JOURNAL.name())
                 .withOriginalFilename("JournalReports.docx")
                 .withTaal("DUTCH")
                 .withTemplate(bytes)
@@ -50,7 +51,7 @@ public class CreateJournalDocument {
         activeerTemplate.activeerTemplate(templateTO.getId());
 
         BriefTO briefTO = maakBrief.voor(BriefNieuwTO.newBuilder()
-                .withCode("JOURNAL_REPORT")
+                .withCode(DocumentCode.REPORT_FOR_JOURNAL.name())
                 .withTaal("DUTCH")
                 .withTemplates(Arrays.asList(templateTO.getCode()))
                 .build());

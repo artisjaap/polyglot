@@ -22,6 +22,10 @@ public class LanguagePairDataSet {
         return builder;
     }
 
+    public static LanguagePairDataSet dummy() {
+        return newBuilder().withLanguageA("DUTCH").withLanguageB("FRENCH").build();
+    }
+
     public String getLanguageA() {
         return languageA;
     }

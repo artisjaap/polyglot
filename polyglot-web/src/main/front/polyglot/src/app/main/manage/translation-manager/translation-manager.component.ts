@@ -32,15 +32,10 @@ export class TranslationManagerComponent implements OnInit {
       this.languagePair = response;
     });
 
-
-    // this.practiceTranslationService.allWordsForLanguagePair("", languagePairId, 0, 10)
-    //   .subscribe(result => this.filteredTranslations = result);
-
     this.translationService.event.subscribe(t => {
       t.translations.forEach(trans => {
-        //FIXME need to find the new PracticeWordResponse
 
-        //this.filteredTranslations.data.push({question:trans.languageA, answer:trans.languageB})
+        this.filteredTranslations.data.push(trans);
 
       })
     });

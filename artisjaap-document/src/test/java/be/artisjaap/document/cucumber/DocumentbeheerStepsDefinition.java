@@ -1,5 +1,6 @@
 package be.artisjaap.document.cucumber;
 
+import be.artisjaap.core.utils.LocalDateUtils;
 import be.artisjaap.document.action.*;
 import be.artisjaap.document.action.to.*;
 import cucumber.api.java.nl.Als;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.hamcrest.Matchers.is;
@@ -124,8 +126,7 @@ public class DocumentbeheerStepsDefinition {
 
     @Gegeven("^vandaag is (\\d{2}/\\d{2}/\\d{4}) ([0-9]{2}):([0-9]{2})$")
     public void vandaagIs(String datumVanGebeurtenis, int uur, int min) {
-        //FIXME
-//        LocalDate localDate = LocalDateUtils.fromFormattedDate(datumVanGebeurtenis);
-//        LocalDateUtils.useFixedDate(localDate.atTime(uur, min, 0));
+        LocalDate localDate = LocalDateUtils.parseDateFromDDMMYYYYString(datumVanGebeurtenis);
+        LocalDateUtils.useFixedDate(localDate.atTime(uur, min, 0));
     }
 }

@@ -4,7 +4,8 @@ import java.time.*;
 import java.time.format.DateTimeFormatter;
 
 public class LocalDateUtils {
-    private  static DateTimeFormatter dateFormatYYYYMMDD = DateTimeFormatter.ofPattern("YYYY-MM-DD");
+    private  static DateTimeFormatter dateFormatYYYYMMDD = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private  static DateTimeFormatter dateFormatDDMMYYYY = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     public static final DateTimeFormatter DATE_FORMATTED_DDMMYYYY_MET_SLASHES = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     public static final DateTimeFormatter DATE_FORMAT_YYYYMMDDHHMMSS = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
 
@@ -42,6 +43,10 @@ public class LocalDateUtils {
         return LocalDate.parse(date, dateFormatYYYYMMDD);
     }
 
+    public static LocalDate parseDateFromDDMMYYYYString(String date) {
+        return LocalDate.parse(date, dateFormatDDMMYYYY);
+    }
+
     public static boolean timestampInDay(LocalDateTime timestamp, LocalDate date){
         return timestamp.isAfter(date.atStartOfDay()) && timestamp.isBefore(date.plusDays(1).atStartOfDay());
     }
@@ -60,4 +65,10 @@ public class LocalDateUtils {
     public static String format(LocalDateTime localDate, DateTimeFormatter format) {
         return localDate.format(format);
     }
+
+    public static String formatIsoDate(LocalDate localDate) {
+        return format(localDate, dateFormatYYYYMMDD);
+    }
+
+
 }

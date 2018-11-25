@@ -44,6 +44,9 @@ public class PracticeWords {
     @Autowired
     private FindPracticeWord findPracticeWord;
 
+    @Autowired
+    private AnswerChecker answerChecker;
+
 
     public PracticeWordTO nextWord(String userId, String languagePairId, OrderType orderType) {
         return nextRandomWord.nextWord(userId, languagePairId, orderType);
@@ -63,7 +66,7 @@ public class PracticeWords {
                 .withGivenAnswer(practiceWordCheckTO.answerGiven());
 
         if (practiceWordCheckTO.answerOrderType() == NORMAL) {
-            if (translation.getLanguageB().equalsIgnoreCase(practiceWordCheckTO.answerGiven())) {
+            if (answerChecker.checkFor(translation.getLanguageB(), practiceWordCheckTO.answerGiven())) {
                 translationPractice.answerCorrect();
                 updateLanguagePairHealth.updateCorrect(languagePairTO.id());
                 answerTOBuilder.withCorrectAnswer(true)
@@ -80,7 +83,7 @@ public class PracticeWords {
             }
 
         } else if (practiceWordCheckTO.answerOrderType() == REVERSE) {
-            if (translation.getLanguageA().equalsIgnoreCase(practiceWordCheckTO.answerGiven())) {
+            if (answerChecker.checkFor(translation.getLanguageA(), practiceWordCheckTO.answerGiven())) {
                 translationPractice.answerCorrectReverse();
                 updateLanguagePairHealth.updateCorrect(languagePairTO.id());
 

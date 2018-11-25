@@ -2,19 +2,23 @@ package be.artisjaap.polyglot.core.action.to;
 
 import be.artisjaap.core.model.ReferenceableTO;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class LanguagePracticeJournalTO extends ReferenceableTO {
 
     private String userId;
     private String languagePairId;
-    private String yearMonth;
+    private LocalDate from;
+    private LocalDate until;
     private List<TranslationJournalTO> translationJournalList;
 
     private LanguagePracticeJournalTO(Builder builder) {
         userId = builder.userId;
         languagePairId = builder.languagePairId;
-        yearMonth = builder.yearMonth;
+        from = builder.from;
+        until = builder.until;
         translationJournalList = builder.translationJournalList;
     }
 
@@ -27,7 +31,8 @@ public class LanguagePracticeJournalTO extends ReferenceableTO {
         Builder builder = new Builder();
         builder.userId = copy.userId;
         builder.languagePairId = copy.languagePairId;
-        builder.yearMonth = copy.yearMonth;
+        builder.from = copy.from;
+        builder.until = copy.until;
         builder.translationJournalList = copy.translationJournalList;
         return builder;
     }
@@ -40,8 +45,12 @@ public class LanguagePracticeJournalTO extends ReferenceableTO {
         return languagePairId;
     }
 
-    public String yearMonth() {
-        return yearMonth;
+    public LocalDate from() {
+        return from;
+    }
+
+    public LocalDate until() {
+        return until;
     }
 
     public List<TranslationJournalTO> translationJournalList() {
@@ -51,8 +60,9 @@ public class LanguagePracticeJournalTO extends ReferenceableTO {
     public static final class Builder extends AbstractBuilder<Builder> {
         private String userId;
         private String languagePairId;
-        private String yearMonth;
-        private List<TranslationJournalTO> translationJournalList;
+        private LocalDate from;
+        private LocalDate until;
+        private List<TranslationJournalTO> translationJournalList = new ArrayList<>();
 
         private Builder() {
         }
@@ -67,8 +77,13 @@ public class LanguagePracticeJournalTO extends ReferenceableTO {
             return this;
         }
 
-        public Builder withYearMonth(String val) {
-            yearMonth = val;
+        public Builder withFrom(LocalDate val) {
+            from = val;
+            return this;
+        }
+
+        public Builder withUntil(LocalDate val) {
+            until = val;
             return this;
         }
 

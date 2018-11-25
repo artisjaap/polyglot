@@ -4,6 +4,7 @@ import be.artisjaap.polyglot.core.action.to.TranslationJournalTO;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class TranslationResultDataSet {
     private String question;
@@ -29,6 +30,19 @@ public class TranslationResultDataSet {
         builder.givenAnswer = copy.getGivenAnswer();
         builder.correct = copy.getCorrect();
         return builder;
+    }
+
+    public static TranslationResultDataSet dummy() {
+        return newBuilder()
+                .withQuestion("Question")
+                .withAnswer("Answer")
+                .withGivenAnswer("Given Answer")
+                .withCorrect(false)
+                .build();
+    }
+
+    public static List<TranslationResultDataSet> dummyList(int i) {
+        return IntStream.rangeClosed(0, i).mapToObj(j -> TranslationResultDataSet.dummy()).collect(Collectors.toList());
     }
 
     public String getQuestion() {

@@ -1,6 +1,6 @@
 package be.artisjaap.polyglot.document;
 
-import be.artisjaap.polyglot.core.action.GenerateReportForJournal;
+import be.artisjaap.polyglot.core.action.documebts.GenerateReportForJournal;
 import be.artisjaap.polyglot.core.action.to.LanguagePracticeJournalTO;
 import be.artisjaap.polyglot.core.action.to.TranslationJournalTO;
 import be.artisjaap.polyglot.core.model.LanguagePair;
@@ -38,6 +38,7 @@ public class GenerateReportForJournalInMemoryTest  extends InMemoryTest {
 
         Optional<byte[]> bytes = generateReportForJournal.withData(LanguagePracticeJournalTO.newBuilder()
                 .withLanguagePairId(languagePair.getId().toString())
+
                 .withTranslationJournalList(Arrays.asList(TranslationJournalTO.newBuilder()
                         .withTranslationId(translation.getId().toString())
                         .withQuestion(translation.getLanguageA())

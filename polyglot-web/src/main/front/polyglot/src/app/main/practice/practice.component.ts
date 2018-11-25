@@ -21,7 +21,7 @@ export class PracticeComponent implements OnInit {
   ngOnInit() {
     let languagePairId = this.route.snapshot.params['pairId'];
 
-    this.translationService.currentListToPracticeForLanguage(languagePairId)
+    this.translationService.currentListToPracticeForLanguage(languagePairId, "NORMAL")
       .subscribe(result => {this.practiceList = result;});
   }
 

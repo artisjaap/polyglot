@@ -2,7 +2,7 @@ package be.artisjaap.polyglot.web.endpoints;
 
 import be.artisjaap.core.utils.LocalDateUtils;
 import be.artisjaap.core.utils.WebUtils;
-import be.artisjaap.polyglot.core.action.GenerateReportForJournal;
+import be.artisjaap.polyglot.core.action.documebts.GenerateReportForJournal;
 import be.artisjaap.polyglot.core.action.JournalPracticeResults;
 import be.artisjaap.polyglot.core.action.to.JournalFilterTO;
 import be.artisjaap.polyglot.core.action.to.LanguagePracticeJournalTO;

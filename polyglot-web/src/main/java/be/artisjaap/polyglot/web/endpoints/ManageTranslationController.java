@@ -8,6 +8,7 @@ import be.artisjaap.polyglot.web.endpoints.request.LanguagePairRequest;
 import be.artisjaap.polyglot.web.endpoints.request.NewTranslationsForUserRequest;
 import be.artisjaap.polyglot.web.endpoints.response.LanguagePairResponse;
 import be.artisjaap.polyglot.web.endpoints.response.TranslationsForUserResponse;
+import be.artisjaap.polyglot.web.endpoints.response.TranslationsForUserResponseAssembler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +31,9 @@ public class ManageTranslationController {
 
     @Autowired
     private RegisterTranslation registerTranslation;
+
+    @Autowired
+    private TranslationsForUserResponseAssembler translationsForUserResponseAssembler;
 
     @RequestMapping(value = "/pairs/user/{userId}", method = RequestMethod.GET)
     public @ResponseBody
@@ -67,34 +71,25 @@ public class ManageTranslationController {
                         .build()).collect(Collectors.toList()))
                 .build());
 
-        return ResponseEntity.ok(TranslationsForUserResponse.from(translationsForUserTO));
+
+        return ResponseEntity.ok(translationsForUserResponseAssembler.assembleResponse(translationsForUserTO));
     }
 
     @RequestMapping(value = "/pairs/{userId}/translations/{translationPairId}/file", method = RequestMethod.POST)
     public @ResponseBody
     ResponseEntity<TranslationsForUserResponse> uploadTranslationsByFile(@PathVariable String userId, @PathVariable String translationPairId, @RequestParam MultipartFile file) {
         System.out.println(file);
-        try {
+        try(InputStreamReader val = new InputStreamReader(file.getInputStream())) {
             TranslationsForUserTO translationsForUserTO = registerTranslation.forAllWords(NewTranslationForUserFromFileTO.newBuilder()
                     .withUserId(userId)
                     .withLanguagePairId(translationPairId)
-                    .withReader(new InputStreamReader(file.getInputStream()))
+                    .withReader(val)
                     .build());
-            return ResponseEntity.ok(TranslationsForUserResponse.from(translationsForUserTO));
+            return ResponseEntity.ok(translationsForUserResponseAssembler.assembleResponse(translationsForUserTO));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-//        TranslationsForUserTO translationsForUserTO = registerTranslation.forAllWords(NewTranslationForUserTO.newBuilder()
-//                .withUserId(translation.getUserId())
-//                .withLanguagePairId(translation.getLanguagePairId())
-//                .withTranslations(translation.getTranslations().stream().map(t -> NewSimpleTranslationPairTO.newBuilder()
-//                        .withLanguageFrom(t.getLanguageFrom())
-//                        .withLanguageTO(t.getLanguageTO())
-//                        .build()).collect(Collectors.toList()))
-//                .build());
-
-        //return ResponseEntity.ok(TranslationsForUserResponse.from(translationsForUserTO));
         return null;
     }
 

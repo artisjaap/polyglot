@@ -49,8 +49,8 @@ public class DocumentbeheerThenStepsDefinition /*extends DocumentbeheerInMemoryT
 
     @Dan("^is de template met code (.*) beschikbaar$")
     public Template isDeBriefMetCodeBeschikbaar(String code) {
-        Optional<Template> template = templateRepository.findByCode(code).stream().findFirst(); //FIXME
-        assertTrue(template.isPresent()); //TODO teospitpas
+        Optional<Template> template = templateRepository.findByCode(code).stream().findFirst();
+        assertTrue(template.isPresent());
         return template.get();
     }
 

@@ -10,7 +10,9 @@ import com.opencsv.bean.CsvToBeanBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.io.*;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -31,6 +33,9 @@ public class RegisterTranslation {
     @Autowired
     private FindTranslations findTranslations;
 
+    @Autowired
+    private CreateLesson createLesson;
+
     public TranslationsForUserTO forAllWords(NewTranslationForUserTO to){
         List<Translation> translations = newTranslationForUserAssembler.assembleAllEntities(to);
 
@@ -41,7 +46,7 @@ public class RegisterTranslation {
 
         translationRepository.saveAll(newTranslations);
 
-        TranslationsForUserTO translationsForUserTO = translationForUserAssembler.assembleTO(to, translations);
+        TranslationsForUserTO translationsForUserTO = translationForUserAssembler.assembleTO(to, newTranslations, duplicates);
 
         initTranslationForPractice.forAll(translationsForUserTO);
 
@@ -56,7 +61,11 @@ public class RegisterTranslation {
     }
 
     public TranslationsForUserTO forAllWords(NewTranslationForUserFromFileTO to){
-        List<TranslationRecord> translationRecords = new CsvToBeanBuilder(to.reader())
+
+        ProxyReader pr = new ProxyReader(to.reader());
+
+
+        List<TranslationRecord> translationRecords = new CsvToBeanBuilder(pr.getReader())
                 .withType(TranslationRecord.class).build().parse();
 
         NewTranslationForUserTO newTranslationForUserTO = NewTranslationForUserTO.newBuilder()
@@ -68,6 +77,63 @@ public class RegisterTranslation {
                         .build()).collect(Collectors.toList()))
                 .build();
 
-        return forAllWords(newTranslationForUserTO);
+        TranslationsForUserTO translationsForUserTO = forAllWords(newTranslationForUserTO);
+
+        pr.lessonName().ifPresent(lessonName ->
+                createLesson.create(NewLessonTO.newBuilder()
+                        .withName(lessonName)
+                        .withLanguagePairId(to.languagePairId())
+                        .withUserId(to.userId())
+                        .withTranslationsIds(translationsForUserTO.translations().stream().map(TranslationTO::id).collect(Collectors.toList()))
+                        .build()));
+
+        return translationsForUserTO;
+    }
+}
+
+class ProxyReader {
+
+    private final BufferedReader reader;
+    private String lessonName = null;
+
+    public Optional<String> lessonName() {
+        return Optional.ofNullable(lessonName);
+    }
+
+    public ProxyReader(Reader reader){
+        this.reader = new BufferedReader(reader);
+
+    }
+
+    public Reader getReader(){
+        byte[] bytes = findBytes();
+
+        return new InputStreamReader(new ByteArrayInputStream(bytes));
+    }
+
+    private byte[] findBytes() {
+        String line = null;
+        try {
+            line = reader.readLine();
+
+            StringBuilder sb = new StringBuilder();
+
+            while (line != null) {
+                if (line.startsWith("@")) {
+                    if(line.startsWith("@Lesson")){
+                        lessonName = line.substring(8);
+                    }
+                } else {
+                    sb.append(line).append("\r\n");
+                }
+                line = reader.readLine();
+            }
+
+            return sb.toString().getBytes();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return new byte[0];
     }
 }

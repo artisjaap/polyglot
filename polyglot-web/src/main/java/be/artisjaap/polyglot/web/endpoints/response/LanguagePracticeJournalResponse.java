@@ -1,5 +1,6 @@
 package be.artisjaap.polyglot.web.endpoints.response;
 
+import be.artisjaap.core.utils.LocalDateUtils;
 import be.artisjaap.polyglot.core.action.to.LanguagePracticeJournalTO;
 
 import java.util.List;
@@ -8,7 +9,8 @@ public class LanguagePracticeJournalResponse {
 
     private String userId;
     private String languagePairId;
-    private String yearMonth;
+    private String from;
+    private String until;
     private List<TranslationJournalResponse> translationJournalList;
 
     public static LanguagePracticeJournalResponse from(LanguagePracticeJournalTO to){
@@ -16,14 +18,16 @@ public class LanguagePracticeJournalResponse {
                 .withLanguagePairId(to.languagePairId())
                 .withTranslationJournalList(TranslationJournalResponse.from(to.translationJournalList()))
                 .withUserId(to.userId())
-                .withYearMonth(to.yearMonth())
+                .withFrom(LocalDateUtils.formatIsoDate(to.from()))
+                .withUntil(LocalDateUtils.formatIsoDate(to.until()))
                 .build();
     }
 
     private LanguagePracticeJournalResponse(Builder builder) {
         userId = builder.userId;
         languagePairId = builder.languagePairId;
-        yearMonth = builder.yearMonth;
+        from = builder.from;
+        until = builder.until;
         translationJournalList = builder.translationJournalList;
     }
 
@@ -39,8 +43,12 @@ public class LanguagePracticeJournalResponse {
         return languagePairId;
     }
 
-    public String getYearMonth() {
-        return yearMonth;
+    public String getFrom() {
+        return from;
+    }
+
+    public String getUntil() {
+        return until;
     }
 
     public List<TranslationJournalResponse> getTranslationJournalList() {
@@ -50,7 +58,8 @@ public class LanguagePracticeJournalResponse {
     public static final class Builder {
         private String userId;
         private String languagePairId;
-        private String yearMonth;
+        private String from;
+        private String until;
         private List<TranslationJournalResponse> translationJournalList;
 
         private Builder() {
@@ -66,8 +75,13 @@ public class LanguagePracticeJournalResponse {
             return this;
         }
 
-        public Builder withYearMonth(String val) {
-            yearMonth = val;
+        public Builder withFrom(String val) {
+            from = val;
+            return this;
+        }
+
+        public Builder withUntil(String val) {
+            until = val;
             return this;
         }
 

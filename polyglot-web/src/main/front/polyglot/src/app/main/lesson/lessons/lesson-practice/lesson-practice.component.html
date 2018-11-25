@@ -1,5 +1,11 @@
 
 <div class="box">
+  <div class="actions">
+    <span class="fa fa-random" (click)="defineOrder('RANDOM')" [ngClass]="{active:order==='RANDOM'}"></span>
+    <span class="fa fa-arrow-circle-right" (click)="defineOrder('NORMAL')"  [ngClass]="{active:order==='NORMAL'}"></span>
+    <span class="fa fa-arrow-circle-left" (click)="defineOrder('REVERSE')"  [ngClass]="{active:order==='REVERSE'}"></span>
+    <span class="fa fa-cube" (click)="toggleAutohint()"  [ngClass]="{active:autohintVal}"></span>
+  </div>
 
   <div class="question">
     {{currentWord?.question}}

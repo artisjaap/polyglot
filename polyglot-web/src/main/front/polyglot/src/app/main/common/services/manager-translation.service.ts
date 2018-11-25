@@ -49,9 +49,7 @@ export class ManagerTranslationService {
   }
 
 
-  //FIXME review next two methods
   addNewWord(languagePairId: string, languageFrom: string, languageTo: string): Observable<TranslationsForUserResponse> {
-    this.logger.logInfo(languagePairId + languageFrom + languageTo);
     const user = this.authenticationService.user;
 
     const translations = [];
@@ -60,24 +58,20 @@ export class ManagerTranslationService {
     return this.httpClient.post<TranslationsForUserResponse>(this.apiurl + "api/translations/pairs/translations", body)
       .pipe(map(t => {
         this.event.emit(t);
-
         return t;
       }));
 
   }
 
-  public currentListToPracticeForLanguage(languagePairId: string): Observable<PracticeWordResponse[]> {
+  public currentListToPracticeForLanguage(languagePairId: string, orderType:string): Observable<PracticeWordResponse[]> {
     const user = this.authenticationService.user;
-    const orderType = "NORMAL";
     return this.httpClient.get<PracticeWordResponse[]>(this.apiurl + "api/translations/practice/list/"+user.userId+"/"+languagePairId+"/"+orderType);
 
   }
 
   uploadTranslations(translationPairId: string, files: Set<File>) {
     const user = this.authenticationService.user;
-
     const url = this.apiurl + "api/translations/pairs/"+user.userId+"/translations/"+translationPairId+"/file";
-    console.log("upload started on " + url);
     this.uploadService.upload(files, url);
   }
 }

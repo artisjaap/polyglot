@@ -6,6 +6,11 @@
 
 <div class=" box">
   <h2>Woorden</h2>
+  <button class="btn btn-primary" (click)="download()">dl</button>
+  <input type="date" #from>
+  <input type="date" #until>
+  <button class="btn btn-primary" (click)="search(from, until)">FIND</button>
+
 
   <div class="table-row header">
     <div class="text timestamp">Timestamp</div>

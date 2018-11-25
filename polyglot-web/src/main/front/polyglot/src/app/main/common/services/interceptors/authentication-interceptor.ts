@@ -11,9 +11,9 @@ export class AuthenticationInterceptor implements HttpInterceptor{
     const token = this.authenticationService.token();
 
     if(token){
-      console.log("token", token);
+      // console.log("token", token);
       const copiedRequest = req.clone({headers : req.headers.set("Authorization", "Bearer "+token)});
-      console.log(copiedRequest);
+      // console.log(copiedRequest);
       return next.handle(copiedRequest);
     }else {
       console.log("no token");

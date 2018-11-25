@@ -1,13 +1,16 @@
 package be.artisjaap.polyglot.web.endpoints.response;
 
+import be.artisjaap.polyglot.core.action.to.PracticeWordTO;
 import be.artisjaap.polyglot.core.action.to.TranslationsForUserTO;
 
 import java.util.List;
 
+
 public class TranslationsForUserResponse {
     private String userId;
     private String languagePairId;
-    private List<TranslationResponse> translations;
+    private List<PracticeWordResponse> translations;
+
 
 
     private TranslationsForUserResponse(Builder builder) {
@@ -16,11 +19,11 @@ public class TranslationsForUserResponse {
         translations = builder.translations;
     }
 
-    public static TranslationsForUserResponse from(TranslationsForUserTO translationsForUserTO) {
-        return TranslationsForUserResponse.newBuilder()
+    public static TranslationsForUserResponse from(TranslationsForUserTO translationsForUserTO, List<PracticeWordTO> practiceWordTOS) {
+         return TranslationsForUserResponse.newBuilder()
                 .withUserId(translationsForUserTO.userId())
                 .withLanguagePairId(translationsForUserTO.languagePairId())
-                .withTranslations(TranslationResponse.from(translationsForUserTO.translations()))
+                .withTranslations(PracticeWordResponse.from(practiceWordTOS))
                 .build();
     }
 
@@ -36,14 +39,14 @@ public class TranslationsForUserResponse {
         return languagePairId;
     }
 
-    public List<TranslationResponse> getTranslations() {
+    public List<PracticeWordResponse> getTranslations() {
         return translations;
     }
 
     public static final class Builder {
         private String userId;
         private String languagePairId;
-        private List<TranslationResponse> translations;
+        private List<PracticeWordResponse> translations;
 
         private Builder() {
         }
@@ -58,7 +61,7 @@ public class TranslationsForUserResponse {
             return this;
         }
 
-        public Builder withTranslations(List<TranslationResponse> val) {
+        public Builder withTranslations(List<PracticeWordResponse> val) {
             translations = val;
             return this;
         }

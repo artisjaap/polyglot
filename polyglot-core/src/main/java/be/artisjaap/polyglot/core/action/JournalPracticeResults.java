@@ -34,7 +34,12 @@ public class JournalPracticeResults {
     public LanguagePracticeJournalTO findJournalFor(JournalFilterTO journalFilterTO){
         return languagePracticeJournalRepository.findByFilters(journalFilterTO)
                 .map(languagePracticeJournalAssembler::assembleTO)
-                .orElseGet(() -> LanguagePracticeJournalTO.newBuilder().build());
+                .orElseGet(() -> LanguagePracticeJournalTO.newBuilder()
+                        .withUserId(journalFilterTO.userId())
+                        .withLanguagePairId(journalFilterTO.languagePairId())
+                        .withFrom(journalFilterTO.from())
+                        .withUntil(journalFilterTO.until())
+                        .build());
     }
 
     public LanguagePracticeJournalTO findJournalFor(String userId, String languagePairId, YearMonth yearMonth){

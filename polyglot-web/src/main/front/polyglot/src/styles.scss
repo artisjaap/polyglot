@@ -76,18 +76,20 @@ $num-width: 10px;
 
   border-bottom: 1px dashed $main-color-20;
 
-  .actions {
-    span {
-      margin: 0 5px;
-      cursor: pointer;
 
-      &.active {
-        color: $icon-correct;
-      }
+
+}
+
+.actions {
+  span {
+    margin: 0 5px;
+    cursor: pointer;
+
+    &.active {
+      color: $icon-correct;
     }
-
-
   }
+
 
 }
 

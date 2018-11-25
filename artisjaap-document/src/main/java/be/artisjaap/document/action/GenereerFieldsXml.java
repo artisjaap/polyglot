@@ -27,10 +27,11 @@ public class GenereerFieldsXml {
 
         try (ByteArrayOutputStream bos = new ByteArrayOutputStream()){
             for (String dataset : datasets.datasetNames()) {
-                fieldsMetadata.load(dataset, datasets.get(dataset).metaClass());
+                DatasetConfig datasetConfig = datasets.get(dataset);
+                fieldsMetadata.load(dataset, datasetConfig.metaClass(), datasetConfig.isAsList());
             }
 
-            fieldsMetadata.saveXML(bos, true);
+            fieldsMetadata.saveXML(bos, false);
 
             bos.flush();
 
@@ -43,9 +44,9 @@ public class GenereerFieldsXml {
 
     }
 
-    public void voorBrief(BriefConfigTO briefConfig){
+    public byte[] voorBrief(BriefConfigTO briefConfig){
 
-        Template template = templateRepository.findByCodeAndTaalAndActief(briefConfig.getCode(), briefConfig.getTaal()).orElseThrow(() -> new UnsupportedOperationException("template niet gevondem"));
+        Template template = templateRepository.findByCodeAndTaalAndActief(briefConfig.getCode(), briefConfig.getTaal()).orElseThrow(() -> new UnsupportedOperationException("template niet gevonden met code: " +briefConfig.getCode()));
 
 
         try (InputStream in = new ByteArrayInputStream(template.getTemplate())) {
@@ -66,12 +67,11 @@ public class GenereerFieldsXml {
 
             }
 
-            File xmlFieldsFile = new File("c:/temp/docs/"+briefConfig.getCode()+".fields.xml");
-            System.out.println("Save file to " + xmlFieldsFile.getAbsolutePath());
-            fieldsMetadata.saveXML(new FileOutputStream(xmlFieldsFile), true);
-
-        }catch(Exception e){
-
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            fieldsMetadata.saveXML(bos, true);
+            return bos.toByteArray();
+        }catch(Exception ex){
+            throw new IllegalStateException("Kan fieldsxml niet maken: " + ex.getMessage(), ex);
         }
     }
 }
