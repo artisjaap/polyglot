@@ -1,6 +1,6 @@
 package be.artisjaap.polyglot.web;
 
-import be.artisjaap.polyglot.core.action.RegisterUser;
+import be.artisjaap.polyglot.core.action.user.RegisterUser;
 import be.artisjaap.polyglot.core.action.to.NewUserTO;
 import be.artisjaap.polyglot.web.endpoints.LoginController;
 import be.artisjaap.polyglot.web.endpoints.request.NewUserRequest;

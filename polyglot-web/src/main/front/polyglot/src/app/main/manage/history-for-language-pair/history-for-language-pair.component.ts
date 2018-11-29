@@ -35,7 +35,7 @@ export class HistoryForLanguagePairComponent implements OnInit {
   download() {
     let languagePairId = this.route.snapshot.params['pairId'];
 
-    this.languagePairJournalService.findAllJournalForFilterAsPdf(languagePairId, null, "2018-11-01", "2018-11-30")
+    this.languagePairJournalService.findAllJournalForFilterAsPdf(languagePairId, null, this.from.nativeElement.value, this.until.nativeElement.value)
       .subscribe(r => {
         const blob = new Blob([r.body], { type: 'application/pdf' });
         FileSaver.saveAs(blob, "report.pdf");

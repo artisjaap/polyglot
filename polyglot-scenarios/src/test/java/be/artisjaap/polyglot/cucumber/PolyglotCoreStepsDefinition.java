@@ -1,9 +1,18 @@
 package be.artisjaap.polyglot.cucumber;
 
 import be.artisjaap.polyglot.PolyglotApplication;
-import be.artisjaap.polyglot.core.action.*;
+import be.artisjaap.polyglot.core.action.lesson.CreateLesson;
+import be.artisjaap.polyglot.core.action.lesson.PracticeWords;
+import be.artisjaap.polyglot.core.action.lesson.SimpleNextWordStrategy;
+import be.artisjaap.polyglot.core.action.lesson.TestForLesson;
+import be.artisjaap.polyglot.core.action.pairs.FindLanguagePair;
+import be.artisjaap.polyglot.core.action.pairs.RegisterLanguagePair;
 import be.artisjaap.polyglot.core.action.to.*;
 import be.artisjaap.polyglot.core.action.to.test.*;
+import be.artisjaap.polyglot.core.action.translation.RegisterTranslation;
+import be.artisjaap.polyglot.core.action.user.FindUser;
+import be.artisjaap.polyglot.core.action.user.RegisterUser;
+import be.artisjaap.polyglot.core.action.user.UpdateUserSettings;
 import be.artisjaap.polyglot.core.model.Lesson;
 import be.artisjaap.polyglot.core.model.LessonRepository;
 import cucumber.api.java.en.And;

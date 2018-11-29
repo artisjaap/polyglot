@@ -17,8 +17,11 @@ public class ReportForJournal extends AbstractDocumentConfig {
     @Override
     public DatasetProvider documentConfigForPreview() {
         return new DatasetProviderFactory()
-                .addDummyLanguagePairDatast()
-                .addDummyTranslationDataset();
+                .addDummyLanguagePairDataSet()
+                .addDummyTranslationDataSet()
+                .addDummyUserDataSet()
+                .addDummyJournalStatisticsDataSet();
+
     }
 
     @Override

@@ -1,7 +1,7 @@
 package be.artisjaap.polyglot.web;
 
-import be.artisjaap.polyglot.core.action.RegisterLanguagePair;
-import be.artisjaap.polyglot.core.action.RegisterUser;
+import be.artisjaap.polyglot.core.action.pairs.RegisterLanguagePair;
+import be.artisjaap.polyglot.core.action.user.RegisterUser;
 import be.artisjaap.polyglot.core.action.to.LanguagePairTO;
 import be.artisjaap.polyglot.core.action.to.NewLanguagePairTO;
 import be.artisjaap.polyglot.core.action.to.NewUserTO;

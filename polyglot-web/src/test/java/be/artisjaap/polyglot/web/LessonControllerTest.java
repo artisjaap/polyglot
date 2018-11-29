@@ -1,9 +1,9 @@
 package be.artisjaap.polyglot.web;
 
-import be.artisjaap.polyglot.core.action.IntroduceNewWordForPractice;
-import be.artisjaap.polyglot.core.action.RegisterLanguagePair;
-import be.artisjaap.polyglot.core.action.RegisterTranslation;
-import be.artisjaap.polyglot.core.action.RegisterUser;
+import be.artisjaap.polyglot.core.action.lesson.IntroduceNewWordForPractice;
+import be.artisjaap.polyglot.core.action.pairs.RegisterLanguagePair;
+import be.artisjaap.polyglot.core.action.translation.RegisterTranslation;
+import be.artisjaap.polyglot.core.action.user.RegisterUser;
 import be.artisjaap.polyglot.core.model.KnowledgeStatus;
 import be.artisjaap.polyglot.core.model.LanguagePair;
 import be.artisjaap.polyglot.core.model.Lesson;

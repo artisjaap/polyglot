@@ -1,6 +1,6 @@
 package be.artisjaap.polyglot.web.endpoints.response;
 
-import be.artisjaap.core.utils.LocalDateUtils;
+import be.artisjaap.common.utils.LocalDateUtils;
 import be.artisjaap.polyglot.core.action.to.LanguagePracticeJournalTO;
 
 import java.util.List;

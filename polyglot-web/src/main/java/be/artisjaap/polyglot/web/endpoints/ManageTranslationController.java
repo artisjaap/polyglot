@@ -1,8 +1,8 @@
 package be.artisjaap.polyglot.web.endpoints;
 
-import be.artisjaap.polyglot.core.action.FindLanguagePair;
-import be.artisjaap.polyglot.core.action.RegisterLanguagePair;
-import be.artisjaap.polyglot.core.action.RegisterTranslation;
+import be.artisjaap.polyglot.core.action.pairs.FindLanguagePair;
+import be.artisjaap.polyglot.core.action.pairs.RegisterLanguagePair;
+import be.artisjaap.polyglot.core.action.translation.RegisterTranslation;
 import be.artisjaap.polyglot.core.action.to.*;
 import be.artisjaap.polyglot.web.endpoints.request.LanguagePairRequest;
 import be.artisjaap.polyglot.web.endpoints.request.NewTranslationsForUserRequest;

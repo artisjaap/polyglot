@@ -1,6 +1,6 @@
 package be.artisjaap.polyglot.core.model;
 
-import be.artisjaap.core.utils.LocalDateUtils;
+import be.artisjaap.common.utils.LocalDateUtils;
 import be.artisjaap.polyglot.core.action.to.AnswerTO;
 import be.artisjaap.polyglot.core.action.to.JournalFilterTO;
 import com.mongodb.client.result.UpdateResult;

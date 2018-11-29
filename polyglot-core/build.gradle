@@ -11,6 +11,7 @@ jar {
 dependencies {
     compile project(':artisjaap-framework')
     compile project(':artisjaap-document')
+    compile project(':artisjaap-common')
 
     compile project(':polyglot-test-helper')
     testCompile project (path: ":polyglot-test-helper", configuration: 'testArtifacts')

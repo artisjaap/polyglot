@@ -8,6 +8,8 @@ public class UserTO extends ReferenceableTO {
     private String password;
     private String firstName;
     private String lastName;
+    private String email;
+    private String classRoom;
     private UserSettingsTO userSettings;
 
     public String username() {
@@ -26,6 +28,14 @@ public class UserTO extends ReferenceableTO {
         return lastName;
     }
 
+    public String email() {
+        return email;
+    }
+
+    public String classRoom() {
+        return classRoom;
+    }
+
     public UserSettingsTO userSettings() {
         return userSettings;
     }
@@ -37,6 +47,8 @@ public class UserTO extends ReferenceableTO {
         firstName = builder.firstName;
         lastName = builder.lastName;
         userSettings = builder.userSettings;
+        classRoom = builder.classRoom;
+        email = builder.email;
     }
 
     public static Builder newBuilder() {
@@ -48,6 +60,8 @@ public class UserTO extends ReferenceableTO {
         private String password;
         private String firstName;
         private String lastName;
+        private String email;
+        private String classRoom;
         private UserSettingsTO userSettings;
 
         private Builder() {
@@ -75,6 +89,16 @@ public class UserTO extends ReferenceableTO {
 
         public Builder withUserSettings(UserSettingsTO userSettings) {
             this.userSettings = userSettings;
+            return this;
+        }
+
+        public Builder withEmail(String email) {
+            this.email = email;
+            return this;
+        }
+
+        public Builder withClassRoom(String classRoom) {
+            this.classRoom = classRoom;
             return this;
         }
 

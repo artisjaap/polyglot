@@ -4,10 +4,14 @@ import be.artisjaap.document.api.DatasetConfig;
 import be.artisjaap.document.api.DatasetMeta;
 import be.artisjaap.document.api.DatasetProvider;
 import be.artisjaap.document.api.DatasetProviderImpl;
+import be.artisjaap.polyglot.core.action.to.JournalStatisticsTO;
 import be.artisjaap.polyglot.core.action.to.LanguagePairTO;
 import be.artisjaap.polyglot.core.action.to.TranslationJournalTO;
+import be.artisjaap.polyglot.core.action.to.UserTO;
+import be.artisjaap.polyglot.core.model.datasets.JournalStatisticsDataSet;
 import be.artisjaap.polyglot.core.model.datasets.LanguagePairDataSet;
 import be.artisjaap.polyglot.core.model.datasets.TranslationResultDataSet;
+import be.artisjaap.polyglot.core.model.datasets.UserDataSet;
 
 import java.util.List;
 
@@ -34,7 +38,7 @@ public class DatasetProviderFactory implements DatasetProvider {
         return datasetProvider.datasetsMeta();
     }
 
-    public DatasetProviderFactory voegLanguagePairDatasetToeVoor(LanguagePairTO languagePairTO) {
+    public DatasetProviderFactory languagePairDataSetFrom(LanguagePairTO languagePairTO) {
         datasetProvider.add("languagePair", LanguagePairDataSet.from(languagePairTO));
         return this;
     }
@@ -45,13 +49,33 @@ public class DatasetProviderFactory implements DatasetProvider {
         return this;
     }
 
-    public DatasetProviderFactory addDummyLanguagePairDatast(){
+    public DatasetProviderFactory journalStatisticsDataSetFrom(JournalStatisticsTO journalStatisticsTO){
+        datasetProvider.add("journalstats", JournalStatisticsDataSet.from(journalStatisticsTO));
+        return this;
+    }
+
+    public DatasetProviderFactory userDataSetFrom(UserTO userTO){
+        datasetProvider.add("user", UserDataSet.from(userTO));
+        return this;
+    }
+
+    public DatasetProviderFactory addDummyLanguagePairDataSet(){
         datasetProvider.add("languagePair", LanguagePairDataSet.dummy());
         return this;
     }
 
-    public DatasetProviderFactory addDummyTranslationDataset(){
+    public DatasetProviderFactory addDummyTranslationDataSet(){
         datasetProvider.add("result", TranslationResultDataSet.dummyList(10), TranslationResultDataSet.class);
+        return this;
+    }
+
+    public DatasetProviderFactory addDummyUserDataSet(){
+        datasetProvider.add("user", UserDataSet.dummy());
+        return this;
+    }
+
+    public DatasetProviderFactory addDummyJournalStatisticsDataSet(){
+        datasetProvider.add("journalstats", JournalStatisticsDataSet.dummy());
         return this;
     }
 }

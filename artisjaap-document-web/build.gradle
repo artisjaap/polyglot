@@ -5,5 +5,5 @@ jar {
 }
 
 dependencies {
-    compile project(':artisjaap-document-web')
+    compile project(':artisjaap-document')
 }

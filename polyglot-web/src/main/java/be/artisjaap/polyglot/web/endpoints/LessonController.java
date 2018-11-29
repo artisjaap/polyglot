@@ -1,8 +1,8 @@
 package be.artisjaap.polyglot.web.endpoints;
 
-import be.artisjaap.polyglot.core.action.CreateLesson;
-import be.artisjaap.polyglot.core.action.FindLesson;
-import be.artisjaap.polyglot.core.action.TestForLesson;
+import be.artisjaap.polyglot.core.action.lesson.CreateLesson;
+import be.artisjaap.polyglot.core.action.lesson.FindLesson;
+import be.artisjaap.polyglot.core.action.lesson.TestForLesson;
 import be.artisjaap.polyglot.core.action.to.LessonTO;
 import be.artisjaap.polyglot.core.action.to.NewAutomaticLessonTO;
 import be.artisjaap.polyglot.core.action.to.test.*;

@@ -3,8 +3,10 @@ package be.artisjaap.polyglot.core.action.documebts.docconfig;
 import be.artisjaap.document.action.to.BriefConfigTO;
 import be.artisjaap.polyglot.core.action.documebts.AllDatasets;
 import be.artisjaap.polyglot.core.action.documebts.DatasetProviderFactory;
+import be.artisjaap.polyglot.core.action.to.JournalStatisticsTO;
 import be.artisjaap.polyglot.core.action.to.LanguagePairTO;
 import be.artisjaap.polyglot.core.action.to.TranslationJournalTO;
+import be.artisjaap.polyglot.core.action.to.UserTO;
 
 import java.util.List;
 
@@ -15,14 +17,26 @@ public abstract class AbstractDocumentConfig implements AllDatasets, DocumentDef
 
 
     @Override
-    public AbstractDocumentConfig voegLanguagePairDatasetToeVoor(LanguagePairTO languagePairTO) {
-        datasetProviderFactory.voegLanguagePairDatasetToeVoor(languagePairTO);
+    public AbstractDocumentConfig languagePairDataSetFrom(LanguagePairTO languagePairTO) {
+        datasetProviderFactory.languagePairDataSetFrom(languagePairTO);
         return this;
     }
 
     @Override
-    public AbstractDocumentConfig translationDataSetFrom(List<TranslationJournalTO> translationJournals) {
+    public AbstractDocumentConfig translationJournalDataSetFrom(List<TranslationJournalTO> translationJournals) {
         datasetProviderFactory.translationDataSetFrom(translationJournals);
+        return this;
+    }
+
+    @Override
+    public AbstractDocumentConfig userDataSetFrom(UserTO userTO) {
+        datasetProviderFactory.userDataSetFrom(userTO);
+        return this;
+    }
+
+    @Override
+    public AbstractDocumentConfig journalStatisticsDataSetFrom(JournalStatisticsTO journalStatistics) {
+        datasetProviderFactory.journalStatisticsDataSetFrom(journalStatistics);
         return this;
     }
 
@@ -42,12 +56,12 @@ public abstract class AbstractDocumentConfig implements AllDatasets, DocumentDef
 
 
     protected AbstractDocumentConfig addDummyLanguagePairDataset(){
-        datasetProviderFactory.addDummyLanguagePairDatast();
+        datasetProviderFactory.addDummyLanguagePairDataSet();
         return this;
     }
 
     protected AbstractDocumentConfig addDummyTranslationDataset(){
-        datasetProviderFactory.addDummyTranslationDataset();
+        datasetProviderFactory.addDummyTranslationDataSet();
         return this;
     }
 

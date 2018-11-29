@@ -1,6 +1,6 @@
 package be.artisjaap.document.cucumber;
 
-import be.artisjaap.core.utils.LocalDateUtils;
+import be.artisjaap.common.utils.LocalDateUtils;
 import be.artisjaap.document.action.*;
 import be.artisjaap.document.action.to.*;
 import cucumber.api.java.nl.Als;

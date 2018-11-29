@@ -1,6 +1,6 @@
 package be.artisjaap.polyglot.web.action;
 
-import be.artisjaap.polyglot.core.action.FindUser;
+import be.artisjaap.polyglot.core.action.user.FindUser;
 import be.artisjaap.polyglot.core.action.to.UserTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

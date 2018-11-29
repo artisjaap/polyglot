@@ -1,6 +1,6 @@
 package be.artisjaap.polyglot.web.endpoints.response;
 
-import be.artisjaap.polyglot.core.action.FindPracticeWord;
+import be.artisjaap.polyglot.core.action.lesson.FindPracticeWord;
 import be.artisjaap.polyglot.core.action.to.PracticeWordTO;
 import be.artisjaap.polyglot.core.action.to.TranslationTO;
 import be.artisjaap.polyglot.core.action.to.TranslationsForUserTO;

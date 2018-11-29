@@ -1,9 +1,13 @@
 package be.artisjaap.polyglot.web.endpoints;
 
 
-import be.artisjaap.polyglot.core.action.*;
+import be.artisjaap.polyglot.core.action.lesson.FindPracticeWord;
+import be.artisjaap.polyglot.core.action.lesson.PracticeWords;
+import be.artisjaap.polyglot.core.action.lesson.PracticeWordsFiltered;
+import be.artisjaap.polyglot.core.action.lesson.SimpleNextWordStrategy;
 import be.artisjaap.polyglot.core.action.to.*;
 import be.artisjaap.polyglot.core.action.to.test.OrderType;
+import be.artisjaap.polyglot.core.action.translation.ChangeStatusTranslation;
 import be.artisjaap.polyglot.core.model.ProgressStatus;
 import be.artisjaap.polyglot.web.endpoints.request.PracticeWordCheckRequest;
 import be.artisjaap.polyglot.web.endpoints.request.TranslationsFilterRequest;

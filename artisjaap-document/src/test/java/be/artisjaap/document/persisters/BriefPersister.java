@@ -5,7 +5,6 @@ import be.artisjaap.document.action.AutofindTemplateType;
 import be.artisjaap.document.action.MaakBrief;
 import be.artisjaap.document.action.to.BriefNieuwTO;
 import be.artisjaap.document.action.to.BriefTO;
-import be.aclvb.framework.common.plugin.Language;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -39,7 +38,7 @@ public class BriefPersister {
         BriefNieuwTO briefTO = BriefNieuwTO.newBuilder()
                 .withCode(code)
                 .withTemplates(Arrays.asList("TEST_MET_HEADER_FOOTER", "MANDAAT_STOPZETTING"))
-                .withTaal(Language.DUTCH)
+                .withTaal("DUTCH")
                 .build();
         BriefTO gemaakteBrief = maakBrief.voor(briefTO);
         activeerBrief.metId(gemaakteBrief.getId());
@@ -54,7 +53,7 @@ public class BriefPersister {
         BriefNieuwTO briefTO = BriefNieuwTO.newBuilder()
                 .withCode(code)
                 .withTemplates(Arrays.asList("STANDAARD_HEADER_FOOTER"))
-                .withTaal(Language.DUTCH)
+                .withTaal("DUTCH")
                 .build();
         maakBrief.voor(briefTO);
     }

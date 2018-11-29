@@ -1,6 +1,6 @@
 package be.artisjaap.polyglot.core.model;
 
-import be.artisjaap.core.utils.LocalDateUtils;
+import be.artisjaap.common.utils.LocalDateUtils;
 import org.bson.types.ObjectId;
 
 import java.time.LocalDateTime;

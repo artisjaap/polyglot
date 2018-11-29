@@ -1,6 +1,6 @@
 package be.artisjaap.document.api;
 
-import be.artisjaap.core.utils.LocalDateUtils;
+import be.artisjaap.common.utils.LocalDateUtils;
 import be.artisjaap.document.action.to.BriefTO;
 
 import java.time.LocalDateTime;
