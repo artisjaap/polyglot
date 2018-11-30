@@ -1,12 +1,15 @@
 package be.artisjaap.document.action;
 
 import be.artisjaap.document.action.to.TemplateCodeNieuwTO;
+import be.artisjaap.document.action.to.TemplateCodeTO;
 import be.artisjaap.document.action.to.TemplateNieuwTO;
 import be.artisjaap.document.action.to.TemplateTO;
 import be.artisjaap.document.assembler.TemplateAssembler;
+import be.artisjaap.document.assembler.TemplateCodeAssembler;
 import be.artisjaap.document.assembler.TemplateCodeNieuwAssembler;
 import be.artisjaap.document.assembler.TemplateNieuwAssembler;
 import be.artisjaap.document.model.Template;
+import be.artisjaap.document.model.TemplateCode;
 import be.artisjaap.document.model.mongo.TemplateCodeRepository;
 import be.artisjaap.document.model.mongo.TemplateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +32,8 @@ public class EenvoudigeTemplateToevoegen {
     @Autowired
     private TemplateCodeNieuwAssembler templateCodeNieuwAssembler;
 
-
+    @Autowired
+    private TemplateCodeAssembler templateCodeAssembler;
 
     public TemplateTO voor(TemplateNieuwTO templateTO){
         Template template = templateNieuwAssembler.assembleEntity(templateTO);
@@ -37,7 +41,8 @@ public class EenvoudigeTemplateToevoegen {
         return templateAssembler.assembleTO(template);
     }
 
-    public void metNieuweCode(TemplateCodeNieuwTO templateCode){
-        templateCodeRepository.save(templateCodeNieuwAssembler.assembleEntity(templateCode));
+    public TemplateCodeTO metNieuweCode(TemplateCodeNieuwTO templateCode){
+        TemplateCode template = templateCodeRepository.save(templateCodeNieuwAssembler.assembleEntity(templateCode));
+        return templateCodeAssembler.assembleTO(template);
     }
 }

@@ -1,13 +1,21 @@
-package be.artisjaap.document.action.to;
+package be.artisjaap.document.web.endpoints.response;
 
-public class GecombineerdeTemplateCodeTO {
+import be.artisjaap.document.action.to.TemplateCodeTO;
 
+public class TemplateCodeResponse {
     private final String code;
     private final String description;
 
-    private GecombineerdeTemplateCodeTO(Builder builder) {
+    private TemplateCodeResponse(Builder builder) {
         code = builder.code;
         description = builder.description;
+    }
+
+    public static TemplateCodeResponse from(TemplateCodeTO templateCodeTO) {
+        return TemplateCodeResponse.newBuilder()
+                .withCode(templateCodeTO.getCode())
+                .withDescription(templateCodeTO.getDescription())
+                .build();
     }
 
     public static Builder newBuilder() {
@@ -39,8 +47,8 @@ public class GecombineerdeTemplateCodeTO {
             return this;
         }
 
-        public GecombineerdeTemplateCodeTO build() {
-            return new GecombineerdeTemplateCodeTO(this);
+        public TemplateCodeResponse build() {
+            return new TemplateCodeResponse(this);
         }
     }
 }

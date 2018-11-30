@@ -17,8 +17,7 @@ public class ZoekGecombineerdeTemplateCodes {
         return gecombineerdeTemplateCodeRepository.findAll().stream()
                 .map(templateCode -> GecombineerdeTemplateCodeTO.newBuilder()
                         .withCode(templateCode.getCode())
-                        .withOmschrijvingNl(templateCode.getOmschrijvingNl())
-                        .withOmschrijvingFr(templateCode.getOmschrijvingFr())
+                        .withDescription(templateCode.getDescription())
                         .build())
                 .collect(Collectors.toList());
     }

@@ -3,13 +3,11 @@ package be.artisjaap.document.action.to;
 public class TemplateCodeTO {
 
     private final String code;
-    private final String omschrijvingNl;
-    private final String omschrijvingFr;
+    private final String description;
 
     private TemplateCodeTO(Builder builder) {
         code = builder.code;
-        omschrijvingNl = builder.omschrijvingNl;
-        omschrijvingFr = builder.omschrijvingFr;
+        description = builder.description;
     }
 
     public static Builder newBuilder() {
@@ -20,19 +18,13 @@ public class TemplateCodeTO {
         return code;
     }
 
-    public String getOmschrijvingNl() {
-        return omschrijvingNl;
+    public String getDescription() {
+        return description;
     }
-
-    public String getOmschrijvingFr() {
-        return omschrijvingFr;
-    }
-
 
     public static final class Builder {
         private String code;
-        private String omschrijvingNl;
-        private String omschrijvingFr;
+        private String description;
 
         private Builder() {
         }
@@ -42,13 +34,8 @@ public class TemplateCodeTO {
             return this;
         }
 
-        public Builder withOmschrijvingNl(String omschrijvingNl) {
-            this.omschrijvingNl = omschrijvingNl;
-            return this;
-        }
-
-        public Builder withOmschrijvingFr(String omschrijvingFr) {
-            this.omschrijvingFr = omschrijvingFr;
+        public Builder withDescription(String omschrijvingNl) {
+            this.description = omschrijvingNl;
             return this;
         }
 

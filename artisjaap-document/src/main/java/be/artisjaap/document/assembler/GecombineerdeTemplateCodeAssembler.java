@@ -25,8 +25,7 @@ public class GecombineerdeTemplateCodeAssembler implements Assembler<Gecombineer
     public GecombineerdeTemplateCodeTO assembleTO(GecombineerdeTemplateCode gecombineerdeTemplateCode) {
         return GecombineerdeTemplateCodeTO.newBuilder()
                 .withCode(gecombineerdeTemplateCode.getCode())
-                .withOmschrijvingNl(gecombineerdeTemplateCode.getOmschrijvingNl())
-                .withOmschrijvingFr(gecombineerdeTemplateCode.getOmschrijvingFr())
+                .withDescription(gecombineerdeTemplateCode.getDescription())
                 .build();
     }
 

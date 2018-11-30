@@ -1,7 +1,5 @@
 package be.artisjaap.document.action.datasets;
 
-import be.aclvb.framework.common.utility.LocalDateUtils;
-
 import java.time.LocalDateTime;
 
 public class BriefInfoDataset {
@@ -12,9 +10,9 @@ public class BriefInfoDataset {
         return briefCode;
     }
 
-    private LocalDateTime nu = LocalDateUtils.now();
+    private LocalDateTime nu = LocalDateTime.now(); //FIXME Use LocalDateUtils
 
     public String getAanmaakdatum() {
-        return LocalDateUtils.format(nu);
+        return "";
     }
 }

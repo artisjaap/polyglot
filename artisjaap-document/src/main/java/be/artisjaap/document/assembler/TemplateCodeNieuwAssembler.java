@@ -10,8 +10,7 @@ public class TemplateCodeNieuwAssembler implements Assembler<TemplateCode, Templ
     public TemplateCode assembleEntity(TemplateCodeNieuwTO templateCodeNieuwTO) {
         return TemplateCode.newBuilder()
                 .withCode(templateCodeNieuwTO.getCode())
-                .withOmschrijvingNl(templateCodeNieuwTO.getOmschrijvingNl())
-                .withOmschrijvingFr(templateCodeNieuwTO.getOmschrijvingFr())
+                .withDescription(templateCodeNieuwTO.getDescription())
                 .build();
     }
 

@@ -4,7 +4,6 @@ import be.artisjaap.document.action.ActiveerTemplate;
 import be.artisjaap.document.action.GecombineerdeTemplateToevoegen;
 import be.artisjaap.document.action.to.GecombineerdeTemplateNieuwTO;
 import be.artisjaap.document.action.to.GecombineerdeTemplateTO;
-import be.aclvb.framework.common.plugin.Language;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +19,7 @@ public class GecombineerdeTemplatePersister {
     private ActiveerTemplate activeerTemplate;
 
     public void maakGecombineerdeTemplate(String code, String ... templates) {
-        GecombineerdeTemplateNieuwTO gecombineerdeTemplateNieuwTO = GecombineerdeTemplateNieuwTO.newBuilder().withCode(code).withTaal(Language.DUTCH).withTemplates(Arrays.asList(templates)).build();
+        GecombineerdeTemplateNieuwTO gecombineerdeTemplateNieuwTO = GecombineerdeTemplateNieuwTO.newBuilder().withCode(code).withTaal("DUTCH").withTemplates(Arrays.asList(templates)).build();
 
         GecombineerdeTemplateTO gecombineerdeTemplateTO = gecombineerdeTemplateToevoegen.uit(gecombineerdeTemplateNieuwTO);
         activeerTemplate.activeerTemplate(gecombineerdeTemplateTO.getId());

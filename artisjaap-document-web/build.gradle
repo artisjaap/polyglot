@@ -5,5 +5,6 @@ jar {
 }
 
 dependencies {
-    compile project(':artisjaap-document-web')
+    compile project(':artisjaap-document')
+    compile('org.springframework.boot:spring-boot-starter-web')
 }
