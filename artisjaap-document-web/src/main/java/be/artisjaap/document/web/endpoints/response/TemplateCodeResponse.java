@@ -2,6 +2,9 @@ package be.artisjaap.document.web.endpoints.response;
 
 import be.artisjaap.document.action.to.TemplateCodeTO;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class TemplateCodeResponse {
     private final String code;
     private final String description;
@@ -16,6 +19,10 @@ public class TemplateCodeResponse {
                 .withCode(templateCodeTO.getCode())
                 .withDescription(templateCodeTO.getDescription())
                 .build();
+    }
+
+    public static List<TemplateCodeResponse> from(List<TemplateCodeTO> templateCodeTO) {
+        return templateCodeTO.stream().map(TemplateCodeResponse::from).collect(Collectors.toList());
     }
 
     public static Builder newBuilder() {

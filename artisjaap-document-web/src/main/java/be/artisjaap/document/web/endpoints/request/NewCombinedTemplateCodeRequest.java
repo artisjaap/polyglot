@@ -1,18 +1,8 @@
-package be.artisjaap.document.action.to;
+package be.artisjaap.document.web.endpoints.request;
 
-public class BriefCodeTO {
-
-    private final String code;
-    private final String description;
-
-    private BriefCodeTO(Builder builder) {
-        code = builder.code;
-        description = builder.description;
-    }
-
-    public static Builder newBuilder() {
-        return new Builder();
-    }
+public class NewCombinedTemplateCodeRequest {
+    private String code;
+    private String description;
 
     public String getCode() {
         return code;
@@ -20,6 +10,15 @@ public class BriefCodeTO {
 
     public String getDescription() {
         return description;
+    }
+
+    private NewCombinedTemplateCodeRequest(Builder builder) {
+        code = builder.code;
+        description = builder.description;
+    }
+
+    public static Builder newBuilder() {
+        return new Builder();
     }
 
     public static final class Builder {
@@ -39,8 +38,8 @@ public class BriefCodeTO {
             return this;
         }
 
-        public BriefCodeTO build() {
-            return new BriefCodeTO(this);
+        public NewCombinedTemplateCodeRequest build() {
+            return new NewCombinedTemplateCodeRequest(this);
         }
     }
 }

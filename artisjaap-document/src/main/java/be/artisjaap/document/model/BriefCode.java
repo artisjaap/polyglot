@@ -5,8 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "BwBriefCode")
 public class BriefCode extends AbstractDocument{
     private String code;
-    private String omschrijvingNl;
-    private String omschrijvingFr;
+    private String description;
 
     private BriefCode() {
 
@@ -17,19 +16,14 @@ public class BriefCode extends AbstractDocument{
         return code;
     }
 
-    public String getOmschrijvingNl() {
-        return omschrijvingNl;
-    }
-
-    public String getOmschrijvingFr() {
-        return omschrijvingFr;
+    public String getDescription() {
+        return description;
     }
 
     private BriefCode(Builder builder) {
         buildCommon(builder);
         code = builder.code;
-        omschrijvingNl = builder.omschrijvingNl;
-        omschrijvingFr = builder.omschrijvingFr;
+        description = builder.description;
     }
 
     public static Builder newBuilder() {
@@ -39,8 +33,7 @@ public class BriefCode extends AbstractDocument{
 
     public static final class Builder extends AbstractBuilder<Builder> {
         private String code;
-        private String omschrijvingNl;
-        private String omschrijvingFr;
+        private String description;
 
         private Builder() {
         }
@@ -50,13 +43,8 @@ public class BriefCode extends AbstractDocument{
             return this;
         }
 
-        public Builder withOmschrijvingNl(String omschrijvingNl) {
-            this.omschrijvingNl = omschrijvingNl;
-            return this;
-        }
-
-        public Builder withOmschrijvingFr(String omschrijvingFr) {
-            this.omschrijvingFr = omschrijvingFr;
+        public Builder withDescription(String omschrijvingNl) {
+            this.description = omschrijvingNl;
             return this;
         }
 

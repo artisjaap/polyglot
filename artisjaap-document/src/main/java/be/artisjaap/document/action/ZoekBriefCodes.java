@@ -22,10 +22,7 @@ public class ZoekBriefCodes {
         return briefCodeRepository.findAll().stream()
                 .map(brief -> BriefCodeTO.newBuilder()
                         .withCode(brief.getCode())
-                        .withOmschrijvingNl(brief.getOmschrijvingNl())
-                        .withOmschrijvingFr(brief.getOmschrijvingFr())
-                        .withGevalideerdNl(valideerBrief.metCodeInTaal(brief.getCode(), "DUTCH"))
-                        .withGevalideerdFr(valideerBrief.metCodeInTaal(brief.getCode(), "FRENCH"))
+                        .withDescription(brief.getDescription())
                         .build())
                 .collect(Collectors.toList());
     }

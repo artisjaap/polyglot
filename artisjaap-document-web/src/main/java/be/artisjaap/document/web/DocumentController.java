@@ -2,13 +2,10 @@ package be.artisjaap.document.web;
 
 import be.artisjaap.document.action.EenvoudigeTemplateToevoegen;
 import be.artisjaap.document.action.GecombineerdeTemplateToevoegen;
+import be.artisjaap.document.action.MaakBrief;
 import be.artisjaap.document.action.to.*;
-import be.artisjaap.document.web.endpoints.request.NewCombinedTemplateRequest;
-import be.artisjaap.document.web.endpoints.request.NewTemplateCodeRequest;
-import be.artisjaap.document.web.endpoints.request.TemplateRequest;
-import be.artisjaap.document.web.endpoints.response.CombinedTemplateCodeResponse;
-import be.artisjaap.document.web.endpoints.response.TemplateCodeResponse;
-import be.artisjaap.document.web.endpoints.response.TemplateResponse;
+import be.artisjaap.document.web.endpoints.request.*;
+import be.artisjaap.document.web.endpoints.response.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -25,6 +22,9 @@ public class DocumentController {
 
     @Autowired
     private GecombineerdeTemplateToevoegen gecombineerdeTemplateToevoegen;
+
+    @Autowired
+    private MaakBrief maakBrief;
 
     @RequestMapping(value = "/template", method = RequestMethod.POST)
     public @ResponseBody
@@ -52,13 +52,38 @@ public class DocumentController {
 
     @RequestMapping(value = "/combined-template", method = RequestMethod.POST)
     public @ResponseBody
-    ResponseEntity<CombinedTemplateCodeResponse> createNewCombinedTemplateType(@RequestBody NewCombinedTemplateRequest newCombinedTemplateRequest){
+    ResponseEntity<CombinedTemplateCodeResponse> createNewCombinedTemplateCode(@RequestBody NewCombinedTemplateCodeRequest newCombinedTemplateRequest){
         GecombineerdeTemplateCodeTO combinedTemplateTO = gecombineerdeTemplateToevoegen.metNieuweCode(TemplateCodeNieuwTO.newBuilder()
                 .withCode(newCombinedTemplateRequest.getCode())
                 .withDescription(newCombinedTemplateRequest.getDescription())
                 .build());
 
         return ResponseEntity.ok(CombinedTemplateCodeResponse.from(combinedTemplateTO));
+
+    }
+
+    @RequestMapping(value = "/combined-template/config", method = RequestMethod.POST)
+    public @ResponseBody
+    ResponseEntity<CombinedTemplateResponse> createNewCombinedTemplate(@RequestBody NewCombinedTemplateRequest newCombinedTemplateRequest){
+        GecombineerdeTemplateTO uit = gecombineerdeTemplateToevoegen.uit(GecombineerdeTemplateNieuwTO.newBuilder()
+                .withCode(newCombinedTemplateRequest.getCode())
+                .withTaal(newCombinedTemplateRequest.getTaal())
+                .withTemplates(newCombinedTemplateRequest.getTemplates())
+                .build());
+
+        return ResponseEntity.ok(CombinedTemplateResponse.from(uit));
+
+    }
+
+    @RequestMapping(value = "/document", method = RequestMethod.POST)
+    public @ResponseBody
+    ResponseEntity<NewDocumentCodeResponse> createNewCombinedTemplate(@RequestBody NewDocumentCodeRequest newDocumentCodeRequest){
+        BriefCodeTO briefCodeTO = maakBrief.metNieuweCode(BriefCodeNieuwTO.newBuilder()
+                .withCode(newDocumentCodeRequest.getCode())
+                .withOmschrijvingFr(newDocumentCodeRequest.getDescription())
+                .build());
+
+        return ResponseEntity.ok(NewDocumentCodeResponse.from(briefCodeTO));
 
     }
 
