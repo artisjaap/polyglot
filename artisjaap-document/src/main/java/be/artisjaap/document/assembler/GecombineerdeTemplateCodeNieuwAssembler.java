@@ -10,8 +10,7 @@ public class GecombineerdeTemplateCodeNieuwAssembler implements Assembler<Gecomb
     public GecombineerdeTemplateCode assembleEntity(TemplateCodeNieuwTO templateCodeNieuwTO) {
         return GecombineerdeTemplateCode.newBuilder()
                 .withCode(templateCodeNieuwTO.getCode())
-                .withOmschrijvingNl(templateCodeNieuwTO.getOmschrijvingNl())
-                .withOmschrijvingFr(templateCodeNieuwTO.getOmschrijvingFr())
+                .withDescription(templateCodeNieuwTO.getDescription())
                 .build();
     }
 

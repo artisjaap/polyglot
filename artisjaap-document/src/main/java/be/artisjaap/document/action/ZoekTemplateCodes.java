@@ -18,8 +18,7 @@ public class ZoekTemplateCodes {
         return templateCodeRepository.findAll().stream()
                 .map(templateCode -> TemplateCodeTO.newBuilder()
                         .withCode(templateCode.getCode())
-                        .withOmschrijvingNl(templateCode.getOmschrijvingNl())
-                        .withOmschrijvingFr(templateCode.getOmschrijvingFr())
+                        .withDescription(templateCode.getDescription())
                         .build())
                 .collect(Collectors.toList());
     }

@@ -3,17 +3,11 @@ package be.artisjaap.document.action.to;
 public class BriefCodeTO {
 
     private final String code;
-    private final String omschrijvingNl;
-    private final String omschrijvingFr;
-    private final Boolean gevalideerdNl;
-    private final Boolean gevalideerdFr;
+    private final String description;
 
     private BriefCodeTO(Builder builder) {
         code = builder.code;
-        omschrijvingNl = builder.omschrijvingNl;
-        omschrijvingFr = builder.omschrijvingFr;
-        gevalideerdNl = builder.gevalideerdNl;
-        gevalideerdFr = builder.gevalideerdFr;
+        description = builder.description;
     }
 
     public static Builder newBuilder() {
@@ -24,28 +18,13 @@ public class BriefCodeTO {
         return code;
     }
 
-    public String getOmschrijvingNl() {
-        return omschrijvingNl;
-    }
-
-    public String getOmschrijvingFr() {
-        return omschrijvingFr;
-    }
-
-    public Boolean getGevalideerdNl() {
-        return gevalideerdNl;
-    }
-
-    public Boolean getGevalideerdFr() {
-        return gevalideerdFr;
+    public String getDescription() {
+        return description;
     }
 
     public static final class Builder {
         private String code;
-        private String omschrijvingNl;
-        private String omschrijvingFr;
-        private Boolean gevalideerdNl;
-        private Boolean gevalideerdFr;
+        private String description;
 
         private Builder() {
         }
@@ -55,25 +34,11 @@ public class BriefCodeTO {
             return this;
         }
 
-        public Builder withOmschrijvingNl(String omschrijvingNl) {
-            this.omschrijvingNl = omschrijvingNl;
+        public Builder withDescription(String description) {
+            this.description = description;
             return this;
         }
 
-        public Builder withOmschrijvingFr(String omschrijvingFr) {
-            this.omschrijvingFr = omschrijvingFr;
-            return this;
-        }
-
-        public Builder withGevalideerdNl(Boolean gevalideerdNl) {
-            this.gevalideerdNl = gevalideerdNl;
-            return this;
-        }
-
-        public Builder withGevalideerdFr(Boolean gevalideerdFr) {
-            this.gevalideerdFr = gevalideerdFr;
-            return this;
-        }
         public BriefCodeTO build() {
             return new BriefCodeTO(this);
         }

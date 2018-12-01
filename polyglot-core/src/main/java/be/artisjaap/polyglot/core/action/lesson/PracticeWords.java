@@ -2,9 +2,6 @@ package be.artisjaap.polyglot.core.action.lesson;
 
 import be.artisjaap.polyglot.core.action.assembler.TranslationPracticeAssembler;
 import be.artisjaap.polyglot.core.action.journal.JournalPracticeResults;
-import be.artisjaap.polyglot.core.action.lesson.AnswerChecker;
-import be.artisjaap.polyglot.core.action.lesson.FindPracticeWord;
-import be.artisjaap.polyglot.core.action.lesson.NextRandomWord;
 import be.artisjaap.polyglot.core.action.pairs.FindLanguagePair;
 import be.artisjaap.polyglot.core.action.pairs.LanguagePairTurn;
 import be.artisjaap.polyglot.core.action.pairs.UpdateLanguagePairHealth;
@@ -110,7 +107,7 @@ public class PracticeWords {
 
         }
 
-        translationPracticeRepository.save(translationPractice);
+         translationPracticeRepository.save(translationPractice);
 
         PracticeWordTO practiceWordTO = nextWord(practiceWordCheckTO.userId(), languagePairTO.id(), practiceWordCheckTO.nextOrderType());
 

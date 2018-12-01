@@ -1,9 +1,11 @@
 package be.artisjaap.document.action;
 
 import be.artisjaap.document.action.to.BriefCodeNieuwTO;
+import be.artisjaap.document.action.to.BriefCodeTO;
 import be.artisjaap.document.action.to.BriefNieuwTO;
 import be.artisjaap.document.action.to.BriefTO;
 import be.artisjaap.document.assembler.BriefAssembler;
+import be.artisjaap.document.assembler.BriefCodeAssembler;
 import be.artisjaap.document.assembler.BriefCodeNieuwAssembler;
 import be.artisjaap.document.assembler.BriefNieuwAssembler;
 import be.artisjaap.document.model.Brief;
@@ -30,6 +32,9 @@ public class MaakBrief {
     @Autowired
     private BriefCodeNieuwAssembler briefCodeNieuwAssembler;
 
+    @Autowired
+    private BriefCodeAssembler briefCodeAssembler;
+
 
     public BriefTO voor(BriefNieuwTO briefTO){
         Brief brief = briefNieuwAssembler.assembleEntity(briefTO);
@@ -37,7 +42,8 @@ public class MaakBrief {
         return briefAssembler.assembleTO(brief);
     }
 
-    public void metNieuweCode(BriefCodeNieuwTO templateCode){
-        briefCodeRepository.save(briefCodeNieuwAssembler.assembleEntity(templateCode));
+    public BriefCodeTO metNieuweCode(BriefCodeNieuwTO templateCode){
+        return briefCodeAssembler.assembleTO(briefCodeRepository.save(briefCodeNieuwAssembler.assembleEntity(templateCode)));
+
     }
 }

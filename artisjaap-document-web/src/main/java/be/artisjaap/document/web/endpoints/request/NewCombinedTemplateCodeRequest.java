@@ -1,18 +1,8 @@
-package be.artisjaap.document.action.to;
+package be.artisjaap.document.web.endpoints.request;
 
-public class GecombineerdeTemplateCodeTO {
-
-    private final String code;
-    private final String description;
-
-    private GecombineerdeTemplateCodeTO(Builder builder) {
-        code = builder.code;
-        description = builder.description;
-    }
-
-    public static Builder newBuilder() {
-        return new Builder();
-    }
+public class NewCombinedTemplateCodeRequest {
+    private String code;
+    private String description;
 
     public String getCode() {
         return code;
@@ -20,6 +10,15 @@ public class GecombineerdeTemplateCodeTO {
 
     public String getDescription() {
         return description;
+    }
+
+    private NewCombinedTemplateCodeRequest(Builder builder) {
+        code = builder.code;
+        description = builder.description;
+    }
+
+    public static Builder newBuilder() {
+        return new Builder();
     }
 
     public static final class Builder {
@@ -39,8 +38,8 @@ public class GecombineerdeTemplateCodeTO {
             return this;
         }
 
-        public GecombineerdeTemplateCodeTO build() {
-            return new GecombineerdeTemplateCodeTO(this);
+        public NewCombinedTemplateCodeRequest build() {
+            return new NewCombinedTemplateCodeRequest(this);
         }
     }
 }

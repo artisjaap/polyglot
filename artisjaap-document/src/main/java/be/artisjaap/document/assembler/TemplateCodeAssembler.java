@@ -23,8 +23,7 @@ public class TemplateCodeAssembler implements Assembler<TemplateCode, TemplateCo
     public TemplateCodeTO assembleTO(TemplateCode templateCode) {
         return TemplateCodeTO.newBuilder()
                 .withCode(templateCode.getCode())
-                .withOmschrijvingNl(templateCode.getOmschrijvingNl())
-                .withOmschrijvingFr(templateCode.getOmschrijvingFr())
+                .withDescription(templateCode.getDescription())
                 .build();
     }
 
