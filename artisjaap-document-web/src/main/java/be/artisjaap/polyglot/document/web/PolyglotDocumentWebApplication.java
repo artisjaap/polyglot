@@ -10,7 +10,7 @@ public class PolyglotDocumentWebApplication {
     public static void main(String[] args) {
         new SpringApplicationBuilder()
                 .sources(PolyglotApplication.class)
-                //.sources(PolyglotDocumentApplication.class)
+                //.sources(PolyglotDocumentWebApplication.class)
                 .build()
                 .run(args);
     }
