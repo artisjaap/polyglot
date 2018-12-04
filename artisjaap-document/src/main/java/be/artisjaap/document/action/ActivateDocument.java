@@ -9,19 +9,19 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class ActiveerBrief {
+public class ActivateDocument {
 
     @Autowired
     private BriefRepository briefRepository;
 
     @Autowired
-    private DesactiveerBrief desactiveerBrief;
+    private DeactivateDocument deactivateDocument;
 
     public void metId(String id){
         Optional<Brief> briefOptional = briefRepository.findById(new ObjectId(id));
         briefOptional.ifPresent(
                 brief -> {
-                    desactiveerBrief.metCodeAndTaal(brief.getCode(), brief.getTaal());
+                    deactivateDocument.metCodeAndTaal(brief.getCode(), brief.getTaal());
                     brief.activeer();
                     briefRepository.save(brief);
                 }

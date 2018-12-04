@@ -1,9 +1,9 @@
 package be.artisjaap.polyglot.core.action.journal;
 
-import be.artisjaap.document.action.ActiveerBrief;
-import be.artisjaap.document.action.ActiveerTemplate;
-import be.artisjaap.document.action.EenvoudigeTemplateToevoegen;
-import be.artisjaap.document.action.MaakBrief;
+import be.artisjaap.document.action.ActivateDocument;
+import be.artisjaap.document.action.ActivateTemplate;
+import be.artisjaap.document.action.AddTemplate;
+import be.artisjaap.document.action.AddDocument;
 import be.artisjaap.document.action.to.BriefNieuwTO;
 import be.artisjaap.document.action.to.BriefTO;
 import be.artisjaap.document.action.to.TemplateNieuwTO;
@@ -21,16 +21,16 @@ import java.util.Arrays;
 public class CreateJournalDocument {
 
     @Autowired
-    private EenvoudigeTemplateToevoegen eenvoudigeTemplateToevoegen;
+    private AddTemplate addTemplate;
 
     @Autowired
-    private ActiveerTemplate activeerTemplate;
+    private ActivateTemplate activateTemplate;
 
     @Autowired
-    private MaakBrief maakBrief;
+    private AddDocument addDocument;
 
     @Autowired
-    private ActiveerBrief activeerBrief;
+    private ActivateDocument activateDocument;
 
     public void createOfNotExists(){
         File file = new File(this.getClass().getClassLoader().getResource("documents/JournalReport.docx").getFile());
@@ -41,21 +41,21 @@ public class CreateJournalDocument {
             throw new IllegalStateException();
         }
 
-        TemplateTO templateTO = eenvoudigeTemplateToevoegen.voor(TemplateNieuwTO.newBuilder()
+        TemplateTO templateTO = addTemplate.voor(TemplateNieuwTO.newBuilder()
                 .withCode(DocumentCode.REPORT_FOR_JOURNAL.name())
                 .withOriginalFilename("JournalReports.docx")
                 .withTaal("DUTCH")
                 .withTemplate(bytes)
                 .build());
 
-        activeerTemplate.activeerTemplate(templateTO.getId());
+        activateTemplate.activeerTemplate(templateTO.getId());
 
-        BriefTO briefTO = maakBrief.voor(BriefNieuwTO.newBuilder()
+        BriefTO briefTO = addDocument.voor(BriefNieuwTO.newBuilder()
                 .withCode(DocumentCode.REPORT_FOR_JOURNAL.name())
                 .withTaal("DUTCH")
                 .withTemplates(Arrays.asList(templateTO.getCode()))
                 .build());
 
-        activeerBrief.metId(briefTO.getId());
+        activateDocument.metId(briefTO.getId());
     }
 }

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class ActiveerTemplate {
+public class ActivateTemplate {
 
     @Autowired
     private TemplateRepository templateRepository;
@@ -20,7 +20,7 @@ public class ActiveerTemplate {
     private GecombineerdeTemplateRepository gecombineerdeTemplateRepository;
 
     @Autowired
-    private DesactiveerTemplate desactiveerTemplate;
+    private DeactivateTemplate deactivateTemplate;
 
     public void activeerTemplate(String id){
         ObjectId objectId = new ObjectId(id);
@@ -31,7 +31,7 @@ public class ActiveerTemplate {
         Optional<Template> templateOptional = templateRepository.findById(objectId);
         if(templateOptional.isPresent()){
             Template template = templateOptional.get();
-            desactiveerTemplate.voorEenvoudigeTemplateMetCodeEnTaal(template.getCode(), template.getTaal());
+            deactivateTemplate.voorEenvoudigeTemplateMetCodeEnTaal(template.getCode(), template.getTaal());
             template.activeer();
             templateRepository.save(template);
         }else {
@@ -43,7 +43,7 @@ public class ActiveerTemplate {
         Optional<GecombineerdeTemplate> templateGecombineerdOptional = gecombineerdeTemplateRepository.findById(objectId);
         if(templateGecombineerdOptional.isPresent()){
             GecombineerdeTemplate templateGecombineerd= templateGecombineerdOptional.get();
-            desactiveerTemplate.voorGecombineerdeTemplateMetCodeEnTaal(templateGecombineerd.getCode(), templateGecombineerd.getTaal());
+            deactivateTemplate.voorGecombineerdeTemplateMetCodeEnTaal(templateGecombineerd.getCode(), templateGecombineerd.getTaal());
             templateGecombineerd.activeer();
             gecombineerdeTemplateRepository.save(templateGecombineerd);
         }else {

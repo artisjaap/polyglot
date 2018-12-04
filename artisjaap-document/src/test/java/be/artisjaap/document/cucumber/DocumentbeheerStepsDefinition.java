@@ -22,16 +22,16 @@ import static org.junit.Assert.assertThat;
 public class DocumentbeheerStepsDefinition {
 
     @Autowired
-    private EenvoudigeTemplateToevoegen eenvoudigeTemplateToevoegen;
+    private AddTemplate addTemplate;
 
     @Autowired
-    private GecombineerdeTemplateToevoegen gecombineerdeTemplateToevoegen;
+    private AddCombinedTemplate addCombinedTemplate;
 
     @Autowired
-    private ActiveerTemplate activeerTemplate;
+    private ActivateTemplate activateTemplate;
 
     @Autowired
-    private ActiveerBrief activeerBrief;
+    private ActivateDocument activateDocument;
 
     @Autowired
     private ZoekBeschikbareEenvoudigeTemplates zoekBeschikbareEenvoudigeTemplates;
@@ -43,7 +43,7 @@ public class DocumentbeheerStepsDefinition {
     private ZoekBeschikbareBrieven zoekBeschikbareBrieven;
 
     @Autowired
-    private MaakBrief maakBrief;
+    private AddDocument addDocument;
 
 
     @Gegeven("^een template (.*) met code (.*) in (.*)$")
@@ -66,28 +66,28 @@ public class DocumentbeheerStepsDefinition {
                 .withTaal(isoCode)
                 .withTemplate(bytesFromFile(bestand))
                 .build();
-        eenvoudigeTemplateToevoegen.voor(templateTO);
+        addTemplate.voor(templateTO);
     }
 
     @Als("^de template met code (.*) actief wordt gezet in taal (.*)$")
     public void deTemplateMetCodeActiefWordtGezet(String code, String isoCode) {
         List<TemplateTO> templateTOS = zoekBeschikbareEenvoudigeTemplates.metCodeInTaal(code, isoCode);
         assertThat(templateTOS.size(), is(1));
-        activeerTemplate.activeerTemplate(templateTOS.get(0).getId());
+        activateTemplate.activeerTemplate(templateTOS.get(0).getId());
     }
 
     @Als("^de gecombineerde template met code (.*) actief wordt gezet in taal (.*)$")
     public void deGecombineerdeTemplateMetCodeActiefWordtGezetInTaal(String code, String isoCode) throws Throwable {
         List<GecombineerdeTemplateTO> gecombineerdeTemplateTOS = zoekBeschikbareGecombineerdeTemplates.metCodeInTaal(code, isoCode);
         assertThat(gecombineerdeTemplateTOS.size(), is(1));
-        activeerTemplate.activeerTemplate(gecombineerdeTemplateTOS.get(0).getId());
+        activateTemplate.activeerTemplate(gecombineerdeTemplateTOS.get(0).getId());
     }
 
     @Als("^de brief met code (.*) actief wordt gezet in taal (.*)$")
     public void deBriefMANDAAT_BRIEFWordtActiefGezet(String code, String isoCode) throws Throwable {
         List<BriefTO> briefTOS = zoekBeschikbareBrieven.metCodeInTaal(code, isoCode);
         assertThat(briefTOS.size(), is(1));
-        activeerBrief.metId(briefTOS.get(0).getId());
+        activateDocument.metId(briefTOS.get(0).getId());
     }
 
     @Als("^een gecombineerde template met code (.*) in taal (.*) wordt gemaakt uit de templates (.*)$")
@@ -98,7 +98,7 @@ public class DocumentbeheerStepsDefinition {
                 .withTemplates(templates)
                 .withTaal(taal)
                 .build();
-        gecombineerdeTemplateToevoegen.uit(combinatie);
+        addCombinedTemplate.uit(combinatie);
     }
 
     private byte[] bytesFromFile(String bestand) {
@@ -120,7 +120,7 @@ public class DocumentbeheerStepsDefinition {
                 .withTaal(isoCode)
                 .withTemplates(templates)
                 .build();
-        maakBrief.voor(nieuweBrief);
+        addDocument.voor(nieuweBrief);
     }
 
 

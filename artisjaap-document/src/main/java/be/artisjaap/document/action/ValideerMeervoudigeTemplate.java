@@ -16,7 +16,7 @@ public class ValideerMeervoudigeTemplate {
     public boolean metCodeInTaal(String code, String taal){
         boolean result = zoekBeschikbareGecombineerdeTemplates.metCodeInTaalActief(code, taal).isPresent();
         if(!result) {
-            logger.warn("geen actieve meervoudige template gevonden voor " + code + " in taal " + taal);
+            logger.warn("geen actieve meervoudige template gevonden forTemplateId " + code + " in taal " + taal);
         }
         return result;
     }

@@ -11,7 +11,7 @@ import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.List;
 
-public class EenvoudigeTemplateToevoegenInMemoryTest extends DocumentbeheerInMemoryTestParent {
+public class AddTemplateInMemoryTest extends DocumentbeheerInMemoryTestParent {
 
     @Resource
     private TemplatePersister templatePersister;

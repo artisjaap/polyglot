@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import javax.annotation.Resource;
 
-public class MaakBriefVoorMandaatNaTelefonsischContact extends DocumentbeheerInMemoryTestParent {
+public class AddDocumentVoorMandaatNaTelefonsischContact extends DocumentbeheerInMemoryTestParent {
 
     @Resource
     private BriefPersister briefPersister;

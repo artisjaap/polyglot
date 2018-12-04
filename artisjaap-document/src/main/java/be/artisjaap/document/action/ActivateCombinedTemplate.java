@@ -7,14 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ActiveerGecombineerdeTemplate {
+public class ActivateCombinedTemplate {
 
 
     @Autowired
     private GecombineerdeTemplateRepository gecombineerdeTemplateRepository;
 
     @Autowired
-    private DesactiveerTemplate desactiveerTemplate;
+    private DeactivateTemplate deactivateTemplate;
 
     public void activeerTemplate(String id){
         ObjectId objectId = new ObjectId(id);
@@ -25,7 +25,7 @@ public class ActiveerGecombineerdeTemplate {
     private void activeerGecombineerdeTemplate(ObjectId objectId) {
         GecombineerdeTemplate templateGecombineerd = gecombineerdeTemplateRepository.findById(objectId).orElseThrow(() -> new UnsupportedOperationException("Template bestaat niet"));
         if(templateGecombineerd != null){
-            desactiveerTemplate.voorGecombineerdeTemplateMetCodeEnTaal(templateGecombineerd.getCode(), templateGecombineerd.getTaal());
+            deactivateTemplate.voorGecombineerdeTemplateMetCodeEnTaal(templateGecombineerd.getCode(), templateGecombineerd.getTaal());
             templateGecombineerd.activeer();
             gecombineerdeTemplateRepository.save(templateGecombineerd);
         }else {

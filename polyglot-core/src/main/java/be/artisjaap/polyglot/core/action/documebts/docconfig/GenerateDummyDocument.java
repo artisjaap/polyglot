@@ -1,7 +1,6 @@
 package be.artisjaap.polyglot.core.action.documebts.docconfig;
 
 import be.artisjaap.document.action.GenereerBrief;
-import be.artisjaap.document.action.GenereerFieldsXml;
 import be.artisjaap.document.action.to.BriefConfigTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

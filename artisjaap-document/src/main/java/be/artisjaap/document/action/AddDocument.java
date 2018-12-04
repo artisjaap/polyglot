@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MaakBrief {
+public class AddDocument {
 
     @Autowired
     private BriefNieuwAssembler briefNieuwAssembler;

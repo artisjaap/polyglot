@@ -1,6 +1,6 @@
 package be.artisjaap.polyglot.core.action.documebts.docconfig;
 
-import be.artisjaap.document.action.GenereerFieldsXml;
+import be.artisjaap.document.action.GenerateFieldsXml;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -11,11 +11,11 @@ public class FieldXmlGenerator {
     private DocumentForCodeFactory documentForCodeFactory;
 
     @Autowired
-    private GenereerFieldsXml genereerFieldsXml;
+    private GenerateFieldsXml generateFieldsXml;
 
     public byte[] forDocument(DocumentCode code){
 
-        return genereerFieldsXml.voorDatasets(documentForCodeFactory.findForCode(code)
+        return generateFieldsXml.voorDatasets(documentForCodeFactory.findForCode(code)
                 .documentConfigForPreview());
     }
 }

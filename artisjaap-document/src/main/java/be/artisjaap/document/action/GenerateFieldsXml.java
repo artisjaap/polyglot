@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 import java.io.*;
 
 @Component
-public class GenereerFieldsXml {
+public class GenerateFieldsXml {
 
     @Autowired
     private TemplateRepository templateRepository;

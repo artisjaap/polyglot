@@ -1,10 +1,10 @@
 package be.artisjaap.document.action;
 
 import be.artisjaap.document.action.to.BriefConfigTO;
-import be.artisjaap.document.action.to.BriefPreviewConfigTO;
 import be.artisjaap.document.action.to.TemplateDataTO;
 import be.artisjaap.document.api.BriefMetaDataset;
 import be.artisjaap.document.api.DatasetConfig;
+import be.artisjaap.document.api.DatasetProvider;
 import be.artisjaap.document.api.DatasetProviderImpl;
 import be.artisjaap.document.api.brieflocatie.BriefLocatieType;
 import be.artisjaap.document.api.brieflocatie.BriefOpslagLocatie;
@@ -20,11 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
@@ -74,7 +70,7 @@ public class GenereerBrief {
             GegenereerdeBrief gegenereerdeBrief = GegenereerdeBrief.newBuilder()
                     .withBriefRef(brief.getId())
                     .withDatasets(briefDatasetData)
-                    .withBriefLocatie(briefLocatie) //resolve bytes voor brief, in db op filesystem, ...
+                    .withBriefLocatie(briefLocatie) //resolve bytes forTemplateId brief, in db op filesystem, ...
                     .withGebruikteTemplates(gebruikteTemplates)
                     .withTaal(briefConfigMetExtraDatasets.getTaal())
                     .withBriefcode(briefConfigMetExtraDatasets.getCode())
@@ -120,8 +116,8 @@ public class GenereerBrief {
                 .build();
     }
 
-    public TemplateDataTO voorBriefMetId(ObjectId briefId, BriefPreviewConfigTO briefConfigTO) {
-        Brief brief = briefRepository.findById(briefId).orElseThrow(() -> new UnsupportedOperationException("Brief bestaat niet"));
+    public TemplateDataTO voorBriefMetId(String briefId, DatasetProvider briefConfigTO) {
+        Brief brief = briefRepository.findById(new ObjectId(briefId)).orElseThrow(() -> new UnsupportedOperationException("Brief bestaat niet"));
 
         BriefConfigTO briefConfig = BriefConfigTO.newBuilder()
                 .withDatasetProvider(briefConfigTO)

@@ -17,7 +17,7 @@ public class EmptyDatasetProvider implements DatasetProvider {
 
     @Override
     public DatasetConfig get(String dataset) {
-        logger.error("Geen dataset voor " + dataset);
+        logger.error("Geen dataset forTemplateId " + dataset);
         return new DatasetConfigImpl(new HashMap<>(), dataset, Object.class, false);
     }
 

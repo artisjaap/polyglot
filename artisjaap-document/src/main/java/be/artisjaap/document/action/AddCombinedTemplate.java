@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public class GecombineerdeTemplateToevoegen {
+public class AddCombinedTemplate {
     @Autowired
     private GecombineerdeTemplateRepository gecombineerdeTemplateRepository;
 

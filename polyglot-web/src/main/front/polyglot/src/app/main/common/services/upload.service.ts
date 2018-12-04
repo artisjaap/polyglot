@@ -10,7 +10,9 @@ export class UploadService {
 
   constructor(private http:HttpClient) { }
 
-  public upload(files: Set<File>, url:string): {[key:string]:Observable<number>} {
+  //fixme body not used
+  //fixme return type can also be an object response
+  public upload(files: Set<File>, url:string, body?:any): {[key:string]:Observable<number>} {
     const status = {};
 
     files.forEach(file => {

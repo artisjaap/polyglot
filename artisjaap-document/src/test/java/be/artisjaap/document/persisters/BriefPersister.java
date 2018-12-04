@@ -1,8 +1,8 @@
 package be.artisjaap.document.persisters;
 
-import be.artisjaap.document.action.ActiveerBrief;
+import be.artisjaap.document.action.ActivateDocument;
 import be.artisjaap.document.action.AutofindTemplateType;
-import be.artisjaap.document.action.MaakBrief;
+import be.artisjaap.document.action.AddDocument;
 import be.artisjaap.document.action.to.BriefNieuwTO;
 import be.artisjaap.document.action.to.BriefTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import java.util.Arrays;
 public class BriefPersister {
 
     @Resource
-    private MaakBrief maakBrief;
+    private AddDocument addDocument;
 
     @Resource
     private TemplatePersister templatePersister;
@@ -28,7 +28,7 @@ public class BriefPersister {
 
 
     @Autowired
-    private ActiveerBrief activeerBrief;
+    private ActivateDocument activateDocument;
 
     public void maakEenBrief(String code){
         templatePersister.maakTemplate("STANDAARD_HEADER_FOOTER", "STANDAARD_HEADER_FOOTER.DOCX");
@@ -40,8 +40,8 @@ public class BriefPersister {
                 .withTemplates(Arrays.asList("TEST_MET_HEADER_FOOTER", "MANDAAT_STOPZETTING"))
                 .withTaal("DUTCH")
                 .build();
-        BriefTO gemaakteBrief = maakBrief.voor(briefTO);
-        activeerBrief.metId(gemaakteBrief.getId());
+        BriefTO gemaakteBrief = addDocument.voor(briefTO);
+        activateDocument.metId(gemaakteBrief.getId());
 
 
     }
@@ -55,6 +55,6 @@ public class BriefPersister {
                 .withTemplates(Arrays.asList("STANDAARD_HEADER_FOOTER"))
                 .withTaal("DUTCH")
                 .build();
-        maakBrief.voor(briefTO);
+        addDocument.voor(briefTO);
     }
 }

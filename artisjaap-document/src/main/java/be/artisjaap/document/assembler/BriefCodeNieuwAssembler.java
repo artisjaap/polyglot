@@ -10,7 +10,7 @@ public class BriefCodeNieuwAssembler implements Assembler<BriefCode, BriefCodeNi
     public BriefCode assembleEntity(BriefCodeNieuwTO briefCodeNieuwTO) {
         return BriefCode.newBuilder()
                 .withCode(briefCodeNieuwTO.getCode())
-                .withDescription(briefCodeNieuwTO.getOmschrijvingNl())
+                .withDescription(briefCodeNieuwTO.getDescription())
                 .build();
     }
 

@@ -16,7 +16,7 @@ public class ValideerEnkelvoudigeTemplate {
     public boolean metCodeInTaal(String code, String taal){
         boolean result = zoekBeschikbareEenvoudigeTemplates.metCodeInTaalActief(code, taal).isPresent();
         if(!result) {
-            logger.warn("geen actieve enkelvoudige template gevonden voor " + code + " in taal " + taal);
+            logger.warn("geen actieve enkelvoudige template gevonden forTemplateId " + code + " in taal " + taal);
         }
         return result;
 

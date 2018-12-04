@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import javax.annotation.Resource;
 
-public class MaakBriefInMemoryTest extends DocumentbeheerInMemoryTestParent {
+public class AddDocumentInMemoryTest extends DocumentbeheerInMemoryTestParent {
 
     @Resource
     private BriefPersister briefPersister;
