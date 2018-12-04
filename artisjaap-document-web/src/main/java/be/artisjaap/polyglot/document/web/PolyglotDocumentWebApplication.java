@@ -1,6 +1,6 @@
 package be.artisjaap.polyglot.document.web;
 
-import be.artisjaap.polyglot.PolyglotApplication;
+import be.artisjaap.document.DocumentbeheerApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 
@@ -9,8 +9,7 @@ public class PolyglotDocumentWebApplication {
 
     public static void main(String[] args) {
         new SpringApplicationBuilder()
-                .sources(PolyglotApplication.class)
-                //.sources(PolyglotDocumentWebApplication.class)
+                .sources(DocumentbeheerApplication.class)
                 .build()
                 .run(args);
     }
