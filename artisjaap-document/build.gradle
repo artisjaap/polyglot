@@ -5,7 +5,7 @@ jar {
 }
 
 dependencies {
-    compile project(':polyglot-core')
+    compile project(':artisjaap-common')
 
     //xdoc
     compile 'fr.opensagres.xdocreport:fr.opensagres.xdocreport.document.docx:1.0.6'

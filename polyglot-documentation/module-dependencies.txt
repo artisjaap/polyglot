@@ -1,0 +1,12 @@
+artisjaap-common
+    #spring-boot-starter-aop
+    #spring-boot-starter-data-mongodb
+    #spring-boot-starter-mail
+    #spring-boot-starter-quartz
+    #spring-boot-starter-security
+    #spring-boot-starter-web
+    #spring-boot-starter-websocket
+
+
+artisjaap-document
+    @artisjaap-common
