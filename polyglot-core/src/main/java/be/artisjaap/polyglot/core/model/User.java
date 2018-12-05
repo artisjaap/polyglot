@@ -1,6 +1,6 @@
 package be.artisjaap.polyglot.core.model;
 
-import be.artisjaap.core.model.AbstractDocument;
+import be.artisjaap.common.model.AbstractDocument;
 
 public class User extends AbstractDocument {
 

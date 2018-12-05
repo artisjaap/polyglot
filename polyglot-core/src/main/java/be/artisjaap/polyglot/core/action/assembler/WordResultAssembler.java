@@ -1,6 +1,7 @@
 package be.artisjaap.polyglot.core.action.assembler;
 
-import be.artisjaap.core.utils.MongoUtils;
+import be.artisjaap.common.action.Assembler;
+import be.artisjaap.common.utils.MongoUtils;
 import be.artisjaap.polyglot.core.action.to.test.WordResultTO;
 import be.artisjaap.polyglot.core.model.WordResult;
 import org.springframework.stereotype.Component;

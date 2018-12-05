@@ -1,6 +1,6 @@
 package be.artisjaap.polyglot.core.action.translation;
 
-import be.artisjaap.core.utils.MongoUtils;
+import be.artisjaap.common.utils.MongoUtils;
 import be.artisjaap.polyglot.core.action.to.TranslationTO;
 import be.artisjaap.polyglot.core.action.to.TranslationsForUserTO;
 import be.artisjaap.polyglot.core.model.KnowledgeStatus;

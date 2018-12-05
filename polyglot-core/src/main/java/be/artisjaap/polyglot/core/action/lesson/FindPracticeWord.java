@@ -1,6 +1,6 @@
 package be.artisjaap.polyglot.core.action.lesson;
 
-import be.artisjaap.core.validation.ValidationException;
+import be.artisjaap.common.validation.ValidationException;
 import be.artisjaap.polyglot.core.action.pairs.FindLanguagePair;
 import be.artisjaap.polyglot.core.action.to.LanguagePairTO;
 import be.artisjaap.polyglot.core.action.to.PracticeWordTO;

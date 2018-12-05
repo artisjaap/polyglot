@@ -1,7 +1,7 @@
 package be.artisjaap.polyglot.core.action.lesson;
 
-import be.artisjaap.core.utils.MongoUtils;
-import be.artisjaap.core.validation.ValidationException;
+import be.artisjaap.common.utils.MongoUtils;
+import be.artisjaap.common.validation.ValidationException;
 import be.artisjaap.polyglot.core.action.assembler.LessonAssembler;
 import be.artisjaap.polyglot.core.action.to.LessonTO;
 import be.artisjaap.polyglot.core.model.Lesson;

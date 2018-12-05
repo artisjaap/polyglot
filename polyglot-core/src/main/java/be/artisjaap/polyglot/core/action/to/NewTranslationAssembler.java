@@ -1,6 +1,6 @@
 package be.artisjaap.polyglot.core.action.to;
 
-import be.artisjaap.polyglot.core.action.assembler.Assembler;
+import be.artisjaap.common.action.Assembler;
 import be.artisjaap.polyglot.core.model.Translation;
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Component;

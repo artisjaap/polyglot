@@ -1,5 +1,6 @@
 package be.artisjaap.polyglot.core.action.assembler;
 
+import be.artisjaap.common.action.Assembler;
 import be.artisjaap.polyglot.core.action.to.LanguagePairTO;
 import be.artisjaap.polyglot.core.model.LanguagePair;
 import org.springframework.stereotype.Component;

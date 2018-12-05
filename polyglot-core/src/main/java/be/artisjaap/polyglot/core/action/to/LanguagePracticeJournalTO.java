@@ -1,6 +1,6 @@
 package be.artisjaap.polyglot.core.action.to;
 
-import be.artisjaap.core.model.ReferenceableTO;
+import be.artisjaap.common.model.ReferenceableTO;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

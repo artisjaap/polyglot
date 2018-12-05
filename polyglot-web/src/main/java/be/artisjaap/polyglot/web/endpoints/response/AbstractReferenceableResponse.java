@@ -1,6 +1,6 @@
 package be.artisjaap.polyglot.web.endpoints.response;
 
-import be.artisjaap.core.model.ReferenceableTO;
+import be.artisjaap.common.model.ReferenceableTO;
 
 public abstract class AbstractReferenceableResponse implements ReferenceableResponse {
 

@@ -1,0 +1,14 @@
+jar {
+    baseName = 'artisjaap-mail'
+    version = '0.0.1-SNAPSHOT'
+
+}
+
+dependencies {
+    compile project(':artisjaap-common')
+    compile project(':artisjaap-properties')
+
+    compile 'org.springframework.boot:spring-boot-starter-freemarker'
+
+
+}

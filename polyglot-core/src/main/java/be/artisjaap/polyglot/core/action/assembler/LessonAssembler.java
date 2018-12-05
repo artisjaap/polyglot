@@ -1,5 +1,6 @@
 package be.artisjaap.polyglot.core.action.assembler;
 
+import be.artisjaap.common.action.Assembler;
 import be.artisjaap.polyglot.core.action.to.LessonTO;
 import be.artisjaap.polyglot.core.action.to.LessonTranslationPairTO;
 import be.artisjaap.polyglot.core.model.Lesson;

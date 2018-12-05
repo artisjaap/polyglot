@@ -1,5 +1,6 @@
 package be.artisjaap.polyglot.core.action.assembler;
 
+import be.artisjaap.common.action.Assembler;
 import be.artisjaap.polyglot.core.action.to.PracticeHealthTO;
 import be.artisjaap.polyglot.core.model.PracticeHealth;
 import org.springframework.stereotype.Component;

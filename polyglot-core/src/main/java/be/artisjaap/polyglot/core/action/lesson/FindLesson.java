@@ -1,6 +1,6 @@
 package be.artisjaap.polyglot.core.action.lesson;
 
-import be.artisjaap.core.validation.ValidationException;
+import be.artisjaap.common.validation.ValidationException;
 import be.artisjaap.polyglot.core.action.assembler.LessonAssembler;
 import be.artisjaap.polyglot.core.action.assembler.LessonHeaderAssembler;
 import be.artisjaap.polyglot.core.action.to.LessonHeaderTO;

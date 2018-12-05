@@ -1,12 +1,13 @@
 package be.artisjaap.polyglot.core.action.assembler;
 
+import be.artisjaap.common.action.Assembler;
 import be.artisjaap.polyglot.core.action.to.TranslationTO;
 import be.artisjaap.polyglot.core.model.Translation;
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TranslationAssembler implements Assembler<TranslationTO, Translation>{
+public class TranslationAssembler implements Assembler<TranslationTO, Translation> {
 
 
     @Override

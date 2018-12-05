@@ -1,7 +1,7 @@
 package be.artisjaap.polyglot.core.action.journal;
 
 import be.artisjaap.common.utils.LocalDateUtils;
-import be.artisjaap.core.utils.MongoUtils;
+import be.artisjaap.common.utils.MongoUtils;
 import be.artisjaap.polyglot.core.action.assembler.LanguagePracticeJournalAssembler;
 import be.artisjaap.polyglot.core.action.to.AnswerTO;
 import be.artisjaap.polyglot.core.action.to.JournalFilterTO;

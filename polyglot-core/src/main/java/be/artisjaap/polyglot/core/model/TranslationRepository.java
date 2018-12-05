@@ -1,6 +1,6 @@
 package be.artisjaap.polyglot.core.model;
 
-import be.artisjaap.core.validation.ValidationException;
+import be.artisjaap.common.validation.ValidationException;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 

@@ -1,6 +1,7 @@
 package be.artisjaap.polyglot.core.action.assembler;
 
-import be.artisjaap.core.validation.ValidationException;
+import be.artisjaap.common.action.Assembler;
+import be.artisjaap.common.validation.ValidationException;
 import be.artisjaap.polyglot.core.action.to.LessonTranslationPairTO;
 import be.artisjaap.polyglot.core.model.LanguagePair;
 import be.artisjaap.polyglot.core.model.LanguagePairRepository;

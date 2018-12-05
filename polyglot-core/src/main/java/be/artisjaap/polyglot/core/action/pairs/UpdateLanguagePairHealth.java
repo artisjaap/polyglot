@@ -1,6 +1,6 @@
 package be.artisjaap.polyglot.core.action.pairs;
 
-import be.artisjaap.core.validation.ValidationException;
+import be.artisjaap.common.validation.ValidationException;
 import be.artisjaap.polyglot.core.model.LanguagePair;
 import be.artisjaap.polyglot.core.model.LanguagePairRepository;
 import org.bson.types.ObjectId;

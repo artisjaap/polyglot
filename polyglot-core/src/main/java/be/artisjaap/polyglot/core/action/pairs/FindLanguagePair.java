@@ -1,7 +1,7 @@
 package be.artisjaap.polyglot.core.action.pairs;
 
-import be.artisjaap.core.validation.ValidationException;
-import be.artisjaap.core.validation.ValidationMessage;
+import be.artisjaap.common.validation.ValidationException;
+import be.artisjaap.common.validation.ValidationMessage;
 import be.artisjaap.polyglot.core.action.assembler.LanguagePairAssembler;
 import be.artisjaap.polyglot.core.action.to.LanguagePairTO;
 import be.artisjaap.polyglot.core.action.to.NewLanguagePairTO;

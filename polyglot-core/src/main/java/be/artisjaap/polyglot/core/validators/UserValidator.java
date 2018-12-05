@@ -1,7 +1,7 @@
 package be.artisjaap.polyglot.core.validators;
 
-import be.artisjaap.core.validation.ValidationMessage;
-import be.artisjaap.core.validation.Validator;
+import be.artisjaap.common.validation.ValidationMessage;
+import be.artisjaap.common.validation.Validator;
 import be.artisjaap.polyglot.core.model.User;
 import be.artisjaap.polyglot.core.model.UserRepository;
 import org.bson.types.ObjectId;
