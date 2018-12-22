@@ -2,6 +2,8 @@ package be.artisjaap.polyglot.core.action.to;
 
 import be.artisjaap.common.model.ReferenceableTO;
 
+import java.util.Set;
+
 public class UserTO extends ReferenceableTO {
 
     private String username;
@@ -10,7 +12,17 @@ public class UserTO extends ReferenceableTO {
     private String lastName;
     private String email;
     private String classRoom;
+    private String preferedRole;
+    private Set<String> roles;
     private UserSettingsTO userSettings;
+
+    public Set<String> roles() {
+        return roles;
+    }
+
+    public String preferedRole() {
+        return preferedRole;
+    }
 
     public String username() {
         return username;
@@ -41,14 +53,15 @@ public class UserTO extends ReferenceableTO {
     }
 
     private UserTO(Builder builder) {
-        buildCommon(builder);
         username = builder.username;
         password = builder.password;
         firstName = builder.firstName;
         lastName = builder.lastName;
-        userSettings = builder.userSettings;
-        classRoom = builder.classRoom;
         email = builder.email;
+        classRoom = builder.classRoom;
+        preferedRole = builder.preferedRole;
+        roles = builder.roles;
+        userSettings = builder.userSettings;
     }
 
     public static Builder newBuilder() {
@@ -62,6 +75,8 @@ public class UserTO extends ReferenceableTO {
         private String lastName;
         private String email;
         private String classRoom;
+        private String preferedRole;
+        private Set<String> roles;
         private UserSettingsTO userSettings;
 
         private Builder() {
@@ -99,6 +114,16 @@ public class UserTO extends ReferenceableTO {
 
         public Builder withClassRoom(String classRoom) {
             this.classRoom = classRoom;
+            return this;
+        }
+
+        public Builder withPreferedRole(String val) {
+            preferedRole = val;
+            return this;
+        }
+
+        public Builder withRoles(Set<String> val) {
+            roles = val;
             return this;
         }
 

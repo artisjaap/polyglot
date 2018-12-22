@@ -2,11 +2,16 @@ package be.artisjaap.polyglot.web.endpoints.response;
 
 import be.artisjaap.polyglot.core.action.to.UserTO;
 
+import java.util.Set;
+
 public class UserLoginResponse {
     private String userId;
     private String username;
     private String password;
     private String token;
+    private Set<String> roles;
+    private String preferedRole;
+
 
     public String getUserId() {
         return userId;
@@ -24,11 +29,21 @@ public class UserLoginResponse {
         return token;
     }
 
+    public Set<String> getRoles() {
+        return roles;
+    }
+
+    public String getPreferedRole() {
+        return preferedRole;
+    }
+
     private UserLoginResponse(Builder builder) {
         userId = builder.userId;
         username = builder.username;
         password = builder.password;
         token = builder.token;
+        roles = builder.roles;
+        preferedRole = builder.preferedRole;
     }
 
 
@@ -36,6 +51,8 @@ public class UserLoginResponse {
         return newBuilder().withUserId(userTO.id())
                 .withUsername(userTO.username())
                 .withToken(token)
+                .withRoles(userTO.roles())
+                .withPreferedRole(userTO.preferedRole())
                 .build();
 
     }
@@ -50,6 +67,8 @@ public class UserLoginResponse {
         private String username;
         private String password;
         private String token;
+        private Set<String> roles;
+        private String preferedRole;
 
         private Builder() {
         }
@@ -71,6 +90,16 @@ public class UserLoginResponse {
 
         public Builder withToken(String val) {
             token = val;
+            return this;
+        }
+
+        public Builder withRoles(Set<String> val) {
+            roles = val;
+            return this;
+        }
+
+        public Builder withPreferedRole(String val) {
+            preferedRole = val;
             return this;
         }
 

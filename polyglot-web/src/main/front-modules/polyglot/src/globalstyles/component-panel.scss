@@ -1,0 +1,56 @@
+@import "colors-main";
+
+.panel {
+  display:flex;
+  flex-direction: column;
+  border: 2px solid $main-color;
+  margin: 0 0 5px 0;
+  padding: 0;
+
+  .header {
+    padding: 3px 10px;
+    display:flex;
+    flex-direction:row;
+    background-color: $main-color;
+    color: $main-color-inverse;
+    justify-content: space-between;
+    .title{
+      flex: 1;
+    }
+    .actions {
+
+    }
+  }
+
+  .content {
+    padding: 5px 10px;
+  }
+
+  .formdata {
+    flex-direction: column;
+    display: flex;
+
+    .row {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin: 5px 0;
+    }
+    .label {
+      width: 150px;
+      display:inline-block;
+      text-align: right;
+      margin: 0 5px;
+    }
+    input{
+      flex: 1;
+    }
+    .buttons{
+      align-self: flex-end;
+    }
+  }
+
+  .footer{
+
+  }
+}

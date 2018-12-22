@@ -21,6 +21,8 @@ public class NewUserAssembler implements Assembler<NewUserTO, User> {
                 .withFirstName(newUserTO.firstName())
                 .withLastName(newUserTO.lastName())
                 .withPassword(newUserTO.password())
+                .withRoles(newUserTO.roles())
+                .withEmail(newUserTO.email())
                 .build();
     }
 }

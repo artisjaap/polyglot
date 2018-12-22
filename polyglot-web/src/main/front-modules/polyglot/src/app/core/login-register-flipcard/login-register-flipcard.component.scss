@@ -1,0 +1,85 @@
+@import "colors-main";
+@import "global-mixins";
+
+$height: 300px;
+$width: 400px;
+
+:host {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+
+}
+
+.main {
+  width: $width;
+  height: $height;
+  margin: 15px 0;
+  position: relative;
+
+  //setup card + animation
+  .front, .back {
+    //border: 1px solid white;
+    position: absolute;
+    height: $height;
+    width: $width;
+   // background-color: rgba(0,0,0,0.2);
+
+    transition: 0.5s all ease;
+    transform-style: preserve-3d;
+    transform: rotateY(0deg);
+    backface-visibility: hidden;
+  }
+  //
+  .front {
+    transform: rotateY(180deg);
+
+    &.active {
+      transform: rotateY(0deg);
+    }
+  }
+
+  .back {
+    transform: rotateY(180deg);
+
+    &.active {
+      transform: rotateY(0deg);
+    }
+  }
+
+  .title {
+    background-color: rgba(0,0,0,0.2);
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    color: white;
+    padding: 15px;
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    padding: 30px 5px;
+
+    label {
+      span {
+        @include transparent-label-span;
+
+      }
+    }
+
+    input {
+      @include transparent-input;
+
+    }
+  }
+
+  .navigation {
+    padding: 5px;
+
+    button {
+      margin: 0 5px;
+    }
+  }
+}
+

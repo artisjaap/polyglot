@@ -20,6 +20,8 @@ public class UserAssembler implements Assembler<UserTO, User> {
                 .withPassword(user.getPassword())
                 .withFirstName(user.getFirstName())
                 .withLastName(user.getLastName())
+                .withRoles(user.getRoles())
+                .withPreferedRole(user.getRoles().iterator().next())
                 .withUserSettings(userSettingsAssembler.assembleTO(user.getUserSettings()))
                 .build();
     }

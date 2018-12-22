@@ -1,9 +1,10 @@
 package be.artisjaap.polyglot.web.endpoints;
 
-import be.artisjaap.polyglot.core.action.user.RegisterUser;
 import be.artisjaap.polyglot.core.action.to.NewUserTO;
 import be.artisjaap.polyglot.core.action.to.UserTO;
+import be.artisjaap.polyglot.core.action.user.RegisterUser;
 import be.artisjaap.polyglot.web.action.AuthenticateForUser;
+import be.artisjaap.polyglot.web.action.UserTypeToRole;
 import be.artisjaap.polyglot.web.endpoints.request.NewUserRequest;
 import be.artisjaap.polyglot.web.endpoints.response.UserLoginResponse;
 import be.artisjaap.polyglot.web.security.JwtTokenUtil;
@@ -25,6 +26,9 @@ public class LoginController {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
+    @Autowired
+    private UserTypeToRole userTypeToRole;
+
     /**
      * Registered user can login with this URL
      * */
@@ -45,6 +49,8 @@ public class LoginController {
     ResponseEntity<UserLoginResponse> login(@RequestBody NewUserRequest newUserRequest){
         UserTO userTO = registerUser.newUser(NewUserTO.newBuilder().withUsername(newUserRequest.getUsername())
                 .withPassword(newUserRequest.getPassword())
+                .withRoles(userTypeToRole.forType(newUserRequest.getType()))
+                .withEmail(newUserRequest.getEmail())
                 .build());
         JwtUser jwtUser = createJwtUser(userTO);
         final String token = jwtTokenUtil.generateToken(jwtUser);

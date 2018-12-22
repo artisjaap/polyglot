@@ -1,0 +1,12 @@
+<div class="main">
+  <div class="front" [ngClass]="{'active' : loginActive}">
+    <pol-login></pol-login>
+    <a (click)="flip()"> register </a>
+  </div>
+
+  <div class=" back " [ngClass]="{'active' : !loginActive}">
+    <pol-create-user></pol-create-user>
+    <a (click)="flip()"> login </a>
+  </div>
+
+</div>
