@@ -10,13 +10,15 @@ import { MainMenuComponent } from './main-menu/main-menu.component';
 import { HomeComponent } from './home/home.component';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { LoginRegisterFlipcardComponent } from './login-register-flipcard/login-register-flipcard.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [LoginComponent, HeaderComponent, MainMenuComponent, HomeComponent, CreateUserComponent, LoginRegisterFlipcardComponent],
   imports: [
     CommonModule,
     CoreRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   exports: [RouterModule, HeaderComponent, MainMenuComponent],
   providers: [
