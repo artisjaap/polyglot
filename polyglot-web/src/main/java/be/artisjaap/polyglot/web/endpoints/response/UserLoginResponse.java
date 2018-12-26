@@ -5,7 +5,10 @@ import be.artisjaap.polyglot.core.action.to.UserTO;
 import java.util.Set;
 
 public class UserLoginResponse {
+
     private String userId;
+    private String firstName;
+    private String lastName;
     private String username;
     private String password;
     private String token;
@@ -37,8 +40,18 @@ public class UserLoginResponse {
         return preferedRole;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
     private UserLoginResponse(Builder builder) {
         userId = builder.userId;
+        firstName = builder.firstName;
+        lastName = builder.lastName;
         username = builder.username;
         password = builder.password;
         token = builder.token;
@@ -50,6 +63,8 @@ public class UserLoginResponse {
     public static UserLoginResponse from(UserTO userTO, String token) {
         return newBuilder().withUserId(userTO.id())
                 .withUsername(userTO.username())
+                .withFirstName(userTO.firstName())
+                .withLastName(userTO.lastName())
                 .withToken(token)
                 .withRoles(userTO.roles())
                 .withPreferedRole(userTO.preferedRole())
@@ -64,6 +79,8 @@ public class UserLoginResponse {
 
     public static final class Builder {
         private String userId;
+        private String firstName;
+        private String lastName;
         private String username;
         private String password;
         private String token;
@@ -75,6 +92,16 @@ public class UserLoginResponse {
 
         public Builder withUserId(String val) {
             userId = val;
+            return this;
+        }
+
+        public Builder withFirstName(String val) {
+            firstName = val;
+            return this;
+        }
+
+        public Builder withLastName(String val) {
+            lastName = val;
             return this;
         }
 

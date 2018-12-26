@@ -11,7 +11,7 @@ const routes: Routes = [
   {path: '', redirectTo : 'dashboard', pathMatch:'full'},
   {path: 'dashboard', component:StudentDashboardComponent, children :[
       {path:'manage-languages', component:ManageLanguagesComponent},
-      {path:'manage-words-for-language', component:ManageWordsForLanguageComponent},
+      {path:'manage-words-for-language/:languagePairId', component:ManageWordsForLanguageComponent},
       {path:'practice-words', component:PracticeWordsComponent, children :[
           {path:'question-and-answer', component: PracticeQuestionAnswerComponent}
         ]},

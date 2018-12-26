@@ -7,12 +7,14 @@ import { ManageWordsForLanguageComponent } from './manage-words-for-language/man
 import { PracticeWordsComponent } from './practice-words/practice-words.component';
 import { TakeLessonComponent } from './take-lesson/take-lesson.component';
 import { PracticeQuestionAnswerComponent } from './practice-words/practice-question-answer/practice-question-answer.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [StudentDashboardComponent, ManageLanguagesComponent, ManageWordsForLanguageComponent, PracticeWordsComponent, TakeLessonComponent, PracticeQuestionAnswerComponent],
   imports: [
     CommonModule,
-    StudentRoutingModule
+    StudentRoutingModule,
+    FormsModule
   ]
 })
 export class StudentModule { }

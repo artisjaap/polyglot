@@ -1,5 +1,6 @@
 <h2>
-  Words for [Nederlands - Frans]
+  Words for [{{languagePair?.languageFrom}} -  {{languagePair?.languageTo}}]
+
 </h2>
 
 <div class="flex-content row">
@@ -25,9 +26,9 @@
       <div class="text">Frans</div>
       <div class="text">Status</div>
     </div>
-    <div class="table-row">
-      <div class="text">Een</div>
-      <div class="text">Un</div>
+    <div class="table-row" *ngFor="let r of filteredTranslations?.data">
+      <div class="text">{{r.question}}</div>
+      <div class="text">{{r.answer}}</div>
       <div class="text">status</div>
     </div>
   </div>
@@ -45,7 +46,7 @@
       </div>
       <div class="formdata content">
         <div class="row">
-          <input type="file" #file>
+          <input type="file"  #file (change)="onFilesAdded()" multiple>
         </div>
 
       </div>
@@ -57,16 +58,18 @@
           Create new word
         </div>
         <div class="actions">
-          +
+          <span class="fa fa-plus-square" (click)="addNewWord()"></span>
         </div>
       </div>
       <div class="formdata content">
-        <div class="row">
-          <span class="label">Nederlands</span><input type="text" #from>
-        </div>
-        <div class="row">
-          <span class="label">Frans</span><input type="text" #to>
-        </div>
+        <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+          <div class="row">
+            <span class="label">Nederlands</span><input type="text" ngModel name="from">
+          </div>
+          <div class="row">
+            <span class="label">Frans</span><input type="text" ngModel name="to">
+          </div>
+        </form>
       </div>
     </div>
   </div>

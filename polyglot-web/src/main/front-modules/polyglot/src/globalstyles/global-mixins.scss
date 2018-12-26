@@ -21,3 +21,11 @@
   margin: 0 10px;
   color: white;
 }
+
+@mixin action-highlight{
+  span:hover{
+    cursor:pointer;
+    color: $color-highlight;
+
+  }
+}

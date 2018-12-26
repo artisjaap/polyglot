@@ -11,11 +11,11 @@
     <form (ngSubmit)="onSubmit(f)" #f="ngForm">
       <div class="row">
         <span class="label">Username</span>
-        <input id="username" type="text" ngModel name="username" required>
+        <input id="username" type="text" [ngModel]="'stijn'" name="username" required >
       </div>
       <div class="row">
         <span class="label">Password</span>
-        <input id="password" type="text" ngModel name="password" required="">
+        <input id="password" type="text" [ngModel]="'abc'" name="password" required >
       </div>
 
       <div class="buttons">

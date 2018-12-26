@@ -1,6 +1,10 @@
 package be.artisjaap.polyglot.web.endpoints.request;
 
 public class NewUserRequest {
+    private String firstName;
+    private String lastName;
+
+
     private String username;
     private String password;
     private String type;
@@ -9,6 +13,8 @@ public class NewUserRequest {
     private NewUserRequest(){}
 
     private NewUserRequest(Builder builder) {
+        firstName = builder.firstName;
+        lastName = builder.lastName;
         username = builder.username;
         password = builder.password;
         type = builder.type;
@@ -17,6 +23,14 @@ public class NewUserRequest {
 
     public static Builder newBuilder() {
         return new Builder();
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
     }
 
     public String getType() {
@@ -40,6 +54,8 @@ public class NewUserRequest {
         private String password;
         private String type;
         private String email;
+        private String firstName;
+        private String lastName;
 
         private Builder() {
         }
@@ -67,6 +83,16 @@ public class NewUserRequest {
 
         public NewUserRequest build() {
             return new NewUserRequest(this);
+        }
+
+        public Builder withFirstName(String val) {
+            firstName = val;
+            return this;
+        }
+
+        public Builder withLastName(String val) {
+            lastName = val;
+            return this;
         }
     }
 }

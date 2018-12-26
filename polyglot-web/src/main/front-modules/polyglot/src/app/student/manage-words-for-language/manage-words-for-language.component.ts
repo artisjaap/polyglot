@@ -1,4 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
+import {ManagerTranslationService} from "../../core/services/manager-translation.service";
+import {LanguagePairDTO} from "../../../../../../front/polyglot/src/app/main/common/services/dto/language-pair-dto";
+import {NgForm} from "@angular/forms";
+import {PracticeTranslationService} from "../../core/services/practice-translation.service";
+
+import {PracticeWordResponse} from "../../core/services/response/practice-word-response";
+import {Observable} from "rxjs/index";
+import {PagedResponse} from "../../core/services/request/paged-response";
+import {PageNavigation} from "../../core/paging/page-navigation";
+
+
 
 @Component({
   selector: 'pol-manage-words-for-language',
@@ -6,10 +18,59 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./manage-words-for-language.component.scss']
 })
 export class ManageWordsForLanguageComponent implements OnInit {
+  @ViewChild("f") form: NgForm;
+  languagePair: LanguagePairDTO;
+  pageNav: PageNavigationImpl;
+  filteredTranslations: PagedResponse<PracticeWordResponse>;
+  @ViewChild('file') file;
+  public files: Set<File> = new Set();
 
-  constructor() { }
+  constructor(private route: ActivatedRoute,  private translationService: ManagerTranslationService,
+              private practiceTranslationService:PracticeTranslationService) { }
 
   ngOnInit() {
+    let languagePairId = this.route.snapshot.params['languagePairId'];
+    this.pageNav = new PageNavigationImpl(0, 10, this.practiceTranslationService, languagePairId);
+
+    this.translationService.languagePairWithId(languagePairId).subscribe(response => {
+      this.languagePair = response;
+    });
+
+    this.pageNav.event.subscribe(r => {
+      this.filteredTranslations = r
+    });
+
+    this.pageNav.goToFirstPage();
+  }
+
+  addNewWord(){
+    this.translationService.addNewWord(this.languagePair.id, this.form.value.from, this.form.value.to).subscribe(r => {
+      console.log(r);
+    });
+  }
+
+  onFilesAdded(){
+    const files: { [key: string]: File } = this.file.nativeElement.files;
+    for (let key in files) {
+      if (!isNaN(parseInt(key))) {
+        this.files.add(files[key]);
+      }
+    }
+
+    this.translationService.uploadTranslations(this.languagePair.id, this.files);
+  }
+}
+
+
+class PageNavigationImpl extends PageNavigation<PracticeWordResponse> {
+
+  constructor(page:number, pageSize:number, private practiceTranslationService:PracticeTranslationService, private languagePairId:string){
+    super(page, pageSize);
+  }
+
+  doSearch(page: number, pageSize: number, text: string): Observable<PagedResponse<PracticeWordResponse>> {
+    return this.practiceTranslationService.allWordsForLanguagePair(text, this.languagePairId, page, pageSize);
+
   }
 
 }

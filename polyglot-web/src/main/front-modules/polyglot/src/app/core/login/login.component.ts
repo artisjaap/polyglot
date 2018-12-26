@@ -16,13 +16,19 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(formData:NgForm){
-    console.log("submit", formData);
+    console.log("submit", formData.value.username);
+
+    this.userService.authenticate(formData.value.username, formData.value.password)
+      .subscribe(r => {
+        this.router.navigate(['/home/student']);
+
+      });
   }
 
   login(username:HTMLInputElement, password:HTMLInputElement) {
     this.userService.authenticate(username.value, password.value)
       .subscribe(r => {
-        this.router.navigate(['/student']);
+        this.router.navigate(['/home/student']);
 
       });
   }

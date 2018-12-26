@@ -46,11 +46,13 @@ public class LoginController {
 
     @RequestMapping(value = "/api/register", method = RequestMethod.POST)
     public @ResponseBody
-    ResponseEntity<UserLoginResponse> login(@RequestBody NewUserRequest newUserRequest){
+    ResponseEntity<UserLoginResponse> register(@RequestBody NewUserRequest newUserRequest){
         UserTO userTO = registerUser.newUser(NewUserTO.newBuilder().withUsername(newUserRequest.getUsername())
                 .withPassword(newUserRequest.getPassword())
                 .withRoles(userTypeToRole.forType(newUserRequest.getType()))
                 .withEmail(newUserRequest.getEmail())
+                .withFirstName(newUserRequest.getFirstName())
+                .withLastName(newUserRequest.getLastName())
                 .build());
         JwtUser jwtUser = createJwtUser(userTO);
         final String token = jwtTokenUtil.generateToken(jwtUser);

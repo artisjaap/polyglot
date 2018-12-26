@@ -53,6 +53,7 @@ public class UserTO extends ReferenceableTO {
     }
 
     private UserTO(Builder builder) {
+        buildCommon(builder);
         username = builder.username;
         password = builder.password;
         firstName = builder.firstName;

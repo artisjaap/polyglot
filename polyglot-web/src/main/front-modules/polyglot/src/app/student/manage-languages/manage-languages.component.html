@@ -7,10 +7,14 @@
     <div class="table-row header">
       <div class="text">From</div>
       <div class="text">To</div>
+      <div class="text">Actions</div>
     </div>
-    <div class="table-row">
-      <div class="text">Nederlands</div>
-      <div class="text">Frans</div>
+    <div class="table-row" *ngFor="let l of languagePairs">
+      <div class="text">{{l.languageFrom}}</div>
+      <div class="text">{{l.languageTo}}</div>
+      <div class="text actions">
+        <a class="fa fa-language" [routerLink]="['/home', 'student', 'dashboard', 'manage-words-for-language', l.id]"></a>
+      </div>
     </div>
   </div>
 
@@ -20,16 +24,18 @@
         Create new language pair
       </div>
       <div class="actions">
-        +
+        <span class="fa fa-plus-square" (click)="createLanguagePair()"></span>
       </div>
     </div>
     <div class="formdata content">
-      <div class="row">
-        <span class="label">From</span><input id="username" type="text" #username>
-      </div>
-      <div class="row">
-        <span class="label">To</span><input id="password" type="text" #password>
-      </div>
+      <form #f="ngForm">
+        <div class="row">
+          <span class="label">From</span><input type="text" ngModel name="languageFrom">
+        </div>
+        <div class="row">
+          <span class="label">To</span><input type="text"  ngModel name="languageTo">
+        </div>
+      </form>
     </div>
   </div>
 

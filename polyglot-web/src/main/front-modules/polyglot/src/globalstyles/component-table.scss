@@ -1,5 +1,5 @@
 @import "colors-main";
-
+@import "global-mixins";
 
 @mixin vertical {
   flex-direction: column;
@@ -10,6 +10,7 @@
     width: 100%;
   }
 }
+
 
 $text-width: 180px;
 $margin: 10px;
@@ -59,6 +60,10 @@ $num-width: 10px;
     flex-wrap: nowrap;
     width: 100%;
     padding: 0 15px;
+
+    .actions {
+      @include action-highlight;
+    }
 
     &.header {
       font-weight: bold;

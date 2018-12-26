@@ -11,7 +11,7 @@ import {NewUserRequest} from "../../../../../../front/polyglot/src/app/main/comm
 })
 export class UserService {
 
-  user: UserLoginResponse;
+  user: UserLoginResponse =  { firstName:"", lastName: "", preferedRole:"", userId:"", username:"",  password:"",  token:""}
 
 
   constructor(private logger:LogService,
@@ -22,7 +22,7 @@ export class UserService {
     this.logger.logInfo(username + "," + password+ "," + this.apiurl);
     return this.httpClient.get<UserLoginResponse>(this.apiurl + "public/api/login/" + username + "/" + password)
       .pipe(map(r=> {
-        this.user = r;
+        Object.assign(this.user, r);
         return r;
       }));
   }
