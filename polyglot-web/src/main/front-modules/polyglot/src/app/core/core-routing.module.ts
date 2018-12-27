@@ -1,18 +1,17 @@
-import {RouterModule, Routes} from "@angular/router";
-import {NgModule} from "@angular/core";
-import {LoginComponent} from "./login/login.component";
-import {HomeComponent} from "./home/home.component";
-import {LoginRegisterFlipcardComponent} from "./login-register-flipcard/login-register-flipcard.component";
+import {RouterModule, Routes} from '@angular/router';
+import {NgModule} from '@angular/core';
+import {HomeComponent} from './home/home.component';
+import {LoginRegisterFlipcardComponent} from './login-register-flipcard/login-register-flipcard.component';
 
 const routes: Routes = [
-  {path:"", redirectTo:"home", pathMatch:"full"},
-  {path: 'home', component:HomeComponent, children:[
+  {path: '', redirectTo: 'home', pathMatch: 'full'},
+  {path: 'home', component: HomeComponent, children: [
 
       {path: 'login', component: LoginRegisterFlipcardComponent},
-      {path: 'user', loadChildren: "../user/user.module#UserModule"},
-      {path: 'admin', loadChildren: "../admin/admin.module#AdminModule"},
-      {path: 'student', loadChildren: "../student/student.module#StudentModule"},
-      {path: 'teacher', loadChildren: "../teacher/teacher.module#TeacherModule"},
+      {path: 'user', loadChildren: '../user/user.module#UserModule'},
+      {path: 'admin', loadChildren: '../admin/admin.module#AdminModule'},
+      {path: 'student', loadChildren: '../student/student.module#StudentModule'},
+      {path: 'teacher', loadChildren: '../teacher/teacher.module#TeacherModule'},
 
     ]},
 

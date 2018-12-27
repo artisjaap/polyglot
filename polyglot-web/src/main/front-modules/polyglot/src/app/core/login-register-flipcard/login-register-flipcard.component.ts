@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login-register-flipcard.component.scss']
 })
 export class LoginRegisterFlipcardComponent implements OnInit {
-  loginActive: boolean = true;
+  loginActive = true;
 
   constructor() { }
 

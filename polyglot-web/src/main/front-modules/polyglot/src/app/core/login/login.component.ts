@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {UserService} from "../services/user.service";
-import {Router} from "@angular/router";
-import {NgForm} from "@angular/forms";
+import {UserService} from '../services/user.service';
+import {Router} from '@angular/router';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'pol-login',
@@ -10,13 +10,13 @@ import {NgForm} from "@angular/forms";
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private userService:UserService, private router:Router) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit() {
   }
 
-  onSubmit(formData:NgForm){
-    console.log("submit", formData.value.username);
+  onSubmit(formData: NgForm) {
+    console.log('submit', formData.value.username);
 
     this.userService.authenticate(formData.value.username, formData.value.password)
       .subscribe(r => {
@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  login(username:HTMLInputElement, password:HTMLInputElement) {
+  login(username: HTMLInputElement, password: HTMLInputElement) {
     this.userService.authenticate(username.value, password.value)
       .subscribe(r => {
         this.router.navigate(['/home/student']);

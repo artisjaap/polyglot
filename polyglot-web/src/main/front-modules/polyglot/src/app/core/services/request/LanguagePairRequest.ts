@@ -1,6 +1,6 @@
-export class LanguagePairRequest{
+export class LanguagePairRequest {
 
-  constructor(public userId, public languageFrom:string, public languageTo:string){
+  constructor(public userId, public languageFrom: string, public languageTo: string) {
 
   }
 }

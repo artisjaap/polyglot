@@ -1,3 +1,3 @@
 export class NewSimpleTranslationRequest {
-  constructor(public languageFrom:string, public languageTO:string){}
+  constructor(public languageFrom: string, public languageTO: string) {}
 }

@@ -1,3 +1,3 @@
-export abstract class PageableFilter{
-  constructor(public pageSize:number,  public pageNumber:number){}
+export abstract class PageableFilter {
+  constructor(public pageSize: number,  public pageNumber: number) {}
 }

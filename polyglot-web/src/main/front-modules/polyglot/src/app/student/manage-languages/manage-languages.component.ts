@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {ManagerTranslationService} from "../../core/services/manager-translation.service";
-import {NgForm} from "@angular/forms";
-import {LanguagePairResponse} from "../../core/services/response/language-pair-response";
+import {ManagerTranslationService} from '../../core/services/manager-translation.service';
+import {NgForm} from '@angular/forms';
+import {LanguagePairResponse} from '../../core/services/response/language-pair-response';
 
 @Component({
   selector: 'pol-manage-languages',
@@ -9,11 +9,11 @@ import {LanguagePairResponse} from "../../core/services/response/language-pair-r
   styleUrls: ['./manage-languages.component.scss']
 })
 export class ManageLanguagesComponent implements OnInit {
-  @ViewChild("f") form: NgForm;
+  @ViewChild('f') form: NgForm;
 
   languagePairs: LanguagePairResponse[];
 
-  constructor(private manageTranslationsService:ManagerTranslationService) { }
+  constructor(private manageTranslationsService: ManagerTranslationService) { }
 
   ngOnInit() {
     this.manageTranslationsService.allLanguagePairs().subscribe(r => {
@@ -22,7 +22,7 @@ export class ManageLanguagesComponent implements OnInit {
   }
 
   createLanguagePair() {
-    this.manageTranslationsService.createNewLanguagePair(this.form.value.languageFrom,this.form.value.languageTo).subscribe(r => {
+    this.manageTranslationsService.createNewLanguagePair(this.form.value.languageFrom, this.form.value.languageTo).subscribe(r => {
       this.languagePairs.push(r);
       this.form.reset();
     });

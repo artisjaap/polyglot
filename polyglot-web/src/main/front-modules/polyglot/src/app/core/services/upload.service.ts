@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpEventType, HttpRequest, HttpResponse} from "@angular/common/http";
-import {Observable, Subject} from "rxjs";
+import {HttpClient, HttpEventType, HttpRequest, HttpResponse} from '@angular/common/http';
+import {Observable, Subject} from 'rxjs';
 
 
 @Injectable({
@@ -8,31 +8,31 @@ import {Observable, Subject} from "rxjs";
 })
 export class UploadService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  //fixme body not used
-  //fixme return type can also be an object response
-  public upload(files: Set<File>, url:string, body?:any): {[key:string]:Observable<number>} {
+  // fixme body not used
+  // fixme return type can also be an object response
+  public upload(files: Set<File>, url: string, body?: any): {[key: string]: Observable<number>} {
     const status = {};
 
     files.forEach(file => {
       const formData: FormData = new FormData();
       formData.append('file', file, file.name);
 
-      const req = new HttpRequest('POST', url, formData, {reportProgress:true});
+      const req = new HttpRequest('POST', url, formData, {reportProgress: true});
 
       const progress = new Subject<number>();
 
       this.http.request(req).subscribe(event => {
-        if(event.type === HttpEventType.UploadProgress) {
+        if (event.type === HttpEventType.UploadProgress) {
           const percentDone = Math.round(100 * event.loaded / event.total);
           progress.next(percentDone);
-        } else if (event instanceof HttpResponse){
+        } else if (event instanceof HttpResponse) {
           progress.complete();
         }
-      })
+      });
 
-      status[file.name] = {progress:progress.asObservable()};
+      status[file.name] = {progress: progress.asObservable()};
 
 
     });

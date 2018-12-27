@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {UserService} from "../services/user.service";
-import {UserLoginResponse} from "../login/response/user-login-response";
+import {UserService} from '../services/user.service';
+import {UserLoginResponse} from '../login/response/user-login-response';
 
 @Component({
   selector: 'pol-main-menu',
@@ -8,11 +8,11 @@ import {UserLoginResponse} from "../login/response/user-login-response";
   styleUrls: ['./main-menu.component.scss']
 })
 export class MainMenuComponent implements OnInit {
-  showMenu:boolean = true;
+  showMenu = true;
   currentUser: UserLoginResponse;
 
-  constructor(userService:UserService) {
-    this.currentUser = userService.user
+  constructor(userService: UserService) {
+    this.currentUser = userService.user;
   }
 
   ngOnInit() {

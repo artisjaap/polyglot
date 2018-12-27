@@ -1,7 +1,7 @@
-import {PracticeWordResponse} from "./practice-word-response";
+import {PracticeWordResponse} from './practice-word-response';
 
 export interface TranslationsForUserResponse {
-  userId:string;
-  languagePairId:string;
-  translations:PracticeWordResponse[];
+  userId: string;
+  languagePairId: string;
+  translations: PracticeWordResponse[];
 }

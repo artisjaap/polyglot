@@ -7,7 +7,7 @@ export class LogService {
 
   constructor() { }
 
-  logInfo(message:string){
+  logInfo(message: string) {
     console.info(message);
   }
 }
