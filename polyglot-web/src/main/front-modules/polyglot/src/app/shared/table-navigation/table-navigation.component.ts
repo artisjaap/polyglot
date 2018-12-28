@@ -1,5 +1,5 @@
 import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
-import {PageNavigation} from "../../../../../../front/polyglot/src/app/main/common/components/page-navigation/page-navigation";
+import {PageNavigation} from "../../core/paging/page-navigation";
 
 @Component({
   selector: 'pol-table-navigation',

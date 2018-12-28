@@ -23,9 +23,15 @@
 }
 
 @mixin action-highlight{
-  span:hover{
-    cursor:pointer;
-    color: $color-highlight;
+  a {
+    color: $main-color;
+    margin: 0 3px;
+    text-decoration: none;
 
+
+    &:hover {
+      cursor: pointer;
+      color: $color-highlight;
+    }
   }
 }

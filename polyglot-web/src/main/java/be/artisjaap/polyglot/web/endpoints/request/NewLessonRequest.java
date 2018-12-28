@@ -5,6 +5,8 @@ public class NewLessonRequest {
     private String languagePairId;
     private String lessonTitle;
 
+    private NewLessonRequest(){}
+
     private NewLessonRequest(Builder builder) {
         userId = builder.userId;
         languagePairId = builder.languagePair;

@@ -10,6 +10,9 @@ import {LessonHeaderResponse} from './response/lesson-header-response';
 import {TestSolutionRequest} from './request/test-solution-request';
 import {NewLessonRequest} from './request/new-lesson-request';
 import {LessonTranslationPairResponse} from './response/lesson-translation-pair-response';
+import {PagedResponse} from "./request/paged-response";
+import {PracticeWordResponse} from "./response/practice-word-response";
+import {LessonsFilterRequest} from "./request/lessons-filter-request";
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +35,14 @@ export class LessonService {
     return this.httpClient.get<LessonResponse>(this.apiurl + 'api/lessons/practice/' + lessonId);
   }
 
+  allLessonsForLanguage(textFilter: string,
+                        languagePairId: string,
+                        page: number,
+                        pageSize: number): Observable<PagedResponse<LessonHeaderResponse>>{
+    const body: LessonsFilterRequest = new LessonsFilterRequest(textFilter, languagePairId, pageSize, page);
+    return this.httpClient.post<PagedResponse<LessonHeaderResponse>>(this.apiurl + 'api/lessons/list/all/filtered', body);
+  }
+
   lessonsForLanguage(languagePairId: string): Observable<LessonHeaderResponse[]> {
     return this.httpClient.get<LessonHeaderResponse[]>(this.apiurl + 'api/lessons/' + languagePairId);
   }
@@ -48,7 +59,7 @@ export class LessonService {
   createLesson(languagePairId: string, title: string): Observable<LessonResponse> {
     const user = this.authenticationService.user;
     const newLesson = new NewLessonRequest(user.userId, languagePairId, title);
-    return this.httpClient.post<LessonResponse>(this.apiurl + 'api/lesson/create', newLesson);
+    return this.httpClient.post<LessonResponse>(this.apiurl + 'api/lessons/create', newLesson);
   }
 
   addWordToLesson(lessonId: string, translationId: string): Observable<LessonTranslationPairResponse> {

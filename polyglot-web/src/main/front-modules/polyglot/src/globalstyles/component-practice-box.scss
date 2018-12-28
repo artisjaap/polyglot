@@ -1,4 +1,5 @@
 @import "colors-main";
+@import "global-mixins";
 
 .practice-box{
   font-size: 80px;
@@ -9,6 +10,17 @@
   .options{
     display:flex;
     flex-direction: row;
+
+    font-size: 12px;
+
+    @include action-highlight;
+    a {
+      margin: 5px;
+
+      &.active {
+        color: $color-active;
+      }
+    }
   }
   .question{
     display: flex;

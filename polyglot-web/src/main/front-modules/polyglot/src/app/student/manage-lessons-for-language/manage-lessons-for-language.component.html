@@ -1,0 +1,47 @@
+<h2>
+  Lessons for [{{languagePair?.languageFrom}} -  {{languagePair?.languageTo}}]
+
+</h2>
+
+
+
+<div class="flex-content row">
+  <div class="table">
+    <pol-table-navigation [control]="getControl()"></pol-table-navigation>
+
+    <div class="table-row header">
+      <div class="text">Lesson</div>
+      <div class="text">Actions</div>
+    </div>
+    <div class="table-row" *ngFor="let l of filteredLessons?.data">
+      <div class="text">{{l.name}}</div>
+      <div class="text actions">
+        <a class="fa fa-bezier-curve" [routerLink]="['/home', 'student', 'dashboard', 'practice-lesson', l.id]"></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar">
+    <div class="panel">
+      <div class="header">
+        <div class="title">
+          Create new lesson
+        </div>
+        <div class="actions">
+          <span class="fa fa-plus-square" (click)="createLesson()"></span>
+        </div>
+      </div>
+      <div class="formdata content">
+        <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+          <div class="row">
+            <span class="label">Name</span><input type="text" ngModel name="lessonName">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+

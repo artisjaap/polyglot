@@ -6,10 +6,11 @@ import {map} from 'rxjs/operators';
 
 export abstract class PageNavigation<T> {
   private lastPage = 0;
+  public numberOfPages;
 
   public event: EventEmitter<PagedResponse<T>> = new EventEmitter<PagedResponse<T>>();
 
-  constructor(private currentPage: number, private pageSize: number) {
+  constructor(public currentPage: number, public pageSize: number) {
 
   }
 
@@ -19,6 +20,7 @@ export abstract class PageNavigation<T> {
     return this.doSearch(page, pageSize, text)
       .pipe(map(r => {
         this.lastPage = r.numberOfPages - 1;
+        this.numberOfPages = r.numberOfPages ;
         this.currentPage = r.page;
         this.pageSize = r.pageSize;
         return r;

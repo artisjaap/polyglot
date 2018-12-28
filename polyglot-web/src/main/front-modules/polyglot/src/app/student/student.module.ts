@@ -10,9 +10,11 @@ import { PracticeQuestionAnswerComponent } from './practice-words/practice-quest
 import {FormsModule} from "@angular/forms";
 import {CoreModule} from "../core/core.module";
 import {SharedModule} from "../shared/shared.module";
+import { ManageLessonsForLanguageComponent } from './manage-lessons-for-language/manage-lessons-for-language.component';
+import { PracticeLessonComponent } from './practice-lesson/practice-lesson.component';
 
 @NgModule({
-  declarations: [StudentDashboardComponent, ManageLanguagesComponent, ManageWordsForLanguageComponent, PracticeWordsComponent, TakeLessonComponent, PracticeQuestionAnswerComponent],
+  declarations: [StudentDashboardComponent, ManageLanguagesComponent, ManageWordsForLanguageComponent, PracticeWordsComponent, TakeLessonComponent, PracticeQuestionAnswerComponent, ManageLessonsForLanguageComponent, PracticeLessonComponent],
   imports: [
     CommonModule,
     StudentRoutingModule,

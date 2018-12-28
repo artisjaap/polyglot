@@ -2,13 +2,11 @@ package be.artisjaap.polyglot.web.endpoints;
 
 import be.artisjaap.polyglot.core.action.lesson.CreateLesson;
 import be.artisjaap.polyglot.core.action.lesson.FindLesson;
+import be.artisjaap.polyglot.core.action.lesson.LessonsFiltered;
 import be.artisjaap.polyglot.core.action.lesson.TestForLesson;
-import be.artisjaap.polyglot.core.action.to.LessonTO;
-import be.artisjaap.polyglot.core.action.to.NewAutomaticLessonTO;
+import be.artisjaap.polyglot.core.action.to.*;
 import be.artisjaap.polyglot.core.action.to.test.*;
-import be.artisjaap.polyglot.web.endpoints.request.NewAutomaticLessonRequest;
-import be.artisjaap.polyglot.web.endpoints.request.NewLessonRequest;
-import be.artisjaap.polyglot.web.endpoints.request.TestSolutionRequest;
+import be.artisjaap.polyglot.web.endpoints.request.*;
 import be.artisjaap.polyglot.web.endpoints.response.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +26,9 @@ public class LessonController {
 
     @Autowired
     private TestForLesson testForLesson;
+
+    @Autowired
+    private LessonsFiltered lessonsFiltered;
 
     @RequestMapping(value = "/autocreate", method = RequestMethod.POST)
     public @ResponseBody
@@ -65,6 +66,20 @@ public class LessonController {
     public @ResponseBody
     ResponseEntity<List<LessonHeaderResponse>> allLessonsForLanguagePair(@PathVariable String languagePairId) {
         return ResponseEntity.ok(LessonHeaderResponse.from(findLesson.forLanguagePair(languagePairId)));
+    }
+
+    @RequestMapping(value = "/list/all/filtered", method = RequestMethod.POST)
+    public @ResponseBody
+    ResponseEntity<PagedResponse<LessonHeaderResponse>> findAllPracticeWordsFiltered(@RequestBody LessonsFilterRequest lessonsFilterRequest) {
+        PagedTO<LessonHeaderTO> lessonHeaderTOPagedTO = lessonsFiltered.withFilter(LessonFilterTO.newBuilder()
+                .withLanguagePairId(lessonsFilterRequest.getLanguagePairId())
+                .withPage(lessonsFilterRequest.getPageNumber())
+                .withPageSize(lessonsFilterRequest.getPageSize())
+                .withTextFilter(lessonsFilterRequest.getTextFilter())
+                .build());
+
+        PagedResponse<LessonHeaderResponse> response = PagedResponse.from(lessonHeaderTOPagedTO, t-> LessonHeaderResponse.from(t));
+        return ResponseEntity.ok(response);
     }
 
     @RequestMapping(value = "/test/{lessonId}/{orderType}", method = RequestMethod.GET)
