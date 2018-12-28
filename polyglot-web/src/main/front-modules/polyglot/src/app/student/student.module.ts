@@ -8,13 +8,16 @@ import { PracticeWordsComponent } from './practice-words/practice-words.componen
 import { TakeLessonComponent } from './take-lesson/take-lesson.component';
 import { PracticeQuestionAnswerComponent } from './practice-words/practice-question-answer/practice-question-answer.component';
 import {FormsModule} from "@angular/forms";
+import {CoreModule} from "../core/core.module";
+import {SharedModule} from "../shared/shared.module";
 
 @NgModule({
   declarations: [StudentDashboardComponent, ManageLanguagesComponent, ManageWordsForLanguageComponent, PracticeWordsComponent, TakeLessonComponent, PracticeQuestionAnswerComponent],
   imports: [
     CommonModule,
     StudentRoutingModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ]
 })
 export class StudentModule { }

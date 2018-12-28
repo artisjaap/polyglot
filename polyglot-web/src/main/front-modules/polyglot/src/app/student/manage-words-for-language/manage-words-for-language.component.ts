@@ -42,6 +42,10 @@ export class ManageWordsForLanguageComponent implements OnInit {
     this.pageNav.goToFirstPage();
   }
 
+  getControl() : PageNavigation<PracticeWordResponse> {
+    return this.pageNav;
+  }
+
   addNewWord() {
     this.translationService.addNewWord(this.languagePair.id, this.form.value.from, this.form.value.to).subscribe(r => {
       console.log(r);
@@ -57,6 +61,9 @@ export class ManageWordsForLanguageComponent implements OnInit {
     }
 
     this.translationService.uploadTranslations(this.languagePair.id, this.files);
+    // [files[0].name].progress.subscribe(null,null,() => {
+    //   this.pageNav.goToFirstPage();
+    // });
   }
 }
 

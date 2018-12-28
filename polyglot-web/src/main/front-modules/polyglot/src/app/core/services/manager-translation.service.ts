@@ -68,9 +68,10 @@ export class ManagerTranslationService {
 
   }
 
-  uploadTranslations(translationPairId: string, files: Set<File>) {
+  uploadTranslations(translationPairId: string, files: Set<File>): {[key: string]: Observable<number>} {
     const user = this.authenticationService.user;
     const url = this.apiurl + 'api/translations/pairs/' + user.userId + '/translations/' + translationPairId + '/file';
-    this.uploadService.upload(files, url);
+
+    return this.uploadService.upload(files, url);
   }
 }

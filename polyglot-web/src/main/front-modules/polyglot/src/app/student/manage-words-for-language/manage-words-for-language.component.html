@@ -5,22 +5,8 @@
 
 <div class="flex-content row">
   <div class="table">
-    <div class="paging">
-      <span class="action fa fa-step-backward"></span>
-      <span class="action fa fa-backward"></span>
-      <span class="action input-image">
-        <span class="fa fa-table"></span>
-        <input type="text" value="50">
-      </span>
-      <span class="action fa fa-forward"></span>
-      <span class="action fa fa-step-forward"></span>
-      <span class="action input-image">
-        <span class="fa fa-address-book"></span>
-        <input type="text" value="1">
-        <span> / 10</span>
-      </span>
+    <pol-table-navigation [control]="getControl()"></pol-table-navigation>
 
-    </div>
     <div class="table-row header">
       <div class="text">Nederlands</div>
       <div class="text">Frans</div>
