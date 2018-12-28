@@ -75,14 +75,14 @@ public class ManageTranslationController {
         return ResponseEntity.ok(translationsForUserResponseAssembler.assembleResponse(translationsForUserTO));
     }
 
-    @RequestMapping(value = "/pairs/{userId}/translations/{translationPairId}/file", method = RequestMethod.POST)
+    @RequestMapping(value = "/pairs/{userId}/translations/{languagePairId}/file", method = RequestMethod.POST)
     public @ResponseBody
-    ResponseEntity<TranslationsForUserResponse> uploadTranslationsByFile(@PathVariable String userId, @PathVariable String translationPairId, @RequestParam MultipartFile file) {
+    ResponseEntity<TranslationsForUserResponse> uploadTranslationsByFile(@PathVariable String userId, @PathVariable String languagePairId, @RequestParam MultipartFile file) {
         System.out.println(file);
         try(InputStreamReader val = new InputStreamReader(file.getInputStream())) {
             TranslationsForUserTO translationsForUserTO = registerTranslation.forAllWords(NewTranslationForUserFromFileTO.newBuilder()
                     .withUserId(userId)
-                    .withLanguagePairId(translationPairId)
+                    .withLanguagePairId(languagePairId)
                     .withReader(val)
                     .build());
             return ResponseEntity.ok(translationsForUserResponseAssembler.assembleResponse(translationsForUserTO));
