@@ -90,6 +90,13 @@ public class PracticeTranslationController {
         return ResponseEntity.ok(PracticeWordResponse.from(findPracticeWord.forTranslation(translationId, OrderType.NORMAL)));
     }
 
+    @RequestMapping(value = "/update-status-to-next/{translationId}", method = RequestMethod.PATCH)
+    public @ResponseBody
+    ResponseEntity<PracticeWordResponse> updateStatusToNext(@PathVariable String translationId) {
+        PracticeWordTO practiceWord = findPracticeWord.forTranslation(translationId, OrderType.NORMAL);
+        ProgressStatus progressStatus = practiceWord.wordStatsTO().progressStatus().logicalNextStatus();
+        return updateStatus(translationId, progressStatus);
+    }
 
 }
 

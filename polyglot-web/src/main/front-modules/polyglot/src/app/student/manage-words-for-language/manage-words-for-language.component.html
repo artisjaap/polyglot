@@ -15,7 +15,14 @@
     <div class="table-row" *ngFor="let r of filteredTranslations?.data">
       <div class="text">{{r.question}}</div>
       <div class="text">{{r.answer}}</div>
-      <div class="text">status</div>
+      <div class="text actions">
+        <a class="fa" [ngClass]="classForStatus(r.wordStatsTO.progressStatus)" (click)="nextStatus(r)"></a>
+        <a class="fa fa-edit"  (click)="editTranslation(r)"></a>
+
+      </div>
+
+
+
     </div>
   </div>
 

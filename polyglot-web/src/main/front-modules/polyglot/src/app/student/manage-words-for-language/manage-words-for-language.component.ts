@@ -17,6 +17,7 @@ import {LanguagePairResponse} from '../../core/services/response/language-pair-r
 })
 export class ManageWordsForLanguageComponent implements OnInit {
   @ViewChild('f') form: NgForm;
+  selectedWord: PracticeWordResponse;
   languagePair: LanguagePairResponse;
   pageNav: PageNavigationImpl;
   filteredTranslations: PagedResponse<PracticeWordResponse>;
@@ -52,6 +53,13 @@ export class ManageWordsForLanguageComponent implements OnInit {
     });
   }
 
+  editWord() {
+    this.translationService.editWord(this.selectedWord.translationId, this.selectedWord.question, this.selectedWord.answer).subscribe( r => {
+      this.selectedWord.answer = r.answer;
+      this.selectedWord.question = r.question;
+    });
+  }
+
   onFilesAdded() {
     const files: { [key: string]: File } = this.file.nativeElement.files;
     for (const key in files) {
@@ -65,6 +73,30 @@ export class ManageWordsForLanguageComponent implements OnInit {
     //   this.pageNav.goToFirstPage();
     // });
   }
+
+  classForStatus(status: string){
+    switch(status){
+      case 'KNOWN': return 'fa-battery-full';
+      case 'NEW': return 'fa-battery-empty';
+      case 'IN_PROGRESS': return 'fa-battery-half';
+      case 'ON_HOLD': return 'fa-pause';
+      default: return 'fa-times';
+    }
+  }
+
+  nextStatus(practiceWord: PracticeWordResponse) {
+    this.practiceTranslationService.updateStatusOfTranslationToNextCircular(practiceWord.translationId).subscribe(r => {
+      practiceWord.wordStatsTO.progressStatus = r.wordStatsTO.progressStatus
+    });
+  }
+
+  editTranslation(practiceWord: PracticeWordResponse){
+    this.formInEditMode = true;
+    this.form.value.from = practiceWord.question;
+    this.form.value.to = practiceWord.answer;
+  }
+
+
 }
 
 

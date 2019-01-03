@@ -11,6 +11,7 @@ import {TranslationsForUserResponse} from './response/translations-for-user-resp
 import {map} from 'rxjs/operators';
 import {PracticeWordResponse} from './response/practice-word-response';
 import {UploadService} from './upload.service';
+import {UpdateTranslationRequest} from "./request/update-translation-request";
 
 @Injectable({
   providedIn: 'root'
@@ -46,6 +47,10 @@ export class ManagerTranslationService {
     return this.httpClient.get<LanguagePairResponse>(this.apiurl + 'api/translations/pairs/' + languagePairId);
   }
 
+  updateTranslation(translationId: string, languageFrom: string, languageTo: string): Observable<PracticeWordResponse> {
+    const body: UpdateTranslationRequest = new UpdateTranslationRequest(translationId, languageFrom, languageTo);
+    return this.httpClient.post<PracticeWordResponse>(this.apiurl + 'api/translations/update', body);
+  }
 
   addNewWord(languagePairId: string, languageFrom: string, languageTo: string): Observable<TranslationsForUserResponse> {
     const user = this.authenticationService.user;

@@ -2,11 +2,14 @@ package be.artisjaap.polyglot.web.endpoints;
 
 import be.artisjaap.polyglot.core.action.pairs.FindLanguagePair;
 import be.artisjaap.polyglot.core.action.pairs.RegisterLanguagePair;
-import be.artisjaap.polyglot.core.action.translation.RegisterTranslation;
 import be.artisjaap.polyglot.core.action.to.*;
+import be.artisjaap.polyglot.core.action.translation.RegisterTranslation;
+import be.artisjaap.polyglot.core.action.translation.UpdateTranslation;
 import be.artisjaap.polyglot.web.endpoints.request.LanguagePairRequest;
 import be.artisjaap.polyglot.web.endpoints.request.NewTranslationsForUserRequest;
+import be.artisjaap.polyglot.web.endpoints.request.UpdateTranslationRequest;
 import be.artisjaap.polyglot.web.endpoints.response.LanguagePairResponse;
+import be.artisjaap.polyglot.web.endpoints.response.PracticeWordResponse;
 import be.artisjaap.polyglot.web.endpoints.response.TranslationsForUserResponse;
 import be.artisjaap.polyglot.web.endpoints.response.TranslationsForUserResponseAssembler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +37,9 @@ public class ManageTranslationController {
 
     @Autowired
     private TranslationsForUserResponseAssembler translationsForUserResponseAssembler;
+
+    @Autowired
+    private UpdateTranslation updateTranslation;
 
     @RequestMapping(value = "/pairs/user/{userId}", method = RequestMethod.GET)
     public @ResponseBody
@@ -73,6 +79,17 @@ public class ManageTranslationController {
 
 
         return ResponseEntity.ok(translationsForUserResponseAssembler.assembleResponse(translationsForUserTO));
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public @ResponseBody
+    ResponseEntity<PracticeWordResponse> updateTranslation(@RequestBody UpdateTranslationRequest updateTranslationRequest){
+        updateTranslation.forTranslation(UpdateTranslationTO.newBuilder()
+                .withLanguageFrom(updateTranslationRequest.getLanguageFrom())
+                .withLanguageTo(updateTranslationRequest.getLanguageTo())
+                .withTranslationId(updateTranslationRequest.getTranslationId())
+                .build());
+        return null; //FIXME
     }
 
     @RequestMapping(value = "/pairs/{userId}/translations/{languagePairId}/file", method = RequestMethod.POST)

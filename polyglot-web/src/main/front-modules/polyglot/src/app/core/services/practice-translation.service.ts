@@ -60,6 +60,11 @@ export class PracticeTranslationService {
   updateStatusOfTranslationToHold(translationId: string): Observable<PracticeWordResponse> {
     return this.updateStatusOfTranslation(translationId, 'ON_HOLD');
   }
+  updateStatusOfTranslationToNextCircular(translationId: string): Observable<PracticeWordResponse> {
+    return this.httpClient.patch<PracticeWordResponse>(this.apiurl + 'api/translations/practice/update-status-to-next/' +
+      translationId, null);
+  }
+
 
   allWordsForLanguagePair(textFilter: string,
                           languagePairId: string,

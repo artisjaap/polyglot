@@ -22,6 +22,14 @@ public class Translation extends AbstractDocument {
         return languagePairId;
     }
 
+    public void setLanguageA(String languageA) {
+        this.languageA = languageA;
+    }
+
+    public void setLanguageB(String languageB) {
+        this.languageB = languageB;
+    }
+
     private Translation(){}
 
     private Translation(Builder builder) {
