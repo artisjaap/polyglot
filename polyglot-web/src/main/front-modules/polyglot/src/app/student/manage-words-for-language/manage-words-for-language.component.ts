@@ -21,6 +21,7 @@ export class ManageWordsForLanguageComponent implements OnInit {
   languagePair: LanguagePairResponse;
   pageNav: PageNavigationImpl;
   filteredTranslations: PagedResponse<PracticeWordResponse>;
+  formInEditMode = true;
   @ViewChild('file') file;
   public files: Set<File> = new Set();
 
@@ -54,7 +55,7 @@ export class ManageWordsForLanguageComponent implements OnInit {
   }
 
   editWord() {
-    this.translationService.editWord(this.selectedWord.translationId, this.selectedWord.question, this.selectedWord.answer).subscribe( r => {
+    this.translationService.updateTranslation(this.selectedWord.translationId, this.selectedWord.question, this.selectedWord.answer).subscribe( r => {
       this.selectedWord.answer = r.answer;
       this.selectedWord.question = r.question;
     });

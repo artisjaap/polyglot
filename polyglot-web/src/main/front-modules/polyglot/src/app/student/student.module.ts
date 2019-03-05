@@ -12,9 +12,11 @@ import {CoreModule} from "../core/core.module";
 import {SharedModule} from "../shared/shared.module";
 import { ManageLessonsForLanguageComponent } from './manage-lessons-for-language/manage-lessons-for-language.component';
 import { PracticeLessonComponent } from './practice-lesson/practice-lesson.component';
+import { ManageWordsForLessonComponent } from './manage-words-for-lesson/manage-words-for-lesson.component';
+import { MyPracticedWordsComponent } from './my-practiced-words/my-practiced-words.component';
 
 @NgModule({
-  declarations: [StudentDashboardComponent, ManageLanguagesComponent, ManageWordsForLanguageComponent, PracticeWordsComponent, TakeLessonComponent, PracticeQuestionAnswerComponent, ManageLessonsForLanguageComponent, PracticeLessonComponent],
+  declarations: [StudentDashboardComponent, ManageLanguagesComponent, ManageWordsForLanguageComponent, PracticeWordsComponent, TakeLessonComponent, PracticeQuestionAnswerComponent, ManageLessonsForLanguageComponent, PracticeLessonComponent, ManageWordsForLessonComponent, MyPracticedWordsComponent],
   imports: [
     CommonModule,
     StudentRoutingModule,

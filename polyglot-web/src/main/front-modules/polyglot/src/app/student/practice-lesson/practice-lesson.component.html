@@ -10,7 +10,7 @@
   </div>
   <div class="answer">
     <span class="fa fa-chevron-right"></span>
-    <input type="text"  #answerGiven (keyup.enter)="checkAndNext(answerGiven)">
+    <input type="text"  #answerGiven (keyup.enter)="checkAndNext(answerGiven)" (polInputDebounce)="startAutoHint()" (restart)="stopAutoHint()" [time]="4000" >
     <span class="fa fa-check"></span>
   </div>
   <div class="feedback" *ngIf="previous">

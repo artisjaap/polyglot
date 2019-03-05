@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {TableNavigationComponent} from './table-navigation/table-navigation.component';
-import {InputDebounceDirective} from './input-debounce.directive';
+import {InputDebounceDirective} from "./input-debounce.directive";
 
 @NgModule({
   declarations: [TableNavigationComponent, InputDebounceDirective],

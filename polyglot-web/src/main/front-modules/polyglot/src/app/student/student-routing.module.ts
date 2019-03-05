@@ -8,13 +8,17 @@ import {ManageWordsForLanguageComponent} from "./manage-words-for-language/manag
 import {PracticeQuestionAnswerComponent} from "./practice-words/practice-question-answer/practice-question-answer.component";
 import {ManageLessonsForLanguageComponent} from "./manage-lessons-for-language/manage-lessons-for-language.component";
 import {PracticeLessonComponent} from "./practice-lesson/practice-lesson.component";
+import {ManageWordsForLessonComponent} from "./manage-words-for-lesson/manage-words-for-lesson.component";
+import {MyPracticedWordsComponent} from "./my-practiced-words/my-practiced-words.component";
 
 const routes: Routes = [
   {path: '', redirectTo : 'dashboard', pathMatch:'full'},
   {path: 'dashboard', component:StudentDashboardComponent, children :[
       {path:'manage-languages', component:ManageLanguagesComponent},
       {path:'manage-words-for-language/:languagePairId', component:ManageWordsForLanguageComponent},
+      {path:'manage-words-for-lesson/:lessonId', component:ManageWordsForLessonComponent},
       {path:'manage-lessons-for-language/:languagePairId', component:ManageLessonsForLanguageComponent},
+      {path:'my-practiced-words-for-language/:languagePairId', component:MyPracticedWordsComponent},
       {path:'practice-words', component:PracticeWordsComponent, children :[
           {path:'question-and-answer', component: PracticeQuestionAnswerComponent}
         ]},

@@ -11,4 +11,6 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-security')
     compile('org.springframework.boot:spring-boot-starter-web')
     compile('org.springframework.boot:spring-boot-starter-websocket')
+
+    compile('net.rakugakibox.spring.boot:orika-spring-boot-starter:1.8.0')
 }

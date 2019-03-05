@@ -8,7 +8,8 @@ export class UtilService {
   constructor() { }
 
   shuffle<T>(array: T[]): T[] {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+    var copyArray = [...array];
+    var currentIndex = copyArray.length, temporaryValue, randomIndex;
 
     // While there remain elements to shuffle...
     while (0 !== currentIndex) {
@@ -18,11 +19,11 @@ export class UtilService {
       currentIndex -= 1;
 
       // And swap it with the current element.
-      temporaryValue = array[currentIndex];
-      array[currentIndex] = array[randomIndex];
-      array[randomIndex] = temporaryValue;
+      temporaryValue = copyArray[currentIndex];
+      copyArray[currentIndex] = copyArray[randomIndex];
+      copyArray[randomIndex] = temporaryValue;
     }
 
-    return array;
+    return copyArray;
   }
 }

@@ -1,12 +1,6 @@
-import {Directive} from '@angular/core';
-import {Input} from '@angular/core';
-import {ElementRef} from '@angular/core';
-import {HostListener} from '@angular/core';
-import {Subject} from 'rxjs/Subject';
-import {OnInit} from '@angular/core';
+import {Directive, EventEmitter, HostListener, Input, Output} from '@angular/core';
 import {debounceTime} from 'rxjs/operators';
-import {Output} from '@angular/core';
-import {EventEmitter} from '@angular/core';
+import {Subject} from "rxjs";
 
 @Directive({
   selector: '[polInputDebounce]'

@@ -69,7 +69,8 @@ $num-width: 10px;
       font-weight: bold;
       font-size: 1.3em;
       border-bottom: 1px solid $main-color;
-      color: $main-color
+      color: $main-color;
+      background-color: $main-color-inverse;
     }
 
     border-bottom: 1px dashed $main-color;

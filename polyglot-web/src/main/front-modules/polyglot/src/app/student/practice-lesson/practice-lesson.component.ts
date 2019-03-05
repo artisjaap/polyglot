@@ -53,8 +53,8 @@ export class PracticeLessonComponent implements OnInit, OnDestroy {
   }
 
   startAutoHint() {
-    if (this.autohintVal && !this.autohintSubscription && !this.autohintSubscription.closed) {
-      this.autohintSubscription = interval(1000).subscribe(x => this.updateWithNext());
+    if (this.autohintVal && (!this.autohintSubscription || this.autohintSubscription.closed)) {
+      this.autohintSubscription = interval(1000).pipe().subscribe( x => this.updateWithNext());
     }
   }
 
