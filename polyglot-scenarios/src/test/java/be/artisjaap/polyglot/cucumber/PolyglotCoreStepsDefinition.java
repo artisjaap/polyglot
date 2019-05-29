@@ -1,5 +1,6 @@
 package be.artisjaap.polyglot.cucumber;
 
+import be.artisjaap.document.DocumentbeheerApplication;
 import be.artisjaap.polyglot.PolyglotApplication;
 import be.artisjaap.polyglot.core.action.lesson.CreateLesson;
 import be.artisjaap.polyglot.core.action.lesson.PracticeWords;
@@ -7,8 +8,24 @@ import be.artisjaap.polyglot.core.action.lesson.SimpleNextWordStrategy;
 import be.artisjaap.polyglot.core.action.lesson.TestForLesson;
 import be.artisjaap.polyglot.core.action.pairs.FindLanguagePair;
 import be.artisjaap.polyglot.core.action.pairs.RegisterLanguagePair;
-import be.artisjaap.polyglot.core.action.to.*;
-import be.artisjaap.polyglot.core.action.to.test.*;
+import be.artisjaap.polyglot.core.action.to.AnswerAndNextWordTO;
+import be.artisjaap.polyglot.core.action.to.LanguagePairTO;
+import be.artisjaap.polyglot.core.action.to.NewAutomaticLessonTO;
+import be.artisjaap.polyglot.core.action.to.NewLanguagePairTO;
+import be.artisjaap.polyglot.core.action.to.NewSimpleTranslationPairTO;
+import be.artisjaap.polyglot.core.action.to.NewTranslationForUserFromFileTO;
+import be.artisjaap.polyglot.core.action.to.NewTranslationForUserTO;
+import be.artisjaap.polyglot.core.action.to.NewUserTO;
+import be.artisjaap.polyglot.core.action.to.PracticeWordCheckTO;
+import be.artisjaap.polyglot.core.action.to.PracticeWordTO;
+import be.artisjaap.polyglot.core.action.to.UserSettingsUpdateTO;
+import be.artisjaap.polyglot.core.action.to.UserTO;
+import be.artisjaap.polyglot.core.action.to.test.CreateTestTO;
+import be.artisjaap.polyglot.core.action.to.test.OrderType;
+import be.artisjaap.polyglot.core.action.to.test.TestAssignmentTO;
+import be.artisjaap.polyglot.core.action.to.test.TestResultTO;
+import be.artisjaap.polyglot.core.action.to.test.TestSolutionTO;
+import be.artisjaap.polyglot.core.action.to.test.WordSolutionTO;
 import be.artisjaap.polyglot.core.action.translation.RegisterTranslation;
 import be.artisjaap.polyglot.core.action.user.FindUser;
 import be.artisjaap.polyglot.core.action.user.RegisterUser;
@@ -31,7 +48,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @RunWith(Cucumber.class)
-@ContextConfiguration( classes = PolyglotApplication.class)
+@ContextConfiguration(classes = {PolyglotApplication.class, DocumentbeheerApplication.class})
 public class PolyglotCoreStepsDefinition {
     @Autowired
     private RegisterUser registerUser;
@@ -67,10 +84,11 @@ public class PolyglotCoreStepsDefinition {
     private SimpleNextWordStrategy simpleNextWordStrategy;
 
     @Given("^a user named (.*)$")
-    public void eenGebruikerMetNaam(String naam)  {
+    public void eenGebruikerMetNaam(String naam) {
 
         registerUser.newUser(NewUserTO.newBuilder()
                 .withUsername(naam)
+                .withRole("ROLE_STUDENT")
                 .build());
     }
 
@@ -123,7 +141,7 @@ public class PolyglotCoreStepsDefinition {
     }
 
     @When("^(.*) starts practicing his words with following settings$")
-    public void zijnNietGekendeWoordenBegintTeOefenenMetInstellingen(String username, Map<String, String> settings ) {
+    public void zijnNietGekendeWoordenBegintTeOefenenMetInstellingen(String username, Map<String, String> settings) {
         UserTO user = findUser.byUsername(username).orElseThrow(() -> new IllegalStateException("Verwacht dat user bestaat"));
         updateUserSettings.forUser(UserSettingsUpdateTO.newBuilder()
                 .withUserId(user.id())
@@ -135,10 +153,10 @@ public class PolyglotCoreStepsDefinition {
         String languageFrom = settings.get("question lanquage");
         String languageTo = settings.get("answer language");
         LanguagePairTO languagePairTO = findLanguagePair.pairForUser(user.id(), languageFrom, languageTo).orElseThrow(IllegalStateException::new);
-        OrderType orderType = languagePairTO.languageFrom().equalsIgnoreCase(languageFrom)?OrderType.NORMAL:OrderType.REVERSE;
+        OrderType orderType = languagePairTO.languageFrom().equalsIgnoreCase(languageFrom) ? OrderType.NORMAL : OrderType.REVERSE;
     }
 
-    private Integer propertyAsInteger(Map<String, String> map, String key, String defaultValue){
+    private Integer propertyAsInteger(Map<String, String> map, String key, String defaultValue) {
         return Integer.parseInt(map.getOrDefault(key, defaultValue));
     }
 
@@ -154,7 +172,7 @@ public class PolyglotCoreStepsDefinition {
 
         LanguagePairTO languagePairTO = findLanguagePair.pairForUser(user.id(), languageFrom, languageTo).orElseThrow(IllegalAccessError::new);
 
-        for(int i = 0; i < numberOfExercises; i++){
+        for (int i = 0; i < numberOfExercises; i++) {
             PracticeWordTO practiceWordTO = practiceWords.nextWord(user.id(), languagePairTO.id(), orderType);
 
             System.out.println(practiceWordTO);
@@ -228,7 +246,7 @@ public class PolyglotCoreStepsDefinition {
         LanguagePairTO languagePair = findLanguagePair.pairForUser(user.id(), languageFrom, languageTo).orElseThrow(() -> new IllegalStateException("Expected language pair for user"));
 
         PracticeWordTO practiceWordTO = practiceWords.nextWord(user.id(), languagePair.id(), OrderType.NORMAL);
-        for(int i = 0; i < numerOfPracticing; i++) {
+        for (int i = 0; i < numerOfPracticing; i++) {
             AnswerAndNextWordTO answerAndNextWordTO = practiceWords.checkAnswerAndGiveNext(PracticeWordCheckTO.newBuilder()
                     .withUserId(user.id())
                     .withTranslationId(practiceWordTO.translationId())

@@ -1,5 +1,6 @@
 package be.artisjaap.polyglot;
 
+import be.artisjaap.document.DocumentbeheerApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
@@ -12,7 +13,7 @@ public class PolyglotApplication {
 
         new SpringApplicationBuilder()
                 .sources(PolyglotApplication.class)
-                //.sources(DocumentbeheerApplication.class)
+                .sources(DocumentbeheerApplication.class)
                 .build()
                 .run(args);
 

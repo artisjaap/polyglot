@@ -1,5 +1,6 @@
 package be.artisjaap.polyglot.cucumber;
 
+import be.artisjaap.document.DocumentbeheerApplication;
 import be.artisjaap.polyglot.PolyglotApplication;
 import be.artisjaap.polyglot.core.model.LanguagePairRepository;
 import be.artisjaap.polyglot.core.model.LessonRepository;
@@ -12,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 
 @RunWith(Cucumber.class)
-@ContextConfiguration(classes = PolyglotApplication.class)
+@ContextConfiguration(classes = {PolyglotApplication.class, DocumentbeheerApplication.class})
 public class CucumberHooks {
 
     @Autowired
@@ -26,7 +27,6 @@ public class CucumberHooks {
 
     @Autowired
     private LanguagePairRepository languagePairRepository;
-
 
 
     @Before

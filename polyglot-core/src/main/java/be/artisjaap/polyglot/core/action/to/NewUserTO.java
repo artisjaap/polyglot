@@ -1,5 +1,6 @@
 package be.artisjaap.polyglot.core.action.to;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class NewUserTO {
@@ -54,7 +55,7 @@ public class NewUserTO {
         private String firstName;
         private String lastName;
         private String email;
-        private Set<String> roles;
+        private Set<String> roles = new HashSet<>();
 
         private Builder() {
         }
@@ -78,10 +79,12 @@ public class NewUserTO {
             this.lastName = lastName;
             return this;
         }
+
         public Builder withRoles(Set<String> roles) {
             this.roles = roles;
             return this;
         }
+
         public Builder withEmail(String email) {
             this.email = email;
             return this;
@@ -89,6 +92,11 @@ public class NewUserTO {
 
         public NewUserTO build() {
             return new NewUserTO(this);
+        }
+
+        public Builder withRole(String role) {
+            this.roles.add(role);
+            return this;
         }
     }
 }
