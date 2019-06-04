@@ -73,4 +73,8 @@ public class LocalDateUtils {
     public static String formatIsoDate(LocalDateTime localDate) {
         return format(localDate, dateFormatYYYYMMDD);
     }
+
+    public static String nowTimestamp(){
+        return format(now(), DATE_FORMAT_YYYYMMDDHHMMSS);
+    }
 }

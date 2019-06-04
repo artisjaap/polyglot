@@ -43,6 +43,10 @@ export class ManagerTranslationService {
     return this.httpClient.post<LanguagePairResponse>(this.apiurl + 'api/translations/pairs/', body);
   }
 
+  removeLanguagePair(languagePairId:string){
+    return this.httpClient.delete<LanguagePairResponse>(this.apiurl + 'api/translations/pair/' + languagePairId);
+  }
+
   languagePairWithId(languagePairId: string): Observable<LanguagePairResponse> {
     return this.httpClient.get<LanguagePairResponse>(this.apiurl + 'api/translations/pairs/' + languagePairId);
   }

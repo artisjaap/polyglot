@@ -8,10 +8,10 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent, children: [
 
       {path: 'login', component: LoginRegisterFlipcardComponent},
-      {path: 'user', loadChildren: '../user/user.module#UserModule'},
-      {path: 'admin', loadChildren: '../admin/admin.module#AdminModule'},
-      {path: 'student', loadChildren: '../student/student.module#StudentModule'},
-      {path: 'teacher', loadChildren: '../teacher/teacher.module#TeacherModule'},
+      {path: 'user', loadChildren: () => import('../user/user.module').then(m => m.UserModule)},
+      {path: 'admin', loadChildren: () => import('../admin/admin.module').then(m => m.AdminModule)},
+      {path: 'student', loadChildren: () => import('../student/student.module').then(m => m.StudentModule)},
+      {path: 'teacher', loadChildren: () => import('../teacher/teacher.module').then(m => m.TeacherModule)},
 
     ]},
 

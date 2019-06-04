@@ -16,7 +16,7 @@ import {PracticeWordResponse} from "../../core/services/response/practice-word-r
   styleUrls: ['./manage-lessons-for-language.component.scss']
 })
 export class ManageLessonsForLanguageComponent implements OnInit {
-  @ViewChild('f') lessonForm: NgForm;
+  @ViewChild('f', {static: true}) lessonForm: NgForm;
 
   languagePair: LanguagePairResponse;
   pageNav: PageNavigationImpl;

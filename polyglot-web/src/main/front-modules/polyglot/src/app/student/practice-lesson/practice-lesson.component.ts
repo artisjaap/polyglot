@@ -23,7 +23,7 @@ export class PracticeLessonComponent implements OnInit, OnDestroy {
 
   autohintSubscription: Subscription;
 
-  @ViewChild('answerGiven') answerGiven: ElementRef;
+  @ViewChild('answerGiven', {static: true}) answerGiven: ElementRef;
 
   private autohintVal: boolean = false;
   autohint: Subject<boolean> = new Subject<boolean>();

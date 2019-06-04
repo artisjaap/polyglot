@@ -11,7 +11,7 @@ export class TableNavigationComponent implements OnInit {
 
 
   @Input("control") controls:PageNavigation<any>;
-  @ViewChild("search") search: ElementRef;
+  @ViewChild("search",  {static: true}) search: ElementRef;
 
   constructor() { }
 

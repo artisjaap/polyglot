@@ -16,13 +16,13 @@ import {LanguagePairResponse} from '../../core/services/response/language-pair-r
   styleUrls: ['./manage-words-for-language.component.scss']
 })
 export class ManageWordsForLanguageComponent implements OnInit {
-  @ViewChild('f') form: NgForm;
+  @ViewChild('f', {static: true}) form: NgForm;
   selectedWord: PracticeWordResponse;
   languagePair: LanguagePairResponse;
   pageNav: PageNavigationImpl;
   filteredTranslations: PagedResponse<PracticeWordResponse>;
   formInEditMode = true;
-  @ViewChild('file') file;
+  @ViewChild('file', {static: true}) file;
   public files: Set<File> = new Set();
 
   constructor(private route: ActivatedRoute,

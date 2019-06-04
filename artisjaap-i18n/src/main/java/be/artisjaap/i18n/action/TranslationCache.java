@@ -30,8 +30,8 @@ public class TranslationCache {
 
 
     void reloadAllFromDB(){
-        translationRepository.findAll().stream().collect(Collectors.groupingBy(Translation::getLanguageIsoCode
-                                                        , Collectors.collectingAndThen(Collectors.groupingBy(Translation::getKey, Collectors.collectingAndThen(Collectors.toCollection(ArrayList::new), l -> l.stream().findFirst().get())))));
+        //translationRepository.findAll().stream().collect(Collectors.groupingBy(Translation::getLanguageIsoCode
+          //                                              , Collectors.collectingAndThen(Collectors.groupingBy(Translation::getKey, Collectors.collectingAndThen(Collectors.toCollection(ArrayList::new), l -> l.stream().findFirst().get())))));
 
     }
 }

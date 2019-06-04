@@ -13,6 +13,7 @@ public class SaveMailTemplate {
     private MailTemplateAssembler mailTemplateAssembler;
 
     public MailTemplateTO forTemplate(MailTemplateTO template){
-        return mailTemplateRepository.saveOrUpdate(mailTemplateAssembler.assembleEntity(template));
+        mailTemplateRepository.saveOrUpdate(mailTemplateAssembler.assembleEntity(template));
+        return template;
     }
 }

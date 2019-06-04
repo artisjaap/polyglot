@@ -1,5 +1,6 @@
 rootProject.name = 'polyglot'
 
+include 'artisjaap-backup'
 include 'artisjaap-common'
 include 'artisjaap-properties'
 include 'artisjaap-mail'

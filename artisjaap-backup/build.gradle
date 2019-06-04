@@ -1,0 +1,10 @@
+jar {
+    baseName = 'artisjaap-backup'
+    version = '0.0.1-SNAPSHOT'
+}
+
+dependencies {
+    compile project(':artisjaap-common')
+    compile project(':artisjaap-mail')
+
+}

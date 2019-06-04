@@ -26,4 +26,17 @@ export class UtilService {
 
     return copyArray;
   }
+
+  removeById(array: any[], id:string) {
+    let index = -1;
+    for(let i = 0; i < array.length; i++){
+      if(array[i].id === id){
+        index = i;
+        break;
+      }
+
+    }
+    array.splice(index,1);
+
+  }
 }

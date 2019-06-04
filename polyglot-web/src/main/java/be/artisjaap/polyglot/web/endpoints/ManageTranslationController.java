@@ -2,6 +2,7 @@ package be.artisjaap.polyglot.web.endpoints;
 
 import be.artisjaap.polyglot.core.action.pairs.FindLanguagePair;
 import be.artisjaap.polyglot.core.action.pairs.RegisterLanguagePair;
+import be.artisjaap.polyglot.core.action.pairs.RemoveLanguagePair;
 import be.artisjaap.polyglot.core.action.to.*;
 import be.artisjaap.polyglot.core.action.translation.RegisterTranslation;
 import be.artisjaap.polyglot.core.action.translation.UpdateTranslation;
@@ -36,6 +37,9 @@ public class ManageTranslationController {
     private RegisterTranslation registerTranslation;
 
     @Autowired
+    private RemoveLanguagePair removeLanguagePair;
+
+    @Autowired
     private TranslationsForUserResponseAssembler translationsForUserResponseAssembler;
 
     @Autowired
@@ -64,6 +68,15 @@ public class ManageTranslationController {
 
         return ResponseEntity.ok(LanguagePairResponse.from(languagePairTO));
     }
+
+    @RequestMapping(value = "/pair/{languagePairId}", method = RequestMethod.DELETE)
+    public @ResponseBody
+    ResponseEntity<LanguagePairResponse> removePairForUser(@PathVariable String languagePairId) {
+        ResponseEntity<LanguagePairResponse> languagePairWithId = findLanguagePairWithId(languagePairId);
+        removeLanguagePair.withId(languagePairId);
+        return languagePairWithId;
+    }
+
 
     @RequestMapping(value = "/pairs/translations", method = RequestMethod.POST)
     public @ResponseBody
