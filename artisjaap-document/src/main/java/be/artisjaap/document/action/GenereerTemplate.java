@@ -19,7 +19,7 @@ public class GenereerTemplate {
     @Autowired
     private TemplateRepository templateRepository;
 
-    public TemplateDataTO voor(String templateCode, BriefConfigTO to){
+    public TemplateDataTO voor(String templateCode, BriefConfigTO to) {
         Template template = templateRepository.findByCodeAndTaalAndActief(templateCode, to.getTaal()).orElseThrow(() -> new UnsupportedOperationException("template niet gevonden: " + templateCode));
         return maakTemplateTO(template, to);
     }

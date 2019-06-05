@@ -36,14 +36,14 @@ public class AddCombinedTemplate {
     @Autowired
     private GecombineerdeTemplateCodeAssembler gecombineerdeTemplateCodeAssembler;
 
-    public GecombineerdeTemplateTO uit(GecombineerdeTemplateNieuwTO combinatie){
+    public GecombineerdeTemplateTO uit(GecombineerdeTemplateNieuwTO combinatie) {
         GecombineerdeTemplate template = gecombineerdeTemplateNieuwAssembler.assembleEntity(combinatie);
         template = gecombineerdeTemplateRepository.save(template);
         return gecombineerdeTemplateAssembler.assembleTO(template);
     }
 
-    public GecombineerdeTemplateCodeTO metNieuweCode(TemplateCodeNieuwTO templateCode){
+    public GecombineerdeTemplateCodeTO metNieuweCode(TemplateCodeNieuwTO templateCode) {
         GecombineerdeTemplateCode gecombineerdeTemplateCode = gecombineerdeTemplateCodeRepository.save(gecombineerdeTemplateCodeNieuwAssembler.assembleEntity(templateCode));
-       return gecombineerdeTemplateCodeAssembler.assembleTO(gecombineerdeTemplateCode);
+        return gecombineerdeTemplateCodeAssembler.assembleTO(gecombineerdeTemplateCode);
     }
 }

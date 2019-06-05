@@ -1,0 +1,57 @@
+= artisjaap-common
+
+Defines all core modules for every application
+
+Core Dependencies:
+
+- spring-boot-starter-aop
+- spring-boot-starter-data-mongodb
+- spring-boot-starter-mail
+- spring-boot-starter-quartz
+- spring-boot-starter-security
+- spring-boot-starter-web
+- spring-boot-starter-websocket
+
+
+= artsjaap-document
+
+module for generating xdoc reporting PDFs
+
+Core Dependencies:
+
+- xdoc
+
+Project Dependencies:
+
+- depends on: artisjaap-common
+
+== actions
+
+ActivateCombinedTemplate.java
+ActivateDocument.java
+ActivateTemplate.java
+AddCombinedTemplate.java
+AddDocument.java
+AddTemplate.java
+AutofindTemplateType.java
+CreatePreview.java
+DeactivateDocument.java
+DeactivateTemplate.java
+FindTemplate.java
+GenerateFieldsXml.java
+GenereerBrief.java
+GenereerGecombineerdeTemplate.java
+GenereerTemplate.java
+ValideerBrief.java
+ValideerEnkelvoudigeTemplate.java
+ValideerMeervoudigeTemplate.java
+VerwijderBrief.java
+VerwijderGecombineerdeTemplate.java
+VerwijderTemplate.java
+ZoekBeschikbareBrieven.java
+ZoekBeschikbareEenvoudigeTemplates.java
+ZoekBeschikbareGecombineerdeTemplates.java
+ZoekBriefCodes.java
+ZoekGecombineerdeTemplateCodes.java
+ZoekGegenereerdeBrieven.java
+ZoekTemplateCodes.java

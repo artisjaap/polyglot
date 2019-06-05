@@ -13,7 +13,7 @@ public class DeactivateDocument {
     @Autowired
     private BriefRepository briefRepository;
 
-    public void metCodeAndTaal(String code, String taal){
+    public void metCodeAndTaal(String code, String taal) {
         Optional<Brief> briefOptional = briefRepository.findByCodeAndTaalAndActief(code, taal);
         briefOptional.ifPresent(brief -> {
             brief.desactiveer();

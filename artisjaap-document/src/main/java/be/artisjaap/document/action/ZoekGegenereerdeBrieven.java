@@ -17,7 +17,7 @@ public class ZoekGegenereerdeBrieven {
     @Autowired
     private GegenereerdeBriefInfoAssembler gegenereerdeBriefInfoAssembler;
 
-    public List<GegenereerdeBriefInfoTO> vanBriefMetCodeInTaal(String code, String taal){
+    public List<GegenereerdeBriefInfoTO> vanBriefMetCodeInTaal(String code, String taal) {
         return gegenereerdeBriefInfoAssembler.assembleTO(gegenereerdeBriefRepository.findByBriefCodeAndTaal(code, taal));
     }
 }

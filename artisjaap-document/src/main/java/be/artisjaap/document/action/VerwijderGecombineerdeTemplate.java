@@ -11,7 +11,7 @@ public class VerwijderGecombineerdeTemplate {
     @Autowired
     private GecombineerdeTemplateRepository gecombineerdeTemplateRepository;
 
-    public void metId(String id){
+    public void metId(String id) {
         gecombineerdeTemplateRepository.deleteById(new ObjectId(id));
     }
 }

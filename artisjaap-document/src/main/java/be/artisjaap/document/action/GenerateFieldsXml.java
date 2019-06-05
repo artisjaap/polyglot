@@ -13,7 +13,9 @@ import fr.opensagres.xdocreport.template.formatter.FieldsMetadata;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 
 @Component
 public class GenerateFieldsXml {
@@ -22,10 +24,10 @@ public class GenerateFieldsXml {
     private TemplateRepository templateRepository;
 
 
-    public byte[] voorDatasets(DatasetProvider datasets){
+    public byte[] voorDatasets(DatasetProvider datasets) {
         FieldsMetadata fieldsMetadata = new FieldsMetadata(TemplateEngineKind.Velocity.name());
 
-        try (ByteArrayOutputStream bos = new ByteArrayOutputStream()){
+        try (ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
             for (String dataset : datasets.datasetNames()) {
                 DatasetConfig datasetConfig = datasets.get(dataset);
                 fieldsMetadata.load(dataset, datasetConfig.metaClass(), datasetConfig.isAsList());
@@ -37,16 +39,16 @@ public class GenerateFieldsXml {
 
             return bos.toByteArray();
 
-        }catch(Exception ex){
+        } catch (Exception ex) {
             throw new IllegalStateException("Kan fieldsxml niet maken: " + ex.getMessage(), ex);
         }
 
 
     }
 
-    public byte[] voorBrief(BriefConfigTO briefConfig){
+    public byte[] voorBrief(BriefConfigTO briefConfig) {
 
-        Template template = templateRepository.findByCodeAndTaalAndActief(briefConfig.getCode(), briefConfig.getTaal()).orElseThrow(() -> new UnsupportedOperationException("template niet gevonden met code: " +briefConfig.getCode()));
+        Template template = templateRepository.findByCodeAndTaalAndActief(briefConfig.getCode(), briefConfig.getTaal()).orElseThrow(() -> new UnsupportedOperationException("template niet gevonden met code: " + briefConfig.getCode()));
 
 
         try (InputStream in = new ByteArrayInputStream(template.getTemplate())) {
@@ -57,7 +59,7 @@ public class GenerateFieldsXml {
             FieldsMetadata fieldsMetadata = report.createFieldsMetadata();
             IContext context = report.createContext();
 
-            for(String dataset : briefConfig.getDatasetProvider().datasetNames()){
+            for (String dataset : briefConfig.getDatasetProvider().datasetNames()) {
                 DatasetConfig datasetConfig = briefConfig.forDataset(dataset);
                 Object data = datasetConfig.data();
                 context.put(datasetConfig.metaName(), data);
@@ -70,7 +72,7 @@ public class GenerateFieldsXml {
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             fieldsMetadata.saveXML(bos, true);
             return bos.toByteArray();
-        }catch(Exception ex){
+        } catch (Exception ex) {
             throw new IllegalStateException("Kan fieldsxml niet maken: " + ex.getMessage(), ex);
         }
     }

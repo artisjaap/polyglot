@@ -14,7 +14,7 @@ public class ZoekTemplateCodes {
     @Autowired
     private TemplateCodeRepository templateCodeRepository;
 
-    public List<TemplateCodeTO> alle(){
+    public List<TemplateCodeTO> alle() {
         return templateCodeRepository.findAll().stream()
                 .map(templateCode -> TemplateCodeTO.newBuilder()
                         .withCode(templateCode.getCode())

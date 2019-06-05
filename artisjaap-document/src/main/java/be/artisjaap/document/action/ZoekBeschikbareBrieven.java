@@ -17,17 +17,16 @@ public class ZoekBeschikbareBrieven {
     @Autowired
     private BriefAssembler briefAssembler;
 
-    public List<BriefTO> metCodeInTaal(String code, String taal){
+    public List<BriefTO> metCodeInTaal(String code, String taal) {
         return briefAssembler.assembleTO(briefRepository.findByCodeAndTaal(code, taal));
     }
 
-    public Optional<BriefTO> actiefMetCodeInTaal(String code, String taal){
+    public Optional<BriefTO> actiefMetCodeInTaal(String code, String taal) {
         return briefRepository.findByCodeAndTaalAndActief(code, taal).map(briefAssembler::assembleTO);
     }
 
 
-
-    public List<BriefTO> metCode(String code){
+    public List<BriefTO> metCode(String code) {
         return briefAssembler.assembleTO(briefRepository.findByCode(code));
     }
 }

@@ -35,13 +35,13 @@ public class AddTemplate {
     @Autowired
     private TemplateCodeAssembler templateCodeAssembler;
 
-    public TemplateTO voor(TemplateNieuwTO templateTO){
+    public TemplateTO voor(TemplateNieuwTO templateTO) {
         Template template = templateNieuwAssembler.assembleEntity(templateTO);
         template = templateRepository.save(template);
         return templateAssembler.assembleTO(template);
     }
 
-    public TemplateCodeTO metNieuweCode(TemplateCodeNieuwTO templateCode){
+    public TemplateCodeTO metNieuweCode(TemplateCodeNieuwTO templateCode) {
         TemplateCode template = templateCodeRepository.save(templateCodeNieuwAssembler.assembleEntity(templateCode));
         return templateCodeAssembler.assembleTO(template);
     }

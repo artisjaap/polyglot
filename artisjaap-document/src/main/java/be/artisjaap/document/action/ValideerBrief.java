@@ -18,7 +18,7 @@ public class ValideerBrief {
     @Autowired
     private ValideerMeervoudigeTemplate valideerMeervoudigeTemplate;
 
-    public boolean metCodeInTaal(String briefCode, String taal){
+    public boolean metCodeInTaal(String briefCode, String taal) {
         return zoekBeschikbareBrieven.actiefMetCodeInTaal(briefCode, taal)
                 .filter(BriefTO::getActief)
                 .map(briefTO -> alleTemplatesActief(briefTO.getPaginas(), taal))
@@ -26,12 +26,12 @@ public class ValideerBrief {
     }
 
 
-    private boolean alleTemplatesActief(List<PaginaTO> paginas, String taal){
+    private boolean alleTemplatesActief(List<PaginaTO> paginas, String taal) {
         return !paginas.stream().map(p -> paginaActief(p, taal)).filter(b -> !b).findFirst().isPresent();
     }
 
-    private boolean paginaActief(PaginaTO pagina, String taal){
-        switch(pagina.getType()){
+    private boolean paginaActief(PaginaTO pagina, String taal) {
+        switch (pagina.getType()) {
             case TEMPLATE:
                 return valideerEnkelvoudigeTemplate.metCodeInTaal(pagina.getCode(), taal);
             case GECOMBINEERD:

@@ -16,7 +16,7 @@ public class ActivateCombinedTemplate {
     @Autowired
     private DeactivateTemplate deactivateTemplate;
 
-    public void activeerTemplate(String id){
+    public void activeerTemplate(String id) {
         ObjectId objectId = new ObjectId(id);
         activeerGecombineerdeTemplate(objectId);
     }
@@ -24,11 +24,11 @@ public class ActivateCombinedTemplate {
 
     private void activeerGecombineerdeTemplate(ObjectId objectId) {
         GecombineerdeTemplate templateGecombineerd = gecombineerdeTemplateRepository.findById(objectId).orElseThrow(() -> new UnsupportedOperationException("Template bestaat niet"));
-        if(templateGecombineerd != null){
+        if (templateGecombineerd != null) {
             deactivateTemplate.voorGecombineerdeTemplateMetCodeEnTaal(templateGecombineerd.getCode(), templateGecombineerd.getTaal());
             templateGecombineerd.activeer();
             gecombineerdeTemplateRepository.save(templateGecombineerd);
-        }else {
+        } else {
             throw new IllegalStateException("Template met ID niet gevonden");
         }
     }

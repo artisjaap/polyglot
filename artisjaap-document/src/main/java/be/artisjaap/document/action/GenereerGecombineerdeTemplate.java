@@ -30,7 +30,7 @@ public class GenereerGecombineerdeTemplate {
 
     public TemplateDataTO genereer(Pagina pagina, BriefConfigTO briefConfig) {
 
-        switch(pagina.getPaginaType() ){
+        switch (pagina.getPaginaType()) {
             case GECOMBINEERD:
                 return genereerGecombineerdePagina(pagina, briefConfig);
             case TEMPLATE:
@@ -40,7 +40,7 @@ public class GenereerGecombineerdeTemplate {
     }
 
     private TemplateDataTO genereerGecombineerdePagina(Pagina pagina, BriefConfigTO briefConfig) {
-        GecombineerdeTemplate template = gecombineerdeTemplateRepository.findByCodeAndTaalAndActief(pagina.getCode(), briefConfig.getTaal()).orElseThrow(()-> new IllegalStateException("template niet gevonden"));
+        GecombineerdeTemplate template = gecombineerdeTemplateRepository.findByCodeAndTaalAndActief(pagina.getCode(), briefConfig.getTaal()).orElseThrow(() -> new IllegalStateException("template niet gevonden"));
         List<TemplateDataTO> collect = template.getTemplates().stream().map(t -> genereerTemplate.voor(t, briefConfig)).collect(Collectors.toList());
         List<byte[]> docs = collect.stream().map(TemplateDataTO::getData).filter(Optional::isPresent).map(Optional::get).collect(Collectors.toList());
 

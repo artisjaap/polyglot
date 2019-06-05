@@ -15,7 +15,7 @@ public class FindTemplate {
     @Autowired
     private TemplateAssembler templateAssembler;
 
-    public TemplateTO forTemplateId(String templateId){
+    public TemplateTO forTemplateId(String templateId) {
         return templateRepository.findById(new ObjectId(templateId)).map(templateAssembler::assembleTO).orElseThrow(() -> new IllegalStateException("template niet gevonden"));
     }
 }
