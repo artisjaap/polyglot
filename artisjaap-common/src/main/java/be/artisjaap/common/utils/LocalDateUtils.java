@@ -16,7 +16,7 @@ public class LocalDateUtils {
     }
 
     public static void useFixedDate(LocalDateTime dateTime) {
-        clock = Clock.fixed(Instant.from(dateTime), ZoneId.systemDefault());
+        clock = Clock.fixed(Instant.from(dateTime.atZone(ZoneId.systemDefault())), ZoneId.systemDefault());
     }
 
     public static void resetFixedDate() {

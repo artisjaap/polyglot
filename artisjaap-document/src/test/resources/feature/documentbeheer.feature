@@ -58,7 +58,7 @@ Functionaliteit: Handleiding voor brieftemplates
     Dan kan de brief met code MANDAAT_BRIEF in taal nld gegenereerd worden met een default set van datasets en worden opgeslagen op het relatieve path /docs/
 
   Scenario: De naam van de gegenereerde brief is standaard de code van de brief, de taal een en timestamp
-    Gegeven vandaag is 26/06/2018 09:00
+    Gegeven vandaag is 26-06-2018 09:00
     En een actieve template MANDAAT_HEADER_FOOTER_NL.DOCX met code MANDAAT_HEADER_FOOTER in nld
     En een brief MANDAAT_BRIEF in nld die bestaat uit de templates MANDAAT_HEADER_FOOTER
     En de brief met code MANDAAT_BRIEF actief wordt gezet in taal nld

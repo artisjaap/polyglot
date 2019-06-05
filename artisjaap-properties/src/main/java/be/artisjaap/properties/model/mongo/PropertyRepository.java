@@ -1,5 +1,6 @@
-package be.artisjaap.properties.model;
+package be.artisjaap.properties.model.mongo;
 
+import be.artisjaap.properties.model.Property;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 

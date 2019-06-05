@@ -1,5 +1,6 @@
-package be.artisjaap.properties.model;
+package be.artisjaap.properties.model.mongo;
 
+import be.artisjaap.properties.model.Property;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class PropertyRepositoryImpl implements PropertyRepositoryCustom {

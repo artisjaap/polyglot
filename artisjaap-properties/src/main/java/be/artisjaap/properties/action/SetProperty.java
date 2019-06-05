@@ -1,7 +1,5 @@
 package be.artisjaap.properties.action;
 
-import be.artisjaap.properties.model.Property;
-import be.artisjaap.properties.model.PropertyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

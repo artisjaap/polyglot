@@ -1,4 +1,6 @@
-= artisjaap-common
+= Module overview
+
+== artisjaap-common
 
 Defines all core modules for every application
 
@@ -13,7 +15,7 @@ Core Dependencies:
 - spring-boot-starter-websocket
 
 
-= artsjaap-document
+== artsjaap-document
 
 module for generating xdoc reporting PDFs
 
@@ -23,35 +25,113 @@ Core Dependencies:
 
 Project Dependencies:
 
-- depends on: artisjaap-common
+- artisjaap-common
 
-== actions
+=== actions
 
-ActivateCombinedTemplate.java
-ActivateDocument.java
-ActivateTemplate.java
-AddCombinedTemplate.java
-AddDocument.java
-AddTemplate.java
-AutofindTemplateType.java
-CreatePreview.java
-DeactivateDocument.java
-DeactivateTemplate.java
-FindTemplate.java
-GenerateFieldsXml.java
-GenereerBrief.java
-GenereerGecombineerdeTemplate.java
-GenereerTemplate.java
-ValideerBrief.java
-ValideerEnkelvoudigeTemplate.java
-ValideerMeervoudigeTemplate.java
-VerwijderBrief.java
-VerwijderGecombineerdeTemplate.java
-VerwijderTemplate.java
-ZoekBeschikbareBrieven.java
-ZoekBeschikbareEenvoudigeTemplates.java
-ZoekBeschikbareGecombineerdeTemplates.java
-ZoekBriefCodes.java
-ZoekGecombineerdeTemplateCodes.java
-ZoekGegenereerdeBrieven.java
-ZoekTemplateCodes.java
+AddTemplate:: Add a new simple template
+AddCombinedTemplate:: Combine template exists of multiple simple templates on top of each other
+AddDocument:: Combines one or more simple or combined templates as a document of one or more pages
+
+ActivateTemplate:: Activate a specific template, if there is a template active with the same code, it will be disabled
+ActivateCombinedTemplate:: Activate a specific combined template, if there is a combined template active with the same code, it will be disabled
+ActivateDocument:: Activate a specific document, if there is a document active with the same code, it will be disabled
+
+DeactivateDocument:: Deactivate a document for specified code and language
+DeactivateTemplate:: Deactivate a template (simple or combined) for a specified code and language
+
+FindTemplate:: Returns template information for a given template ID
+
+ZoekBeschikbareEenvoudigeTemplates:: Find all simple template (active and inactive) for a given template code
+ZoekBeschikbareGecombineerdeTemplates:: Find all combined templates (active and inactive) for a given template code
+ZoekBeschikbareBrieven:: Find all documents (active and inactive) for a given document code
+ZoekTemplateCodes:: List all available template codes
+ZoekGecombineerdeTemplateCodes:: List all available combined templates
+ZoekBriefCodes:: Lists all available codes
+ZoekGegenereerdeBrieven:: Find all generated documents for a given document code
+
+ValideerEnkelvoudigeTemplate:: Checks if template is active
+ValideerMeervoudigeTemplate:: Checks recursivly if all used templates are active
+ValideerBrief:: Check recursivly if all used template are active
+
+VerwijderTemplate:: Removes a template of a given template ID
+VerwijderGecombineerdeTemplate:: Removes a combined template for a given template ID
+VerwijderBrief:: Removes a document for a given document ID
+
+CreatePreview:: Create preview for a given template or document
+GenereerBrief:: Generate a document for the given configuration
+GenereerGecombineerdeTemplate:: Generate combined template for a given configuration
+GenereerTemplate:: Generate template for given configuration
+
+AutofindTemplateType:: Returns of a specified template code if it is a simple or combined template
+GenerateFieldsXml:: Generate fields.xml for a given document
+
+
+== artsjaap-document-web
+
+REST endpoint interfaces for document module
+
+Project Dependencies:
+
+- artsjaap-document
+
+For all available endpoints, see swagger documentation
+
+
+== artsjaap-framework
+
+WARNING: Should be removed and includewd in common
+
+== artsjaap-backup
+
+Enables functionality to backup and restore mongo collections
+
+Project Dependencies:
+
+- artisjaap-common
+- artisjaap-mail
+
+=== actions
+
+ConfigBuilder:: let you build a config to backup data
+BackupData:: backup data for a specified configuration and save it in a file of send it over email
+RestoreData:: Restore a file with collection data back in mongo
+
+== artsjaap-i18n
+
+Project Dependencies:
+
+- artisjaap-common
+
+=== actions
+
+CreateTranslation:: Create a new translation key with the translation for a specified language
+FindTranslation:: Find a translation for a specified key in a specified language
+
+
+== artisjaap-properties
+
+Project Dependencies:
+
+- artisjaap-common
+
+=== actions
+
+SetProperty:: Create a new property
+GetProperty:: Get value for a property
+
+
+== artsjaap-mail
+
+Project Dependencies:
+
+- artisjaap-common
+- artisjaap-properties
+
+=== actions
+
+SaveMailTemplate:: Create a new mail template with specified code
+FindMailTemplate:: Find mail template for code
+FreemarkerTemplateGenerator:: Fill template with given code with specified data
+GMail:: Send mail over GMAIL
+SendMail:: Send a mail

@@ -124,7 +124,7 @@ public class DocumentbeheerStepsDefinition {
     }
 
 
-    @Gegeven("^vandaag is (\\d{2}/\\d{2}/\\d{4}) ([0-9]{2}):([0-9]{2})$")
+    @Gegeven("^vandaag is (\\d{2}-\\d{2}-\\d{4}) ([0-9]{2}):([0-9]{2})$")
     public void vandaagIs(String datumVanGebeurtenis, int uur, int min) {
         LocalDate localDate = LocalDateUtils.parseDateFromDDMMYYYYString(datumVanGebeurtenis);
         LocalDateUtils.useFixedDate(localDate.atTime(uur, min, 0));

@@ -33,7 +33,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
 @RunWith(Cucumber.class)
-public class DocumentbeheerThenStepsDefinition /*extends DocumentbeheerInMemoryTestParent*/ {
+public class DocumentbeheerThenStepsDefinition {
 
     @Autowired
     private TemplateRepository templateRepository;
