@@ -22,31 +22,31 @@ public class ActivateTemplate {
     @Autowired
     private DeactivateTemplate deactivateTemplate;
 
-    public void activeerTemplate(String id){
+    public void activeerTemplate(String id) {
         ObjectId objectId = new ObjectId(id);
         activeerTemplate(objectId);
     }
 
     private void activeerTemplate(ObjectId objectId) {
         Optional<Template> templateOptional = templateRepository.findById(objectId);
-        if(templateOptional.isPresent()){
+        if (templateOptional.isPresent()) {
             Template template = templateOptional.get();
             deactivateTemplate.voorEenvoudigeTemplateMetCodeEnTaal(template.getCode(), template.getTaal());
             template.activeer();
             templateRepository.save(template);
-        }else {
+        } else {
             activeerGecombineerdeTemplate(objectId);
         }
     }
 
     private void activeerGecombineerdeTemplate(ObjectId objectId) {
         Optional<GecombineerdeTemplate> templateGecombineerdOptional = gecombineerdeTemplateRepository.findById(objectId);
-        if(templateGecombineerdOptional.isPresent()){
-            GecombineerdeTemplate templateGecombineerd= templateGecombineerdOptional.get();
+        if (templateGecombineerdOptional.isPresent()) {
+            GecombineerdeTemplate templateGecombineerd = templateGecombineerdOptional.get();
             deactivateTemplate.voorGecombineerdeTemplateMetCodeEnTaal(templateGecombineerd.getCode(), templateGecombineerd.getTaal());
             templateGecombineerd.activeer();
             gecombineerdeTemplateRepository.save(templateGecombineerd);
-        }else {
+        } else {
             throw new IllegalStateException("Template met ID niet gevonden");
         }
     }

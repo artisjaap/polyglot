@@ -20,14 +20,14 @@ public class AutofindTemplateType {
     @Autowired
     private GecombineerdeTemplateRepository gecombineerdeTemplateRepository;
 
-    public PaginaType voorPaginaCode(String code){
+    public PaginaType voorPaginaCode(String code) {
         Optional<Template> template = templateRepository.findByCode(code).stream().findFirst();
-        if(template.isPresent()){
+        if (template.isPresent()) {
             return PaginaType.TEMPLATE;
         }
 
         List<GecombineerdeTemplate> gecombineerdeTemplate = gecombineerdeTemplateRepository.findByCode(code);
-        if(!gecombineerdeTemplate.isEmpty()){
+        if (!gecombineerdeTemplate.isEmpty()) {
             return PaginaType.GECOMBINEERD;
         }
 

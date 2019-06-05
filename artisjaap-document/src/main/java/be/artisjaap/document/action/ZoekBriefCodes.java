@@ -17,8 +17,7 @@ public class ZoekBriefCodes {
     private ValideerBrief valideerBrief;
 
 
-
-    public List<BriefCodeTO> alle(){
+    public List<BriefCodeTO> alle() {
         return briefCodeRepository.findAll().stream()
                 .map(brief -> BriefCodeTO.newBuilder()
                         .withCode(brief.getCode())
@@ -26,10 +25,6 @@ public class ZoekBriefCodes {
                         .build())
                 .collect(Collectors.toList());
     }
-
-
-
-
 
 
 }

@@ -1,6 +1,11 @@
 package be.artisjaap.document.action.to;
 
-import be.artisjaap.document.api.*;
+import be.artisjaap.document.api.DatasetConfig;
+import be.artisjaap.document.api.DatasetConfigImpl;
+import be.artisjaap.document.api.DatasetConfigProvider;
+import be.artisjaap.document.api.DatasetMeta;
+import be.artisjaap.document.api.DatasetProvider;
+import be.artisjaap.document.api.DocumentImage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,7 +38,7 @@ public class BriefPreviewConfigTO implements DatasetConfigProvider, DatasetProvi
     }
 
 
-    class IdentityHashMap<K,V> extends HashMap<K,V> {
+    class IdentityHashMap<K, V> extends HashMap<K, V> {
 
         @Override
         public boolean containsKey(Object o) {

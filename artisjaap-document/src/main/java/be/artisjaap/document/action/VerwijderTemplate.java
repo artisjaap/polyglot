@@ -11,7 +11,7 @@ public class VerwijderTemplate {
     @Autowired
     private TemplateRepository templateRepository;
 
-    public void metId(String id){
+    public void metId(String id) {
         templateRepository.deleteById(new ObjectId(id));
     }
 }

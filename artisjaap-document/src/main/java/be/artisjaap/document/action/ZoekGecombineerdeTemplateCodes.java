@@ -13,7 +13,7 @@ public class ZoekGecombineerdeTemplateCodes {
     @Autowired
     private GecombineerdeTemplateCodeRepository gecombineerdeTemplateCodeRepository;
 
-    public List<GecombineerdeTemplateCodeTO> alle(){
+    public List<GecombineerdeTemplateCodeTO> alle() {
         return gecombineerdeTemplateCodeRepository.findAll().stream()
                 .map(templateCode -> GecombineerdeTemplateCodeTO.newBuilder()
                         .withCode(templateCode.getCode())

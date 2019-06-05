@@ -18,17 +18,17 @@ public class ZoekBeschikbareEenvoudigeTemplates {
     @Autowired
     private TemplateRepository templateRepository;
 
-    public List<TemplateTO> metCodeInTaal(String code, String taal){
+    public List<TemplateTO> metCodeInTaal(String code, String taal) {
         return templateAssembler.assembleTO(templateRepository.findByCodeAndTaal(code, taal));
 
     }
 
-    public Optional<TemplateTO> metCodeInTaalActief(String code, String taal){
+    public Optional<TemplateTO> metCodeInTaalActief(String code, String taal) {
         return templateRepository.findByCodeAndTaalAndActief(code, taal).map(templateAssembler::assembleTO);
 
     }
 
-    public List<TemplateTO> metCode(String code){
+    public List<TemplateTO> metCode(String code) {
         return templateAssembler.assembleTO(templateRepository.findByCode(code));
 
     }

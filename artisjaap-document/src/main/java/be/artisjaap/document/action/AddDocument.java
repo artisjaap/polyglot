@@ -36,13 +36,13 @@ public class AddDocument {
     private BriefCodeAssembler briefCodeAssembler;
 
 
-    public BriefTO voor(BriefNieuwTO briefTO){
+    public BriefTO voor(BriefNieuwTO briefTO) {
         Brief brief = briefNieuwAssembler.assembleEntity(briefTO);
         brief = briefRepository.save(brief);
         return briefAssembler.assembleTO(brief);
     }
 
-    public BriefCodeTO metNieuweCode(BriefCodeNieuwTO templateCode){
+    public BriefCodeTO metNieuweCode(BriefCodeNieuwTO templateCode) {
         return briefCodeAssembler.assembleTO(briefCodeRepository.save(briefCodeNieuwAssembler.assembleEntity(templateCode)));
 
     }

@@ -17,7 +17,7 @@ public class ActivateDocument {
     @Autowired
     private DeactivateDocument deactivateDocument;
 
-    public void metId(String id){
+    public void metId(String id) {
         Optional<Brief> briefOptional = briefRepository.findById(new ObjectId(id));
         briefOptional.ifPresent(
                 brief -> {

@@ -15,8 +15,7 @@ public class DeactivateTemplate {
     private GecombineerdeTemplateRepository gecombineerdeTemplateRepository;
 
 
-
-    public void voorEenvoudigeTemplateMetCodeEnTaal(String code, String taal){
+    public void voorEenvoudigeTemplateMetCodeEnTaal(String code, String taal) {
         templateRepository.findByCodeAndTaalAndActief(code, taal).ifPresent(template -> {
             template.desactiveer();
             templateRepository.save(template);
@@ -24,7 +23,7 @@ public class DeactivateTemplate {
 
     }
 
-    public void voorGecombineerdeTemplateMetCodeEnTaal(String code, String taal){
+    public void voorGecombineerdeTemplateMetCodeEnTaal(String code, String taal) {
         gecombineerdeTemplateRepository.findByCodeAndTaalAndActief(code, taal).ifPresent(template -> {
             template.desactiveer();
             gecombineerdeTemplateRepository.save(template);

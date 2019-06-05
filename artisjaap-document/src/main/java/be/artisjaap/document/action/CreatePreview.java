@@ -33,7 +33,7 @@ public class CreatePreview {
         return genereerBrief.voorBriefMetId(documentId, briefConfigTO);
     }
 
-    public TemplateDataTO forDocument(String documentId){
+    public TemplateDataTO forDocument(String documentId) {
         return forDocument(documentId, new BriefPreviewConfigTO());
     }
 

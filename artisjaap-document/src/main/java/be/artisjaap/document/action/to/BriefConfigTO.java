@@ -1,6 +1,11 @@
 package be.artisjaap.document.action.to;
 
-import be.artisjaap.document.api.*;
+import be.artisjaap.document.api.DatasetConfig;
+import be.artisjaap.document.api.DatasetConfigProvider;
+import be.artisjaap.document.api.DatasetMeta;
+import be.artisjaap.document.api.DatasetProvider;
+import be.artisjaap.document.api.DocumentImage;
+import be.artisjaap.document.api.EmptyDatasetProvider;
 import be.artisjaap.document.api.brieflocatie.BriefLocatieFactory;
 import be.artisjaap.document.api.brieflocatie.BriefOpslagLocatie;
 import be.artisjaap.document.api.filegeneratie.FileGeneratieFactory;
@@ -70,7 +75,7 @@ public class BriefConfigTO implements DatasetConfigProvider {
         return datasetsBlacklist;
     }
 
-    public boolean dryRun(){
+    public boolean dryRun() {
         return dryRun;
     }
 
@@ -175,7 +180,7 @@ public class BriefConfigTO implements DatasetConfigProvider {
         }
 
 
-        public Builder withQrData(String qrData){
+        public Builder withQrData(String qrData) {
             addImage(DocumentImage.newBuilder().withName("qr").withImage(QrUtils.maakQrMetData(qrData)).build());
             return this;
         }

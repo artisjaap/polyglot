@@ -18,16 +18,16 @@ public class ZoekBeschikbareGecombineerdeTemplates {
     @Autowired
     private GecombineerdeTemplateRepository gecombineerdeTemplateRepository;
 
-    public List<GecombineerdeTemplateTO> metCodeInTaal(String code, String taal){
+    public List<GecombineerdeTemplateTO> metCodeInTaal(String code, String taal) {
         return gecombineerdeTemplateAssembler.assembleTO(gecombineerdeTemplateRepository.findByCodeAndTaal(code, taal));
 
     }
 
-    public Optional<GecombineerdeTemplateTO> metCodeInTaalActief(String code, String taal){
+    public Optional<GecombineerdeTemplateTO> metCodeInTaalActief(String code, String taal) {
         return gecombineerdeTemplateRepository.findByCodeAndTaalAndActief(code, taal).map(gecombineerdeTemplateAssembler::assembleTO);
     }
 
-    public List<GecombineerdeTemplateTO> metCode(String code){
+    public List<GecombineerdeTemplateTO> metCode(String code) {
         return gecombineerdeTemplateAssembler.assembleTO(gecombineerdeTemplateRepository.findByCode(code));
     }
 }

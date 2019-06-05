@@ -11,7 +11,7 @@ public class VerwijderBrief {
     @Autowired
     private BriefRepository briefRepository;
 
-    public void metId(String id){
+    public void metId(String id) {
         briefRepository.deleteById(new ObjectId(id));
     }
 }

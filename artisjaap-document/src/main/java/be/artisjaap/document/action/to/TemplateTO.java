@@ -80,10 +80,12 @@ public class TemplateTO {
             this.template = template;
             return this;
         }
+
         public Builder withTaal(String taal) {
             this.taal = taal;
             return this;
         }
+
         public Builder withId(String id) {
             this.id = id;
             return this;

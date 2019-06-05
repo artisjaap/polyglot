@@ -20,7 +20,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
@@ -41,7 +45,7 @@ public class GenereerBrief {
     @Autowired
     private BriefAssembler briefAssembler;
 
-    public Optional<byte[]> voor(BriefConfigTO briefConfig){
+    public Optional<byte[]> voor(BriefConfigTO briefConfig) {
         Brief brief = briefRepository.findByCodeAndTaalAndActief(briefConfig.getCode(), briefConfig.getTaal()).orElseThrow(() -> new IllegalStateException("brief niet gevonden"));
         BriefConfigTO briefConfigMetExtraDatasets = extendedBriefconfig(briefConfig, brief);
         List<TemplateDataTO> templateData = brief.getPaginas().stream().map(p -> genereerGecombineerdeTemplate.genereer(p, briefConfigMetExtraDatasets)).collect(Collectors.toList());
@@ -50,7 +54,7 @@ public class GenereerBrief {
         Optional<byte[]> bytes = PDFUtils.mergePdfs(collect);
 
 
-        if(!briefConfig.dryRun()) {
+        if (!briefConfig.dryRun()) {
             Map<String, Object> briefDatasetData = new HashMap<>();
             if (briefConfig.getOpslagSettingsTO().briefLocatieType() != BriefLocatieType.NIET_OPSLAAN) {
                 for (String dataset : briefConfigMetExtraDatasets.datasets()) {
@@ -87,7 +91,7 @@ public class GenereerBrief {
         BriefLocatie.Builder briefLocatieBuilder = BriefLocatie.newBuilder();
         String filename = briefConfig.getBestandsnaam().filename(briefConfig.getDatasetProvider());
         briefLocatieBuilder.withGegenereerdeBestandsnaam(filename);
-        switch (opslagSettingsTO.briefLocatieType()){
+        switch (opslagSettingsTO.briefLocatieType()) {
             case IN_DB:
                 briefLocatieBuilder.withType(BriefLocatieType.IN_DB).withDocument(doc);
                 break;
@@ -97,7 +101,7 @@ public class GenereerBrief {
                 break;
             case RELATIVE_PATH:
                 String path = basePath + opslagSettingsTO.path();
-                PDFUtils.savePdf(path, filename,  doc);
+                PDFUtils.savePdf(path, filename, doc);
                 briefLocatieBuilder.withType(BriefLocatieType.RELATIVE_PATH).withPath(path);
                 break;
             case NIET_OPSLAAN:
@@ -106,9 +110,9 @@ public class GenereerBrief {
         return briefLocatieBuilder.build();
     }
 
-    private BriefConfigTO extendedBriefconfig(BriefConfigTO briefConfig, Brief brief){
+    private BriefConfigTO extendedBriefconfig(BriefConfigTO briefConfig, Brief brief) {
         DatasetProviderImpl datasetProvider = DatasetProviderImpl.create();
-        briefConfig.getDatasetProvider().datasetNames().forEach(d -> datasetProvider.add(d, briefConfig.getDatasetProvider().get(d).data(),briefConfig.getDatasetProvider().get(d).isAsList() ));
+        briefConfig.getDatasetProvider().datasetNames().forEach(d -> datasetProvider.add(d, briefConfig.getDatasetProvider().get(d).data(), briefConfig.getDatasetProvider().get(d).isAsList()));
         datasetProvider.add("BriefMeta", BriefMetaDataset.fromBrief(briefAssembler.assembleTO(brief)));
 
         return BriefConfigTO.newBuilder(briefConfig)
