@@ -1,22 +1,16 @@
 jar {
-    baseName = 'polyglot-scenarios'
+    baseName = 'artisjaap-mail-scenarios'
     version = '0.0.1-SNAPSHOT'
-
 }
 
-
 dependencies {
-    compile project(':polyglot-core')
-    compile project(':artisjaap-properties')
+    compile project(':artisjaap-mail')
+    testCompile project(path: ":artisjaap-mail", configuration: 'testArtifacts')
 
-    compile project(':polyglot-test-helper')
-    testCompile project(path: ":polyglot-test-helper", configuration: 'testArtifacts')
-
-    testCompile project(path: ":artisjaap-properties", configuration: 'testArtifacts')
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
+
     testCompile('de.flapdoodle.embed:de.flapdoodle.embed.mongo')
-    testCompile('org.springframework.security:spring-security-test')
 
     //cucumber
     testCompile "info.cukes:cucumber-java8:1.2.4"

@@ -1,16 +1,13 @@
-package be.artisjaap.properties.cucumber;
+package be.artisjaap.document.cucumber;
 
 import cucumber.api.java.Before;
 import cucumber.api.junit.Cucumber;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
-public class CucumberHooks {
-
+public class CucumberContext {
     @Before
-    public void clear() {
+    public void init() {
 
     }
-
-
 }

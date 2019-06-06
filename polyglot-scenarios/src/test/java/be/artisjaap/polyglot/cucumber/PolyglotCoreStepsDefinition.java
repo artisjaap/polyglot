@@ -1,7 +1,5 @@
 package be.artisjaap.polyglot.cucumber;
 
-import be.artisjaap.document.DocumentbeheerApplication;
-import be.artisjaap.polyglot.PolyglotApplication;
 import be.artisjaap.polyglot.core.action.lesson.CreateLesson;
 import be.artisjaap.polyglot.core.action.lesson.PracticeWords;
 import be.artisjaap.polyglot.core.action.lesson.SimpleNextWordStrategy;
@@ -39,7 +37,6 @@ import cucumber.api.junit.Cucumber;
 import org.bson.types.ObjectId;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
 
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -48,7 +45,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @RunWith(Cucumber.class)
-@ContextConfiguration(classes = {PolyglotApplication.class, DocumentbeheerApplication.class})
 public class PolyglotCoreStepsDefinition {
     @Autowired
     private RegisterUser registerUser;
