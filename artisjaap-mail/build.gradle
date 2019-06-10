@@ -9,4 +9,10 @@ dependencies {
 
     compile 'org.springframework.boot:spring-boot-starter-freemarker'
 
+    //cucumber
+    testCompile "info.cukes:cucumber-java8:1.2.4"
+    testCompile "info.cukes:cucumber-spring:1.2.4"
+    testCompile "info.cukes:cucumber-junit:1.2.4"
+    compile group: 'net.masterthought', name: 'cucumber-reporting', version: '3.1.0'
+
 }

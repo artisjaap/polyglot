@@ -1,18 +1,19 @@
 package be.artisjaap.i18n.action;
 
 import be.artisjaap.i18n.model.Translation;
-import be.artisjaap.i18n.model.TranslationRepository;
+import be.artisjaap.i18n.model.mongo.TranslationRepository;
+import com.sun.java.accessibility.util.Translator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Component
 public class TranslationCache {
+
+    private boolean initialized = false;
 
     private Map<String, Map<String, Translation>> translationsPerLanguage = new HashMap<>();
 
@@ -21,6 +22,10 @@ public class TranslationCache {
 
 
     Optional<String> translationForKey(String key, String languageIsoCode) {
+        if(!initialized){
+            reloadAllFromDB();
+            initialized = true;
+        }
         return Optional.ofNullable(allTranslationsForLanguage(languageIsoCode).get(key)).map(Translation::getTranslation);
     }
 
@@ -30,8 +35,6 @@ public class TranslationCache {
 
 
     void reloadAllFromDB(){
-        //translationRepository.findAll().stream().collect(Collectors.groupingBy(Translation::getLanguageIsoCode
-          //                                              , Collectors.collectingAndThen(Collectors.groupingBy(Translation::getKey, Collectors.collectingAndThen(Collectors.toCollection(ArrayList::new), l -> l.stream().findFirst().get())))));
-
+        translationsPerLanguage = translationRepository.findAll().stream().collect(Collectors.groupingBy(Translation::getLanguageIsoCode, Collectors.toMap(Translation::getKey, Function.identity())));
     }
 }

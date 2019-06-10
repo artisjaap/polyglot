@@ -1,5 +1,6 @@
-package be.artisjaap.mail.model;
+package be.artisjaap.mail.model.mongo;
 
+import be.artisjaap.mail.model.Mailing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.data.mongodb.core.MongoTemplate;

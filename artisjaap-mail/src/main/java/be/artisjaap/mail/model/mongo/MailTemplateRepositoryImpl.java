@@ -1,5 +1,6 @@
-package be.artisjaap.mail.model;
+package be.artisjaap.mail.model.mongo;
 
+import be.artisjaap.mail.model.MailTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class MailTemplateRepositoryImpl implements MailTemplateRepositoryCustom {

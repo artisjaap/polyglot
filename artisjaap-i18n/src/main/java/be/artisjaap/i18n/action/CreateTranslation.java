@@ -2,7 +2,7 @@ package be.artisjaap.i18n.action;
 
 import be.artisjaap.i18n.action.to.NewTranslationTO;
 import be.artisjaap.i18n.assembler.NewTranslationAssembler;
-import be.artisjaap.i18n.model.TranslationRepository;
+import be.artisjaap.i18n.model.mongo.TranslationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

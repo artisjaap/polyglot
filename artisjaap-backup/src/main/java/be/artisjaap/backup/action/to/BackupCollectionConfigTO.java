@@ -4,6 +4,14 @@ public class BackupCollectionConfigTO {
     private String name;
     private Boolean clearAfterBackup = false;
 
+    public String getName() {
+        return name;
+    }
+
+    public Boolean getClearAfterBackup() {
+        return clearAfterBackup;
+    }
+
     private BackupCollectionConfigTO(Builder builder) {
         name = builder.name;
         clearAfterBackup = builder.clearAfterBackup;

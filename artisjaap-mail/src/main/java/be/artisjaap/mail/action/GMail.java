@@ -3,7 +3,7 @@ package be.artisjaap.mail.action;
 import be.artisjaap.mail.action.to.MailTO;
 import be.artisjaap.mail.model.Attachment;
 import be.artisjaap.mail.model.Mailing;
-import be.artisjaap.mail.model.MailingRepository;
+import be.artisjaap.mail.model.mongo.MailingRepository;
 import be.artisjaap.properties.action.GetProperty;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

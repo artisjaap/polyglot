@@ -2,6 +2,7 @@ package be.artisjaap.common.utils;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class LocalDateUtils {
     private  static DateTimeFormatter dateFormatYYYYMMDD = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -76,5 +77,36 @@ public class LocalDateUtils {
 
     public static String nowTimestamp(){
         return format(now(), DATE_FORMAT_YYYYMMDDHHMMSS);
+    }
+
+    public static Date nowAsDate() {
+        return new Date();
+    }
+
+    public static long durationInMiliseconds(LocalDateTime timestamp){
+        //FIXME currentTime - timestamp in ms
+        return 0;
+    }
+
+    public static String msToFormattedTime(long duration) {
+        int ms = (int)duration%1000;
+        int seconden = ms/1000;
+        int sec = seconden%60;
+        int min = seconden/60;
+        return d2Format(min) + ":" + d2Format(sec) + "." + d3Format(ms);
+    }
+
+    private static String d2Format(int nr){
+        return nr < 10?"0"+nr:""+nr;
+    }
+
+    private static String d3Format(int nr){
+        if(nr < 10)
+            return "00"+nr;
+
+        if(nr < 100)
+            return "0"+nr;
+
+        return ""+nr;
     }
 }

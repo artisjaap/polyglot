@@ -10,6 +10,10 @@ public class Translation extends AbstractDocument {
     private String languageIsoCode;
     private String bundleName;
 
+    protected Translation(){
+
+    }
+
     private Translation(Builder builder) {
         buildCommon(builder);
         key = builder.key;
