@@ -1,5 +1,6 @@
 package be.artisjaap.schedule.service;
 
+import be.artisjaap.common.action.Context;
 import be.artisjaap.common.utils.WebUtils;
 import be.artisjaap.schedule.enums.TaskCategory;
 import be.artisjaap.schedule.enums.TaskStatus;
@@ -20,7 +21,7 @@ public class DummyTask extends AbstractSchoolcupTask implements SchoolcupSchedul
 	public void execute(RunningTaakContext context) {
 		
 		context.addMessage("Een dummytaak heeft geen enkel functioneel nut {paramameterized?" + context.isCustomized() +"}");
-		//FIXME System.out.println("Running..." + WebUtils.findSessionData().getGebruikerId());
+		System.out.println("Running..." + Context.userId());
 	}
 
 	@Override

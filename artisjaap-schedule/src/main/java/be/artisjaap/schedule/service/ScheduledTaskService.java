@@ -1,5 +1,6 @@
 package be.artisjaap.schedule.service;
 
+import be.artisjaap.common.action.Context;
 import be.artisjaap.schedule.action.assembler.GeplandeTaakConfigAssembler;
 import be.artisjaap.schedule.action.assembler.TaakJournaalAssembler;
 import be.artisjaap.schedule.action.assembler.TaakParametersAssembler;
@@ -188,8 +189,7 @@ public class ScheduledTaskService {
     }
 
     public void startTask(SchoolcupTask task) {
-        //FIXME String currentUser = WebUtils.findSessionData().getGebruikerId();
-        String currentUser = "static";
+        String currentUser = Context.userId();
         try {
             TaskLogDocument builder = TaskLogDocument.build().setTaak(task.getCode()).setStatus(TaskLogState.SCHEDULED).setGebruiker(currentUser);
             taskLogDocumentRepository.save(builder.entity());
@@ -244,10 +244,10 @@ public class ScheduledTaskService {
 
     private GeplandeTaakConfig configuratieAanmakenIndienDezeNogNietBestaat(String code, GeplandeTaakConfig taakConfig) {
         if (taakConfig == null) {
-            taakConfig = new GeplandeTaakConfig();
-            taakConfig.setCode(code);
-            taakConfig.setActief(Boolean.TRUE);
-            taakConfig.setTriggerType(TriggerType.USER);
+            taakConfig = GeplandeTaakConfig.newBuilder()
+                    .withCode(code)
+                    .withActief(Boolean.TRUE)
+                    .withTriggerType(TriggerType.USER).build();
             geplandeTaakConfigRepository.save(taakConfig);
         }
         return taakConfig;

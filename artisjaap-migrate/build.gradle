@@ -1,18 +1,16 @@
 jar {
-    baseName = 'artisjaap-schedule'
+    baseName = 'artisjaap-migrate'
     version = '0.0.1-SNAPSHOT'
 }
 
 dependencies {
     compile project(':artisjaap-common')
-    compile project(':artisjaap-migrate')
     
-    compile 'org.springframework.boot:spring-boot-starter-freemarker'
+    testCompile('org.springframework.boot:spring-boot-starter-test')
 
     //cucumber
     testCompile "info.cukes:cucumber-java8:1.2.4"
     testCompile "info.cukes:cucumber-spring:1.2.4"
     testCompile "info.cukes:cucumber-junit:1.2.4"
     compile group: 'net.masterthought', name: 'cucumber-reporting', version: '3.1.0'
-
 }

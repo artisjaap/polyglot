@@ -27,6 +27,7 @@ public class GeplandeTaakConfigTO extends ReferenceableTO {
 	}
 
 	private GeplandeTaakConfigTO(Builder builder) {
+		buildCommon(builder);
 		code = builder.code;
 		actief = builder.actief;
 		triggerType = builder.triggerType;

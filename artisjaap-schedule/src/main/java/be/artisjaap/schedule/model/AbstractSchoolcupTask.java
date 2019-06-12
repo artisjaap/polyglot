@@ -1,5 +1,6 @@
 package be.artisjaap.schedule.model;
 
+import be.artisjaap.common.action.Context;
 import be.artisjaap.common.utils.LocalDateUtils;
 import be.artisjaap.schedule.action.assembler.TaakParameterEntryAssembler;
 import be.artisjaap.schedule.action.to.RunningTaakContextTO;
@@ -47,7 +48,7 @@ public abstract class AbstractSchoolcupTask implements SchoolcupTask {
 
 			RunningTaakContext context = new RunningTaakContext(TaakConfig.forParameters(params), nextRunInfo.getParameterized());
 
-			//FIXME logRunning(getUserCode());
+			logRunning(getUserCode());
 			execute(context);
 
 			nextRunInfo.setParameterized(false);
@@ -156,14 +157,7 @@ public abstract class AbstractSchoolcupTask implements SchoolcupTask {
 	}
 
 	public final String getUserCode() {
-        return "userCode";
-	    //FIXME
-//		UserInfo sessionData = WebUtils.findSessionData();
-//		if(sessionData == null){
-//			return "AUTOMATED";
-//		}
-//		return sessionData.getGebruikerId();
-
+		return Context.userId();
 	}
 
 }

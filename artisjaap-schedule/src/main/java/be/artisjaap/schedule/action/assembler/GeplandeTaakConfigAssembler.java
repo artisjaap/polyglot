@@ -14,50 +14,49 @@ import java.util.Date;
 @Component
 public class GeplandeTaakConfigAssembler implements Assembler<GeplandeTaakConfigTO, GeplandeTaakConfig> {
 
-	@Override
+    @Override
     public GeplandeTaakConfig assembleEntity(GeplandeTaakConfigTO t) {
-		GeplandeTaakConfig config = new GeplandeTaakConfig();
-		config.setActief(t.getActief());
-		config.setCode(t.getCode());
-		//FIXME config.setId(t.idOrNull());
-		config.setTriggerSetting(t.getTriggerSetting());
-		config.setTriggerType(t.getTriggerType());
-		return config;
-	}
+        return GeplandeTaakConfig.newBuilder()
+                .withActief(t.getActief())
+                .withCode(t.getCode())
+                .withTriggerSetting(t.getTriggerSetting())
+                .withTriggerType(t.getTriggerType())
+                .build();
 
-	@Override
-	public GeplandeTaakConfigTO assembleTO(GeplandeTaakConfig e) {
-		return GeplandeTaakConfigTO.newBuilder()
-		//FIXME .id(e.getId())
-		.code(e.getCode())
-		.triggerType(e.getTriggerType())
-		.triggerSetting(e.getTriggerSetting())
-		.actief(e.getActief())
-		.build();
-		
-	}
-	
-	public GeplandeTaakTO voMakenVan(SchoolcupScheduledTaskContext taskContext) {
-		GeplandeTaakTO vo = new GeplandeTaakTO();
-		vo.setCode(taskContext.code());
-		vo.setOmschrijving(taskContext.omschrijving());
+    }
 
-		TriggerType triggerType = taskContext.triggerType();
-		vo.setTriggerType(triggerType);
+    @Override
+    public GeplandeTaakConfigTO assembleTO(GeplandeTaakConfig e) {
+        return GeplandeTaakConfigTO.newBuilder()
+                .code(e.getCode())
+                .triggerType(e.getTriggerType())
+                .triggerSetting(e.getTriggerSetting())
+                .actief(e.getActief())
+                .build();
 
-		vo.setTriggersetting(taskContext.triggerSetting());
+    }
 
-		vo.setActief(taskContext.actief());
+    public GeplandeTaakTO voMakenVan(SchoolcupScheduledTaskContext taskContext) {
+        GeplandeTaakTO vo = new GeplandeTaakTO();
+        vo.setCode(taskContext.code());
+        vo.setOmschrijving(taskContext.omschrijving());
 
-		TaskStatus status = taskContext.status();
-		vo.setStatus(status);
+        TriggerType triggerType = taskContext.triggerType();
+        vo.setTriggerType(triggerType);
 
-		Date nextRunTime = taskContext.nextRunTime();
-		vo.setNextRun(nextRunTime);
+        vo.setTriggersetting(taskContext.triggerSetting());
 
-		vo.setTaskCategoryCode(taskContext.taskCategoryCode());
+        vo.setActief(taskContext.actief());
 
-		return vo;
-	}
-	
+        TaskStatus status = taskContext.status();
+        vo.setStatus(status);
+
+        Date nextRunTime = taskContext.nextRunTime();
+        vo.setNextRun(nextRunTime);
+
+        vo.setTaskCategoryCode(taskContext.taskCategoryCode());
+
+        return vo;
+    }
+
 }
