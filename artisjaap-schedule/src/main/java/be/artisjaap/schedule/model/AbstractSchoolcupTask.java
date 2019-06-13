@@ -1,6 +1,6 @@
 package be.artisjaap.schedule.model;
 
-import be.artisjaap.common.action.Context;
+import be.artisjaap.common.service.Context;
 import be.artisjaap.common.utils.LocalDateUtils;
 import be.artisjaap.schedule.action.assembler.TaakParameterEntryAssembler;
 import be.artisjaap.schedule.action.to.RunningTaakContextTO;
@@ -9,11 +9,9 @@ import be.artisjaap.schedule.model.mongo.TaakInfoRepository;
 import be.artisjaap.schedule.model.mongo.TaskLogDocumentRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.data.convert.Jsr310Converters;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

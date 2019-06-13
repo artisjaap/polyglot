@@ -1,7 +1,6 @@
 package be.artisjaap.schedule.service;
 
-import be.artisjaap.common.action.Context;
-import be.artisjaap.common.utils.WebUtils;
+import be.artisjaap.common.service.Context;
 import be.artisjaap.schedule.enums.TaskCategory;
 import be.artisjaap.schedule.enums.TaskStatus;
 import be.artisjaap.schedule.model.AbstractSchoolcupTask;

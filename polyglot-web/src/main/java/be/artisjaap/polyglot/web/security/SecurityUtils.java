@@ -11,7 +11,7 @@ public class SecurityUtils {
 
     public static Optional<UserDetails> findSessionData() {
         if (SecurityContextHolder.getContext().getAuthentication() == null) {
-            return null;
+            return Optional.empty();
         }
         Object details = SecurityContextHolder.getContext().getAuthentication().getDetails();
         if (UserDetails.class.isAssignableFrom(details.getClass())) {

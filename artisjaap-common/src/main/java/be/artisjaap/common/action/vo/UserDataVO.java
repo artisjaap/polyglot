@@ -8,6 +8,10 @@ public class UserDataVO {
     private final String userId;
     private final LocalDateTime activeSince;
 
+    public static UserDataVO anonymous() {
+        return newBuilder().withUserId("ANONYMOUS").build();
+    }
+
     public String getUserId() {
         return userId;
     }

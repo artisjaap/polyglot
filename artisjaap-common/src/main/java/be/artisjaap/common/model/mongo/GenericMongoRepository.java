@@ -1,5 +1,6 @@
-package be.artisjaap.common.model;
+package be.artisjaap.common.model.mongo;
 
+import be.artisjaap.common.model.AbstractDocument;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;

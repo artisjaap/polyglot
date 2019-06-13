@@ -1,6 +1,6 @@
 package be.artisjaap.schedule.service;
 
-import be.artisjaap.common.action.Context;
+import be.artisjaap.common.service.Context;
 import be.artisjaap.schedule.action.assembler.GeplandeTaakConfigAssembler;
 import be.artisjaap.schedule.action.assembler.TaakJournaalAssembler;
 import be.artisjaap.schedule.action.assembler.TaakParametersAssembler;
