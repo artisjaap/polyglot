@@ -1,0 +1,34 @@
+1. create user
+POST - /public/api/register
+
+2. login
+GET  - /public/api/login/{username}/{password}
+
+3. create new language pair
+POST - /api/translations/pairs
+
+4. list all language pairs
+POST - /api/translations/pairs/{userId}
+
+5. add translation
+POST - /api/translations/pairs/translations
+
+6. get all words in practice
+GET - /api/translations/practice/list/{userId}/{languagePairId}/{orderType}
+
+7. get next word to practice
+GET - /api/translations/practice/next/{userId}/{languagePairId}/{orderType}/{practiceType}
+
+8. autocreate a new lesson for practiced words
+POST - /public/api/lessons/autocreate
+
+
+to do
+9. practice lesson
+GET  - /public/api/lessons/practice/{lessonId}
+
+10. test lesson
+GET  - /public/api/lessons/test/{lessonId}
+
+10. test lesson check solutions
+GET  - /public/api/lessons/test/{lessonId}

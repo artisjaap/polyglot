@@ -1,0 +1,206 @@
+<div class="page-wrapper chiller-theme " [ngClass]="{'toggled':showMenu}">
+  <a id="show-sidebar" (click)="toggleMenu()" class="btn btn-sm btn-dark" >
+    <i class="fas fa-bars" ></i>
+  </a>
+  <nav id="sidebar" class="sidebar-wrapper">
+    <div class="sidebar-content">
+      <div class="sidebar-brand">
+        <a>Ployglot</a>
+        <div id="close-sidebar">
+          <i class="fas fa-times" (click)="toggleMenu()"></i>
+        </div>
+      </div>
+      <div class="sidebar-header">
+        <div class="user-pic">
+          <img class="img-responsive img-rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg" alt="User picture">
+        </div>
+        <div class="user-info">
+                        <span class="user-name"> {{currentUser.firstName}}
+                            <strong>{{currentUser.lastName}}</strong>
+                        </span>
+          <span class="user-role">Administrator</span>
+          <span class="user-status">
+                            <i class="fa fa-circle"></i>
+                            <span>Online</span>
+                        </span>
+        </div>
+      </div>
+      <!-- sidebar-header  -->
+      <div class="sidebar-search">
+        <div>
+          <div class="input-group">
+            <input type="text" class="form-control search-menu" placeholder="Search...">
+            <div class="input-group-append">
+                                <span class="input-group-text">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- sidebar-search  -->
+      <div class="sidebar-menu">
+        <ul>
+          <li class="header-menu">
+            <span>General</span>
+          </li>
+          <li class="sidebar-dropdown"  routerLinkActive="active">
+            <a routerLink="/home/admin/dashboard"  >
+              <i class="fa fa-shopping-cart"></i>
+              <span>Admin</span>
+              <span class="badge badge-pill badge-primary">3</span>
+            </a>
+            <div class="sidebar-submenu">
+              <ul>
+                <li>
+                  <a routerLink="/home/admin/dashboard/document">Document</a>
+                </li>
+                <li>
+                  <a routerLink="/home/admin/dashboard/actuator">Actuator</a>
+                </li>
+                <li>
+                  <a routerLink="/home/admin/dashboard/mailbox">Mailbox</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="sidebar-dropdown"  routerLinkActive="active">
+            <a routerLink="/home/student" >
+              <i class="fa fa-shopping-cart"></i>
+              <span>Student</span>
+              <span class="badge badge-pill badge-primary">3</span>
+            </a>
+            <div class="sidebar-submenu">
+              <ul>
+                <li>
+                  <a routerLink="/home/student/dashboard/manage-languages">Manage Languages</a>
+                </li>
+                <li>
+                  <a routerLink="/home/student/dashboard/manage-words-for-language">Manage words</a>
+                </li>
+                <li>
+                  <a routerLink="/home/student/dashboard/practice-words">Practice words</a>
+                </li>
+                <li>
+                  <a routerLink="/home/student/dashboard/take-lesson">Take lesson</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="sidebar-dropdown" routerLinkActive="active">
+            <a routerLink="/home/teacher">
+              <i class="far fa-gem"></i>
+              <span>Teacher</span>
+            </a>
+            <div class="sidebar-submenu">
+              <ul>
+                <li>
+                  <a routerLink="admin">My students</a>
+                </li>
+                <li>
+                  <a routerLink="admin">My languages</a>
+                </li>
+                <li>
+                  <a routerLink="admin">My lessons</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="sidebar-dropdown" routerLinkActive="active">
+            <a routerLink="/home/user">
+              <i class="far fa-user"></i>
+              <span>User</span>
+            </a>
+            <div class="sidebar-submenu">
+              <ul>
+                <li>
+                  <a routerLink="/home/user/dashboard/user-settings">Settings</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+
+
+          <li class="header-menu">
+            <span>Extra</span>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa fa-calendar"></i>
+              <span>Calendar</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa fa-folder"></i>
+              <span>Examples</span>
+            </a>
+          </li>
+          <li>
+            <a routerLink="login">
+              <i class="fa fa-book"></i>
+              <span>Documentation</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!-- sidebar-menu  -->
+    </div>
+    <!-- sidebar-content  -->
+    <div class="sidebar-footer">
+      <a href="#">
+        <i class="fa fa-bell"></i>
+        <span class="badge badge-pill badge-warning notification">3</span>
+      </a>
+      <a href="#">
+        <i class="fa fa-envelope"></i>
+        <span class="badge badge-pill badge-success notification">7</span>
+      </a>
+      <a href="#">
+        <i class="fa fa-cog"></i>
+        <span class="badge-sonar"></span>
+      </a>
+      <a routerLink="login">
+        <i class="fa fa-power-off"></i>
+      </a>
+    </div>
+  </nav>
+  <main class="page-content">
+    <ng-content></ng-content>
+  </main>
+  <!--&lt;!&ndash; sidebar-wrapper  &ndash;&gt;-->
+  <!--<main class="page-content">-->
+    <!--<div class="container-fluid">-->
+      <!--<div class="row">-->
+        <!--<div class="form-group col-md-12">-->
+          <!--<h2>Sidebar template</h2>-->
+          <!--<p>This is a responsive sidebar template with dropdown menu based on bootstrap 4 framework.</p>-->
+
+        <!--</div>-->
+      <!--</div>-->
+      <!--<hr>-->
+      <!--<div class="row">-->
+        <!--<div class="form-group col-md-12">-->
+          <!--<div> You can find the complete code on <a href="https://github.com/azouaoui-med/pro-sidebar-template"  target="_blank"> Github</a>, it contains more themes and background image option</div>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<hr>-->
+      <!--<div class="row">-->
+
+        <!--<div class="form-group col-md-12">-->
+          <!--<iframe src="https://ghbtns.com/github-btn.html?user=azouaoui-med&repo=pro-sidebar-template&type=star&count=true&size=large" frameborder="0" scrolling="0" width="140px" height="30px"></iframe>-->
+          <!--<iframe src="https://ghbtns.com/github-btn.html?user=azouaoui-med&repo=pro-sidebar-template&type=fork&count=true&size=large" frameborder="0" scrolling="0" width="140px" height="30px"></iframe>-->
+          <!--<iframe src="https://ghbtns.com/github-btn.html?user=azouaoui-med&repo=pro-sidebar-template&type=watch&count=true&size=large&v=2" frameborder="0" scrolling="0" width="140px" height="30px"></iframe>-->
+        <!--</div>-->
+        <!--<div class="form-group col-md-12">-->
+          <!--<a href="https://github.com/azouaoui-med/pro-sidebar-template" class="btn btn-primary" target="_blank">-->
+            <!--<i class="fab fa-github"></i> View on GitHub</a>-->
+
+
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</main>-->
+  <!--&lt;!&ndash; page-content" &ndash;&gt;-->
+</div>
+<!-- page-wrapper -->

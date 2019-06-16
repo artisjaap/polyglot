@@ -1,0 +1,43 @@
+buildscript {
+    ext {
+        springBootVersion = '2.0.4.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath 'org.asciidoctor:asciidoctor-gradle-plugin:1.5.9.2'
+
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    sourceCompatibility = 1.8
+
+    repositories {
+        mavenCentral()
+    }
+
+    configurations {
+        testArtifacts
+    }
+    task testJar(type: Jar) {
+        baseName = "${project.name}-test"
+        from sourceSets.test.output
+    }
+    artifacts {
+        testArtifacts testJar
+    }
+
+    dependencies {
+
+        testCompile('org.springframework.boot:spring-boot-starter-test')
+    }
+
+}

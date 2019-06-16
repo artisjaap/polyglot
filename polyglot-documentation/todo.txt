@@ -1,0 +1,2 @@
+- multiple spaces between words should be sanitized and should not result in a fault
+- on errors, result and correct result should display on separate rows

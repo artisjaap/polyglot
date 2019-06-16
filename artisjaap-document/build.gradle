@@ -1,0 +1,33 @@
+jar {
+    baseName = 'artisjaap-document'
+    version = '0.0.1-SNAPSHOT'
+
+}
+
+dependencies {
+    compile project(':artisjaap-common')
+
+    //xdoc
+    compile 'fr.opensagres.xdocreport:fr.opensagres.xdocreport.document.docx:1.0.6'
+    compile 'fr.opensagres.xdocreport:fr.opensagres.xdocreport.document.pptx:1.0.5'
+    compile 'fr.opensagres.xdocreport:fr.opensagres.xdocreport.document.odt:1.0.5'
+    compile 'fr.opensagres.xdocreport:fr.opensagres.xdocreport.template.velocity:1.0.6'
+    compile 'fr.opensagres.xdocreport:fr.opensagres.xdocreport.converter.docx.xwpf:1.0.6'
+    compile 'fr.opensagres.xdocreport:fr.opensagres.xdocreport.converter.odt.odfdom:1.0.6'
+    compile 'fr.opensagres.xdocreport:org.apache.poi.xwpf.converter.pdf:1.0.6'
+
+    //QR
+    compile "com.google.zxing:core:3.3.3"
+    compile "com.google.zxing:javase:3.3.3"
+    compile "org.apache.pdfbox:pdfbox:2.0.10"
+    compile "com.itextpdf:itextpdf:5.5.13"
+
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+
+    //cucumber
+    testCompile "info.cukes:cucumber-java8:1.2.4"
+    testCompile "info.cukes:cucumber-spring:1.2.4"
+    testCompile "info.cukes:cucumber-junit:1.2.4"
+    compile group: 'net.masterthought', name: 'cucumber-reporting', version: '3.1.0'
+
+}

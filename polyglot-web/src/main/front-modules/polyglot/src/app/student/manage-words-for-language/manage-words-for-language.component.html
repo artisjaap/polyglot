@@ -1,0 +1,73 @@
+<h2>
+  Words for [{{languagePair?.languageFrom}} -  {{languagePair?.languageTo}}]
+
+</h2>
+
+<div class="flex-content row">
+  <div class="table">
+    <pol-table-navigation [control]="getControl()"></pol-table-navigation>
+
+    <div class="table-row header">
+      <div class="text">Nederlands</div>
+      <div class="text">Frans</div>
+      <div class="text">Status</div>
+    </div>
+    <div class="table-row" *ngFor="let r of filteredTranslations?.data">
+      <div class="text">{{r.question}}</div>
+      <div class="text">{{r.answer}}</div>
+      <div class="text actions">
+        <a class="fa" [ngClass]="classForStatus(r.wordStatsTO.progressStatus)" (click)="nextStatus(r)"></a>
+        <a class="fa fa-edit"  (click)="editTranslation(r)"></a>
+
+      </div>
+
+
+
+    </div>
+  </div>
+
+  <div class="sidebar">
+
+    <div class="panel">
+      <div class="header">
+        <div class="title">
+          Upload file
+        </div>
+        <div class="actions">
+          +
+        </div>
+      </div>
+      <div class="formdata content">
+        <div class="row">
+          <input type="file"  #file (change)="onFilesAdded()" multiple>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="header">
+        <div class="title">
+          Create new word
+        </div>
+        <div class="actions">
+          <span class="fa fa-plus-square" (click)="addNewWord()"></span>
+        </div>
+      </div>
+      <div class="formdata content">
+        <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+          <div class="row">
+            <span class="label">Nederlands</span><input type="text" ngModel name="from">
+          </div>
+          <div class="row">
+            <span class="label">Frans</span><input type="text" ngModel name="to">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+

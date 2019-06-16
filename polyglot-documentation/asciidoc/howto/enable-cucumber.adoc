@@ -1,0 +1,14 @@
+= How to enable cucumber
+
+This tutorial explains how to add cucumber tests with ApplicationContext for a new module.
+As an exmaple take the _artisjaap-properties_ because it is simple module.
+
+== setup
+
+. create a CucumberHooks in the _module's standard-package_.cucumber
+[WARNING]
+ make sure the @Before is from the cucumber package
+
+. create an InMemoryTestParent
+. create feature file in the resources/feature
+. create steps definition in the _module's standard-package_.cucumber

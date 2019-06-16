@@ -1,0 +1,10 @@
+jar {
+    baseName = 'artisjaap-document-web'
+    version = '0.0.1-SNAPSHOT'
+
+}
+
+dependencies {
+    compile project(':artisjaap-document')
+
+}

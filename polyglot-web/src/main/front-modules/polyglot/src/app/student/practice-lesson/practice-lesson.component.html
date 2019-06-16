@@ -1,0 +1,25 @@
+<div class="practice-box">
+  <div class="options">
+    <a class="fa fa-random" (click)="defineOrder('RANDOM')" [ngClass]="{active:order==='RANDOM'}"></a>
+    <a class="fa fa-arrow-circle-right" (click)="defineOrder('NORMAL')"  [ngClass]="{active:order==='NORMAL'}"></a>
+    <a class="fa fa-arrow-circle-left" (click)="defineOrder('REVERSE')"  [ngClass]="{active:order==='REVERSE'}"></a>
+    <a class="fa fa-cube" (click)="toggleAutohint()"  [ngClass]="{active:autohintVal}"></a>
+  </div>
+  <div class="question">
+    {{currentWord?.question}}
+  </div>
+  <div class="answer">
+    <span class="fa fa-chevron-right"></span>
+    <input type="text"  #answerGiven (keyup.enter)="checkAndNext(answerGiven)" (polInputDebounce)="startAutoHint()" (restart)="stopAutoHint()" [time]="4000" >
+    <span class="fa fa-check"></span>
+  </div>
+  <div class="feedback" *ngIf="previous">
+    <span class="fa fa-check correct" *ngIf="previous.correctAnswer"></span>
+    <span class="fa fa-times incorrect" *ngIf="!previous.correctAnswer"></span>
+    <span class="question">{{previous.question}}</span>
+    <span class="fa fa-long-arrow-alt-right"></span>
+    <span class="answer incorrect" *ngIf="!previous.correctAnswer">{{previous.givenAnswer}}</span>
+    <span class="answer correct">{{previous.expectedAnswer}}</span>
+
+  </div>
+</div>

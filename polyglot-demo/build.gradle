@@ -1,0 +1,21 @@
+
+jar {
+    baseName = 'polyglot-web-swagger'
+    version = '0.0.1-SNAPSHOT'
+
+}
+
+
+dependencies {
+
+    compile project(':polyglot-web-swagger')
+
+    compile('de.flapdoodle.embed:de.flapdoodle.embed.mongo')
+
+
+
+    // swagger
+    compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
+    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+
+}

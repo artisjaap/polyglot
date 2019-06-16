@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto|Shadows+Into+Light');
+
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.flex-content {
+  display: flex;
+  margin: 0;
+  padding: 0 5px;
+
+  &.row {
+    flex-direction: row;
+  }
+
+  .table {
+    flex: 1;
+  }
+
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+  }
+}

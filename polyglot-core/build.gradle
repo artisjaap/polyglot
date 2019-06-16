@@ -1,0 +1,26 @@
+
+
+
+jar {
+    baseName = 'polyglot-core'
+    version = '0.0.1-SNAPSHOT'
+
+}
+
+
+dependencies {
+    compile project(':artisjaap-framework')
+    compile project(':artisjaap-document')
+
+
+    testCompile project (path: ":polyglot-test-helper", configuration: 'testArtifacts')
+    testCompile group: 'io.codearte.jfairy', name: 'jfairy', version: '0.5.9'
+
+   
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('de.flapdoodle.embed:de.flapdoodle.embed.mongo')
+    testCompile('org.springframework.security:spring-security-test')
+
+    compile('com.opencsv:opencsv:4.2')
+    
+}
