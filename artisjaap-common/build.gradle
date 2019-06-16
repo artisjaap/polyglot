@@ -13,4 +13,10 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-websocket')
 
     compile('net.rakugakibox.spring.boot:orika-spring-boot-starter:1.8.0')
+
+    //cucumber
+    testCompile "info.cukes:cucumber-java8:1.2.4"
+    testCompile "info.cukes:cucumber-spring:1.2.4"
+    testCompile "info.cukes:cucumber-junit:1.2.4"
+    compile group: 'net.masterthought', name: 'cucumber-reporting', version: '3.1.0'
 }

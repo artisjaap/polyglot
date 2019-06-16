@@ -6,7 +6,6 @@ jar {
 
 
 dependencies {
-    compile project(':polyglot-core')
     compile project(':artisjaap-properties')
 
     compile project(':polyglot-test-helper')

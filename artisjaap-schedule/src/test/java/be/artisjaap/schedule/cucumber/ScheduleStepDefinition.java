@@ -1,6 +1,5 @@
 package be.artisjaap.schedule.cucumber;
 
-import be.artisjaap.common.service.Context;
 import be.artisjaap.schedule.action.ListTasks;
 import cucumber.api.java.en.Given;
 import org.springframework.beans.factory.annotation.Autowired;

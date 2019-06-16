@@ -8,6 +8,7 @@ jar {
 dependencies {
 
     compile project(':polyglot-core')
+    compile project(':artisjaap-migrate')
 
     testCompile project (path: ":polyglot-test-helper", configuration: 'testArtifacts')
     testCompile group: 'io.codearte.jfairy', name: 'jfairy', version: '0.5.9'

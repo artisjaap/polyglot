@@ -7,7 +7,7 @@ jar {
 
 dependencies {
     compile project(':polyglot-core')
-    testCompile project (path: ":polyglot-core", configuration: 'testArtifacts')
+   
 
 
     // https://mvnrepository.com/artifact/io.codearte.jfairy/jfairy
