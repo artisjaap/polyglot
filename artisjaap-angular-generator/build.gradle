@@ -1,0 +1,12 @@
+
+jar {
+    baseName = 'artisjaap-angular-generator'
+    version = '0.0.1-SNAPSHOT'
+
+}
+
+
+dependencies {
+
+    compile project(':artisjaap-common')
+}

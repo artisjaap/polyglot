@@ -1,5 +1,6 @@
 package be.artisjaap.polyglot.demo;
 
+import be.artisjaap.angular.generator.AngularGeneratorApplication;
 import be.artisjaap.document.DocumentbeheerApplication;
 import be.artisjaap.migrate.MigrateApplication;
 import be.artisjaap.polyglot.PolyglotApplication;
@@ -19,6 +20,7 @@ public class DemoApplication {
                 .sources(PolyglotWebApplication.class)
                 .sources(PolyglotWebSwaggerApplication.class)
                 .sources(MigrateApplication.class)
+                .sources(AngularGeneratorApplication.class)
                 .build()
                 .run(args);
     }
