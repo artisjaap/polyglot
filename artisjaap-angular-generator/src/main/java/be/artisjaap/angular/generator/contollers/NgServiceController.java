@@ -43,7 +43,7 @@ public class NgServiceController {
 
 
 
-        return ResponseEntity.ok(createNgServiceMethod.forMethod(new ServiceMethodVO()));
+        return ResponseEntity.ok(createNgServiceMethod.forMethod(methods.get(0)));
     }
 
 
