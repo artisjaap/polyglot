@@ -1,4 +1,3 @@
- allLanguagePairs(): Observable<LanguagePairResponse[]> {
-    const user = this.authenticationService.user;
-            return this.httpClient.get<LanguagePairResponse[]>(this.apiurl + 'api/translations/pairs/user/' + user.userId);
-        }
+${methodName}(): Observable<${returnType}<#if returnsList>[]</#if>> {
+  return this.httpClient.${requestMethod}<${returnType}<#if returnsList>[]</#if>>(this.apiurl + '${endpoint}' );
+}
