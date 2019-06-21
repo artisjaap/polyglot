@@ -1,18 +1,15 @@
 package be.artisjaap.angular.generator.contollers;
 
+import be.artisjaap.angular.generator.action.CreateNgServiceClass;
 import be.artisjaap.angular.generator.action.CreateNgServiceMethod;
-import be.artisjaap.angular.generator.action.vo.ServiceMethodVO;
-import be.artisjaap.angular.generator.utils.ReflectionUtils;
 import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-
-import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping(value = "/api/ng/services")
@@ -22,7 +19,7 @@ public class NgServiceController {
     private ListableBeanFactory listableBeanFactory;
 
     @Autowired
-    private CreateNgServiceMethod createNgServiceMethod;
+    private CreateNgServiceClass createNgServiceClass;
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public @ResponseBody
@@ -36,16 +33,10 @@ public class NgServiceController {
     ResponseEntity<?> allDetectedServices(@PathVariable String service) {
         Object bean = listableBeanFactory.getBean(service);
 
-        List<Method> methods = Arrays.asList(bean.getClass().getMethods())
-                .stream()
-                .filter(method -> ReflectionUtils.methodHasAnnotation(method, RequestMapping.class))
-                .collect(Collectors.toList());
+        String serviceClass = createNgServiceClass.forClass(bean.getClass());
 
-
-
-        return ResponseEntity.ok(createNgServiceMethod.forMethod(methods.get(0)));
+        return ResponseEntity.ok(serviceClass);
     }
-
 
 
 }

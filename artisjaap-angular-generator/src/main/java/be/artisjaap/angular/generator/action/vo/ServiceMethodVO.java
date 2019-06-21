@@ -3,6 +3,7 @@ package be.artisjaap.angular.generator.action.vo;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
+import java.util.Set;
 
 public class ServiceMethodVO {
 
@@ -13,6 +14,7 @@ public class ServiceMethodVO {
     private RequestMethod requestMethod;
     private List<UrlParameterVO> urlParameters;
     private String bodyType;
+    private Set<Class<?>> requiredClasses;
 
     private ServiceMethodVO(Builder builder) {
         methodName = builder.methodName;
@@ -22,6 +24,7 @@ public class ServiceMethodVO {
         requestMethod = builder.requestMethod;
         urlParameters = builder.urlParameters;
         bodyType = builder.bodyType;
+        requiredClasses = builder.requiredClasses;
     }
 
     public static Builder newBuilder() {
@@ -56,6 +59,10 @@ public class ServiceMethodVO {
         return bodyType;
     }
 
+    public Set<Class<?>> getRequiredClasses() {
+        return requiredClasses;
+    }
+
     public static final class Builder {
         private String methodName;
         private String returnType;
@@ -64,6 +71,7 @@ public class ServiceMethodVO {
         private RequestMethod requestMethod;
         private List<UrlParameterVO> urlParameters;
         private String bodyType;
+        private Set<Class<?>> requiredClasses;
 
         private Builder() {
         }
@@ -105,6 +113,11 @@ public class ServiceMethodVO {
 
         public ServiceMethodVO build() {
             return new ServiceMethodVO(this);
+        }
+
+        public Builder withRequiredClasses(Set<Class<?>> requiredClasses) {
+            this.requiredClasses = requiredClasses;
+            return this;
         }
     }
 }
