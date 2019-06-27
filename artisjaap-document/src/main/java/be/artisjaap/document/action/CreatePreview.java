@@ -11,26 +11,26 @@ import org.springframework.stereotype.Component;
 public class CreatePreview {
 
     @Autowired
-    private GenereerTemplate genereerTemplate;
+    private GenerateSimpleTemplate generateSimpleTemplate;
 
     @Autowired
-    private GenereerGecombineerdeTemplate genereerGecombineerdeTemplate;
+    private GenerateCombinedTemplate generateCombinedTemplate;
 
     @Autowired
-    private GenereerBrief genereerBrief;
+    private GenerateDocument generateDocument;
 
     public TemplateDataTO forTemplate(ObjectId templateId, BriefPreviewConfigTO briefConfigTO) {
-        return genereerTemplate.voorTemplateMetId(templateId, briefConfigTO);
+        return generateSimpleTemplate.voorTemplateMetId(templateId, briefConfigTO);
 
     }
 
     public TemplateDataTO forCombinedTemplate(ObjectId templateId, BriefPreviewConfigTO briefConfigTO) {
-        return genereerGecombineerdeTemplate.voorGecombineerdeTemplateMetId(templateId, briefConfigTO);
+        return generateCombinedTemplate.forCombinedTemplateWithId(templateId, briefConfigTO);
     }
 
     public TemplateDataTO forDocument(String documentId, DatasetProvider briefConfigTO) {
 
-        return genereerBrief.voorBriefMetId(documentId, briefConfigTO);
+        return generateDocument.voorBriefMetId(documentId, briefConfigTO);
     }
 
     public TemplateDataTO forDocument(String documentId) {

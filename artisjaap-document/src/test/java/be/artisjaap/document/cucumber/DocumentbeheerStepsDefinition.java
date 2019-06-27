@@ -22,25 +22,25 @@ import static org.junit.Assert.assertThat;
 public class DocumentbeheerStepsDefinition {
 
     @Autowired
-    private AddTemplate addTemplate;
+    private AddSimpleTemplate addSimpleTemplate;
 
     @Autowired
     private AddCombinedTemplate addCombinedTemplate;
 
     @Autowired
-    private ActivateTemplate activateTemplate;
+    private ActivateSimpleOrCombinedTemplate activateSimpleTemplate;
 
     @Autowired
     private ActivateDocument activateDocument;
 
     @Autowired
-    private ZoekBeschikbareEenvoudigeTemplates zoekBeschikbareEenvoudigeTemplates;
+    private FindAvailableSimpleTemplates findAvailableSimpleTemplates;
 
     @Autowired
-    private ZoekBeschikbareGecombineerdeTemplates zoekBeschikbareGecombineerdeTemplates;
+    private FindAvailableCombinedTemplates findAvailableCombinedTemplates;
 
     @Autowired
-    private ZoekBeschikbareBrieven zoekBeschikbareBrieven;
+    private FindAvailableDocuments findAvailableDocuments;
 
     @Autowired
     private AddDocument addDocument;
@@ -60,45 +60,45 @@ public class DocumentbeheerStepsDefinition {
 
     @Als("^een template (.*) wordt opgeladen als code (.*) in (.*)$")
     public void eenTemplateWordtOpgeladen(String bestand, String code, String isoCode) {
-        TemplateNieuwTO templateTO = TemplateNieuwTO.newBuilder()
+        TemplateNewTO templateTO = TemplateNewTO.newBuilder()
                 .withCode(code)
                 .withOriginalFilename(bestand)
                 .withTaal(isoCode)
                 .withTemplate(bytesFromFile(bestand))
                 .build();
-        addTemplate.voor(templateTO);
+        addSimpleTemplate.forNew(templateTO);
     }
 
     @Als("^de template met code (.*) actief wordt gezet in taal (.*)$")
     public void deTemplateMetCodeActiefWordtGezet(String code, String isoCode) {
-        List<TemplateTO> templateTOS = zoekBeschikbareEenvoudigeTemplates.metCodeInTaal(code, isoCode);
+        List<TemplateTO> templateTOS = findAvailableSimpleTemplates.withCodeAndLanguage(code, isoCode);
         assertThat(templateTOS.size(), is(1));
-        activateTemplate.activeerTemplate(templateTOS.get(0).getId());
+        activateSimpleTemplate.activateTemplate(templateTOS.get(0).getId());
     }
 
     @Als("^de gecombineerde template met code (.*) actief wordt gezet in taal (.*)$")
     public void deGecombineerdeTemplateMetCodeActiefWordtGezetInTaal(String code, String isoCode) throws Throwable {
-        List<GecombineerdeTemplateTO> gecombineerdeTemplateTOS = zoekBeschikbareGecombineerdeTemplates.metCodeInTaal(code, isoCode);
-        assertThat(gecombineerdeTemplateTOS.size(), is(1));
-        activateTemplate.activeerTemplate(gecombineerdeTemplateTOS.get(0).getId());
+        List<CombinedTemplateTO> combinedTemplateTOS = findAvailableCombinedTemplates.withCodeAndLanguage(code, isoCode);
+        assertThat(combinedTemplateTOS.size(), is(1));
+        activateSimpleTemplate.activateTemplate(combinedTemplateTOS.get(0).getId());
     }
 
     @Als("^de brief met code (.*) actief wordt gezet in taal (.*)$")
     public void deBriefMANDAAT_BRIEFWordtActiefGezet(String code, String isoCode) throws Throwable {
-        List<BriefTO> briefTOS = zoekBeschikbareBrieven.metCodeInTaal(code, isoCode);
-        assertThat(briefTOS.size(), is(1));
-        activateDocument.metId(briefTOS.get(0).getId());
+        List<DocumentTO> documentTOS = findAvailableDocuments.withCodeAndLanguage(code, isoCode);
+        assertThat(documentTOS.size(), is(1));
+        activateDocument.metId(documentTOS.get(0).getId());
     }
 
     @Als("^een gecombineerde template met code (.*) in taal (.*) wordt gemaakt uit de templates (.*)$")
     public void eenGecombineerdeTemplateMetCodeWordtGemaaktUitDeTemplates(String code, String taal, List<String> templates) {
-        GecombineerdeTemplateNieuwTO combinatie = GecombineerdeTemplateNieuwTO
+        CombinedTemplateNewTO combinatie = CombinedTemplateNewTO
                 .newBuilder()
                 .withCode(code)
                 .withTemplates(templates)
                 .withTaal(taal)
                 .build();
-        addCombinedTemplate.uit(combinatie);
+        addCombinedTemplate.from(combinatie);
     }
 
     private byte[] bytesFromFile(String bestand) {
@@ -115,12 +115,12 @@ public class DocumentbeheerStepsDefinition {
 
     @Als("^een brief (.*) in (.*) die bestaat uit de templates (.*)")
     public void eenBriefInNldDieBestaatUitDeTemplates(String code, String isoCode, List<String> templates) throws Throwable {
-        BriefNieuwTO nieuweBrief = BriefNieuwTO.newBuilder()
+        DocumentNewTO nieuweBrief = DocumentNewTO.newBuilder()
                 .withCode(code)
                 .withTaal(isoCode)
                 .withTemplates(templates)
                 .build();
-        addDocument.voor(nieuweBrief);
+        addDocument.forNew(nieuweBrief);
     }
 
 

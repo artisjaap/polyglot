@@ -1,6 +1,6 @@
 package be.artisjaap.polyglot.core.action.documebts;
 
-import be.artisjaap.document.action.GenereerBrief;
+import be.artisjaap.document.action.GenerateDocument;
 import be.artisjaap.document.action.to.BriefConfigTO;
 import be.artisjaap.document.api.brieflocatie.BriefLocatieFactory;
 import be.artisjaap.document.api.filegeneratie.FileGeneratieFactory;
@@ -24,7 +24,7 @@ import java.util.Optional;
 @Component
 public class GenerateReportForJournal {
     @Autowired
-    private GenereerBrief genereerBrief;
+    private GenerateDocument generateDocument;
 
 
 
@@ -86,7 +86,7 @@ public class GenerateReportForJournal {
         }catch(Exception e){}
 
 
-        return genereerBrief.voor(briefConfigTO);
+        return generateDocument.forDocument(briefConfigTO);
     }
 
 }

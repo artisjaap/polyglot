@@ -1,7 +1,7 @@
 package be.artisjaap.document.action;
 
-import be.artisjaap.document.model.Brief;
-import be.artisjaap.document.model.mongo.BriefRepository;
+import be.artisjaap.document.model.Document;
+import be.artisjaap.document.model.mongo.DocumentRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -12,18 +12,18 @@ import java.util.Optional;
 public class ActivateDocument {
 
     @Autowired
-    private BriefRepository briefRepository;
+    private DocumentRepository documentRepository;
 
     @Autowired
     private DeactivateDocument deactivateDocument;
 
     public void metId(String id) {
-        Optional<Brief> briefOptional = briefRepository.findById(new ObjectId(id));
+        Optional<Document> briefOptional = documentRepository.findById(new ObjectId(id));
         briefOptional.ifPresent(
                 brief -> {
-                    deactivateDocument.metCodeAndTaal(brief.getCode(), brief.getTaal());
+                    deactivateDocument.withCodeAndLanguage(brief.getCode(), brief.getTaal());
                     brief.activeer();
-                    briefRepository.save(brief);
+                    documentRepository.save(brief);
                 }
         );
     }

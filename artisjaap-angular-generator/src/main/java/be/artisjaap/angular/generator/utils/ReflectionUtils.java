@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -41,5 +43,21 @@ public class ReflectionUtils {
 
     public static List<Parameter> findParametersWithAnnotation(Method method, Class<PathVariable> annotationClass) {
         return Arrays.asList(method.getParameters()).stream().filter(p -> parameterHasAnnotation(p, annotationClass)).collect(Collectors.toList());
+    }
+
+    public static Class realClassForReturnType(Type returnType){
+        if (ParameterizedType.class.isAssignableFrom(returnType.getClass())) {
+            ParameterizedType type = (ParameterizedType) returnType;
+
+            Type[] typeArguments = type.getActualTypeArguments();
+
+
+            try {
+                return Class.forName(typeArguments[0].getTypeName());
+            } catch (ClassNotFoundException e) {
+
+            }
+        }
+        return Object.class;
     }
 }

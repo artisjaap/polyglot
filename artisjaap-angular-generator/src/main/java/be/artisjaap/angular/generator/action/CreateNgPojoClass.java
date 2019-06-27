@@ -1,12 +1,10 @@
 package be.artisjaap.angular.generator.action;
 
-import be.artisjaap.angular.generator.action.assembler.ClassAssembler;
 import be.artisjaap.angular.generator.action.vo.ClassVO;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import freemarker.template.Version;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 
@@ -18,14 +16,6 @@ import java.io.Reader;
 @Component
 public class CreateNgPojoClass {
 
-    @Autowired
-    private ClassAssembler classAssembler;
-
-
-    public String forClass(Class<?> clazz) {
-        ClassVO methodVO = classAssembler.assembleTO(clazz);
-        return forClass(methodVO);
-    }
 
     public String forClass(ClassVO classVO) {
 

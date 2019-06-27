@@ -1,6 +1,6 @@
 package be.artisjaap.document.web.endpoints.response;
 
-import be.artisjaap.document.action.to.GecombineerdeTemplateCodeTO;
+import be.artisjaap.document.action.to.CombinedTemplateCodeTO;
 
 public class CombinedTemplateCodeResponse {
     private String code;
@@ -15,7 +15,7 @@ public class CombinedTemplateCodeResponse {
         return new Builder();
     }
 
-    public static CombinedTemplateCodeResponse from(GecombineerdeTemplateCodeTO combinedTemplateTO) {
+    public static CombinedTemplateCodeResponse from(CombinedTemplateCodeTO combinedTemplateTO) {
         return CombinedTemplateCodeResponse.newBuilder()
                 .withCode(combinedTemplateTO.getCode())
                 .withDescription(combinedTemplateTO.getDescription())

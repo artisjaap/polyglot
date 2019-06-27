@@ -1,6 +1,6 @@
 package be.artisjaap.document.cucumber;
 
-import be.artisjaap.document.action.GenereerBrief;
+import be.artisjaap.document.action.GenerateDocument;
 import be.artisjaap.document.action.datasets.*;
 import be.artisjaap.document.action.to.BriefConfigTO;
 import be.artisjaap.document.api.DatasetProvider;
@@ -9,10 +9,10 @@ import be.artisjaap.document.api.DocumentImage;
 import be.artisjaap.document.api.brieflocatie.BriefLocatieFactory;
 import be.artisjaap.document.api.filegeneratie.FileGeneratieFactory;
 import be.artisjaap.document.api.filegeneratie.GenericFileName;
-import be.artisjaap.document.model.GecombineerdeTemplate;
+import be.artisjaap.document.model.CombinedTemplate;
 import be.artisjaap.document.model.GegenereerdeBrief;
 import be.artisjaap.document.model.Template;
-import be.artisjaap.document.model.mongo.GecombineerdeTemplateRepository;
+import be.artisjaap.document.model.mongo.CombinedTemplateRepository;
 import be.artisjaap.document.model.mongo.GegenereerdeBriefRepository;
 import be.artisjaap.document.model.mongo.TemplateRepository;
 import be.artisjaap.document.utils.QrUtils;
@@ -39,10 +39,10 @@ public class DocumentbeheerThenStepsDefinition {
     private TemplateRepository templateRepository;
 
     @Autowired
-    private GecombineerdeTemplateRepository gecombineerdeTemplateRepository;
+    private CombinedTemplateRepository combinedTemplateRepository;
 
     @Autowired
-    private GenereerBrief genereerBrief;
+    private GenerateDocument generateDocument;
 
     @Autowired
     private GegenereerdeBriefRepository gegenereerdeBriefRepository;
@@ -55,8 +55,8 @@ public class DocumentbeheerThenStepsDefinition {
     }
 
     @Dan("^is de gecombineerde template met code (.*) beschikbaar$")
-    public GecombineerdeTemplate isDeGecombineerdeTemplateMetCodeBeschikbaar(String code){
-        List<GecombineerdeTemplate> template = gecombineerdeTemplateRepository.findByCode(code);
+    public CombinedTemplate isDeGecombineerdeTemplateMetCodeBeschikbaar(String code){
+        List<CombinedTemplate> template = combinedTemplateRepository.findByCode(code);
         assertFalse(template.isEmpty());
         return template.get(0);
     }
@@ -81,7 +81,7 @@ public class DocumentbeheerThenStepsDefinition {
                 .withBestandsnaam(FileGeneratieFactory.simpleFilename())
                 .withOpslagLocatie(BriefLocatieFactory.voorAbsolutePath("c:/temp/docs/"))
                 .build();
-        genereerBrief.voor(briefConfigTO);
+        generateDocument.forDocument(briefConfigTO);
     }
 
 
@@ -94,11 +94,11 @@ public class DocumentbeheerThenStepsDefinition {
                 .withBestandsnaam(FileGeneratieFactory.simpleFilename())
                 .withOpslagLocatie(BriefLocatieFactory.voorDB())
                 .build();
-        genereerBrief.voor(briefConfigTO);
+        generateDocument.forDocument(briefConfigTO);
 
         List<GegenereerdeBrief> brief = gegenereerdeBriefRepository.findByBriefCodeAndTaal(code, isoCode);
         assertThat(brief.size(), is(1));
-        assertNotNull(brief.get(0).getBriefLocatie().getDocument());
+        assertNotNull(brief.get(0).getDocumentLocation().getDocument());
     }
 
     @Dan("^kan de brief met code (.*) in taal (.*) gegenereerd worden met een default set van datasets en worden opgeslagen in de MongoDB met bestandsnaam (.*)$")
@@ -112,7 +112,7 @@ public class DocumentbeheerThenStepsDefinition {
                 .withBestandsnaam(genericFilenameBuilder.build())
                 .withOpslagLocatie(BriefLocatieFactory.voorDB())
                 .build();
-        genereerBrief.voor(briefConfigTO);
+        generateDocument.forDocument(briefConfigTO);
 
 
     }
@@ -127,11 +127,11 @@ public class DocumentbeheerThenStepsDefinition {
                 .withOpslagLocatie(BriefLocatieFactory.voorDB())
                 .withDatasetsToBlacklist(new HashSet(blackList))
                 .build();
-        genereerBrief.voor(briefConfigTO);
+        generateDocument.forDocument(briefConfigTO);
 
         List<GegenereerdeBrief> brief = gegenereerdeBriefRepository.findByBriefCodeAndTaal(code, isoCode);
         assertThat(brief.size(), is(1));
-        assertNotNull(brief.get(0).getBriefLocatie().getDocument());
+        assertNotNull(brief.get(0).getDocumentLocation().getDocument());
 
 
 
@@ -148,7 +148,7 @@ public class DocumentbeheerThenStepsDefinition {
                 .withBestandsnaam(FileGeneratieFactory.simpleFilename())
                 .withOpslagLocatie(BriefLocatieFactory.voorAbsolutePath(absolutePath))
                 .build();
-        genereerBrief.voor(briefConfigTO);
+        generateDocument.forDocument(briefConfigTO);
     }
 
     @Dan("^kan de brief met code (.*) in taal (.*) gegenereerd worden met een default set van datasets, wordt opgeslagen op het absolute path (.*) en bevat volgende images$")
@@ -163,7 +163,7 @@ public class DocumentbeheerThenStepsDefinition {
         images.forEach(image -> builder.addImage(DocumentImage.newBuilder().withName(image.bookmarkNaam).withImage(bytesFromImage( image.image)).build()));
 
         BriefConfigTO briefConfigTO = builder.build();
-        genereerBrief.voor(briefConfigTO);
+        generateDocument.forDocument(briefConfigTO);
     }
 
     @Dan("^kan de brief met code (.*) in taal (.*) gegenereerd worden met een default set van datasets en worden opgeslagen op het relatieve path (.*)$")
@@ -175,7 +175,7 @@ public class DocumentbeheerThenStepsDefinition {
                 .withBestandsnaam(FileGeneratieFactory.simpleFilename())
                 .withOpslagLocatie(BriefLocatieFactory.voorRelatiefPath(relativePath))
                 .build();
-        genereerBrief.voor(briefConfigTO);
+        generateDocument.forDocument(briefConfigTO);
     }
 
     @Dan("^kan de brief met code (.*) in taal (.*) gegenereerd worden met een default set van datasets, wordt opgeslagen op het absolute path (.*) en bevat in de QR de volgende gegevens (.*)$")
@@ -194,7 +194,7 @@ public class DocumentbeheerThenStepsDefinition {
 
 
         BriefConfigTO briefConfigTO = builder.build();
-        genereerBrief.voor(briefConfigTO);
+        generateDocument.forDocument(briefConfigTO);
 
     }
 
@@ -216,7 +216,7 @@ public class DocumentbeheerThenStepsDefinition {
     @Dan("^is het bestand (.*) in taal (.*) beschikbaar onder de naam (.*)$")
     public void isHetBestandBeschikbaarOnderDeNaam(String documentCode, String isoCode, String bestandsnaam) throws Throwable {
         GegenereerdeBrief gegenereerdeBrief = zoekGegenereerdeBrief(documentCode, isoCode);
-        assertThat(gegenereerdeBrief.getBriefLocatie().getGegenereerdeBestandsnaam(), is(bestandsnaam));
+        assertThat(gegenereerdeBrief.getDocumentLocation().getGegenereerdeBestandsnaam(), is(bestandsnaam));
     }
 
     private byte[] bytesFromImage(String bestand){

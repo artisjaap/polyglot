@@ -2,15 +2,15 @@ package be.artisjaap.document.action;
 
 import be.artisjaap.document.action.to.BriefCodeNieuwTO;
 import be.artisjaap.document.action.to.BriefCodeTO;
-import be.artisjaap.document.action.to.BriefNieuwTO;
-import be.artisjaap.document.action.to.BriefTO;
-import be.artisjaap.document.assembler.BriefAssembler;
-import be.artisjaap.document.assembler.BriefCodeAssembler;
-import be.artisjaap.document.assembler.BriefCodeNieuwAssembler;
-import be.artisjaap.document.assembler.BriefNieuwAssembler;
-import be.artisjaap.document.model.Brief;
-import be.artisjaap.document.model.mongo.BriefCodeRepository;
-import be.artisjaap.document.model.mongo.BriefRepository;
+import be.artisjaap.document.action.to.DocumentNewTO;
+import be.artisjaap.document.action.to.DocumentTO;
+import be.artisjaap.document.assembler.DocumentAssembler;
+import be.artisjaap.document.assembler.DocumentCodeAssembler;
+import be.artisjaap.document.assembler.DocumentCodeNewAssembler;
+import be.artisjaap.document.assembler.DocumentNewAssembler;
+import be.artisjaap.document.model.Document;
+import be.artisjaap.document.model.mongo.DocumentCodeRepository;
+import be.artisjaap.document.model.mongo.DocumentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,32 +18,32 @@ import org.springframework.stereotype.Component;
 public class AddDocument {
 
     @Autowired
-    private BriefNieuwAssembler briefNieuwAssembler;
+    private DocumentNewAssembler documentNewAssembler;
 
     @Autowired
-    private BriefAssembler briefAssembler;
+    private DocumentAssembler documentAssembler;
 
     @Autowired
-    private BriefRepository briefRepository;
+    private DocumentRepository documentRepository;
 
     @Autowired
-    private BriefCodeRepository briefCodeRepository;
+    private DocumentCodeRepository documentCodeRepository;
 
     @Autowired
-    private BriefCodeNieuwAssembler briefCodeNieuwAssembler;
+    private DocumentCodeNewAssembler documentCodeNewAssembler;
 
     @Autowired
-    private BriefCodeAssembler briefCodeAssembler;
+    private DocumentCodeAssembler documentCodeAssembler;
 
 
-    public BriefTO voor(BriefNieuwTO briefTO) {
-        Brief brief = briefNieuwAssembler.assembleEntity(briefTO);
-        brief = briefRepository.save(brief);
-        return briefAssembler.assembleTO(brief);
+    public DocumentTO forNew(DocumentNewTO briefTO) {
+        Document document = documentNewAssembler.assembleEntity(briefTO);
+        document = documentRepository.save(document);
+        return documentAssembler.assembleTO(document);
     }
 
     public BriefCodeTO metNieuweCode(BriefCodeNieuwTO templateCode) {
-        return briefCodeAssembler.assembleTO(briefCodeRepository.save(briefCodeNieuwAssembler.assembleEntity(templateCode)));
+        return documentCodeAssembler.assembleTO(documentCodeRepository.save(documentCodeNewAssembler.assembleEntity(templateCode)));
 
     }
 }

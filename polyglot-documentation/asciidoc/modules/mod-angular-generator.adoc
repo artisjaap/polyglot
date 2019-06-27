@@ -1,0 +1,26 @@
+= Angular generator
+
+== purpose
+
+Angular generator enables some endpoints that lets you generate skeleton code for angular services and classes
+
+== how to include in project
+
+Add the AngularGeneratorApplication to the application
+    .sources(AngularGeneratorApplication.class)
+
+The following endpoints will be available:
+- /all
+- /{service}
+- /{service}/class-imports
+
+== endpoints
+
+- GET /all
+lists all controllers available in the running application
+
+- GET /{service}
+for a specific service, generate skeleton code for the Angular Service
+
+- GET /{service}/class-imports
+for a specific service, generate default data-classes that are used by the service.

@@ -1,7 +1,7 @@
 package be.artisjaap.document.api;
 
 import be.artisjaap.common.utils.LocalDateUtils;
-import be.artisjaap.document.action.to.BriefTO;
+import be.artisjaap.document.action.to.DocumentTO;
 
 import java.time.LocalDateTime;
 
@@ -50,10 +50,10 @@ public class BriefMetaDataset {
     }
 
 
-    public static BriefMetaDataset fromBrief(BriefTO briefTO) {
-        return newBuilder().withTaal(briefTO.getTaal())
-                .withReferentie(briefTO.getReferentie())
-                .withBriefCode(briefTO.getNaam())
+    public static BriefMetaDataset fromBrief(DocumentTO documentTO) {
+        return newBuilder().withTaal(documentTO.getTaal())
+                .withReferentie(documentTO.getReferentie())
+                .withBriefCode(documentTO.getNaam())
                 .build();
 
     }

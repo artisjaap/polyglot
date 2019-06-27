@@ -1,30 +1,21 @@
 package be.artisjaap.angular.generator.action;
 
-import be.artisjaap.angular.generator.action.assembler.MethodAssembler;
 import be.artisjaap.angular.generator.action.vo.ServiceMethodVO;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import freemarker.template.Version;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 
-import java.io.*;
-import java.lang.reflect.Method;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
 
 @Component
 public class CreateNgServiceMethod {
 
-    @Autowired
-    private MethodAssembler methodAssembler;
-
-
-
-    public String forMethod(Method method) {
-        ServiceMethodVO methodVO = methodAssembler.assembleTO(method);
-        return forMethod(methodVO);
-    }
 
     public String forMethod(ServiceMethodVO methodVO) {
 

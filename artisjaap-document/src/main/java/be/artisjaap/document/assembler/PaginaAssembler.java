@@ -1,25 +1,25 @@
 package be.artisjaap.document.assembler;
 
 import be.artisjaap.document.action.to.PaginaTO;
-import be.artisjaap.document.model.Pagina;
+import be.artisjaap.document.model.Page;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PaginaAssembler implements Assembler<Pagina, PaginaTO> {
+public class PaginaAssembler implements Assembler<Page, PaginaTO> {
     @Override
-    public Pagina assembleEntity(PaginaTO paginaTO) {
-        return Pagina.newBuilder()
+    public Page assembleEntity(PaginaTO paginaTO) {
+        return Page.newBuilder()
                 .withCode(paginaTO.getCode())
                 .withPaginaType(paginaTO.getType())
                 .build();
     }
 
     @Override
-    public PaginaTO assembleTO(Pagina pagina) {
+    public PaginaTO assembleTO(Page page) {
 
         return PaginaTO.newBuilder()
-                .withCode(pagina.getCode())
-                .withType(pagina.getPaginaType())
+                .withCode(page.getCode())
+                .withType(page.getPaginaType())
                 .build();
     }
 }

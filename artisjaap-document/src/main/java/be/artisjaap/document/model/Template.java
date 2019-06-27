@@ -47,7 +47,7 @@ public class Template extends AbstractDocument {
         return taal;
     }
 
-    public void desactiveer() {
+    public void deactivate() {
         actief = false;
     }
     public void activeer() {

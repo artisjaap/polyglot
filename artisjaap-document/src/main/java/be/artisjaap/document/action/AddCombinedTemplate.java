@@ -1,17 +1,17 @@
 package be.artisjaap.document.action;
 
-import be.artisjaap.document.action.to.GecombineerdeTemplateCodeTO;
-import be.artisjaap.document.action.to.GecombineerdeTemplateNieuwTO;
-import be.artisjaap.document.action.to.GecombineerdeTemplateTO;
-import be.artisjaap.document.action.to.TemplateCodeNieuwTO;
-import be.artisjaap.document.assembler.GecombineerdeTemplateAssembler;
-import be.artisjaap.document.assembler.GecombineerdeTemplateCodeAssembler;
-import be.artisjaap.document.assembler.GecombineerdeTemplateCodeNieuwAssembler;
-import be.artisjaap.document.assembler.GecombineerdeTemplateNieuwAssembler;
-import be.artisjaap.document.model.GecombineerdeTemplate;
+import be.artisjaap.document.action.to.CombinedTemplateCodeTO;
+import be.artisjaap.document.action.to.CombinedTemplateNewTO;
+import be.artisjaap.document.action.to.CombinedTemplateTO;
+import be.artisjaap.document.action.to.TemplateCodeNewTO;
+import be.artisjaap.document.assembler.CombinedTemplateAssembler;
+import be.artisjaap.document.assembler.CombinedTemplateCodeAssembler;
+import be.artisjaap.document.assembler.CombinedTemplateCodeNewAssembler;
+import be.artisjaap.document.assembler.CombinedTemplateNewAssembler;
+import be.artisjaap.document.model.CombinedTemplate;
 import be.artisjaap.document.model.GecombineerdeTemplateCode;
-import be.artisjaap.document.model.mongo.GecombineerdeTemplateCodeRepository;
-import be.artisjaap.document.model.mongo.GecombineerdeTemplateRepository;
+import be.artisjaap.document.model.mongo.CombinedTemplateCodeRepository;
+import be.artisjaap.document.model.mongo.CombinedTemplateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,31 +19,31 @@ import org.springframework.stereotype.Component;
 @Component
 public class AddCombinedTemplate {
     @Autowired
-    private GecombineerdeTemplateRepository gecombineerdeTemplateRepository;
+    private CombinedTemplateRepository combinedTemplateRepository;
 
     @Autowired
-    private GecombineerdeTemplateCodeRepository gecombineerdeTemplateCodeRepository;
+    private CombinedTemplateCodeRepository combinedTemplateCodeRepository;
 
     @Autowired
-    private GecombineerdeTemplateNieuwAssembler gecombineerdeTemplateNieuwAssembler;
+    private CombinedTemplateNewAssembler combinedTemplateNewAssembler;
 
     @Autowired
-    private GecombineerdeTemplateAssembler gecombineerdeTemplateAssembler;
+    private CombinedTemplateAssembler combinedTemplateAssembler;
 
     @Autowired
-    private GecombineerdeTemplateCodeNieuwAssembler gecombineerdeTemplateCodeNieuwAssembler;
+    private CombinedTemplateCodeNewAssembler combinedTemplateCodeNewAssembler;
 
     @Autowired
-    private GecombineerdeTemplateCodeAssembler gecombineerdeTemplateCodeAssembler;
+    private CombinedTemplateCodeAssembler combinedTemplateCodeAssembler;
 
-    public GecombineerdeTemplateTO uit(GecombineerdeTemplateNieuwTO combinatie) {
-        GecombineerdeTemplate template = gecombineerdeTemplateNieuwAssembler.assembleEntity(combinatie);
-        template = gecombineerdeTemplateRepository.save(template);
-        return gecombineerdeTemplateAssembler.assembleTO(template);
+    public CombinedTemplateTO from(CombinedTemplateNewTO combinatie) {
+        CombinedTemplate template = combinedTemplateNewAssembler.assembleEntity(combinatie);
+        template = combinedTemplateRepository.save(template);
+        return combinedTemplateAssembler.assembleTO(template);
     }
 
-    public GecombineerdeTemplateCodeTO metNieuweCode(TemplateCodeNieuwTO templateCode) {
-        GecombineerdeTemplateCode gecombineerdeTemplateCode = gecombineerdeTemplateCodeRepository.save(gecombineerdeTemplateCodeNieuwAssembler.assembleEntity(templateCode));
-        return gecombineerdeTemplateCodeAssembler.assembleTO(gecombineerdeTemplateCode);
+    public CombinedTemplateCodeTO withNewCode(TemplateCodeNewTO templateCode) {
+        GecombineerdeTemplateCode gecombineerdeTemplateCode = combinedTemplateCodeRepository.save(combinedTemplateCodeNewAssembler.assembleEntity(templateCode));
+        return combinedTemplateCodeAssembler.assembleTO(gecombineerdeTemplateCode);
     }
 }

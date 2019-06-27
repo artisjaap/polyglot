@@ -1,5 +1,6 @@
 package be.artisjaap.angular.generator.action.assembler;
 
+import be.artisjaap.angular.generator.action.vo.ClassVO;
 import be.artisjaap.angular.generator.action.vo.ServiceMethodVO;
 import be.artisjaap.angular.generator.action.vo.UrlParameterVO;
 import be.artisjaap.angular.generator.utils.ReflectionUtils;
@@ -29,6 +30,7 @@ import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Component
 public class MethodAssembler implements Assembler<ServiceMethodVO, Method> {
@@ -37,11 +39,14 @@ public class MethodAssembler implements Assembler<ServiceMethodVO, Method> {
     @Autowired
     private UrlParameterAssembler urlParameterAssembler;
 
+    @Autowired
+    private ClassAssembler classAssembler;
+
     @Override
     public ServiceMethodVO assembleTO(Method method) {
         return ServiceMethodVO.newBuilder()
                 .withBodyType(findMethodParameterWithRequestBody(method).map(Class::getSimpleName).orElse(null))
-                .withEndpoint(findEndpoint(method))
+                .withEndpoint(convertVarsInEndpoint(findEndpoint(method)))
                 .withMethodName(method.getName())
                 .withRequestMethod(findRequestMethod(method))
                 .withReturnsList(returnTypeIsList(method))
@@ -49,6 +54,10 @@ public class MethodAssembler implements Assembler<ServiceMethodVO, Method> {
                 .withRequiredClasses(addRequiredClasses(method))
                 .withUrlParameters(addUrlParameters(method))
                 .build();
+    }
+
+    private String convertVarsInEndpoint(String endpoint) {
+        return endpoint.replaceAll("(\\{[a-zA-Z]+})", "\\$$1");
     }
 
     private List<UrlParameterVO> addUrlParameters(Method method) {
@@ -61,12 +70,25 @@ public class MethodAssembler implements Assembler<ServiceMethodVO, Method> {
     }
 
     private List<UrlParameterVO> orderParameters(List<String> endpointVars, List<UrlParameterVO> parameters) {
+        // FIXME
+        //this doesnt order, becase the actual param name is lost during compilation
+        // it will just replace argI with the name from the method
+        // supposing tue url parameters are defined in the same order as those in t methor parameters
         if (endpointVars.size() != parameters.size()) {
             throw new IllegalStateException("Endpoint vars don't match method parameters");
         }
-        Map<String, UrlParameterVO> collect = parameters.stream().collect(Collectors.toMap(UrlParameterVO::getName, Function.identity()));
+        //Map<String, UrlParameterVO> collect = parameters.stream().collect(Collectors.toMap(UrlParameterVO::getName, Function.identity()));
+        //return endpointVars.stream().map(key -> collect.get(key)).collect(Collectors.toList());
 
-        return endpointVars.stream().map(key -> collect.get(key)).collect(Collectors.toList());
+        if(endpointVars.isEmpty()){
+            return new ArrayList<>();
+        }
+        return IntStream.range(0, endpointVars.size())
+                .mapToObj(i -> UrlParameterVO.newBuilder().
+                        withType(parameters.get(i).getType())
+                        .withName(endpointVars.get(i))
+                        .build())
+                .collect(Collectors.toList());
     }
 
     private List<Parameter> findPathVariables(Method method) {
@@ -86,13 +108,14 @@ public class MethodAssembler implements Assembler<ServiceMethodVO, Method> {
 
     }
 
-    private Set<Class<?>> addRequiredClasses(Method method) {
-        Set<Class<?>> classes = new HashSet<>();
+    private List<ClassVO> addRequiredClasses(Method method) {
+        List<Class> classes = new ArrayList<>();
 
         classes.add(methodReturnType(method));
         findMethodParameterWithRequestBody(method).ifPresent(classes::add);
 
-        return classes;
+        return classAssembler.assembleTOs(classes);
+
     }
 
 

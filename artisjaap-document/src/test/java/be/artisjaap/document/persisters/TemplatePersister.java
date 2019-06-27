@@ -1,8 +1,8 @@
 package be.artisjaap.document.persisters;
 
-import be.artisjaap.document.action.ActivateTemplate;
-import be.artisjaap.document.action.AddTemplate;
-import be.artisjaap.document.action.to.TemplateNieuwTO;
+import be.artisjaap.document.action.ActivateSimpleOrCombinedTemplate;
+import be.artisjaap.document.action.AddSimpleTemplate;
+import be.artisjaap.document.action.to.TemplateNewTO;
 import be.artisjaap.document.action.to.TemplateTO;
 import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
@@ -16,10 +16,10 @@ import java.io.IOException;
 public class TemplatePersister {
 
     @Resource
-    private AddTemplate addTemplate;
+    private AddSimpleTemplate addSimpleTemplate;
 
     @Resource
-    private ActivateTemplate activateTemplate;
+    private ActivateSimpleOrCombinedTemplate activateSimpleTemplate;
 
     public void maakTemplate(String code, String filename) {
 
@@ -27,15 +27,15 @@ public class TemplatePersister {
         File file = new File(classLoader.getResource("templates/"+filename).getFile());
 
         try {
-            TemplateNieuwTO templateTO = TemplateNieuwTO.newBuilder()
+            TemplateNewTO templateTO = TemplateNewTO.newBuilder()
                     .withCode(code)
                     .withOriginalFilename(filename)
                     .withTaal("DUTCH")
                     .withTemplate(FileUtils.readFileToByteArray(file))
 
                     .build();
-            TemplateTO templateOpgeslagen = addTemplate.voor(templateTO);
-            activateTemplate.activeerTemplate(templateOpgeslagen.getId());
+            TemplateTO templateOpgeslagen = addSimpleTemplate.forNew(templateTO);
+            activateSimpleTemplate.activateTemplate(templateOpgeslagen.getId());
         }catch(IOException x){
             Assert.fail(x.getMessage());
         }

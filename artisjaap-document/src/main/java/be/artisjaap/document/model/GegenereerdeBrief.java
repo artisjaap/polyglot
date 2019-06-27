@@ -9,7 +9,7 @@ import java.util.Set;
 @Document(collection = "BwGegenereerdeBrief")
 public class GegenereerdeBrief extends AbstractDocument {
     private String taal;
-    private BriefLocatie briefLocatie;
+    private DocumentLocation documentLocation;
     private String briefCode;
     private ObjectId briefRef;
     private Set<ObjectId> gebruikteTemplates;
@@ -19,8 +19,8 @@ public class GegenereerdeBrief extends AbstractDocument {
         return taal;
     }
 
-    public BriefLocatie getBriefLocatie() {
-        return briefLocatie;
+    public DocumentLocation getDocumentLocation() {
+        return documentLocation;
     }
 
     public String getBriefCode() {
@@ -44,7 +44,7 @@ public class GegenereerdeBrief extends AbstractDocument {
     }
 
     private GegenereerdeBrief(Builder builder) {
-        briefLocatie = builder.briefLocatie;
+        documentLocation = builder.documentLocation;
         briefRef = builder.briefRef;
         gebruikteTemplates = builder.gebruikteTemplates;
         datasets = builder.datasets;
@@ -59,7 +59,7 @@ public class GegenereerdeBrief extends AbstractDocument {
 
     public static final class Builder {
 
-        private BriefLocatie briefLocatie;
+        private DocumentLocation documentLocation;
         private ObjectId briefRef;
         private Set<ObjectId> gebruikteTemplates;
         private Map<String, Object> datasets;
@@ -70,8 +70,8 @@ public class GegenereerdeBrief extends AbstractDocument {
         }
 
 
-        public Builder withBriefLocatie(BriefLocatie briefLocatie) {
-            this.briefLocatie = briefLocatie;
+        public Builder withBriefLocatie(DocumentLocation documentLocation) {
+            this.documentLocation = documentLocation;
             return this;
         }
 

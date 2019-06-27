@@ -15,7 +15,7 @@ public class GegenereerdeBriefInfoAssembler implements Assembler<GegenereerdeBri
     public GegenereerdeBriefInfoTO assembleTO(GegenereerdeBrief gegenereerdeBrief) {
         return GegenereerdeBriefInfoTO.newBuilder()
                 .briefCode(gegenereerdeBrief.getBriefCode())
-                .briefLocatieType(gegenereerdeBrief.getBriefLocatie().getType())
+                .briefLocatieType(gegenereerdeBrief.getDocumentLocation().getType())
                 .id(gegenereerdeBrief.getId().toString())
                 .taal(gegenereerdeBrief.getTaal())
                 .build();

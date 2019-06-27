@@ -1,8 +1,8 @@
 package be.artisjaap.document.cucumber;
 
 import be.artisjaap.document.DocumentbeheerInMemoryTestParent;
-import be.artisjaap.document.model.mongo.BriefRepository;
-import be.artisjaap.document.model.mongo.GecombineerdeTemplateRepository;
+import be.artisjaap.document.model.mongo.DocumentRepository;
+import be.artisjaap.document.model.mongo.CombinedTemplateRepository;
 import be.artisjaap.document.model.mongo.GegenereerdeBriefRepository;
 import be.artisjaap.document.model.mongo.TemplateRepository;
 import cucumber.api.java.Before;
@@ -13,13 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 @RunWith(Cucumber.class)
 public class CucumberHooks extends DocumentbeheerInMemoryTestParent {
     @Autowired
-    private BriefRepository briefRepository;
+    private DocumentRepository documentRepository;
 
     @Autowired
     private TemplateRepository templateRepository;
 
     @Autowired
-    private GecombineerdeTemplateRepository gecombineerdeTemplateRepository;
+    private CombinedTemplateRepository combinedTemplateRepository;
 
 
     @Autowired
@@ -27,9 +27,9 @@ public class CucumberHooks extends DocumentbeheerInMemoryTestParent {
 
     @Before
     public void clear() {
-        briefRepository.deleteAll();
+        documentRepository.deleteAll();
         templateRepository.deleteAll();
-        gecombineerdeTemplateRepository.deleteAll();
+        combinedTemplateRepository.deleteAll();
         gegenereerdeBriefRepository.deleteAll();
     }
 

@@ -17,7 +17,7 @@ public class PDFUtils {
 		File file = new File(path);
 		file.mkdirs();
 		File fullPathToFile = new File(file, filename + ".pdf");
-		System.out.println("Brief wordt opgeslagen in :" + fullPathToFile.getAbsoluteFile());
+		System.out.println("Document wordt opgeslagen in :" + fullPathToFile.getAbsoluteFile());
 		try {
 			FileOutputStream outputStream = new FileOutputStream(fullPathToFile);
 			outputStream.write(bytes);

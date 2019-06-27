@@ -2,8 +2,7 @@ package be.artisjaap.angular.generator.action.vo;
 
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class ServiceMethodVO {
 
@@ -14,7 +13,7 @@ public class ServiceMethodVO {
     private RequestMethod requestMethod;
     private List<UrlParameterVO> urlParameters;
     private String bodyType;
-    private Set<Class<?>> requiredClasses;
+    private Set<ClassVO> requiredClasses;
 
     private ServiceMethodVO(Builder builder) {
         methodName = builder.methodName;
@@ -59,7 +58,7 @@ public class ServiceMethodVO {
         return bodyType;
     }
 
-    public Set<Class<?>> getRequiredClasses() {
+    public Set<ClassVO> getRequiredClasses() {
         return requiredClasses;
     }
 
@@ -69,9 +68,9 @@ public class ServiceMethodVO {
         private Boolean returnsList;
         private String endpoint;
         private RequestMethod requestMethod;
-        private List<UrlParameterVO> urlParameters;
+        private List<UrlParameterVO> urlParameters = new ArrayList<>();
         private String bodyType;
-        private Set<Class<?>> requiredClasses;
+        private Set<ClassVO> requiredClasses = new HashSet<>();
 
         private Builder() {
         }
@@ -115,8 +114,8 @@ public class ServiceMethodVO {
             return new ServiceMethodVO(this);
         }
 
-        public Builder withRequiredClasses(Set<Class<?>> requiredClasses) {
-            this.requiredClasses = requiredClasses;
+        public Builder withRequiredClasses(Collection<ClassVO> requiredClasses) {
+            this.requiredClasses.addAll(requiredClasses);
             return this;
         }
     }

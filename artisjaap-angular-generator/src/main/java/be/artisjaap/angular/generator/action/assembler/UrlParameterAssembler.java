@@ -1,5 +1,6 @@
 package be.artisjaap.angular.generator.action.assembler;
 
+import be.artisjaap.angular.generator.action.ConvertClassTypeToNg;
 import be.artisjaap.angular.generator.action.vo.UrlParameterVO;
 import be.artisjaap.angular.generator.utils.ReflectionUtils;
 import be.artisjaap.common.action.Assembler;
@@ -13,7 +14,10 @@ import java.lang.reflect.Parameter;
 public class UrlParameterAssembler implements Assembler<UrlParameterVO, Parameter> {
     @Override
     public UrlParameterVO assembleTO(Parameter param) {
-        return UrlParameterVO.newBuilder().withName(extratParameterName(param)).withType(param.getType().getName()).build();
+        return UrlParameterVO.newBuilder()
+                .withName(extratParameterName(param))
+                .withType(ConvertClassTypeToNg.toNgType(param.getType()))
+                .build();
     }
 
     private String extratParameterName(Parameter param) {

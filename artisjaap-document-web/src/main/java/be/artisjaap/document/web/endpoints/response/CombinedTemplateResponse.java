@@ -1,7 +1,6 @@
 package be.artisjaap.document.web.endpoints.response;
 
-import be.artisjaap.document.action.to.GecombineerdeTemplateTO;
-import be.artisjaap.document.action.to.TemplateCodeTO;
+import be.artisjaap.document.action.to.CombinedTemplateTO;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -47,7 +46,7 @@ public class CombinedTemplateResponse {
         return createdOn;
     }
 
-    public static CombinedTemplateResponse from(GecombineerdeTemplateTO combinedTemplate) {
+    public static CombinedTemplateResponse from(CombinedTemplateTO combinedTemplate) {
         return CombinedTemplateResponse.newBuilder()
                 .withLanguage(combinedTemplate.taal())
                 .withTemplates(TemplateCodeResponse.from(combinedTemplate.templates()))

@@ -15,7 +15,7 @@ public class AddDocumentVoorMandaatNaTelefonsischContact extends DocumentbeheerI
     private BriefPersister briefPersister;
 
     @Resource
-    private GenereerBrief genereerBrief;
+    private GenerateDocument generateDocument;
 
 
     @Test
@@ -27,7 +27,7 @@ public class AddDocumentVoorMandaatNaTelefonsischContact extends DocumentbeheerI
                 .withTaal("DUTCH")
                 .withCode("EEN_BRIEF")
                 .build();
-        genereerBrief.voor(briefConfig);
+        generateDocument.forDocument(briefConfig);
     }
 
 }

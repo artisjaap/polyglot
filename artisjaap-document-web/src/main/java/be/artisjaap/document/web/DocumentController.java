@@ -19,7 +19,7 @@ import java.io.OutputStream;
 @RequestMapping("/api/document")
 public class DocumentController {
     @Autowired
-    private AddTemplate addTemplate;
+    private AddSimpleTemplate addSimpleTemplate;
 
     @Autowired
     private AddCombinedTemplate addCombinedTemplate;
@@ -28,7 +28,7 @@ public class DocumentController {
     private AddDocument addDocument;
 
     @Autowired
-    private ActivateTemplate activateTemplate;
+    private ActivateSimpleOrCombinedTemplate activateSimpleTemplate;
 
     @Autowired
     private ActivateCombinedTemplate activateCombinedTemplate;
@@ -42,7 +42,7 @@ public class DocumentController {
     @RequestMapping(value = "/template", method = RequestMethod.POST)
     public @ResponseBody
     ResponseEntity<TemplateCodeResponse>  createNewTemplateType(@RequestBody NewTemplateCodeRequest newTemplateCodeRequest){
-        TemplateCodeTO templateCodeTO = addTemplate.metNieuweCode(TemplateCodeNieuwTO.newBuilder()
+        TemplateCodeTO templateCodeTO = addSimpleTemplate.withNewCode(TemplateCodeNewTO.newBuilder()
                 .withCode(newTemplateCodeRequest.getCode())
                 .withDescription(newTemplateCodeRequest.getDescription())
                 .build());
@@ -53,7 +53,7 @@ public class DocumentController {
     @RequestMapping(value = "/template/upload", method = RequestMethod.POST)
     public @ResponseBody
     ResponseEntity<TemplateResponse>  uploadNewTemplate(@RequestBody TemplateRequest newTemplateRequest, @RequestParam MultipartFile file){
-        TemplateTO template = addTemplate.voor(TemplateNieuwTO.newBuilder()
+        TemplateTO template = addSimpleTemplate.forNew(TemplateNewTO.newBuilder()
                 .withCode(newTemplateRequest.getCode())
                 .withOriginalFilename(file.getOriginalFilename())
                 .withTaal(newTemplateRequest.getLanguage())
@@ -66,7 +66,7 @@ public class DocumentController {
     @RequestMapping(value = "/combined-template", method = RequestMethod.POST)
     public @ResponseBody
     ResponseEntity<CombinedTemplateCodeResponse> createNewCombinedTemplateCode(@RequestBody NewCombinedTemplateCodeRequest newCombinedTemplateRequest){
-        GecombineerdeTemplateCodeTO combinedTemplateTO = addCombinedTemplate.metNieuweCode(TemplateCodeNieuwTO.newBuilder()
+        CombinedTemplateCodeTO combinedTemplateTO = addCombinedTemplate.withNewCode(TemplateCodeNewTO.newBuilder()
                 .withCode(newCombinedTemplateRequest.getCode())
                 .withDescription(newCombinedTemplateRequest.getDescription())
                 .build());
@@ -78,7 +78,7 @@ public class DocumentController {
     @RequestMapping(value = "/combined-template/config", method = RequestMethod.POST)
     public @ResponseBody
     ResponseEntity<CombinedTemplateResponse> createNewCombinedTemplate(@RequestBody NewCombinedTemplateRequest newCombinedTemplateRequest){
-        GecombineerdeTemplateTO uit = addCombinedTemplate.uit(GecombineerdeTemplateNieuwTO.newBuilder()
+        CombinedTemplateTO uit = addCombinedTemplate.from(CombinedTemplateNewTO.newBuilder()
                 .withCode(newCombinedTemplateRequest.getCode())
                 .withTaal(newCombinedTemplateRequest.getTaal())
                 .withTemplates(newCombinedTemplateRequest.getTemplates())
@@ -102,7 +102,7 @@ public class DocumentController {
     @RequestMapping(value = "/activate/template/{templateId}", method = RequestMethod.PUT)
     public @ResponseBody
     ResponseEntity<?> activateTemplate(@PathVariable String templateId){
-        activateTemplate.activeerTemplate(templateId);
+        activateSimpleTemplate.activateTemplate(templateId);
         return ResponseEntity.ok().build();
     }
 
