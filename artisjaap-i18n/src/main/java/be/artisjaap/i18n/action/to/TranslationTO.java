@@ -1,20 +1,14 @@
-package be.artisjaap.i18n.model;
+package be.artisjaap.i18n.action.to;
 
-import be.artisjaap.common.model.AbstractDocument;
-import org.springframework.data.mongodb.core.mapping.Document;
+import be.artisjaap.common.model.ReferenceableTO;
 
-@Document
-public class Translation extends AbstractDocument {
+public class TranslationTO extends ReferenceableTO {
     private String key;
     private String translation;
     private String languageIsoCode;
     private String bundleName;
 
-    protected Translation(){
-
-    }
-
-    private Translation(Builder builder) {
+    private TranslationTO(Builder builder) {
         buildCommon(builder);
         key = builder.key;
         translation = builder.translation;
@@ -26,27 +20,23 @@ public class Translation extends AbstractDocument {
         return new Builder();
     }
 
-    public String getKey() {
+    public String key() {
         return key;
     }
 
-    public String getTranslation() {
+    public String translation() {
         return translation;
     }
 
-    public String getLanguageIsoCode() {
+    public String languageIsoCode() {
         return languageIsoCode;
     }
 
-    public String getBundleName() {
+    public String bundleName() {
         return bundleName;
     }
 
-    public void setTranslation(String translation) {
-        this.translation = translation;
-    }
-
-    public static final class Builder extends AbstractBuilder<Builder>{
+    public static final class Builder extends AbstractBuilder<Builder> {
         private String key;
         private String translation;
         private String languageIsoCode;
@@ -75,8 +65,8 @@ public class Translation extends AbstractDocument {
             return this;
         }
 
-        public Translation build() {
-            return new Translation(this);
+        public TranslationTO build() {
+            return new TranslationTO(this);
         }
     }
 }

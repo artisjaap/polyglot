@@ -1,5 +1,6 @@
 package be.artisjaap.polyglot.core.action.to;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NewTranslationForUserTO {
@@ -33,7 +34,7 @@ public class NewTranslationForUserTO {
     public static final class Builder {
         private String userId;
         private String languagePairId;
-        private List<NewSimpleTranslationPairTO> translations;
+        private List<NewSimpleTranslationPairTO> translations = new ArrayList<>();
 
         private Builder() {
         }
@@ -50,6 +51,11 @@ public class NewTranslationForUserTO {
 
         public Builder withTranslations(List<NewSimpleTranslationPairTO> translations) {
             this.translations = translations;
+            return this;
+        }
+
+        public Builder addTranslation(NewSimpleTranslationPairTO translation){
+            this.translations.add(translation);
             return this;
         }
 

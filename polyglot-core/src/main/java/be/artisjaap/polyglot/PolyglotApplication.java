@@ -1,5 +1,6 @@
 package be.artisjaap.polyglot;
 
+import be.artisjaap.backup.BackupApplication;
 import be.artisjaap.document.DocumentbeheerApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -14,6 +15,7 @@ public class PolyglotApplication {
         new SpringApplicationBuilder()
                 .sources(PolyglotApplication.class)
                 .sources(DocumentbeheerApplication.class)
+                .sources(BackupApplication.class)
                 .build()
                 .run(args);
 

@@ -9,6 +9,10 @@ dependencies {
 
     compile project(':polyglot-core')
     compile project(':artisjaap-migrate')
+    compile project(':artisjaap-document-web')
+    compile project(':artisjaap-backup-web')
+    compile project(':artisjaap-properties')
+
     compile project(':artisjaap-angular-generator')
 
     testCompile project (path: ":polyglot-test-helper", configuration: 'testArtifacts')

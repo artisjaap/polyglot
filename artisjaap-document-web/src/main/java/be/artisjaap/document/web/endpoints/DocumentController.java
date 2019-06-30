@@ -1,4 +1,4 @@
-package be.artisjaap.document.web;
+package be.artisjaap.document.web.endpoints;
 
 import be.artisjaap.common.utils.WebUtils;
 import be.artisjaap.document.action.*;
@@ -38,6 +38,10 @@ public class DocumentController {
 
     @Autowired
     private CreatePreview createPreview;
+
+    public DocumentController(){
+        System.out.println("Created");
+    }
 
     @RequestMapping(value = "/template", method = RequestMethod.POST)
     public @ResponseBody

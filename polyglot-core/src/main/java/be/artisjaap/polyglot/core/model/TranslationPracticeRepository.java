@@ -21,6 +21,8 @@ public interface TranslationPracticeRepository extends MongoRepository<Translati
 
     Optional<TranslationPractice> findByTranslationId(ObjectId translationId);
 
+
+
     default TranslationPractice findByTranslationIdOrThrow(ObjectId translationId){
         return findByTranslationId(translationId).orElseThrow(() -> new ValidationException("TRANSLATION_PRACTICE_NOT_FOUND"));
     }

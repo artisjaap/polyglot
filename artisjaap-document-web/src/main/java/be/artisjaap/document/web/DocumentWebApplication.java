@@ -1,11 +1,11 @@
-package be.artisjaap.polyglot.document.web;
+package be.artisjaap.document.web;
 
 import be.artisjaap.document.DocumentbeheerApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 
 @SpringBootApplication
-public class PolyglotDocumentWebApplication {
+public class DocumentWebApplication {
 
     public static void main(String[] args) {
         new SpringApplicationBuilder()

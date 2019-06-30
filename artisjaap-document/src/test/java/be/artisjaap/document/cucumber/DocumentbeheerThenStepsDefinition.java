@@ -230,7 +230,6 @@ public class DocumentbeheerThenStepsDefinition {
     }
 
 
-
     private GegenereerdeBrief zoekGegenereerdeBrief(String documentCode, String isoCode) {
         List<GegenereerdeBrief> byBriefCodeAndTaal = gegenereerdeBriefRepository.findByBriefCodeAndTaal(documentCode, isoCode);
         assertThat(byBriefCodeAndTaal.size(), is(1));

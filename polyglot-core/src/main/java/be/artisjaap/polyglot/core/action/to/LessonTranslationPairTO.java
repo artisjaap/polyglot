@@ -9,6 +9,7 @@ public class LessonTranslationPairTO {
     private String solution;
 
     private LessonTranslationPairTO(Builder builder) {
+        isReverse = builder.isReverse;
         translationId = builder.translationId;
         languageFrom = builder.languageFrom;
         languageTo = builder.languageTo;

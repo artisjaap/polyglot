@@ -1,16 +1,17 @@
-package be.artisjaap.document.web;
+package be.artisjaap.backup.web;
 
-import be.artisjaap.document.DocumentbeheerApplication;
+import be.artisjaap.backup.BackupApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 
 @SpringBootApplication
-public class PolyglotDocumentWebApplication {
+public class BackupWebApplication {
 
     public static void main(String[] args) {
         new SpringApplicationBuilder()
-                .sources(DocumentbeheerApplication.class)
+                .sources(BackupApplication.class)
                 .build()
                 .run(args);
     }
+
 }

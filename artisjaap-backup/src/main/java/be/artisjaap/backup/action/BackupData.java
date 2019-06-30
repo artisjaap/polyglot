@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.stereotype.Component;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+@Component
 public class BackupData {
     private final static Logger logger = LogManager.getLogger();
 
@@ -62,7 +64,9 @@ public class BackupData {
         return outfile;
     }
 
-    private void createZip(BackupConfigTO config, OutputStream fout) throws IOException {
+
+
+    public void createZip(BackupConfigTO config, OutputStream fout) throws IOException {
         ZipOutputStream zout = new ZipOutputStream(fout);
 
         for (BackupCollectionConfigTO bcConfig : config.getBackupCollectionConfigs()) {
