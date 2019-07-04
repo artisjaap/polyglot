@@ -1,6 +1,7 @@
 package be.artisjaap.schedule;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.scheduling.TaskScheduler;
@@ -22,5 +23,15 @@ public class ScheduleApplication {
     @Bean
     public ScheduledExecutorService getTaskSchedulerService() {
         return Executors.newScheduledThreadPool(1);
+    }
+
+
+    public static void main(String[] args) {
+
+        new SpringApplicationBuilder()
+                .build()
+                .run(args);
+
+
     }
 }

@@ -1,9 +1,9 @@
 package be.artisjaap.i18n.cucumber;
 
-import be.artisjaap.i18n.action.CreateTranslation;
-import be.artisjaap.i18n.action.FindTranslation;
-import be.artisjaap.i18n.action.TranslationBundle;
-import be.artisjaap.i18n.action.TranslationCache;
+import be.artisjaap.i18n.action.I18nCreateTranslation;
+import be.artisjaap.i18n.action.I18nFindTranslation;
+import be.artisjaap.i18n.action.I18nTranslationBundle;
+import be.artisjaap.i18n.action.I18nTranslationCache;
 import be.artisjaap.i18n.action.to.NewTranslationTO;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
@@ -15,16 +15,16 @@ import java.util.Optional;
 
 public class I18nStepDefinition {
     @Autowired
-    private CreateTranslation createTranslation;
+    private I18nCreateTranslation i18nCreateTranslation;
 
     @Autowired
-    private FindTranslation findTranslation;
+    private I18nFindTranslation i18nFindTranslation;
 
     @Autowired
-    private TranslationBundle translationBundle;
+    private I18nTranslationBundle i18nTranslationBundle;
 
     @Autowired
-    private TranslationCache translationCache;
+    private I18nTranslationCache i18nTranslationCache;
 
 
     @Given("^A i18n service$")
@@ -35,7 +35,7 @@ public class I18nStepDefinition {
 
     @Given("^A translation with key (.*) has value (.*) in (.*)$")
     public void aTranslationWithKeyMessageHasValueBoodschapInNL(String key, String value, String language) {
-        createTranslation.forTranslation(NewTranslationTO.newBuilder().withKey(key)
+        i18nCreateTranslation.forTranslation(NewTranslationTO.newBuilder().withKey(key)
                 .withLanguageIsoCode(language)
                 .withTranslation(value)
                 .withBundleName("common")
@@ -44,7 +44,7 @@ public class I18nStepDefinition {
 
     @When("^The translation of key (.*) in (.*) has value (.*)$")
     public void iRequestTranslationOfKeyMessageInNLItHasValueBoodschap(String key, String language, String value) {
-        Optional<String> translation = findTranslation.translationForKey(key, language);
+        Optional<String> translation = i18nFindTranslation.translationForKey(key, language);
         Assert.assertThat(translation.get(), CoreMatchers.is(value));
 
     }

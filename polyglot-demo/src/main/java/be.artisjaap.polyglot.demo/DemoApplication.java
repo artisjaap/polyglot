@@ -31,6 +31,8 @@ public class DemoApplication {
                 .sources(BackupWebApplication.class)
                 .sources(MailApplication.class)
                 .sources(PropertiesApplication.class)
+//                .sources(I18nApplication.class)
+//                .sources(I18nWebApplication.class)
                 .build()
                 .run(args);
     }

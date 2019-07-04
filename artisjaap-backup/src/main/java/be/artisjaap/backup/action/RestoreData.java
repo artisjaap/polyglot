@@ -1,6 +1,7 @@
 package be.artisjaap.backup.action;
 
 import be.artisjaap.backup.action.to.CollectionDataTO;
+import be.artisjaap.backup.utils.ZipUtils;
 import com.mongodb.DBObject;
 import com.mongodb.util.JSON;
 import com.mongodb.util.JSONParseException;
@@ -12,15 +13,19 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
 
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-import be.artisjaap.backup.utils.ZipUtils;
-
 @Component
 public class RestoreData {
-    private final static Logger logger = LogManager.getLogger();
+    private static final Logger logger = LogManager.getLogger();
 
     @Autowired
     private MongoTemplate mongoTemplate;
@@ -33,11 +38,8 @@ public class RestoreData {
         while ((entry = zis.getNextEntry()) != null) {
             String filename = entry.getName();
             String collection = filename.substring(0, filename.length() - 5);
-            //schoolcupWS
-            //		.mastercast(new Message(MessageTopic.STATUS_UPDATE, "Collection " + collection + " Restoring..."));
             ByteArrayOutputStream output = ZipUtils.readFileFromZipStream(zis);
             saveStreamToMongo(output, collection, collectionDataTO.getRestoreMode());
-//            logger.info("restoring collection: " + collection);
         }
     }
 
@@ -68,12 +70,13 @@ public class RestoreData {
                 }
 
             } catch (JSONParseException jpx) {
-                System.out.println("cannot serialize: " + line);
+                logger.error("Json parse, cannot serialize: " + line);
             } catch (Exception e) {
-                System.out.println("cannot serialize: " + line);
+                logger.error("cannot serialize: " + line);
             }
         }
     }
+
     private void insertIfNew(String collection, DBObject object) {
         Query q = new Query();
         q.addCriteria(Criteria.where("_id").is(object.get("_id")));

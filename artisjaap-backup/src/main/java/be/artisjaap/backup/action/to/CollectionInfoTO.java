@@ -1,18 +1,16 @@
 package be.artisjaap.backup.action.to;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class CollectionInfoTO {
     private String collectionName;
     private Long size;
     private Boolean capped;
 
-    private CollectionInfoTO(Builder builder){
+    private CollectionInfoTO(Builder builder) {
         this.collectionName = builder.collectionName;
         this.size = builder.size;
         this.capped = builder.capped;
     }
+
     public String getCollectionName() {
         return collectionName;
     }

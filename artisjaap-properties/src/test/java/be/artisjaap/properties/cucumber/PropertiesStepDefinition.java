@@ -26,7 +26,7 @@ public class PropertiesStepDefinition {
 
     @Then("^when I request (.*) it has value (.*)$")
     public void whenIRequestPropItHasValueVal(String key, String value) {
-        String valFromDB = getProperty.withKey(key);
+        String valFromDB = getProperty.valueForKey(key);
         Assert.assertThat(valFromDB, CoreMatchers.is(value));
     }
 

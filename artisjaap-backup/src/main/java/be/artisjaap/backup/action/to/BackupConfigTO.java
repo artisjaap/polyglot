@@ -21,7 +21,7 @@ public class BackupConfigTO {
 
 
     public static final class Builder {
-        private List<BackupCollectionConfigTO> config = new ArrayList<BackupCollectionConfigTO>();
+        private List<BackupCollectionConfigTO> config = new ArrayList<>();
 
         private Builder() {
         }

@@ -6,11 +6,7 @@ import be.artisjaap.common.utils.LocalDateUtils;
 import be.artisjaap.mail.action.SendMail;
 import be.artisjaap.mail.action.to.MailTO;
 import be.artisjaap.mail.model.Attachment;
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBCollection;
-import com.mongodb.DBObject;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.util.JSONSerializers;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bson.Document;
@@ -20,7 +16,11 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
 
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -30,7 +30,7 @@ import java.util.zip.ZipOutputStream;
 
 @Component
 public class BackupData {
-    private final static Logger logger = LogManager.getLogger();
+    private static final Logger logger = LogManager.getLogger();
 
     @Autowired
     private MongoTemplate mongoTemplate;
@@ -38,7 +38,7 @@ public class BackupData {
     @Autowired
     private SendMail sendMail;
 
-    public void backupDataToEmail(BackupConfigTO config, String email) throws IOException{
+    public void backupDataToEmail(BackupConfigTO config, String email) throws IOException {
         ByteArrayOutputStream fout = new ByteArrayOutputStream();
 
         createZip(config, fout);
@@ -65,13 +65,11 @@ public class BackupData {
     }
 
 
-
     public void createZip(BackupConfigTO config, OutputStream fout) throws IOException {
         ZipOutputStream zout = new ZipOutputStream(fout);
 
         for (BackupCollectionConfigTO bcConfig : config.getBackupCollectionConfigs()) {
             MongoCollection<Document> collection = mongoTemplate.getCollection(bcConfig.getName());
-            //schoolcupWS.mastercast(new Message(MessageTopic.STATUS_UPDATE, "Collection " + collection + " Saving..."));
 
             logger.info("Backup collectie: " + bcConfig.getName() + "[" + collection.count() + "]");
             zout.putNextEntry(new ZipEntry(bcConfig.getName() + ".json"));
@@ -80,7 +78,6 @@ public class BackupData {
 
             for (Document object : collection.find()) {
                 String objectString = object.toJson();
-                // String objectString = JSON.serialize(object);
 
                 if (bcConfig.getClearAfterBackup()) {
                     idsToRemove.add(object.get("_id"));
@@ -91,7 +88,7 @@ public class BackupData {
             }
 
             if (bcConfig.getClearAfterBackup()) {
-                String idSample = idsToRemove.stream().limit(5).map(i -> i.toString()).collect(Collectors.joining(","));
+                String idSample = idsToRemove.stream().limit(5).map(Object::toString).collect(Collectors.joining(","));
                 logger.info("Remove items from collection " + bcConfig.getName() + "[" + idsToRemove.size() + "]{ "
                         + idSample + "...}");
                 Query query = Query.query(Criteria.where("_id").in(idsToRemove));

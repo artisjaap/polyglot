@@ -5,7 +5,7 @@ import java.io.InputStream;
 public class CollectionDataTO {
     public enum RestoreMode {
         DELETE_INSERT, INSERT_NEW, UPSERT
-    };
+    }
 
     private String name;
     private InputStream data;

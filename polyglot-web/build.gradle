@@ -11,11 +11,12 @@ dependencies {
     compile project(':artisjaap-migrate')
     compile project(':artisjaap-document-web')
     compile project(':artisjaap-backup-web')
+    compile project(':artisjaap-i18n-web')
     compile project(':artisjaap-properties')
 
     compile project(':artisjaap-angular-generator')
 
-    testCompile project (path: ":polyglot-test-helper", configuration: 'testArtifacts')
+    testCompile project(path: ":polyglot-test-helper", configuration: 'testArtifacts')
     testCompile group: 'io.codearte.jfairy', name: 'jfairy', version: '0.5.9'
 
 
@@ -24,9 +25,6 @@ dependencies {
     //jwt
     compile('io.jsonwebtoken:jjwt:0.9.1')
     compile group: 'javax.xml', name: 'jaxb-api', version: '2.1'
-
-
-   
 
 
     testCompile('org.springframework.boot:spring-boot-starter-test')

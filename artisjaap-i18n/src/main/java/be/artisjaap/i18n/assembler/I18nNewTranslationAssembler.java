@@ -6,7 +6,7 @@ import be.artisjaap.i18n.model.Translation;
 import org.springframework.stereotype.Component;
 
 @Component
-public class NewTranslationAssembler implements Assembler<NewTranslationTO, Translation> {
+public class I18nNewTranslationAssembler implements Assembler<NewTranslationTO, Translation> {
     @Override
     public NewTranslationTO assembleTO(Translation doc) {
         throw new UnsupportedOperationException();
