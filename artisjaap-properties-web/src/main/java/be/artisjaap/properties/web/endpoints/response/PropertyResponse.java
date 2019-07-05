@@ -21,16 +21,15 @@ public class PropertyResponse {
         return new Builder();
     }
 
-    public static PropertyResponse from(PropertyTO propertyTO){
+    public static PropertyResponse from(PropertyTO propertyTO) {
         return PropertyResponse.newBuilder()
                 .withKey(propertyTO.getKey())
                 .withValue(propertyTO.getValue())
-                .withActualType(propertyTO.getActualType())
-
+                .withActualType(propertyTO.getActualType().name())
                 .build();
     }
 
-    public static List<PropertyResponse> from(Collection<PropertyTO> propertyTO){
+    public static List<PropertyResponse> from(Collection<PropertyTO> propertyTO) {
         return propertyTO.stream().map(PropertyResponse::from).collect(Collectors.toList());
     }
 

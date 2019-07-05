@@ -2,7 +2,7 @@ package be.artisjaap.i18n.action;
 
 import be.artisjaap.i18n.action.to.TranslationTO;
 import be.artisjaap.i18n.assembler.I18nTranslationAssembler;
-import be.artisjaap.i18n.model.mongo.TranslationRepository;
+import be.artisjaap.i18n.model.mongo.I18nTranslationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +21,7 @@ public class I18nTranslationCache {
     private Map<String, Map<String, TranslationTO>> translationsPerLanguage = new HashMap<>();
 
     @Autowired
-    private TranslationRepository translationRepository;
+    private I18nTranslationRepository i18nTranslationRepository;
 
     @Autowired
     private I18nTranslationAssembler i18nTranslationAssembler;
@@ -46,7 +46,7 @@ public class I18nTranslationCache {
 
 
     void reloadAllFromDB() {
-        translationsPerLanguage = translationRepository.findAll().stream()
+        translationsPerLanguage = i18nTranslationRepository.findAll().stream()
                 .map(i18nTranslationAssembler::assembleTO)
                 .collect(Collectors.groupingBy(TranslationTO::languageIsoCode, Collectors.toMap(TranslationTO::key, Function.identity())));
     }

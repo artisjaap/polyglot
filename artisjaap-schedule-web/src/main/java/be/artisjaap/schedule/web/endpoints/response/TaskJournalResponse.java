@@ -30,11 +30,11 @@ public class TaskJournalResponse {
                 .withMessages(taskJournalTO.getMessages())
                 .withSpecifiekeConfig(taskJournalTO.getSpecifiekeConfig())
                 .withTijdGelopen(taskJournalTO.getTijdGelopen())
-                .withUitgevoerdOp(taskJournalTO.getTijdGelopen())
-                .build()
+                .withUitgevoerdOp(taskJournalTO.getUitgevoerdOp())
+                .build();
     }
 
-    public static List<TaskJournalResponse> from(List<TaakJournalTO taakJournals>){
+    public static List<TaskJournalResponse> from(List<TaakJournalTO> taakJournals) {
         return taakJournals.stream().map(TaskJournalResponse::from).collect(Collectors.toList());
     }
 

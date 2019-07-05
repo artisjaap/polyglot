@@ -11,7 +11,6 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 public class PolyglotApplication {
 
     public static void main(String[] args) {
-
         new SpringApplicationBuilder()
                 .sources(PolyglotApplication.class)
                 .sources(DocumentbeheerApplication.class)
