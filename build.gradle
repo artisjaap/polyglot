@@ -20,8 +20,17 @@ subprojects {
 
     sourceCompatibility = 1.8
 
+
     repositories {
         mavenCentral()
+    }
+
+    jar {
+        enabled = true
+    }
+
+    bootJar {
+        enabled = false
     }
 
     configurations {
@@ -36,7 +45,6 @@ subprojects {
     }
 
     dependencies {
-
         testCompile('org.springframework.boot:spring-boot-starter-test')
     }
 
