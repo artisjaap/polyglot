@@ -23,7 +23,7 @@ public class QrUtilsUnitTest {
 
     @Test
     public void testCrappyDocument() throws IOException {
-        URL resource = getClass().getClassLoader().getResource("documents/test.pdf");
+        URL resource = getClass().getResource("/documents/test.pdf");
         String s = null;
         try {
             s = QrUtils.readUniqueQrcodeDataFromPdf(FileUtils.readFileToByteArray(new File(resource.getFile())));

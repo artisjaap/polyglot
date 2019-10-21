@@ -22,7 +22,7 @@ public class AddSimpleTemplateInMemoryTest extends DocumentbeheerInMemoryTestPar
     @Test
     public void eenTemplateOpladen() throws IOException{
 
-        templatePersister.maakTemplate("TEST_TEMPLATE", "TEST_TEMPLATE.DOCX");
+        templatePersister.maakTemplate("TEST_TEMPLATE", "/templates/TEST_TEMPLATE.DOCX");
 
         List<Template> all = templateRepository.findAll();
         Assert.assertEquals(1, all.size());

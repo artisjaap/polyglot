@@ -2,12 +2,15 @@ package be.artisjaap.document.cucumber;
 
 import cucumber.api.java.Before;
 import cucumber.api.junit.Cucumber;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
-@RunWith(Cucumber.class)
+//@RunWith(Cucumber.class)
 public class CucumberContext {
     @Before
     public void init() {
 
     }
+
+
 }

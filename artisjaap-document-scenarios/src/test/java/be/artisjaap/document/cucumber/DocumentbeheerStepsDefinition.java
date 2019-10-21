@@ -18,7 +18,7 @@ import java.util.List;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
-@RunWith(Cucumber.class)
+//@RunWith(Cucumber.class)
 public class DocumentbeheerStepsDefinition {
 
     @Autowired

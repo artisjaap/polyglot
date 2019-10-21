@@ -23,8 +23,7 @@ public class TemplatePersister {
 
     public void maakTemplate(String code, String filename) {
 
-        ClassLoader classLoader = getClass().getClassLoader();
-        File file = new File(classLoader.getResource("templates/"+filename).getFile());
+        File file = new File(this.getClass().getResource(filename).getFile());
 
         try {
             TemplateNewTO templateTO = TemplateNewTO.newBuilder()

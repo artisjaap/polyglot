@@ -31,8 +31,8 @@ public class BriefPersister {
     private ActivateDocument activateDocument;
 
     public void maakEenBrief(String code){
-        templatePersister.maakTemplate("STANDAARD_HEADER_FOOTER", "STANDAARD_HEADER_FOOTER.DOCX");
-        templatePersister.maakTemplate("TEST_TEMPLATE", "MANDAAT_ACTIELIJST_RAPPEL-PROCEDURE_NL.DOCX");
+        templatePersister.maakTemplate("STANDAARD_HEADER_FOOTER", "/templates/STANDAARD_HEADER_FOOTER.DOCX");
+        templatePersister.maakTemplate("TEST_TEMPLATE", "/templates/MANDAAT_ACTIELIJST_RAPPEL-PROCEDURE_NL.DOCX");
         gecombineerdeTemplatePersister.maakGecombineerdeTemplate("TEST_MET_HEADER_FOOTER", "STANDAARD_HEADER_FOOTER", "TEST_TEMPLATE");
 
         DocumentNewTO briefTO = DocumentNewTO.newBuilder()
@@ -48,7 +48,7 @@ public class BriefPersister {
 
 
     public void maakEenSimpleBrief(String code){
-        templatePersister.maakTemplate("STANDAARD_HEADER_FOOTER", "STANDAARD_HEADER_FOOTER.DOCX");
+        templatePersister.maakTemplate("STANDAARD_HEADER_FOOTER", "templates/STANDAARD_HEADER_FOOTER.DOCX");
 
         DocumentNewTO briefTO = DocumentNewTO.newBuilder()
                 .withCode(code)

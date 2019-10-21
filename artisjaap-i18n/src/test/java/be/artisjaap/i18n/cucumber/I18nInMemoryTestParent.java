@@ -5,5 +5,5 @@ import org.springframework.test.context.ContextConfiguration;
 
 @ContextConfiguration(classes = {
         I18nApplication.class})
-public class I18nInMemoryTestParent {
+public abstract class I18nInMemoryTestParent {
 }
