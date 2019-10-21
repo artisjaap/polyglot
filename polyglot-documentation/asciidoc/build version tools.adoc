@@ -1,0 +1,7 @@
+------------------------------------------------------------
+Gradle 4.8.1
+------------------------------------------------------------
+
+Build time: 2018-06-21 07:53:06 UTC Revision: 0abdea078047b12df42e7750ccba34d69b516a22
+
+Groovy: 2.4.12 Ant: Apache Ant(TM) version 1.9.11 compiled on March 23 2018 JVM: 1.8.0_202 (Oracle Corporation 25.202-b08) OS: Windows 10 10.0 amd64
