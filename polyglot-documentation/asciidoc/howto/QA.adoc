@@ -1,0 +1,4 @@
+=== While testing spring context doesn't load because it doenst find beans
+
+Check the ContextConfiguration
+@ContextConfiguration(classes = { PolyglotApplication.class, DocumentbeheerApplication.class})

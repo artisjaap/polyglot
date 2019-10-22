@@ -44,7 +44,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@RunWith(Cucumber.class)
 public class PolyglotCoreStepsDefinition {
     @Autowired
     private RegisterUser registerUser;

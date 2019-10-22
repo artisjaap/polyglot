@@ -1,5 +1,6 @@
 package be.artisjaap.polyglot.web;
 
+import be.artisjaap.document.DocumentbeheerApplication;
 import be.artisjaap.polyglot.PolyglotApplication;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
@@ -18,7 +19,7 @@ import java.nio.charset.Charset;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @WebAppConfiguration
-@ContextConfiguration(classes = {PolyglotWebApplication.class, PolyglotApplication.class})
+@ContextConfiguration(classes = {PolyglotWebApplication.class, PolyglotApplication.class, DocumentbeheerApplication.class})
 public abstract class RestControllerTest {
 
     public static final MediaType APPLICATION_JSON_UTF8 = new MediaType(MediaType.APPLICATION_JSON.getType(),

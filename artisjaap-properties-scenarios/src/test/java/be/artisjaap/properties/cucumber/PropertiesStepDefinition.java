@@ -11,8 +11,7 @@ import org.junit.Assert;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 
-@RunWith(Cucumber.class)
-public class PropertiesStepDefinition {
+public class PropertiesStepDefinition extends PropertiesInMemoryTestParent {
     @Autowired
     private GetProperty getProperty;
 

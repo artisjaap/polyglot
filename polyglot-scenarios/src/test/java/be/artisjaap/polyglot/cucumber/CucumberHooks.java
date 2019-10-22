@@ -13,7 +13,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 
-@RunWith(Cucumber.class)
+
 @ContextConfiguration(classes = {PolyglotApplication.class, DocumentbeheerApplication.class, PropertiesApplication.class})
 public class CucumberHooks {
 

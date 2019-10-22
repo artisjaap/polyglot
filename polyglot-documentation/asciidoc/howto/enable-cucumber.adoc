@@ -5,10 +5,20 @@ As an exmaple take the _artisjaap-properties_ because it is simple module.
 
 == setup
 
-. create a CucumberHooks in the _module's standard-package_.cucumber
-[WARNING]
- make sure the @Before is from the cucumber package
+Cucumbers are defined in a separate module. In the module that is tested, there should be no dependencies to cucumber.
+As an example take the artisjaap-mail, this module will be tested in a separete module artisjaap-mail-scenarios.
 
-. create an InMemoryTestParent
-. create feature file in the resources/feature
-. create steps definition in the _module's standard-package_.cucumber
+This module should be setup as follows:
+
+in src/test/java/be.artisjaap.<module>.cucumber:
+
+CucumberContext:: This is a configuration file. It should have the following annotations
+
+- @RunWith(Cucumber.class)
+- @CucumberOptions(features = "classpath:feature")
+
+<module>InMemoryTestParent:: This is another configuration class. This one is to configure spring boot. It contains the Configuration classes of the spring context
+
+- @ContextConfiguration(classes = {MailApplication.class, PropertiesApplication.class})
+
+<module>StepDefinition:: one or more step definition files that extend the TestParent

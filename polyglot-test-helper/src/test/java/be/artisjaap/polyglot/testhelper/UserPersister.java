@@ -5,6 +5,10 @@ import be.artisjaap.polyglot.core.model.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
 @Component
 public class UserPersister {
 
@@ -14,6 +18,8 @@ public class UserPersister {
 
 
     public User randomUser(){
-        return userRepository.save(UserMother.initRandom().build());
+        Set<String> roles = new HashSet<>();
+        roles.add("ROLE_ADMIN");
+        return userRepository.save(UserMother.initRandom().withRoles(roles).build());
     }
 }

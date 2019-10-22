@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 @SpringBootApplication
 @EnableMongoRepositories("be.artisjaap.polyglot.core.model")
+
 public class PolyglotApplication {
 
     public static void main(String[] args) {

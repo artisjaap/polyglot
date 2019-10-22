@@ -10,5 +10,5 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @ContextConfiguration(classes = { PolyglotApplication.class, DocumentbeheerApplication.class})
-public class InMemoryTest {
+public abstract class InMemoryTest {
 }

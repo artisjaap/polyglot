@@ -5,7 +5,7 @@ import be.artisjaap.mail.action.to.MailTemplateTO;
 import cucumber.api.java.en.Given;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class MailStepDefinition {
+public class MailStepDefinition extends MailInMemoryTestParent {
     @Autowired
     private SaveMailTemplate saveMailTemplate;
 

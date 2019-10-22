@@ -8,6 +8,8 @@ public class Property extends AbstractDocument {
     private String value;
     private PropertyType type;
 
+    protected Property(){}
+
     private Property(Builder builder) {
         key = builder.key;
         value = builder.value;

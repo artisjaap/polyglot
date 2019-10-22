@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-public class ScheduleStepDefinition {
+public class ScheduleStepDefinition extends ScheduleInMemoryTestParent {
     @Autowired
     private ListTasks listTasks;
 
