@@ -44,13 +44,13 @@ public class LoginControllerTest extends RestControllerTest {
 
     @Test
     public void loginUser() throws Exception {
-        registerUser.newUser(NewUserTO.newBuilder().withUsername("Tom").withPassword("secret").build());
+        registerUser.newUser(NewUserTO.newBuilder().withUsername("Tom2").withPassword("secret").withRole("ROLE_ADMIN").build());
 
         mockMvc.perform(
-                get("/public/api/login/Tom/secret"))
+                get("/public/api/login/Tom2/secret"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(APPLICATION_JSON_UTF8))
-                .andExpect(jsonPath("$.username", equalTo("Tom")))
+                .andExpect(jsonPath("$.username", equalTo("Tom2")))
                 .andExpect(jsonPath("$.userId", not(empty())))
                 .andExpect(jsonPath("$.token", not(empty())))
         ;

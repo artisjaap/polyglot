@@ -49,7 +49,7 @@ public class LoginController {
     ResponseEntity<UserLoginResponse> register(@RequestBody NewUserRequest newUserRequest){
         UserTO userTO = registerUser.newUser(NewUserTO.newBuilder().withUsername(newUserRequest.getUsername())
                 .withPassword(newUserRequest.getPassword())
-                .withRoles(userTypeToRole.forType(newUserRequest.getType()))
+                .withRoles(userTypeToRole.forType(newUserRequest.typeOrDefault()))
                 .withEmail(newUserRequest.getEmail())
                 .withFirstName(newUserRequest.getFirstName())
                 .withLastName(newUserRequest.getLastName())

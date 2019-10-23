@@ -67,7 +67,7 @@ public class LessonControllerTest extends RestControllerTest {
         translationPracticePersister.randomTranslationPracticeInKnowledgeStatus(languagePair, KnowledgeStatus.IN_PROGRESS, 100);
 
         mockMvc.perform(
-                post("/public/api/lessons/autocreate")
+                post("/api/lessons/autocreate")
                         .contentType(APPLICATION_JSON_UTF8).content(convertObjectToJsonBytes(NewAutomaticLessonRequest.newBuilder()
                         .withLanguagePairId(languagePair.getId().toString())
                         .withLessonTitle("A new lesson")
@@ -107,10 +107,9 @@ public class LessonControllerTest extends RestControllerTest {
                 get("/api/lessons/test/" + lesson.getId() + "/" + NORMAL))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(APPLICATION_JSON_UTF8))
-                .andExpect(content().string(""))
-                .andExpect(jsonPath("$.name", equalTo(lesson.getName())))
-                .andExpect(jsonPath("$.userId", equalTo(lesson.getUserId().toString())))
-                .andExpect(jsonPath("$.translations", hasSize(10)))
+//                .andExpect(content().string(""))
+                .andExpect(jsonPath("$.lessonName", equalTo(lesson.getName())))
+                .andExpect(jsonPath("$.words", hasSize(10)))
         ;
 
     }

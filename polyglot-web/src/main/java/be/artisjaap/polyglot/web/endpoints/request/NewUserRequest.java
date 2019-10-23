@@ -1,5 +1,7 @@
 package be.artisjaap.polyglot.web.endpoints.request;
 
+import java.util.Optional;
+
 public class NewUserRequest {
     private String firstName;
     private String lastName;
@@ -10,7 +12,8 @@ public class NewUserRequest {
     private String type;
     private String email;
 
-    private NewUserRequest(){}
+    private NewUserRequest() {
+    }
 
     private NewUserRequest(Builder builder) {
         firstName = builder.firstName;
@@ -47,6 +50,10 @@ public class NewUserRequest {
 
     public String getEmail() {
         return email;
+    }
+
+    public String typeOrDefault() {
+        return Optional.ofNullable(getType()).orElse("STUDENT");
     }
 
     public static final class Builder {
