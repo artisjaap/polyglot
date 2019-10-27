@@ -1,0 +1,14 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "styles/components.scss";
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: steelblue;
+  color: white;
+}
+
+
+.debug span {
+  padding: 20px
+}
