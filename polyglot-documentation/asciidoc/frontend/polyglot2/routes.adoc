@@ -4,11 +4,11 @@
 
 /admin --> admin homepage
 
-/student --> student homepage
-/student/languages --> all language pair overviews
-/student/languages/:pairId --> specific language pair dashboard, contains latest words and lessons for the language
-/student/languages/:pairId/train --> train words of the languge
-/student/languages/:pairId/lessons --> all defined lessons for the language pair
+StudentComponent:: /student --> student homepage
+LanguagesComponent:: /student/languages --> all language pair overviews
+LanguageDasboardComponent:: /student/languages/:pairId --> specific language pair dashboard, contains latest words and lessons for the language
+LanguageTrainComponent:: /student/languages/:pairId/train --> train words of the languge
+LanguageLessonComponent:: /student/languages/:pairId/lessons --> all defined lessons for the language pair
 /student/languages/:pairId/lessons/create --> ability to create a new lesson
 /student/languages/:pairId/lessons/result --> overview of all training and exam info, ability to print overall results from here or to navigate to a specific lessonId
 /student/languages/:pairId/lessons/:lessonId --> all information of the specified lesson, ability to modify lesson

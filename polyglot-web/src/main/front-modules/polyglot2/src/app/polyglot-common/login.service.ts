@@ -1,19 +1,28 @@
-import { Injectable } from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs";
+import {map} from 'rxjs/operators';
+import {UserLoginResponse} from "./login/user-login-response";
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  private val: string;
+  private user: UserLoginResponse = { firstName: '', lastName: '', preferedRole: '', userId: '', username: '',  password: '',  token: ''};
 
-  constructor() { }
+  constructor(private httpClient:HttpClient, @Inject('API_URL') private apiurl: string) { }
 
-   setValue(v:string){
-    this.val = v;
-   }
+  public authenticate(username:string, password:string):Observable<UserLoginResponse>{
+    return this.httpClient.get<UserLoginResponse>(this.apiurl + `public/api/login/${username}/${password}`)
+      .pipe(map(response => {
+        Object.assign(this.user, response);
+        return response;
+      }));
+  }
 
-   getValue(): string{
-     return this.val;
-   }
+  public loggedInUser(): UserLoginResponse {
+    return this.user;
+  }
+
 }

@@ -13,8 +13,8 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  public setValue(){
-    this.loginService.setValue("VAL");
+  public authenticate(username:HTMLInputElement, password:HTMLInputElement){
+    this.loginService.authenticate(username.value, password.value).subscribe(r => console.log(r));
   }
 
 }

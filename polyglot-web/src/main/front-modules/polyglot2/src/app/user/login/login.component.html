@@ -4,15 +4,15 @@
 
   <div class="box">
       <div class="header">
-        User Login
+        User Login {{loginService.loggedInUser() | json}}
       </div>
       <div class="content">
-        <input type="text">
-        <input type="text">
+        <input placeholder="username" type="text" #username>
+        <input placeholder="password" type="password" #password>
 
       </div>
       <div class="actions">
-        <button (click)="setValue()">
+        <button (click)="authenticate(username, password)">
           login
         </button>
       </div>
