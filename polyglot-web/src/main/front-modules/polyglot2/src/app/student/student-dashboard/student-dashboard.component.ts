@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {LoginService} from "../../polyglot-common/login.service";
 
 @Component({
   selector: 'app-student-dashboard',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StudentDashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(public loginService:LoginService) { }
 
   ngOnInit() {
   }
