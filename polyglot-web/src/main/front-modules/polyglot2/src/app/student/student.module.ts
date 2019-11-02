@@ -7,6 +7,7 @@ import { LanguagesComponent } from './languages/languages.component';
 import { LanguageDashboardComponent } from './language-dashboard/language-dashboard.component';
 import { LanguageTrainComponent } from './language-train/language-train.component';
 import { LanguageLessonComponent } from './language-lesson/language-lesson.component';
+import {PolyglotCommonModule} from "../polyglot-common/polyglot-common.module";
 
 
 
@@ -14,7 +15,8 @@ import { LanguageLessonComponent } from './language-lesson/language-lesson.compo
   declarations: [StudentComponent, StudentDashboardComponent, LanguagesComponent, LanguageDashboardComponent, LanguageTrainComponent, LanguageLessonComponent],
   imports: [
     CommonModule,
-    StudentRoutingModule
+    StudentRoutingModule,
+    PolyglotCommonModule
   ]
 })
 export class StudentModule { }

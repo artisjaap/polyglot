@@ -1,0 +1,13 @@
+.flex {
+  display: flex;
+
+  &.row {
+    flex-direction: row;
+  }
+
+  .flexelement {
+    flex: 1;
+
+  }
+}
+
