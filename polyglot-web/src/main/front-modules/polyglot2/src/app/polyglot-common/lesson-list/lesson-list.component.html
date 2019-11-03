@@ -1,1 +1,16 @@
-<p>lesson-list works!</p>
+<div class="list">
+
+  <div class="header">
+    <div class="element">Lesson</div>
+    <div class="element">Actions</div>
+  </div>
+  <div class="item-list">
+    <app-lesson-list-item  *ngFor="let l of lessons"
+                           [lessonListItem]="l"
+    (openLessonEvent)="openLessonResponse($event)">
+
+
+    </app-lesson-list-item>
+
+  </div>
+</div>

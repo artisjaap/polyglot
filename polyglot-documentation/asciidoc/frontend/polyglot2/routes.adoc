@@ -11,7 +11,7 @@ LanguageTrainComponent:: /student/languages/:pairId/train --> train words of the
 LanguageLessonComponent:: /student/languages/:pairId/lessons --> all defined lessons for the language pair
 /student/languages/:pairId/lessons/create --> ability to create a new lesson
 /student/languages/:pairId/lessons/result --> overview of all training and exam info, ability to print overall results from here or to navigate to a specific lessonId
-/student/languages/:pairId/lessons/:lessonId --> all information of the specified lesson, ability to modify lesson
+LessonDetail:: /student/languages/:pairId/lessons/:lessonId --> all information of the specified lesson, ability to modify lesson
 /student/languages/:pairId/lessons/:lessonId/train --> train the lessons
 /student/languages/:pairId/lessons/:lessonId/train/result --> training results, ability to group and download
 /student/languages/:pairId/lessons/:lessonId/exam --> take exam on lesson

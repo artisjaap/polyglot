@@ -6,6 +6,7 @@ import {LanguagesComponent} from "./languages/languages.component";
 import {LanguageDashboardComponent} from "./language-dashboard/language-dashboard.component";
 import {LanguageTrainComponent} from "./language-train/language-train.component";
 import {LanguageLessonComponent} from "./language-lesson/language-lesson.component";
+import {LanguageLessonDetailComponent} from "./language-lesson-detail/language-lesson-detail.component";
 
 const routes: Routes = [
 
@@ -16,6 +17,7 @@ const routes: Routes = [
       {path:'languages/:pairId', component: LanguageDashboardComponent},
       {path:'languages/:pairId/train', component: LanguageTrainComponent},
       {path:'languages/:pairId/lesson', component: LanguageLessonComponent},
+      {path:'languages/:pairId/lesson/:lessonId', component: LanguageLessonDetailComponent},
       ]
   }];
 

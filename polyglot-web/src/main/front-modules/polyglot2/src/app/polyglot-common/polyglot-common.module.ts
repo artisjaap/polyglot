@@ -6,10 +6,12 @@ import { LanguagePairCardComponent } from './language-pair-card/language-pair-ca
 import { LanguagePairCardEmptyComponent } from './language-pair-card-empty/language-pair-card-empty.component';
 import { WordPairListComponent } from './word-pair-list/word-pair-list.component';
 import { LessonListComponent } from './lesson-list/lesson-list.component';
+import { LessonListItemComponent } from './lesson-list/lesson-list-item/lesson-list-item.component';
+import { WordSelectorComponent } from './word-selector/word-selector.component';
 
 
 @NgModule({
-  declarations: [LanguagePairCardComponent, LanguagePairCardEmptyComponent, WordPairListComponent, LessonListComponent],
+  declarations: [LanguagePairCardComponent, LanguagePairCardEmptyComponent, WordPairListComponent, LessonListComponent, LessonListItemComponent, WordSelectorComponent],
   imports: [
     CommonModule,
     HttpClientModule,

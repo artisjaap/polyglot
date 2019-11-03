@@ -8,11 +8,12 @@ import { LanguageDashboardComponent } from './language-dashboard/language-dashbo
 import { LanguageTrainComponent } from './language-train/language-train.component';
 import { LanguageLessonComponent } from './language-lesson/language-lesson.component';
 import {PolyglotCommonModule} from "../polyglot-common/polyglot-common.module";
+import { LanguageLessonDetailComponent } from './language-lesson-detail/language-lesson-detail.component';
 
 
 
 @NgModule({
-  declarations: [StudentComponent, StudentDashboardComponent, LanguagesComponent, LanguageDashboardComponent, LanguageTrainComponent, LanguageLessonComponent],
+  declarations: [StudentComponent, StudentDashboardComponent, LanguagesComponent, LanguageDashboardComponent, LanguageTrainComponent, LanguageLessonComponent, LanguageLessonDetailComponent],
   imports: [
     CommonModule,
     StudentRoutingModule,

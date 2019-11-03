@@ -1,0 +1,23 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  .header {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid;
+    .element {
+      flex: 1;
+
+    }
+
+  }
+  .item {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px dashed;
+    .element{
+      flex: 1;
+
+    }
+  }
+}

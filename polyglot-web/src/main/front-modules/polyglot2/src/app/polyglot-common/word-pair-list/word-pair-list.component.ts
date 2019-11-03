@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {WordPairItem} from "./word-pair-item";
 
 @Component({
   selector: 'app-word-pair-list',
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./word-pair-list.component.scss']
 })
 export class WordPairListComponent implements OnInit {
+
+  @Input()
+  wordPairs: WordPairItem[];
 
   constructor() { }
 

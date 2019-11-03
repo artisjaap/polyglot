@@ -1,1 +1,14 @@
-<p>word-pair-list works!</p>
+<div class="list">
+
+  <div class="header">
+    <div class="element">From</div>
+    <div class="element">To</div>
+    <div class="element">Actions</div>
+  </div>
+  <div class="item" *ngFor="let l of wordPairs">
+    <div class="element">{{l.from}}</div>
+    <div class="element">{{l.to}}</div>
+    <div class="element"></div>
+
+  </div>
+</div>
