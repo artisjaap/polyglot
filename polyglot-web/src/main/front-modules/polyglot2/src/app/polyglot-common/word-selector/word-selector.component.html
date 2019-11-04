@@ -9,6 +9,9 @@
 </div>
 
 <div class="results">
+  <div *ngFor="let w of currentWords | async">
 
+    {{w | json}}
+  </div>
 
 </div>

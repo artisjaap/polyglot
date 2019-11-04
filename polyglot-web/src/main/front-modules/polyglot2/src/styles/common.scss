@@ -1,3 +1,9 @@
+@import "colors";
+
+h1 {
+  color: $main-color-inverse;
+}
+
 .flex {
   display: flex;
 

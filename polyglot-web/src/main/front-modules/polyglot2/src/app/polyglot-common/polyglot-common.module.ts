@@ -16,7 +16,7 @@ import { WordSelectorComponent } from './word-selector/word-selector.component';
     CommonModule,
     HttpClientModule,
   ],
-  exports: [LanguagePairCardComponent, LanguagePairCardEmptyComponent, WordPairListComponent, LessonListComponent],
+  exports: [LanguagePairCardComponent, LanguagePairCardEmptyComponent, WordPairListComponent, LessonListComponent, WordSelectorComponent],
   providers: [
     {provide: 'API_URL', useValue: 'http://localhost:8080/'},
    // {provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true}

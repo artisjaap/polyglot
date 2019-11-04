@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {WordSelector} from "./word-selector";
 import {WordSelectorService} from "../word-selector.service";
+import {WordPair} from "../../core/model/word-pair";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-word-selector',
@@ -12,10 +14,15 @@ export class WordSelectorComponent implements OnInit {
   @Input()
   wordSelectorData: WordSelector;
 
-  constructor(wordSelectorService:WordSelectorService) {
+  currentWords:Observable<WordPair[]>;
+
+
+  constructor(private wordSelectorService:WordSelectorService) {
   }
 
   ngOnInit() {
+
+    this.currentWords = this.wordSelectorService.findWordsBy({languagePairId:this.wordSelectorData.languagePairId});
   }
 
 }

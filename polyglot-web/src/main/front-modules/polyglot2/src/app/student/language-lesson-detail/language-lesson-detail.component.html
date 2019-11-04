@@ -1,1 +1,13 @@
-<p>{{lessonDetail?.name}}</p>
+
+<h1>{{lessonDetail?.name}}</h1>
+<h1> c {{currentLesson?.name }}</h1>
+
+<div class="flex row">
+  <div class="flexelement" *ngFor="let t of lessonDetail?.translations">
+    {{t | json}}
+  </div>
+</div>
+
+
+<app-word-selector [wordSelectorData]="wordSelectorData()"></app-word-selector>
+
