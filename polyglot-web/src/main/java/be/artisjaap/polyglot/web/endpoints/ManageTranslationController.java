@@ -5,14 +5,12 @@ import be.artisjaap.polyglot.core.action.pairs.RegisterLanguagePair;
 import be.artisjaap.polyglot.core.action.pairs.RemoveLanguagePair;
 import be.artisjaap.polyglot.core.action.to.*;
 import be.artisjaap.polyglot.core.action.translation.RegisterTranslation;
+import be.artisjaap.polyglot.core.action.translation.TranslationsFiltered;
 import be.artisjaap.polyglot.core.action.translation.UpdateTranslation;
 import be.artisjaap.polyglot.web.endpoints.request.LanguagePairRequest;
 import be.artisjaap.polyglot.web.endpoints.request.NewTranslationsForUserRequest;
 import be.artisjaap.polyglot.web.endpoints.request.UpdateTranslationRequest;
-import be.artisjaap.polyglot.web.endpoints.response.LanguagePairResponse;
-import be.artisjaap.polyglot.web.endpoints.response.PracticeWordResponse;
-import be.artisjaap.polyglot.web.endpoints.response.TranslationsForUserResponse;
-import be.artisjaap.polyglot.web.endpoints.response.TranslationsForUserResponseAssembler;
+import be.artisjaap.polyglot.web.endpoints.response.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -44,6 +42,9 @@ public class ManageTranslationController {
 
     @Autowired
     private UpdateTranslation updateTranslation;
+
+    @Autowired
+    private TranslationsFiltered translationsFiltered;
 
     @RequestMapping(value = "/pairs/user/{userId}", method = RequestMethod.GET)
     public @ResponseBody
@@ -108,7 +109,6 @@ public class ManageTranslationController {
     @RequestMapping(value = "/pairs/{userId}/translations/{languagePairId}/file", method = RequestMethod.POST)
     public @ResponseBody
     ResponseEntity<TranslationsForUserResponse> uploadTranslationsByFile(@PathVariable String userId, @PathVariable String languagePairId, @RequestParam MultipartFile file) {
-        System.out.println(file);
         try(InputStreamReader val = new InputStreamReader(file.getInputStream())) {
             TranslationsForUserTO translationsForUserTO = registerTranslation.forAllWords(NewTranslationForUserFromFileTO.newBuilder()
                     .withUserId(userId)
@@ -121,6 +121,22 @@ public class ManageTranslationController {
         }
 
         return null;
+    }
+
+    @RequestMapping(value = "/pairs/{languagePairId}/latest/{number}", method = RequestMethod.GET)
+    public @ResponseBody
+    ResponseEntity<PagedResponse<TranslationResponse>> findLatestTranslations(@PathVariable String languagePairId, @PathVariable Integer number){
+
+        TranslationFilterTO filter = TranslationFilterTO.newBuilder()
+                .withLanguagePairId(languagePairId)
+                .withPageSize(number)
+                .withOrderByField(SortTO.newBuilder().withDirection(SortTO.Direction.DESCENDING).withFieldName("_id").build())
+                .build();
+        PagedTO<TranslationTO> translationTOPagedTO = translationsFiltered.withFilter(filter);
+
+        PagedResponse<TranslationResponse> response = PagedResponse.from(translationTOPagedTO, t-> TranslationResponse.from(t));
+        return ResponseEntity.ok(response);
+
     }
 
 
