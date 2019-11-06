@@ -8,10 +8,11 @@ import { WordPairListComponent } from './word-pair-list/word-pair-list.component
 import { LessonListComponent } from './lesson-list/lesson-list.component';
 import { LessonListItemComponent } from './lesson-list/lesson-list-item/lesson-list-item.component';
 import { WordSelectorComponent } from './word-selector/word-selector.component';
+import { TablePagingComponent } from './table-paging/table-paging.component';
 
 
 @NgModule({
-  declarations: [LanguagePairCardComponent, LanguagePairCardEmptyComponent, WordPairListComponent, LessonListComponent, LessonListItemComponent, WordSelectorComponent],
+  declarations: [LanguagePairCardComponent, LanguagePairCardEmptyComponent, WordPairListComponent, LessonListComponent, LessonListItemComponent, WordSelectorComponent, TablePagingComponent],
   imports: [
     CommonModule,
     HttpClientModule,

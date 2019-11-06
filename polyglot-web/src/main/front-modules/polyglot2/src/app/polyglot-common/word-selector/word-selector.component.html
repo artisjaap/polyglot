@@ -4,9 +4,7 @@
   <input type="text">
 </div>
 
-<div class="paging">
-
-</div>
+<app-table-paging [pagingControls]="pagingControls()"></app-table-paging>
 
 <div class="results">
   <div *ngFor="let w of currentWords | async">
