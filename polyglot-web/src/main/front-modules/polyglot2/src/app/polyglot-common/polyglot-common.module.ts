@@ -9,6 +9,7 @@ import { LessonListComponent } from './lesson-list/lesson-list.component';
 import { LessonListItemComponent } from './lesson-list/lesson-list-item/lesson-list-item.component';
 import { WordSelectorComponent } from './word-selector/word-selector.component';
 import { TablePagingComponent } from './table-paging/table-paging.component';
+import {AuthenticationInterceptor} from "./interceptors/authentication-interceptor";
 
 
 @NgModule({
@@ -20,7 +21,7 @@ import { TablePagingComponent } from './table-paging/table-paging.component';
   exports: [LanguagePairCardComponent, LanguagePairCardEmptyComponent, WordPairListComponent, LessonListComponent, WordSelectorComponent],
   providers: [
     {provide: 'API_URL', useValue: 'http://localhost:8080/'},
-   // {provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true}
   ]
 })
 export class PolyglotCommonModule { }

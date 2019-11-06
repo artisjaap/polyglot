@@ -25,4 +25,7 @@ export class LoginService {
     return this.user;
   }
 
+  token():string {
+      return this.user.token;
+  }
 }

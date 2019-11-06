@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {LoginService} from "../../polyglot-common/login.service";
+import {LessonService} from "../../polyglot-common/lesson.service";
+import {Observable} from "rxjs";
+import {LessonDetail} from "../../core/model/lesson-detail";
 
 @Component({
   selector: 'app-student-dashboard',
@@ -8,9 +11,14 @@ import {LoginService} from "../../polyglot-common/login.service";
 })
 export class StudentDashboardComponent implements OnInit {
 
-  constructor(public loginService:LoginService) { }
+  latestLessons: Observable<LessonDetail>;
+
+  constructor(public lessonService:LessonService) { }
 
   ngOnInit() {
+     this.latestLessons = this.lessonService.findLatestLessons();
+
   }
+
 
 }

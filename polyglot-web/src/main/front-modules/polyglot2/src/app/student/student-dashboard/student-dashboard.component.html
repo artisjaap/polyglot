@@ -1,2 +1,5 @@
 <p>student-dashboard works!</p>
 
+<div *ngFor="let l of latestLessons | async">
+  {{l |json}
+</div>
