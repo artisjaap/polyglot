@@ -15,7 +15,7 @@ public interface LessonRepository extends MongoRepository<Lesson, ObjectId>, Les
 
     Optional<Lesson> findByUserIdAndName(ObjectId userId, String name);
 
-    List<Lesson> findByUserId(String userId);
+    List<Lesson> findByUserId(ObjectId userId);
 
     default Lesson findByIdOrThrow(ObjectId id){
         return findById(id).orElseThrow(() -> new ValidationException("DOC_NOT_FOUND"));

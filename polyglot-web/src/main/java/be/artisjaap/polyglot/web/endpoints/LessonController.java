@@ -8,6 +8,7 @@ import be.artisjaap.polyglot.core.action.to.*;
 import be.artisjaap.polyglot.core.action.to.test.*;
 import be.artisjaap.polyglot.web.endpoints.request.*;
 import be.artisjaap.polyglot.web.endpoints.response.*;
+import be.artisjaap.polyglot.web.security.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +30,28 @@ public class LessonController {
 
     @Autowired
     private LessonsFiltered lessonsFiltered;
+
+    /* endpoints to define
+
+    GET /api/lessons - all lessons headers of logged in user
+    GET /api/lessons/:id - lesson details for specified id for current user
+    POST /api/lesson/autocreate - maak automatische les
+    POST /api/lesson/create - maak les
+    GET /api/lesson/:id/practice - practice the given lesson
+    GET /api/lesson?languagePairId - lesson for specified languagepair
+     */
+
+    /// used in front
+
+    @RequestMapping(method = RequestMethod.GET)
+    public @ResponseBody
+    ResponseEntity<List<LessonHeaderResponse>> allMyLessons() {
+        return ResponseEntity.ok(LessonHeaderResponse.from(findLesson.forUser(SecurityUtils.userId())));
+
+    }
+
+
+    /// not yet used in front
 
     @RequestMapping(value = "/autocreate", method = RequestMethod.POST)
     public @ResponseBody
@@ -123,4 +146,6 @@ public class LessonController {
     ResponseEntity<LessonTranslationPairResponse> removeTranslationToLesson(@PathVariable String lessonId, @PathVariable String translationId) {
         return ResponseEntity.ok(LessonTranslationPairResponse.from(createLesson.removeTranslationFromLesson(lessonId, translationId)));
     }
+
+
 }

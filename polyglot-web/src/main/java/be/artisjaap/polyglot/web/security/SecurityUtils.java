@@ -1,5 +1,6 @@
 package be.artisjaap.polyglot.web.security;
 
+import be.artisjaap.common.validation.ValidationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.Optional;
@@ -18,5 +19,9 @@ public class SecurityUtils {
             return Optional.of((UserDetails) details);
         }
         return Optional.empty();
+    }
+
+    public static String userId(){
+        return findSessionData().map(UserDetails::getUserId).orElseThrow(() -> new ValidationException("Unauthorized"));
     }
 }

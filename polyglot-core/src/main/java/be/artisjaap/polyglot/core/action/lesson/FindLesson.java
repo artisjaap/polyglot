@@ -26,7 +26,7 @@ public class FindLesson {
     private LessonHeaderAssembler lessonHeaderAssembler;
 
     public List<LessonHeaderTO> forUser(String userId){
-        return lessonHeaderAssembler.assembleTOs(lessonRepository.findByUserId(userId));
+        return lessonHeaderAssembler.assembleTOs(lessonRepository.findByUserId(new ObjectId(userId)));
     }
 
     public LessonTO forTesting(String lessonId){
