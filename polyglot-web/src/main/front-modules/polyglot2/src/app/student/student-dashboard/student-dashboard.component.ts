@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {LoginService} from "../../polyglot-common/login.service";
+import {LoginService} from "../../user/login.service";
 import {LessonService} from "../../polyglot-common/lesson.service";
 import {Observable} from "rxjs";
 import {LessonDetail} from "../../core/model/lesson-detail";

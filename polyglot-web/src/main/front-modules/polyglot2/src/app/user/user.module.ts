@@ -1,7 +1,12 @@
-import { NgModule } from '@angular/core';
+import {ModuleWithProviders, NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login/login.component';
 import {UserRoutingModule} from "./user-routing.module";
+import { StoreModule } from '@ngrx/store';
+import * as fromAuth from './reducers';
+import {authReducer} from "./reducers";
+import {LoginService} from "./login.service";
+import {AuthGuard} from "./auth-guard";
 
 
 
@@ -9,7 +14,19 @@ import {UserRoutingModule} from "./user-routing.module";
   declarations: [LoginComponent],
   imports: [
     CommonModule,
-    UserRoutingModule
+    UserRoutingModule,
+    StoreModule.forFeature(fromAuth.authFeatureKey, authReducer)
   ]
 })
-export class UserModule { }
+export class UserModule {
+
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: UserModule,
+      providers: [
+        LoginService,
+        AuthGuard
+      ]
+    }
+  }
+}

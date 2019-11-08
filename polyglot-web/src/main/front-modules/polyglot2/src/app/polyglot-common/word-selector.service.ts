@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {LoginService} from "./login.service";
+import {LoginService} from "../user/login.service";
 import {AuthenticatedBaseServiceService} from "./authenticated-base-service.service";
 import {WordSelectorFilter} from "./word-selector-filter";
 import {Observable, of} from "rxjs";

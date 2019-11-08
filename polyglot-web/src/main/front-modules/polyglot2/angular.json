@@ -125,6 +125,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "polyglot2"
+    }
+  },
+  "defaultProject": "polyglot2",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }

@@ -2,7 +2,7 @@ import {Inject, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {map} from 'rxjs/operators';
-import {UserLoginResponse} from "./login/user-login-response";
+import {UserLoginResponse} from "./model/user-login-response";
 
 @Injectable({
   providedIn: 'root'
