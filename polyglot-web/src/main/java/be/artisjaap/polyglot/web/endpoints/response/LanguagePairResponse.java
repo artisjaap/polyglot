@@ -3,6 +3,8 @@ package be.artisjaap.polyglot.web.endpoints.response;
 import be.artisjaap.polyglot.core.action.to.LanguagePairTO;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class LanguagePairResponse extends AbstractReferenceableResponse{
 
@@ -25,6 +27,10 @@ public class LanguagePairResponse extends AbstractReferenceableResponse{
         lastTurnReverse = builder.lastTurnReverse;
     }
 
+    public static List<LanguagePairResponse> from(List<LanguagePairTO> tos){
+        return tos.stream().map(LanguagePairResponse::from).collect(Collectors.toList());
+    }
+
     public static LanguagePairResponse from(LanguagePairTO to) {
         return newBuilder()
                 .forDocument(to)
@@ -37,6 +43,7 @@ public class LanguagePairResponse extends AbstractReferenceableResponse{
                 .withUserId(to.userId())
                 .build();
     }
+
 
     public static Builder newBuilder() {
         return new Builder();

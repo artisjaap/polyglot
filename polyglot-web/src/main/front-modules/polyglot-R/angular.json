@@ -128,5 +128,8 @@
       }
     }
   },
-  "defaultProject": "polyglot-R"
+  "defaultProject": "polyglot-R",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }

@@ -20,7 +20,6 @@ export class AuthenticationInterceptor implements HttpInterceptor {
         })
       });
 
-      debugger;
       return next.handle(authReq);
     } else {
       console.log('no token');

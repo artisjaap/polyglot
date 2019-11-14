@@ -2,7 +2,7 @@ package be.artisjaap.polyglot.web.endpoints.response;
 
 import be.artisjaap.common.model.ReferenceableTO;
 
-public abstract class AbstractReferenceableResponse implements ReferenceableResponse {
+public abstract class AbstractReferenceableResponse<T> implements ReferenceableResponse {
 
     private String id;
 
@@ -14,6 +14,8 @@ public abstract class AbstractReferenceableResponse implements ReferenceableResp
     protected void buildCommon(AbstractBuilder<?> builder) {
         id = builder.id;
     }
+
+
 
 
     public static abstract class AbstractBuilder<T> {

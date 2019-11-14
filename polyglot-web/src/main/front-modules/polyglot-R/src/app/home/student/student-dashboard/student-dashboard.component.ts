@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {LanguagePairDataService} from "../../../language-pair-data-service";
+import {map} from "rxjs/operators";
+import {Observable} from "rxjs";
+import {LanguagePair} from "../model/language-pair";
 
 @Component({
   selector: 'app-student-dashboard',
@@ -7,9 +11,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StudentDashboardComponent implements OnInit {
 
-  constructor() { }
+  languagePairs$: Observable<LanguagePair[]>;
+
+  constructor(private languagePairService: LanguagePairDataService) {
+
+  }
 
   ngOnInit() {
+    this.languagePairs$ = this.languagePairService.entities$;
   }
 
 }

@@ -1,1 +1,10 @@
 <p>student-dashboard works!</p>
+
+<div class="card-row">
+  <div *ngFor="let pair of languagePairs$ | async">
+    <app-language-pair-card [languagePair]="pair"></app-language-pair-card>
+  </div>
+
+  <app-language-pair-card ></app-language-pair-card>
+</div>
+

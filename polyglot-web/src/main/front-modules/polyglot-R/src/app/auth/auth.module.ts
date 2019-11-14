@@ -1,15 +1,26 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AuthComponent } from './auth/auth.component';
+import { LoginComponent } from './login/login.component';
 import {AuthRoutingModule} from "./auth-routing.module";
+import { StoreModule } from '@ngrx/store';
+import * as fromAuth from './reducers';
+import {AuthService} from "./auth.service";
+import {ReactiveFormsModule} from "@angular/forms";
+import {authReducer} from "./reducers";
+import {AuthGuard} from "./auth-guard";
+import {EffectsModule} from "@ngrx/effects";
+import {AuthEffects} from "./auth.effects";
 
 
 
 @NgModule({
-  declarations: [AuthComponent],
+  declarations: [LoginComponent],
   imports: [
     CommonModule,
-    AuthRoutingModule
+    ReactiveFormsModule,
+    AuthRoutingModule,
+    StoreModule.forFeature(fromAuth.authFeatureKey, authReducer),
+    EffectsModule.forFeature([AuthEffects])
   ]
 
 })
@@ -19,7 +30,7 @@ export class AuthModule {
     return {
       ngModule: AuthModule,
 
-      providers: []
+      providers: [AuthService,AuthGuard]
     }
   }
 }

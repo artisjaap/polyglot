@@ -1,0 +1,23 @@
+# NgRX
+
+## Building blocks
+
+Actions:: The actions to dispatch. It requires a name of the action. and optional a payload, defined in props<{}>()
+
+INFO:
+`export const login = createAction(
+"[Login page] User Login",
+props<{user:UserLoginResponse}>()
+);
+
+export const logout = createAction(
+"[Top Menu] Logout"
+);`
+
+
+
+Reducers:: Listen for a current action and modifies the internal state
+Effects:: sideeffect that happens on actions. They start from the actions observer, filter out a specific type of action and use tap() to execute the sideeffect
+ Side effects can be read/write to local storage, save or load data from the backend
+Selectors:: Selectors are like a query to retrieve data from the storage. They typically start from a featureSelector to select the root of a specified part and then further query down
+Entity:: Identifieable entities with CRUD operations. This is a state that extends EntityState. It allows simple modification of the data with the entityAdapter

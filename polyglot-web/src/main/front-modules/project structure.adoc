@@ -1,0 +1,41 @@
+# Getting started
+
+## Setup the environment
+### create the app
+ng new polyglot-R
+
+### add material
+ng add @angular/material
+
+### add ngRX
+ng add @ngrx/store
+ng add @ngrx/store-devtools
+ng add @ngrx/schematics
+ng add @ngrx/effects
+ng add @ngrx/data
+
+## Modules Layout
+- AppModule
+    - Auth
+    - Home
+        - Student
+    - Admin
+    
+paths
+
+- /login
+- /home/student
+- /admin
+
+## Add store for authentication
+ng g store auth/Auth --module auth.module.ts
+
+name global state to AppState
+- create action
+- create reducer
+
+## how to use ngRX
+1. First create an action. An action has a type and defines the type of the action.
+This is only for dispatching the action.
+2. now, we need a listener when an action is dispatched. this is done in a reducer. The reducer takes the current state and the action and it will return a new updated state.
+3. to read data from the state, selectors are used
