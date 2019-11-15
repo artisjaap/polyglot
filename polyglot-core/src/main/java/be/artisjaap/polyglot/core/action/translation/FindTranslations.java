@@ -9,6 +9,7 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,6 +27,10 @@ public class FindTranslations {
     public List<TranslationTO> containing(String languagePairId, List<String> languageA) {
         List<Translation> translations = translationRepository.findByLanguagePairIdAndLanguageAIn(new ObjectId(languagePairId), languageA);
         return translations.stream().map(translationAssembler::assembleTO).collect(Collectors.toList());
+    }
+
+    public List<TranslationTO> latestFor(String userId, int count){
+        return new ArrayList<>();
     }
 
 }

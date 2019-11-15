@@ -1,4 +1,5 @@
-export class LanguagePair {
+export interface LanguagePair {
+  id: string;
   userId: string;
   languageFrom: string;
   languageTo: string;
@@ -6,8 +7,6 @@ export class LanguagePair {
   turnsDoneReverse: number;
   lastTurn: string; //LocalDateTime
   lastTurnReverse: string; //LocalDateTime
-
-
 
 }
 

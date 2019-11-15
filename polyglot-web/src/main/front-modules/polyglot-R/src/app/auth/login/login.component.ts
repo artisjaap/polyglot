@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
       .pipe(
         tap(user => {
           this.store.dispatch(login({user}))
-          this.router.navigateByUrl("/home/student")
+          this.router.navigateByUrl("/home/student/dashboard")
         })
       )
       .subscribe(noop);

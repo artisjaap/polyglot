@@ -2,7 +2,7 @@
   <li><span [routerLink]="['']">start</span></li>
   <li *ngIf="isLoggedOut$ | async"><span [routerLink]="['login']">login</span></li>
   <li *ngIf="isLoggedIn$ | async"><span [routerLink]="['home']">home</span></li>
-  <li *ngIf="isLoggedIn$ | async"><span [routerLink]="['home','student']">home/student</span></li>
+  <li *ngIf="isLoggedIn$ | async"><span [routerLink]="['home','student','dashboard']">home/student</span></li>
   <li *ngIf="isLoggedIn$ | async"><span (click)="logout()">logout</span></li>
 </ul>
 <router-outlet></router-outlet>

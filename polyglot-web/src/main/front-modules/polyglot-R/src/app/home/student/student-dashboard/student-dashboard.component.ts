@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {LanguagePairDataService} from "../../../language-pair-data-service";
+import {LanguagePairDataService} from "../../dataservice/language-pair-data-service";
 import {map} from "rxjs/operators";
 import {Observable} from "rxjs";
-import {LanguagePair} from "../model/language-pair";
+import {LanguagePair} from "../../model/language-pair";
 
 @Component({
   selector: 'app-student-dashboard',

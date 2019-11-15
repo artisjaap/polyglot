@@ -1,6 +1,6 @@
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from "@angular/router";
 import {Observable, of} from "rxjs";
-import {LanguagePairDataService} from "../../language-pair-data-service";
+import {LanguagePairDataService} from "../dataservice/language-pair-data-service";
 import {Injectable} from "@angular/core";
 import {filter, first, tap} from "rxjs/operators";
 

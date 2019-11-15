@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {LanguagePair} from "../model/language-pair";
+import {LanguagePair} from "../../model/language-pair";
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {LanguagePairDataService} from "../../../language-pair-data-service";
+import {LanguagePairDataService} from "../../dataservice/language-pair-data-service";
 
 @Component({
   selector: 'app-language-pair-card',
