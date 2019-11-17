@@ -4,7 +4,7 @@ import {Injectable} from "@angular/core";
 import {LessonHeader} from "../model/lesson-header";
 
 @Injectable()
-export class LessonDataService extends EntityCollectionServiceBase<LessonHeader>{
+export class LessonDataService extends EntityCollectionServiceBase<Lesson>{
 
   constructor(serviceElementFactory: EntityCollectionServiceElementsFactory) {
     super('Lesson', serviceElementFactory);

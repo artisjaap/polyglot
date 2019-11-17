@@ -10,4 +10,5 @@ lessons
 <div *ngFor="let a of latestLessons | async">
   l: {{a | json}}
 
+  <span [routerLink]="['/home', 'student', 'lesson', a.id]">go to lesson</span>
 </div>

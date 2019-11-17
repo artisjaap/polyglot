@@ -5,26 +5,34 @@ import {StudentMainComponent} from "./student-main/student-main.component";
 import {DashboardResolver} from "./DashboardResolver";
 import {LanguagePairDetailComponent} from "./language-pair-detail/language-pair-detail.component";
 import {LanguagePairDetailResolver} from "./LanguagePairDetailResolver";
-import {LanguagePairDataService} from "../dataservice/language-pair-data-service";
+import {LessonDetailResolver} from "./LessonDetailResolver";
 
 
 const routes: Routes = [
   {
     path: 'student',
     component: StudentMainComponent,
-    children: [{
-      path: 'dashboard', component: StudentDashboardComponent,
-      resolve: {'Dashboard': DashboardResolver}
-    }, {
-      path: 'language-pair/:languagePairId', component: LanguagePairDetailComponent,
-      resolve: {'LanguagePairDetail': LanguagePairDetailResolver}
-    }]
+    children: [
+      {
+        path: 'dashboard', component: StudentDashboardComponent,
+        resolve: {'Dashboard': DashboardResolver}
+      },
+      {
+        path: 'language-pair/:languagePairId', component: LanguagePairDetailComponent,
+        resolve: {'LanguagePairDetail': LanguagePairDetailResolver}
+      }
+      ,
+      {
+        path: 'lesson/:lessonId', component: LanguagePairDetailComponent,
+        resolve: {'LessonDetail': LessonDetailResolver}
+      }
+    ]
   },
 ];
 
 
 @NgModule({
-  providers: [DashboardResolver, LanguagePairDetailResolver],
+  providers: [DashboardResolver, LanguagePairDetailResolver, LessonDetailResolver],
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
