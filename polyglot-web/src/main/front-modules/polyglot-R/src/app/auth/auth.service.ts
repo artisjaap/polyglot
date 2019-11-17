@@ -1,7 +1,7 @@
 import {Inject, Injectable} from '@angular/core';
-import {UserLoginResponse} from "../../../../polyglot2/src/app/user/model/user-login-response";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {UserLoginResponse} from "./model/user-login-response";
 
 @Injectable()
 export class AuthService {

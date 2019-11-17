@@ -13,22 +13,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/lessons")
+@RequestMapping("/api")
 public class LessonController {
-    @Autowired
+    @Resource
     private CreateLesson createLesson;
 
-    @Autowired
+    @Resource
     private FindLesson findLesson;
 
-    @Autowired
+    @Resource
     private TestForLesson testForLesson;
 
-    @Autowired
+    @Resource
     private LessonsFiltered lessonsFiltered;
 
     /* endpoints to define
@@ -43,11 +44,16 @@ public class LessonController {
 
     /// used in front
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(path= "/lessons", method = RequestMethod.GET)
     public @ResponseBody
-    ResponseEntity<List<LessonHeaderResponse>> allMyLessons() {
-        return ResponseEntity.ok(LessonHeaderResponse.from(findLesson.forUser(SecurityUtils.userId())));
+    ResponseEntity<List<LessonHeaderResponse>> allLessonsForUser(@RequestParam String languagePairId) {
+        if(languagePairId != null){
+            return ResponseEntity.ok(LessonHeaderResponse.from(lessonsFiltered.withFilter(LessonFilterTO.newBuilder()
+                    .withLanguagePairId(languagePairId)
+                    .build()).data()));
 
+        }
+        return ResponseEntity.ok(LessonHeaderResponse.from(findLesson.forUser(SecurityUtils.userId())));
     }
 
 

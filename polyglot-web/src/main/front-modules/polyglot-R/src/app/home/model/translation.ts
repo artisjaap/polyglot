@@ -1,5 +1,7 @@
 export interface Translation {
-  languagePairId:string;
+  id:string;
   languageA:string;
   languageB:string;
 }
+
+

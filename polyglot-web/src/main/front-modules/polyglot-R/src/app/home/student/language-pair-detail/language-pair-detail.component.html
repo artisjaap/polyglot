@@ -1,1 +1,13 @@
 <p>language-pair-detail works!</p>
+
+<div *ngFor="let a of latestTranslations | async">
+  a: {{a | json}}
+
+</div>
+
+lessons
+
+<div *ngFor="let a of latestLessons | async">
+  l: {{a | json}}
+
+</div>

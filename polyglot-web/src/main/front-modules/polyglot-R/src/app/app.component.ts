@@ -3,8 +3,8 @@ import {AppState} from "./reducers";
 import {select, Store} from "@ngrx/store";
 import {Observable} from "rxjs";
 import {isLoggedIn, isLoggedOut} from "./auth/auth.selectors";
-import {AuthActions} from "../../../polyglot2/src/app/user/auth.action-types";
 import {login} from "./auth/auth.actions";
+import {AuthActions} from "./auth/action-types";
 
 @Component({
   selector: 'app-root',

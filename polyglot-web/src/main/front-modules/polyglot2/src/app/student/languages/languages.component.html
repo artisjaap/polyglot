@@ -1,8 +1,0 @@
-<p>languages works!</p>
-
-<div class="all-language-cards">
-  <span *ngFor="let l of languages">
-    <app-language-pair-card [languagePairCard]="l" (openLanguage)="navigateToLanguagePair($event)"></app-language-pair-card>
-  </span>
-  <app-language-pair-card (createLanguagePair)="createLanguagePair($event)" state="new"></app-language-pair-card>
-</div>

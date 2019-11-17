@@ -4,6 +4,7 @@ public class LessonFilterTO extends PageableTO {
     private String textFilter;
     private String languagePairId;
 
+
     private LessonFilterTO(Builder builder) {
         buildCommon(builder);
         textFilter = builder.textFilter;

@@ -21,3 +21,19 @@ Effects:: sideeffect that happens on actions. They start from the actions observ
  Side effects can be read/write to local storage, save or load data from the backend
 Selectors:: Selectors are like a query to retrieve data from the storage. They typically start from a featureSelector to select the root of a specified part and then further query down
 Entity:: Identifieable entities with CRUD operations. This is a state that extends EntityState. It allows simple modification of the data with the entityAdapter
+
+
+schematics
+
+generate new store for module
+ng generate store State --root --module app.module.ts
+
+eg.
+ng generate store Student --module student.module.ts
+
+
+add reducer to store
+ng generate reducer User --reducers reducers/index.ts
+
+ng generate reducer LatestTranslations --reducers reducers/index.ts
+

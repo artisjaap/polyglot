@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../auth.service";
 import {noop} from "rxjs";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {tap} from "rxjs/operators";
 import {Router} from "@angular/router";
-import {AuthState} from "../../../../../polyglot2/src/app/user/reducers";
 import {Store} from "@ngrx/store";
 import {AppState} from "../../reducers";
 import {login} from "../auth.actions";
@@ -18,8 +17,8 @@ export class LoginComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(private authService:AuthService, private fb:FormBuilder,
-              private router:Router,
+  constructor(private authService: AuthService, private fb: FormBuilder,
+              private router: Router,
               private store: Store<AppState>) {
     this.form = fb.group({
       username: ['stijn'],
