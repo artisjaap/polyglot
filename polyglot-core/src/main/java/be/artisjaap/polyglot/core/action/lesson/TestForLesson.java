@@ -24,7 +24,7 @@ public class TestForLesson {
     private TranslationRepository translationRepository;
 
     @Autowired
-    private PracticeWords practiceWords;
+    private FindPracticeWords findPracticeWords;
 
     @Autowired
     private LanguagePairRepository languagePairRepository;
@@ -61,8 +61,8 @@ public class TestForLesson {
         List<String> part1 = translationIds.subList(0, translationIds.size() / 2);
         List<String> part2 = translationIds.subList(translationIds.size() / 2, translationIds.size());
 
-        List<PracticeWordTO> practiceWordTOS = practiceWords.givePracticeWordsForTranslations(OrderType.NORMAL, part1);
-        practiceWordTOS.addAll(practiceWords.givePracticeWordsForTranslations(OrderType.REVERSE, part2));
+        List<PracticeWordTO> practiceWordTOS = findPracticeWords.givePracticeWordsForTranslations(OrderType.NORMAL, part1);
+        practiceWordTOS.addAll(findPracticeWords.givePracticeWordsForTranslations(OrderType.REVERSE, part2));
 
         return TestAssignmentTO.newBuilder()
                 .withLessonName(lesson.getName())
@@ -73,7 +73,7 @@ public class TestForLesson {
 
 
     private TestAssignmentTO reverseOrderTest( Lesson lesson, List<String> translationIds) {
-        List<PracticeWordTO> practiceWordTOS = practiceWords.givePracticeWordsForTranslations( OrderType.REVERSE, translationIds);
+        List<PracticeWordTO> practiceWordTOS = findPracticeWords.givePracticeWordsForTranslations( OrderType.REVERSE, translationIds);
 
         return TestAssignmentTO.newBuilder()
                 .withLessonName(lesson.getName())
@@ -84,7 +84,7 @@ public class TestForLesson {
 
     private TestAssignmentTO normalOrderTest(Lesson lesson, List<String> translationIds) {
 
-        List<PracticeWordTO> practiceWordTOS = practiceWords.givePracticeWordsForTranslations( OrderType.NORMAL, translationIds);
+        List<PracticeWordTO> practiceWordTOS = findPracticeWords.givePracticeWordsForTranslations( OrderType.NORMAL, translationIds);
 
         return TestAssignmentTO.newBuilder()
                 .withLessonName(lesson.getName())

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TranslationResponse {
+    private String id;
     private String languagePairId;
     private String languageA;
     private String languageB;
@@ -16,6 +17,7 @@ public class TranslationResponse {
         languagePairId = builder.languagePairId;
         languageA = builder.languageA;
         languageB = builder.languageB;
+        id = builder.id;
     }
 
     public static TranslationResponse from(TranslationTO t){
@@ -23,6 +25,7 @@ public class TranslationResponse {
                 .withLanguageA(t.languageA())
                 .withLanguageB(t.languageB())
                 .withLanguagePairId(t.languagePairId())
+                .withId(t.id())
                 .build();
     }
 
@@ -46,10 +49,15 @@ public class TranslationResponse {
         return languageB;
     }
 
+    public String getId() {
+        return id;
+    }
+
     public static final class Builder {
         private String languagePairId;
         private String languageA;
         private String languageB;
+        private String id;
 
         private Builder() {
         }
@@ -66,6 +74,11 @@ public class TranslationResponse {
 
         public Builder withLanguageB(String val) {
             languageB = val;
+            return this;
+        }
+
+        public Builder withId(String val) {
+            id = val;
             return this;
         }
 

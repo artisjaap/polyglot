@@ -29,7 +29,7 @@ public class CreateLesson {
     private NewLessonAssembler newLessonAssembler;
 
     @Autowired
-    private PracticeWords practiceWords;
+    private FindPracticeWords findPracticeWords;
 
     @Autowired
     private TranslationRepository translationRepository;
@@ -46,7 +46,7 @@ public class CreateLesson {
     public LessonTO automaticallyFor(NewAutomaticLessonTO newLesson) {
         List<Lesson> allLessons = lessonRepository.findByUserIdAndLanguagePairId(new ObjectId(newLesson.userId()), new ObjectId(newLesson.languagePairId()));
         List<ProgressStatus> status = Arrays.asList(ProgressStatus.IN_PROGRESS, ProgressStatus.KNOWN);
-        List<TranslationPracticeTO> translationPracticeTOS = practiceWords.allPracticedWords(newLesson.userId(), newLesson.languagePairId(), status);
+        List<TranslationPracticeTO> translationPracticeTOS = findPracticeWords.allPracticedWords(newLesson.userId(), newLesson.languagePairId(), status);
 
 
         Set<ObjectId> translations = autobuildTranslations(allLessons, translationPracticeTOS, newLesson);

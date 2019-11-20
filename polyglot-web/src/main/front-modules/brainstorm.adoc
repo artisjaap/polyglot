@@ -1,0 +1,149 @@
+= Model
+Start with simple model:
+
+
+NOTE: (every entity has username and creation date)
+
+=== LanguagePair
+- ID
+- LanguageFrom
+- LanguageTo
+
+=== Lesson
+- ID
+- Name
+- list of translations
+
+=== Translation
+- ID
+- LangugeA
+- LanguageB
+
+= RX Store entities
+
+* LangugePair
+** ID
+** LanguageFrom
+** LanguageTO
+
+* LessonHeader
+** ID
+** Name
+***  loadedLanguagePairs (defiend with lessons are loaded)
+
+* Lesson
+** ID
+** translations [ids]
+
+* Translation
+** ID
+** LanguageFrom
+** LanguageTo
+
+= RX Actions
+
+loadAllLanguagePairs:: Takes no parameter, dispatch action *allLanguagePairsLoadd* with payload GET /api/language-pairs
+allLanguagePairsLoaded:: saves payload in LanguagePair
+* props
+** list of languagePair data
+loadLessonHeaders:: takes languagePairId as parameter, request to load lesson with GET /api/lesson-header?languagePairId
+* props
+** languagePairId
+lessonHeadersLoaded:: Saves payload in LessonHeader
+* props
+** list of lessonHeaders
+loadLesson:: takes lessonId as parameter, dispatch action lessonLoaded with payload GET /api/lesson/:id
+* prop
+** lessonId
+lessonLoaded:: saves lesson with translation ID, and Translation data
+* props
+** lesson data inclusive all translations of that lesson
+createLesson:: saves new lesson wit PUT /api/lesson
+* props
+** name
+lessonCreated:: save payload of createLesson in LessonHeader
+* props
+** lesson header
+addNewTranslationToLesson:: saves lesson with PATCH /api/lesson/:id/new-translation
+* props
+** lesson id
+** translation
+newTranslationAdded:: takes payload and saved in Lesson and Translation
+* props
+* lesson id
+** translation inclusive id
+addExistingTranslationToLesson:: saved lesson with PATCH /api/lesson/:id/translation
+* props
+** lessonId
+** translationId
+existingTranslationToLessonAdded:: take payload and add translationId to lesson
+* props
+** lessonId
+** translationId
+deleteTranslationFromLesson:: delete translation with DELETE /api/lesson/:id/translation/:id
+* props
+** lessonId
+** translationId
+translationDeletedFromLesson:: removes only id from lesson
+* props
+** lessonId
+** translationId
+
+= RX Selectors
+
+* allLanguagePairs
+* allLessonHeadersForLanguagePair
+* lessonHeaderForId
+* allTranslationsInLesson
+* allTranslationsNotInLesson
+
+
+= Endpoints
+
+GET /api/language-pairs ::
+Get all language pairs for user returns object with:
+- ID
+- languageFrom
+- languageTO
+
+GET /api/lesson-headers?languagePairId=ID::
+get all lesson headers for a given languagePair. Returns list of lesson-headers:
+- ID
+- Name
+
+GET /api/lesson/:id::
+get lesson detail for given lesson Id
+- ID
+- Name
+- List translations
+** ID
+** LanguageA
+** LanguageB
+
+PUT /api/lesson::
+* in
+** Name
+* out
+** ID
+** Name
+
+PATCH /api/lesson/:id/new-translation::
+* in
+** languageA
+** languageB
+* out
+** ID
+** languageA
+** languageB
+
+
+PATCH /api/lesson/:id/new-translation::
+* in
+** translationId
+* out
+** ID
+** languageA
+** languageB
+
+
+DELETE /api/lesson/:id/translation/:translationId::

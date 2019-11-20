@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 import java.util.Collection;
 
 @Component
-public class ModifyLesson {
+public class UpdateLesson {
 
     @Autowired
     private LessonRepository lessonRepository;

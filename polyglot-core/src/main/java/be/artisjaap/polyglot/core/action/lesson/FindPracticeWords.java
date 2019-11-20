@@ -19,7 +19,7 @@ import static be.artisjaap.polyglot.core.action.to.test.OrderType.NORMAL;
 import static be.artisjaap.polyglot.core.action.to.test.OrderType.REVERSE;
 
 @Component
-public class PracticeWords {
+public class FindPracticeWords {
 
     @Autowired
     private TranslationPracticeRepository translationPracticeRepository;

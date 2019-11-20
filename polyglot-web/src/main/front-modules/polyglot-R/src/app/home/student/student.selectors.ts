@@ -2,6 +2,7 @@ import {createFeatureSelector, createSelector} from "@ngrx/store";
 import * as fromStudent from './reducers';
 import {latestTranslationsFeatureKey} from "./reducers/latest-translations.reducer";
 import {latestLessonsFeatureKey} from "./reducers/latest-lessons.reducer";
+import {lessonFeatureKey} from "./reducers/lesson.reducer";
 
 
 export const studentState =
@@ -24,13 +25,18 @@ export const loadedLanguagePairLatestLessons  = createSelector(
 export const latestTranslationsForLanguagePair = createSelector(
   loadedLanguagePairLatestTranslations,
   studentState,
-  (loadedLanguages, translations, props) => loadedLanguages[props.languagePairId].map(ids => translations[latestTranslationsFeatureKey].entities[ids])
+  (loadedLanguages, translations, props) =>
+    loadedLanguages[props.languagePairId].map(ids => translations[latestTranslationsFeatureKey].entities[ids])
+
 );
 
 export const latestLessonsForLanguagePair = createSelector(
   loadedLanguagePairLatestLessons,
   studentState,
-  (loadedLanguages, translations, props) => loadedLanguages[props.languagePairId].map(ids => translations[latestLessonsFeatureKey].entities[ids])
+
+  (loadedLanguages, translations, props) => {
+    return loadedLanguages[props.languagePairId].map(ids => translations[latestLessonsFeatureKey].entities[ids])
+  }
 );
 
 /*Learn: returns boolean if the languagePair translations are already loaded for the given languagePairId*/
@@ -44,3 +50,17 @@ export const areLatestLessonsLoadedForLanguagePair = createSelector(
   loadedLanguagePairLatestLessons,
   (state, props) => !!state[props.languagePairId]
 );
+
+
+export const isLessonLoaded = createSelector(
+  studentState,
+  (state, props) => !!state[lessonFeatureKey].entities[props.lessonId]
+)
+
+export const lessonWithId = createSelector(
+  studentState,
+  (state, props) => {
+
+    return state[lessonFeatureKey].entities[props.lessonId];
+  }
+)

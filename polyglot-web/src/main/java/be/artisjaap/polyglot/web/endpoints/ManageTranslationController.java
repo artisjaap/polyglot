@@ -4,8 +4,8 @@ import be.artisjaap.polyglot.core.action.pairs.FindLanguagePair;
 import be.artisjaap.polyglot.core.action.pairs.RegisterLanguagePair;
 import be.artisjaap.polyglot.core.action.pairs.RemoveLanguagePair;
 import be.artisjaap.polyglot.core.action.to.*;
-import be.artisjaap.polyglot.core.action.translation.RegisterTranslation;
-import be.artisjaap.polyglot.core.action.translation.TranslationsFiltered;
+import be.artisjaap.polyglot.core.action.translation.CreateTranslation;
+import be.artisjaap.polyglot.core.action.translation.FindTranslationsFiltered;
 import be.artisjaap.polyglot.core.action.translation.UpdateTranslation;
 import be.artisjaap.polyglot.web.endpoints.request.LanguagePairRequest;
 import be.artisjaap.polyglot.web.endpoints.request.NewTranslationsForUserRequest;
@@ -32,7 +32,7 @@ public class ManageTranslationController {
     private RegisterLanguagePair registerLanguagePair;
 
     @Autowired
-    private RegisterTranslation registerTranslation;
+    private CreateTranslation createTranslation;
 
     @Autowired
     private RemoveLanguagePair removeLanguagePair;
@@ -44,7 +44,7 @@ public class ManageTranslationController {
     private UpdateTranslation updateTranslation;
 
     @Autowired
-    private TranslationsFiltered translationsFiltered;
+    private FindTranslationsFiltered findTranslationsFiltered;
 
     @RequestMapping(value = "/pairs/user/{userId}", method = RequestMethod.GET)
     public @ResponseBody
@@ -82,12 +82,12 @@ public class ManageTranslationController {
     @RequestMapping(value = "/pairs/translations", method = RequestMethod.POST)
     public @ResponseBody
     ResponseEntity<TranslationsForUserResponse> createNewTranslationsForExistingPair(@RequestBody NewTranslationsForUserRequest translation) {
-        TranslationsForUserTO translationsForUserTO = registerTranslation.forAllWords(NewTranslationForUserTO.newBuilder()
+        TranslationsForUserTO translationsForUserTO = createTranslation.forAllWords(NewTranslationForUserTO.newBuilder()
                 .withUserId(translation.getUserId())
                 .withLanguagePairId(translation.getLanguagePairId())
                 .withTranslations(translation.getTranslations().stream().map(t -> NewSimpleTranslationPairTO.newBuilder()
-                        .withLanguageFrom(t.getLanguageFrom())
-                        .withLanguageTO(t.getLanguageTO())
+                        .withLanguageFrom(t.getQuestion())
+                        .withLanguageTO(t.getSolution())
                         .build()).collect(Collectors.toList()))
                 .build());
 
@@ -110,7 +110,7 @@ public class ManageTranslationController {
     public @ResponseBody
     ResponseEntity<TranslationsForUserResponse> uploadTranslationsByFile(@PathVariable String userId, @PathVariable String languagePairId, @RequestParam MultipartFile file) {
         try(InputStreamReader val = new InputStreamReader(file.getInputStream())) {
-            TranslationsForUserTO translationsForUserTO = registerTranslation.forAllWords(NewTranslationForUserFromFileTO.newBuilder()
+            TranslationsForUserTO translationsForUserTO = createTranslation.forAllWords(NewTranslationForUserFromFileTO.newBuilder()
                     .withUserId(userId)
                     .withLanguagePairId(languagePairId)
                     .withReader(val)
@@ -132,7 +132,7 @@ public class ManageTranslationController {
                 .withPageSize(number)
                 .withOrderByField(SortTO.newBuilder().withDirection(SortTO.Direction.DESCENDING).withFieldName("_id").build())
                 .build();
-        PagedTO<TranslationTO> translationTOPagedTO = translationsFiltered.withFilter(filter);
+        PagedTO<TranslationTO> translationTOPagedTO = findTranslationsFiltered.withFilter(filter);
 
         PagedResponse<TranslationResponse> response = PagedResponse.from(translationTOPagedTO, t-> TranslationResponse.from(t));
         return ResponseEntity.ok(response);

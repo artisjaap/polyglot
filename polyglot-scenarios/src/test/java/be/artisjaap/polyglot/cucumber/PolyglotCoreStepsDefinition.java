@@ -1,7 +1,7 @@
 package be.artisjaap.polyglot.cucumber;
 
 import be.artisjaap.polyglot.core.action.lesson.CreateLesson;
-import be.artisjaap.polyglot.core.action.lesson.PracticeWords;
+import be.artisjaap.polyglot.core.action.lesson.FindPracticeWords;
 import be.artisjaap.polyglot.core.action.lesson.SimpleNextWordStrategy;
 import be.artisjaap.polyglot.core.action.lesson.TestForLesson;
 import be.artisjaap.polyglot.core.action.pairs.FindLanguagePair;
@@ -24,7 +24,7 @@ import be.artisjaap.polyglot.core.action.to.test.TestAssignmentTO;
 import be.artisjaap.polyglot.core.action.to.test.TestResultTO;
 import be.artisjaap.polyglot.core.action.to.test.TestSolutionTO;
 import be.artisjaap.polyglot.core.action.to.test.WordSolutionTO;
-import be.artisjaap.polyglot.core.action.translation.RegisterTranslation;
+import be.artisjaap.polyglot.core.action.translation.CreateTranslation;
 import be.artisjaap.polyglot.core.action.user.FindUser;
 import be.artisjaap.polyglot.core.action.user.RegisterUser;
 import be.artisjaap.polyglot.core.action.user.UpdateUserSettings;
@@ -33,9 +33,7 @@ import be.artisjaap.polyglot.core.model.LessonRepository;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
-import cucumber.api.junit.Cucumber;
 import org.bson.types.ObjectId;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.InputStreamReader;
@@ -49,7 +47,7 @@ public class PolyglotCoreStepsDefinition {
     private RegisterUser registerUser;
 
     @Autowired
-    private RegisterTranslation registerTranslation;
+    private CreateTranslation createTranslation;
 
     @Autowired
     private CreateLesson createLesson;
@@ -64,7 +62,7 @@ public class PolyglotCoreStepsDefinition {
     private FindLanguagePair findLanguagePair;
 
     @Autowired
-    private PracticeWords practiceWords;
+    private FindPracticeWords findPracticeWords;
 
     @Autowired
     private UpdateUserSettings updateUserSettings;
@@ -108,7 +106,7 @@ public class PolyglotCoreStepsDefinition {
                 .map(t -> NewSimpleTranslationPairTO.newBuilder().withLanguageFrom(t.languageA)
                         .withLanguageTO(t.languageB).build()).collect(Collectors.toList());
 
-        registerTranslation.forAllWords(NewTranslationForUserTO.newBuilder()
+        createTranslation.forAllWords(NewTranslationForUserTO.newBuilder()
                 .withUserId(user.id())
                 .withTranslations(translationParams)
                 .withLanguagePairId(languagePair.id())
@@ -168,11 +166,11 @@ public class PolyglotCoreStepsDefinition {
         LanguagePairTO languagePairTO = findLanguagePair.pairForUser(user.id(), languageFrom, languageTo).orElseThrow(IllegalAccessError::new);
 
         for (int i = 0; i < numberOfExercises; i++) {
-            PracticeWordTO practiceWordTO = practiceWords.nextWord(user.id(), languagePairTO.id(), orderType);
+            PracticeWordTO practiceWordTO = findPracticeWords.nextWord(user.id(), languagePairTO.id(), orderType);
 
             System.out.println(practiceWordTO);
 
-            practiceWords.practiced(user.id(), practiceWordTO.translationId(), practiceWordTO.reversed());
+            findPracticeWords.practiced(user.id(), practiceWordTO.translationId(), practiceWordTO.reversed());
         }
 
         List<PracticeWordTO> practiceWordTOS = simpleNextWordStrategy.giveCurrentListToPractice(user.id(), languagePairTO.id(), orderType);
@@ -228,7 +226,7 @@ public class PolyglotCoreStepsDefinition {
         UserTO user = findUser.byUsername(username).orElseThrow(() -> new IllegalStateException("Verwacht dat user bestaat"));
         LanguagePairTO languagePair = findLanguagePair.pairForUser(user.id(), languageFrom, languageTo).orElseThrow(() -> new IllegalStateException("Expected language pair for user"));
 
-        registerTranslation.forAllWords(NewTranslationForUserFromFileTO.newBuilder()
+        createTranslation.forAllWords(NewTranslationForUserFromFileTO.newBuilder()
                 .withUserId(user.id())
                 .withLanguagePairId(languagePair.id())
                 .withReader(new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream("data/" + file)))
@@ -240,9 +238,9 @@ public class PolyglotCoreStepsDefinition {
         UserTO user = findUser.byUsername(username).orElseThrow(() -> new IllegalStateException("Verwacht dat user bestaat"));
         LanguagePairTO languagePair = findLanguagePair.pairForUser(user.id(), languageFrom, languageTo).orElseThrow(() -> new IllegalStateException("Expected language pair for user"));
 
-        PracticeWordTO practiceWordTO = practiceWords.nextWord(user.id(), languagePair.id(), OrderType.NORMAL);
+        PracticeWordTO practiceWordTO = findPracticeWords.nextWord(user.id(), languagePair.id(), OrderType.NORMAL);
         for (int i = 0; i < numerOfPracticing; i++) {
-            AnswerAndNextWordTO answerAndNextWordTO = practiceWords.checkAnswerAndGiveNext(PracticeWordCheckTO.newBuilder()
+            AnswerAndNextWordTO answerAndNextWordTO = findPracticeWords.checkAnswerAndGiveNext(PracticeWordCheckTO.newBuilder()
                     .withUserId(user.id())
                     .withTranslationId(practiceWordTO.translationId())
                     .withAnswerOrderType(OrderType.NORMAL)

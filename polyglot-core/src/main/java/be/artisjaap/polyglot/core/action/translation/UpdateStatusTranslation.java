@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class ChangeStatusTranslation {
+public class UpdateStatusTranslation {
 
     @Autowired
     private TranslationPracticeRepository translationPracticeRepository;

@@ -6,12 +6,14 @@ import {DashboardResolver} from "./DashboardResolver";
 import {LanguagePairDetailComponent} from "./language-pair-detail/language-pair-detail.component";
 import {LanguagePairDetailResolver} from "./LanguagePairDetailResolver";
 import {LessonDetailResolver} from "./LessonDetailResolver";
+import {LessonDetailComponent} from "./lesson-detail/lesson-detail.component";
 
 
 const routes: Routes = [
   {
     path: 'student',
     component: StudentMainComponent,
+
     children: [
       {
         path: 'dashboard', component: StudentDashboardComponent,
@@ -23,7 +25,7 @@ const routes: Routes = [
       }
       ,
       {
-        path: 'lesson/:lessonId', component: LanguagePairDetailComponent,
+        path: 'lesson/:lessonId', component: LessonDetailComponent,
         resolve: {'LessonDetail': LessonDetailResolver}
       }
     ]

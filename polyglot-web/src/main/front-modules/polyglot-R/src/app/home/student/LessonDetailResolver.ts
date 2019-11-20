@@ -2,30 +2,38 @@ import {Injectable} from "@angular/core";
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from "@angular/router";
 import {Observable} from "rxjs";
 import {LessonDataService} from "../dataservice/lesson-data-service";
-import {filter, first, tap} from "rxjs/operators";
+import {filter, finalize, first, tap} from "rxjs/operators";
+import {select, Store} from "@ngrx/store";
+import {areLatestTranslationsLoadedForLanguagePair, isLessonLoaded} from "./student.selectors";
+import {StudentActions} from "./action-types";
+import {AppState} from "../../reducers";
 
 @Injectable()
 export class LessonDetailResolver implements Resolve<boolean> {
+  lessonIsLoading: boolean = false;
 
-  constructor(private lessonDataService: LessonDataService) {
+  constructor(private store: Store<AppState>) {
 
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     let lessonId = route.params['lessonId'];
 
-
-
-    return this.lessonDataService.loaded$
+    return this.store
       .pipe(
-        tap(loaded => {
-          if (!loaded) {
-            this.lessonDataService.getByKey(lessonId);
+        select(isLessonLoaded, {lessonId: lessonId}),
+        tap(lessonLoaded => {
+          if (!this.lessonIsLoading && !lessonLoaded) {
+            this.lessonIsLoading = true;
+            this.store.dispatch(StudentActions.loadLessonById({lessonId}))
           }
         }),
-        filter(loaded => !!loaded),
-        first()
-      )
+        filter(latestTranslationsLoaded => latestTranslationsLoaded),
+        first(),
+        finalize(() => this.lessonIsLoading = false)
+      );
+
+
 
   }
 

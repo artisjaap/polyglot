@@ -11,7 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 @Component
-public class LessonsFiltered {
+public class FindLessonsFiltered {
 
     @Autowired
     private LessonRepository lessonRepository;

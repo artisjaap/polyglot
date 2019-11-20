@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class PracticeWordsFiltered {
+public class FindPracticeWordsFiltered {
     @Autowired
     private TranslationRepository translationRepository;
 

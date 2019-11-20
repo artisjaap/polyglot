@@ -12,11 +12,11 @@
   <mat-card-content>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-flat-button color="warn">
-      <mat-icon class="add-course-btn" (click)="removePair()">delete</mat-icon>
+    <button mat-flat-button color="warn" (click)="removePair()">
+      <mat-icon class="add-course-btn" >delete</mat-icon>
     </button>
-    <button mat-flat-button color="warn">
-      <mat-icon class="add-course-btn" [routerLink]="['..', 'language-pair', languagePair.id]">open_in_new</mat-icon>
+    <button mat-flat-button color="warn" [routerLink]="['..', 'language-pair', languagePair.id]">
+      <mat-icon class="add-course-btn" >open_in_new</mat-icon>
     </button>
   </mat-card-actions>
   <mat-card-footer>

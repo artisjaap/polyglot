@@ -1,16 +1,16 @@
 package be.artisjaap.polyglot.web.endpoints;
 
-import be.artisjaap.polyglot.core.action.translation.FindTranslations;
-import be.artisjaap.polyglot.web.endpoints.response.LessonHeaderResponse;
+import be.artisjaap.polyglot.core.action.to.PagedTO;
+import be.artisjaap.polyglot.core.action.to.SortTO;
+import be.artisjaap.polyglot.core.action.to.TranslationFilterTO;
+import be.artisjaap.polyglot.core.action.to.TranslationTO;
+import be.artisjaap.polyglot.core.action.translation.FindTranslationsFiltered;
 import be.artisjaap.polyglot.web.endpoints.response.TranslationResponse;
-import be.artisjaap.polyglot.web.security.SecurityUtils;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -18,12 +18,17 @@ import java.util.List;
 public class TranslationController {
 
     @Resource
-    private FindTranslations findTranslations;
+    private FindTranslationsFiltered findTranslationsFiltered;
 
     @RequestMapping(path="/translations", method = RequestMethod.GET)
     public @ResponseBody
-    ResponseEntity<List<TranslationResponse>> allMyTranslations() {
-        return ResponseEntity.ok(TranslationResponse.from(findTranslations.latestFor(SecurityUtils.userId(), 10)));
+    ResponseEntity<List<TranslationResponse>> allMyTranslations(@RequestParam String languagePairId) {
+        PagedTO<TranslationTO> translationTOPagedTO = this.findTranslationsFiltered.withFilter(TranslationFilterTO.newBuilder()
+                .withLanguagePairId(languagePairId)
+                .withOrderByFields(Collections.singletonList(SortTO.newBuilder().withFieldName("_id")
+                        .withDirection(SortTO.Direction.DESCENDING).build()))
+                .build());
+        return ResponseEntity.ok(TranslationResponse.from(translationTOPagedTO.data()));
 
     }
 }

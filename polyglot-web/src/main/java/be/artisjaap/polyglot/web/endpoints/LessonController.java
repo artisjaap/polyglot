@@ -1,15 +1,11 @@
 package be.artisjaap.polyglot.web.endpoints;
 
-import be.artisjaap.polyglot.core.action.lesson.CreateLesson;
-import be.artisjaap.polyglot.core.action.lesson.FindLesson;
-import be.artisjaap.polyglot.core.action.lesson.LessonsFiltered;
-import be.artisjaap.polyglot.core.action.lesson.TestForLesson;
+import be.artisjaap.polyglot.core.action.lesson.*;
 import be.artisjaap.polyglot.core.action.to.*;
 import be.artisjaap.polyglot.core.action.to.test.*;
 import be.artisjaap.polyglot.web.endpoints.request.*;
 import be.artisjaap.polyglot.web.endpoints.response.*;
 import be.artisjaap.polyglot.web.security.SecurityUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,10 +23,16 @@ public class LessonController {
     private FindLesson findLesson;
 
     @Resource
+    private FindLessonHeader findLessonHeader;
+
+    @Resource
     private TestForLesson testForLesson;
 
     @Resource
-    private LessonsFiltered lessonsFiltered;
+    private FindLessonsFiltered findLessonsFiltered;
+
+    @Resource
+    private CreateNewWordForLesson createNewWordForLesson;
 
     /* endpoints to define
 
@@ -43,19 +45,24 @@ public class LessonController {
      */
 
     /// used in front
-
-    @RequestMapping(path= "/lessons", method = RequestMethod.GET)
+    @RequestMapping(value = "/lesson/{lessonId}", method = RequestMethod.GET)
     public @ResponseBody
-    ResponseEntity<List<LessonHeaderResponse>> allLessonsForUser(@RequestParam String languagePairId) {
-        if(languagePairId != null){
-            return ResponseEntity.ok(LessonHeaderResponse.from(lessonsFiltered.withFilter(LessonFilterTO.newBuilder()
-                    .withLanguagePairId(languagePairId)
-                    .build()).data()));
-
-        }
-        return ResponseEntity.ok(LessonHeaderResponse.from(findLesson.forUser(SecurityUtils.userId())));
+    ResponseEntity<LessonResponse> lessonDetail(@PathVariable String lessonId) {
+        LessonTO lessonTO = findLesson.forPracticing(lessonId);
+        return ResponseEntity.ok(LessonResponse.from(lessonTO));
     }
 
+    @RequestMapping(value = "/lessons", method = RequestMethod.POST)
+    public @ResponseBody
+    ResponseEntity<LessonResponse> create(@RequestBody NewLessonRequest newLessonRequest) {
+        LessonTO lessonTO = createLesson.automaticallyFor(NewAutomaticLessonTO.newBuilder()
+                .withUserId(SecurityUtils.userId())
+                .withLessonTitle(newLessonRequest.getLessonTitle())
+                .withLanguagePairId(newLessonRequest.getLanguagePairId())
+                .build());
+
+        return ResponseEntity.ok(LessonResponse.from(lessonTO));
+    }
 
     /// not yet used in front
 
@@ -73,17 +80,7 @@ public class LessonController {
     }
 
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public @ResponseBody
-    ResponseEntity<LessonResponse> create(@RequestBody NewLessonRequest newLessonRequest) {
-        LessonTO lessonTO = createLesson.automaticallyFor(NewAutomaticLessonTO.newBuilder()
-                .withUserId(newLessonRequest.getUserId())
-                .withLessonTitle(newLessonRequest.getLessonTitle())
-                .withLanguagePairId(newLessonRequest.getLanguagePairId())
-                .build());
 
-        return ResponseEntity.ok(LessonResponse.from(lessonTO));
-    }
 
     @RequestMapping(value = "/practice/{lessonId}", method = RequestMethod.GET)
     public @ResponseBody
@@ -94,13 +91,13 @@ public class LessonController {
     @RequestMapping(value = "/{languagePairId}", method = RequestMethod.GET)
     public @ResponseBody
     ResponseEntity<List<LessonHeaderResponse>> allLessonsForLanguagePair(@PathVariable String languagePairId) {
-        return ResponseEntity.ok(LessonHeaderResponse.from(findLesson.forLanguagePair(languagePairId)));
+        return ResponseEntity.ok(LessonHeaderResponse.from(findLessonHeader.forLanguagePair(languagePairId)));
     }
 
     @RequestMapping(value = "/list/all/filtered", method = RequestMethod.POST)
     public @ResponseBody
     ResponseEntity<PagedResponse<LessonHeaderResponse>> findAllPracticeWordsFiltered(@RequestBody LessonsFilterRequest lessonsFilterRequest) {
-        PagedTO<LessonHeaderTO> lessonHeaderTOPagedTO = lessonsFiltered.withFilter(LessonFilterTO.newBuilder()
+        PagedTO<LessonHeaderTO> lessonHeaderTOPagedTO = findLessonsFiltered.withFilter(LessonFilterTO.newBuilder()
                 .withLanguagePairId(lessonsFilterRequest.getLanguagePairId())
                 .withPage(lessonsFilterRequest.getPageNumber())
                 .withPageSize(lessonsFilterRequest.getPageSize())
@@ -147,7 +144,18 @@ public class LessonController {
         return ResponseEntity.ok(LessonTranslationPairResponse.from(createLesson.addTranslationToLesson(lessonId, translationId)));
     }
 
-    @RequestMapping(value = "/remove/{lessonId}/{translationId}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/lesson/{lessonId}/translation", method = RequestMethod.PUT)
+    public @ResponseBody
+    ResponseEntity<TranslationResponse> addNewTranslationToLesson(@PathVariable String lessonId, @RequestBody NewSimpleTranslationRequest translation) {
+        TranslationTO translationTO = createNewWordForLesson.forWord(NewWordForLessonTO.newBuilder().lessonId(lessonId)
+                .languageFrom(translation.getQuestion())
+                .languageFrom(translation.getSolution())
+                .build());
+
+        return ResponseEntity.ok(TranslationResponse.from(translationTO));
+    }
+
+    @RequestMapping(value = "lesson/{lessonId}/{translationId}", method = RequestMethod.DELETE)
     public @ResponseBody
     ResponseEntity<LessonTranslationPairResponse> removeTranslationToLesson(@PathVariable String lessonId, @PathVariable String translationId) {
         return ResponseEntity.ok(LessonTranslationPairResponse.from(createLesson.removeTranslationFromLesson(lessonId, translationId)));

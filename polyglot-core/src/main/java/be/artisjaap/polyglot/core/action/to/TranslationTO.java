@@ -2,6 +2,8 @@ package be.artisjaap.polyglot.core.action.to;
 
 import be.artisjaap.common.model.ReferenceableTO;
 
+
+
 public class TranslationTO extends ReferenceableTO {
 
     private String languagePairId;

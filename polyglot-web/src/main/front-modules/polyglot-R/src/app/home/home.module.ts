@@ -7,7 +7,8 @@ import {LanguagePairDataService} from "./dataservice/language-pair-data-service"
 import {LessonDataService} from "./dataservice/lesson-data-service";
 import {TranslationDataService} from "./dataservice/translation-data-service";
 import {TranslationService} from "./services/translation-service";
-import {LessonService} from "./services/lesson-service";
+import {LessonHeaderService} from "./services/lesson-header.service";
+import {LessonService} from "./services/LessonService";
 
 
 
@@ -17,7 +18,14 @@ import {LessonService} from "./services/lesson-service";
     CommonModule,
     HomeRoutingModule
   ],
-  providers: [LanguagePairDataService, LessonDataService, TranslationDataService, TranslationService, LessonService]
+  providers: [
+    LanguagePairDataService,
+    LessonDataService,
+    TranslationDataService,
+    TranslationService,
+    LessonHeaderService,
+    LessonService
+  ]
 })
 export class HomeModule {
 

@@ -2,12 +2,12 @@ package be.artisjaap.polyglot.web.endpoints;
 
 
 import be.artisjaap.polyglot.core.action.lesson.FindPracticeWord;
-import be.artisjaap.polyglot.core.action.lesson.PracticeWords;
-import be.artisjaap.polyglot.core.action.lesson.PracticeWordsFiltered;
+import be.artisjaap.polyglot.core.action.lesson.FindPracticeWords;
+import be.artisjaap.polyglot.core.action.lesson.FindPracticeWordsFiltered;
 import be.artisjaap.polyglot.core.action.lesson.SimpleNextWordStrategy;
 import be.artisjaap.polyglot.core.action.to.*;
 import be.artisjaap.polyglot.core.action.to.test.OrderType;
-import be.artisjaap.polyglot.core.action.translation.ChangeStatusTranslation;
+import be.artisjaap.polyglot.core.action.translation.UpdateStatusTranslation;
 import be.artisjaap.polyglot.core.model.ProgressStatus;
 import be.artisjaap.polyglot.web.endpoints.request.PracticeWordCheckRequest;
 import be.artisjaap.polyglot.web.endpoints.request.TranslationsFilterRequest;
@@ -25,16 +25,16 @@ import java.util.List;
 public class PracticeTranslationController {
 
     @Autowired
-    private PracticeWords practiceWords;
+    private FindPracticeWords findPracticeWords;
 
     @Autowired
-    private PracticeWordsFiltered practiceWordsFiltered;
+    private FindPracticeWordsFiltered findPracticeWordsFiltered;
 
     @Autowired
     private SimpleNextWordStrategy simpleNextWordStrategy;
 
     @Autowired
-    private ChangeStatusTranslation changeStatusTranslation;
+    private UpdateStatusTranslation updateStatusTranslation;
 
     @Autowired
     private FindPracticeWord findPracticeWord;
@@ -49,7 +49,7 @@ public class PracticeTranslationController {
     @RequestMapping(value = "/list/all/filterd", method = RequestMethod.POST)
     public @ResponseBody
       ResponseEntity<PagedResponse<PracticeWordResponse>> findAllPracticeWordsFiltered(@RequestBody TranslationsFilterRequest translationsFilterRequest) {
-        PagedTO<PracticeWordTO> translationTOPagedTO = practiceWordsFiltered.withFilter(TranslationFilterTO.newBuilder()
+        PagedTO<PracticeWordTO> translationTOPagedTO = findPracticeWordsFiltered.withFilter(TranslationFilterTO.newBuilder()
                 .withLanguagePairId(translationsFilterRequest.getLanguagePairId())
                 .withPage(translationsFilterRequest.getPageNumber())
                 .withPageSize(translationsFilterRequest.getPageSize())
@@ -63,7 +63,7 @@ public class PracticeTranslationController {
     @RequestMapping(value = "/next/{userId}/{languagePairId}/{orderType}", method = RequestMethod.GET)
     public @ResponseBody
     ResponseEntity<PracticeWordResponse> nextPracticeWord(@PathVariable String userId, @PathVariable String languagePairId, @PathVariable OrderType orderType) {
-        PracticeWordTO practiceWordTO = practiceWords.nextWord(userId, languagePairId, orderType);
+        PracticeWordTO practiceWordTO = findPracticeWords.nextWord(userId, languagePairId, orderType);
         return ResponseEntity.ok(PracticeWordResponse.from(practiceWordTO));
     }
 
@@ -79,14 +79,14 @@ public class PracticeTranslationController {
                 .withUserId(practiceWordCheck.getUserId())
                 .build();
 
-        AnswerAndNextWordTO answerAndNextWordTO = practiceWords.checkAnswerAndGiveNext(practiceWordCheckTO);
+        AnswerAndNextWordTO answerAndNextWordTO = findPracticeWords.checkAnswerAndGiveNext(practiceWordCheckTO);
         return ResponseEntity.ok(AnswerAndNextWordResponse.from(answerAndNextWordTO));
     }
 
     @RequestMapping(value = "/update-status/{translationId}/{status}", method = RequestMethod.PATCH)
     public @ResponseBody
     ResponseEntity<PracticeWordResponse> updateStatus(@PathVariable String translationId, @PathVariable ProgressStatus status) {
-        changeStatusTranslation.toStatus(translationId, status);
+        updateStatusTranslation.toStatus(translationId, status);
         return ResponseEntity.ok(PracticeWordResponse.from(findPracticeWord.forTranslation(translationId, OrderType.NORMAL)));
     }
 

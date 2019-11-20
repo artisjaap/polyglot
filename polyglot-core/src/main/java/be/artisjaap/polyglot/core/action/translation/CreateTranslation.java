@@ -16,8 +16,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+
 @Component
-public class RegisterTranslation {
+public class CreateTranslation {
 
     @Autowired
     private TranslationRepository translationRepository;
@@ -29,7 +30,7 @@ public class RegisterTranslation {
     private TranslationForUserAssembler translationForUserAssembler;
 
     @Autowired
-    private InitTranslationForPractice initTranslationForPractice;
+    private CreateInitTranslationForPractice createInitTranslationForPractice;
 
     @Autowired
     private FindTranslations findTranslations;
@@ -49,7 +50,7 @@ public class RegisterTranslation {
 
         TranslationsForUserTO translationsForUserTO = translationForUserAssembler.assembleTO(to, newTranslations, duplicates);
 
-        initTranslationForPractice.forAll(translationsForUserTO);
+        createInitTranslationForPractice.forAll(translationsForUserTO);
 
         return translationsForUserTO;
     }

@@ -1,50 +1,51 @@
 package be.artisjaap.polyglot.web.endpoints.request;
 
 public class NewSimpleTranslationRequest {
-    private String languageFrom;
-    private String languageTO;
+    private String question;
+    private String solution;
 
-    private NewSimpleTranslationRequest(){}
+    public NewSimpleTranslationRequest(){}
+
+    public String getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+
+    public String getSolution() {
+        return solution;
+    }
+
+    public void setSolution(String solution) {
+        this.solution = solution;
+    }
 
     private NewSimpleTranslationRequest(Builder builder) {
-        setLanguageFrom(builder.languageFrom);
-        setLanguageTO(builder.languageTO);
+        question = builder.question;
+        solution = builder.solution;
     }
 
     public static Builder newBuilder() {
         return new Builder();
     }
 
-    public String getLanguageFrom() {
-        return languageFrom;
-    }
-
-    public void setLanguageFrom(String languageFrom) {
-        this.languageFrom = languageFrom;
-    }
-
-    public String getLanguageTO() {
-        return languageTO;
-    }
-
-    public void setLanguageTO(String languageTO) {
-        this.languageTO = languageTO;
-    }
 
     public static final class Builder {
-        private String languageFrom;
-        private String languageTO;
+        private String question;
+        private String solution;
 
         private Builder() {
         }
 
-        public Builder withLanguageFrom(String val) {
-            languageFrom = val;
+        public Builder question(String val) {
+            question = val;
             return this;
         }
 
-        public Builder withLanguageTO(String val) {
-            languageTO = val;
+        public Builder solution(String val) {
+            solution = val;
             return this;
         }
 

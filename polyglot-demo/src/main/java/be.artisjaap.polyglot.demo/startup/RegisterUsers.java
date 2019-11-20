@@ -5,18 +5,14 @@ import be.artisjaap.migrate.model.scripts.AbstractInitScript;
 import be.artisjaap.polyglot.core.action.lesson.CreateLesson;
 import be.artisjaap.polyglot.core.action.pairs.RegisterLanguagePair;
 import be.artisjaap.polyglot.core.action.to.*;
-import be.artisjaap.polyglot.core.action.translation.ChangeStatusTranslation;
-import be.artisjaap.polyglot.core.action.translation.FindTranslationsInPractice;
-import be.artisjaap.polyglot.core.action.translation.RegisterTranslation;
+import be.artisjaap.polyglot.core.action.translation.UpdateStatusTranslation;
+import be.artisjaap.polyglot.core.action.translation.CreateTranslation;
 import be.artisjaap.polyglot.core.action.user.RegisterUser;
 import be.artisjaap.polyglot.core.model.ProgressStatus;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Component
 public class RegisterUsers extends AbstractInitScript {
@@ -29,14 +25,14 @@ public class RegisterUsers extends AbstractInitScript {
     private RegisterLanguagePair registerLanguagePair;
 
     @Autowired
-    private RegisterTranslation registerTranslation;
+    private CreateTranslation createTranslation;
 
     @Autowired
     private CreateLesson createLesson;
 
 
     @Autowired
-    private ChangeStatusTranslation changeStatusTranslation;
+    private UpdateStatusTranslation updateStatusTranslation;
 
     @Autowired
     private CollectionInfo collectionInfo;
@@ -70,7 +66,7 @@ public class RegisterUsers extends AbstractInitScript {
                 .build());
         logger.info("LanguagePair created with id: " + languagePairTO.id());
 
-        TranslationsForUserTO translationsForUserTO = registerTranslation.forAllWords(NewTranslationForUserTO.newBuilder()
+        TranslationsForUserTO translationsForUserTO = createTranslation.forAllWords(NewTranslationForUserTO.newBuilder()
                 .withLanguagePairId(languagePairTO.id())
                 .withUserId(languagePairTO.userId())
                 .addTranslation(NewSimpleTranslationPairTO.newBuilder().withLanguageFrom("EEN").withLanguageTO("ONE").build())
@@ -86,7 +82,7 @@ public class RegisterUsers extends AbstractInitScript {
                 .build());
 
 
-        changeStatusTranslation.allInStatusTo(userTO.id(), languagePairTO.id(), ProgressStatus.NEW, ProgressStatus.IN_PROGRESS);
+        updateStatusTranslation.allInStatusTo(userTO.id(), languagePairTO.id(), ProgressStatus.NEW, ProgressStatus.IN_PROGRESS);
 
         LessonTO lessonTO = createLesson.automaticallyFor(NewAutomaticLessonTO.newBuilder()
                 .withLanguagePairId(languagePairTO.id())

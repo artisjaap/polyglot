@@ -22,12 +22,7 @@ public class FindLesson {
     @Autowired
     private LessonAssembler lessonAssembler;
 
-    @Autowired
-    private LessonHeaderAssembler lessonHeaderAssembler;
 
-    public List<LessonHeaderTO> forUser(String userId){
-        return lessonHeaderAssembler.assembleTOs(lessonRepository.findByUserId(new ObjectId(userId)));
-    }
 
     public LessonTO forTesting(String lessonId){
         Lesson lesson = lessonRepository.findById(new ObjectId(lessonId)).orElseThrow(() -> new ValidationException("LESSON_NOT_FOUND", "les niet gevonden"));
@@ -39,7 +34,5 @@ public class FindLesson {
         return lessonAssembler.assembleTO(lesson);
     }
 
-    public List<LessonHeaderTO> forLanguagePair(String languagePairId) {
-        return lessonHeaderAssembler.assembleTOs(lessonRepository.findByLanguagePairId(new ObjectId(languagePairId)));
-    }
+
 }

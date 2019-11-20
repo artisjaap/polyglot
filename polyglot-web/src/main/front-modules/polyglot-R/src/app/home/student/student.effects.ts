@@ -1,9 +1,10 @@
 import {Injectable} from "@angular/core";
-import {Actions, createEffect, ofType} from "@ngrx/effects";
+import {act, Actions, createEffect, ofType} from "@ngrx/effects";
 import {StudentActions} from "./action-types";
 import {concatMap, map} from "rxjs/operators";
 import {TranslationService} from "../services/translation-service";
-import {LessonService} from "../services/lesson-service";
+import {LessonHeaderService} from "../services/lesson-header.service";
+import {LessonService} from "../services/LessonService";
 
 @Injectable()
 export class StudentEffects {
@@ -39,7 +40,7 @@ export class StudentEffects {
     () => this.actions$.pipe(
       ofType(StudentActions.loadLatestLessons),
       concatMap(action =>
-        this.lessonService.loadLatestLessonsForLanguagePair(action.languagePairId)
+        this.lessonHeaderService.loadLatestLessonsForLanguagePair(action.languagePairId)
           .pipe(
             map(lessons => {
                 return {lessons: lessons, languagePairId:action.languagePairId}
@@ -56,9 +57,45 @@ export class StudentEffects {
     )
   );
 
+  loadLessonForId$ = createEffect(
+    () => this.actions$.pipe(
+      ofType(StudentActions.loadLessonById),
+      concatMap(action =>
+        this.lessonService.loadLessonById(action.lessonId)
+      ),
+      map(lesson => StudentActions.lessonLoaded({lesson}))
+    )
+  );
+
+  createNewLesson$ = createEffect(
+    () => this.actions$.pipe(
+      ofType(StudentActions.createNewLesson),
+      concatMap(action => this.lessonService.createLesson(action.lesson)),
+      map(lesson => StudentActions.newLessonCreated({lesson}))
+    )
+  );
+
+  removeTranslationFromLesson$ = createEffect(
+    () => this.actions$.pipe(
+      ofType(StudentActions.removeTranslationFromLesson),
+      concatMap(action => this.lessonService.removeTranslationFromLesson(action.lessonId, action.translationId))
+    ),
+  )
+
+  translationAddedForLanguage = createEffect(
+    () => this.actions$.pipe(
+      ofType(StudentActions.addNewTranslation),
+      concatMap(action => this.lessonService.addNewTranslationToLesson(action.lessonId, action.translation))
+    )
+  )
 
 
-  constructor(private actions$: Actions, private translationService: TranslationService, private lessonService: LessonService) {
+
+
+  constructor(private actions$: Actions,
+              private translationService: TranslationService,
+              private lessonHeaderService: LessonHeaderService,
+              private lessonService: LessonService) {
 
   }
 

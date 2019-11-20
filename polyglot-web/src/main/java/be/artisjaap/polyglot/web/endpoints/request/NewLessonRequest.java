@@ -1,24 +1,18 @@
 package be.artisjaap.polyglot.web.endpoints.request;
 
 public class NewLessonRequest {
-    private String userId;
     private String languagePairId;
     private String lessonTitle;
 
     private NewLessonRequest(){}
 
     private NewLessonRequest(Builder builder) {
-        userId = builder.userId;
         languagePairId = builder.languagePair;
         lessonTitle = builder.title;
     }
 
     public static Builder newBuilder() {
         return new Builder();
-    }
-
-    public String getUserId() {
-        return userId;
     }
 
     public String getLanguagePairId() {
@@ -31,16 +25,10 @@ public class NewLessonRequest {
 
 
     public static final class Builder {
-        private String userId;
         private String languagePair;
         private String title;
 
         private Builder() {
-        }
-
-        public Builder withUserId(String val) {
-            userId = val;
-            return this;
         }
 
         public Builder withLanguagePair(String val) {

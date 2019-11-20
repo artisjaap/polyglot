@@ -1,1 +1,31 @@
-<p>lesson-detail works!</p>
+
+<mat-card *ngIf="lesson$ | async as lesson ">
+  <mat-card-header>
+    {{lesson.name}}
+  </mat-card-header>
+  <mat-card-content>
+    <div>
+
+
+      <form [formGroup]="form" class="create-card-form">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Language from" formControlName="question">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Language to" formControlName="solution">
+        </mat-form-field>
+      </form>
+      <button mat-mini-fab color="warn">
+        <mat-icon class="add-course-btn" (click)="createTranslation(lesson)">add</mat-icon>
+      </button>
+
+    </div>
+    <div *ngFor="let t of lesson.translations">
+      <span>{{t.question}} - {{t.solution}}</span>
+      <button mat-flat-button color="warn" (click)="removeWord(t.translationId, lesson.id, lesson)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </mat-card-content>
+</mat-card>
+

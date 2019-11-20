@@ -56,7 +56,7 @@ export class LanguagePairDetailResolver implements Resolve<boolean> {
         filter(latestTranslationsLoaded => latestTranslationsLoaded),
         first(),
         finalize(() => this.loadingLatestTranslations = false)
-      )
+      );
 
     return merge(translation$, lessons$);
     ;

@@ -26,7 +26,7 @@ public class SimpleNextWordStrategy implements NextRandomWord {
     private UpdateLanguagePairHealth updateLanguagePairHealth;
 
     @Autowired
-    private IntroduceNewWordForPractice introduceNewWordForPractice;
+    private CreateNewWordForPractice createNewWordForPractice;
 
     @Autowired
     private TranslationRepository translationRepository;
@@ -48,7 +48,7 @@ public class SimpleNextWordStrategy implements NextRandomWord {
 
         if (languagePairTO.practiceHealth().healthy()) {
             updateLanguagePairHealth.newWordIntroduced(languagePairId);
-            Optional<TranslationPractice> translationPractice = introduceNewWordForPractice.forUserInLanguage(userId, languagePairTO.id());
+            Optional<TranslationPractice> translationPractice = createNewWordForPractice.forUserInLanguage(userId, languagePairTO.id());
             if (translationPractice.isPresent()) {
                 TranslationPractice practice = translationPractice.get();
                 Translation translation = translationRepository.findById(practice.getTranslationId()).orElseThrow(() -> new IllegalStateException("expected to find translation"));
@@ -81,7 +81,7 @@ public class SimpleNextWordStrategy implements NextRandomWord {
         LanguagePairTO languagePair = findLanguagePair.byId(languagePairId);
         for (int i = 0; i < initialNumberOnPracticeWords; i++) {
             updateLanguagePairHealth.newWordIntroduced(languagePairId);
-            introduceNewWordForPractice.forUserInLanguage(languagePair.userId(), languagePair.id()).ifPresent(translationPractices::add);
+            createNewWordForPractice.forUserInLanguage(languagePair.userId(), languagePair.id()).ifPresent(translationPractices::add);
         }
     }
 
