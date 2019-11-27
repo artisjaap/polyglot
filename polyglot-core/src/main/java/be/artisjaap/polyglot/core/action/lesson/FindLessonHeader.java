@@ -25,6 +25,10 @@ public class FindLessonHeader {
         return lessonHeaderAssembler.assembleTOs(lessonRepository.findByLanguagePairId(new ObjectId(languagePairId)));
     }
 
+    public List<LessonHeaderTO> containingTranslation(String translationId){
+        return lessonHeaderAssembler.assembleTOs(lessonRepository.findAllByTranslations(new ObjectId(translationId)));
+    }
+
 
 
 

@@ -1,10 +1,14 @@
 package be.artisjaap.polyglot.web.endpoints;
 
+
+import be.artisjaap.polyglot.core.action.lesson.CreateLesson;
 import be.artisjaap.polyglot.core.action.lesson.FindLessonHeader;
-import be.artisjaap.polyglot.core.action.lesson.FindLessonsFiltered;
-import be.artisjaap.polyglot.core.action.to.LessonFilterTO;
+import be.artisjaap.polyglot.core.action.to.LessonTO;
+import be.artisjaap.polyglot.core.action.to.NewLessonTO;
+import be.artisjaap.polyglot.web.endpoints.request.NewLessonHeaderRequest;
 import be.artisjaap.polyglot.web.endpoints.response.LessonHeaderResponse;
-import be.artisjaap.polyglot.web.security.SecurityUtils;
+import be.artisjaap.polyglot.web.endpoints.response.LessonHeaderResponseLessonMapper;
+import be.artisjaap.polyglot.web.endpoints.response.LessonHeaderResponseMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,36 +17,36 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-public class LessonHeaderController {
-    @Resource
-    private FindLessonsFiltered findLessonsFiltered;
-
+public class LessonHeaderController extends BaseController {
     @Resource
     private FindLessonHeader findLessonHeader;
 
-/*
-    GET /api/lessons - all lessons headers of logged in user
-    GET /api/lessons/:id - lesson details for specified id for current user
-    POST /api/lesson/autocreate - maak automatische les
-    POST /api/lesson/create - maak les
-    GET /api/lesson/:id/practice - practice the given lesson
-    GET /api/lesson?languagePairId - lesson for specified languagepair
-     */
+    @Resource
+    private LessonHeaderResponseMapper lessonHeaderResponseMapper;
 
-    @RequestMapping(path= "/lesson-headers", method = RequestMethod.GET)
+    @Resource
+    private LessonHeaderResponseLessonMapper lessonHeaderResponseLessonMapper;
+
+    @Resource
+    private CreateLesson createLesson;
+
+    @RequestMapping(value = "/lesson-headers", method = RequestMethod.GET)
     public @ResponseBody
-    ResponseEntity<List<LessonHeaderResponse>> allLessonsForUser(@RequestParam String languagePairId) {
-        if(languagePairId != null){
-            return ResponseEntity.ok(LessonHeaderResponse.from(findLessonsFiltered.withFilter(LessonFilterTO.newBuilder()
-                    .withLanguagePairId(languagePairId)
-                    .build()).data()));
+    ResponseEntity<List<LessonHeaderResponse>> lessonHeadersForLanguagePair(@RequestParam String languagePairId) {
+        List<LessonHeaderResponse> lessonHeaderResponses = lessonHeaderResponseMapper.mapToResponse(findLessonHeader.forLanguagePair(languagePairId));
+        return ResponseEntity.ok(lessonHeaderResponses);
 
-        }
-        return ResponseEntity.ok(LessonHeaderResponse.from(findLessonHeader.forUser(SecurityUtils.userId())));
     }
 
+    @RequestMapping(value = "/lesson-header", method = RequestMethod.PUT)
+    public @ResponseBody
+    ResponseEntity<LessonHeaderResponse> addNewLessonHeader(@RequestBody NewLessonHeaderRequest newLessonHeaderRequest) {
+        LessonTO lessonTO = createLesson.create(NewLessonTO.newBuilder()
+                .withLanguagePairId(newLessonHeaderRequest.getLanguagePairId())
+                .withName(newLessonHeaderRequest.getName())
+                .withUserId(userId())
+                .build());
 
-
+        return ResponseEntity.ok(lessonHeaderResponseLessonMapper.map(lessonTO));
+    }
 }
-//http://localhost:8080/api/lesson-headers?languagePairId=5dd2e5688607ab1c6090a203
-//http://localhost:8080/public/api/lesson-headers?languagePairId=5dd2e5688607ab1c6090a203

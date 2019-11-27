@@ -66,7 +66,7 @@ public class RegisterUsers extends AbstractInitScript {
                 .build());
         logger.info("LanguagePair created with id: " + languagePairTO.id());
 
-        TranslationsForUserTO translationsForUserTO = createTranslation.forAllWords(NewTranslationForUserTO.newBuilder()
+        TranslationsForUserTO translationsForUserTO = createTranslation.forAllWords(NewTranslationsForUserTO.newBuilder()
                 .withLanguagePairId(languagePairTO.id())
                 .withUserId(languagePairTO.userId())
                 .addTranslation(NewSimpleTranslationPairTO.newBuilder().withLanguageFrom("EEN").withLanguageTO("ONE").build())

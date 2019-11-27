@@ -24,7 +24,7 @@ public class CreateNewWordForLesson {
     public TranslationTO forWord(NewWordForLessonTO newWord){
         Lesson lesson = lessonRepository.findById(new ObjectId(newWord.getLessonId())).orElseThrow(() -> new ValidationException("LESSON_NOT_FOUND"));
 
-        NewTranslationForUserTO newTranslationForUser = NewTranslationForUserTO.newBuilder()
+        NewTranslationsForUserTO newTranslationForUser = NewTranslationsForUserTO.newBuilder()
                 .withLanguagePairId(lesson.getLanguagePairId().toString())
                 .withUserId(lesson.getUserId().toString())
                 .addTranslation(NewSimpleTranslationPairTO.newBuilder()

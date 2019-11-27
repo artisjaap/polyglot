@@ -12,7 +12,7 @@ import be.artisjaap.polyglot.core.action.to.NewAutomaticLessonTO;
 import be.artisjaap.polyglot.core.action.to.NewLanguagePairTO;
 import be.artisjaap.polyglot.core.action.to.NewSimpleTranslationPairTO;
 import be.artisjaap.polyglot.core.action.to.NewTranslationForUserFromFileTO;
-import be.artisjaap.polyglot.core.action.to.NewTranslationForUserTO;
+import be.artisjaap.polyglot.core.action.to.NewTranslationsForUserTO;
 import be.artisjaap.polyglot.core.action.to.NewUserTO;
 import be.artisjaap.polyglot.core.action.to.PracticeWordCheckTO;
 import be.artisjaap.polyglot.core.action.to.PracticeWordTO;
@@ -106,7 +106,7 @@ public class PolyglotCoreStepsDefinition {
                 .map(t -> NewSimpleTranslationPairTO.newBuilder().withLanguageFrom(t.languageA)
                         .withLanguageTO(t.languageB).build()).collect(Collectors.toList());
 
-        createTranslation.forAllWords(NewTranslationForUserTO.newBuilder()
+        createTranslation.forAllWords(NewTranslationsForUserTO.newBuilder()
                 .withUserId(user.id())
                 .withTranslations(translationParams)
                 .withLanguagePairId(languagePair.id())

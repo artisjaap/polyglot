@@ -1,8 +1,8 @@
 import {Inject, Injectable} from "@angular/core";
 import {Observable, of} from "rxjs";
-import {Translation} from "../model/translation";
-import {LessonHeader} from "../model/lesson-header";
 import {HttpClient, HttpParams} from "@angular/common/http";
+import {LessonHeaderResponse} from "../model/lesson-header-response";
+import {NewLessonHeaderRequest} from "../model/new-lesson-header-request";
 
 @Injectable()
 export class LessonHeaderService {
@@ -10,9 +10,12 @@ export class LessonHeaderService {
 
   }
 
-  public loadLatestLessonsForLanguagePair(languagePairId: string): Observable<LessonHeader[]> {
+  public loadLessonsForLanguagePair(languagePairId: string): Observable<LessonHeaderResponse[]> {
     let params = new HttpParams().set("languagePairId", languagePairId);
+    return this.httpClient.get<LessonHeaderResponse[]>(this.apiurl + `api/lesson-headers` , {params:params});
+  }
 
-    return this.httpClient.get<LessonHeader[]>(this.apiurl + `api/lesson-headers` , {params:params});
+  public createNewLesson(newLessonHeaderRequest: NewLessonHeaderRequest): Observable<LessonHeaderResponse[]> {
+    return this.httpClient.put<LessonHeaderResponse[]>(this.apiurl + `api/lesson-header` , newLessonHeaderRequest);
   }
 }

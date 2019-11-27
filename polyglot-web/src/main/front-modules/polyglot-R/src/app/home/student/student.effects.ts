@@ -4,7 +4,8 @@ import {StudentActions} from "./action-types";
 import {concatMap, map} from "rxjs/operators";
 import {TranslationService} from "../services/translation-service";
 import {LessonHeaderService} from "../services/lesson-header.service";
-import {LessonService} from "../services/LessonService";
+import {LessonService} from "../services/lesson-service";
+import {LanguagePairServiceService} from "../services/language-pair-service.service";
 
 @Injectable()
 export class StudentEffects {
@@ -14,7 +15,7 @@ export class StudentEffects {
   * - then an action is dispatched that contains the translations and the language pair
   * - now, the reducer will use this to save the data in the store
   * */
-  loadLatestWordsForTranslationPair$ = createEffect(
+/*  loadLatestWordsForTranslationPair$ = createEffect(
     () => this.actions$.pipe(
       ofType(StudentActions.loadLatestWords),
       concatMap(action =>
@@ -88,13 +89,22 @@ export class StudentEffects {
       concatMap(action => this.lessonService.addNewTranslationToLesson(action.lessonId, action.translation))
     )
   )
+*/
 
-
+  allLanguagePairs$ = createEffect(
+    () => this.actions$.pipe(
+      ofType(StudentActions.loadAllLanguagePairs),
+      concatMap(action => this.languagePairService.allLanguagePairs()),
+      map(languagePairs => StudentActions.allLanguagePairsLoaded({languagePairs})
+      )
+    )
+  )
 
 
   constructor(private actions$: Actions,
               private translationService: TranslationService,
               private lessonHeaderService: LessonHeaderService,
+              private languagePairService: LanguagePairServiceService,
               private lessonService: LessonService) {
 
   }

@@ -1,48 +1,196 @@
-= Model
+= Technical info
 Start with simple model:
 
+== Model
 
-NOTE: (every entity has username and creation date)
+NOTE: Every entity has username and creation ate
 
-=== LanguagePair
-- ID
-- LanguageFrom
-- LanguageTo
 
-=== Lesson
-- ID
-- Name
-- list of translations
+.TranslationPair
+[options="header"]
+|=======================
+|Property       |Datatype       |Comment                    |Example
+|Id             |ObjectId       |unique identifier          |a1
+|LanguageFrom   |String         |the source language        |Dutch
+|LanguageTo     |String         |the destination language   |English
+|=======================
 
-=== Translation
-- ID
-- LangugeA
-- LanguageB
+.Lesson
+[options="header"]
+|=======================
+|Property         |Datatype       |Comment                    |Example
+|Id               |ObjectId       |unique identifier          |a1
+|Title            |String         |the title of the lesson    |My first lesson
+|TranslationsId   |ObjectId[]     |listOfTranslations         |[a1,a2]
+|=======================
 
-= RX Store entities
+.Translation
+[options="header"]
+|=======================
+|Property         |Datatype       |Comment                    |Example
+|Id               |ObjectId       |unique identifier          |a1
+|LanguageA        |String         |the source language        |One
+|LanguageB        |String         |listOfTranslations         |Een
+|=======================
 
-* LangugePair
-** ID
-** LanguageFrom
-** LanguageTO
 
-* LessonHeader
-** ID
-** Name
-***  loadedLanguagePairs (defiend with lessons are loaded)
+== Endpoints
 
-* Lesson
-** ID
-** translations [ids]
+=== RequestObjects
+.NewLessonHeaderRequest
+[options="header"]
+|=======================
+|Property       |Datatype       |Comment                    |Example
+|Name           |String         |Name of the lesson         |My First Lesson
+|=======================
 
-* Translation
-** ID
-** LanguageFrom
-** LanguageTo
+.NewTranslationForLessonRequest
+[options="header"]
+|=======================
+|Property       |Datatype       |Comment                              |Example
+|LessonId       |String         |The lesson to add the translationTo  |My First Lesson
+|LanguageA      |String         |Translation in first language        |One
+|LanguageB      |String         |Translation in scond language        |Een
+|=======================
 
-= RX Actions
+.UpdateTranslationForLessonRequest
+[options="header"]
+|=======================
+|Property       |Datatype       |Comment                              |Example
+|LessonId       |String         |The lesson to add the translationTo  |a1
+|TranslationId  |String         |The translation to update            |a2
+|LanguageA      |String         |Translation in first language        |One
+|LanguageB      |String         |Translation in scond language        |Een
+|=======================
 
-loadAllLanguagePairs:: Takes no parameter, dispatch action *allLanguagePairsLoadd* with payload GET /api/language-pairs
+
+
+
+=== ResponseObjects
+
+.LanguagePairResponse
+[options="header"]
+|=======================
+|Property       |Datatype       |Comment                    |Example
+|Id             |String         |unique identifier          |a1
+|LanguageFrom   |String         |the source language        |Dutch
+|LanguageTo     |String         |the destination language   |English
+|=======================
+
+.LessonHeaderResponse
+[options="header"]
+|=======================
+|Property       |Datatype       |Comment                    |Example
+|Id             |String         |unique identifier          |a1
+|Name           |String         |the name of the lesson     |My first lesson
+|=======================
+
+.LessonResponse
+[options="header"]
+|=======================
+|Property       |Datatype               |Comment                    |Example
+|Id             |String                 |unique identifier          |a1
+|Name           |String                 |the name of the lesson     |My first lesson
+|Translations   |TranslationResponse[]  |list of all translations   |
+|=======================
+
+.TranslationResponse
+[options="header"]
+|=======================
+|Property       |Datatype     |Comment                          |Example
+|Id             |String       |unique identifier                |a1
+|LanguageA      |String       |translation in first language    |Een
+|LanguageB      |String       |translation in second language   |One
+|=======================
+
+.TranslationForLessonResponse
+[options="header"]
+|=======================
+|Property       |Datatype       |Comment                              |Example
+|LessonId       |String         |The lesson to add the translationTo  |My First Lesson
+|LanguageA      |String         |Translation in first language        |One
+|LanguageB      |String         |Translation in scond language        |Een
+|=======================
+
+=== endpoints
+
+NOTE: All request contain the default AUthorization Header used to determine the user. Unless
+indicated otherwise, only data for the current user is returned
+
+GET /api/language-pairs ::
+* Get all language pairs for user returns object with:
+* Returns LanguagePairResponse
+
+GET /api/lesson-headers?languagePairId=ID::
+* get all lesson headers for a given languagePair.
+* Returns LessonHeaderResponse
+
+GET /api/lesson/:id::
+* get lesson detail for given lesson Id
+* Returns LessonResponse
+
+PUT /api/lesson-header::
+* creates a new lessonHeader
+* Request: NewLessonHeaderRequest
+* Response: LessonResponse
+
+PUT /api/translation::
+* add a new translation to a lesson
+* Request: NewTranslationForLessonRequest
+* Response: TranslationForLessonResponse
+
+PATCH /api/translation::
+* updates an existiong translation. It will remove the existing translation from the lesson and inserts this instead
+if the update is caused by a type and the origin should be updated/deleted an other action has to be called
+* Request: UpdateTranslationForLessonRequest
+* Response: TranslationForLessonResponse
+
+DELETE /api/translation/:translationId::
+* delete a translation from a lesson
+* Response: TranslationForLessonResponse
+
+
+== RX Store entities
+The NGRX entities stored in the client
+
+.LangugePair
+[options="header"]
+|=======================
+|Property       |Type                       |Comment
+|Ids            |String[]                   |list of loaded entities
+|entities       |LanguagePairResponse[]     |all the entities
+|=======================
+
+.LessonHeader
+[options="header"]
+|=======================
+|Property            |Type                                      |Comment
+|Ids                 |String[]                                  |list of loaded entities
+|entities            |LessonHeader[]                            |all the entities
+|LoadedLanguagePairs | map<languagePairId, LessonHeaderId[]>    |for all language pairs list all lessons loaded
+|=======================
+
+.Lesson
+[options="header"]
+|=======================
+|Property            |Type         |Comment
+|Ids                 |String[]     |list of loaded entities
+|entities            |Lesson[]     |all the entities
+|=======================
+
+.Translation
+[options="header"]
+|=======================
+|Property            |Type              |Comment
+|Ids                 |String[]          |list of loaded entities
+|entities            |Translation[]     |all the entities
+|=======================
+
+== RX Actions
+
+loadAllLanguagePairs::
+* Load All language Pairs
+* Takes no parameter, dispatch action *allLanguagePairsLoadd* with payload GET /api/language-pairs
 allLanguagePairsLoaded:: saves payload in LanguagePair
 * props
 ** list of languagePair data
@@ -89,61 +237,10 @@ translationDeletedFromLesson:: removes only id from lesson
 ** lessonId
 ** translationId
 
-= RX Selectors
+== RX Selectors
 
 * allLanguagePairs
 * allLessonHeadersForLanguagePair
 * lessonHeaderForId
 * allTranslationsInLesson
 * allTranslationsNotInLesson
-
-
-= Endpoints
-
-GET /api/language-pairs ::
-Get all language pairs for user returns object with:
-- ID
-- languageFrom
-- languageTO
-
-GET /api/lesson-headers?languagePairId=ID::
-get all lesson headers for a given languagePair. Returns list of lesson-headers:
-- ID
-- Name
-
-GET /api/lesson/:id::
-get lesson detail for given lesson Id
-- ID
-- Name
-- List translations
-** ID
-** LanguageA
-** LanguageB
-
-PUT /api/lesson::
-* in
-** Name
-* out
-** ID
-** Name
-
-PATCH /api/lesson/:id/new-translation::
-* in
-** languageA
-** languageB
-* out
-** ID
-** languageA
-** languageB
-
-
-PATCH /api/lesson/:id/new-translation::
-* in
-** translationId
-* out
-** ID
-** languageA
-** languageB
-
-
-DELETE /api/lesson/:id/translation/:translationId::

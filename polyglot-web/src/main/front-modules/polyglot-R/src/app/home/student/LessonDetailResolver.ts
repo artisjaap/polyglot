@@ -25,7 +25,7 @@ export class LessonDetailResolver implements Resolve<boolean> {
         tap(lessonLoaded => {
           if (!this.lessonIsLoading && !lessonLoaded) {
             this.lessonIsLoading = true;
-            this.store.dispatch(StudentActions.loadLessonById({lessonId}))
+            this.store.dispatch(StudentActions.loadLesson({lessonId}))
           }
         }),
         filter(latestTranslationsLoaded => latestTranslationsLoaded),

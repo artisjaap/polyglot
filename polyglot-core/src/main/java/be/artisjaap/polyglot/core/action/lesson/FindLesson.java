@@ -24,6 +24,7 @@ public class FindLesson {
 
 
 
+
     public LessonTO forTesting(String lessonId){
         Lesson lesson = lessonRepository.findById(new ObjectId(lessonId)).orElseThrow(() -> new ValidationException("LESSON_NOT_FOUND", "les niet gevonden"));
         return lessonAssembler.assembleTOwithoutSolution(lesson);

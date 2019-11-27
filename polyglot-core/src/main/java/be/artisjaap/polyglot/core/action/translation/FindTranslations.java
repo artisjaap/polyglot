@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -23,6 +24,9 @@ public class FindTranslations {
     private TranslationAssembler translationAssembler;
 
 
+    public Optional<TranslationTO> byId(String translationId) {
+        return translationRepository.findById(new ObjectId(translationId)).map(translationAssembler::assembleTO);
+    }
 
     public List<TranslationTO> containing(String languagePairId, List<String> languageA) {
         List<Translation> translations = translationRepository.findByLanguagePairIdAndLanguageAIn(new ObjectId(languagePairId), languageA);

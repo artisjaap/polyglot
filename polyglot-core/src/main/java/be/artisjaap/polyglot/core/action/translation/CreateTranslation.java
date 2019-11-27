@@ -3,6 +3,7 @@ package be.artisjaap.polyglot.core.action.translation;
 import be.artisjaap.polyglot.core.action.assembler.NewTranslationForUserAssembler;
 import be.artisjaap.polyglot.core.action.assembler.TranslationForUserAssembler;
 import be.artisjaap.polyglot.core.action.lesson.CreateLesson;
+import be.artisjaap.polyglot.core.action.lesson.CreateNewWordForLesson;
 import be.artisjaap.polyglot.core.action.to.*;
 import be.artisjaap.polyglot.core.action.to.translationsfromfile.TranslationRecord;
 import be.artisjaap.polyglot.core.model.Translation;
@@ -38,7 +39,34 @@ public class CreateTranslation {
     @Autowired
     private CreateLesson createLesson;
 
-    public TranslationsForUserTO forAllWords(NewTranslationForUserTO to){
+    @Autowired
+    private CreateNewWordForLesson createNewWordForLesson;
+
+    public TranslationTO forTranslation(NewTranslationTO to) {
+        return forAllWords(NewTranslationsForUserTO.newBuilder()
+                .withUserId(to.getUserId())
+                .withLanguagePairId(to.getLanguagePairId())
+                .addTranslation(NewSimpleTranslationPairTO.newBuilder()
+                        .withLanguageFrom(to.getLanguageFrom())
+                        .withLanguageTO(to.getLanguageTo())
+                        .build())
+                .build())
+                .translations()
+                .iterator()
+                .next();
+
+    }
+
+    public TranslationTO forTranslation(NewTranslationInLessonTO to) {
+        return createNewWordForLesson.forWord(NewWordForLessonTO.newBuilder()
+                .languageFrom(to.getLanguageFrom())
+                .languageTO(to.getLanguageTO())
+                .lessonId(to.getLessonId())
+                .build());
+
+    }
+
+    public TranslationsForUserTO forAllWords(NewTranslationsForUserTO to) {
         List<Translation> translations = newTranslationForUserAssembler.assembleAllEntities(to);
 
         List<String> languageA = translations.stream().map(Translation::getLanguageA).collect(Collectors.toList());
@@ -62,7 +90,7 @@ public class CreateTranslation {
                 .collect(Collectors.toList());
     }
 
-    public TranslationsForUserTO forAllWords(NewTranslationForUserFromFileTO to){
+    public TranslationsForUserTO forAllWords(NewTranslationForUserFromFileTO to) {
 
         ProxyReader pr = new ProxyReader(to.reader());
 
@@ -70,7 +98,7 @@ public class CreateTranslation {
         List<TranslationRecord> translationRecords = new CsvToBeanBuilder(pr.getReader())
                 .withType(TranslationRecord.class).build().parse();
 
-        NewTranslationForUserTO newTranslationForUserTO = NewTranslationForUserTO.newBuilder()
+        NewTranslationsForUserTO newTranslationsForUserTO = NewTranslationsForUserTO.newBuilder()
                 .withLanguagePairId(to.languagePairId())
                 .withUserId(to.userId())
                 .withTranslations(translationRecords.stream().map(r -> NewSimpleTranslationPairTO.newBuilder()
@@ -79,7 +107,7 @@ public class CreateTranslation {
                         .build()).collect(Collectors.toList()))
                 .build();
 
-        TranslationsForUserTO translationsForUserTO = forAllWords(newTranslationForUserTO);
+        TranslationsForUserTO translationsForUserTO = forAllWords(newTranslationsForUserTO);
 
         pr.lessonName().ifPresent(lessonName ->
                 createLesson.create(NewLessonTO.newBuilder()
@@ -102,12 +130,12 @@ class ProxyReader {
         return Optional.ofNullable(lessonName);
     }
 
-    public ProxyReader(Reader reader){
+    public ProxyReader(Reader reader) {
         this.reader = new BufferedReader(reader);
 
     }
 
-    public Reader getReader(){
+    public Reader getReader() {
         byte[] bytes = findBytes();
 
         return new InputStreamReader(new ByteArrayInputStream(bytes));
@@ -122,7 +150,7 @@ class ProxyReader {
 
             while (line != null) {
                 if (line.startsWith("@")) {
-                    if(line.startsWith("@Lesson")){
+                    if (line.startsWith("@Lesson")) {
                         lessonName = line.substring(8);
                     }
                 } else {

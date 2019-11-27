@@ -10,6 +10,7 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
 import java.util.Collection;
 
 @Component
@@ -34,5 +35,11 @@ public class UpdateLesson {
         lessonRepository.save(lesson);
         return lessonAssembler.assembleTO(lesson);
     }
+
+    public LessonTO removeTranslationsFromLesson(String lessonId, String translationId){
+        return removeTranslationsFromLesson(lessonId, Arrays.asList(translationId));
+    }
+
+
 
 }

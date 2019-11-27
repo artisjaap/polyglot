@@ -1,6 +1,8 @@
 package be.artisjaap.polyglot.core.action.to;
 
+import java.util.ArrayList;
 import java.util.List;
+
 
 public class NewLessonTO {
     private String name;
@@ -40,7 +42,7 @@ public class NewLessonTO {
         private String name;
         private String userId;
         private String languagePairId;
-        private List<String> translationsIds;
+        private List<String> translationsIds = new ArrayList<>();
 
         private Builder() {
         }
