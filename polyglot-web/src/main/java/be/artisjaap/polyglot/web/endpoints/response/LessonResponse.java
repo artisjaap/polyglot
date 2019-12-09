@@ -13,6 +13,7 @@ import java.util.List;
 public class LessonResponse {
     private String id;
     private String title;
+    private String languagePairId;
     @Builder.Default
     private List<TranslationResponse> translations;
 

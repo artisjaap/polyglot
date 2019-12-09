@@ -5,7 +5,7 @@ import be.artisjaap.polyglot.core.action.lesson.FindPracticeWords;
 import be.artisjaap.polyglot.core.action.lesson.SimpleNextWordStrategy;
 import be.artisjaap.polyglot.core.action.lesson.TestForLesson;
 import be.artisjaap.polyglot.core.action.pairs.FindLanguagePair;
-import be.artisjaap.polyglot.core.action.pairs.RegisterLanguagePair;
+import be.artisjaap.polyglot.core.action.pairs.CreateLanguagePair;
 import be.artisjaap.polyglot.core.action.to.AnswerAndNextWordTO;
 import be.artisjaap.polyglot.core.action.to.LanguagePairTO;
 import be.artisjaap.polyglot.core.action.to.NewAutomaticLessonTO;
@@ -53,7 +53,7 @@ public class PolyglotCoreStepsDefinition {
     private CreateLesson createLesson;
 
     @Autowired
-    private RegisterLanguagePair registerLanguagePair;
+    private CreateLanguagePair createLanguagePair;
 
     @Autowired
     private FindUser findUser;
@@ -88,7 +88,7 @@ public class PolyglotCoreStepsDefinition {
     @And("^(.*) creates language pair (.*)-(.*)$")
     public void maaktEenTalenpaar(String username, String languageFrom, String languageTo) {
         UserTO user = findUser.byUsername(username).orElseThrow(() -> new IllegalStateException("Verwacht dat user bestaat"));
-        registerLanguagePair.forUser(NewLanguagePairTO.newBuilder()
+        createLanguagePair.forUser(NewLanguagePairTO.newBuilder()
                 .withUserId(user.id())
                 .withLanguageFrom(languageFrom)
                 .withLanguageTo(languageTo)

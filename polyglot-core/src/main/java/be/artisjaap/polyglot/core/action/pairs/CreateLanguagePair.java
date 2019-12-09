@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RegisterLanguagePair {
+public class CreateLanguagePair {
 
     @Autowired
     private NewLanguagePairAssembler newLanguagePairAssembler;

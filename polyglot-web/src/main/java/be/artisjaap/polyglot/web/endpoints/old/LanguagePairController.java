@@ -1,7 +1,7 @@
 package be.artisjaap.polyglot.web.endpoints.old;
 
 import be.artisjaap.polyglot.core.action.pairs.FindLanguagePair;
-import be.artisjaap.polyglot.core.action.pairs.RegisterLanguagePair;
+import be.artisjaap.polyglot.core.action.pairs.CreateLanguagePair;
 import be.artisjaap.polyglot.core.action.pairs.RemoveLanguagePair;
 import be.artisjaap.polyglot.core.action.to.LanguagePairTO;
 import be.artisjaap.polyglot.core.action.to.NewLanguagePairTO;
@@ -22,7 +22,7 @@ public class LanguagePairController {
     private FindLanguagePair findLanguagePair;
 
     @Resource
-    private RegisterLanguagePair registerLanguagePair;
+    private CreateLanguagePair createLanguagePair;
 
     @Resource
     private RemoveLanguagePair removeLanguagePair;
@@ -36,7 +36,7 @@ public class LanguagePairController {
     @RequestMapping(path = "/languagepair", method = RequestMethod.POST)
     public @ResponseBody
     ResponseEntity<LanguagePairResponse> creaetNew(@RequestBody LanguagePairRequest languagePairRequest) {
-        LanguagePairTO languagePairTO = registerLanguagePair.forUser(NewLanguagePairTO.newBuilder()
+        LanguagePairTO languagePairTO = createLanguagePair.forUser(NewLanguagePairTO.newBuilder()
                 .withLanguageFrom(languagePairRequest.getLanguageFrom())
                 .withLanguageTo(languagePairRequest.getLanguageTo())
                 .withUserId(SecurityUtils.userId())

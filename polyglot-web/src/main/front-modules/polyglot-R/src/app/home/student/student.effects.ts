@@ -1,11 +1,11 @@
-import {Injectable} from "@angular/core";
-import {act, Actions, createEffect, ofType} from "@ngrx/effects";
-import {StudentActions} from "./action-types";
-import {concatMap, map} from "rxjs/operators";
-import {TranslationService} from "../services/translation-service";
-import {LessonHeaderService} from "../services/lesson-header.service";
-import {LessonService} from "../services/lesson-service";
-import {LanguagePairServiceService} from "../services/language-pair-service.service";
+import {Injectable} from '@angular/core';
+import {act, Actions, createEffect, ofType} from '@ngrx/effects';
+import {StudentActions} from './action-types';
+import {concatMap, map} from 'rxjs/operators';
+import {TranslationService} from '../services/translation-service';
+import {LessonHeaderService} from '../services/lesson-header.service';
+import {LessonService} from '../services/lesson-service';
+import {LanguagePairService} from '../services/language-pair.service';
 
 @Injectable()
 export class StudentEffects {
@@ -98,13 +98,85 @@ export class StudentEffects {
       map(languagePairs => StudentActions.allLanguagePairsLoaded({languagePairs})
       )
     )
-  )
+  );
 
+  deleteLanguagePair$ = createEffect(
+    () => this.actions$.pipe(
+      ofType(StudentActions.deleteLanguagePair),
+      concatMap(action => this.languagePairService.deleteLanguaegPair(action.languagePair)),
+      map( languagePair => StudentActions.languagePairDeleted({languagePair}))
+    )
+  );
+
+  createLanguagePair$ = createEffect(
+    () => this.actions$.pipe(
+      ofType(StudentActions.createLanguagePair),
+      concatMap(action => this.languagePairService.creaetLanguaegPair(action.languagePair)),
+      map(languagePair => StudentActions.languagePairCreated({languagePair}))
+    )
+  );
+
+  loadLessonHeaders$ = createEffect(
+    () => this.actions$.pipe(
+      ofType(StudentActions.loadLessonHeaders),
+      concatMap(action => this.lessonHeaderService.loadLessonsForLanguagePair(action.languagePairId).pipe(
+        map(lessonHeaders => {
+          return {languagePairId: action.languagePairId, languageHeaders: lessonHeaders};
+        })
+      )),
+      map(lessonHeaders => StudentActions.lessonHeadersLoaded({languagePairId: lessonHeaders.languagePairId,
+        lessonHeaders: lessonHeaders.languageHeaders}))
+    )
+  );
+
+  createLesson$ = createEffect(
+    () => this.actions$.pipe(
+      ofType(StudentActions.createLesson),
+      concatMap( action => this.lessonHeaderService.createNewLesson(action.lesson).pipe(
+        map( lessonHeader => {
+          return {languagePairId: action.lesson.languagePairId, languageHeader : lessonHeader};
+        })
+      )),
+      map(payload => StudentActions.lessonCreated({languagePairId: payload.languagePairId, lessonHeader: payload.languageHeader}))
+    )
+  );
+
+  deleteLesson$ = createEffect(
+    () => this.actions$.pipe(
+      ofType(StudentActions.deleteLesson),
+      concatMap( action => this.lessonService.deleteLesson(action.lessonId)),
+      map(lessonHeader => StudentActions.lessonDeleted({lessonHeader}))
+    )
+  );
+
+  loadLesson$ = createEffect(
+    () => this.actions$.pipe(
+      ofType(StudentActions.loadLesson),
+      concatMap(action => this.lessonService.loadLessonById(action.lessonId)),
+      map(lesson => StudentActions.lessonLoaded({lesson}))
+    )
+  );
+
+  newTranslationForLesson$ = createEffect(
+    () => this.actions$.pipe(
+      ofType(StudentActions.addNewTranslationToLesson),
+      concatMap(payload => this.translationService.createNewTranslation(payload.translation)),
+      map(translation => StudentActions.newTranslationAdded({translation}))
+    )
+  );
+
+  removeTranslationFromLesson$ = createEffect(
+    () => this.actions$.pipe(
+      ofType(StudentActions.deleteTranslationFromLesson),
+      concatMap(action => this.lessonService.deleteWordFromLesson(action.lessonId, action.translationId)),
+      map(lesson => StudentActions.translationFromLessonDeleted({lesson}))
+    )
+  );
 
   constructor(private actions$: Actions,
               private translationService: TranslationService,
               private lessonHeaderService: LessonHeaderService,
-              private languagePairService: LanguagePairServiceService,
+              private languagePairService: LanguagePairService,
               private lessonService: LessonService) {
 
   }

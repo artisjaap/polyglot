@@ -1,6 +1,6 @@
 package be.artisjaap.polyglot.web;
 
-import be.artisjaap.polyglot.core.action.pairs.RegisterLanguagePair;
+import be.artisjaap.polyglot.core.action.pairs.CreateLanguagePair;
 import be.artisjaap.polyglot.core.action.to.LanguagePairTO;
 import be.artisjaap.polyglot.core.action.to.NewLanguagePairTO;
 import be.artisjaap.polyglot.core.action.to.NewUserTO;
@@ -37,7 +37,7 @@ public class ManageTranslationControllerTest extends RestControllerTest {
     private RegisterUser registerUser;
 
     @Autowired
-    private RegisterLanguagePair registerLanguagePair;
+    private CreateLanguagePair createLanguagePair;
 
     @Autowired
     private MongoTemplate mongoTemplate;
@@ -50,7 +50,7 @@ public class ManageTranslationControllerTest extends RestControllerTest {
     @Test
     public void findLanguagePairs() {
         UserTO userTO = registerUser.newUser(NewUserTO.newBuilder().withRole("ROLE_STUDENT").withUsername("test").withPassword("password").build());
-        LanguagePairTO languagePairTO = registerLanguagePair.forUser(NewLanguagePairTO.newBuilder().withUserId(userTO.id()).withLanguageFrom("FROM").withLanguageTo("TO").build());
+        LanguagePairTO languagePairTO = createLanguagePair.forUser(NewLanguagePairTO.newBuilder().withUserId(userTO.id()).withLanguageFrom("FROM").withLanguageTo("TO").build());
         try {
             mockMvc.perform(
                     get("/api/translations/pairs/" + languagePairTO.id()))
@@ -91,12 +91,12 @@ public class ManageTranslationControllerTest extends RestControllerTest {
     @Test
     public void createTranslationsForLanguagePair() throws Exception {
         UserTO userTO = registerUser.newUser(NewUserTO.newBuilder().withRole("ROLE_STUDENT").withUsername("test3").withPassword("password").build());
-        LanguagePairTO languagePairTO = registerLanguagePair.forUser(NewLanguagePairTO.newBuilder().withUserId(userTO.id())
+        LanguagePairTO languagePairTO = createLanguagePair.forUser(NewLanguagePairTO.newBuilder().withUserId(userTO.id())
                 .withLanguageFrom("FROM")
                 .withLanguageTo("TO")
                 .build());
-        List<NewSimpleTranslationRequest> translationRequestList = Arrays.asList(NewSimpleTranslationRequest.newBuilder().withLanguageFrom("one").withLanguageTO("een").build(),
-                NewSimpleTranslationRequest.newBuilder().withLanguageFrom("two").withLanguageTO("twee").build());
+        List<NewSimpleTranslationRequest> translationRequestList = Arrays.asList(NewSimpleTranslationRequest.newBuilder().question("one").solution("een").build(),
+                NewSimpleTranslationRequest.newBuilder().question("two").solution("twee").build());
 
 
         NewTranslationsForUserRequest translations = NewTranslationsForUserRequest.newBuilder()

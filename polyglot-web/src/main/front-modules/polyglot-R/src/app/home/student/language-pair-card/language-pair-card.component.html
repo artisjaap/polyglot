@@ -2,10 +2,10 @@
   <mat-card-header>
     <div>
       <div>
-        <h1>{{languagePair?.languageFrom}}</h1>
+        <h1>{{languagePair?.languageA}}</h1>
       </div>
       <div>
-        <h1>{{languagePair?.languageTo}}</h1>
+        <h1>{{languagePair?.languageB}}</h1>
       </div>
     </div>
   </mat-card-header>
@@ -33,10 +33,10 @@
   <mat-card-content>
     <form [formGroup]="form" class="create-card-form">
       <mat-form-field class="full-width">
-        <input matInput placeholder="Language from" formControlName="languageFrom">
+        <input matInput placeholder="Language from" formControlName="languageA">
       </mat-form-field>
       <mat-form-field class="full-width">
-        <input matInput placeholder="Language to" formControlName="languageTo">
+        <input matInput placeholder="Language to" formControlName="languageB">
       </mat-form-field>
     </form>
   </mat-card-content>

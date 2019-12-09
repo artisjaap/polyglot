@@ -1,7 +1,7 @@
 package be.artisjaap.polyglot.web.endpoints.old;
 
 import be.artisjaap.polyglot.core.action.pairs.FindLanguagePair;
-import be.artisjaap.polyglot.core.action.pairs.RegisterLanguagePair;
+import be.artisjaap.polyglot.core.action.pairs.CreateLanguagePair;
 import be.artisjaap.polyglot.core.action.pairs.RemoveLanguagePair;
 import be.artisjaap.polyglot.core.action.to.*;
 import be.artisjaap.polyglot.core.action.translation.CreateTranslation;
@@ -29,7 +29,7 @@ public class ManageTranslationController {
     private FindLanguagePair findLanguagePair;
 
     @Autowired
-    private RegisterLanguagePair registerLanguagePair;
+    private CreateLanguagePair createLanguagePair;
 
     @Autowired
     private CreateTranslation createTranslation;
@@ -61,7 +61,7 @@ public class ManageTranslationController {
     @RequestMapping(value = "/pairs", method = RequestMethod.POST)
     public @ResponseBody
     ResponseEntity<LanguagePairResponse> createNewPairForUser(@RequestBody LanguagePairRequest languagePairRequest) {
-        LanguagePairTO languagePairTO = registerLanguagePair.forUser(NewLanguagePairTO.newBuilder()
+        LanguagePairTO languagePairTO = createLanguagePair.forUser(NewLanguagePairTO.newBuilder()
                 .withLanguageFrom(languagePairRequest.getLanguageFrom())
                 .withLanguageTo(languagePairRequest.getLanguageTo())
                 .withUserId(languagePairRequest.getUserId())

@@ -23,7 +23,7 @@ public class FindLanguagePair {
     private LanguagePairAssembler languagePairAssembler;
 
     @Autowired
-    private RegisterLanguagePair registerLanguagePair;
+    private CreateLanguagePair createLanguagePair;
 
     public List<LanguagePairTO> allPairsForUserId(String userId){
         return languagePairAssembler.assembleTOs(languagePairRepository.findAllByUserId(new ObjectId(userId)));
@@ -46,7 +46,7 @@ public class FindLanguagePair {
             return languagePair.get();
         }
 
-        return registerLanguagePair.forUser(NewLanguagePairTO.newBuilder()
+        return createLanguagePair.forUser(NewLanguagePairTO.newBuilder()
                 .withUserId(userId)
                 .withLanguageFrom(languageFrom)
                 .withLanguageTo(languageTo)

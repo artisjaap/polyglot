@@ -21,10 +21,10 @@
 
     </div>
     <div *ngFor="let t of lesson.translations">
-      <span>{{t.question}} - {{t.solution}}</span>
-      <button mat-flat-button color="warn" (click)="removeWord(t.translationId, lesson.id, lesson)">
+      <button mat-flat-button color="warn" (click)="removeWordFromLesson(t.id, lesson.id)">
         <mat-icon>delete</mat-icon>
       </button>
+      <span>{{t.languageA}} - {{t.languageB}}</span>
     </div>
   </mat-card-content>
 </mat-card>

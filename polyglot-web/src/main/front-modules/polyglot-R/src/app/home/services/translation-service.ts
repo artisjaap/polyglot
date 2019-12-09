@@ -17,7 +17,7 @@ export class TranslationService {
   //   return this.httpClient.get<Translation[]>(this.apiurl + `api/translations`, {params: params});
   // }
 
-  public creaeNewTranslation(newTranslationForLessonRequest: NewTranslationForLessonRequest): Observable<TranslationForLessonResponse> {
+  public createNewTranslation(newTranslationForLessonRequest: NewTranslationForLessonRequest): Observable<TranslationForLessonResponse> {
     return this.httpClient.put<TranslationForLessonResponse>(this.apiurl + `api/translation`, newTranslationForLessonRequest);
   }
 

@@ -22,7 +22,7 @@ import java.util.List;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
-    //TODO add authentication
+
     // https://www.baeldung.com/swagger-2-documentation-for-spring-rest-api
 
     @Bean
@@ -45,7 +45,7 @@ public class SwaggerConfig {
     }
 
     private ApiInfo apiInfo() {
-        return new ApiInfoBuilder().title("Swagger API Security REST API")
-                .description("\"Swagger API Security REST API\"").version("1.0.0").build();
+        return new ApiInfoBuilder().title("Swagger API Security REST API - Polyglot-R")
+                .description("\"Swagger API Security REST API - Polyglot-R\"").version("1.0.0").build();
     }
 }

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {LanguagePairDataService} from "../../dataservice/language-pair-data-service";
-import {map} from "rxjs/operators";
-import {Observable} from "rxjs";
-import {LanguagePair} from "../../model/language-pair";
+import {Observable} from 'rxjs';
+import {Store} from '@ngrx/store';
+import {AppState} from '../../../reducers';
+import {languagePairs} from '../student.selectors';
+import {LanguagePairService} from '../../services/language-pair.service';
+import {LanguagePairResponse} from '../../model/language-pair-response';
 
 @Component({
   selector: 'app-student-dashboard',
@@ -11,14 +13,15 @@ import {LanguagePair} from "../../model/language-pair";
 })
 export class StudentDashboardComponent implements OnInit {
 
-  languagePairs$: Observable<LanguagePair[]>;
+  languagePairs$: Observable<LanguagePairResponse[]>;
 
-  constructor(private languagePairService: LanguagePairDataService) {
+  constructor(private state: Store<AppState>) {
 
   }
-
+  //
   ngOnInit() {
-    this.languagePairs$ = this.languagePairService.entities$;
+    this.languagePairs$ = this.state.select(languagePairs);
+  //   this.languagePairs$ = this.languagePairService.entities$;
   }
 
 }

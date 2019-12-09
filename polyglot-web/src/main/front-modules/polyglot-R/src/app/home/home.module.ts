@@ -3,12 +3,10 @@ import { CommonModule } from '@angular/common';
 import {StudentModule} from "./student/student.module";
 import { HomeComponent } from './home/home.component';
 import {HomeRoutingModule} from "./home-routing.module";
-import {LanguagePairDataService} from "./dataservice/language-pair-data-service";
-import {LessonDataService} from "./dataservice/lesson-data-service";
-import {TranslationDataService} from "./dataservice/translation-data-service";
 import {TranslationService} from "./services/translation-service";
 import {LessonHeaderService} from "./services/lesson-header.service";
 import {LessonService} from "./services/lesson-service";
+import {LanguagePairService} from "./services/language-pair.service";
 
 
 
@@ -19,12 +17,10 @@ import {LessonService} from "./services/lesson-service";
     HomeRoutingModule
   ],
   providers: [
-    LanguagePairDataService,
-    LessonDataService,
-    TranslationDataService,
     TranslationService,
     LessonHeaderService,
-    LessonService
+    LessonService,
+    LanguagePairService
   ]
 })
 export class HomeModule {

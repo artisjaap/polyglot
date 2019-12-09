@@ -1,12 +1,12 @@
 import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from "@angular/router";
-import {StudentDashboardComponent} from "./student-dashboard/student-dashboard.component";
-import {StudentMainComponent} from "./student-main/student-main.component";
-import {DashboardResolver} from "./DashboardResolver";
-import {LanguagePairDetailComponent} from "./language-pair-detail/language-pair-detail.component";
-import {LanguagePairDetailResolver} from "./LanguagePairDetailResolver";
-import {LessonDetailResolver} from "./LessonDetailResolver";
-import {LessonDetailComponent} from "./lesson-detail/lesson-detail.component";
+import {RouterModule, Routes} from '@angular/router';
+import {StudentDashboardComponent} from './student-dashboard/student-dashboard.component';
+import {StudentMainComponent} from './student-main/student-main.component';
+import {DashboardResolver} from './DashboardResolver';
+import {LanguagePairDetailComponent} from './language-pair-detail/language-pair-detail.component';
+import {LanguagePairDetailResolver} from './LanguagePairDetailResolver';
+import {LessonDetailResolver} from './LessonDetailResolver';
+import {LessonDetailComponent} from './lesson-detail/lesson-detail.component';
 
 
 const routes: Routes = [
@@ -17,16 +17,16 @@ const routes: Routes = [
     children: [
       {
         path: 'dashboard', component: StudentDashboardComponent,
-        resolve: {'Dashboard': DashboardResolver}
+        resolve: {Dashboard: DashboardResolver}
       },
       {
         path: 'language-pair/:languagePairId', component: LanguagePairDetailComponent,
-        resolve: {'LanguagePairDetail': LanguagePairDetailResolver}
+        resolve: {LanguagePairDetail: LanguagePairDetailResolver}
       }
       ,
       {
         path: 'lesson/:lessonId', component: LessonDetailComponent,
-        resolve: {'LessonDetail': LessonDetailResolver}
+        resolve: {LessonDetail: LessonDetailResolver}
       }
     ]
   },

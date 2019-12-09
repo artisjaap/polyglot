@@ -35,6 +35,7 @@ public class CreateNewWordForLesson {
         TranslationsForUserTO translationsForUserTO = createTranslation.forAllWords(newTranslationForUser);
         Set<ObjectId> translationids = translationsForUserTO.translations().stream().map(TranslationTO::id).map(ObjectId::new).collect(Collectors.toSet());
         lesson.addTranslations(translationids);
+        lessonRepository.save(lesson);
 
         return translationsForUserTO.translations().iterator().next();
     }

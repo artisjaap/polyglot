@@ -15,6 +15,7 @@ public class LessonResponseMapper implements ResponseMapper<LessonTO, LessonResp
         return LessonResponse.builder()
                 .id(lessonTO.id())
                 .title(lessonTO.name())
+                .languagePairId(lessonTO.languagePairId())
                 .translations(translationResponseMapper.mapToResponse(lessonTO.translations()))
                 .build();
     }

@@ -1,13 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {Lesson} from "../../model/lesson";
-import {Observable} from "rxjs";
-import {select, Store} from "@ngrx/store";
-import {lessonWithId} from "../student.selectors";
-import {AppState} from "../../../reducers";
-import {ActivatedRoute} from "@angular/router";
-import {StudentActions} from "../action-types";
-import {Update} from "@ngrx/entity/src/models";
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {Observable} from 'rxjs';
+import {select, Store} from '@ngrx/store';
+import {AppState} from '../../../reducers';
+import {ActivatedRoute} from '@angular/router';
+import {StudentActions} from '../action-types';
+import {Update} from '@ngrx/entity/src/models';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {LessonResponse} from '../../model/lesson-response';
+import {lessonById} from '../student.selectors';
+import {NewTranslationForLessonRequest} from '../../model/new-translation-for-lesson-request';
 
 @Component({
   selector: 'app-lesson-detail',
@@ -16,45 +17,60 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 })
 export class LessonDetailComponent implements OnInit {
   private form: FormGroup;
+  private lesson$: Observable<LessonResponse>;
 
-  lesson$: Observable<Lesson>;
 
   constructor(private store: Store<AppState>, private route: ActivatedRoute, private fb: FormBuilder) {
+    const lessonId = route.snapshot.params.lessonId;
 
     this.form = this.fb.group({
       question: ['question'],
       solution: ['solution']
-    })
+    });
+
+    this.lesson$ = store.select(lessonById, {lessonId});
+
 
   }
 
   ngOnInit() {
-    this.lesson$ = this.store.pipe(
-      select(lessonWithId, {lessonId: this.route.snapshot.params['lessonId']})
-    );
-
 
   }
 
-  removeWord(translationId: string, lessonId: string, lesson: Lesson) {
-    const updatedLesson: Update<Lesson> = {
-      id: lessonId,
-      changes: {...lesson, translations: lesson.translations.filter(t => t.translationId !== translationId)}
-    };
-    this.store.dispatch(StudentActions.removeTranslationFromLesson({translationId, lessonId, updatedLesson}));
-  }
-
-  createTranslation(lesson: Lesson) {
-    const data = this.form.value;
-
-    const updatedLesson = {
-      ...lesson,
-      translations: [...lesson.translations, data]
-    }
-    this.store.dispatch(StudentActions.addNewTranslation({
+  createTranslation(lesson: LessonResponse) {
+    const translation: NewTranslationForLessonRequest = {
+      languagePairId: lesson.languagePairId,
       lessonId: lesson.id,
-      translation: data,
-      updatedLesson: updatedLesson
-    }))
+      languageA: this.form.value.question,
+      languageB: this.form.value.solution
+    };
+
+    this.store.dispatch(StudentActions.addNewTranslationToLesson({translation}));
   }
+
+  removeWordFromLesson(translationId: string, lessonId: string) {
+    this.store.dispatch(StudentActions.deleteTranslationFromLesson({translationId, lessonId}));
+  }
+
+  // removeWord(translationId: string, lessonId: string, lesson: Lesson) {
+  //   const updatedLesson: Update<Lesson> = {
+  //     id: lessonId,
+  //     changes: {...lesson, translations: lesson.translations.filter(t => t.translationId !== translationId)}
+  //   };
+  //   this.store.dispatch(StudentActions.removeTranslationFromLesson({translationId, lessonId, updatedLesson}));
+  // }
+  //
+  // createTranslation(lesson: Lesson) {
+  //   const data = this.form.value;
+  //
+  //   const updatedLesson = {
+  //     ...lesson,
+  //     translations: [...lesson.translations, data]
+  //   }
+  //   this.store.dispatch(StudentActions.addNewTranslation({
+  //     lessonId: lesson.id,
+  //     translation: data,
+  //     updatedLesson: updatedLesson
+  //   }))
+  // }
 }

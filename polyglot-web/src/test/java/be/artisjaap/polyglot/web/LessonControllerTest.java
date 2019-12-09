@@ -1,7 +1,7 @@
 package be.artisjaap.polyglot.web;
 
 import be.artisjaap.polyglot.core.action.lesson.CreateNewWordForPractice;
-import be.artisjaap.polyglot.core.action.pairs.RegisterLanguagePair;
+import be.artisjaap.polyglot.core.action.pairs.CreateLanguagePair;
 import be.artisjaap.polyglot.core.action.translation.CreateTranslation;
 import be.artisjaap.polyglot.core.action.user.RegisterUser;
 import be.artisjaap.polyglot.core.model.KnowledgeStatus;
@@ -34,7 +34,7 @@ public class LessonControllerTest extends RestControllerTest {
     private RegisterUser registerUser;
 
     @Autowired
-    private RegisterLanguagePair registerLanguagePair;
+    private CreateLanguagePair createLanguagePair;
 
     @Autowired
     private CreateTranslation createTranslation;

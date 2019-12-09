@@ -38,7 +38,7 @@ public class LessonHeaderController extends BaseController {
 
     }
 
-    @RequestMapping(value = "/lesson-header", method = RequestMethod.PUT)
+    @RequestMapping(value = "/lesson-header", method = RequestMethod.POST)
     public @ResponseBody
     ResponseEntity<LessonHeaderResponse> addNewLessonHeader(@RequestBody NewLessonHeaderRequest newLessonHeaderRequest) {
         LessonTO lessonTO = createLesson.create(NewLessonTO.newBuilder()
@@ -49,4 +49,14 @@ public class LessonHeaderController extends BaseController {
 
         return ResponseEntity.ok(lessonHeaderResponseLessonMapper.map(lessonTO));
     }
+
+    @RequestMapping(value = "/lesson-header/{lessonId}", method = RequestMethod.DELETE)
+    public @ResponseBody
+    ResponseEntity<LessonHeaderResponse> removeLesson(@PathVariable String lessonId) {
+        //FIXME not yet implemented
+
+
+        return ResponseEntity.ok(null);
+    }
+
 }

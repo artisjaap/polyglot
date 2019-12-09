@@ -3,7 +3,7 @@ package be.artisjaap.polyglot.demo.startup;
 import be.artisjaap.backup.action.CollectionInfo;
 import be.artisjaap.migrate.model.scripts.AbstractInitScript;
 import be.artisjaap.polyglot.core.action.lesson.CreateLesson;
-import be.artisjaap.polyglot.core.action.pairs.RegisterLanguagePair;
+import be.artisjaap.polyglot.core.action.pairs.CreateLanguagePair;
 import be.artisjaap.polyglot.core.action.to.*;
 import be.artisjaap.polyglot.core.action.translation.UpdateStatusTranslation;
 import be.artisjaap.polyglot.core.action.translation.CreateTranslation;
@@ -22,7 +22,7 @@ public class RegisterUsers extends AbstractInitScript {
     private RegisterUser registerUser;
 
     @Autowired
-    private RegisterLanguagePair registerLanguagePair;
+    private CreateLanguagePair createLanguagePair;
 
     @Autowired
     private CreateTranslation createTranslation;
@@ -59,7 +59,7 @@ public class RegisterUsers extends AbstractInitScript {
         UserTO userTO = registerUser.newUser(NewUserTO.newBuilder().withUsername("stijn").withPassword("abc").withRole("STUDENT").build());
         logger.info("User created with id: " + userTO.id());
 
-        LanguagePairTO languagePairTO = registerLanguagePair.forUser(NewLanguagePairTO.newBuilder()
+        LanguagePairTO languagePairTO = createLanguagePair.forUser(NewLanguagePairTO.newBuilder()
                 .withUserId(userTO.id())
                 .withLanguageFrom("Dutch")
                 .withLanguageTo("English")

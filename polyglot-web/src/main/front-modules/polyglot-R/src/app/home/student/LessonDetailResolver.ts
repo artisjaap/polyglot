@@ -1,40 +1,37 @@
-import {Injectable} from "@angular/core";
-import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from "@angular/router";
-import {Observable} from "rxjs";
-import {LessonDataService} from "../dataservice/lesson-data-service";
-import {filter, finalize, first, tap} from "rxjs/operators";
-import {select, Store} from "@ngrx/store";
-import {areLatestTranslationsLoadedForLanguagePair, isLessonLoaded} from "./student.selectors";
-import {StudentActions} from "./action-types";
-import {AppState} from "../../reducers";
+import {Injectable} from '@angular/core';
+import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
+import {Observable, of} from 'rxjs';
+import {select, Store} from '@ngrx/store';
+import {AppState} from '../../reducers';
+import {isLessonLoaded} from './student.selectors';
+
+import {filter, finalize, first, tap} from 'rxjs/operators';
+import {StudentActions} from './action-types';
 
 @Injectable()
 export class LessonDetailResolver implements Resolve<boolean> {
-  lessonIsLoading: boolean = false;
+  lessonIsLoading = false;
 
   constructor(private store: Store<AppState>) {
 
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    let lessonId = route.params['lessonId'];
+    const lessonId = route.params.lessonId;
 
     return this.store
       .pipe(
-        select(isLessonLoaded, {lessonId: lessonId}),
+        select(isLessonLoaded, {lessonId}),
         tap(lessonLoaded => {
-          if (!this.lessonIsLoading && !lessonLoaded) {
+          if (!lessonLoaded && !this.lessonIsLoading) {
             this.lessonIsLoading = true;
-            this.store.dispatch(StudentActions.loadLesson({lessonId}))
+            this.store.dispatch(StudentActions.loadLesson({lessonId}));
           }
         }),
-        filter(latestTranslationsLoaded => latestTranslationsLoaded),
+        filter( lessonLoaded => lessonLoaded),
         first(),
         finalize(() => this.lessonIsLoading = false)
-      );
-
-
-
+    );
   }
 
 }

@@ -1,7 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {LanguagePair} from "../../model/language-pair";
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {LanguagePairDataService} from "../../dataservice/language-pair-data-service";
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {LanguagePairResponse} from '../../model/language-pair-response';
+import {AppState} from '../../../reducers';
+import {Store} from '@ngrx/store';
+import {StudentActions} from '../action-types';
 
 @Component({
   selector: 'app-language-pair-card',
@@ -11,35 +13,35 @@ import {LanguagePairDataService} from "../../dataservice/language-pair-data-serv
 export class LanguagePairCardComponent implements OnInit {
   private form: FormGroup;
 
-  private mode : 'VIEW' | 'NEW';
+  private mode: 'VIEW' | 'NEW';
 
   @Input()
-  languagePair: LanguagePair;
+  languagePair: LanguagePairResponse;
 
-  constructor(private fb:FormBuilder, private languagePairService:LanguagePairDataService) {
+  constructor(private fb: FormBuilder, private state: Store<AppState>) {
     this.form = this.fb.group({
-      languageFrom: ['from'],
-      languageTo: ['to']
-    })
+      languageA: ['from'],
+      languageB: ['to']
+    });
 
 
   }
 
   ngOnInit() {
-    if(this.languagePair) {
+    if (this.languagePair) {
       this.mode = 'VIEW';
-    }else {
+    } else {
       this.mode = 'NEW';
     }
   }
 
   createPair() {
     const languagePair =  this.form.value;
-    this.languagePairService.add(languagePair);
+    this.state.dispatch(StudentActions.createLanguagePair({languagePair}));
   }
 
   removePair() {
-    this.languagePairService.delete(this.languagePair);
+    this.state.dispatch(StudentActions.deleteLanguagePair({languagePair: this.languagePair}));
   }
 
   openPair() {

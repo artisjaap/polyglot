@@ -1,17 +1,18 @@
 import {Action, createReducer, on} from '@ngrx/store';
-import {createEntityAdapter, EntityState} from "@ngrx/entity";
-import {Lesson} from "../../model/lesson";
-import {StudentActions} from "../action-types";
+import {createEntityAdapter, EntityState, Update} from '@ngrx/entity';
+import {StudentActions} from '../action-types';
+import {LessonResponse} from '../../model/lesson-response';
+import {act} from '@ngrx/effects';
 
 
 export const lessonFeatureKey = 'lesson';
 
-export interface State extends EntityState<Lesson> {
+export interface State extends EntityState<LessonResponse> {
   // loadedLessons : string[]
 
 }
 
-const adapter = createEntityAdapter<Lesson>({});
+export const adapter = createEntityAdapter<LessonResponse>({});
 
 export const initialState: State = adapter.getInitialState({
   // loadedLessons: []
@@ -22,10 +23,34 @@ const lessonReducer = createReducer(
 
   on(StudentActions.lessonLoaded,
     (state, action) => {
-      return adapter.addOne(action.lesson,
-        {...state})
-      // ,loadedLessons : [...state.loadedLessons, action.lesson.id] })
+      return adapter.addOne(action.lesson, state);
     }),
+
+  on(StudentActions.newTranslationAdded,
+    (state, action) => {
+    const lessonId = action.translation.lessonId;
+    return {...state,
+      entities : {...state.entities,
+        [lessonId] : {...state.entities[lessonId],
+          translations : [...state.entities[lessonId].translations,
+            action.translation]}}};
+    }),
+
+  //could be more perfomant, now, delete of a word in a lesson returns the complete lesson from the server
+  //it would be faster to return jus the word deleted
+  on(StudentActions.translationFromLessonDeleted,
+    (state, action) => {
+      const update: Update<LessonResponse> = {
+        id: action.lesson.id,
+        changes: action.lesson
+      }
+      return adapter.updateOne(update, state);
+  })
+
+
+
+
+  /*
 
   on(StudentActions.removeTranslationFromLesson,
     (state, action) => {
@@ -40,7 +65,7 @@ const lessonReducer = createReducer(
   on(StudentActions.addNewTranslation,
     (state, action) => {
       return adapter.upsertOne(action.updatedLesson, state)
-    })
+    })*/
 );
 
 /*

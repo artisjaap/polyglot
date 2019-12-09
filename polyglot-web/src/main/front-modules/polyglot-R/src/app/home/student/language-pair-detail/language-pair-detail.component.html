@@ -4,9 +4,9 @@
       latest words
     </mat-card-header>
     <mat-card-content>
-      <div *ngFor="let a of latestTranslations | async">
-        {{a.languageA}} - {{a.languageB}}
-      </div>
+<!--      <div *ngFor="let a of latestTranslations | async">-->
+<!--        {{a.languageA}} - {{a.languageB}}-->
+<!--      </div>-->
     </mat-card-content>
   </mat-card>
 
@@ -15,9 +15,9 @@
       lessons
     </mat-card-header>
     <mat-card-content>
-      <div *ngFor="let a of latestLessons | async">
+      <div *ngFor="let a of lessonHeaders$ | async">
         <span [routerLink]="['/home', 'student', 'lesson', a.id]">{{a.name}}</span>
-        <button (click)="deleteLesson(a)"> del</button>
+<!--        <button (click)="deleteLesson(a)"> del</button>-->
       </div>
       <input type="text" #newLesson> <button (click)="createLesson(newLesson)">create</button>
     </mat-card-content>
