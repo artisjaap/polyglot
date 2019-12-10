@@ -2,21 +2,24 @@ package be.artisjaap.polyglot.web.endpoints;
 
 
 import be.artisjaap.polyglot.core.action.lesson.UpdateLesson;
-import be.artisjaap.polyglot.core.action.to.NewTranslationInLessonTO;
-import be.artisjaap.polyglot.core.action.to.NewTranslationTO;
-import be.artisjaap.polyglot.core.action.to.TranslationTO;
-import be.artisjaap.polyglot.core.action.to.UpdateTranslationTO;
+import be.artisjaap.polyglot.core.action.to.*;
 import be.artisjaap.polyglot.core.action.translation.CreateTranslation;
 import be.artisjaap.polyglot.core.action.translation.RemoveTranslation;
 import be.artisjaap.polyglot.core.action.translation.UpdateTranslation;
+import be.artisjaap.polyglot.web.endpoints.old.response.TranslationsForUserResponse;
 import be.artisjaap.polyglot.web.endpoints.request.NewTranslationForLessonRequest;
 import be.artisjaap.polyglot.web.endpoints.request.UpdateTranslationForLessonRequest;
 import be.artisjaap.polyglot.web.endpoints.response.TranslationForLessonResponse;
 import be.artisjaap.polyglot.web.endpoints.response.TranslationForLessonResponseMapper;
+import be.artisjaap.polyglot.web.endpoints.response.TranslationsLoadedByFileResponse;
+import be.artisjaap.polyglot.web.endpoints.response.TranslationsLoadedByFileResponseMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 @RestController
 @RequestMapping("/api")
@@ -36,6 +39,9 @@ public class TranslationController extends BaseController {
 
     @Resource
     private RemoveTranslation removeTranslation;
+
+    @Resource
+    private TranslationsLoadedByFileResponseMapper translationsLoadedByFileResponseMapper;
 
     //if no lessonId is given create a tramslation without coupling to a lesson
     @RequestMapping(value = "/translation", method = RequestMethod.PUT)
@@ -95,6 +101,23 @@ public class TranslationController extends BaseController {
         TranslationTO translationTO = removeTranslation.withId(translationId);
         return ResponseEntity.ok(translationForLessonResponseMapper.map(translationTO));
 
+    }
+
+    @RequestMapping(value = "/upload-translations/{languagePairId}", method = RequestMethod.POST)
+    public @ResponseBody
+    ResponseEntity<TranslationsLoadedByFileResponse> uploadTranslationsByFile(@PathVariable String languagePairId, @RequestParam MultipartFile file) {
+        try(InputStreamReader val = new InputStreamReader(file.getInputStream())) {
+            TranslationsForUserTO translationsForUserTO = createTranslation.forAllWords(NewTranslationForUserFromFileTO.newBuilder()
+                    .withUserId(userId())
+                    .withLanguagePairId(languagePairId)
+                    .withReader(val)
+                    .build());
+            return ResponseEntity.ok(translationsLoadedByFileResponseMapper.map(translationsForUserTO));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
 

@@ -1,17 +1,14 @@
 package be.artisjaap.polyglot.web.endpoints.response;
 
-import be.artisjaap.polyglot.core.action.to.LessonTranslationPairTO;
-import org.springframework.stereotype.Component;
+import be.artisjaap.polyglot.core.action.to.TranslationTO;
 
-@Component
-public class TranslationResponseMapper implements ResponseMapper<LessonTranslationPairTO, TranslationResponse> {
-
+public class TranslationResponseMapper  implements ResponseMapper<TranslationTO, TranslationResponse> {
     @Override
-    public TranslationResponse map(LessonTranslationPairTO lessonTranslationPairTO) {
+    public TranslationResponse map(TranslationTO translationTO) {
         return TranslationResponse.builder()
-                .id(lessonTranslationPairTO.translationId())
-                .languageA(lessonTranslationPairTO.question())
-                .languageB(lessonTranslationPairTO.solution())
+                .id(translationTO.id())
+                .languageA(translationTO.languageA())
+                .languageB(translationTO.languageB())
                 .build();
     }
 }

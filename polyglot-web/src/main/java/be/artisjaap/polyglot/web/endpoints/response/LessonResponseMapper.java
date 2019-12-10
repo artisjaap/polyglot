@@ -8,7 +8,7 @@ import javax.annotation.Resource;
 @Component
 public class LessonResponseMapper implements ResponseMapper<LessonTO, LessonResponse> {
     @Resource
-    private TranslationResponseMapper translationResponseMapper;
+    private LessonTranslationPairResponseMapper lessonTranslationPairResponseMapper;
 
     @Override
     public LessonResponse map(LessonTO lessonTO) {
@@ -16,7 +16,7 @@ public class LessonResponseMapper implements ResponseMapper<LessonTO, LessonResp
                 .id(lessonTO.id())
                 .title(lessonTO.name())
                 .languagePairId(lessonTO.languagePairId())
-                .translations(translationResponseMapper.mapToResponse(lessonTO.translations()))
+                .translations(lessonTranslationPairResponseMapper.mapToResponse(lessonTO.translations()))
                 .build();
     }
 }
