@@ -173,6 +173,14 @@ export class StudentEffects {
     )
   );
 
+  uploadTranslationFie$ = createEffect(
+    () => this.actions$.pipe(
+      ofType(StudentActions.uploadTranslationFile),
+      concatMap(action => this.translationService.uploadTranslations(action.languagePairId, action.files)),
+      map(loadedTranslationsFronFile => StudentActions.translationFileUploaded({loadedTranslationsFronFile}))
+    )
+  );
+
   constructor(private actions$: Actions,
               private translationService: TranslationService,
               private lessonHeaderService: LessonHeaderService,

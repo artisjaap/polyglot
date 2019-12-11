@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {AppState} from '../../../reducers';
 import {Store} from '@ngrx/store';
 import {ActivatedRoute, ActivatedRouteSnapshot} from '@angular/router';
@@ -18,6 +18,9 @@ export class LanguagePairDetailComponent implements OnInit {
   lessonHeaders$: Observable<LessonHeaderResponse[]>;
   languagePairId: string;
 
+  @ViewChild('file', {static: true}) file;
+  public files: Set<File> = new Set();
+
   constructor(private store: Store<AppState>, private route: ActivatedRoute) {
   }
 
@@ -36,6 +39,19 @@ export class LanguagePairDetailComponent implements OnInit {
       name: newLesson.value
     }
     this.store.dispatch(StudentActions.createLesson({lesson}));
+  }
+
+  onFilesAdded() {
+    const files: { [key: string]: File } = this.file.nativeElement.files;
+    for (const key in files) {
+      if (!isNaN(parseInt(key, 10))) {
+        this.files.add(files[key]);
+      }
+    }
+
+    this.store.dispatch(StudentActions.uploadTranslationFile({languagePairId: this.languagePairId, files: this.files}));
+
+
   }
 }
 

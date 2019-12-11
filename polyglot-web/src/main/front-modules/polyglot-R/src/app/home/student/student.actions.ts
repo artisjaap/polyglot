@@ -5,6 +5,8 @@ import {LessonResponse} from '../model/lesson-response';
 import {TranslationForLessonResponse} from '../model/translation-for-lesson-response';
 import {NewTranslationForLessonRequest} from '../model/new-translation-for-lesson-request';
 import {NewLessonHeaderRequest} from '../model/new-lesson-header-request';
+import {TranslationsLoadedByFileResponse} from '../model/translations-loaded-by-file-response';
+import {FileUpload} from '../model/file-upload';
 
 
 export const loadAllLanguagePairs = createAction(
@@ -71,12 +73,12 @@ export const lessonCreated = createAction(
 export const deleteLesson = createAction(
   '[] delete lesson',
   props<{lessonId: string}>()
-)
+);
 
 export const lessonDeleted = createAction(
   '[] lesson deleted',
   props<{lessonHeader: LessonHeaderResponse}>()
-)
+);
 
 export const addNewTranslationToLesson = createAction(
   '[] add translation to lesson',
@@ -108,5 +110,12 @@ export const existingTranslationDeleteFromLesson = createAction(
   props<{lessonId: string, translationId: string}>()
 );
 
+export const uploadTranslationFile = createAction(
+  '[] upload translatino file',
+  props<{ fileUpload: FileUpload }>()
+);
 
-
+export const translationFileUploaded = createAction(
+  '[] translation file uploaded',
+  props<{loadedTranslationsFronFile: TranslationsLoadedByFileResponse}>()
+);

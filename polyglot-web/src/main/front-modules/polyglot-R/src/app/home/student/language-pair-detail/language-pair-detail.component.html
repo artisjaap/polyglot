@@ -23,4 +23,13 @@
     </mat-card-content>
   </mat-card>
 
+  <mat-card>
+    <mat-card-header>
+      Upload lesson
+    </mat-card-header>
+    <mat-card-content>
+      <input type="file"  #file (change)="onFilesAdded()" multiple>
+    </mat-card-content>
+  </mat-card>
+
 </div>
