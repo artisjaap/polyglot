@@ -119,3 +119,8 @@ export const translationFileUploaded = createAction(
   '[] translation file uploaded',
   props<{loadedTranslationsFronFile: TranslationsLoadedByFileResponse}>()
 );
+
+export const translationFileUploading = createAction(
+  '[] translation file uploading',
+  props<{payload: any}>()
+);

@@ -34,8 +34,8 @@ import {ReactiveFormsModule} from "@angular/forms";
       runtimeChecks: {
         strictStateImmutability: true,
         strictActionImmutability: true,
-        strictActionSerializability: true,
-        strictStateSerializability: true
+        strictActionSerializability: false,
+        strictStateSerializability: false
       }
     }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),

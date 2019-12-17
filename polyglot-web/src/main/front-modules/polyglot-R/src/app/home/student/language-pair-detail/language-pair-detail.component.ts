@@ -7,6 +7,7 @@ import {LessonHeaderResponse} from '../../model/lesson-header-response';
 import {Observable} from 'rxjs';
 import {StudentActions} from '../action-types';
 import {NewLessonHeaderRequest} from '../../model/new-lesson-header-request';
+import {FileUpload} from '../../model/file-upload';
 
 @Component({
   selector: 'app-language-pair-detail',
@@ -26,7 +27,7 @@ export class LanguagePairDetailComponent implements OnInit {
 
   ngOnInit() {
     this.languagePairId = this.route.snapshot.params.languagePairId;
-    this.lessonHeaders$ = this.store.select(lessonHeadersForLanguagePair,{languagePairId : this.languagePairId});
+    this.lessonHeaders$ = this.store.select(lessonHeadersForLanguagePair, {languagePairId: this.languagePairId});
   }
 
   deleteLesson(lessonToDelete: LessonHeaderResponse) {
@@ -37,19 +38,23 @@ export class LanguagePairDetailComponent implements OnInit {
     const lesson: NewLessonHeaderRequest = {
       languagePairId: this.languagePairId,
       name: newLesson.value
-    }
+    };
     this.store.dispatch(StudentActions.createLesson({lesson}));
   }
 
   onFilesAdded() {
     const files: { [key: string]: File } = this.file.nativeElement.files;
+    let file: File ;
     for (const key in files) {
       if (!isNaN(parseInt(key, 10))) {
         this.files.add(files[key]);
+        file = files[key];
       }
     }
 
-    this.store.dispatch(StudentActions.uploadTranslationFile({languagePairId: this.languagePairId, files: this.files}));
+    const fileUpload: FileUpload = {languagePairId: this.languagePairId, file: file};
+
+    this.store.dispatch(StudentActions.uploadTranslationFile({fileUpload}));
 
 
   }

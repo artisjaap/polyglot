@@ -50,7 +50,21 @@ const lessonReducer = createReducer(
         loadedLanguagePairs: {...state.loadedLanguagePairs,
           [languagePairId] : [...state.loadedLanguagePairs[languagePairId], action.lessonHeader.id]}
       });
-    })
+    }),
+
+  on(StudentActions.translationFileUploaded,
+  (state, action) => {
+
+    if (action.loadedTranslationsFronFile.lessonHeaderResponse) {
+      const languagePairId = action.loadedTranslationsFronFile.languagePairId;
+      return adapter.upsertOne(action.loadedTranslationsFronFile.lessonHeaderResponse, {
+        ...state,
+        loadedLanguagePairs: {...state.loadedLanguagePairs,
+          [languagePairId] : [action.loadedTranslationsFronFile.lessonHeaderResponse.id, ...state.loadedLanguagePairs[languagePairId]]}
+      });
+    }
+    return state;
+  })
 
   /*
 

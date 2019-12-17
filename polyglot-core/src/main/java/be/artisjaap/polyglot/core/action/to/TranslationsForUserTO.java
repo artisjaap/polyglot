@@ -7,6 +7,7 @@ public class TranslationsForUserTO {
     private String userId;
     private String languagePairId;
     private List<TranslationTO> translations;
+    private LessonHeaderTO lessonHeader;
 
     public String userId() {
         return userId;
@@ -14,6 +15,14 @@ public class TranslationsForUserTO {
 
     public String languagePairId() {
         return languagePairId;
+    }
+
+    public LessonHeaderTO lessonHeader() {
+        return lessonHeader;
+    }
+
+    public void setLessonHeader(LessonHeaderTO lessonHeader){
+        this.lessonHeader = lessonHeader;
     }
 
     public List<TranslationTO> translations() {
@@ -24,6 +33,7 @@ public class TranslationsForUserTO {
         userId = builder.userId;
         languagePairId = builder.languagePairId;
         translations = builder.translations;
+        lessonHeader = builder.lessonHeader;
     }
 
     public static Builder newBuilder() {
@@ -34,6 +44,7 @@ public class TranslationsForUserTO {
     public static final class Builder {
         private String userId;
         private String languagePairId;
+        private LessonHeaderTO lessonHeader;
         private List<TranslationTO> translations = new ArrayList<>();
 
         private Builder() {
@@ -54,6 +65,12 @@ public class TranslationsForUserTO {
             this.translations.addAll(translations);
             return this;
         }
+
+        public Builder withLessonHeader(LessonHeaderTO lessonHeader) {
+            this.lessonHeader = lessonHeader;
+            return this;
+        }
+
 
         public TranslationsForUserTO build() {
             return new TranslationsForUserTO(this);

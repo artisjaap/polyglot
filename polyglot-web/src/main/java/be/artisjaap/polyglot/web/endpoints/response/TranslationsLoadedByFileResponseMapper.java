@@ -9,13 +9,17 @@ import javax.annotation.Resource;
 public class TranslationsLoadedByFileResponseMapper implements ResponseMapper<TranslationsForUserTO, TranslationsLoadedByFileResponse> {
 
     @Resource
-    private TranslationResponseMapper lessonTranslationPairResponseMapper;
+    private TranslationResponseMapper translationResponseMapper;
+
+    @Resource
+    private LessonHeaderResponseMapper lessonHeaderResponseMapper;
 
     @Override
     public TranslationsLoadedByFileResponse map(TranslationsForUserTO translationsForUserTO) {
         return TranslationsLoadedByFileResponse.builder()
                 .languagePairId(translationsForUserTO.languagePairId())
-                .translations(lessonTranslationPairResponseMapper.mapToResponse(translationsForUserTO.translations()))
+                .translations(translationResponseMapper.mapToResponse(translationsForUserTO.translations()))
+                .lessonHeaderResponse(lessonHeaderResponseMapper.map(translationsForUserTO.lessonHeader()))
                 .build();
     }
 }

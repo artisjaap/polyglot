@@ -1,11 +1,12 @@
 import {Inject, Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpEvent, HttpParams} from '@angular/common/http';
 import {NewTranslationForLessonRequest} from '../model/new-translation-for-lesson-request';
 import {TranslationForLessonResponse} from '../model/translation-for-lesson-response';
 import {UpdateTranslationForLessonRequest} from '../model/update-translation-for-lesson-request';
 import {UploadService} from './upload.service';
 import {TranslationsLoadedByFileResponse} from '../model/translations-loaded-by-file-response';
+import {FileUpload} from '../model/file-upload';
 
 @Injectable()
 export class TranslationService {
@@ -32,10 +33,10 @@ export class TranslationService {
     return this.httpClient.delete<TranslationForLessonResponse>(this.apiurl + `api/translation/${translationId}`);
   }
 
-  public uploadTranslations(languagePairId: string, files: Set<File>): {[key: string]: Observable<TranslationsLoadedByFileResponse>} {
-    const url = this.apiurl + `/upload-translations/${languagePairId}`;
-    return this.uploadService.upload(files, url);
-
+  public uploadTranslations(fileUpload: FileUpload): Observable<HttpEvent<{}>> {
+    const url = this.apiurl + `api/upload-translations/${fileUpload.languagePairId}`;
+    return this.uploadService.uploadFile(url, fileUpload.file);
+  }
 
 }
 

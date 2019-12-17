@@ -13,7 +13,7 @@ export class UploadService {
 
   public uploadFile(url: string, file: File): Observable<HttpEvent<{}>> {
     const formData = new FormData();
-    formData.append('files', file, file.name);
+    formData.append('file', file, file.name);
 
     const options = {
       reportProgress: true

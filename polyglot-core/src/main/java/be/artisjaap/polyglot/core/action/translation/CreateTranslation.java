@@ -109,13 +109,23 @@ public class CreateTranslation {
 
         TranslationsForUserTO translationsForUserTO = forAllWords(newTranslationsForUserTO);
 
-        pr.lessonName().ifPresent(lessonName ->
-                createLesson.create(NewLessonTO.newBuilder()
-                        .withName(lessonName)
-                        .withLanguagePairId(to.languagePairId())
-                        .withUserId(to.userId())
-                        .withTranslationsIds(translationsForUserTO.translations().stream().map(TranslationTO::id).collect(Collectors.toList()))
-                        .build()));
+        if( pr.lessonName().isPresent()) {
+
+            LessonTO lessonTO = createLesson.create(NewLessonTO.newBuilder()
+                    .withName(pr.lessonName().get())
+                    .withLanguagePairId(to.languagePairId())
+                    .withUserId(to.userId())
+                    .withTranslationsIds(translationsForUserTO.translations().stream().map(TranslationTO::id).collect(Collectors.toList()))
+                    .build());
+            translationsForUserTO.setLessonHeader(LessonHeaderTO.newBuilder()
+                    .withId(lessonTO.id())
+                    .withLanguagePairId(lessonTO.languagePairId())
+                    .withName(lessonTO.name())
+                    .withUserId(lessonTO.userId())
+                    .build()
+            );
+        }
+
 
         return translationsForUserTO;
     }

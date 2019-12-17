@@ -14,6 +14,7 @@ import java.util.List;
 public class TranslationsLoadedByFileResponse {
     @NonNull
     private String languagePairId;
+    private LessonHeaderResponse lessonHeaderResponse;
     @Builder.Default
     private List<TranslationResponse> translations = new ArrayList<>();
 }

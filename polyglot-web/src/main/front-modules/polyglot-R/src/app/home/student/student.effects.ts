@@ -6,6 +6,7 @@ import {TranslationService} from '../services/translation-service';
 import {LessonHeaderService} from '../services/lesson-header.service';
 import {LessonService} from '../services/lesson-service';
 import {LanguagePairService} from '../services/language-pair.service';
+import {HttpEventType, HttpResponse} from '@angular/common/http';
 
 @Injectable()
 export class StudentEffects {
@@ -176,8 +177,24 @@ export class StudentEffects {
   uploadTranslationFie$ = createEffect(
     () => this.actions$.pipe(
       ofType(StudentActions.uploadTranslationFile),
-      concatMap(action => this.translationService.uploadTranslations(action.languagePairId, action.files)),
-      map(loadedTranslationsFronFile => StudentActions.translationFileUploaded({loadedTranslationsFronFile}))
+      concatMap(action => this.translationService.uploadTranslations(action.fileUpload)),
+      map(loading => {
+
+        console.log('RESPONSE: ', loading.type);
+        switch (loading.type) {
+          case 4:
+            console.log('type 4');
+            if (loading instanceof HttpResponse) {
+              console.log('dispatch translationFileUploaded');
+              return StudentActions.translationFileUploaded({loadedTranslationsFronFile : (loading as HttpResponse<any>).body});
+            }
+            return StudentActions.translationFileUploaded({loadedTranslationsFronFile: null});
+
+          default:
+            return StudentActions.translationFileUploading({payload: loading});
+        }
+      })
+    //  map(loadedTranslationsFronFile => StudentActions.translationFileUploaded({loadedTranslationsFronFile}))
     )
   );
 
