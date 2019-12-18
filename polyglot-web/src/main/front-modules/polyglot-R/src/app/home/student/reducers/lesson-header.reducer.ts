@@ -33,12 +33,8 @@ const lessonReducer = createReducer(
   on(StudentActions.lessonDeleted,
     (state, action) => {
       const loadedLanguagePairs = state.loadedLanguagePairs;
-      // const languagePairId = Array.from(loadedLanguagePairs.keys())
-      //   .filter(key => state.loadedLanguagePairs.get(key).indexOf(action.lessonHeader.id) >= 0)[0];
       return adapter.removeOne(action.lessonHeader.id, {
         ...state,
-        // loadedLanguagePairs: {...state.loadedLanguagePairs,
-        //   [languagePairId] : [...state.loadedLanguagePairs[languagePairId].filter(t => t !== action.lessonHeader.id)]}
       });
   }),
 

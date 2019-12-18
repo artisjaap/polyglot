@@ -18,6 +18,7 @@
       <div *ngFor="let a of lessonHeaders$ | async">
         <span [routerLink]="['/home', 'student', 'lesson', a.id]">{{a.name}}</span>
 <!--        <button (click)="deleteLesson(a)"> del</button>-->
+        <span [routerLink]="['/home', 'student', 'lesson', a.id, 'practice']">Oefen</span>
       </div>
       <input type="text" #newLesson> <button (click)="createLesson(newLesson)">create</button>
     </mat-card-content>

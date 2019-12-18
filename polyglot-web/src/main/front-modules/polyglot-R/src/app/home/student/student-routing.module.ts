@@ -7,6 +7,7 @@ import {LanguagePairDetailComponent} from './language-pair-detail/language-pair-
 import {LanguagePairDetailResolver} from './LanguagePairDetailResolver';
 import {LessonDetailResolver} from './LessonDetailResolver';
 import {LessonDetailComponent} from './lesson-detail/lesson-detail.component';
+import {PracticeLessonComponent} from './practice-lesson/practice-lesson.component';
 
 
 const routes: Routes = [
@@ -26,6 +27,10 @@ const routes: Routes = [
       ,
       {
         path: 'lesson/:lessonId', component: LessonDetailComponent,
+        resolve: {LessonDetail: LessonDetailResolver}
+      },
+      {
+        path: 'lesson/:lessonId/practice', component: PracticeLessonComponent,
         resolve: {LessonDetail: LessonDetailResolver}
       }
     ]

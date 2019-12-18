@@ -1,0 +1,12 @@
+
+<mat-card *ngIf="lesson$ | async as lesson ">
+  <mat-card-header>
+    {{lesson.name}}
+  </mat-card-header>
+  <mat-card-content>
+    <div>{{translation?.languageA}}</div>
+    <input type="text" #answer>
+    <button (click)="check(answer)">check</button>
+  </mat-card-content>
+</mat-card>
+

@@ -110,6 +110,9 @@ export const existingTranslationDeleteFromLesson = createAction(
   props<{lessonId: string, translationId: string}>()
 );
 
+
+//upload action should go in root module...
+
 export const uploadTranslationFile = createAction(
   '[] upload translatino file',
   props<{ fileUpload: FileUpload }>()
@@ -124,3 +127,5 @@ export const translationFileUploading = createAction(
   '[] translation file uploading',
   props<{payload: any}>()
 );
+
+// end of upload actions

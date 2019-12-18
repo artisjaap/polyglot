@@ -19,6 +19,7 @@ import {StudentEffects} from "./student.effects";
 import { StoreModule } from '@ngrx/store';
 import * as fromStudent from './reducers';
 import { LessonDetailComponent } from './lesson-detail/lesson-detail.component';
+import { PracticeLessonComponent } from './practice-lesson/practice-lesson.component';
 
 
 const entityMetadata: EntityMetadataMap = {
@@ -30,7 +31,7 @@ const entityMetadata: EntityMetadataMap = {
 
 
 @NgModule({
-  declarations: [StudentDashboardComponent, LanguagePairCardComponent, LanguagePairComponent, LanguagePairDetailComponent, StudentMainComponent, LessonDetailComponent],
+  declarations: [StudentDashboardComponent, LanguagePairCardComponent, LanguagePairComponent, LanguagePairDetailComponent, StudentMainComponent, LessonDetailComponent, PracticeLessonComponent],
   imports: [
     CommonModule,
     StudentRoutingModule,
