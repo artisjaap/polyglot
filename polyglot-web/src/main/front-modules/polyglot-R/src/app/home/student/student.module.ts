@@ -1,21 +1,21 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {StudentRoutingModule} from "./student-routing.module";
+import {StudentRoutingModule} from './student-routing.module';
 import {StudentDashboardComponent} from './student-dashboard/student-dashboard.component';
-import {EntityDefinitionService, EntityMetadataMap} from "@ngrx/data";
+import {EntityDefinitionService, EntityMetadataMap} from '@ngrx/data';
 import {LanguagePairCardComponent} from './language-pair-card/language-pair-card.component';
-import {ReactiveFormsModule} from "@angular/forms";
-import {MatCardModule} from "@angular/material/card";
-import {MatIconModule} from "@angular/material/icon";
-import {MatButtonModule} from "@angular/material/button";
-import {MatInputModule} from "@angular/material/input";
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatSelectModule} from "@angular/material/select";
+import {ReactiveFormsModule} from '@angular/forms';
+import {MatCardModule} from '@angular/material/card';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
 import {LanguagePairComponent} from './language-pair/language-pair.component';
 import {LanguagePairDetailComponent} from './language-pair-detail/language-pair-detail.component';
 import {StudentMainComponent} from './student-main/student-main.component';
-import {EffectsModule} from "@ngrx/effects";
-import {StudentEffects} from "./student.effects";
+import {EffectsModule} from '@ngrx/effects';
+import {StudentEffects} from './student.effects';
 import { StoreModule } from '@ngrx/store';
 import * as fromStudent from './reducers';
 import { LessonDetailComponent } from './lesson-detail/lesson-detail.component';
@@ -27,7 +27,7 @@ const entityMetadata: EntityMetadataMap = {
   LessonHeader: {},
   Lesson: {},
   Translation: {}
-}
+};
 
 
 @NgModule({

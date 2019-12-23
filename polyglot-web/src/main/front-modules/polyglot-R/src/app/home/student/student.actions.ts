@@ -7,6 +7,9 @@ import {NewTranslationForLessonRequest} from '../model/new-translation-for-lesso
 import {NewLessonHeaderRequest} from '../model/new-lesson-header-request';
 import {TranslationsLoadedByFileResponse} from '../model/translations-loaded-by-file-response';
 import {FileUpload} from '../model/file-upload';
+import {PracticeAnswerResponse} from '../model/practice-answer-response';
+import {PracticeAnswerValidateRequest} from '../model/practice-answer-validate-request';
+
 
 
 export const loadAllLanguagePairs = createAction(
@@ -110,8 +113,19 @@ export const existingTranslationDeleteFromLesson = createAction(
   props<{lessonId: string, translationId: string}>()
 );
 
+export const checkPracticeWordAnswer = createAction(
+  '[Practice Lesson] check practice word answer',
+  props<{practiceAnswer: PracticeAnswerValidateRequest}>()
+);
 
-//upload action should go in root module...
+export const practiceWordAnswerChecked = createAction(
+  '[Practice Lesson] practice word answer checked',
+  props<{practiceAnswerResponse: PracticeAnswerResponse}>()
+);
+
+
+
+// upload action should go in root module...
 
 export const uploadTranslationFile = createAction(
   '[] upload translatino file',

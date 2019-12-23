@@ -7,6 +7,7 @@ import {LessonHeaderService} from '../services/lesson-header.service';
 import {LessonService} from '../services/lesson-service';
 import {LanguagePairService} from '../services/language-pair.service';
 import {HttpEventType, HttpResponse} from '@angular/common/http';
+import {PracticeAnswerService} from '../services/practice-answer.service';
 
 @Injectable()
 export class StudentEffects {
@@ -174,6 +175,14 @@ export class StudentEffects {
     )
   );
 
+  checkPracticeWordAnswer$ = createEffect(
+    () => this.actions$.pipe(
+      ofType(StudentActions.checkPracticeWordAnswer),
+      concatMap(action =>  this.practiceAnswerService.validatePracticeResult(action.practiceAnswer)),
+      map(practiceAnswerResponse => StudentActions.practiceWordAnswerChecked({practiceAnswerResponse}))
+    )
+  );
+
   uploadTranslationFie$ = createEffect(
     () => this.actions$.pipe(
       ofType(StudentActions.uploadTranslationFile),
@@ -202,7 +211,8 @@ export class StudentEffects {
               private translationService: TranslationService,
               private lessonHeaderService: LessonHeaderService,
               private languagePairService: LanguagePairService,
-              private lessonService: LessonService) {
+              private lessonService: LessonService,
+              private practiceAnswerService: PracticeAnswerService) {
 
   }
 

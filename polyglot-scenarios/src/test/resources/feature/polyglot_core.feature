@@ -1,6 +1,7 @@
 Feature: core polyglot features
   Scenario: Creating a user
     Given a user named Tibo
+  And A backup service
 
   Scenario: Een vertalingen definieren
     Given a user named Tibo

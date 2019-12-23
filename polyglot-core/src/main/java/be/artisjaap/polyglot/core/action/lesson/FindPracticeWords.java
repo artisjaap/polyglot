@@ -58,10 +58,41 @@ public class FindPracticeWords {
 
 
     public AnswerAndNextWordTO checkAnswerAndGiveNext(PracticeWordCheckTO practiceWordCheckTO) {
+
         TranslationPractice translationPractice = translationPracticeRepository.findByUserIdAndTranslationId(new ObjectId(practiceWordCheckTO.userId()), new ObjectId(practiceWordCheckTO.translationId()));
         Translation translation = translationRepository.findById(new ObjectId(practiceWordCheckTO.translationId())).orElseThrow(IllegalStateException::new);
         LanguagePairTO languagePairTO = findLanguagePair.byId(translation.getLanguagePairId().toString());
 
+        PracticeWordTO practiceWordTO = nextWord(practiceWordCheckTO.userId(), languagePairTO.id(), practiceWordCheckTO.nextOrderType());
+
+
+        AnswerTO answerTO = checkPracticeAnswer(practiceWordCheckTO, translationPractice, translation, languagePairTO);
+
+
+        return AnswerAndNextWordTO.newBuilder()
+                .withAnswer(answerTO)
+                .withPracticeWord(practiceWordTO)
+                .build();
+
+    }
+
+    public AnswerTO checkAnswer(PracticeWordCheckTO practiceWordCheckTO) {
+
+        TranslationPractice translationPractice = translationPracticeRepository.findByUserIdAndTranslationId(new ObjectId(practiceWordCheckTO.userId()), new ObjectId(practiceWordCheckTO.translationId()));
+        Translation translation = translationRepository.findById(new ObjectId(practiceWordCheckTO.translationId())).orElseThrow(IllegalStateException::new);
+        LanguagePairTO languagePairTO = findLanguagePair.byId(translation.getLanguagePairId().toString());
+        PracticeWordTO practiceWordTO = nextWord(practiceWordCheckTO.userId(), languagePairTO.id(), practiceWordCheckTO.nextOrderType());
+
+
+        AnswerTO answerTO = checkPracticeAnswer(practiceWordCheckTO, translationPractice, translation, languagePairTO);
+        return answerTO;
+
+    }
+
+
+    private AnswerTO checkPracticeAnswer(PracticeWordCheckTO practiceWordCheckTO, TranslationPractice translationPractice,
+                                         Translation translation,
+                                         LanguagePairTO languagePairTO) {
 
         AnswerTO.Builder answerTOBuilder = AnswerTO.newBuilder()
                 .withLanguagePairId(languagePairTO.id())
@@ -109,17 +140,11 @@ public class FindPracticeWords {
 
          translationPracticeRepository.save(translationPractice);
 
-        PracticeWordTO practiceWordTO = nextWord(practiceWordCheckTO.userId(), languagePairTO.id(), practiceWordCheckTO.nextOrderType());
-
 
         AnswerTO answerTO = answerTOBuilder.build();
         journalPracticeResults.forResult(answerTO, Optional.ofNullable(practiceWordCheckTO.lessonId()));
 
-        return AnswerAndNextWordTO.newBuilder()
-                .withAnswer(answerTO)
-                .withPracticeWord(practiceWordTO)
-                .build();
-
+        return answerTO;
     }
 
 

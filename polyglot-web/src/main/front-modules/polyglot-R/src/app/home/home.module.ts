@@ -8,6 +8,7 @@ import {LessonHeaderService} from './services/lesson-header.service';
 import {LessonService} from './services/lesson-service';
 import {LanguagePairService} from './services/language-pair.service';
 import {UploadService} from './services/upload.service';
+import {PracticeAnswerService} from './services/practice-answer.service';
 
 
 
@@ -22,7 +23,8 @@ import {UploadService} from './services/upload.service';
     LessonHeaderService,
     LessonService,
     LanguagePairService,
-    UploadService
+    UploadService,
+    PracticeAnswerService
   ]
 })
 export class HomeModule {
