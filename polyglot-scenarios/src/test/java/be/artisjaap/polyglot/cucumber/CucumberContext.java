@@ -10,10 +10,10 @@ import org.springframework.test.context.ContextConfiguration;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(monochrome = true
-, features="classpath:feature/"
+, features="classpath:scenarios"
 , glue = "be.artisjaap"
 , dryRun = false
 , plugin={"html:build/reports/cucumber", "pretty", "json:build/reports/cucumber/report.json", "be.artisjaap.polyglot.cucumber.PrettyReport:build/reports/cucumber"})
-public class CucumberRunner {
+public class CucumberContext {
 
 }

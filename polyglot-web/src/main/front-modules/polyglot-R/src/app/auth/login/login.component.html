@@ -1,8 +1,25 @@
-<p>auth works!</p>
-<form [formGroup]="form">
 
-<input type="text" formControlName="username">
-<input type="text" formControlName="password">
-<button (click)="login()">login</button>
+<mat-card class="login">
+  <form [formGroup]="form">
 
-</form>
+  <mat-card-title>Login</mat-card-title>
+  <mat-card-content>
+
+    <div class="flex flex-column">
+    <mat-form-field class="full-width">
+      <input matInput placeholder="Username" formControlName="username">
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <input type="password" matInput placeholder="password" formControlName="password">
+    </mat-form-field>
+
+    </div>
+
+
+  </mat-card-content>
+    <mat-card-actions>
+      <button mat-button (click)="login()">login</button>
+    </mat-card-actions>
+    </form>
+</mat-card>

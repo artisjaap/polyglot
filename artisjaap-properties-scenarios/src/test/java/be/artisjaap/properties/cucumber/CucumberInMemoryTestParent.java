@@ -5,5 +5,5 @@ import org.springframework.test.context.ContextConfiguration;
 
 @ContextConfiguration(classes = {
         PropertiesApplication.class})
-public class PropertiesInMemoryTestParent {
+public class CucumberInMemoryTestParent {
 }

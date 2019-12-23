@@ -1,0 +1,28 @@
+.flex {
+  display: flex;
+
+  &.flex-column {
+    flex-direction: column;
+  }
+
+  &.flex-row {
+    flex-direction: row;
+  }
+
+  &.flex-wrap {
+    flex-wrap: wrap;
+  }
+
+  &.text-align{
+    align-items: center;
+  }
+
+  &.center {
+    text-align: center;
+  }
+
+  .flex-child-5 {
+    width: 20%;
+
+  }
+}

@@ -1,7 +1,12 @@
 Feature: core polyglot features
+
   Scenario: Creating a user
     Given a user named Tibo
   And A backup service
+    Given a property prop with value val
+    Then when I request prop it has value val
+    When the property prop is updated to value2
+    Then when I request prop it has value value2
 
   Scenario: Een vertalingen definieren
     Given a user named Tibo

@@ -7,5 +7,5 @@ import org.springframework.test.context.ContextConfiguration;
 
 @ContextConfiguration(classes = {
         CommonApplication.class, ScheduleApplication.class, MigrateApplication.class})
-public class ScheduleInMemoryTestParent {
+public class CucumberInMemoryTestParent {
 }

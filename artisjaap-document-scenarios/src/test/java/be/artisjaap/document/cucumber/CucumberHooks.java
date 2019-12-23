@@ -1,6 +1,5 @@
 package be.artisjaap.document.cucumber;
 
-import be.artisjaap.document.DocumentbeheerInMemoryTestParent;
 import be.artisjaap.document.model.mongo.CombinedTemplateRepository;
 import be.artisjaap.document.model.mongo.DocumentRepository;
 import be.artisjaap.document.model.mongo.GegenereerdeBriefRepository;
@@ -9,8 +8,7 @@ import cucumber.api.java.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-//@RunWith(Cucumber.class)
-public class CucumberHooks extends DocumentbeheerInMemoryTestParent {
+public class CucumberHooks extends CucumberInMemoryTestParent {
     @Autowired
     private DocumentRepository documentRepository;
 
@@ -32,8 +30,5 @@ public class CucumberHooks extends DocumentbeheerInMemoryTestParent {
         gegenereerdeBriefRepository.deleteAll();
     }
 
-    @Test
-    public void empty() {
-    }
 
 }

@@ -1,17 +1,13 @@
 package be.artisjaap.i18n.cucumber;
 
+import cucumber.api.CucumberOptions;
 import cucumber.api.java.Before;
+import cucumber.api.junit.Cucumber;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-//@RunWith(Cucumber.class)
-public class CucumberContext extends I18nInMemoryTestParent {
-    @Before
-    public void init() {
+@RunWith(Cucumber.class)
+@CucumberOptions(features = "classpath:scenarios", glue = "be.artisjaap")
+public class CucumberContext {
 
-    }
-
-
-    @Test
-    public void empty() {
-    }
 }

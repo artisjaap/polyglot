@@ -1,0 +1,9 @@
+@import "colors";
+
+nav {
+  &.main-nav {
+    background-color: $color-main;
+    border-bottom: 1px solid black;
+    color: $color-main-inv;
+  }
+}

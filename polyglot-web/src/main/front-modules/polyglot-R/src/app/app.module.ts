@@ -8,13 +8,17 @@ import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import {AuthModule} from "./auth/auth.module";
-import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {AuthModule} from './auth/auth.module';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
 import { EntityDataModule } from '@ngrx/data';
 import { entityConfig } from './entity-metadata';
-import {AuthenticationInterceptor} from "./interceptors/authentication-interceptor";
-import {ReactiveFormsModule} from "@angular/forms";
+import {AuthenticationInterceptor} from './interceptors/authentication-interceptor';
+import {ReactiveFormsModule} from '@angular/forms';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import {MatCardModule} from '@angular/material/card';
 
 
 
@@ -28,6 +32,10 @@ import {ReactiveFormsModule} from "@angular/forms";
     HttpClientModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule,
     AuthModule.forRoot(),
     StoreModule.forRoot(reducers, {
       metaReducers,

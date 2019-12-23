@@ -7,6 +7,8 @@
     <div>{{translation?.languageA}}</div>
     <input type="text" #answer>
     <button (click)="check(answer)">check</button>
+
+    <span>{{previousAnswer.question}} - {{previousAnswer.expectedAnswer }} - {{previousAnswer.givenAnswer}}</span>
   </mat-card-content>
 </mat-card>
 

@@ -15,8 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 
 
-@ContextConfiguration(classes = {PolyglotApplication.class, DocumentbeheerApplication.class, PropertiesApplication.class})
-public class CucumberHooks {
+
+public class CucumberHooks extends CucumberInMemoryTestParent{
 
     @Autowired
     private UserRepository userRepository;

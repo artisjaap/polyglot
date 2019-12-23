@@ -1,50 +1,52 @@
 <mat-card class="language-pair-card mat-elevation-z10" *ngIf="mode === 'VIEW'">
-  <mat-card-header>
-    <div>
-      <div>
-        <h1>{{languagePair?.languageA}}</h1>
-      </div>
-      <div>
-        <h1>{{languagePair?.languageB}}</h1>
-      </div>
+  <mat-card-title>
+    <div class="flex flex-column center">
+      <div> {{languagePair?.languageA}}</div>
+     <div> <mat-icon>link</mat-icon></div>
+      <div>{{languagePair?.languageB}}</div>
+
     </div>
-  </mat-card-header>
+
+  </mat-card-title>
   <mat-card-content>
+
+
   </mat-card-content>
   <mat-card-actions>
-    <button mat-flat-button color="warn" (click)="removePair()">
-      <mat-icon class="add-course-btn" >delete</mat-icon>
+    <button mat-button color="warn" (click)="removePair()">
+      <mat-icon class="add-course-btn" >clear</mat-icon>
     </button>
-    <button mat-flat-button color="warn" [routerLink]="['..', 'language-pair', languagePair.id]">
-      <mat-icon class="add-course-btn" >open_in_new</mat-icon>
+    <button mat-button color="primary" [routerLink]="['..', 'language-pair', languagePair.id]">
+      <mat-icon class="add-course-btn" >send</mat-icon>
     </button>
   </mat-card-actions>
-  <mat-card-footer>
 
-  </mat-card-footer>
 </mat-card>
 
 
 <mat-card class="language-pair-card mat-elevation-z10" *ngIf="mode === 'NEW'">
-  <mat-card-header>
-    <h1>Add new language pair</h1>
-
-  </mat-card-header>
+  <mat-card-title>
+    <div class="flex flex-column center">
+    Add new
+    </div>
+  </mat-card-title>
   <mat-card-content>
     <form [formGroup]="form" class="create-card-form">
-      <mat-form-field class="full-width">
-        <input matInput placeholder="Language from" formControlName="languageA">
-      </mat-form-field>
-      <mat-form-field class="full-width">
-        <input matInput placeholder="Language to" formControlName="languageB">
-      </mat-form-field>
+      <div class="flex flex-column">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Language from" formControlName="languageA">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Language to" formControlName="languageB">
+        </mat-form-field>
+      </div>
+
     </form>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-mini-fab color="warn">
-      <mat-icon class="add-course-btn" (click)="createPair()">add</mat-icon>
+    <button mat-button color="primary" (click)="createPair()" >
+      <mat-icon class="add-course-btn" >add</mat-icon>
     </button>
   </mat-card-actions>
-  <mat-card-footer>
-  </mat-card-footer>
+
 </mat-card>

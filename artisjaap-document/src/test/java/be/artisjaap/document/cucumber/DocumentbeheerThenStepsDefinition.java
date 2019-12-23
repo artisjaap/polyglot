@@ -32,7 +32,6 @@ import java.util.Set;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
-//@RunWith(Cucumber.class)
 public class DocumentbeheerThenStepsDefinition {
 
     @Autowired

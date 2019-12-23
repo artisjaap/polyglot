@@ -6,5 +6,5 @@ import org.springframework.test.context.ContextConfiguration;
 
 @ContextConfiguration(classes = {
         MailApplication.class, PropertiesApplication.class})
-public class MailInMemoryTestParent {
+public class CucumberInMemoryTestParent {
 }

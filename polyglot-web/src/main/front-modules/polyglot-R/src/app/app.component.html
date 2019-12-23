@@ -1,9 +1,9 @@
-<ul>
-  <li><span [routerLink]="['']">start</span></li>
-  <li *ngIf="isLoggedOut$ | async"><span [routerLink]="['login']">login</span></li>
-  <li *ngIf="isLoggedIn$ | async"><span [routerLink]="['home']">home</span></li>
-  <li *ngIf="isLoggedIn$ | async"><span [routerLink]="['home','student','dashboard']">home/student</span></li>
-  <li *ngIf="isLoggedIn$ | async"><span (click)="logout()">logout</span></li>
-</ul>
+<nav class="main-nav">
+<!--  <button mat-button [routerLink]="['']"><mat-icon>home</mat-icon> Home </button>-->
+  <button mat-button [routerLink]="['login']" *ngIf="isLoggedOut$ | async"> <mat-icon>person</mat-icon> login</button>
+  <button mat-button [routerLink]="['home']" *ngIf="isLoggedIn$ | async"><mat-icon>home</mat-icon> home </button>
+  <button mat-button [routerLink]="['home','student','dashboard']"*ngIf="isLoggedIn$ | async"> <mat-icon>poll</mat-icon> home/student</button>
+  <button mat-button (click)="logout()"*ngIf="isLoggedIn$ | async"><mat-icon>person_outline</mat-icon> logout</button>
+</nav>
 <router-outlet></router-outlet>
 
