@@ -1,4 +1,4 @@
-package be.artisjaap.polyglot.core.action.documebts.docconfig;
+package be.artisjaap.polyglot.core.action.documents.docconfig;
 
 import be.artisjaap.document.action.to.BriefConfigTO;
 import be.artisjaap.document.api.DatasetProvider;

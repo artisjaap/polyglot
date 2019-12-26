@@ -1,6 +1,6 @@
-package be.artisjaap.polyglot.core.action.documebts;
+package be.artisjaap.polyglot.core.action.documents;
 
-import be.artisjaap.polyglot.core.action.documebts.docconfig.AbstractDocumentConfig;
+import be.artisjaap.polyglot.core.action.documents.docconfig.AbstractDocumentConfig;
 import be.artisjaap.polyglot.core.action.to.JournalStatisticsTO;
 import be.artisjaap.polyglot.core.action.to.LanguagePairTO;
 import be.artisjaap.polyglot.core.action.to.TranslationJournalTO;

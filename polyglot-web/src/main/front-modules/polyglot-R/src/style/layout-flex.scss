@@ -1,3 +1,6 @@
+@import "mixin-media-query";
+
+
 .flex {
   display: flex;
 
@@ -7,7 +10,19 @@
 
   &.flex-row {
     flex-direction: row;
+    align-items: center;
+    margin: 4px 0;
+
+    span {
+      flex: 1
+    }
   }
+
+  &.flex-row-wrap {
+    flex-wrap: wrap;
+  }
+
+
 
   &.flex-wrap {
     flex-wrap: wrap;
@@ -21,8 +36,49 @@
     text-align: center;
   }
 
-  .flex-child-5 {
-    width: 20%;
+  @include xs-screen {
+    .flex-child-responsive-10-2 {
+      width: 100%;
 
+    }
   }
+
+  @include s-screen {
+    .flex-child-responsive-10-2 {
+      width: 50%;
+
+    }
+  }
+
+  @include l-screen {
+    .flex-child-responsive-10-2 {
+      width: 25%;
+
+    }
+  }
+
+  @include xl-screen {
+    .flex-child-responsive-10-2 {
+      width: 12.5%;
+
+    }
+  }
+
+
+  @include xxl-screen {
+    .flex-child-responsive-10-2 {
+      width: 10%;
+
+    }
+  }
+}
+
+.flex-item {
+  flex: 1;
+
+  &.flex-col-4 {
+    flex: none;
+    width: 25%;
+  }
+
 }

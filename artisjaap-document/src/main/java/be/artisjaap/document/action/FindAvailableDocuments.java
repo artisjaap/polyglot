@@ -17,6 +17,10 @@ public class FindAvailableDocuments {
     @Autowired
     private DocumentAssembler documentAssembler;
 
+    public List<DocumentTO> all() {
+        return documentAssembler.assembleTO(documentRepository.findAll());
+    }
+
     public List<DocumentTO> withCodeAndLanguage(String code, String language) {
         return documentAssembler.assembleTO(documentRepository.findByCodeAndTaal(code, language));
     }

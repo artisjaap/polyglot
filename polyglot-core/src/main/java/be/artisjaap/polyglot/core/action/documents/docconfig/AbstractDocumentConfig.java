@@ -1,8 +1,8 @@
-package be.artisjaap.polyglot.core.action.documebts.docconfig;
+package be.artisjaap.polyglot.core.action.documents.docconfig;
 
 import be.artisjaap.document.action.to.BriefConfigTO;
-import be.artisjaap.polyglot.core.action.documebts.AllDatasets;
-import be.artisjaap.polyglot.core.action.documebts.DatasetProviderFactory;
+import be.artisjaap.polyglot.core.action.documents.AllDatasets;
+import be.artisjaap.polyglot.core.action.documents.DatasetProviderFactory;
 import be.artisjaap.polyglot.core.action.to.JournalStatisticsTO;
 import be.artisjaap.polyglot.core.action.to.LanguagePairTO;
 import be.artisjaap.polyglot.core.action.to.TranslationJournalTO;
@@ -52,17 +52,6 @@ public abstract class AbstractDocumentConfig implements AllDatasets, DocumentDef
     @Override
     public BriefConfigTO.Builder buildConfig() {
         return  BriefConfigTO.newBuilder().withDatasetProvider(datasetProviderFactory);
-    }
-
-
-    protected AbstractDocumentConfig addDummyLanguagePairDataset(){
-        datasetProviderFactory.addDummyLanguagePairDataSet();
-        return this;
-    }
-
-    protected AbstractDocumentConfig addDummyTranslationDataset(){
-        datasetProviderFactory.addDummyTranslationDataSet();
-        return this;
     }
 
     abstract AbstractDocumentConfig createInstance();

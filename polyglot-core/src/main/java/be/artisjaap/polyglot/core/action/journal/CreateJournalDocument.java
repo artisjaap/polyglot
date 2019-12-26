@@ -8,7 +8,7 @@ import be.artisjaap.document.action.to.DocumentNewTO;
 import be.artisjaap.document.action.to.DocumentTO;
 import be.artisjaap.document.action.to.TemplateNewTO;
 import be.artisjaap.document.action.to.TemplateTO;
-import be.artisjaap.polyglot.core.action.documebts.docconfig.DocumentCode;
+import be.artisjaap.polyglot.core.action.documents.docconfig.DocumentCode;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

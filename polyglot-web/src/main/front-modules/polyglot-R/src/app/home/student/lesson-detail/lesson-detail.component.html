@@ -1,30 +1,37 @@
 
-<mat-card *ngIf="lesson$ | async as lesson ">
-  <mat-card-header>
-    {{lesson.name}}
-  </mat-card-header>
+<mat-card class="flex-item center main-content-large " *ngIf="lesson$ | async as lesson ">
+  <mat-card-title>
+    {{lesson.title }}
+  </mat-card-title>
   <mat-card-content>
     <div>
 
 
       <form [formGroup]="form" class="create-card-form">
-        <mat-form-field class="full-width">
-          <input matInput placeholder="Language from" formControlName="question">
-        </mat-form-field>
-        <mat-form-field class="full-width">
-          <input matInput placeholder="Language to" formControlName="solution">
-        </mat-form-field>
+        <div class="flex flex-row">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Language from" formControlName="question">
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Language to" formControlName="solution">
+          </mat-form-field>
+          <button mat-button color="warn" (click)="createTranslation(lesson)">
+            <i class="icofont-plus"></i>
+          </button>
+        </div>
+
       </form>
-      <button mat-mini-fab color="warn">
-        <mat-icon class="add-course-btn" (click)="createTranslation(lesson)">add</mat-icon>
-      </button>
 
     </div>
-    <div *ngFor="let t of lesson.translations">
-      <button mat-flat-button color="warn" (click)="removeWordFromLesson(t.id, lesson.id)">
-        <mat-icon>delete</mat-icon>
-      </button>
-      <span>{{t.languageA}} - {{t.languageB}}</span>
+    <div class="flex flex-row flex-row-wrap">
+      <div *ngFor="let t of lesson.translations" class="flex-item flex-col-4">
+
+        <a class="action-link" (click)="removeWordFromLesson(t.id, lesson.id)">
+          <i class="icofont-bin"></i>
+        </a>
+        <span>{{t.languageA}} - {{t.languageB}}</span>
+      </div>
+
     </div>
   </mat-card-content>
 </mat-card>

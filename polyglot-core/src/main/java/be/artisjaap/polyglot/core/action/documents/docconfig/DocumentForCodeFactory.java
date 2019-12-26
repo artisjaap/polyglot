@@ -1,4 +1,4 @@
-package be.artisjaap.polyglot.core.action.documebts.docconfig;
+package be.artisjaap.polyglot.core.action.documents.docconfig;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

@@ -1,0 +1,56 @@
+package be.artisjaap.polyglot.core.action.practice;
+
+import be.artisjaap.common.utils.InfinitRandomDataStreamer;
+import be.artisjaap.document.action.GenerateDocument;
+import be.artisjaap.document.action.to.BriefConfigTO;
+import be.artisjaap.document.api.DatasetProviderImpl;
+import be.artisjaap.document.api.brieflocatie.BriefLocatieFactory;
+import be.artisjaap.polyglot.core.action.documents.DatasetProviderFactory;
+import be.artisjaap.polyglot.core.action.pairs.FindLanguagePair;
+import be.artisjaap.polyglot.core.action.to.LanguagePairTO;
+import be.artisjaap.polyglot.core.model.datasets.TranslationDataSet;
+import be.artisjaap.polyglot.core.action.to.CreatePracticePdfTO;
+import be.artisjaap.polyglot.core.action.to.TranslationTO;
+import be.artisjaap.polyglot.core.action.translation.FindTranslations;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+@Component
+public class CreatePracticePdf {
+
+    @Resource
+    private FindTranslations findTranslations;
+
+    @Resource
+    private FindLanguagePair findLanguagePair;
+
+    @Resource
+    private GenerateDocument generateDocument;
+
+    public Optional<byte[]> forData(CreatePracticePdfTO practicePdfTO){
+        List<TranslationTO> translationTOS = findTranslations.allWordsForLanguagePair(practicePdfTO.getLanguagePairId());
+        InfinitRandomDataStreamer infinitRandomDataStreamer = InfinitRandomDataStreamer.fromDataList(translationTOS);
+
+        List<TranslationTO> randomTranslationsList = IntStream.rangeClosed(1, practicePdfTO.getNumberOfWords())
+                .mapToObj(i -> (TranslationTO) infinitRandomDataStreamer.next())
+                .collect(Collectors.toList());
+
+        LanguagePairTO languagePairTO = findLanguagePair.byId(practicePdfTO.getLanguagePairId());
+
+        return generateDocument.forDocument(BriefConfigTO.newBuilder()
+                .withCode("WORD_PRACTICE_SHEET_WITH_ANSWERS")
+                .withDatasetProvider(DatasetProviderFactory.create()
+                        .translationsFrom(randomTranslationsList)
+                        .languagePairDataSetFrom(languagePairTO))
+                .withOpslagLocatie(BriefLocatieFactory.briefNietOpslaan())
+                .withTaal("NL")
+                .build());
+
+    }
+}

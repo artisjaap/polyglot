@@ -2,12 +2,13 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {AppState} from '../../../reducers';
 import {Store} from '@ngrx/store';
 import {ActivatedRoute, ActivatedRouteSnapshot} from '@angular/router';
-import {lessonHeadersForLanguagePair} from '../student.selectors';
+import {latestTranslationsForLanguagePair, lessonHeadersForLanguagePair} from '../student.selectors';
 import {LessonHeaderResponse} from '../../model/lesson-header-response';
 import {Observable} from 'rxjs';
 import {StudentActions} from '../action-types';
 import {NewLessonHeaderRequest} from '../../model/new-lesson-header-request';
 import {FileUpload} from '../../model/file-upload';
+import {TranslationForLessonResponse} from '../../model/translation-for-lesson-response';
 
 @Component({
   selector: 'app-language-pair-detail',
@@ -17,6 +18,7 @@ import {FileUpload} from '../../model/file-upload';
 export class LanguagePairDetailComponent implements OnInit {
 
   lessonHeaders$: Observable<LessonHeaderResponse[]>;
+  latestTranslations$: Observable<TranslationForLessonResponse[]>;
   languagePairId: string;
 
   @ViewChild('file', {static: true}) file;
@@ -28,6 +30,7 @@ export class LanguagePairDetailComponent implements OnInit {
   ngOnInit() {
     this.languagePairId = this.route.snapshot.params.languagePairId;
     this.lessonHeaders$ = this.store.select(lessonHeadersForLanguagePair, {languagePairId: this.languagePairId});
+    this.latestTranslations$ = this.store.select(latestTranslationsForLanguagePair, {languagePairId: this.languagePairId});
   }
 
   deleteLesson(lessonToDelete: LessonHeaderResponse) {
@@ -52,7 +55,7 @@ export class LanguagePairDetailComponent implements OnInit {
       }
     }
 
-    const fileUpload: FileUpload = {languagePairId: this.languagePairId, file: file};
+    const fileUpload: FileUpload = {languagePairId: this.languagePairId, file};
 
     this.store.dispatch(StudentActions.uploadTranslationFile({fileUpload}));
 

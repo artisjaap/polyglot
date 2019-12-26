@@ -15,4 +15,6 @@ public interface TranslationRepository extends MongoRepository<Translation, Obje
     default Translation findByIdOrThrow(ObjectId toObjectId){
         return findById(toObjectId).orElseThrow(() -> new ValidationException("TRANSLATION_NOT_FOUND"));
     }
+
+    List<Translation> findByLanguagePairId(ObjectId objectId);
 }

@@ -4,9 +4,9 @@
       latest words
     </mat-card-header>
     <mat-card-content>
-<!--      <div *ngFor="let a of latestTranslations | async">-->
-<!--        {{a.languageA}} - {{a.languageB}}-->
-<!--      </div>-->
+      <div *ngFor="let a of latestTranslations$ | async">
+        {{a.languageA}} - {{a.languageB}}
+      </div>
     </mat-card-content>
   </mat-card>
 
@@ -15,10 +15,16 @@
       lessons
     </mat-card-header>
     <mat-card-content>
-      <div *ngFor="let a of lessonHeaders$ | async">
-        <span [routerLink]="['/home', 'student', 'lesson', a.id]">{{a.name}}</span>
-<!--        <button (click)="deleteLesson(a)"> del</button>-->
-        <span [routerLink]="['/home', 'student', 'lesson', a.id, 'practice']">Oefen</span>
+      <div *ngFor="let a of lessonHeaders$ | async" class="flex flex-row">
+        <a class="action-link" (click)="deleteLesson(a)">
+          <i class="icofont-bin"></i>
+        </a>
+
+        <span class="link" [routerLink]="['/home', 'student', 'lesson', a.id]">{{a.name}}</span>
+
+        <a class="action-link"  [routerLink]="['/home', 'student', 'lesson', a.id, 'practice']">
+          <i class="icofont-play-alt-1"></i>
+        </a>
       </div>
       <input type="text" #newLesson> <button (click)="createLesson(newLesson)">create</button>
     </mat-card-content>

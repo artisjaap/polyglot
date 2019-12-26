@@ -6,7 +6,7 @@ import {TranslationForLessonResponse} from "../../model/translation-for-lesson-r
 export const latestTranslationsFeatureKey = 'latestTranslations';
 
 export interface State extends EntityState<TranslationForLessonResponse> {
-  loadedLanguagePairs: {}
+  loadedLanguagePairs: {};
 }
 
 export const adapter = createEntityAdapter<TranslationForLessonResponse>({});

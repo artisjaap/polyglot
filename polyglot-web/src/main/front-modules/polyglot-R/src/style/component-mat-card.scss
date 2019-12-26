@@ -1,7 +1,17 @@
 @import "colors";
 
 mat-card {
-  background-color: $color-main-2
+  background-color: $color-main-2;
+
+
+
+  &.center {
+
+  }
+
+  &.main-content-large {
+    margin: 10px 30px;
+  }
 }
 
 

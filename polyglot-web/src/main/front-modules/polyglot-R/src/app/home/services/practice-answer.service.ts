@@ -4,6 +4,7 @@ import {PracticeAnswerValidateRequest} from '../model/practice-answer-validate-r
 import {Observable} from 'rxjs';
 import {LessonResponse} from '../model/lesson-response';
 import {PracticeAnswerResponse} from '../model/practice-answer-response';
+import {CreatePracticePdfRequest} from '../model/create-practice-pdf-request';
 
 @Injectable()
 export class PracticeAnswerService {
@@ -14,4 +15,11 @@ export class PracticeAnswerService {
   public validatePracticeResult(practiceAnswerValidateRequest: PracticeAnswerValidateRequest): Observable<PracticeAnswerResponse> {
     return this.httpClient.put<LessonResponse>(this.apiurl + `api/practice/validate`, practiceAnswerValidateRequest );
   }
+
+  public createPracticePdf(createPracticePdfRequest: CreatePracticePdfRequest): Observable<PracticeAnswerResponse> {
+    return this.httpClient.post(this.apiurl + `api/practice/generate-pdf`, createPracticePdfRequest,
+      {observe: 'response', responseType: 'blob'} );
+  }
+
+
 }

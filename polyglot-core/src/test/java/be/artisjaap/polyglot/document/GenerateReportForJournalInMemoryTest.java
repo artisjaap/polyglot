@@ -1,6 +1,6 @@
 package be.artisjaap.polyglot.document;
 
-import be.artisjaap.polyglot.core.action.documebts.GenerateReportForJournal;
+import be.artisjaap.polyglot.core.action.documents.GenerateReportForJournal;
 import be.artisjaap.polyglot.core.action.to.LanguagePracticeJournalTO;
 import be.artisjaap.polyglot.core.action.to.TranslationJournalTO;
 import be.artisjaap.polyglot.core.model.LanguagePair;

@@ -1,7 +1,7 @@
-package be.artisjaap.polyglot.core.action.documebts.docconfig;
+package be.artisjaap.polyglot.core.action.documents.docconfig;
 
 import be.artisjaap.document.api.DatasetProvider;
-import be.artisjaap.polyglot.core.action.documebts.DatasetProviderFactory;
+import be.artisjaap.polyglot.core.action.documents.DatasetProviderFactory;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -18,7 +18,7 @@ public class ReportForJournal extends AbstractDocumentConfig {
     public DatasetProvider documentConfigForPreview() {
         return new DatasetProviderFactory()
                 .addDummyLanguagePairDataSet()
-                .addDummyTranslationDataSet()
+                .addDummyTranslationResultDataSet()
                 .addDummyUserDataSet()
                 .addDummyJournalStatisticsDataSet();
 

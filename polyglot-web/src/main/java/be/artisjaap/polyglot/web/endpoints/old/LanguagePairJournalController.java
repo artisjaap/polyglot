@@ -2,7 +2,7 @@ package be.artisjaap.polyglot.web.endpoints.old;
 
 import be.artisjaap.common.utils.LocalDateUtils;
 import be.artisjaap.core.utils.WebUtils;
-import be.artisjaap.polyglot.core.action.documebts.GenerateReportForJournal;
+import be.artisjaap.polyglot.core.action.documents.GenerateReportForJournal;
 import be.artisjaap.polyglot.core.action.journal.JournalPracticeResults;
 import be.artisjaap.polyglot.core.action.to.JournalFilterTO;
 import be.artisjaap.polyglot.core.action.to.LanguagePracticeJournalTO;
@@ -10,7 +10,6 @@ import be.artisjaap.polyglot.web.endpoints.old.request.JournalReportRequest;
 import be.artisjaap.polyglot.web.endpoints.old.response.LanguagePracticeJournalResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
