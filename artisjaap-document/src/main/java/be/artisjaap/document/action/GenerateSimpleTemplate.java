@@ -16,8 +16,11 @@ import java.util.Optional;
 @Component
 public class GenerateSimpleTemplate {
 
-    @Autowired
-    private TemplateRepository templateRepository;
+    private final TemplateRepository templateRepository;
+
+    public GenerateSimpleTemplate(TemplateRepository templateRepository) {
+        this.templateRepository = templateRepository;
+    }
 
     public TemplateDataTO voor(String templateCode, BriefConfigTO to) {
         Template template = templateRepository.findByCodeAndTaalAndActief(templateCode, to.getTaal()).orElseThrow(() -> new UnsupportedOperationException("template niet gevonden: " + templateCode));
@@ -25,10 +28,10 @@ public class GenerateSimpleTemplate {
     }
 
     private TemplateDataTO maakTemplateTO(Template template, DatasetConfigProvider to) {
-        return TemplateDataTO.newBuilder()
-                .withData(XdocUtils.maakDocument(template, to))
-                .withGebruikteTemplates(Collections.singleton(template.getId()))
-                .withCode(template.getCode())
+        return TemplateDataTO.builder()
+                .data(XdocUtils.maakDocument(template, to).orElse(null))
+                .gebruikteTemplates(Collections.singleton(template.getId()))
+                .code(template.getCode())
                 .build();
     }
 

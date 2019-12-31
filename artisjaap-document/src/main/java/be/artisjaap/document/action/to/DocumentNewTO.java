@@ -1,62 +1,16 @@
 package be.artisjaap.document.action.to;
 
 
+import lombok.Builder;
+import lombok.Data;
+
 import java.util.List;
 
+@Builder
+@Data
 public class DocumentNewTO {
     private String code;
     private List<String> templates;
     private String taal;
 
-
-    public String getCode() {
-        return code;
-    }
-
-    public List<String> getPaginas() {
-        return templates;
-    }
-
-    public String getTaal() {
-        return taal;
-    }
-
-    private DocumentNewTO(Builder builder) {
-        code = builder.code;
-        templates = builder.templates;
-        taal = builder.taal;
-    }
-
-    public static Builder newBuilder() {
-        return new Builder();
-    }
-
-    public static final class Builder {
-        private String code;
-        private List<String> templates;
-        private String taal;
-
-        private Builder() {
-        }
-
-        public Builder withCode(String code) {
-            this.code = code;
-            return this;
-        }
-
-
-        public Builder withTemplates(List<String> templates) {
-            this.templates = templates;
-            return this;
-        }
-
-        public Builder withTaal(String taal) {
-            this.taal = taal;
-            return this;
-        }
-
-        public DocumentNewTO build() {
-            return new DocumentNewTO(this);
-        }
-    }
 }

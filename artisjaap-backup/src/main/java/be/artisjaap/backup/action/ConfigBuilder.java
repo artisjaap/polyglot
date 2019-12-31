@@ -12,25 +12,29 @@ import java.util.stream.Collectors;
 @Component
 public class ConfigBuilder {
 
-    @Autowired
-    private MongoTemplate mongoTemplate;
+    private final MongoTemplate mongoTemplate;
+
+    private ConfigBuilder(MongoTemplate mongoTemplate){
+        this.mongoTemplate = mongoTemplate;
+    }
+
 
     public BackupConfigTO fullDbBackup() {
         List<BackupCollectionConfigTO> collectionConfigTOS = mongoTemplate.getCollectionNames()
                 .stream()
-                .map(collectionName -> BackupCollectionConfigTO.newBuilder().withClearAfterBackup(false).withName(collectionName).build())
+                .map(collectionName -> BackupCollectionConfigTO.builder().clearAfterBackup(false).name(collectionName).build())
                 .collect(Collectors.toList());
 
-        return BackupConfigTO.newBuilder()
-                .withConfig(collectionConfigTOS)
+        return BackupConfigTO.builder()
+                .config(collectionConfigTOS)
                 .build();
     }
 
     public BackupConfigTO singleTableBackup(String tableName) {
-        BackupCollectionConfigTO backupCollectionConfigTO = BackupCollectionConfigTO.newBuilder().withClearAfterBackup(false).withName(tableName).build();
+        BackupCollectionConfigTO backupCollectionConfigTO = BackupCollectionConfigTO.builder().clearAfterBackup(false).name(tableName).build();
 
-        return BackupConfigTO.newBuilder()
-                .addConfig(backupCollectionConfigTO)
+        return BackupConfigTO.builder()
+               // .aConfig(backupCollectionConfigTO)
                 .build();
     }
 

@@ -11,11 +11,13 @@ import java.util.Optional;
 @Component
 public class ActivateDocument {
 
-    @Autowired
-    private DocumentRepository documentRepository;
+    private final DocumentRepository documentRepository;
+    private final DeactivateDocument deactivateDocument;
 
-    @Autowired
-    private DeactivateDocument deactivateDocument;
+    public ActivateDocument(DocumentRepository documentRepository, DeactivateDocument deactivateDocument) {
+        this.documentRepository = documentRepository;
+        this.deactivateDocument = deactivateDocument;
+    }
 
     public void metId(String id) {
         Optional<Document> briefOptional = documentRepository.findById(new ObjectId(id));

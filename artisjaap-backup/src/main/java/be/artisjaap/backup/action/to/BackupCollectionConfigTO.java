@@ -1,46 +1,12 @@
 package be.artisjaap.backup.action.to;
 
+import lombok.Builder;
+import lombok.Data;
+
+@Builder
+@Data
 public class BackupCollectionConfigTO {
     private String name;
+    @Builder.Default
     private Boolean clearAfterBackup = false;
-
-    public String getName() {
-        return name;
-    }
-
-    public Boolean getClearAfterBackup() {
-        return clearAfterBackup;
-    }
-
-    private BackupCollectionConfigTO(Builder builder) {
-        name = builder.name;
-        clearAfterBackup = builder.clearAfterBackup;
-    }
-
-    public static Builder newBuilder() {
-        return new Builder();
-    }
-
-
-    public static final class Builder {
-        private String name;
-        private Boolean clearAfterBackup;
-
-        private Builder() {
-        }
-
-        public Builder withName(String val) {
-            name = val;
-            return this;
-        }
-
-        public Builder withClearAfterBackup(Boolean val) {
-            clearAfterBackup = val;
-            return this;
-        }
-
-        public BackupCollectionConfigTO build() {
-            return new BackupCollectionConfigTO(this);
-        }
-    }
 }

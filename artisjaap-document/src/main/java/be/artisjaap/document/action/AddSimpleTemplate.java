@@ -17,23 +17,21 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class AddSimpleTemplate {
-    @Autowired
-    private TemplateNewAssembler templateNewAssembler;
+    private final TemplateNewAssembler templateNewAssembler;
+    private final TemplateAssembler templateAssembler;
+    private final TemplateRepository templateRepository;
+    private final TemplateCodeRepository templateCodeRepository;
+    private final TemplateCodeNewAssembler templateCodeNewAssembler;
+    private final TemplateCodeAssembler templateCodeAssembler;
 
-    @Autowired
-    private TemplateAssembler templateAssembler;
-
-    @Autowired
-    private TemplateRepository templateRepository;
-
-    @Autowired
-    private TemplateCodeRepository templateCodeRepository;
-
-    @Autowired
-    private TemplateCodeNewAssembler templateCodeNewAssembler;
-
-    @Autowired
-    private TemplateCodeAssembler templateCodeAssembler;
+    public AddSimpleTemplate(TemplateNewAssembler templateNewAssembler, TemplateAssembler templateAssembler, TemplateRepository templateRepository, TemplateCodeRepository templateCodeRepository, TemplateCodeNewAssembler templateCodeNewAssembler, TemplateCodeAssembler templateCodeAssembler) {
+        this.templateNewAssembler = templateNewAssembler;
+        this.templateAssembler = templateAssembler;
+        this.templateRepository = templateRepository;
+        this.templateCodeRepository = templateCodeRepository;
+        this.templateCodeNewAssembler = templateCodeNewAssembler;
+        this.templateCodeAssembler = templateCodeAssembler;
+    }
 
     public TemplateTO forNew(TemplateNewTO templateTO) {
         Template template = templateNewAssembler.assembleEntity(templateTO);

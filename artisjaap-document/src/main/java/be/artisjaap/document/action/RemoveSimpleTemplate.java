@@ -8,8 +8,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class RemoveSimpleTemplate {
 
-    @Autowired
-    private TemplateRepository templateRepository;
+    private final TemplateRepository templateRepository;
+
+    public RemoveSimpleTemplate(TemplateRepository templateRepository) {
+        this.templateRepository = templateRepository;
+    }
 
     public void metId(String id) {
         templateRepository.deleteById(new ObjectId(id));

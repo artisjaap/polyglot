@@ -23,9 +23,9 @@ public class DocumentNewAssembler implements Assembler<Document, DocumentNewTO> 
     @Override
     public Document assembleEntity(DocumentNewTO documentNewTO) {
 
-        List<Page> pages = documentNewTO.getPaginas()
+        List<Page> pages = documentNewTO.getTemplates()
                 .stream()
-                .map(pagina -> PaginaTO.newBuilder().withCode(pagina).withType(autofindTemplateType.forPageCode(pagina)).build())
+                .map(pagina -> PaginaTO.builder().code(pagina).type(autofindTemplateType.forPageCode(pagina)).build())
                 .map(paginaAssembler::assembleEntity)
                 .collect(Collectors.toList());
 

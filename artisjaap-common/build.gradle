@@ -22,9 +22,7 @@ dependencies {
     testCompile "info.cukes:cucumber-junit:1.2.4"
     compile group: 'net.masterthought', name: 'cucumber-reporting', version: '3.1.0'
 
-    compile "org.projectlombok:lombok:1.18.8"
-    compileOnly("org.projectlombok:lombok")
-    annotationProcessor("org.projectlombok:lombok")
+
 }
 
 

@@ -18,37 +18,36 @@ import java.io.OutputStream;
 @Controller
 @RequestMapping("/api/document")
 public class DocumentController {
-    @Autowired
-    private AddSimpleTemplate addSimpleTemplate;
+    private final AddSimpleTemplate addSimpleTemplate;
 
-    @Autowired
-    private AddCombinedTemplate addCombinedTemplate;
+    private final AddCombinedTemplate addCombinedTemplate;
 
-    @Autowired
-    private AddDocument addDocument;
+    private final AddDocument addDocument;
 
-    @Autowired
-    private ActivateSimpleOrCombinedTemplate activateSimpleTemplate;
+    private final ActivateSimpleOrCombinedTemplate activateSimpleTemplate;
 
-    @Autowired
-    private ActivateCombinedTemplate activateCombinedTemplate;
+    private final ActivateCombinedTemplate activateCombinedTemplate;
 
-    @Autowired
-    private ActivateDocument activateDocument;
+    private final ActivateDocument activateDocument;
 
-    @Autowired
-    private CreatePreview createPreview;
+    private final CreatePreview createPreview;
 
-    public DocumentController(){
-        System.out.println("Created");
+    public DocumentController(AddSimpleTemplate addSimpleTemplate, AddCombinedTemplate addCombinedTemplate, AddDocument addDocument, ActivateSimpleOrCombinedTemplate activateSimpleTemplate, ActivateCombinedTemplate activateCombinedTemplate, ActivateDocument activateDocument, CreatePreview createPreview){
+        this.addSimpleTemplate = addSimpleTemplate;
+        this.addCombinedTemplate = addCombinedTemplate;
+        this.addDocument = addDocument;
+        this.activateSimpleTemplate = activateSimpleTemplate;
+        this.activateCombinedTemplate = activateCombinedTemplate;
+        this.activateDocument = activateDocument;
+        this.createPreview = createPreview;
     }
 
     @RequestMapping(value = "/template", method = RequestMethod.POST)
     public @ResponseBody
     ResponseEntity<TemplateCodeResponse>  createNewTemplateType(@RequestBody NewTemplateCodeRequest newTemplateCodeRequest){
-        TemplateCodeTO templateCodeTO = addSimpleTemplate.withNewCode(TemplateCodeNewTO.newBuilder()
-                .withCode(newTemplateCodeRequest.getCode())
-                .withDescription(newTemplateCodeRequest.getDescription())
+        TemplateCodeTO templateCodeTO = addSimpleTemplate.withNewCode(TemplateCodeNewTO.builder()
+                .code(newTemplateCodeRequest.getCode())
+                .description(newTemplateCodeRequest.getDescription())
                 .build());
         return ResponseEntity.ok(TemplateCodeResponse.from(templateCodeTO));
 
@@ -57,11 +56,11 @@ public class DocumentController {
     @RequestMapping(value = "/template/upload", method = RequestMethod.POST)
     public @ResponseBody
     ResponseEntity<TemplateResponse>  uploadNewTemplate(@RequestBody TemplateRequest newTemplateRequest, @RequestParam MultipartFile file){
-        TemplateTO template = addSimpleTemplate.forNew(TemplateNewTO.newBuilder()
-                .withCode(newTemplateRequest.getCode())
-                .withOriginalFilename(file.getOriginalFilename())
-                .withTaal(newTemplateRequest.getLanguage())
-                .withTemplate(WebUtils.getBytesFromMultipartFile(file))
+        TemplateTO template = addSimpleTemplate.forNew(TemplateNewTO.builder()
+                .code(newTemplateRequest.getCode())
+                .originalFilename(file.getOriginalFilename())
+                .taal(newTemplateRequest.getLanguage())
+                .template(WebUtils.getBytesFromMultipartFile(file))
                 .build());
         return ResponseEntity.ok(TemplateResponse.from(template));
 
@@ -70,9 +69,9 @@ public class DocumentController {
     @RequestMapping(value = "/combined-template", method = RequestMethod.POST)
     public @ResponseBody
     ResponseEntity<CombinedTemplateCodeResponse> createNewCombinedTemplateCode(@RequestBody NewCombinedTemplateCodeRequest newCombinedTemplateRequest){
-        CombinedTemplateCodeTO combinedTemplateTO = addCombinedTemplate.withNewCode(TemplateCodeNewTO.newBuilder()
-                .withCode(newCombinedTemplateRequest.getCode())
-                .withDescription(newCombinedTemplateRequest.getDescription())
+        CombinedTemplateCodeTO combinedTemplateTO = addCombinedTemplate.withNewCode(TemplateCodeNewTO.builder()
+                .code(newCombinedTemplateRequest.getCode())
+                .description(newCombinedTemplateRequest.getDescription())
                 .build());
 
         return ResponseEntity.ok(CombinedTemplateCodeResponse.from(combinedTemplateTO));
@@ -82,10 +81,10 @@ public class DocumentController {
     @RequestMapping(value = "/combined-template/config", method = RequestMethod.POST)
     public @ResponseBody
     ResponseEntity<CombinedTemplateResponse> createNewCombinedTemplate(@RequestBody NewCombinedTemplateRequest newCombinedTemplateRequest){
-        CombinedTemplateTO uit = addCombinedTemplate.from(CombinedTemplateNewTO.newBuilder()
-                .withCode(newCombinedTemplateRequest.getCode())
-                .withTaal(newCombinedTemplateRequest.getTaal())
-                .withTemplates(newCombinedTemplateRequest.getTemplates())
+        CombinedTemplateTO uit = addCombinedTemplate.from(CombinedTemplateNewTO.builder()
+                .code(newCombinedTemplateRequest.getCode())
+                .taal(newCombinedTemplateRequest.getTaal())
+                .templates(newCombinedTemplateRequest.getTemplates())
                 .build());
 
         return ResponseEntity.ok(CombinedTemplateResponse.from(uit));
@@ -95,9 +94,9 @@ public class DocumentController {
     @RequestMapping(value = "/document", method = RequestMethod.POST)
     public @ResponseBody
     ResponseEntity<NewDocumentCodeResponse> createNewDocument(@RequestBody NewDocumentCodeRequest newDocumentCodeRequest){
-        BriefCodeTO briefCodeTO = addDocument.metNieuweCode(BriefCodeNieuwTO.newBuilder()
-                .withCode(newDocumentCodeRequest.getCode())
-                .withDescription(newDocumentCodeRequest.getDescription())
+        BriefCodeTO briefCodeTO = addDocument.metNieuweCode(BriefCodeNieuwTO.builder()
+                .code(newDocumentCodeRequest.getCode())
+                .description(newDocumentCodeRequest.getDescription())
                 .build());
         return ResponseEntity.ok(NewDocumentCodeResponse.from(briefCodeTO));
     }
@@ -128,7 +127,7 @@ public class DocumentController {
     public void previewDocument(HttpServletResponse response,  @PathVariable String documentId) throws IOException {
         TemplateDataTO template = createPreview.forDocument(documentId);
         OutputStream outputStream = WebUtils.maakOutputstreamVoorFile(response, template.getCode(), "pdf");
-        outputStream.write(template.getData().orElse(null));
+        outputStream.write(template.getData());
         response.flushBuffer();
     }
 

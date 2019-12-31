@@ -6,6 +6,9 @@ jar {
 dependencies {
     compile project(':artisjaap-backup')
     testCompile project(path: ":artisjaap-backup", configuration: 'testArtifacts')
+    compile project(':artisjaap-common')
+    compile project(':artisjaap-mail')
+    compile project(':artisjaap-properties')
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
 

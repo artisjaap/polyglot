@@ -12,11 +12,14 @@ import java.util.Optional;
 @Component
 public class FindAvailableCombinedTemplates {
 
-    @Autowired
-    private CombinedTemplateAssembler combinedTemplateAssembler;
+    private final CombinedTemplateAssembler combinedTemplateAssembler;
+    private final CombinedTemplateRepository combinedTemplateRepository;
 
-    @Autowired
-    private CombinedTemplateRepository combinedTemplateRepository;
+    public FindAvailableCombinedTemplates(CombinedTemplateAssembler combinedTemplateAssembler, CombinedTemplateRepository combinedTemplateRepository) {
+        this.combinedTemplateAssembler = combinedTemplateAssembler;
+        this.combinedTemplateRepository = combinedTemplateRepository;
+    }
+
 
     public List<CombinedTemplateTO> withCodeAndLanguage(String code, String language) {
         return combinedTemplateAssembler.assembleTO(combinedTemplateRepository.findByCodeAndTaal(code, language));

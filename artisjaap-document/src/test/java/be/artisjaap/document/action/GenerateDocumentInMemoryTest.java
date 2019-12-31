@@ -10,6 +10,8 @@ import be.artisjaap.document.persisters.BriefPersister;
 import org.junit.Test;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class GenerateDocumentInMemoryTest extends DocumentbeheerInMemoryTestParent {
 
@@ -23,15 +25,15 @@ public class GenerateDocumentInMemoryTest extends DocumentbeheerInMemoryTestPare
     @Test
     public void genereerEenFinaleBrief(){
         briefPersister.maakEenBrief("EEN_BRIEF");
-        BriefConfigTO briefConfig = BriefConfigTO.newBuilder()
-                .withBestandsnaam(FileGeneratieFactory.fromDatasets()
+        BriefConfigTO briefConfig = BriefConfigTO.builder()
+                .bestandsnaam(FileGeneratieFactory.fromDatasets()
                         .withFilenameParts("Lid.naam")
                         .withFilenameParts("Zone.zonesecretarisNaam")
                         .build())
-                .withOpslagLocatie(BriefLocatieFactory.voorAbsolutePath("c:/temp/docs/"))
-                .withTaal("DUTCH")
-                .withCode("EEN_BRIEF")
-                .withDatasetProvider(DatasetProviderImpl.create()
+                .opslagSettingsTO(BriefLocatieFactory.voorAbsolutePath("c:/temp/docs/"))
+                .taal("DUTCH")
+                .code("EEN_BRIEF")
+                .datasetProvider(DatasetProviderImpl.create()
                         .add("Lid", new LidDataset())
                         .add("Secretariaat", new SecretariaatDataset())
                         .add("BriefInfo", new BriefInfoDataset())
@@ -39,7 +41,7 @@ public class GenerateDocumentInMemoryTest extends DocumentbeheerInMemoryTestPare
                         .add("Zone", new ZoneDataset())
                         .add("Mandaat", new MandaatDataset())
                         .add("Overschrijving", new OverschrijvingDataset()))
-                .addDatasetToBlacklist("Secretariaat")
+                .datasetsBlacklist(Collections.singleton("Secretariaat"))
                 .build();
         generateDocument.forDocument(briefConfig);
     }

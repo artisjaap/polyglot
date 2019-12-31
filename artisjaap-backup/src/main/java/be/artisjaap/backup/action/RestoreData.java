@@ -27,8 +27,11 @@ import java.util.zip.ZipInputStream;
 public class RestoreData {
     private static final Logger logger = LogManager.getLogger();
 
-    @Autowired
-    private MongoTemplate mongoTemplate;
+    private final MongoTemplate mongoTemplate;
+
+    private RestoreData(MongoTemplate mongoTemplate){
+        this.mongoTemplate = mongoTemplate;
+    }
 
     public void restore(CollectionDataTO collectionDataTO) throws IOException {
         InputStream in = new BufferedInputStream(collectionDataTO.getData());

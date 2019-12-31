@@ -13,14 +13,15 @@ import java.util.Optional;
 @Component
 public class ActivateSimpleOrCombinedTemplate {
 
-    @Autowired
-    private TemplateRepository templateRepository;
+    private final TemplateRepository templateRepository;
+    private final CombinedTemplateRepository combinedTemplateRepository;
+    private final DeactivateTemplate deactivateTemplate;
 
-    @Autowired
-    private CombinedTemplateRepository combinedTemplateRepository;
-
-    @Autowired
-    private DeactivateTemplate deactivateTemplate;
+    public ActivateSimpleOrCombinedTemplate(TemplateRepository templateRepository, CombinedTemplateRepository combinedTemplateRepository, DeactivateTemplate deactivateTemplate) {
+        this.templateRepository = templateRepository;
+        this.combinedTemplateRepository = combinedTemplateRepository;
+        this.deactivateTemplate = deactivateTemplate;
+    }
 
     public void activateTemplate(String id) {
         ObjectId objectId = new ObjectId(id);

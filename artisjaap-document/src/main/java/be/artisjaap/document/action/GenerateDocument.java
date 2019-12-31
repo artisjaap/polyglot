@@ -33,28 +33,30 @@ public class GenerateDocument {
     @Value("${lid.bestanden.directory:c:/temp/}")
     private String basePath;
 
-    @Autowired
-    private DocumentRepository documentRepository;
+    private final DocumentRepository documentRepository;
+    private final GenerateCombinedTemplate generateCombinedTemplate;
+    private final GegenereerdeBriefRepository gegenereerdeBriefRepository;
+    private final DocumentAssembler documentAssembler;
 
-    @Autowired
-    private GenerateCombinedTemplate generateCombinedTemplate;
-
-    @Autowired
-    private GegenereerdeBriefRepository gegenereerdeBriefRepository;
-
-    @Autowired
-    private DocumentAssembler documentAssembler;
+    public GenerateDocument(DocumentRepository documentRepository, GenerateCombinedTemplate generateCombinedTemplate, GegenereerdeBriefRepository gegenereerdeBriefRepository, DocumentAssembler documentAssembler) {
+        this.documentRepository = documentRepository;
+        this.generateCombinedTemplate = generateCombinedTemplate;
+        this.gegenereerdeBriefRepository = gegenereerdeBriefRepository;
+        this.documentAssembler = documentAssembler;
+    }
 
     public Optional<byte[]> forDocument(BriefConfigTO briefConfig) {
         Document document = documentRepository.findByCodeAndTaalAndActief(briefConfig.getCode(), briefConfig.getTaal()).orElseThrow(() -> new IllegalStateException("document niet gevonden"));
         BriefConfigTO briefConfigMetExtraDatasets = extendedDocumentConfig(briefConfig, document);
         List<TemplateDataTO> templateData = document.getPages().stream().map(p -> generateCombinedTemplate.generate(p, briefConfigMetExtraDatasets)).collect(Collectors.toList());
-        List<byte[]> collect = templateData.stream().map(TemplateDataTO::getData).filter(Optional::isPresent).map(Optional::get).collect(Collectors.toList());
+        List<byte[]> collect = templateData.stream().map(TemplateDataTO::getData)
+                .map(Optional::ofNullable)
+                .filter(Optional::isPresent).map(Optional::get).collect(Collectors.toList());
 
         Optional<byte[]> bytes = PDFUtils.mergePdfs(collect);
 
 
-        if (!briefConfig.dryRun()) {
+        if (!briefConfig.isDryRun()) {
             Map<String, Object> briefDatasetData = new HashMap<>();
             if (briefConfig.getOpslagSettingsTO().briefLocatieType() != BriefLocatieType.NIET_OPSLAAN) {
                 for (String dataset : briefConfigMetExtraDatasets.datasets()) {
@@ -115,29 +117,31 @@ public class GenerateDocument {
         briefConfig.getDatasetProvider().datasetNames().forEach(d -> datasetProvider.add(d, briefConfig.getDatasetProvider().get(d).data(), briefConfig.getDatasetProvider().get(d).isAsList()));
         datasetProvider.add("BriefMeta", BriefMetaDataset.fromBrief(documentAssembler.assembleTO(document)));
 
-        return BriefConfigTO.newBuilder(briefConfig)
-                .withDatasetProvider(datasetProvider)
+        return briefConfig.toBuilder()
+                .datasetProvider(datasetProvider)
                 .build();
     }
 
     public TemplateDataTO voorBriefMetId(String briefId, DatasetProvider briefConfigTO) {
         Document document = documentRepository.findById(new ObjectId(briefId)).orElseThrow(() -> new UnsupportedOperationException("Document bestaat niet"));
 
-        BriefConfigTO briefConfig = BriefConfigTO.newBuilder()
-                .withDatasetProvider(briefConfigTO)
-                .withTaal(document.getTaal())
+        BriefConfigTO briefConfig = BriefConfigTO.builder()
+                .datasetProvider(briefConfigTO)
+                .taal(document.getTaal())
                 .build();
 
         List<TemplateDataTO> templateData = document.getPages().stream().map(p -> generateCombinedTemplate.generate(p, briefConfig)).collect(Collectors.toList());
-        List<byte[]> collect = templateData.stream().map(TemplateDataTO::getData).filter(Optional::isPresent).map(Optional::get).collect(Collectors.toList());
+        List<byte[]> collect = templateData.stream().map(TemplateDataTO::getData)
+                .map(Optional::ofNullable)
+                .filter(Optional::isPresent).map(Optional::get).collect(Collectors.toList());
 
         Optional<byte[]> bytes = PDFUtils.mergePdfs(collect);
 
         Set<ObjectId> gebruikteTemplates = templateData.stream().flatMap(templateDataTO -> templateDataTO.getGebruikteTemplates().stream()).collect(Collectors.toSet());
 
-        return TemplateDataTO.newBuilder()
-                .withData(bytes)
-                .withGebruikteTemplates(gebruikteTemplates)
+        return TemplateDataTO.builder()
+                .data(bytes.orElse(null))
+                .gebruikteTemplates(gebruikteTemplates)
                 .build();
 
     }

@@ -1,8 +1,6 @@
 package be.artisjaap.polyglot;
 
 import be.artisjaap.document.DocumentbeheerApplication;
-import be.artisjaap.mail.MailApplication;
-import be.artisjaap.properties.PropertiesApplication;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;

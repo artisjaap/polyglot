@@ -6,7 +6,7 @@ import be.artisjaap.document.api.DatasetProvider;
 public interface DocumentDefinition {
     DocumentCode documentCode();
 
-    BriefConfigTO.Builder buildConfig();
+    BriefConfigTO.BriefConfigTOBuilder buildConfig();
 
     DatasetProvider documentConfigForPreview();
 

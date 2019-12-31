@@ -11,20 +11,21 @@ import java.util.stream.Collectors;
 
 @Component
 public class CollectionInfo {
-    @Autowired
-    private MongoTemplate mongoTemplate;
+    private final MongoTemplate mongoTemplate;
+
+    private CollectionInfo(MongoTemplate mongoTemplate){
+        this.mongoTemplate = mongoTemplate;
+    }
 
     public List<CollectionInfoTO> allCollections() {
         Set<String> collectionNames = mongoTemplate.getCollectionNames();
 
         return collectionNames.stream().map(this::convertTO).collect(Collectors.toList());
-
-
     }
 
     private CollectionInfoTO convertTO(String collectionName) {
-        return CollectionInfoTO.newBuilder()
-                .withCollectionName(collectionName)
+        return CollectionInfoTO.builder()
+                .collectionName(collectionName)
                 .build();
     }
 

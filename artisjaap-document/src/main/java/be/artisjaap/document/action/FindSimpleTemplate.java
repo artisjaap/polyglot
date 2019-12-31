@@ -9,11 +9,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class FindSimpleTemplate {
-    @Autowired
-    private TemplateRepository templateRepository;
+    private final TemplateRepository templateRepository;
+    private final TemplateAssembler templateAssembler;
 
-    @Autowired
-    private TemplateAssembler templateAssembler;
+    public FindSimpleTemplate(TemplateRepository templateRepository, TemplateAssembler templateAssembler) {
+        this.templateRepository = templateRepository;
+        this.templateAssembler = templateAssembler;
+    }
 
     public TemplateTO forTemplateId(String templateId) {
         return templateRepository.findById(new ObjectId(templateId)).map(templateAssembler::assembleTO).orElseThrow(() -> new IllegalStateException("template niet gevonden"));

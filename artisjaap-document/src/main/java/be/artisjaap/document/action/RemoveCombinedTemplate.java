@@ -8,8 +8,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class RemoveCombinedTemplate {
 
-    @Autowired
-    private CombinedTemplateRepository combinedTemplateRepository;
+    private final CombinedTemplateRepository combinedTemplateRepository;
+
+    public RemoveCombinedTemplate(CombinedTemplateRepository combinedTemplateRepository) {
+        this.combinedTemplateRepository = combinedTemplateRepository;
+    }
 
     public void metId(String id) {
         combinedTemplateRepository.deleteById(new ObjectId(id));

@@ -11,14 +11,17 @@ import java.util.stream.Collectors;
 @Component
 public class FindSimpleTemplateCodes {
 
-    @Autowired
-    private TemplateCodeRepository templateCodeRepository;
+    private final TemplateCodeRepository templateCodeRepository;
+
+    public FindSimpleTemplateCodes(TemplateCodeRepository templateCodeRepository) {
+        this.templateCodeRepository = templateCodeRepository;
+    }
 
     public List<TemplateCodeTO> allSimpleTemplateCodes() {
         return templateCodeRepository.findAll().stream()
-                .map(templateCode -> TemplateCodeTO.newBuilder()
-                        .withCode(templateCode.getCode())
-                        .withDescription(templateCode.getDescription())
+                .map(templateCode -> TemplateCodeTO.builder()
+                        .code(templateCode.getCode())
+                        .description(templateCode.getDescription())
                         .build())
                 .collect(Collectors.toList());
     }

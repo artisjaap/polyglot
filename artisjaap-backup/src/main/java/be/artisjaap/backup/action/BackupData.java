@@ -32,11 +32,13 @@ import java.util.zip.ZipOutputStream;
 public class BackupData {
     private static final Logger logger = LogManager.getLogger();
 
-    @Autowired
-    private MongoTemplate mongoTemplate;
+    private final MongoTemplate mongoTemplate;
+    private final SendMail sendMail;
 
-    @Autowired
-    private SendMail sendMail;
+    private BackupData(MongoTemplate mongoTemplate, SendMail sendMail){
+        this.mongoTemplate = mongoTemplate;
+        this.sendMail = sendMail;
+    }
 
     public void backupDataToEmail(BackupConfigTO config, String email) throws IOException {
         ByteArrayOutputStream fout = new ByteArrayOutputStream();
@@ -68,7 +70,7 @@ public class BackupData {
     public void createZip(BackupConfigTO config, OutputStream fout) throws IOException {
         ZipOutputStream zout = new ZipOutputStream(fout);
 
-        for (BackupCollectionConfigTO bcConfig : config.getBackupCollectionConfigs()) {
+        for (BackupCollectionConfigTO bcConfig : config.getConfig()) {
             MongoCollection<Document> collection = mongoTemplate.getCollection(bcConfig.getName());
 
             logger.info("Backup collectie: " + bcConfig.getName() + "[" + collection.count() + "]");

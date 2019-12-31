@@ -18,14 +18,16 @@ import java.util.stream.Collectors;
 
 @Component
 public class GenerateCombinedTemplate {
-    @Autowired
-    private GenerateSimpleTemplate generateSimpleTemplate;
 
-    @Autowired
-    private CombinedTemplateRepository combinedTemplateRepository;
+    private final GenerateSimpleTemplate generateSimpleTemplate;
+    private final CombinedTemplateRepository combinedTemplateRepository;
+    private final FindAvailableSimpleTemplates findAvailableSimpleTemplates;
 
-    @Autowired
-    private FindAvailableSimpleTemplates findAvailableSimpleTemplates;
+    public GenerateCombinedTemplate(GenerateSimpleTemplate generateSimpleTemplate, CombinedTemplateRepository combinedTemplateRepository, FindAvailableSimpleTemplates findAvailableSimpleTemplates) {
+        this.generateSimpleTemplate = generateSimpleTemplate;
+        this.combinedTemplateRepository = combinedTemplateRepository;
+        this.findAvailableSimpleTemplates = findAvailableSimpleTemplates;
+    }
 
 
     public TemplateDataTO generate(Page page, BriefConfigTO briefConfig) {
@@ -42,15 +44,19 @@ public class GenerateCombinedTemplate {
     private TemplateDataTO generateCombinedPages(Page page, BriefConfigTO briefConfig) {
         CombinedTemplate template = combinedTemplateRepository.findByCodeAndTaalAndActief(page.getCode(), briefConfig.getTaal()).orElseThrow(() -> new IllegalStateException("template niet gevonden"));
         List<TemplateDataTO> collect = template.getTemplates().stream().map(t -> generateSimpleTemplate.voor(t, briefConfig)).collect(Collectors.toList());
-        List<byte[]> docs = collect.stream().map(TemplateDataTO::getData).filter(Optional::isPresent).map(Optional::get).collect(Collectors.toList());
+        List<byte[]> docs = collect.stream().map(TemplateDataTO::getData)
+                .map(Optional::ofNullable)
+                .filter(Optional::isPresent)
+                .map(Optional::get).collect(Collectors.toList());
 
         Set<ObjectId> usedTemplates = collect.stream().flatMap(templateDataTO -> templateDataTO.getGebruikteTemplates().stream()).collect(Collectors.toSet());
 
         byte[] combinedTemplate = PDFUtils.stampDoc(docs);
 
-        return TemplateDataTO.newBuilder()
-                .withData(Optional.of(combinedTemplate))
-                .withGebruikteTemplates(usedTemplates)
+        return TemplateDataTO.builder()
+                .code(page.getCode())
+                .data(combinedTemplate)
+                .gebruikteTemplates(usedTemplates)
                 .build();
 
     }
@@ -63,15 +69,17 @@ public class GenerateCombinedTemplate {
                 .map(Optional::get)
                 .map(t -> generateSimpleTemplate.voorTemplateMetId(new ObjectId(t.getId()), to)).collect(Collectors.toList());
 
-        List<byte[]> docs = collect.stream().map(TemplateDataTO::getData).filter(Optional::isPresent).map(Optional::get).collect(Collectors.toList());
+        List<byte[]> docs = collect.stream().map(TemplateDataTO::getData)
+                .map(Optional::ofNullable)
+                .filter(Optional::isPresent).map(Optional::get).collect(Collectors.toList());
 
         Set<ObjectId> usedTemplates = collect.stream().flatMap(templateDataTO -> templateDataTO.getGebruikteTemplates().stream()).collect(Collectors.toSet());
 
         byte[] combinedTemplates = PDFUtils.stampDoc(docs);
 
-        return TemplateDataTO.newBuilder()
-                .withData(Optional.of(combinedTemplates))
-                .withGebruikteTemplates(usedTemplates)
+        return TemplateDataTO.builder()
+                .data(combinedTemplates)
+                .gebruikteTemplates(usedTemplates)
                 .build();
 
 

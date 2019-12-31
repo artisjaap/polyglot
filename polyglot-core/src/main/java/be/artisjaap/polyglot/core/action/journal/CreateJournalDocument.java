@@ -20,17 +20,17 @@ import java.util.Arrays;
 @Component
 public class CreateJournalDocument {
 
-    @Autowired
-    private AddSimpleTemplate addSimpleTemplate;
+    private final AddSimpleTemplate addSimpleTemplate;
+    private final ActivateSimpleOrCombinedTemplate activateSimpleTemplate;
+    private final AddDocument addDocument;
+    private final ActivateDocument activateDocument;
 
-    @Autowired
-    private ActivateSimpleOrCombinedTemplate activateSimpleTemplate;
-
-    @Autowired
-    private AddDocument addDocument;
-
-    @Autowired
-    private ActivateDocument activateDocument;
+    public CreateJournalDocument(AddSimpleTemplate addSimpleTemplate, ActivateSimpleOrCombinedTemplate activateSimpleTemplate, AddDocument addDocument, ActivateDocument activateDocument) {
+        this.addSimpleTemplate = addSimpleTemplate;
+        this.activateSimpleTemplate = activateSimpleTemplate;
+        this.addDocument = addDocument;
+        this.activateDocument = activateDocument;
+    }
 
     public void createOfNotExists(){
         File file = new File(this.getClass().getClassLoader().getResource("documents/JournalReport.docx").getFile());
@@ -41,19 +41,19 @@ public class CreateJournalDocument {
             throw new IllegalStateException();
         }
 
-        TemplateTO templateTO = addSimpleTemplate.forNew(TemplateNewTO.newBuilder()
-                .withCode(DocumentCode.REPORT_FOR_JOURNAL.name())
-                .withOriginalFilename("JournalReports.docx")
-                .withTaal("DUTCH")
-                .withTemplate(bytes)
+        TemplateTO templateTO = addSimpleTemplate.forNew(TemplateNewTO.builder()
+                .code(DocumentCode.REPORT_FOR_JOURNAL.name())
+                .originalFilename("JournalReports.docx")
+                .taal("DUTCH")
+                .template(bytes)
                 .build());
 
         activateSimpleTemplate.activateTemplate(templateTO.getId());
 
-        DocumentTO documentTO = addDocument.forNew(DocumentNewTO.newBuilder()
-                .withCode(DocumentCode.REPORT_FOR_JOURNAL.name())
-                .withTaal("DUTCH")
-                .withTemplates(Arrays.asList(templateTO.getCode()))
+        DocumentTO documentTO = addDocument.forNew(DocumentNewTO.builder()
+                .code(DocumentCode.REPORT_FOR_JOURNAL.name())
+                .taal("DUTCH")
+                .templates(Arrays.asList(templateTO.getCode()))
                 .build());
 
         activateDocument.metId(documentTO.getId());

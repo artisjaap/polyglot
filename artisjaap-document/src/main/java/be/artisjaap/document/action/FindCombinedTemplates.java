@@ -10,14 +10,18 @@ import java.util.stream.Collectors;
 
 @Component
 public class FindCombinedTemplates {
-    @Autowired
-    private CombinedTemplateCodeRepository combinedTemplateCodeRepository;
+
+    private final CombinedTemplateCodeRepository combinedTemplateCodeRepository;
+
+    public FindCombinedTemplates(CombinedTemplateCodeRepository combinedTemplateCodeRepository) {
+        this.combinedTemplateCodeRepository = combinedTemplateCodeRepository;
+    }
 
     public List<CombinedTemplateCodeTO> allCombinedTemplate() {
         return combinedTemplateCodeRepository.findAll().stream()
-                .map(templateCode -> CombinedTemplateCodeTO.newBuilder()
-                        .withCode(templateCode.getCode())
-                        .withDescription(templateCode.getDescription())
+                .map(templateCode -> CombinedTemplateCodeTO.builder()
+                        .code(templateCode.getCode())
+                        .description(templateCode.getDescription())
                         .build())
                 .collect(Collectors.toList());
     }

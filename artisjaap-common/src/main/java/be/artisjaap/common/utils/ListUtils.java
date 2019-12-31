@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListUtils {
+
+    private ListUtils(){}
+
     public static <T> List<T> shuffle(List<T> list) {
         List<T> randomList = new ArrayList<>(list);
         for (int i = 0; i < list.size() * 2; i++) {

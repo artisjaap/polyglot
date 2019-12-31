@@ -8,12 +8,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class DeactivateTemplate {
 
-    @Autowired
-    private TemplateRepository templateRepository;
+    private final TemplateRepository templateRepository;
+    private final CombinedTemplateRepository combinedTemplateRepository;
 
-    @Autowired
-    private CombinedTemplateRepository combinedTemplateRepository;
-
+    public DeactivateTemplate(TemplateRepository templateRepository, CombinedTemplateRepository combinedTemplateRepository) {
+        this.templateRepository = templateRepository;
+        this.combinedTemplateRepository = combinedTemplateRepository;
+    }
 
     public void forSimpleTemplateWithCodeAndLanguage(String code, String language) {
         templateRepository.findByCodeAndTaalAndActief(code, language).ifPresent(template -> {

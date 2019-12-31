@@ -20,8 +20,11 @@ import java.io.InputStream;
 @Component
 public class GenerateFieldsXml {
 
-    @Autowired
-    private TemplateRepository templateRepository;
+    private final TemplateRepository templateRepository;
+
+    public GenerateFieldsXml(TemplateRepository templateRepository) {
+        this.templateRepository = templateRepository;
+    }
 
 
     public byte[] voorDatasets(DatasetProvider datasets) {
