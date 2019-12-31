@@ -4,8 +4,8 @@ jar {
 }
 
 dependencies {
-    compile project(':artisjaap-common')
-    compile project(':artisjaap-mail')
+    implementation project(':artisjaap-common')
+    implementation project(':artisjaap-mail')
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
 
