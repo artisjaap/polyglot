@@ -19,7 +19,7 @@ public class GecombineerdeTemplatePersister {
     private ActivateSimpleOrCombinedTemplate activateSimpleTemplate;
 
     public void maakGecombineerdeTemplate(String code, String ... templates) {
-        CombinedTemplateNewTO combinedTemplateNewTO = CombinedTemplateNewTO.newBuilder().withCode(code).withTaal("DUTCH").withTemplates(Arrays.asList(templates)).build();
+        CombinedTemplateNewTO combinedTemplateNewTO = CombinedTemplateNewTO.builder().code(code).taal("DUTCH").templates(Arrays.asList(templates)).build();
 
         CombinedTemplateTO combinedTemplateTO = addCombinedTemplate.from(combinedTemplateNewTO);
         activateSimpleTemplate.activateTemplate(combinedTemplateTO.getId());

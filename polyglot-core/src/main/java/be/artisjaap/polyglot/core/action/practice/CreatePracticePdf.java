@@ -43,13 +43,13 @@ public class CreatePracticePdf {
 
         LanguagePairTO languagePairTO = findLanguagePair.byId(practicePdfTO.getLanguagePairId());
 
-        return generateDocument.forDocument(BriefConfigTO.newBuilder()
-                .withCode("WORD_PRACTICE_SHEET_WITH_ANSWERS")
-                .withDatasetProvider(DatasetProviderFactory.create()
+        return generateDocument.forDocument(BriefConfigTO.builder()
+                .code("WORD_PRACTICE_SHEET_WITH_ANSWERS")
+                .datasetProvider(DatasetProviderFactory.create()
                         .translationsFrom(randomTranslationsList)
                         .languagePairDataSetFrom(languagePairTO))
-                .withOpslagLocatie(BriefLocatieFactory.briefNietOpslaan())
-                .withTaal("NL")
+                .opslagSettingsTO(BriefLocatieFactory.briefNietOpslaan())
+                .taal("NL")
                 .build());
 
     }

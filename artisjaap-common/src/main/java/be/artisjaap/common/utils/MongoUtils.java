@@ -13,6 +13,8 @@ public class MongoUtils {
         return new ObjectId(id);
     }
 
+    private MongoUtils(){}
+
     public static List<ObjectId> toObjectIdList(Collection<String> idsAsString){
         return idsAsString.stream().map(MongoUtils::toObjectId).collect(Collectors.toList());
     }

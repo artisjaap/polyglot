@@ -13,7 +13,7 @@ public class GegenereerdeBriefInfoAssembler implements Assembler<GegenereerdeBri
 
     @Override
     public GegenereerdeBriefInfoTO assembleTO(GegenereerdeBrief gegenereerdeBrief) {
-        return GegenereerdeBriefInfoTO.newBuilder()
+        return GegenereerdeBriefInfoTO.builder()
                 .briefCode(gegenereerdeBrief.getBriefCode())
                 .briefLocatieType(gegenereerdeBrief.getDocumentLocation().getType())
                 .id(gegenereerdeBrief.getId().toString())

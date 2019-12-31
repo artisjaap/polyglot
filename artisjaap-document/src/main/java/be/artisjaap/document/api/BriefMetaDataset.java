@@ -53,7 +53,7 @@ public class BriefMetaDataset {
     public static BriefMetaDataset fromBrief(DocumentTO documentTO) {
         return newBuilder().withTaal(documentTO.getTaal())
                 .withReferentie(documentTO.getReferentie())
-                .withBriefCode(documentTO.getNaam())
+                .withBriefCode(documentTO.getCode())
                 .build();
 
     }

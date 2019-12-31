@@ -15,10 +15,10 @@ public class I18nNewTranslationAssembler implements Assembler<NewTranslationTO, 
     @Override
     public Translation assembleEntity(NewTranslationTO translationTO) {
         return Translation.newBuilder()
-                .withBundleName(translationTO.bundleName())
-                .withKey(translationTO.key())
-                .withLanguageIsoCode(translationTO.languageIsoCode())
-                .withTranslation(translationTO.translation())
+                .withBundleName(translationTO.getBundleName())
+                .withKey(translationTO.getKey())
+                .withLanguageIsoCode(translationTO.getLanguageIsoCode())
+                .withTranslation(translationTO.getTranslation())
                 .build();
     }
 }

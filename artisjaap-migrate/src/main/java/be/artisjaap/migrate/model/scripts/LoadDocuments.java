@@ -39,47 +39,47 @@ public class LoadDocuments extends AbstractInitScript {
 
     @Override
     public void execute() {
-        TemplateCodeTO wordPracticeTemplate = addSimpleTemplate.withNewCode(TemplateCodeNewTO.newBuilder()
-                .withCode("WORD_PRACTICE_TEMPLATE")
-                .withDescription("create printable pdf to practice words")
+        TemplateCodeTO wordPracticeTemplate = addSimpleTemplate.withNewCode(TemplateCodeNewTO.builder()
+                .code("WORD_PRACTICE_TEMPLATE")
+                .description("create printable pdf to practice words")
                 .build());
 
         try {
-            addSimpleTemplate.forNew(TemplateNewTO.newBuilder()
-                    .withCode("WORD_PRACTICE_TEMPLATE")
-                    .withTaal("NL")
-                    .withTemplate(FileUtils.readFileToByteArray(new File(getClass().getClassLoader().getResource("documents/word-practice-template.docx").getFile())))
-                    .withOriginalFilename("word-practice-template.docx")
+            addSimpleTemplate.forNew(TemplateNewTO.builder()
+                    .code("WORD_PRACTICE_TEMPLATE")
+                    .taal("NL")
+                    .template(FileUtils.readFileToByteArray(new File(getClass().getClassLoader().getResource("documents/word-practice-template.docx").getFile())))
+                    .originalFilename("word-practice-template.docx")
                     .build());
         }catch (Exception e){
             logger.error("Could not load WORD_PRACTICE_TEMPLATE");
         }
 
-        TemplateCodeTO wordPracticeAnswersTemplate = addSimpleTemplate.withNewCode(TemplateCodeNewTO.newBuilder()
-                .withCode("WORD_PRACTICE_ANSWERS_TEMPLATE")
-                .withDescription("create printable pdf to practice words")
+        TemplateCodeTO wordPracticeAnswersTemplate = addSimpleTemplate.withNewCode(TemplateCodeNewTO.builder()
+                .code("WORD_PRACTICE_ANSWERS_TEMPLATE")
+                .description("create printable pdf to practice words")
                 .build());
 
         try {
-            addSimpleTemplate.forNew(TemplateNewTO.newBuilder()
-                    .withCode("WORD_PRACTICE_ANSWERS_TEMPLATE")
-                    .withTaal("NL")
-                    .withTemplate(FileUtils.readFileToByteArray(new File(getClass().getClassLoader().getResource("documents/word-practice-answers-template.docx").getFile())))
-                    .withOriginalFilename("word-practice-answers-template.docx")
+            addSimpleTemplate.forNew(TemplateNewTO.builder()
+                    .code("WORD_PRACTICE_ANSWERS_TEMPLATE")
+                    .taal("NL")
+                    .template(FileUtils.readFileToByteArray(new File(getClass().getClassLoader().getResource("documents/word-practice-answers-template.docx").getFile())))
+                    .originalFilename("word-practice-answers-template.docx")
                     .build());
         }catch (Exception e){
             logger.error("Could not load WORD_PRACTICE_ANSWERS_TEMPLATE");
         }
 
-        addDocument.metNieuweCode(BriefCodeNieuwTO.newBuilder()
-                .withCode("WORD_PRACTICE_SHEET_WITH_ANSWERS")
-                .withDescription("Practice words with answers")
+        addDocument.metNieuweCode(BriefCodeNieuwTO.builder()
+                .code("WORD_PRACTICE_SHEET_WITH_ANSWERS")
+                .description("Practice words with answers")
                 .build());
 
-        addDocument.forNew(DocumentNewTO.newBuilder()
-                .withCode("WORD_PRACTICE_SHEET_WITH_ANSWERS")
-                .withTaal("NL")
-                .withTemplates(Arrays.asList("WORD_PRACTICE_TEMPLATE", "WORD_PRACTICE_ANSWERS_TEMPLATE"))
+        addDocument.forNew(DocumentNewTO.builder()
+                .code("WORD_PRACTICE_SHEET_WITH_ANSWERS")
+                .taal("NL")
+                .templates(Arrays.asList("WORD_PRACTICE_TEMPLATE", "WORD_PRACTICE_ANSWERS_TEMPLATE"))
                 .build());
 
     }

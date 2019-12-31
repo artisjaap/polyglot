@@ -14,11 +14,13 @@ import java.util.Optional;
 @Component
 public class AutofindTemplateType {
 
-    @Autowired
-    private TemplateRepository templateRepository;
+    private final TemplateRepository templateRepository;
+    private final CombinedTemplateRepository combinedTemplateRepository;
 
-    @Autowired
-    private CombinedTemplateRepository combinedTemplateRepository;
+    public AutofindTemplateType(TemplateRepository templateRepository, CombinedTemplateRepository combinedTemplateRepository) {
+        this.templateRepository = templateRepository;
+        this.combinedTemplateRepository = combinedTemplateRepository;
+    }
 
     public PaginaType forPageCode(String code) {
         Optional<Template> template = templateRepository.findByCode(code).stream().findFirst();

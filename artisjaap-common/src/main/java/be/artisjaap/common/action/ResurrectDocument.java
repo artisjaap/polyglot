@@ -8,8 +8,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ResurrectDocument {
-    @Autowired
-    private GenericMongoRepository genericMongoRepository;
+
+    private final GenericMongoRepository genericMongoRepository;
+
+    private ResurrectDocument(GenericMongoRepository genericMongoRepository){
+        this.genericMongoRepository = genericMongoRepository;
+    }
 
     public <T extends AbstractDocument> void forDocument(Class<T> clazz, ObjectId id){
         genericMongoRepository.resurrect(clazz, id);

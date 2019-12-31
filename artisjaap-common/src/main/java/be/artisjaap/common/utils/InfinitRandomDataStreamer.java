@@ -7,7 +7,6 @@ public class InfinitRandomDataStreamer<T> {
     private final List<T> dataset;
     private List<T> random;
 
-
     private InfinitRandomDataStreamer(List<T> data){
         this.dataset = data;
         this.random = ListUtils.shuffle(data);

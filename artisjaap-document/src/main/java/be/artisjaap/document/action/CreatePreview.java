@@ -10,14 +10,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class CreatePreview {
 
-    @Autowired
-    private GenerateSimpleTemplate generateSimpleTemplate;
+    private final GenerateSimpleTemplate generateSimpleTemplate;
+    private final GenerateCombinedTemplate generateCombinedTemplate;
+    private final GenerateDocument generateDocument;
 
-    @Autowired
-    private GenerateCombinedTemplate generateCombinedTemplate;
-
-    @Autowired
-    private GenerateDocument generateDocument;
+    public CreatePreview(GenerateSimpleTemplate generateSimpleTemplate, GenerateCombinedTemplate generateCombinedTemplate, GenerateDocument generateDocument) {
+        this.generateSimpleTemplate = generateSimpleTemplate;
+        this.generateCombinedTemplate = generateCombinedTemplate;
+        this.generateDocument = generateDocument;
+    }
 
     public TemplateDataTO forTemplate(ObjectId templateId, BriefPreviewConfigTO briefConfigTO) {
         return generateSimpleTemplate.voorTemplateMetId(templateId, briefConfigTO);

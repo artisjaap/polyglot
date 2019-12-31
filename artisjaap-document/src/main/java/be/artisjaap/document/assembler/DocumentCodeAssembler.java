@@ -13,9 +13,9 @@ public class DocumentCodeAssembler implements Assembler<BriefCode, BriefCodeTO>{
 
     @Override
     public BriefCodeTO assembleTO(BriefCode briefCode) {
-        return BriefCodeTO.newBuilder()
-                .withCode(briefCode.getCode())
-                .withDescription(briefCode.getDescription())
+        return BriefCodeTO.builder()
+                .code(briefCode.getCode())
+                .description(briefCode.getDescription())
                 .build();
     }
 }

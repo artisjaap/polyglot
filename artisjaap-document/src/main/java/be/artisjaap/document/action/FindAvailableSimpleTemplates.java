@@ -12,11 +12,13 @@ import java.util.Optional;
 @Component
 public class FindAvailableSimpleTemplates {
 
-    @Autowired
-    private TemplateAssembler templateAssembler;
+    private final TemplateAssembler templateAssembler;
+    private final TemplateRepository templateRepository;
 
-    @Autowired
-    private TemplateRepository templateRepository;
+    public FindAvailableSimpleTemplates(TemplateAssembler templateAssembler, TemplateRepository templateRepository) {
+        this.templateAssembler = templateAssembler;
+        this.templateRepository = templateRepository;
+    }
 
     public List<TemplateTO> withCodeAndLanguage(String code, String language) {
         return templateAssembler.assembleTO(templateRepository.findByCodeAndTaal(code, language));

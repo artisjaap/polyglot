@@ -48,10 +48,10 @@ public class GenerateReportForJournal {
                 .journalStatisticsDataSetFrom(journalStatisticsAggregator.forResult(result))
                 .userDataSetFrom(findUser.byUserId(result.userId()))
                 .buildConfig()
-                .withBestandsnaam(FileGeneratieFactory.simpleFilename())
-                .withOpslagLocatie(BriefLocatieFactory.voorDB())
-                .withTaal("DUTCH")
-                .withCode(DocumentCode.REPORT_FOR_JOURNAL.name())
+                .bestandsnaam(FileGeneratieFactory.simpleFilename())
+                .opslagSettingsTO(BriefLocatieFactory.voorDB())
+                .taal("DUTCH")
+                .code(DocumentCode.REPORT_FOR_JOURNAL.name())
                 .build();
 
 

@@ -35,10 +35,11 @@ public class I18nStepDefinition {
 
     @Given("^A translation with key (.*) has value (.*) in (.*)$")
     public void aTranslationWithKeyMessageHasValueBoodschapInNL(String key, String value, String language) {
-        i18nCreateTranslation.forTranslation(NewTranslationTO.newBuilder().withKey(key)
-                .withLanguageIsoCode(language)
-                .withTranslation(value)
-                .withBundleName("common")
+        i18nCreateTranslation.forTranslation(NewTranslationTO.builder()
+                .key(key)
+                .languageIsoCode(language)
+                .translation(value)
+                .bundleName("common")
                 .build());
     }
 

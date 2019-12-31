@@ -26,12 +26,11 @@ public class TemplatePersister {
         File file = new File(this.getClass().getResource(filename).getFile());
 
         try {
-            TemplateNewTO templateTO = TemplateNewTO.newBuilder()
-                    .withCode(code)
-                    .withOriginalFilename(filename)
-                    .withTaal("DUTCH")
-                    .withTemplate(FileUtils.readFileToByteArray(file))
-
+            TemplateNewTO templateTO = TemplateNewTO.builder()
+                    .code(code)
+                    .originalFilename(filename)
+                    .taal("DUTCH")
+                    .template(FileUtils.readFileToByteArray(file))
                     .build();
             TemplateTO templateOpgeslagen = addSimpleTemplate.forNew(templateTO);
             activateSimpleTemplate.activateTemplate(templateOpgeslagen.getId());

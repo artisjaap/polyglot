@@ -17,9 +17,9 @@ public class PaginaAssembler implements Assembler<Page, PaginaTO> {
     @Override
     public PaginaTO assembleTO(Page page) {
 
-        return PaginaTO.newBuilder()
-                .withCode(page.getCode())
-                .withType(page.getPaginaType())
+        return PaginaTO.builder()
+                .code(page.getCode())
+                .type(page.getPaginaType())
                 .build();
     }
 }

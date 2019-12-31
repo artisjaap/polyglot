@@ -21,9 +21,9 @@ public class TemplateCodeAssembler implements Assembler<TemplateCode, TemplateCo
 
     @Override
     public TemplateCodeTO assembleTO(TemplateCode templateCode) {
-        return TemplateCodeTO.newBuilder()
-                .withCode(templateCode.getCode())
-                .withDescription(templateCode.getDescription())
+        return TemplateCodeTO.builder()
+                .code(templateCode.getCode())
+                .description(templateCode.getDescription())
                 .build();
     }
 

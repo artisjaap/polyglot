@@ -9,12 +9,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class ActivateCombinedTemplate {
 
+    private final CombinedTemplateRepository combinedTemplateRepository;
 
-    @Autowired
-    private CombinedTemplateRepository combinedTemplateRepository;
+    private final DeactivateTemplate deactivateTemplate;
 
-    @Autowired
-    private DeactivateTemplate deactivateTemplate;
+    public ActivateCombinedTemplate(CombinedTemplateRepository combinedTemplateRepository, DeactivateTemplate deactivateTemplate) {
+        this.combinedTemplateRepository = combinedTemplateRepository;
+        this.deactivateTemplate = deactivateTemplate;
+    }
 
     public void activeerTemplate(String id) {
         ObjectId objectId = new ObjectId(id);

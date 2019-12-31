@@ -24,10 +24,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
@@ -73,12 +71,12 @@ public class DocumentbeheerThenStepsDefinition {
 
     @Dan("^kan de brief met code (.*) in taal (.*) gegenereerd worden met een default set van datasets$")
     public void kanDeBriefMetCodeMANDAAT_BRIEFGegenereerdWordenMetEenDefaultSetVanDatasets(String code, String taal) {
-        BriefConfigTO briefConfigTO = BriefConfigTO.newBuilder()
-                .withCode(code)
-                .withTaal(taal)
-                .withDatasetProvider(defaultDatasets())
-                .withBestandsnaam(FileGeneratieFactory.simpleFilename())
-                .withOpslagLocatie(BriefLocatieFactory.voorAbsolutePath("c:/temp/docs/"))
+        BriefConfigTO briefConfigTO = BriefConfigTO.builder()
+                .code(code)
+                .taal(taal)
+                .datasetProvider(defaultDatasets())
+                .bestandsnaam(FileGeneratieFactory.simpleFilename())
+                .opslagSettingsTO(BriefLocatieFactory.voorAbsolutePath("c:/temp/docs/"))
                 .build();
         generateDocument.forDocument(briefConfigTO);
     }
@@ -86,12 +84,12 @@ public class DocumentbeheerThenStepsDefinition {
 
     @Dan("^kan de brief met code (.*) in taal (.*) gegenereerd worden met een default set van datasets en worden opgeslagen in de MongoDB$")
     public void kanDeBriefMetCodeInTaalGegenereerdWordenMetEenDefaultSetVanDatasetsEnWordenOpgeslagenInDeMongoDB(String code, String isoCode) throws Throwable {
-        BriefConfigTO briefConfigTO = BriefConfigTO.newBuilder()
-                .withCode(code)
-                .withTaal(isoCode)
-                .withDatasetProvider(defaultDatasets())
-                .withBestandsnaam(FileGeneratieFactory.simpleFilename())
-                .withOpslagLocatie(BriefLocatieFactory.voorDB())
+        BriefConfigTO briefConfigTO = BriefConfigTO.builder()
+                .code(code)
+                .taal(isoCode)
+                .datasetProvider(defaultDatasets())
+                .bestandsnaam(FileGeneratieFactory.simpleFilename())
+                .opslagSettingsTO(BriefLocatieFactory.voorDB())
                 .build();
         generateDocument.forDocument(briefConfigTO);
 
@@ -104,12 +102,12 @@ public class DocumentbeheerThenStepsDefinition {
     public void kanDeBriefMetCodeInTaalGegenereerdWordenMetEenDefaultSetVanDatasetsEnWordenOpgeslagenInDeMongoDBMetBestandsnaam(String code, String isoCode, List<String> bestandsnaamDeel) throws Throwable {
         GenericFileName.Builder genericFilenameBuilder = FileGeneratieFactory.fromDatasets();
         bestandsnaamDeel.forEach(genericFilenameBuilder::withFilenameParts);
-        BriefConfigTO briefConfigTO = BriefConfigTO.newBuilder()
-                .withCode(code)
-                .withTaal(isoCode)
-                .withDatasetProvider(defaultDatasets())
-                .withBestandsnaam(genericFilenameBuilder.build())
-                .withOpslagLocatie(BriefLocatieFactory.voorDB())
+        BriefConfigTO briefConfigTO = BriefConfigTO.builder()
+                .code(code)
+                .taal(isoCode)
+                .datasetProvider(defaultDatasets())
+                .bestandsnaam(genericFilenameBuilder.build())
+                .opslagSettingsTO(BriefLocatieFactory.voorDB())
                 .build();
         generateDocument.forDocument(briefConfigTO);
 
@@ -118,13 +116,13 @@ public class DocumentbeheerThenStepsDefinition {
 
     @Dan("^kan de brief met code (.*) in taal (.*) gegenereerd worden met een default set van datasets en worden opgeslagen in de MongoDB en volgende datasets worden geblacklist: (.*)")
     public void kanDeBriefMetCodeInTaalGegenereerdWordenMetEenDefaultSetVanDatasetsEnWordenOpgeslagenInDeMongoDBMetBlacklist(String code, String isoCode, List<String> blackList) throws Throwable {
-        BriefConfigTO briefConfigTO = BriefConfigTO.newBuilder()
-                .withCode(code)
-                .withTaal(isoCode)
-                .withDatasetProvider(defaultDatasets())
-                .withBestandsnaam(FileGeneratieFactory.simpleFilename())
-                .withOpslagLocatie(BriefLocatieFactory.voorDB())
-                .withDatasetsToBlacklist(new HashSet(blackList))
+        BriefConfigTO briefConfigTO = BriefConfigTO.builder()
+                .code(code)
+                .taal(isoCode)
+                .datasetProvider(defaultDatasets())
+                .bestandsnaam(FileGeneratieFactory.simpleFilename())
+                .opslagSettingsTO(BriefLocatieFactory.voorDB())
+                .datasetsBlacklist(new HashSet(blackList))
                 .build();
         generateDocument.forDocument(briefConfigTO);
 
@@ -140,39 +138,42 @@ public class DocumentbeheerThenStepsDefinition {
 
     @Dan("^kan de brief met code (.*) in taal (.*) gegenereerd worden met een default set van datasets en worden opgeslagen het absolute path (.*)$")
     public void kanDeBriefMetCodeInTaaldGegenereerdWordenMetEenDefaultSetVanDatasetsEnWordenOpgeslagenHetAbsolutePath(String code, String isoCode, String absolutePath) throws Throwable {
-        BriefConfigTO briefConfigTO = BriefConfigTO.newBuilder()
-                .withCode(code)
-                .withTaal(isoCode)
-                .withDatasetProvider(defaultDatasets())
-                .withBestandsnaam(FileGeneratieFactory.simpleFilename())
-                .withOpslagLocatie(BriefLocatieFactory.voorAbsolutePath(absolutePath))
+        BriefConfigTO briefConfigTO = BriefConfigTO.builder()
+                .code(code)
+                .taal(isoCode)
+                .datasetProvider(defaultDatasets())
+                .bestandsnaam(FileGeneratieFactory.simpleFilename())
+                .opslagSettingsTO(BriefLocatieFactory.voorAbsolutePath(absolutePath))
                 .build();
         generateDocument.forDocument(briefConfigTO);
     }
 
     @Dan("^kan de brief met code (.*) in taal (.*) gegenereerd worden met een default set van datasets, wordt opgeslagen op het absolute path (.*) en bevat volgende images$")
     public void kanDeBriefMetCodeInTaaldGegenereerdWordenMetEenDefaultSetVanDatasetsEnWordenOpgeslagenHetAbsolutePathMetImages(String code, String isoCode, String absolutePath, List<GherkinDocumentImage> images) throws Throwable {
-        BriefConfigTO.Builder builder = BriefConfigTO.newBuilder()
-                .withCode(code)
-                .withTaal(isoCode)
-                .withDatasetProvider(defaultDatasets())
-                .withBestandsnaam(FileGeneratieFactory.simpleFilename())
-                .withOpslagLocatie(BriefLocatieFactory.voorAbsolutePath(absolutePath));
+        List<DocumentImage> documentImages = images.stream()
+                .map(image -> DocumentImage.newBuilder().withName(image.bookmarkNaam).withImage(bytesFromImage(image.image)).build())
+                .collect(Collectors.toList());
 
-        images.forEach(image -> builder.addImage(DocumentImage.newBuilder().withName(image.bookmarkNaam).withImage(bytesFromImage( image.image)).build()));
+        BriefConfigTO briefConfigTO = BriefConfigTO.builder()
+                .code(code)
+                .taal(isoCode)
+                .datasetProvider(defaultDatasets())
+                .bestandsnaam(FileGeneratieFactory.simpleFilename())
+                .opslagSettingsTO(BriefLocatieFactory.voorAbsolutePath(absolutePath))
+                .documentImages(documentImages)
+                .build();
 
-        BriefConfigTO briefConfigTO = builder.build();
         generateDocument.forDocument(briefConfigTO);
     }
 
     @Dan("^kan de brief met code (.*) in taal (.*) gegenereerd worden met een default set van datasets en worden opgeslagen op het relatieve path (.*)$")
     public void kanDeBriefMetCodeInTaalGegenereerdWordenMetEenDefaultSetVanDatasetsEnWordenOpgeslagenOpHetRelatievePath(String code, String isoCode, String relativePath) throws Throwable {
-        BriefConfigTO briefConfigTO = BriefConfigTO.newBuilder()
-                .withCode(code)
-                .withTaal(isoCode)
-                .withDatasetProvider(defaultDatasets())
-                .withBestandsnaam(FileGeneratieFactory.simpleFilename())
-                .withOpslagLocatie(BriefLocatieFactory.voorRelatiefPath(relativePath))
+        BriefConfigTO briefConfigTO = BriefConfigTO.builder()
+                .code(code)
+                .taal(isoCode)
+                .datasetProvider(defaultDatasets())
+                .bestandsnaam(FileGeneratieFactory.simpleFilename())
+                .opslagSettingsTO(BriefLocatieFactory.voorRelatiefPath(relativePath))
                 .build();
         generateDocument.forDocument(briefConfigTO);
     }
@@ -180,14 +181,13 @@ public class DocumentbeheerThenStepsDefinition {
     @Dan("^kan de brief met code (.*) in taal (.*) gegenereerd worden met een default set van datasets, wordt opgeslagen op het absolute path (.*) en bevat in de QR de volgende gegevens (.*)$")
     public void briefMetCodeInTaalMetDefaultDatasetsEnQrCodeData(String code, String isoCode, String absolutePath, String qrData) {
 
-        BriefConfigTO.Builder builder = BriefConfigTO.newBuilder()
-                .withCode(code)
-                .withTaal(isoCode)
-                .withDatasetProvider(defaultDatasets())
-                .withBestandsnaam(FileGeneratieFactory.simpleFilename())
-                .withOpslagLocatie(BriefLocatieFactory.voorAbsolutePath(absolutePath))
-                .addImage(DocumentImage.newBuilder().withName("qr").withImage(QrUtils.maakQrMetData(qrData)).build())
-//                .addImage(DocumentImage.newBuilder().withName("qr").withImage(bytesFromImage( "qr.png")).build())
+        BriefConfigTO.BriefConfigTOBuilder builder = BriefConfigTO.builder()
+                .code(code)
+                .taal(isoCode)
+                .datasetProvider(defaultDatasets())
+                .bestandsnaam(FileGeneratieFactory.simpleFilename())
+                .opslagSettingsTO(BriefLocatieFactory.voorAbsolutePath(absolutePath))
+                .documentImages(Arrays.asList(DocumentImage.newBuilder().withName("qr").withImage(QrUtils.maakQrMetData(qrData)).build()))
                 ;
 
 

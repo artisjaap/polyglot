@@ -10,8 +10,11 @@ public class ValidateSimpleTemplate {
 
     private static final Logger logger = LoggerFactory.getLogger(ValidateSimpleTemplate.class);
 
-    @Autowired
-    private FindAvailableSimpleTemplates findAvailableSimpleTemplates;
+    private final FindAvailableSimpleTemplates findAvailableSimpleTemplates;
+
+    public ValidateSimpleTemplate(FindAvailableSimpleTemplates findAvailableSimpleTemplates) {
+        this.findAvailableSimpleTemplates = findAvailableSimpleTemplates;
+    }
 
     public boolean metCodeInTaal(String code, String taal) {
         boolean result = findAvailableSimpleTemplates.activeWithCodeAndLanguage(code, taal).isPresent();

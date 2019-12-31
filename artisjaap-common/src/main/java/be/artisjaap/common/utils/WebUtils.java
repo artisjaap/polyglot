@@ -9,6 +9,8 @@ import java.io.OutputStream;
 
 public class WebUtils {
 
+    private WebUtils(){}
+
     public static byte[] getBytesFromMultipartFile(MultipartFile file){
         try{
             return file.getBytes();

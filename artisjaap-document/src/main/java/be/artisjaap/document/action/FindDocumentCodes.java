@@ -10,15 +10,18 @@ import java.util.stream.Collectors;
 
 @Component
 public class FindDocumentCodes {
-    @Autowired
-    private DocumentCodeRepository documentCodeRepository;
 
+    private final DocumentCodeRepository documentCodeRepository;
+
+    public FindDocumentCodes(DocumentCodeRepository documentCodeRepository) {
+        this.documentCodeRepository = documentCodeRepository;
+    }
 
     public List<BriefCodeTO> allDocuments() {
         return documentCodeRepository.findAll().stream()
-                .map(brief -> BriefCodeTO.newBuilder()
-                        .withCode(brief.getCode())
-                        .withDescription(brief.getDescription())
+                .map(brief -> BriefCodeTO.builder()
+                        .code(brief.getCode())
+                        .description(brief.getDescription())
                         .build())
                 .collect(Collectors.toList());
     }

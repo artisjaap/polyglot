@@ -9,14 +9,15 @@ import java.util.List;
 
 @Component
 public class ValidateDocument {
-    @Autowired
-    private FindAvailableDocuments findAvailableDocuments;
+    private final FindAvailableDocuments findAvailableDocuments;
+    private final ValidateSimpleTemplate validateSimpleTemplate;
+    private final ValidateCombinedTemplate validateCombinedTemplate;
 
-    @Autowired
-    private ValidateSimpleTemplate validateSimpleTemplate;
-
-    @Autowired
-    private ValidateCombinedTemplate validateCombinedTemplate;
+    public ValidateDocument(FindAvailableDocuments findAvailableDocuments, ValidateSimpleTemplate validateSimpleTemplate, ValidateCombinedTemplate validateCombinedTemplate) {
+        this.findAvailableDocuments = findAvailableDocuments;
+        this.validateSimpleTemplate = validateSimpleTemplate;
+        this.validateCombinedTemplate = validateCombinedTemplate;
+    }
 
     public boolean metCodeInTaal(String briefCode, String taal) {
         return findAvailableDocuments.activeWithCodeAndLanguage(briefCode, taal)

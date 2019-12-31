@@ -23,9 +23,9 @@ public class CombinedTemplateCodeAssembler implements Assembler<GecombineerdeTem
 
     @Override
     public CombinedTemplateCodeTO assembleTO(GecombineerdeTemplateCode gecombineerdeTemplateCode) {
-        return CombinedTemplateCodeTO.newBuilder()
-                .withCode(gecombineerdeTemplateCode.getCode())
-                .withDescription(gecombineerdeTemplateCode.getDescription())
+        return CombinedTemplateCodeTO.builder()
+                .code(gecombineerdeTemplateCode.getCode())
+                .description(gecombineerdeTemplateCode.getDescription())
                 .build();
     }
 

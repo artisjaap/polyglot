@@ -12,6 +12,8 @@ public class LocalDateUtils {
 
     private static Clock clock = Clock.systemDefaultZone();
 
+    private LocalDateUtils(){}
+
     public static void useFixedDate(LocalDate date) {
         clock = Clock.fixed(Instant.from(date.atStartOfDay()), ZoneId.systemDefault());
     }

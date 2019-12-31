@@ -10,8 +10,11 @@ public class ValidateCombinedTemplate {
 
     private static final Logger logger = LoggerFactory.getLogger(ValidateCombinedTemplate.class);
 
-    @Autowired
-    private FindAvailableCombinedTemplates findAvailableCombinedTemplates;
+    private final FindAvailableCombinedTemplates findAvailableCombinedTemplates;
+
+    public ValidateCombinedTemplate(FindAvailableCombinedTemplates findAvailableCombinedTemplates) {
+        this.findAvailableCombinedTemplates = findAvailableCombinedTemplates;
+    }
 
     public boolean metCodeInTaal(String code, String taal) {
         boolean result = findAvailableCombinedTemplates.withCodeAndLanguageActive(code, taal).isPresent();

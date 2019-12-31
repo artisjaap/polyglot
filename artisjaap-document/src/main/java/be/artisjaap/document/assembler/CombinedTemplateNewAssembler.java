@@ -11,9 +11,9 @@ public class CombinedTemplateNewAssembler implements Assembler<CombinedTemplate,
     @Override
     public CombinedTemplate assembleEntity(CombinedTemplateNewTO combinedTemplateNewTO) {
         return CombinedTemplate.newBuilder()
-                .withNaam(combinedTemplateNewTO.code())
-                .withTaal(combinedTemplateNewTO.taal())
-                .withTemplates(combinedTemplateNewTO.templates())
+                .withNaam(combinedTemplateNewTO.getCode())
+                .withTaal(combinedTemplateNewTO.getTaal())
+                .withTemplates(combinedTemplateNewTO.getTemplates())
                 .build();
     }
 

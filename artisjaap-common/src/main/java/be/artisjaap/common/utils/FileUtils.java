@@ -4,6 +4,8 @@ import java.io.*;
 
 public class FileUtils {
 
+    private FileUtils(){}
+
     public static File writeBytesToTempFile(String filename, byte[] bytes){
         File file = createTempFileFor(filename);
 

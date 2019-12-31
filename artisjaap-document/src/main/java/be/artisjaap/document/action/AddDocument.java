@@ -17,24 +17,21 @@ import org.springframework.stereotype.Component;
 @Component
 public class AddDocument {
 
-    @Autowired
-    private DocumentNewAssembler documentNewAssembler;
+    private final DocumentNewAssembler documentNewAssembler;
+    private final DocumentAssembler documentAssembler;
+    private final DocumentRepository documentRepository;
+    private final DocumentCodeRepository documentCodeRepository;
+    private final DocumentCodeNewAssembler documentCodeNewAssembler;
+    private final DocumentCodeAssembler documentCodeAssembler;
 
-    @Autowired
-    private DocumentAssembler documentAssembler;
-
-    @Autowired
-    private DocumentRepository documentRepository;
-
-    @Autowired
-    private DocumentCodeRepository documentCodeRepository;
-
-    @Autowired
-    private DocumentCodeNewAssembler documentCodeNewAssembler;
-
-    @Autowired
-    private DocumentCodeAssembler documentCodeAssembler;
-
+    public AddDocument(DocumentNewAssembler documentNewAssembler, DocumentAssembler documentAssembler, DocumentRepository documentRepository, DocumentCodeRepository documentCodeRepository, DocumentCodeNewAssembler documentCodeNewAssembler, DocumentCodeAssembler documentCodeAssembler) {
+        this.documentNewAssembler = documentNewAssembler;
+        this.documentAssembler = documentAssembler;
+        this.documentRepository = documentRepository;
+        this.documentCodeRepository = documentCodeRepository;
+        this.documentCodeNewAssembler = documentCodeNewAssembler;
+        this.documentCodeAssembler = documentCodeAssembler;
+    }
 
     public DocumentTO forNew(DocumentNewTO briefTO) {
         Document document = documentNewAssembler.assembleEntity(briefTO);

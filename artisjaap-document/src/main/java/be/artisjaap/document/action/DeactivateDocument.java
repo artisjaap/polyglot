@@ -10,8 +10,11 @@ import java.util.Optional;
 @Component
 public class DeactivateDocument {
 
-    @Autowired
-    private DocumentRepository documentRepository;
+    private final DocumentRepository documentRepository;
+
+    public DeactivateDocument(DocumentRepository documentRepository) {
+        this.documentRepository = documentRepository;
+    }
 
     public void withCodeAndLanguage(String code, String language) {
         Optional<Document> documentOptional = documentRepository.findByCodeAndTaalAndActief(code, language);

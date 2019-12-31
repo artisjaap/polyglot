@@ -13,7 +13,7 @@ public class CommonStepDefinition {
 
     @Given("^A user named (.*)$")
     public void setUserName(String name){
-        setContext.with(UserDataVO.newBuilder().withUserId(name).build());
+        setContext.with(UserDataVO.builder().userId(name).build());
 
     }
 }

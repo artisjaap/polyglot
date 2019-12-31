@@ -8,8 +8,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class RemoveDocument {
 
-    @Autowired
-    private DocumentRepository documentRepository;
+    private final DocumentRepository documentRepository;
+
+    public RemoveDocument(DocumentRepository documentRepository) {
+        this.documentRepository = documentRepository;
+    }
 
     public void metId(String id) {
         documentRepository.deleteById(new ObjectId(id));

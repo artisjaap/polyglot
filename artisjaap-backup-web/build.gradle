@@ -4,6 +4,7 @@ jar {
 }
 
 dependencies {
+    implementation project(':artisjaap-common')
     compile project(':artisjaap-backup')
     
     testCompile('org.springframework.boot:spring-boot-starter-test')

@@ -59,11 +59,11 @@ public class DocumentbeheerStepsDefinition {
 
     @Als("^een template (.*) wordt opgeladen als code (.*) in (.*)$")
     public void eenTemplateWordtOpgeladen(String bestand, String code, String isoCode) {
-        TemplateNewTO templateTO = TemplateNewTO.newBuilder()
-                .withCode(code)
-                .withOriginalFilename(bestand)
-                .withTaal(isoCode)
-                .withTemplate(bytesFromFile(bestand))
+        TemplateNewTO templateTO = TemplateNewTO.builder()
+                .code(code)
+                .originalFilename(bestand)
+                .taal(isoCode)
+                .template(bytesFromFile(bestand))
                 .build();
         addSimpleTemplate.forNew(templateTO);
     }
@@ -92,10 +92,10 @@ public class DocumentbeheerStepsDefinition {
     @Als("^een gecombineerde template met code (.*) in taal (.*) wordt gemaakt uit de templates (.*)$")
     public void eenGecombineerdeTemplateMetCodeWordtGemaaktUitDeTemplates(String code, String taal, List<String> templates) {
         CombinedTemplateNewTO combinatie = CombinedTemplateNewTO
-                .newBuilder()
-                .withCode(code)
-                .withTemplates(templates)
-                .withTaal(taal)
+                .builder()
+                .code(code)
+                .templates(templates)
+                .taal(taal)
                 .build();
         addCombinedTemplate.from(combinatie);
     }
@@ -114,10 +114,10 @@ public class DocumentbeheerStepsDefinition {
 
     @Als("^een brief (.*) in (.*) die bestaat uit de templates (.*)")
     public void eenBriefInNldDieBestaatUitDeTemplates(String code, String isoCode, List<String> templates) throws Throwable {
-        DocumentNewTO nieuweBrief = DocumentNewTO.newBuilder()
-                .withCode(code)
-                .withTaal(isoCode)
-                .withTemplates(templates)
+        DocumentNewTO nieuweBrief = DocumentNewTO.builder()
+                .code(code)
+                .taal(isoCode)
+                .templates(templates)
                 .build();
         addDocument.forNew(nieuweBrief);
     }

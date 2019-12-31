@@ -11,11 +11,13 @@ import java.util.List;
 @Component
 public class FindGeneratedDocuments {
 
-    @Autowired
-    private GegenereerdeBriefRepository gegenereerdeBriefRepository;
+    private final GegenereerdeBriefRepository gegenereerdeBriefRepository;
+    private final GegenereerdeBriefInfoAssembler gegenereerdeBriefInfoAssembler;
 
-    @Autowired
-    private GegenereerdeBriefInfoAssembler gegenereerdeBriefInfoAssembler;
+    public FindGeneratedDocuments(GegenereerdeBriefRepository gegenereerdeBriefRepository, GegenereerdeBriefInfoAssembler gegenereerdeBriefInfoAssembler) {
+        this.gegenereerdeBriefRepository = gegenereerdeBriefRepository;
+        this.gegenereerdeBriefInfoAssembler = gegenereerdeBriefInfoAssembler;
+    }
 
     public List<GegenereerdeBriefInfoTO> forDocumentInCodeAndLanguage(String code, String language) {
         return gegenereerdeBriefInfoAssembler.assembleTO(gegenereerdeBriefRepository.findByBriefCodeAndTaal(code, language));

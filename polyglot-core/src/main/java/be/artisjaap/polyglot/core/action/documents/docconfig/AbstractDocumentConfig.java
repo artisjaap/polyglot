@@ -42,16 +42,16 @@ public abstract class AbstractDocumentConfig implements AllDatasets, DocumentDef
 
     @Override
     public BriefConfigTO documentConfigForPreview(String language) {
-        return BriefConfigTO.newBuilder()
-                .withDatasetProvider(documentConfigForPreview())
-                .withCode(documentCode().name())
-                .withTaal(language)
+        return BriefConfigTO.builder()
+                .datasetProvider(documentConfigForPreview())
+                .code(documentCode().name())
+                .taal(language)
                 .build();
     }
 
     @Override
-    public BriefConfigTO.Builder buildConfig() {
-        return  BriefConfigTO.newBuilder().withDatasetProvider(datasetProviderFactory);
+    public BriefConfigTO.BriefConfigTOBuilder buildConfig() {
+        return  BriefConfigTO.builder().datasetProvider(datasetProviderFactory);
     }
 
     abstract AbstractDocumentConfig createInstance();

@@ -11,11 +11,14 @@ import java.util.Optional;
 
 @Component
 public class FindAvailableDocuments {
-    @Autowired
-    private DocumentRepository documentRepository;
 
-    @Autowired
-    private DocumentAssembler documentAssembler;
+    private final DocumentRepository documentRepository;
+    private final DocumentAssembler documentAssembler;
+
+    public FindAvailableDocuments(DocumentRepository documentRepository, DocumentAssembler documentAssembler) {
+        this.documentRepository = documentRepository;
+        this.documentAssembler = documentAssembler;
+    }
 
     public List<DocumentTO> all() {
         return documentAssembler.assembleTO(documentRepository.findAll());

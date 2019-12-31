@@ -7,8 +7,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class SetContext {
-    @Autowired
-    private ContextManager contextManager;
+
+    private final ContextManager contextManager;
+
+    private SetContext(ContextManager contextManager) {
+        this.contextManager = contextManager;
+    }
 
     public void with(UserDataVO userData){
         contextManager.setUser(userData);

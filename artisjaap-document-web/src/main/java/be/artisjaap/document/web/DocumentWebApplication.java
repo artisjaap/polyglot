@@ -4,7 +4,7 @@ import be.artisjaap.document.DocumentbeheerApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "be.artisjaap")
 public class DocumentWebApplication {
 
     public static void main(String[] args) {
