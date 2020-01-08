@@ -12,10 +12,10 @@ public class MailStepDefinition {
     @Given("^A mail template with code (.*), subject: \"([^\"]*)\" and body$")
     public void aMailTemplateWithCodeCODESubjectAndBody(String code, String subject, String body) {
 
-        saveMailTemplate.forTemplate(MailTemplateTO.newBuilder()
-                .withCode(code)
-                .withSubject(subject)
-                .withHtmlBody(body)
+        saveMailTemplate.forTemplate(MailTemplateTO.builder()
+                .code(code)
+                .subject(subject)
+                .htmlBody(body)
                 .build());
 
     }

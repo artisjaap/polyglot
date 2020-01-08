@@ -1,6 +1,6 @@
 jar {
-    baseName = 'artisjaap-i18n-web'
-    version = '0.0.1-SNAPSHOT'
+    archiveBaseName = 'artisjaap-i18n-web'
+    archiveVersion = '0.0.1-SNAPSHOT'
 }
 
 dependencies {

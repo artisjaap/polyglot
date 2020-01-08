@@ -1,6 +1,6 @@
 jar {
-    baseName = 'polyglot-documentation'
-    version = '0.0.1-SNAPSHOT'
+    archiveBaseName = 'polyglot-documentation'
+    archiveVersion = '0.0.1-SNAPSHOT'
 
 }
 
@@ -16,8 +16,7 @@ asciidoctor {
     outputDir = file('build/docs')
 
 
-    attributes             \
-                     'icons' : 'font' ,
+    attributes    'icons' : 'font' ,
     'linkcss' : 'false' ,
     'source-highlighter' : 'coderay' ,
     'coderay-css' : 'class' ,

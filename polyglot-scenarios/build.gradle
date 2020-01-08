@@ -1,23 +1,27 @@
 jar {
-    baseName = 'polyglot-scenarios'
-    version = '0.0.1-SNAPSHOT'
+    archiveBaseName = 'polyglot-scenarios'
+    archiveVersion = '0.0.1-SNAPSHOT'
 
 }
 
 
 dependencies {
     compile project(':artisjaap-properties')
+    testCompile project(path: ":artisjaap-properties", configuration: 'testArtifacts')
 
     compile project(':polyglot-test-helper')
     testCompile project(path: ":polyglot-test-helper", configuration: 'testArtifacts')
-
-    testCompile project(path: ":artisjaap-properties", configuration: 'testArtifacts')
 
     compile project(':artisjaap-backup')
     testCompile project(path: ":artisjaap-backup", configuration: 'testArtifacts')
 
     compile project(':artisjaap-mail')
     testCompile project(path: ":artisjaap-mail", configuration: 'testArtifacts')
+
+    compile project(':artisjaap-document')
+    testCompile project(path: ":artisjaap-document", configuration: 'testArtifacts')
+
+    compile project(':polyglot-core')
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('de.flapdoodle.embed:de.flapdoodle.embed.mongo')

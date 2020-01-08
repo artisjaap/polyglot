@@ -1,11 +1,11 @@
 jar {
-    baseName = 'artisjaap-backup'
-    version = '0.0.1-SNAPSHOT'
+    archiveBaseName = 'artisjaap-backup'
+    archiveVersion = '0.0.1-SNAPSHOT'
 }
 
 dependencies {
-    implementation project(':artisjaap-common')
-    implementation project(':artisjaap-mail')
+    compile project(':artisjaap-common')
+    compile project(':artisjaap-mail')
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
 

@@ -1,6 +1,6 @@
 jar {
-    baseName = 'artisjaap-mail-web'
-    version = '0.0.1-SNAPSHOT'
+    archiveBaseName = 'artisjaap-mail-web'
+    archiveVersion = '0.0.1-SNAPSHOT'
 }
 
 dependencies {

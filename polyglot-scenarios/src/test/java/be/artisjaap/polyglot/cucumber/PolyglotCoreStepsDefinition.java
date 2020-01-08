@@ -1,5 +1,10 @@
 package be.artisjaap.polyglot.cucumber;
 
+import be.artisjaap.document.action.GenerateDocument;
+import be.artisjaap.document.action.to.BriefConfigTO;
+import be.artisjaap.document.api.brieflocatie.BriefLocatieFactory;
+import be.artisjaap.document.api.filegeneratie.FileGeneratieFactory;
+import be.artisjaap.polyglot.core.action.documents.DatasetProviderFactory;
 import be.artisjaap.polyglot.core.action.lesson.CreateLesson;
 import be.artisjaap.polyglot.core.action.lesson.FindPracticeWords;
 import be.artisjaap.polyglot.core.action.lesson.SimpleNextWordStrategy;
@@ -33,6 +38,7 @@ import be.artisjaap.polyglot.core.model.LessonRepository;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
+import cucumber.api.java.nl.Dan;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -75,6 +81,9 @@ public class PolyglotCoreStepsDefinition {
 
     @Autowired
     private SimpleNextWordStrategy simpleNextWordStrategy;
+
+    @Autowired
+    private GenerateDocument generateDocument;
 
     @Given("^a user named (.*)$")
     public void eenGebruikerMetNaam(String naam) {
@@ -250,5 +259,17 @@ public class PolyglotCoreStepsDefinition {
             practiceWordTO = answerAndNextWordTO.practiceWord();
         }
 
+    }
+
+    @Dan("^the document with code (.*) in language (.*) can be generated with default polyglot datasets$")
+    public void kanDeBriefMetCodeMANDAAT_BRIEFGegenereerdWordenMetEenDefaultSetVanDatasets(String code, String taal) {
+        BriefConfigTO briefConfigTO = BriefConfigTO.builder()
+                .code(code)
+                .taal(taal)
+                .datasetProvider(DatasetProviderFactory.create().addAllDummy())
+                .bestandsnaam(FileGeneratieFactory.simpleFilename())
+                .opslagSettingsTO(BriefLocatieFactory.voorAbsolutePath("c:/temp/docs/"))
+                .build();
+        generateDocument.forDocument(briefConfigTO);
     }
 }

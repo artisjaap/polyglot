@@ -1,6 +1,6 @@
 jar {
-    baseName = 'artisjaap-migrate'
-    version = '0.0.1-SNAPSHOT'
+    archiveBaseName = 'artisjaap-migrate'
+    archiveVersion = '0.0.1-SNAPSHOT'
 }
 
 dependencies {

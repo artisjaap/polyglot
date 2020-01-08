@@ -29,11 +29,9 @@ import java.util.Properties;
 class GMail {
     private final static Logger LOGGER = LogManager.getLogger();
 
-    @Autowired
-    private MailingRepository mailingRepository;
+    private final MailingRepository mailingRepository;
 
-    @Autowired
-    private GetProperty getProperty;
+    private final GetProperty getProperty;
 
     private static Properties props = new Properties();
 
@@ -44,12 +42,17 @@ class GMail {
         props.put("mail.smtp.port", "587");
     }
 
+    public GMail(MailingRepository mailingRepository, GetProperty getProperty) {
+        this.mailingRepository = mailingRepository;
+        this.getProperty = getProperty;
+    }
+
     public void sendAMail(MailTO mailTO) {
-        if (mailTO.username() == null ||
-                mailTO.password() == null) {
-            mailTO = MailTO.newBuilder(mailTO)
-                    .withUsername(getProperty.valueForKey("mailing.username"))
-                    .withPassword(getProperty.valueForKey("mailing.password")).build();
+        if (mailTO.getUsername() == null ||
+                mailTO.getPassword() == null) {
+            mailTO = mailTO.toBuilder()
+                    .username(getProperty.valueForKey("mailing.username"))
+                    .password(getProperty.valueForKey("mailing.password")).build();
         }
 
         doSendAMail(mailTO);
@@ -57,17 +60,17 @@ class GMail {
 
     private void doSendAMail(MailTO mailTO) {
 
-        final Session session = createSession(mailTO.username(), mailTO.password());
+        final Session session = createSession(mailTO.getUsername(), mailTO.getPassword());
 
         Runnable run = new Runnable() {
 
             @Override
             public void run() {
                 Mailing mailing = new Mailing();
-                mailing.setFrom(mailTO.from());
-                mailing.setTo(mailTO.to());
-                mailing.setSubject(mailTO.subject());
-                mailing.setBody(mailTO.body());
+                mailing.setFrom(mailTO.getFrom());
+                mailing.setTo(mailTO.getTo());
+                mailing.setSubject(mailTO.getSubject());
+                mailing.setBody(mailTO.getBody());
                 mailingRepository.save(mailing);
 
                 try {
@@ -75,20 +78,20 @@ class GMail {
 
                     if (mailingEnabled) {
                         Message message = new MimeMessage(session);
-                        message.setFrom(new InternetAddress(mailTO.from()));
+                        message.setFrom(new InternetAddress(mailTO.getFrom()));
                         message.setRecipients(Message.RecipientType.TO,
-                                InternetAddress.parse(mailTO.to()));
+                                InternetAddress.parse(mailTO.getTo()));
 
 
-                        message.setSubject(mailTO.subject());
+                        message.setSubject(mailTO.getSubject());
 
                         BodyPart messageBody = new MimeBodyPart();
-                        messageBody.setContent(mailTO.body(), "text/html; charset=utf-8");
+                        messageBody.setContent(mailTO.getBody(), "text/html; charset=utf-8");
 
                         Multipart multipart = new MimeMultipart();
                         multipart.addBodyPart(messageBody);
 
-                        for (Attachment atm : mailTO.attachments()) {
+                        for (Attachment atm : mailTO.getAttachments()) {
                             MimeBodyPart attachment = new MimeBodyPart();
                             DataSource source = new ByteArrayDataSource(
                                     atm.getInputstream(), atm.getFiletype());
@@ -99,8 +102,8 @@ class GMail {
 
                         message.setContent(multipart);
 
-                        LOGGER.info("Sending mail to " + mailTO.to() + " with subject: "
-                                + mailTO.subject());
+                        LOGGER.info("Sending mail to " + mailTO.getTo() + " with subject: "
+                                + mailTO.getSubject());
 
                         Transport.send(message);
                         mailing.sendSuccess();
@@ -114,8 +117,8 @@ class GMail {
 
 
                 } catch (Exception e) {
-                    LOGGER.info("Failed to send mail to " + mailTO.to()
-                            + " with subject: " + mailTO.subject() + ". ["
+                    LOGGER.info("Failed to send mail to " + mailTO.getTo()
+                            + " with subject: " + mailTO.getSubject() + ". ["
                             + e.getMessage() + "]", e);
                     mailing.sendFailed(e.getMessage());
                     mailingRepository.save(mailing);

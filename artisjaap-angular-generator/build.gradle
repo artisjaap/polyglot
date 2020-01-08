@@ -1,7 +1,7 @@
 
 jar {
-    baseName = 'artisjaap-angular-generator'
-    version = '0.0.1-SNAPSHOT'
+    archiveBaseName = 'artisjaap-angular-generator'
+    archiveVersion = '0.0.1-SNAPSHOT'
 
 }
 

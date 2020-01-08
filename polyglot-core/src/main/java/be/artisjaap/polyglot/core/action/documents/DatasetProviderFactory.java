@@ -82,7 +82,7 @@ public class DatasetProviderFactory implements DatasetProvider {
     }
 
     public DatasetProviderFactory addDummyTranslationDataSet(){
-        datasetProvider.add("translation", TranslationDataSet.dummyList(10), TranslationDataSet.class);
+        datasetProvider.add("translations", TranslationDataSet.dummyList(10), TranslationDataSet.class);
         return this;
     }
 

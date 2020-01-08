@@ -9,10 +9,10 @@ import org.springframework.stereotype.Component;
 public class PropertyAssembler implements Assembler<PropertyTO, Property> {
     @Override
     public PropertyTO assembleTO(Property doc) {
-        return PropertyTO.newBuilder()
-                .withKey(doc.getKey())
-                .withValue(doc.getValue())
-                .withActualType(doc.getType())
+        return PropertyTO.builder()
+                .key(doc.getKey())
+                .value(doc.getValue())
+                .actualType(doc.getType())
                 .build();
     }
 

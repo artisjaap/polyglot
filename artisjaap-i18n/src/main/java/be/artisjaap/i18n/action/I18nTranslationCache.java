@@ -20,11 +20,14 @@ public class I18nTranslationCache {
 
     private Map<String, Map<String, TranslationTO>> translationsPerLanguage = new HashMap<>();
 
-    @Autowired
-    private I18nTranslationRepository i18nTranslationRepository;
+    private final I18nTranslationRepository i18nTranslationRepository;
 
-    @Autowired
-    private I18nTranslationAssembler i18nTranslationAssembler;
+    private final I18nTranslationAssembler i18nTranslationAssembler;
+
+    public I18nTranslationCache(I18nTranslationRepository i18nTranslationRepository, I18nTranslationAssembler i18nTranslationAssembler) {
+        this.i18nTranslationRepository = i18nTranslationRepository;
+        this.i18nTranslationAssembler = i18nTranslationAssembler;
+    }
 
     List<TranslationTO> allTranslations() {
         return translationsPerLanguage.entrySet().stream().flatMap(entity -> entity.getValue().entrySet().stream())

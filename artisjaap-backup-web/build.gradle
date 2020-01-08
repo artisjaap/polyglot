@@ -1,12 +1,12 @@
 jar {
-    baseName = 'artisjaap-backup-web'
-    version = '0.0.1-SNAPSHOT'
+    archiveBaseName = 'artisjaap-backup-web'
+    archiveVersion = '0.0.1-SNAPSHOT'
 }
 
 dependencies {
-    implementation project(':artisjaap-common')
+    compile project(':artisjaap-common')
     compile project(':artisjaap-backup')
-    
+
     testCompile('org.springframework.boot:spring-boot-starter-test')
 
     testCompile('de.flapdoodle.embed:de.flapdoodle.embed.mongo')

@@ -1,6 +1,6 @@
 jar {
-    baseName = 'artisjaap-schedule'
-    version = '0.0.1-SNAPSHOT'
+    archiveBaseName = 'artisjaap-schedule'
+    archiveVersion = '0.0.1-SNAPSHOT'
 }
 
 dependencies {

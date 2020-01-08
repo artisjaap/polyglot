@@ -8,11 +8,14 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class I18nCreateTranslation {
-    @Autowired
-    private I18nTranslationRepository i18nTranslationRepository;
+    private final I18nTranslationRepository i18nTranslationRepository;
 
-    @Autowired
-    private I18nNewTranslationAssembler i18nNewTranslationAssembler;
+    private final I18nNewTranslationAssembler i18nNewTranslationAssembler;
+
+    public I18nCreateTranslation(I18nTranslationRepository i18nTranslationRepository, I18nNewTranslationAssembler i18nNewTranslationAssembler) {
+        this.i18nTranslationRepository = i18nTranslationRepository;
+        this.i18nNewTranslationAssembler = i18nNewTranslationAssembler;
+    }
 
     public void forTranslation(NewTranslationTO translationTO){
         i18nTranslationRepository.save(i18nNewTranslationAssembler.assembleEntity(translationTO));

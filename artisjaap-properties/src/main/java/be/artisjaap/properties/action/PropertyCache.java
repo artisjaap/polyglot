@@ -24,11 +24,14 @@ class PropertyCache {
 
     private Map<String, PropertyTO> properties = new HashMap<>();
 
-    @Autowired
-    private PropertyRepository propertyRepository;
+    private final PropertyRepository propertyRepository;
 
-    @Autowired
-    private PropertyAssembler propertyAssembler;
+    private final PropertyAssembler propertyAssembler;
+
+    public PropertyCache(PropertyRepository propertyRepository, PropertyAssembler propertyAssembler) {
+        this.propertyRepository = propertyRepository;
+        this.propertyAssembler = propertyAssembler;
+    }
 
     @PostConstruct
     private void initProperties() {

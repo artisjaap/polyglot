@@ -16,10 +16,8 @@ import be.artisjaap.document.model.mongo.CombinedTemplateRepository;
 import be.artisjaap.document.model.mongo.GegenereerdeBriefRepository;
 import be.artisjaap.document.model.mongo.TemplateRepository;
 import be.artisjaap.document.utils.QrUtils;
-import cucumber.api.java.nl.Dan;
-import cucumber.api.junit.Cucumber;
+import cucumber.api.java.en.Then;
 import org.apache.commons.io.FileUtils;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.File;
@@ -44,32 +42,32 @@ public class DocumentbeheerThenStepsDefinition {
     @Autowired
     private GegenereerdeBriefRepository gegenereerdeBriefRepository;
 
-    @Dan("^is de template met code (.*) beschikbaar$")
+    @Then("^the template with code (.*) is available$")
     public Template isDeBriefMetCodeBeschikbaar(String code) {
         Optional<Template> template = templateRepository.findByCode(code).stream().findFirst();
         assertTrue(template.isPresent());
         return template.get();
     }
 
-    @Dan("^is de gecombineerde template met code (.*) beschikbaar$")
+    @Then("^the combined template with code (.*) is available$")
     public CombinedTemplate isDeGecombineerdeTemplateMetCodeBeschikbaar(String code){
         List<CombinedTemplate> template = combinedTemplateRepository.findByCode(code);
         assertFalse(template.isEmpty());
         return template.get(0);
     }
 
-    @Dan("^staat de template met code (.*) actief$")
+    @Then("^template with code (.*) is active$")
     public void staatDeTemplateMetCodeActief(String code){
         assertTrue(isDeBriefMetCodeBeschikbaar(code).getActief());
     }
 
-    @Dan("^staat de gecombineerde template met code (.*) actief$")
+    @Then("^the combined template with code (.*) is active$")
     public void staatDeGecombineerdeTemplateMetCodeActief(String code){
         assertTrue(isDeGecombineerdeTemplateMetCodeBeschikbaar(code).getActief());
     }
 
 
-    @Dan("^kan de brief met code (.*) in taal (.*) gegenereerd worden met een default set van datasets$")
+    @Then("^the document with code (.*) in language (.*) can be generated using a default dataset$")
     public void kanDeBriefMetCodeMANDAAT_BRIEFGegenereerdWordenMetEenDefaultSetVanDatasets(String code, String taal) {
         BriefConfigTO briefConfigTO = BriefConfigTO.builder()
                 .code(code)
@@ -82,7 +80,7 @@ public class DocumentbeheerThenStepsDefinition {
     }
 
 
-    @Dan("^kan de brief met code (.*) in taal (.*) gegenereerd worden met een default set van datasets en worden opgeslagen in de MongoDB$")
+    @Then("^the document with code (.*) in language (.*) can be generated using a default dataset and are saved in MongoDB$")
     public void kanDeBriefMetCodeInTaalGegenereerdWordenMetEenDefaultSetVanDatasetsEnWordenOpgeslagenInDeMongoDB(String code, String isoCode) throws Throwable {
         BriefConfigTO briefConfigTO = BriefConfigTO.builder()
                 .code(code)
@@ -98,7 +96,7 @@ public class DocumentbeheerThenStepsDefinition {
         assertNotNull(brief.get(0).getDocumentLocation().getDocument());
     }
 
-    @Dan("^kan de brief met code (.*) in taal (.*) gegenereerd worden met een default set van datasets en worden opgeslagen in de MongoDB met bestandsnaam (.*)$")
+    @Then("^the document with code (.*) in language (.*) can be generated using a default dataset and are saved in MongoDB with filename (.*)$")
     public void kanDeBriefMetCodeInTaalGegenereerdWordenMetEenDefaultSetVanDatasetsEnWordenOpgeslagenInDeMongoDBMetBestandsnaam(String code, String isoCode, List<String> bestandsnaamDeel) throws Throwable {
         GenericFileName.Builder genericFilenameBuilder = FileGeneratieFactory.fromDatasets();
         bestandsnaamDeel.forEach(genericFilenameBuilder::withFilenameParts);
@@ -114,7 +112,7 @@ public class DocumentbeheerThenStepsDefinition {
 
     }
 
-    @Dan("^kan de brief met code (.*) in taal (.*) gegenereerd worden met een default set van datasets en worden opgeslagen in de MongoDB en volgende datasets worden geblacklist: (.*)")
+    @Then("^the document with code (.*) in language (.*) can be generated using a default dataset and are saved in MongoDB and datasets (.*) are blacklisted$")
     public void kanDeBriefMetCodeInTaalGegenereerdWordenMetEenDefaultSetVanDatasetsEnWordenOpgeslagenInDeMongoDBMetBlacklist(String code, String isoCode, List<String> blackList) throws Throwable {
         BriefConfigTO briefConfigTO = BriefConfigTO.builder()
                 .code(code)
@@ -136,7 +134,7 @@ public class DocumentbeheerThenStepsDefinition {
 
 
 
-    @Dan("^kan de brief met code (.*) in taal (.*) gegenereerd worden met een default set van datasets en worden opgeslagen het absolute path (.*)$")
+    @Then("^the document with code (.*) in language (.*) can be generated using a default dataset and are saved on absolute path (.*)$")
     public void kanDeBriefMetCodeInTaaldGegenereerdWordenMetEenDefaultSetVanDatasetsEnWordenOpgeslagenHetAbsolutePath(String code, String isoCode, String absolutePath) throws Throwable {
         BriefConfigTO briefConfigTO = BriefConfigTO.builder()
                 .code(code)
@@ -148,7 +146,7 @@ public class DocumentbeheerThenStepsDefinition {
         generateDocument.forDocument(briefConfigTO);
     }
 
-    @Dan("^kan de brief met code (.*) in taal (.*) gegenereerd worden met een default set van datasets, wordt opgeslagen op het absolute path (.*) en bevat volgende images$")
+    @Then("^the document with code (.*) in language (.*) can be generated using a default dataset, are saved in absolute path (.*) and contain the following images$")
     public void kanDeBriefMetCodeInTaaldGegenereerdWordenMetEenDefaultSetVanDatasetsEnWordenOpgeslagenHetAbsolutePathMetImages(String code, String isoCode, String absolutePath, List<GherkinDocumentImage> images) throws Throwable {
         List<DocumentImage> documentImages = images.stream()
                 .map(image -> DocumentImage.newBuilder().withName(image.bookmarkNaam).withImage(bytesFromImage(image.image)).build())
@@ -166,7 +164,7 @@ public class DocumentbeheerThenStepsDefinition {
         generateDocument.forDocument(briefConfigTO);
     }
 
-    @Dan("^kan de brief met code (.*) in taal (.*) gegenereerd worden met een default set van datasets en worden opgeslagen op het relatieve path (.*)$")
+    @Then("^the document with code (.*) in language (.*) can be generated using a default dataset and are saved on relative path (.*)$")
     public void kanDeBriefMetCodeInTaalGegenereerdWordenMetEenDefaultSetVanDatasetsEnWordenOpgeslagenOpHetRelatievePath(String code, String isoCode, String relativePath) throws Throwable {
         BriefConfigTO briefConfigTO = BriefConfigTO.builder()
                 .code(code)
@@ -178,7 +176,7 @@ public class DocumentbeheerThenStepsDefinition {
         generateDocument.forDocument(briefConfigTO);
     }
 
-    @Dan("^kan de brief met code (.*) in taal (.*) gegenereerd worden met een default set van datasets, wordt opgeslagen op het absolute path (.*) en bevat in de QR de volgende gegevens (.*)$")
+    @Then("^the document with code (.*) in language (.*) can be generated using a default dataset, is saved on absolute path (.*) and has a QR code with following data (.*)$")
     public void briefMetCodeInTaalMetDefaultDatasetsEnQrCodeData(String code, String isoCode, String absolutePath, String qrData) {
 
         BriefConfigTO.BriefConfigTOBuilder builder = BriefConfigTO.builder()
@@ -212,7 +210,7 @@ public class DocumentbeheerThenStepsDefinition {
     }
 
 
-    @Dan("^is het bestand (.*) in taal (.*) beschikbaar onder de naam (.*)$")
+    @Then("^is het bestand (.*) in taal (.*) beschikbaar onder de naam (.*)$")
     public void isHetBestandBeschikbaarOnderDeNaam(String documentCode, String isoCode, String bestandsnaam) throws Throwable {
         GegenereerdeBrief gegenereerdeBrief = zoekGegenereerdeBrief(documentCode, isoCode);
         assertThat(gegenereerdeBrief.getDocumentLocation().getGegenereerdeBestandsnaam(), is(bestandsnaam));
@@ -235,7 +233,7 @@ public class DocumentbeheerThenStepsDefinition {
         return byBriefCodeAndTaal.get(0);
     }
 
-    @Dan("^is het bestand (.*) in taal (.*) beschikbaar en de metadata van de volgende datasets is niet opgeslagen: (.*)")
+    @Then("^is het bestand (.*) in taal (.*) beschikbaar en de metadata van de volgende datasets is niet opgeslagen: (.*)")
     public void isHetBestandMANDAAT_BRIEFInTaalNldBeschikbaarEnDeMetadataVanDeVolgendeDatasetsIsNietOpgeslagenLid(String code, String isoCode, List<String> blackList) throws Throwable {
         GegenereerdeBrief gegenereerdeBrief = zoekGegenereerdeBrief(code, isoCode);
         Set<String> datasets = gegenereerdeBrief.getDatasets().keySet();

@@ -5,8 +5,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class SetProperty {
-    @Autowired
-    private PropertyCache propertyCache;
+    private final PropertyCache propertyCache;
+
+    public SetProperty(PropertyCache propertyCache) {
+        this.propertyCache = propertyCache;
+    }
 
 
     public void forKeyWithValue(String key, Object value){

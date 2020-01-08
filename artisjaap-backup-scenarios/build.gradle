@@ -1,6 +1,6 @@
 jar {
-    baseName = 'artisjaap-backup-scenarios'
-    version = '0.0.1-SNAPSHOT'
+    archiveBaseName = 'artisjaap-backup-scenarios'
+    archiveVersion = '0.0.1-SNAPSHOT'
 }
 
 dependencies {

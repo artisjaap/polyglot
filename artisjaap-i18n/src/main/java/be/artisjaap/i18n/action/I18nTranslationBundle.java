@@ -11,14 +11,17 @@ import java.util.List;
 
 @Component
 public class I18nTranslationBundle {
-    @Autowired
-    private I18nTranslationCache i18nTranslationCache;
+    private final I18nTranslationCache i18nTranslationCache;
 
-    @Autowired
-    private I18nTranslationRepository i18nTranslationRepository;
+    private final I18nTranslationRepository i18nTranslationRepository;
 
-    @Autowired
-    private I18nTranslationAssembler i18nTranslationAssembler;
+    private final I18nTranslationAssembler i18nTranslationAssembler;
+
+    public I18nTranslationBundle(I18nTranslationCache i18nTranslationCache, I18nTranslationRepository i18nTranslationRepository, I18nTranslationAssembler i18nTranslationAssembler) {
+        this.i18nTranslationCache = i18nTranslationCache;
+        this.i18nTranslationRepository = i18nTranslationRepository;
+        this.i18nTranslationAssembler = i18nTranslationAssembler;
+    }
 
     public List<TranslationTO> findAllForBundle(String bundleName){
         List<Translation> allByBundleName = i18nTranslationRepository.findAllByBundleName(bundleName);

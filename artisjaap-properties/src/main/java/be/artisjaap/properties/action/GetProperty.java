@@ -8,8 +8,11 @@ import java.util.Set;
 
 @Component
 public class GetProperty {
-    @Autowired
-    private PropertyCache propertyCache;
+    private final PropertyCache propertyCache;
+
+    public GetProperty(PropertyCache propertyCache) {
+        this.propertyCache = propertyCache;
+    }
 
     public String valueForKey(String key){
         return propertyCache.propertyForKey(key);
