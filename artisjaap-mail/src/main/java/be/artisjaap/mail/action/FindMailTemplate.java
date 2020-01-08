@@ -8,11 +8,14 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class FindMailTemplate {
-    @Autowired
-    private MailTemplateRepository mailTemplateRepository;
+    private final MailTemplateRepository mailTemplateRepository;
 
-    @Autowired
-    private MailTemplateAssembler mailTemplateAssembler;
+    private final MailTemplateAssembler mailTemplateAssembler;
+
+    public FindMailTemplate(MailTemplateRepository mailTemplateRepository, MailTemplateAssembler mailTemplateAssembler) {
+        this.mailTemplateRepository = mailTemplateRepository;
+        this.mailTemplateAssembler = mailTemplateAssembler;
+    }
 
     public MailTemplateTO forCode(String code){
         return mailTemplateRepository.findByCode(code).map(mailTemplateAssembler::assembleTO).orElseThrow(() -> new UnsupportedOperationException("template not found"));

@@ -3,11 +3,10 @@ package be.artisjaap.document.cucumber;
 import be.artisjaap.common.utils.LocalDateUtils;
 import be.artisjaap.document.action.*;
 import be.artisjaap.document.action.to.*;
-import cucumber.api.java.nl.Als;
-import cucumber.api.java.nl.Gegeven;
-import cucumber.api.junit.Cucumber;
+import cucumber.api.java.en.When;
+
+import cucumber.api.java.en.Given;
 import org.apache.commons.io.FileUtils;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.File;
@@ -45,19 +44,14 @@ public class DocumentbeheerStepsDefinition {
     private AddDocument addDocument;
 
 
-    @Gegeven("^een template (.*) met code (.*) in (.*)$")
-    public void eenTemplateMetCodeInTaal(String bestand, String code, String isoCode) {
-        eenTemplateWordtOpgeladen(bestand, code, isoCode);
-    }
-
-    @Gegeven("^een actieve template (.*) met code (.*) in (.*)$")
+    @Given("^an active template (.*) with code (.*) in language (.*)$")
     public void eenBriefMetCodeInTaalDieActiefIs(String bestand, String code, String isoCode) {
         eenTemplateWordtOpgeladen(bestand, code, isoCode);
         deTemplateMetCodeActiefWordtGezet(code, isoCode);
     }
 
 
-    @Als("^een template (.*) wordt opgeladen als code (.*) in (.*)$")
+    @When("^a template (.*) is uploaded with code (.*) in language (.*)$")
     public void eenTemplateWordtOpgeladen(String bestand, String code, String isoCode) {
         TemplateNewTO templateTO = TemplateNewTO.builder()
                 .code(code)
@@ -68,28 +62,28 @@ public class DocumentbeheerStepsDefinition {
         addSimpleTemplate.forNew(templateTO);
     }
 
-    @Als("^de template met code (.*) actief wordt gezet in taal (.*)$")
+    @When("^template with code (.*) is activated in language (.*)$")
     public void deTemplateMetCodeActiefWordtGezet(String code, String isoCode) {
         List<TemplateTO> templateTOS = findAvailableSimpleTemplates.withCodeAndLanguage(code, isoCode);
         assertThat(templateTOS.size(), is(1));
         activateSimpleTemplate.activateTemplate(templateTOS.get(0).getId());
     }
 
-    @Als("^de gecombineerde template met code (.*) actief wordt gezet in taal (.*)$")
+    @When("^the combined template with code (.*) is activated in language (.*)$")
     public void deGecombineerdeTemplateMetCodeActiefWordtGezetInTaal(String code, String isoCode) throws Throwable {
         List<CombinedTemplateTO> combinedTemplateTOS = findAvailableCombinedTemplates.withCodeAndLanguage(code, isoCode);
         assertThat(combinedTemplateTOS.size(), is(1));
         activateSimpleTemplate.activateTemplate(combinedTemplateTOS.get(0).getId());
     }
 
-    @Als("^de brief met code (.*) actief wordt gezet in taal (.*)$")
+    @When("^the document with code (.*) has been set active in language (.*)$")
     public void deBriefMANDAAT_BRIEFWordtActiefGezet(String code, String isoCode) throws Throwable {
         List<DocumentTO> documentTOS = findAvailableDocuments.withCodeAndLanguage(code, isoCode);
         assertThat(documentTOS.size(), is(1));
         activateDocument.metId(documentTOS.get(0).getId());
     }
 
-    @Als("^een gecombineerde template met code (.*) in taal (.*) wordt gemaakt uit de templates (.*)$")
+    @When("^a combined template with code (.*) in language (.*) consists of templates (.*)$")
     public void eenGecombineerdeTemplateMetCodeWordtGemaaktUitDeTemplates(String code, String taal, List<String> templates) {
         CombinedTemplateNewTO combinatie = CombinedTemplateNewTO
                 .builder()
@@ -112,7 +106,7 @@ public class DocumentbeheerStepsDefinition {
 
 
 
-    @Als("^een brief (.*) in (.*) die bestaat uit de templates (.*)")
+    @When("^a document (.*) in language (.*) exists of templates (.*)")
     public void eenBriefInNldDieBestaatUitDeTemplates(String code, String isoCode, List<String> templates) throws Throwable {
         DocumentNewTO nieuweBrief = DocumentNewTO.builder()
                 .code(code)
@@ -123,7 +117,7 @@ public class DocumentbeheerStepsDefinition {
     }
 
 
-    @Gegeven("^vandaag is (\\d{2}-\\d{2}-\\d{4}) ([0-9]{2}):([0-9]{2})$")
+    @Given("^vandaag is (\\d{2}-\\d{2}-\\d{4}) ([0-9]{2}):([0-9]{2})$")
     public void vandaagIs(String datumVanGebeurtenis, int uur, int min) {
         LocalDate localDate = LocalDateUtils.parseDateFromDDMMYYYYString(datumVanGebeurtenis);
         LocalDateUtils.useFixedDate(localDate.atTime(uur, min, 0));

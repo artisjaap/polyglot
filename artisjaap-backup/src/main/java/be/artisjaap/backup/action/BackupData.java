@@ -48,12 +48,12 @@ public class BackupData {
 
         String filename = "backup_" + LocalDateUtils.nowTimestamp() + ".zip";
 
-        MailTO.newBuilder()
-                .withFrom("coene.stijn@gmail.com")
-                .withTo(email)
-                .withSubject("backup")
-                .withBody("backup")
-                .withAttachments(Arrays.asList(new Attachment(filename, "application/zip", fout)))
+        MailTO.builder()
+                .from("coene.stijn@gmail.com")
+                .to(email)
+                .subject("backup")
+                .body("backup")
+                .attachments(Arrays.asList(new Attachment(filename, "application/zip", fout)))
                 .build();
 
 

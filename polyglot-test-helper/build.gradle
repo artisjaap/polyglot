@@ -1,7 +1,7 @@
 
 jar {
-    baseName = 'polyglot-test-helper'
-    version = '0.0.1-SNAPSHOT'
+    archiveBaseName = 'polyglot-test-helper'
+    archiveVersion = '0.0.1-SNAPSHOT'
 
 }
 

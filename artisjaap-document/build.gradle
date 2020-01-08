@@ -1,6 +1,6 @@
 jar {
-    baseName = 'artisjaap-document'
-    version = '0.0.1-SNAPSHOT'
+    archiveBaseName = 'artisjaap-document'
+    archiveVersion = '0.0.1-SNAPSHOT'
 
 }
 

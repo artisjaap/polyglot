@@ -3,38 +3,40 @@ package be.artisjaap.mail.action;
 import be.artisjaap.mail.action.to.MailAndTemplateTO;
 import be.artisjaap.mail.action.to.MailTO;
 import be.artisjaap.mail.action.to.MailTemplateTO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class SendMail {
 
-    @Autowired
-    private GMail gmail;
+    private final GMail gmail;
 
-    @Autowired
-    private FindMailTemplate mailTemplate;
+    private final FindMailTemplate mailTemplate;
 
-    @Autowired
-    private FreemarkerTemplateGenerator freemarkerTemplateGenerator;
+    private final FreemarkerTemplateGenerator freemarkerTemplateGenerator;
 
-    public void to(MailTO mailTO){
+    public SendMail(GMail gmail, FindMailTemplate mailTemplate, FreemarkerTemplateGenerator freemarkerTemplateGenerator) {
+        this.gmail = gmail;
+        this.mailTemplate = mailTemplate;
+        this.freemarkerTemplateGenerator = freemarkerTemplateGenerator;
+    }
+
+    public void to(MailTO mailTO) {
         gmail.sendAMail(mailTO);
     }
 
-    public void fromTemplate(MailAndTemplateTO mailAndTemplateTO ){
-        MailTemplateTO mailTemplateTO = mailTemplate.forCode(mailAndTemplateTO.templateCode());
-        String mailBody = freemarkerTemplateGenerator.fillTemplate(mailTemplateTO.htmlBody(), mailAndTemplateTO.model());
-        String subject = freemarkerTemplateGenerator.fillTemplate(mailTemplateTO.subject(), mailAndTemplateTO.model());
+    public void fromTemplate(MailAndTemplateTO mailAndTemplateTO) {
+        MailTemplateTO mailTemplateTO = mailTemplate.forCode(mailAndTemplateTO.getTemplateCode());
+        String mailBody = freemarkerTemplateGenerator.fillTemplate(mailTemplateTO.getHtmlBody(), mailAndTemplateTO.getModel());
+        String subject = freemarkerTemplateGenerator.fillTemplate(mailTemplateTO.getSubject(), mailAndTemplateTO.getModel());
 
-        to(MailTO.newBuilder()
-                .withAttachments(mailAndTemplateTO.attachments())
-                .withBody(mailBody)
-                .withFrom(mailAndTemplateTO.from())
-                .withTo(mailAndTemplateTO.to())
-                .withSubject(subject)
-                .withUsername(mailAndTemplateTO.username())
-                .withPassword(mailAndTemplateTO.password())
+        to(MailTO.builder()
+                .attachments(mailAndTemplateTO.getAttachments())
+                .body(mailBody)
+                .from(mailAndTemplateTO.getFrom())
+                .to(mailAndTemplateTO.getTo())
+                .subject(subject)
+                .username(mailAndTemplateTO.getUsername())
+                .password(mailAndTemplateTO.getPassword())
                 .build());
     }
 }

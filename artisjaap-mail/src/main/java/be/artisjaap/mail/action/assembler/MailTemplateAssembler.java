@@ -9,10 +9,10 @@ import org.springframework.stereotype.Component;
 public class MailTemplateAssembler implements Assembler<MailTemplateTO, MailTemplate> {
     @Override
     public MailTemplateTO assembleTO(MailTemplate doc) {
-        return MailTemplateTO.newBuilder()
-                .withCode(doc.getCode())
-                .withHtmlBody(doc.getHtmlBody())
-                .withSubject(doc.getSubject())
+        return MailTemplateTO.builder()
+                .code(doc.getCode())
+                .htmlBody(doc.getHtmlBody())
+                .subject(doc.getSubject())
                 .build();
 
     }
@@ -20,9 +20,9 @@ public class MailTemplateAssembler implements Assembler<MailTemplateTO, MailTemp
     @Override
     public MailTemplate assembleEntity(MailTemplateTO mailTemplateTO) {
         return MailTemplate.newBuilder()
-                .withCode(mailTemplateTO.code())
-                .withHtmlBody(mailTemplateTO.htmlBody())
-                .withSubject(mailTemplateTO.subject())
+                .withCode(mailTemplateTO.getCode())
+                .withHtmlBody(mailTemplateTO.getHtmlBody())
+                .withSubject(mailTemplateTO.getSubject())
                 .build();
     }
 }

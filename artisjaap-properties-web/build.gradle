@@ -1,6 +1,6 @@
 jar {
-    baseName = 'artisjaap-properties-web'
-    version = '0.0.1-SNAPSHOT'
+    archiveBaseName = 'artisjaap-properties-web'
+    archiveVersion = '0.0.1-SNAPSHOT'
 }
 
 dependencies {

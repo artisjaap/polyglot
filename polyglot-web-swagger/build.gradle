@@ -1,7 +1,7 @@
 
 jar {
-    baseName = 'polyglot-web-swagger'
-    version = '0.0.1-SNAPSHOT'
+    archiveBaseName = 'polyglot-web-swagger'
+    archiveVersion = '0.0.1-SNAPSHOT'
 
 }
 
