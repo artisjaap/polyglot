@@ -9,6 +9,8 @@ import {StudentActions} from '../action-types';
 import {NewLessonHeaderRequest} from '../../model/new-lesson-header-request';
 import {FileUpload} from '../../model/file-upload';
 import {TranslationForLessonResponse} from '../../model/translation-for-lesson-response';
+import {PracticeAnswerService} from "../../services/practice-answer.service";
+import {FileSaverService} from "ngx-filesaver";
 
 @Component({
   selector: 'app-language-pair-detail',
@@ -24,7 +26,10 @@ export class LanguagePairDetailComponent implements OnInit {
   @ViewChild('file', {static: true}) file;
   public files: Set<File> = new Set();
 
-  constructor(private store: Store<AppState>, private route: ActivatedRoute) {
+  constructor(private store: Store<AppState>
+              , private route: ActivatedRoute
+              , private practiceAnswerService: PracticeAnswerService
+              , private fileSaverService: FileSaverService) {
   }
 
   ngOnInit() {
@@ -61,6 +66,15 @@ export class LanguagePairDetailComponent implements OnInit {
 
 
   }
+
+  generateLessonPdf() {
+    this.practiceAnswerService.createPracticePdf({
+       languagePairId: this.languagePairId,
+       numberOfWords: 10
+    }).subscribe(data => this.fileSaverService.save(data.body, "test.pdf"));
+  }
+
+
 }
 
 

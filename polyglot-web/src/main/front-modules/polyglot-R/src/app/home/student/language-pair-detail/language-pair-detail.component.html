@@ -1,8 +1,8 @@
 <div class="card-row">
   <mat-card>
-    <mat-card-header>
+    <mat-card-title>
       latest words
-    </mat-card-header>
+    </mat-card-title>
     <mat-card-content>
       <div *ngFor="let a of latestTranslations$ | async">
         {{a.languageA}} - {{a.languageB}}
@@ -11,9 +11,9 @@
   </mat-card>
 
   <mat-card>
-    <mat-card-header>
+    <mat-card-title>
       lessons
-    </mat-card-header>
+    </mat-card-title>
     <mat-card-content>
       <div *ngFor="let a of lessonHeaders$ | async" class="flex flex-row">
         <a class="action-link" (click)="deleteLesson(a)">
@@ -31,12 +31,14 @@
   </mat-card>
 
   <mat-card>
-    <mat-card-header>
+    <mat-card-title>
       Upload lesson
-    </mat-card-header>
+    </mat-card-title>
     <mat-card-content>
       <input type="file"  #file (change)="onFilesAdded()" multiple>
     </mat-card-content>
+    <button mat-button (click)="generateLessonPdf()">Gen PDF</button>
   </mat-card>
 
 </div>
+

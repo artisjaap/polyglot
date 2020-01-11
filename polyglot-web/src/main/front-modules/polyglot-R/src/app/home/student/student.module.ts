@@ -20,6 +20,7 @@ import { StoreModule } from '@ngrx/store';
 import * as fromStudent from './reducers';
 import { LessonDetailComponent } from './lesson-detail/lesson-detail.component';
 import { PracticeLessonComponent } from './practice-lesson/practice-lesson.component';
+import {FileSaverModule} from "ngx-filesaver";
 
 
 const entityMetadata: EntityMetadataMap = {
@@ -42,6 +43,7 @@ const entityMetadata: EntityMetadataMap = {
     MatInputModule,
     MatFormFieldModule,
     MatSelectModule,
+    FileSaverModule,
     EffectsModule.forFeature([StudentEffects]),
     StoreModule.forFeature(fromStudent.studentFeatureKey, fromStudent.reducers)
   ],

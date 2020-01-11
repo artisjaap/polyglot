@@ -1,5 +1,5 @@
 import {Inject, Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpResponse} from '@angular/common/http';
 import {PracticeAnswerValidateRequest} from '../model/practice-answer-validate-request';
 import {Observable} from 'rxjs';
 import {LessonResponse} from '../model/lesson-response';
@@ -16,9 +16,9 @@ export class PracticeAnswerService {
     return this.httpClient.put<LessonResponse>(this.apiurl + `api/practice/validate`, practiceAnswerValidateRequest );
   }
 
-  public createPracticePdf(createPracticePdfRequest: CreatePracticePdfRequest): Observable<PracticeAnswerResponse> {
+  public createPracticePdf(createPracticePdfRequest: CreatePracticePdfRequest): Observable<HttpResponse<Blob>> {
     return this.httpClient.post(this.apiurl + `api/practice/generate-pdf`, createPracticePdfRequest,
-      {observe: 'response', responseType: 'blob'} );
+      {observe: 'response', responseType: 'blob'});
   }
 
 
