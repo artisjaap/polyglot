@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class MailingRepositoryImpl implements MailingRepositoryCustom {
@@ -24,8 +25,10 @@ public class MailingRepositoryImpl implements MailingRepositoryCustom {
 			q.addCriteria(Criteria.where("subject").regex(subject, "i"));
 		}
 
-		Sort recenteEerst = new Sort(Sort.Direction.DESC, "timeStamp");
-		Pageable pageable = new PageRequest(page, 100, recenteEerst );
+		Sort.Order timeStampDesc = Sort.Order.desc("timeStamp");
+
+		Sort recenteEerst = Sort.by(timeStampDesc); //new Sort(Sort.Direction.DESC, Arrays.asList("timeStamp"));
+		Pageable pageable = PageRequest.of(page, 100, recenteEerst );
 
 		long count = mongoTemplate.count(q, Mailing.class);
 

@@ -27,7 +27,7 @@ public class VersionRepositoryImpl implements VersionRepositoryCustom {
 	@Override
 	public String findCurrentVersion() {
 		Query query = new Query();
-		query.with(new Sort(Direction.DESC, "timeStamp"));
+		query.with(Sort.by(Sort.Order.desc( "timeStamp")));
 		query.limit(1);
 
 		List<Version> find = mongoTemplate.find(query, Version.class);
