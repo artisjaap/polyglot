@@ -131,6 +131,20 @@ export class StudentEffects {
     )
   );
 
+  loadLatestTranslations = createEffect(
+    () => this.actions$.pipe(
+      ofType(StudentActions.loadLatestTranslations),
+      concatMap(action => this.translationService.loadLatestTranslationsForLanguagePair(action.languagePairId).pipe(
+        map(translations =>{
+          return {languagePairId: action.languagePairId, latestTranslations: translations};
+        })
+      )),
+      map(translations=> StudentActions.latestTranslationsLoaded({languagePairId: translations.languagePairId,
+        latestTranslations: translations.latestTranslations
+      }))
+    )
+  );
+
   createLesson$ = createEffect(
     () => this.actions$.pipe(
       ofType(StudentActions.createLesson),

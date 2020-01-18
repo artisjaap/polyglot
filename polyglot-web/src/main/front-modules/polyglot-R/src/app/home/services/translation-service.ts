@@ -1,5 +1,5 @@
 import {Inject, Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {HttpClient, HttpEvent, HttpParams} from '@angular/common/http';
 import {NewTranslationForLessonRequest} from '../model/new-translation-for-lesson-request';
 import {TranslationForLessonResponse} from '../model/translation-for-lesson-response';
@@ -38,5 +38,9 @@ export class TranslationService {
     return this.uploadService.uploadFile(url, fileUpload.file);
   }
 
+  loadLatestTranslationsForLanguagePair(languagePairId: any): Observable<TranslationForLessonResponse[]> {
+    return of();
+
+  }
 }
 

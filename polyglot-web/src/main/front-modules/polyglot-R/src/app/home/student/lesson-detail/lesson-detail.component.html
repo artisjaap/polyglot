@@ -1,38 +1,37 @@
-
 <mat-card class="flex-item center main-content-large " *ngIf="lesson$ | async as lesson ">
   <mat-card-title>
     {{lesson.title }}
   </mat-card-title>
   <mat-card-content>
-    <div>
 
 
-      <form [formGroup]="form" class="create-card-form">
-        <div class="flex flex-row">
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Language from" formControlName="question">
-          </mat-form-field>
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Language to" formControlName="solution">
-          </mat-form-field>
-          <button mat-button color="warn" (click)="createTranslation(lesson)">
-            <i class="icofont-plus"></i>
-          </button>
-        </div>
-
-      </form>
-
-    </div>
-    <div class="flex flex-row flex-row-wrap">
-      <div *ngFor="let t of lesson.translations" class="flex-item flex-col-4">
-
-        <a class="action-link" (click)="removeWordFromLesson(t.id, lesson.id)">
-          <i class="icofont-bin"></i>
-        </a>
-        <span>{{t.languageA}} - {{t.languageB}}</span>
+    <div class="flex flex-column">
+      <div class="flex">
+        <form [formGroup]="form" class="create-card-form">
+          <div class="flex flex-row">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Language from" formControlName="question">
+            </mat-form-field>
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Language to" formControlName="solution">
+            </mat-form-field>
+            <button mat-button color="warn" (click)="createTranslation(lesson)">
+              <i class="icofont-plus"></i>
+            </button>
+          </div>
+        </form>
       </div>
 
+      <div class="flex flex-row flex-row-reverse flex-row-wrap-reverse">
+        <div *ngFor="let t of lesson.translations" class="flex-item flex-col-2">
+          <a class="action-link" (click)="removeWordFromLesson(t.id, lesson.id)">
+            <i class="icofont-bin"></i>
+          </a>
+          <span>{{t.languageA}} - {{t.languageB}}</span>
+        </div>
+      </div>
     </div>
+
   </mat-card-content>
 </mat-card>
 

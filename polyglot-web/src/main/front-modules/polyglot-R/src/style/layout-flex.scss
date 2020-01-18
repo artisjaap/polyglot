@@ -18,8 +18,18 @@
     }
   }
 
-  &.flex-row-wrap {
-    flex-wrap: wrap;
+  &.flex-row-reverse {
+    flex-direction: row-reverse;
+    align-items: center;
+    margin: 4px 0;
+
+    span {
+      flex: 1
+    }
+  }
+
+  &.flex-row-wrap-reverse {
+    flex-wrap: wrap-reverse;
   }
 
 
@@ -81,4 +91,14 @@
     width: 25%;
   }
 
+  &.flex-col-2 {
+    flex: none;
+    width: 50%;
+  }
+
+  &.default-focus{
+    &:active{
+      border-bottom-color: rebeccapurple;
+    }
+  }
 }

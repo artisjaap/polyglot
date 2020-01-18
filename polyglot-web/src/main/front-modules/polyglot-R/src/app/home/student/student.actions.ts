@@ -53,6 +53,16 @@ export const lessonHeadersLoaded = createAction(
   props<{languagePairId: string, lessonHeaders: LessonHeaderResponse[]}>()
 );
 
+export const loadLatestTranslations = createAction(
+  '[] loadLatestTranslations',
+  props<{languagePairId: string}>()
+);
+
+export const latestTranslationsLoaded = createAction(
+  '[] latestTranslationsLoaded',
+  props<{languagePairId: string, latestTranslations: TranslationForLessonResponse[]}>()
+);
+
 export const loadLesson = createAction(
   '[] load lesson',
   props<{lessonId: string}>()
