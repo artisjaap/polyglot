@@ -31,7 +31,7 @@ export class LanguagePairDetailResolver implements Resolve<boolean> {
           }),
           filter(loaded => !!loaded),
           first(),
-          finalize(() => this.loadingLessonHeaders = false)),
+          finalize(() => this.loadingLessonHeaders = false))/*,
 
       this.store
         .pipe(select(latestTranslationsForLanguagePair, {languagePairId}),
@@ -43,7 +43,7 @@ export class LanguagePairDetailResolver implements Resolve<boolean> {
           }),
           filter(loaded => !!loaded),
           first(),
-          finalize(()=> this.loadingLatestTranslations = false))
+          finalize(()=> this.loadingLatestTranslations = false))*/
     );
 
 
