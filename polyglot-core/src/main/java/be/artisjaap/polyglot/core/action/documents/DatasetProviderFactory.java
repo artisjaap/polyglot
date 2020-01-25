@@ -57,7 +57,7 @@ public class DatasetProviderFactory implements DatasetProvider {
 
 
     public DatasetProviderFactory translationsFrom(List<TranslationTO> translations){
-        datasetProvider.add("translations", TranslationDataSet.from(translations));
+        datasetProvider.add("translations", TranslationDataSet.from(translations), true);
         return this;
     }
 

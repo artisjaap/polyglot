@@ -5,6 +5,7 @@ import be.artisjaap.document.action.GenerateDocument;
 import be.artisjaap.document.action.to.BriefConfigTO;
 import be.artisjaap.document.api.DatasetProviderImpl;
 import be.artisjaap.document.api.brieflocatie.BriefLocatieFactory;
+import be.artisjaap.document.api.filegeneratie.FileGeneratieFactory;
 import be.artisjaap.polyglot.core.action.documents.DatasetProviderFactory;
 import be.artisjaap.polyglot.core.action.pairs.FindLanguagePair;
 import be.artisjaap.polyglot.core.action.to.LanguagePairTO;
@@ -49,6 +50,7 @@ public class CreatePracticePdf {
                         .translationsFrom(randomTranslationsList)
                         .languagePairDataSetFrom(languagePairTO))
                 .opslagSettingsTO(BriefLocatieFactory.briefNietOpslaan())
+                .bestandsnaam(FileGeneratieFactory.simpleFilename())
                 .taal("NL")
                 .build());
 
