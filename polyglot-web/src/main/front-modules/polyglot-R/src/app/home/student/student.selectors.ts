@@ -2,7 +2,13 @@ import {createFeatureSelector, createSelector} from '@ngrx/store';
 import * as fromStudent from './reducers/index';
 import * as fromLanguagePair from './reducers/language-pair.reducer';
 import * as fromLessonHeader from './reducers/lesson-header.reducer';
-import {selectLanguagePair, selectLesson, selectLessonHeader, selectLatestTranslations} from './reducers/index';
+import {
+  selectLanguagePair,
+  selectLesson,
+  selectLessonHeader,
+  selectLatestTranslations,
+  selectPracticeLesson
+} from './reducers/index';
 
 
 export const allLanguagePairsLoaded = createSelector(
@@ -36,7 +42,7 @@ export const latestTranslationsForLanguagePair = createSelector(
   (state, props) => {
     return state.loadedLanguagePairs[props.languagePairId].map(id => state.entities[id]);
   }
-)
+);
 
 export const isLessonLoaded = createSelector(
   selectLesson,
@@ -49,6 +55,13 @@ export const lessonById = createSelector(
   selectLesson,
   (state, props) => {
     return state.entities[props.lessonId];
+  }
+);
+
+export const previousAnswer = createSelector(
+  selectPracticeLesson,
+  (state, props) => {
+    return state.previousAnswer;
   }
 );
 
