@@ -7,6 +7,14 @@ import org.springframework.stereotype.Component;
 public class PracticeAnswerResponseMapper implements ResponseMapper<AnswerTO, PracticeAnswerResponse> {
     @Override
     public PracticeAnswerResponse map(AnswerTO answerTO) {
-        return null;
+        return PracticeAnswerResponse.builder()
+                .correctAnswer(answerTO.correctAnswer())
+                .expectedAnswer(answerTO.expectedAnswer())
+                .givenAnswer(answerTO.givenAnswer())
+                .languagePairId(answerTO.languagePairId())
+                .question(answerTO.question())
+                .translationId(answerTO.translationId())
+                .userId(answerTO.userId())
+                .build();
     }
 }

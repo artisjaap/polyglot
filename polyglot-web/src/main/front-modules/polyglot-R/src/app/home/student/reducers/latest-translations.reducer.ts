@@ -1,6 +1,6 @@
 import {Action, createReducer, on} from '@ngrx/store';
-import {createEntityAdapter, EntityState} from "@ngrx/entity";
-import {TranslationForLessonResponse} from "../../model/translation-for-lesson-response";
+import {createEntityAdapter, EntityState} from '@ngrx/entity';
+import {TranslationForLessonResponse} from '../../model/translation-for-lesson-response';
 
 
 export const latestTranslationsFeatureKey = 'latestTranslations';

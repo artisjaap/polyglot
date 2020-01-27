@@ -18,9 +18,9 @@
         </div>
 
         <div class="flex-item font-right previous-solution" *ngIf="previousAnswer$ |async as previousAnswer">
-          <span *ngIf="previousAnswer.isCorrect()">
+          <span *ngIf="previousAnswer.correctAnswer">
             <i class="icofont-check-alt correct-answer"></i>{{previousAnswer.question}}: <span class="correct-answer">{{previousAnswer.expectedAnswer }} </span> </span>
-          <span *ngIf="!previousAnswer.isCorrect()">
+          <span *ngIf="!previousAnswer.correctAnswer">
             <i class="icofont-close-line incorrect-answer"></i>{{previousAnswer.question}}: <span class="incorrect-answer-strikethrough">{{previousAnswer.givenAnswer}} </span> <span class="correct-answer">{{previousAnswer.expectedAnswer }} </span> </span>
         </div>
 

@@ -5,11 +5,13 @@ import {LessonResponse} from '../../model/lesson-response';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../../reducers';
 import {ActivatedRoute} from '@angular/router';
-import {lessonById} from '../student.selectors';
+import {lessonById, previousAnswer} from '../student.selectors';
 import {TranslationForLessonResponse} from '../../model/translation-for-lesson-response';
 import {StudentActions} from '../action-types';
 import {PracticeAnswerValidateRequest} from '../../model/practice-answer-validate-request';
 import {PreviousAnswer} from './previous-answer';
+import {selectPracticeLesson} from '../reducers';
+import {PracticeAnswerResponse} from '../../model/practice-answer-response';
 
 @Component({
   selector: 'app-practice-lesson',
@@ -22,9 +24,9 @@ export class PracticeLessonComponent implements OnInit {
   private lesson$: Observable<LessonResponse>;
   private lesson: LessonResponse = new LessonResponse();
 
-  private previousAnswer$: Observable<PreviousAnswer>;
+  private previousAnswer$: Observable<PracticeAnswerResponse>;
 
-  private stats = {aantalOpgelost:0, aantalJuist:0, aantalFout:0}
+  private stats = {aantalOpgelost: 0, aantalJuist: 0, aantalFout: 0};
 
   constructor(private store: Store<AppState>, private route: ActivatedRoute) {
     const lessonId = route.snapshot.params.lessonId;
@@ -32,6 +34,10 @@ export class PracticeLessonComponent implements OnInit {
     this.lesson$ = store.select(lessonById, {lessonId});
     this.lesson$.subscribe(l => this.lesson = l);
 
+    this.previousAnswer$ = store.select(previousAnswer, {});
+    this.previousAnswer$.subscribe(previous => {
+      this.updateStats(previous);
+    });
   }
 
   ngOnInit() {
@@ -53,15 +59,14 @@ export class PracticeLessonComponent implements OnInit {
 
     this.store.dispatch(StudentActions.checkPracticeWordAnswer({practiceAnswer}));
 
-    const previousAnswer = new PreviousAnswer();
-    previousAnswer.question = this.translation.languageA;
-    previousAnswer.givenAnswer = answer.value;
-    previousAnswer.expectedAnswer = this.translation.languageB;
-    answer.value = "";
+    // const previousAnswer = new PreviousAnswer();
+    // previousAnswer.question = this.translation.languageA;
+    // previousAnswer.givenAnswer = answer.value;
+    // previousAnswer.expectedAnswer = this.translation.languageB;
+    answer.value = '';
+    //
+    // this.updateStats(previousAnswer);
 
-    this.updateStats(previousAnswer);
-
-    this.previousAnswer$ = of(previousAnswer);
 
 
 
@@ -69,14 +74,17 @@ export class PracticeLessonComponent implements OnInit {
 
   }
 
-  private updateStats(previousAnswer: PreviousAnswer) {
-    this.stats.aantalOpgelost++;
-    if(previousAnswer.isCorrect()){
-      this.stats.aantalJuist++;
-    }else {
-      this.stats.aantalFout++;
+  private updateStats(practiceAnswer: PracticeAnswerResponse) {
+    if (practiceAnswer) {
+
+      this.stats.aantalOpgelost++;
+      if (practiceAnswer.correctAnswer) {
+        this.stats.aantalJuist++;
+      } else {
+        this.stats.aantalFout++;
 
 
+      }
     }
   }
 }
