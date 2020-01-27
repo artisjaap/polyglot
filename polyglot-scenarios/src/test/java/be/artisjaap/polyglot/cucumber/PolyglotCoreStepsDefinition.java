@@ -37,6 +37,7 @@ import be.artisjaap.polyglot.core.model.Lesson;
 import be.artisjaap.polyglot.core.model.LessonRepository;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import cucumber.api.java.nl.Dan;
 import org.bson.types.ObjectId;
@@ -271,5 +272,15 @@ public class PolyglotCoreStepsDefinition {
                 .opslagSettingsTO(BriefLocatieFactory.voorAbsolutePath("c:/temp/docs/"))
                 .build();
         generateDocument.forDocument(briefConfigTO);
+    }
+
+    @Given("^the lesson (.*) is loaded for language pair (.*)-(.*)$")
+    public void uploadLesson(){
+
+    }
+
+    @Then("^a document TEST can be generated for language pair Nederlands-Fran$")
+    public void generateDocument(){
+
     }
 }

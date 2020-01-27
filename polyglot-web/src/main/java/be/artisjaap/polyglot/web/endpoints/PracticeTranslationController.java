@@ -51,6 +51,7 @@ public class PracticeTranslationController extends BaseController {
     void generatePracticePdf(HttpServletResponse response, @RequestBody CreatePracticePdfRequest generatePracticePdfRequest) throws IOException {
         Optional<byte[]> generatedPdf = createPracticePdf.forData(CreatePracticePdfTO.builder()
                 .languagePairId(generatePracticePdfRequest.getLanguagePairId())
+                .lessonId(generatePracticePdfRequest.getLessonId())
                 .numberOfWords(generatePracticePdfRequest.getNumberOfWords())
                 .build());
 
@@ -59,7 +60,7 @@ public class PracticeTranslationController extends BaseController {
         outputStream.write(generatedPdf.orElse(null));
 
         response.flushBuffer();
-
-
     }
+
+
 }

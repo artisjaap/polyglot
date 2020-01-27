@@ -35,7 +35,7 @@ public class CreatePracticePdf {
     private GenerateDocument generateDocument;
 
     public Optional<byte[]> forData(CreatePracticePdfTO practicePdfTO){
-        List<TranslationTO> translationTOS = findTranslations.allWordsForLanguagePair(practicePdfTO.getLanguagePairId());
+        List<TranslationTO> translationTOS = findTranslationsForSettings(practicePdfTO);
         InfinitRandomDataStreamer infinitRandomDataStreamer = InfinitRandomDataStreamer.fromDataList(translationTOS);
 
         List<TranslationTO> randomTranslationsList = IntStream.rangeClosed(1, practicePdfTO.getNumberOfWords())
@@ -54,5 +54,12 @@ public class CreatePracticePdf {
                 .taal("NL")
                 .build());
 
+    }
+
+    private List<TranslationTO> findTranslationsForSettings(CreatePracticePdfTO practicePdfTO) {
+        if(practicePdfTO.getLessonId() != null){
+            return findTranslations.allWordsForLesson(practicePdfTO.getLessonId());
+        }
+        return findTranslations.allWordsForLanguagePair(practicePdfTO.getLanguagePairId());
     }
 }

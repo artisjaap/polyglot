@@ -1,3 +1,3 @@
 jwt:
   secret: SECRET
-  expiration: 1000
+  expiration: 36000000

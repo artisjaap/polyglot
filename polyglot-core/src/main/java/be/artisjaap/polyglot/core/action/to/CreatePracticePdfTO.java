@@ -7,5 +7,6 @@ import lombok.Data;
 @Data
 public class CreatePracticePdfTO {
     private String languagePairId;
+    private String lessonId;
     private Integer numberOfWords;
 }
