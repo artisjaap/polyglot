@@ -12,6 +12,7 @@ import {PracticeAnswerValidateRequest} from '../../model/practice-answer-validat
 import {PreviousAnswer} from './previous-answer';
 import {selectPracticeLesson} from '../reducers';
 import {PracticeAnswerResponse} from '../../model/practice-answer-response';
+import {ArrayTools} from '../../../tools/ArrayTools';
 
 @Component({
   selector: 'app-practice-lesson',
@@ -23,6 +24,8 @@ export class PracticeLessonComponent implements OnInit {
   private translation: TranslationForLessonResponse;
   private lesson$: Observable<LessonResponse>;
   private lesson: LessonResponse = new LessonResponse();
+  private currentTranslationQueue: TranslationForLessonResponse[] = [];
+
 
   private previousAnswer$: Observable<PracticeAnswerResponse>;
 
@@ -44,10 +47,20 @@ export class PracticeLessonComponent implements OnInit {
     this.loadTranslation();
   }
 
+  loadTranslation() {
+    if (this.currentTranslationQueue.length === 0) {
+      this.currentTranslationQueue = ArrayTools.copy(this.lesson.translations);
+    }
 
-  private loadTranslation() {
-   this.translation = this.lesson.translations[Math.floor(Math.random() * this.lesson.translations.length)];
+    if (this.currentTranslationQueue.length > 0) {
+      this.translation = this.currentTranslationQueue.splice(Math.floor(Math.random() * this.currentTranslationQueue.length), 1)[0];
+    }
+
   }
+
+
+
+
 
   check(answer: HTMLInputElement) {
     const practiceAnswer: PracticeAnswerValidateRequest = {
