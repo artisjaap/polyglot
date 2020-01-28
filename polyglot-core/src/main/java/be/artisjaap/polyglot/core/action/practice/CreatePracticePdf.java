@@ -38,7 +38,8 @@ public class CreatePracticePdf {
         List<TranslationTO> translationTOS = findTranslationsForSettings(practicePdfTO);
         InfinitRandomDataStreamer infinitRandomDataStreamer = InfinitRandomDataStreamer.fromDataList(translationTOS);
 
-        List<TranslationTO> randomTranslationsList = IntStream.rangeClosed(1, practicePdfTO.getNumberOfWords())
+        Integer numberOfWords = practicePdfTO.getNumberOfWords()==0?translationTOS.size(): practicePdfTO.getNumberOfWords();
+        List<TranslationTO> randomTranslationsList = IntStream.rangeClosed(1, numberOfWords)
                 .mapToObj(i -> (TranslationTO) infinitRandomDataStreamer.next())
                 .collect(Collectors.toList());
 

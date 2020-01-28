@@ -8,11 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.CriteriaDefinition;
 import org.springframework.data.mongodb.core.query.Query;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.springframework.data.mongodb.core.query.Criteria.where;
+import static org.springframework.data.mongodb.core.query.Query.query;
 import static org.springframework.util.StringUtils.hasText;
 
 public class TranslationRepositoryImpl implements TranslationRepositoryCustom {
@@ -36,13 +39,13 @@ public class TranslationRepositoryImpl implements TranslationRepositoryCustom {
         }
         Pageable pageable = PageRequest.of(filter.page(), filter.pageSize(), sort);
 
-        q.addCriteria(Criteria.where("languagePairId")
+        q.addCriteria(where("languagePairId")
                 .is(new ObjectId(filter.languagePairId())));
 
         if (hasText(filter.textFilter())) {
             q.addCriteria(new Criteria().orOperator(
-                    Criteria.where("languageA").regex(filter.textFilter(), "i"),
-                    Criteria.where("languageB").regex(filter.textFilter(), "i")));
+                    where("languageA").regex(filter.textFilter(), "i"),
+                    where("languageB").regex(filter.textFilter(), "i")));
         }
 
         long count = mongoTemplate.count(q, Translation.class);
@@ -52,5 +55,12 @@ public class TranslationRepositoryImpl implements TranslationRepositoryCustom {
 
         return new PageImpl<>(translations, pageable, count);
     }
+
+    public List<Translation> findLatestForLanguagePair(Integer count, ObjectId languagePairId){
+        Query query = query(where("languagePairId").is(languagePairId))
+                .with(Sort.by("id").descending());
+        return mongoTemplate.find(query, Translation.class);
+    }
+
 }
 

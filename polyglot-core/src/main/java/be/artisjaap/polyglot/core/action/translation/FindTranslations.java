@@ -53,7 +53,7 @@ public class FindTranslations {
                 .collect(Collectors.toList());
     }
 
-    public List<TranslationTO> latestFor(String userId, int count){
+    public List<TranslationTO> latestFor(String languagePairId, int count){
         return new ArrayList<>();
     }
 

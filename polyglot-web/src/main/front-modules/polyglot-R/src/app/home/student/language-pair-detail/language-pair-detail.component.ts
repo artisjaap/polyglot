@@ -70,7 +70,16 @@ export class LanguagePairDetailComponent implements OnInit {
   generateLessonPdf() {
     this.practiceAnswerService.createPracticePdf({
        languagePairId: this.languagePairId,
+      lessonId: null,
        numberOfWords: 10
+    }).subscribe(data => this.fileSaverService.save(data.body, "test.pdf"));
+  }
+
+  generateLessonPdForLesson(lessonId: string) {
+    this.practiceAnswerService.createPracticePdf({
+      languagePairId: this.languagePairId,
+      lessonId,
+      numberOfWords: 0
     }).subscribe(data => this.fileSaverService.save(data.body, "test.pdf"));
   }
 

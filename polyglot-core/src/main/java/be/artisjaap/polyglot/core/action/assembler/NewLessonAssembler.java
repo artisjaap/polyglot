@@ -18,10 +18,11 @@ public class NewLessonAssembler implements Assembler<NewLessonTO, Lesson> {
     @Override
     public Lesson assembleEntity(NewLessonTO newLessonTO) {
         return Lesson.newBuilder()
-                .withLanguagePairId(MongoUtils.toObjectId(newLessonTO.languagePairId()))
-                .withUserId(MongoUtils.toObjectId(newLessonTO.userId()))
-                .withName(newLessonTO.name())
-                .withTranslations(newLessonTO.translationsIds().stream().map(MongoUtils::toObjectId).collect(Collectors.toSet()))
+                .withLanguagePairId(MongoUtils.toObjectId(newLessonTO.getLanguagePairId()))
+                .withUserId(MongoUtils.toObjectId(newLessonTO.getUserId()))
+                .withName(newLessonTO.getName())
+                .withTranslations(newLessonTO.getTranslationsIds().stream().map(MongoUtils::toObjectId).collect(Collectors.toSet()))
+                .withTags(newLessonTO.getTags())
                 .build();
     }
 }

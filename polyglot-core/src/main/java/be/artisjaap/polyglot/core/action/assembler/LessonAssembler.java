@@ -46,6 +46,7 @@ public class LessonAssembler implements Assembler<LessonTO, Lesson> {
                 .withLanguagePairId(lesson.getLanguagePairId().toString())
                 .withTranslations(translationPairTOS)
                 .withUserId(lesson.getUserId().toString())
+                .withTags(lesson.getTags())
                 .build();
     }
 

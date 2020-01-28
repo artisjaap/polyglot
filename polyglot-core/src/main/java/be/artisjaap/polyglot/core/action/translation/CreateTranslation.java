@@ -13,8 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 
@@ -111,11 +114,12 @@ public class CreateTranslation {
 
         if( pr.lessonName().isPresent()) {
 
-            LessonTO lessonTO = createLesson.create(NewLessonTO.newBuilder()
-                    .withName(pr.lessonName().get())
-                    .withLanguagePairId(to.languagePairId())
-                    .withUserId(to.userId())
-                    .withTranslationsIds(translationsForUserTO.translations().stream().map(TranslationTO::id).collect(Collectors.toList()))
+            LessonTO lessonTO = createLesson.create(NewLessonTO.builder()
+                    .name(pr.lessonName().get())
+                    .languagePairId(to.languagePairId())
+                    .userId(to.userId())
+                    .translationsIds(translationsForUserTO.translations().stream().map(TranslationTO::id).collect(Collectors.toList()))
+                    .tags(pr.tags())
                     .build());
             translationsForUserTO.setLessonHeader(LessonHeaderTO.newBuilder()
                     .withId(lessonTO.id())
@@ -135,9 +139,14 @@ class ProxyReader {
 
     private final BufferedReader reader;
     private String lessonName = null;
+    private Set<String> tags = new HashSet<>();
 
     public Optional<String> lessonName() {
         return Optional.ofNullable(lessonName);
+    }
+
+    public Set<String> tags() {
+        return tags;
     }
 
     public ProxyReader(Reader reader) {
@@ -162,6 +171,11 @@ class ProxyReader {
                 if (line.startsWith("@")) {
                     if (line.startsWith("@Lesson")) {
                         lessonName = line.substring(8);
+                    }
+                    if (line.startsWith("@Tags")) {
+                        tags = Arrays.asList(line.substring(6).split(","))
+                                .stream()
+                                .collect(Collectors.toSet());
                     }
                 } else {
                     sb.append(line).append("\r\n");

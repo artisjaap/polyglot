@@ -13,7 +13,7 @@ export class PracticeAnswerService {
   }
 
   public validatePracticeResult(practiceAnswerValidateRequest: PracticeAnswerValidateRequest): Observable<PracticeAnswerResponse> {
-    return this.httpClient.put<LessonResponse>(this.apiurl + `api/practice/validate`, practiceAnswerValidateRequest );
+    return this.httpClient.put<PracticeAnswerResponse>(this.apiurl + `api/practice/validate`, practiceAnswerValidateRequest );
   }
 
   public createPracticePdf(createPracticePdfRequest: CreatePracticePdfRequest): Observable<HttpResponse<Blob>> {
