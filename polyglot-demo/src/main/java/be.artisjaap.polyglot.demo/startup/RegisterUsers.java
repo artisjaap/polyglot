@@ -61,8 +61,8 @@ public class RegisterUsers extends AbstractInitScript {
 
         LanguagePairTO languagePairTO = createLanguagePair.forUser(NewLanguagePairTO.newBuilder()
                 .withUserId(userTO.id())
-                .withLanguageFrom("Dutch")
-                .withLanguageTo("English")
+                .withLanguageFrom("Nederlands")
+                .withLanguageTo("Frans")
                 .build());
         logger.info("LanguagePair created with id: " + languagePairTO.id());
 
