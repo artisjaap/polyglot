@@ -10,6 +10,6 @@ public interface TranslationRepositoryCustom {
 
     Page<Translation> findTranslationsForFilter(TranslationFilterTO filter);
 
-    List<Translation> findLatestForLanguagePair(Integer count, ObjectId languagePairId);
+    List<Translation> findLatestForLanguagePair(ObjectId languagePairId, Integer count);
 
 }

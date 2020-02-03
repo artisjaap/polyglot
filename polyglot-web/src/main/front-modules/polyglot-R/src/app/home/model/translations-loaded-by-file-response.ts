@@ -4,6 +4,6 @@ import {LessonHeaderResponse} from './lesson-header-response';
 export class TranslationsLoadedByFileResponse {
   lessonHeaderResponse: LessonHeaderResponse;
   languagePairId: string;
-  translation: TranslationForLessonResponse;
+  translations: TranslationForLessonResponse[];
 
 }

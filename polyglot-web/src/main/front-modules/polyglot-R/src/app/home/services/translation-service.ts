@@ -7,6 +7,7 @@ import {UpdateTranslationForLessonRequest} from '../model/update-translation-for
 import {UploadService} from './upload.service';
 import {TranslationsLoadedByFileResponse} from '../model/translations-loaded-by-file-response';
 import {FileUpload} from '../model/file-upload';
+import {LessonHeaderResponse} from '../model/lesson-header-response';
 
 @Injectable()
 export class TranslationService {
@@ -39,8 +40,9 @@ export class TranslationService {
   }
 
   loadLatestTranslationsForLanguagePair(languagePairId: any): Observable<TranslationForLessonResponse[]> {
-    return of();
+
+    const params = new HttpParams().set('languagePairId', languagePairId).set('latest', '10');
+    return this.httpClient.get<TranslationForLessonResponse[]>(this.apiurl + `api/translations`, {params});
 
   }
 }
-

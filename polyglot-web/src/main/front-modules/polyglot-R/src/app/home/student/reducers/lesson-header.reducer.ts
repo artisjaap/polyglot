@@ -30,6 +30,8 @@ const lessonReducer = createReducer(
       });
   }),
 
+
+
   on(StudentActions.lessonDeleted,
     (state, action) => {
       const loadedLanguagePairs = state.loadedLanguagePairs;

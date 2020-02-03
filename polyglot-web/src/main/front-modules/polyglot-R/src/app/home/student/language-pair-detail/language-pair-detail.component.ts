@@ -71,7 +71,7 @@ export class LanguagePairDetailComponent implements OnInit {
     this.practiceAnswerService.createPracticePdf({
        languagePairId: this.languagePairId,
       lessonId: null,
-       numberOfWords: 10
+       numberOfWords: 50
     }).subscribe(data => this.fileSaverService.save(data.body, "test.pdf"));
   }
 

@@ -2,13 +2,15 @@ package be.artisjaap.polyglot.core.model;
 
 import be.artisjaap.polyglot.core.action.to.SortTO;
 import be.artisjaap.polyglot.core.action.to.TranslationFilterTO;
-import be.artisjaap.polyglot.core.utils.MongoUtils;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.CriteriaDefinition;
 import org.springframework.data.mongodb.core.query.Query;
 
 import java.util.List;
@@ -27,14 +29,14 @@ public class TranslationRepositoryImpl implements TranslationRepositoryCustom {
         Query q = new Query();
 
         Sort sort;
-        if(filter.isOrderDefined()){
+        if (filter.isOrderDefined()) {
             List<Sort.Order> order = filter.getOrderByFields().stream().map(sortTO ->
                     (sortTO.getDirection() == SortTO.Direction.ASCENDING) ?
                             Sort.Order.asc(sortTO.getFieldName()) :
                             Sort.Order.desc(sortTO.getFieldName()))
                     .collect(Collectors.toList());
             sort = Sort.by(order);
-        }else{
+        } else {
             sort = Sort.by(Sort.Direction.ASC, "_id");
         }
         Pageable pageable = PageRequest.of(filter.page(), filter.pageSize(), sort);
@@ -56,9 +58,10 @@ public class TranslationRepositoryImpl implements TranslationRepositoryCustom {
         return new PageImpl<>(translations, pageable, count);
     }
 
-    public List<Translation> findLatestForLanguagePair(Integer count, ObjectId languagePairId){
+    public List<Translation> findLatestForLanguagePair(ObjectId languagePairId, Integer count) {
         Query query = query(where("languagePairId").is(languagePairId))
-                .with(Sort.by("id").descending());
+                .with(Sort.by("id").descending())
+                .limit(count);
         return mongoTemplate.find(query, Translation.class);
     }
 

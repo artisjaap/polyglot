@@ -53,8 +53,9 @@ public class FindTranslations {
                 .collect(Collectors.toList());
     }
 
-    public List<TranslationTO> latestFor(String languagePairId, int count){
-        return new ArrayList<>();
+    public List<TranslationTO> findLatestFor(String languagePairId, Integer count){
+        List<Translation> translations = translationRepository.findLatestForLanguagePair(new ObjectId(languagePairId), count);
+        return translationAssembler.assembleTOs(translations);
     }
 
 }

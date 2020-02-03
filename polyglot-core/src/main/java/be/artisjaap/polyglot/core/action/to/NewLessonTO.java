@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -14,8 +15,11 @@ public class NewLessonTO {
     private String name;
     private String userId;
     private String languagePairId;
-    private List<String> translationsIds;
-    private Set<String> tags;
+
+    @Builder.Default
+    private List<String> translationsIds = new ArrayList<>();
+    @Builder.Default
+    private Set<String> tags = new HashSet<>();
 
 
 }

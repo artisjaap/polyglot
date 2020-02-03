@@ -5,7 +5,11 @@ import {filter, finalize, first, tap} from 'rxjs/operators';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../reducers';
 import {StudentActions} from './action-types';
-import {latestTranslationsForLanguagePair, lessonHeaersLoadedForLanguagePair} from './student.selectors';
+import {
+  latestTranslationsForLanguagePair,
+  latestTranslationsLoadedForLanguagePair,
+  lessonHeaersLoadedForLanguagePair
+} from './student.selectors';
 
 @Injectable()
 export class LanguagePairDetailResolver implements Resolve<boolean> {
@@ -31,10 +35,10 @@ export class LanguagePairDetailResolver implements Resolve<boolean> {
           }),
           filter(loaded => !!loaded),
           first(),
-          finalize(() => this.loadingLessonHeaders = false))/*,
+          finalize(() => this.loadingLessonHeaders = false)),
 
       this.store
-        .pipe(select(latestTranslationsForLanguagePair, {languagePairId}),
+        .pipe(select(latestTranslationsLoadedForLanguagePair, {languagePairId}),
           tap(latestTranslationsLoaded => {
             if(!latestTranslationsLoaded && !this.loadingLatestTranslations){
               this.loadingLatestTranslations = true;
@@ -43,7 +47,7 @@ export class LanguagePairDetailResolver implements Resolve<boolean> {
           }),
           filter(loaded => !!loaded),
           first(),
-          finalize(()=> this.loadingLatestTranslations = false))*/
+          finalize(()=> this.loadingLatestTranslations = false))
     );
 
 

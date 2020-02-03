@@ -30,6 +30,13 @@ export const lessonHeaersLoadedForLanguagePair = createSelector(
   }
 );
 
+export const latestTranslationsLoadedForLanguagePair = createSelector(
+  selectLatestTranslations,
+  (state, props) => {
+    return !!state.loadedLanguagePairs[props.languagePairId];
+  }
+);
+
 export const lessonHeadersForLanguagePair = createSelector(
   selectLessonHeader,
   (state, props) => {

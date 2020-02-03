@@ -46,6 +46,7 @@ public class PracticeTranslationController extends BaseController {
         return ResponseEntity.ok(practiceAnswerResponseMapper.map(answerTO));
     }
 
+
     @RequestMapping(value = "/practice/generate-pdf", method = RequestMethod.POST)
     public @ResponseBody
     void generatePracticePdf(HttpServletResponse response, @RequestBody CreatePracticePdfRequest generatePracticePdfRequest) throws IOException {
