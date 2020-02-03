@@ -10,6 +10,7 @@ public class Lesson extends AbstractDocument {
     private String name;
     private ObjectId languagePairId;
     private Set<ObjectId> translations;
+    private Set<String> tags;
     private ObjectId userId;
 
     private Lesson() {
@@ -21,6 +22,7 @@ public class Lesson extends AbstractDocument {
         languagePairId = builder.languagePairId;
         translations = builder.translations;
         userId = builder.userId;
+        tags = builder.tags;
     }
 
     public static Builder newBuilder() {
@@ -43,6 +45,10 @@ public class Lesson extends AbstractDocument {
         return userId;
     }
 
+    public Set<String> getTags() {
+        return tags;
+    }
+
     public void addTranslations(Set<ObjectId> translationIds) {
         translations.addAll(translationIds);
     }
@@ -63,6 +69,7 @@ public class Lesson extends AbstractDocument {
         private String name;
         private ObjectId languagePairId;
         private Set<ObjectId> translations;
+        private Set<String> tags;
         private ObjectId userId;
 
         private Builder() {
@@ -87,7 +94,10 @@ public class Lesson extends AbstractDocument {
             userId = val;
             return this;
         }
-
+        public Builder withTags(Set<String> val) {
+            tags = val;
+            return this;
+        }
         public Lesson build() {
             return new Lesson(this);
         }

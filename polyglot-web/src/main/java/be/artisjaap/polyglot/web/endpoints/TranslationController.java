@@ -4,11 +4,13 @@ package be.artisjaap.polyglot.web.endpoints;
 import be.artisjaap.polyglot.core.action.lesson.UpdateLesson;
 import be.artisjaap.polyglot.core.action.to.*;
 import be.artisjaap.polyglot.core.action.translation.CreateTranslation;
+import be.artisjaap.polyglot.core.action.translation.FindTranslations;
 import be.artisjaap.polyglot.core.action.translation.RemoveTranslation;
 import be.artisjaap.polyglot.core.action.translation.UpdateTranslation;
 import be.artisjaap.polyglot.web.endpoints.old.response.TranslationsForUserResponse;
 import be.artisjaap.polyglot.web.endpoints.request.NewTranslationForLessonRequest;
 import be.artisjaap.polyglot.web.endpoints.request.UpdateTranslationForLessonRequest;
+import be.artisjaap.polyglot.web.endpoints.response.LessonHeaderResponse;
 import be.artisjaap.polyglot.web.endpoints.response.TranslationForLessonResponse;
 import be.artisjaap.polyglot.web.endpoints.response.TranslationForLessonResponseMapper;
 import be.artisjaap.polyglot.web.endpoints.response.TranslationsLoadedByFileResponse;
@@ -20,6 +22,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
@@ -41,7 +45,20 @@ public class TranslationController extends BaseController {
     private RemoveTranslation removeTranslation;
 
     @Resource
+    private FindTranslations findTranslations;
+
+    @Resource
     private TranslationsLoadedByFileResponseMapper translationsLoadedByFileResponseMapper;
+
+    @RequestMapping(value = "/translations", method = RequestMethod.GET)
+    public @ResponseBody
+    ResponseEntity<List<TranslationForLessonResponse>> latestTranslations(@RequestParam String languagePairId, @RequestParam Integer latest) {
+        List<TranslationTO> translationTOS = findTranslations.findLatestFor(languagePairId, latest);
+
+        List<TranslationForLessonResponse> translations = translationTOS.stream().map(e -> translationForLessonResponseMapper.map(e, languagePairId)).collect(Collectors.toList());
+        return ResponseEntity.ok(translations);
+
+    }
 
     //if no lessonId is given create a tramslation without coupling to a lesson
     @RequestMapping(value = "/translation", method = RequestMethod.PUT)

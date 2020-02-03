@@ -4,8 +4,9 @@
       latest words
     </mat-card-title>
     <mat-card-content>
-      <div *ngFor="let a of latestTranslations$ | async">
-        {{a.languageA}} - {{a.languageB}}
+      <div *ngFor="let a of latestTranslations$ | async" class="flex flex-row">
+        <span>{{a.languageA}}</span>
+        <span>{{a.languageB}}</span>
       </div>
     </mat-card-content>
   </mat-card>
@@ -25,6 +26,10 @@
         <a class="action-link"  [routerLink]="['/home', 'student', 'lesson', a.id, 'practice']">
           <i class="icofont-play-alt-1"></i>
         </a>
+        <a class="action-link" (click)="generateLessonPdForLesson(a.id)" >
+          <i class="icofont-magic"></i>
+        </a>
+
       </div>
       <input type="text" #newLesson> <button (click)="createLesson(newLesson)">create</button>
     </mat-card-content>
@@ -37,7 +42,6 @@
     <mat-card-content>
       <input type="file"  #file (change)="onFilesAdded()" multiple>
     </mat-card-content>
-    <button mat-button (click)="generateLessonPdf()">Gen PDF</button>
   </mat-card>
 
 </div>

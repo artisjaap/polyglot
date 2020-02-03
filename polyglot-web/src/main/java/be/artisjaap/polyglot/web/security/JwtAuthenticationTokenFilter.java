@@ -51,7 +51,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             logger.warn("couldn't find bearer string, will ignore the header");
         }
 
-        logger.info("checking authentication for user " + username);
+        logger.info("checking authentication for user " + username + " on url " + request.getRequestURI());
         if (username != null /*&& SecurityContextHolder.getContext().getAuthentication() == null*/) {
 
             // It is not compelling necessary to load the use details yearMonthFrom the database. You could also store the information

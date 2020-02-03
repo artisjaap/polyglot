@@ -17,4 +17,6 @@ public interface TranslationRepository extends MongoRepository<Translation, Obje
     }
 
     List<Translation> findByLanguagePairId(ObjectId objectId);
+
+
 }

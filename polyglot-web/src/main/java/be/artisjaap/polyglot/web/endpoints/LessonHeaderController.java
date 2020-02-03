@@ -41,10 +41,10 @@ public class LessonHeaderController extends BaseController {
     @RequestMapping(value = "/lesson-header", method = RequestMethod.POST)
     public @ResponseBody
     ResponseEntity<LessonHeaderResponse> addNewLessonHeader(@RequestBody NewLessonHeaderRequest newLessonHeaderRequest) {
-        LessonTO lessonTO = createLesson.create(NewLessonTO.newBuilder()
-                .withLanguagePairId(newLessonHeaderRequest.getLanguagePairId())
-                .withName(newLessonHeaderRequest.getName())
-                .withUserId(userId())
+        LessonTO lessonTO = createLesson.create(NewLessonTO.builder()
+                .languagePairId(newLessonHeaderRequest.getLanguagePairId())
+                .name(newLessonHeaderRequest.getName())
+                .userId(userId())
                 .build());
 
         return ResponseEntity.ok(lessonHeaderResponseLessonMapper.map(lessonTO));

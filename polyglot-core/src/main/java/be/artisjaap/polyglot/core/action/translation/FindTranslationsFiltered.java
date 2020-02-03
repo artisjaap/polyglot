@@ -6,9 +6,12 @@ import be.artisjaap.polyglot.core.action.to.TranslationFilterTO;
 import be.artisjaap.polyglot.core.action.to.TranslationTO;
 import be.artisjaap.polyglot.core.model.Translation;
 import be.artisjaap.polyglot.core.model.TranslationRepository;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class FindTranslationsFiltered {
@@ -24,4 +27,6 @@ public class FindTranslationsFiltered {
 
         return PagedTO.from(translationsForFilter, translationAssembler);
     }
+
+
 }

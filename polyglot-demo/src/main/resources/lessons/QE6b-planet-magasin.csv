@@ -1,4 +1,5 @@
-@Lesson,Quartier étoile 6a - Planète Magasin
+@Lesson=Quartier étoile 6a - Planète Magasin
+@Tags=6A,WORDENLIJST
 het avondmaal,le dîner
 het menu,le menu
 de biefstuk,le bifteck
@@ -23,5 +24,5 @@ klaarmaken,préparer
 betalen,payer
 alstublieft,s'il vous plaît
 dank u wel,merci bien
-Neen, dank u!,Non, merci!
+"Neen, dank u!","Non, merci!"
 Akkoord!,D'accord!
