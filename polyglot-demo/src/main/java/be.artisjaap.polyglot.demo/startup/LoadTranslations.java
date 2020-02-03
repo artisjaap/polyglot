@@ -49,5 +49,12 @@ public class LoadTranslations extends AbstractInitScript {
                 .withLanguagePairId(languagePairId)
                 .withReader(new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream("lessons/QE6b-planet-magasin.csv")))
                 .build());
+
+        createTranslation.forAllWords(NewTranslationForUserFromFileTO.newBuilder()
+                .withUserId(userId)
+                .withLanguagePairId(languagePairId)
+                .withReader(new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream("lessons/QE6b-planet-7-Carnaval.csv")))
+                .build());
+
     }
 }
