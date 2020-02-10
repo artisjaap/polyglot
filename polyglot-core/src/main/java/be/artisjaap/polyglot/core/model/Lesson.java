@@ -2,9 +2,11 @@ package be.artisjaap.polyglot.core.model;
 
 import be.artisjaap.common.model.AbstractDocument;
 import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Set;
 
+@Document(collection = "PolLesson")
 public class Lesson extends AbstractDocument {
 
     private String name;

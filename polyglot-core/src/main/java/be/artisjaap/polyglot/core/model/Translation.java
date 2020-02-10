@@ -2,7 +2,9 @@ package be.artisjaap.polyglot.core.model;
 
 import be.artisjaap.common.model.AbstractDocument;
 import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document(collection = "PolTranslation")
 public class Translation extends AbstractDocument {
 
     private ObjectId languagePairId;

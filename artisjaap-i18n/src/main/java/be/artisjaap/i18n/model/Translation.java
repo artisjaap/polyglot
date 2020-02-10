@@ -3,7 +3,7 @@ package be.artisjaap.i18n.model;
 import be.artisjaap.common.model.AbstractDocument;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
+@Document(collection = "Translation")
 public class Translation extends AbstractDocument {
     private String key;
     private String translation;
