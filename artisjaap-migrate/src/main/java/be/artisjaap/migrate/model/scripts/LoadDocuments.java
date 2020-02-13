@@ -4,7 +4,13 @@ import be.artisjaap.document.action.ActivateDocument;
 import be.artisjaap.document.action.ActivateSimpleOrCombinedTemplate;
 import be.artisjaap.document.action.AddDocument;
 import be.artisjaap.document.action.AddSimpleTemplate;
-import be.artisjaap.document.action.to.*;
+import be.artisjaap.document.action.to.BriefCodeNieuwTO;
+import be.artisjaap.document.action.to.DocumentNewTO;
+import be.artisjaap.document.action.to.DocumentTO;
+import be.artisjaap.document.action.to.TemplateCodeNewTO;
+import be.artisjaap.document.action.to.TemplateCodeTO;
+import be.artisjaap.document.action.to.TemplateNewTO;
+import be.artisjaap.document.action.to.TemplateTO;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -27,6 +33,8 @@ public class LoadDocuments extends AbstractInitScript {
     private ActivateDocument activateDocument;
     @Resource
     private ActivateSimpleOrCombinedTemplate activateSimpleOrCombinedTemplate;
+    @Resource
+    private DocumentLoader documentLoader;
 
     @Override
     public String omschrijving() {
@@ -45,52 +53,36 @@ public class LoadDocuments extends AbstractInitScript {
 
     @Override
     public void execute() {
-        TemplateCodeTO wordPracticeTemplate = addSimpleTemplate.withNewCode(TemplateCodeNewTO.builder()
-                .code("WORD_PRACTICE_TEMPLATE")
-                .description("create printable pdf to practice words")
+        documentLoader.forConfig(DocumentLoaderConfigTO.builder()
+                .documentCode("WORD_PRACTICE_SHEET_WITH_ANSWERS")
+                .description("Word practice sheet with answer page")
+                .language("NL")
+                .templates(Arrays.asList(
+                        TemplateLoaderConfigTO.builder()
+                                .templateCode("WORD_PRACTICE_TEMPLATE")
+                                .description("create printable pdf to practice words")
+                                .documentPath("documents/word-practice-template.docx")
+                                .build(),
+                        TemplateLoaderConfigTO.builder()
+                                .templateCode("WORD_PRACTICE_ANSWERS_TEMPLATE")
+                                .description("create printable pdf to practice words")
+                                .documentPath("documents/word-practice-answers-template.docx")
+                                .build()))
                 .build());
 
-        try {
-            TemplateTO templateTO = addSimpleTemplate.forNew(TemplateNewTO.builder()
-                    .code("WORD_PRACTICE_TEMPLATE")
-                    .taal("NL")
-                    .template(FileUtils.readFileToByteArray(new File(getClass().getClassLoader().getResource("documents/word-practice-template.docx").getFile())))
-                    .originalFilename("word-practice-template.docx")
-                    .build());
-            activateSimpleOrCombinedTemplate.activateTemplate(templateTO.getId());
-        }catch (Exception e){
-            logger.error("Could not load WORD_PRACTICE_TEMPLATE");
-        }
 
-        TemplateCodeTO wordPracticeAnswersTemplate = addSimpleTemplate.withNewCode(TemplateCodeNewTO.builder()
-                .code("WORD_PRACTICE_ANSWERS_TEMPLATE")
-                .description("create printable pdf to practice words")
+        documentLoader.forConfig(DocumentLoaderConfigTO.builder()
+                .documentCode("JOURNAL_TRANSLATION_REPORT")
+                .description("Overview of practiced words")
+                .language("NL")
+                .templates(Arrays.asList(TemplateLoaderConfigTO.builder()
+                        .templateCode("JOURNAL_TRANSLATIONS")
+                        .description("Journal translations")
+                        .documentPath("documents/journal-translations-template.docx")
+                        .build()))
                 .build());
-
-        try {
-            TemplateTO templateTO = addSimpleTemplate.forNew(TemplateNewTO.builder()
-                    .code("WORD_PRACTICE_ANSWERS_TEMPLATE")
-                    .taal("NL")
-                    .template(FileUtils.readFileToByteArray(new File(getClass().getClassLoader().getResource("documents/word-practice-answers-template.docx").getFile())))
-                    .originalFilename("word-practice-answers-template.docx")
-                    .build());
-            activateSimpleOrCombinedTemplate.activateTemplate(templateTO.getId());
-
-        }catch (Exception e){
-            logger.error("Could not load WORD_PRACTICE_ANSWERS_TEMPLATE");
-        }
-
-        addDocument.metNieuweCode(BriefCodeNieuwTO.builder()
-                .code("WORD_PRACTICE_SHEET_WITH_ANSWERS")
-                .description("Practice words with answers")
-                .build());
-
-        DocumentTO documentTO = addDocument.forNew(DocumentNewTO.builder()
-                .code("WORD_PRACTICE_SHEET_WITH_ANSWERS")
-                .taal("NL")
-                .templates(Arrays.asList("WORD_PRACTICE_TEMPLATE", "WORD_PRACTICE_ANSWERS_TEMPLATE"))
-                .build());
-        activateDocument.metId(documentTO.getId());
 
     }
+
+
 }

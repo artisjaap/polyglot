@@ -41,6 +41,8 @@
     </mat-card-title>
     <mat-card-content>
       <input type="file"  #file (change)="onFilesAdded()" multiple>
+
+      <input type="text" #newLesson> <button (click)="generateJournalPdf()">JOURNAL PDF</button>
     </mat-card-content>
   </mat-card>
 

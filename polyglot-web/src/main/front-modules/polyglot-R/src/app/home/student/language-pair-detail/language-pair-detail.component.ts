@@ -9,8 +9,9 @@ import {StudentActions} from '../action-types';
 import {NewLessonHeaderRequest} from '../../model/new-lesson-header-request';
 import {FileUpload} from '../../model/file-upload';
 import {TranslationForLessonResponse} from '../../model/translation-for-lesson-response';
-import {PracticeAnswerService} from "../../services/practice-answer.service";
-import {FileSaverService} from "ngx-filesaver";
+import {PracticeAnswerService} from '../../services/practice-answer.service';
+import {FileSaverService} from 'ngx-filesaver';
+import {JournalService} from '../../services/journal.service';
 
 @Component({
   selector: 'app-language-pair-detail',
@@ -29,7 +30,8 @@ export class LanguagePairDetailComponent implements OnInit {
   constructor(private store: Store<AppState>
               , private route: ActivatedRoute
               , private practiceAnswerService: PracticeAnswerService
-              , private fileSaverService: FileSaverService) {
+              , private fileSaverService: FileSaverService
+  ,           private journalService: JournalService) {
   }
 
   ngOnInit() {
@@ -67,12 +69,11 @@ export class LanguagePairDetailComponent implements OnInit {
 
   }
 
-  generateLessonPdf() {
-    this.practiceAnswerService.createPracticePdf({
+  generateJournalPdf() {
+    this.journalService.createJournalPdf({
        languagePairId: this.languagePairId,
-      lessonId: null,
-       numberOfWords: 50
-    }).subscribe(data => this.fileSaverService.save(data.body, "test.pdf"));
+      lessonId: null
+    }).subscribe(data => this.fileSaverService.save(data.body, 'test.pdf'));
   }
 
   generateLessonPdForLesson(lessonId: string) {
@@ -80,7 +81,7 @@ export class LanguagePairDetailComponent implements OnInit {
       languagePairId: this.languagePairId,
       lessonId,
       numberOfWords: 0
-    }).subscribe(data => this.fileSaverService.save(data.body, "test.pdf"));
+    }).subscribe(data => this.fileSaverService.save(data.body, 'test.pdf'));
   }
 
 

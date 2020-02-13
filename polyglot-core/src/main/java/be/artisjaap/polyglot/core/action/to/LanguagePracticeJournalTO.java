@@ -57,6 +57,30 @@ public class LanguagePracticeJournalTO extends ReferenceableTO {
         return translationJournalList;
     }
 
+    public JournalStatisticsTO calculateStatistics() {
+        int total = totalAnswers();
+        int correct = correctAnswers();
+        int incorrect = total - correct;
+        float percentage = correct / total;
+
+        return JournalStatisticsTO.newBuilder()
+                .withCorrectlyAnswered(correct)
+                .withIncorrectlyAnswered(incorrect)
+                .withNumerOfQuestions(total)
+                .withPercentageCorrect(percentage)
+                .build();
+    }
+
+    private int totalAnswers() {
+        return translationJournalList.size();
+    }
+
+    private int correctAnswers() {
+        return Long.valueOf(translationJournalList.stream().filter(TranslationJournalTO::correct).count()).intValue();
+    }
+
+
+
     public static final class Builder extends AbstractBuilder<Builder> {
         private String userId;
         private String languagePairId;
