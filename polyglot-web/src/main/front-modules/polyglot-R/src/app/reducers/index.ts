@@ -16,7 +16,7 @@ export const reducers: ActionReducerMap<AppState> = {
 };
 
 
-export function logger(reducer:ActionReducer<any>): ActionReducer<any>{
+export function logger(reducer: ActionReducer<any>): ActionReducer<any>{
   return (state, action) => {
     return reducer(state, action);
 

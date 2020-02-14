@@ -3,7 +3,7 @@ package be.artisjaap.backup.cucumber;
 import be.artisjaap.backup.action.BackupData;
 import be.artisjaap.backup.action.ConfigBuilder;
 import be.artisjaap.backup.action.RestoreData;
-import cucumber.api.java.en.Given;
+import io.cucumber.java.en.Given;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class BackupStepDefinition {

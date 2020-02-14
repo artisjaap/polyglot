@@ -6,15 +6,11 @@ jar {
 dependencies {
     compile project(':artisjaap-mail')
     testCompile project(path: ":artisjaap-mail", configuration: 'testArtifacts')
+    testCompile project(path: ":artisjaap-common", configuration: 'testArtifacts')
 
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
 
     testCompile('de.flapdoodle.embed:de.flapdoodle.embed.mongo')
 
-    //cucumber
-    testCompile "info.cukes:cucumber-java8:1.2.4"
-    testCompile "info.cukes:cucumber-spring:1.2.4"
-    testCompile "info.cukes:cucumber-junit:1.2.4"
-    compile group: 'net.masterthought', name: 'cucumber-reporting', version: '3.1.0'
 }

@@ -4,7 +4,6 @@ import be.artisjaap.document.action.to.TemplateTO;
 import be.artisjaap.document.assembler.TemplateAssembler;
 import be.artisjaap.document.model.mongo.TemplateRepository;
 import org.bson.types.ObjectId;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component

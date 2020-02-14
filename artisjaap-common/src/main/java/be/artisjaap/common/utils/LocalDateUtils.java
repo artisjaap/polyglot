@@ -5,12 +5,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class LocalDateUtils {
-    public static final LocalDate MIN_DATE = parseDateFromDDMMYYYYString("01-01-1900");
-    public static final LocalDate MAX_DATE = parseDateFromDDMMYYYYString("31-12-9999");
-    private  static DateTimeFormatter dateFormatYYYYMMDD = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    private  static DateTimeFormatter dateFormatDDMMYYYY = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    private static final DateTimeFormatter dateFormatYYYYMMDD = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private static final DateTimeFormatter dateFormatDDMMYYYY = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     public static final DateTimeFormatter DATE_FORMATTED_DDMMYYYY_MET_SLASHES = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     public static final DateTimeFormatter DATE_FORMAT_YYYYMMDDHHMMSS = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+    public static final LocalDate MIN_DATE = parseDateFromDDMMYYYYString("01-01-1900");
+    public static final LocalDate MAX_DATE = parseDateFromDDMMYYYYString("31-12-9999");
 
     private static Clock clock = Clock.systemDefaultZone();
 

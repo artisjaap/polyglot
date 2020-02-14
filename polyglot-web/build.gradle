@@ -35,8 +35,6 @@ dependencies {
 
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
-
-    testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('de.flapdoodle.embed:de.flapdoodle.embed.mongo')
     testCompile('org.springframework.security:spring-security-test')
 

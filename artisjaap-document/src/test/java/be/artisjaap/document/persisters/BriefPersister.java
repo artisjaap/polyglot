@@ -21,11 +21,7 @@ public class BriefPersister {
     private TemplatePersister templatePersister;
 
     @Autowired
-    private AutofindTemplateType autofindTemplateType;
-
-    @Autowired
     private GecombineerdeTemplatePersister gecombineerdeTemplatePersister;
-
 
     @Autowired
     private ActivateDocument activateDocument;

@@ -4,8 +4,7 @@ import be.artisjaap.document.model.mongo.CombinedTemplateRepository;
 import be.artisjaap.document.model.mongo.DocumentRepository;
 import be.artisjaap.document.model.mongo.GegenereerdeBriefRepository;
 import be.artisjaap.document.model.mongo.TemplateRepository;
-import cucumber.api.java.Before;
-import org.junit.Test;
+import io.cucumber.java.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class CucumberHooks extends CucumberInMemoryTestParent {

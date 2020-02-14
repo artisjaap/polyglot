@@ -7,7 +7,6 @@ import be.artisjaap.document.model.Template;
 import be.artisjaap.document.model.mongo.TemplateRepository;
 import be.artisjaap.document.utils.XdocUtils;
 import org.bson.types.ObjectId;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;

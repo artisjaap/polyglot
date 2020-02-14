@@ -32,10 +32,10 @@ public class LoginControllerTest extends RestControllerTest {
     public void createUser() throws Exception{
         mockMvc.perform(
                 post("/public/api/register")
-                        .contentType(APPLICATION_JSON_UTF8).content(convertObjectToJsonBytes(NewUserRequest.newBuilder().withUsername("Tom").withPassword("secret").build())))
+                        .contentType(APPLICATION_JSON).content(convertObjectToJsonBytes(NewUserRequest.newBuilder().withUsername("Tom").withPassword("secret").build())))
                 .andExpect(status().isOk())
 //                    .andExpect(content().string(""))
-                .andExpect(content().contentType(APPLICATION_JSON_UTF8))
+                .andExpect(content().contentType(APPLICATION_JSON))
                 .andExpect(jsonPath("$.username", equalTo("Tom")))
                 .andExpect(jsonPath("$.userId", not(empty())))
                 .andExpect(jsonPath("$.token", not(empty())))
@@ -49,7 +49,7 @@ public class LoginControllerTest extends RestControllerTest {
         mockMvc.perform(
                 get("/public/api/login/Tom2/secret"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(APPLICATION_JSON_UTF8))
+                .andExpect(content().contentType(APPLICATION_JSON))
                 .andExpect(jsonPath("$.username", equalTo("Tom2")))
                 .andExpect(jsonPath("$.userId", not(empty())))
                 .andExpect(jsonPath("$.token", not(empty())))
