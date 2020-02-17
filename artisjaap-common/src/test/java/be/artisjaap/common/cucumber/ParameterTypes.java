@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 public class ParameterTypes {
 
-    @ParameterType("[A-Z_,]")
+    @ParameterType("[A-Z_,]*")
     public List<String> listOfCodes(String string){
         return Arrays.asList(string.split(",")).
         stream()

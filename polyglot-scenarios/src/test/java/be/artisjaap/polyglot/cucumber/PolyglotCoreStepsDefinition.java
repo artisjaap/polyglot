@@ -128,7 +128,7 @@ public class PolyglotCoreStepsDefinition {
     @Given("a user {username} with default dataset")
     public void eenStandaardGebruikerDataset(String naam) {
         eenGebruikerMetNaam(naam);
-        LanguagePairType languagePairType = LanguagePairType.builder().from("NL").to("FR").build();
+        LanguagePairType languagePairType = LanguagePairType.newBuilder().from("NL").to("FR").build();
         maaktEenTalenpaar(naam, languagePairType);
         List<LanguagePairGherkinRow> vertalingen = new ArrayList<>();
         vertalingen.add(new LanguagePairGherkinRow("een", "un"));

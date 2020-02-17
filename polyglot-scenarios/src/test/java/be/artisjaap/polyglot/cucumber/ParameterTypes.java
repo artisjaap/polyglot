@@ -7,20 +7,20 @@ import io.cucumber.java.ParameterType;
 
 public class ParameterTypes {
 
-    @ParameterType("(.*)-(.*)")
+    @ParameterType("([a-zA-Z]*)-([a-zA-Z]*)")
     public LanguagePairType languagePair(String from, String to){
-        return LanguagePairType.builder()
+        return LanguagePairType.newBuilder()
                 .from(from)
                 .to(to)
                 .build();
     }
 
-    @ParameterType("(.*)")
+    @ParameterType(".*")
     public String username(String username){
         return username;
     }
 
-    @ParameterType("(NORMAL | REVERSE | RANDOM)")
+    @ParameterType(".*")
     public OrderType order(String orderType){
         return OrderType.valueOf(orderType);
     }
