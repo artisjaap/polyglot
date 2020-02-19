@@ -1,7 +1,7 @@
 package be.artisjaap.schedule.cucumber;
 
 import be.artisjaap.schedule.action.ListTasks;
-import cucumber.api.java.en.Given;
+import io.cucumber.java.en.Given;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -11,7 +11,12 @@ public class ScheduleStepDefinition{
     @Autowired
     private ListTasks listTasks;
 
-    @Given("^there is ([0-9]*) task scheduled$")
+    @Given("A schedule service")
+    public void aScheduleService(){
+
+    }
+
+    @Given("there is {int} task scheduled")
     public void countNumberOfScheduledTasks(int number){
         assertThat(listTasks.allTasks().size(), is(number));
     }

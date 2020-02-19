@@ -1,5 +1,5 @@
 package be.artisjaap.polyglot.core.action.documents.docconfig;
 
 public enum DocumentCode {
-    REPORT_FOR_JOURNAL
+    REPORT_FOR_JOURNAL, PRACTICE_MISTAKES
 }

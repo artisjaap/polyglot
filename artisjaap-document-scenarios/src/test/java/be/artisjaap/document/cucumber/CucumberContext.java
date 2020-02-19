@@ -1,16 +1,11 @@
 package be.artisjaap.document.cucumber;
 
-import be.artisjaap.common.CommonApplication;
-import be.artisjaap.document.DocumentbeheerApplication;
-import cucumber.api.CucumberOptions;
-import cucumber.api.java.Before;
-import cucumber.api.junit.Cucumber;
-import org.junit.Test;
+import io.cucumber.junit.Cucumber;
+import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
-import org.springframework.test.context.ContextConfiguration;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "classpath:scenarios", glue = "be.artisjaap")
+@CucumberOptions(features = "classpath:scenarios", glue = "be.artisjaap", plugin = {"html:c:/temp/cucumber", "json"})
 public class CucumberContext {
 
 

@@ -10,8 +10,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class UpdateLanguagePairHealth {
 
-    @Autowired
-    private LanguagePairRepository languagePairRepository;
+    private final LanguagePairRepository languagePairRepository;
+
+    public UpdateLanguagePairHealth(LanguagePairRepository languagePairRepository) {
+        this.languagePairRepository = languagePairRepository;
+    }
 
     public void newWordIntroduced(String languagePairId){
         LanguagePair languagePair = languagePairRepository.findById(new ObjectId(languagePairId)).orElseThrow(() -> new ValidationException(""));

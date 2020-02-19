@@ -1,9 +1,11 @@
 package be.artisjaap.polyglot.core.model;
 
 import be.artisjaap.common.model.AbstractDocument;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Set;
 
+@Document(collection = "PolUser")
 public class User extends AbstractDocument {
 
     private String username;

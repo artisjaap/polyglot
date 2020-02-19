@@ -12,7 +12,6 @@ import be.artisjaap.document.model.Template;
 import be.artisjaap.document.model.TemplateCode;
 import be.artisjaap.document.model.mongo.TemplateCodeRepository;
 import be.artisjaap.document.model.mongo.TemplateRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component

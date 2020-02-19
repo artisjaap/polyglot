@@ -50,6 +50,11 @@ public class DatasetProviderFactory implements DatasetProvider {
         return this;
     }
 
+    public DatasetProviderFactory journalTranslations(List<TranslationJournalTO> translationJournalList) {
+        datasetProvider.add("journalTranslations", JournalTranslationsDataSet.from(translationJournalList), JournalTranslationsDataSet.class);
+        return this;
+    }
+
     public DatasetProviderFactory userDataSetFrom(UserTO userTO){
         datasetProvider.add("user", UserDataSet.from(userTO));
         return this;
@@ -68,6 +73,11 @@ public class DatasetProviderFactory implements DatasetProvider {
 
     public DatasetProviderFactory addDummyTranslationResultDataSet(){
         datasetProvider.add("result", TranslationResultDataSet.dummyList(10), TranslationResultDataSet.class);
+        return this;
+    }
+
+    public DatasetProviderFactory addDummyJournalTranslationDataSet(List<TranslationJournalTO> translationJournalList) {
+        datasetProvider.add("journalTranslations", JournalTranslationsDataSet.dummyList(10), JournalTranslationsDataSet.class);
         return this;
     }
 
@@ -94,4 +104,6 @@ public class DatasetProviderFactory implements DatasetProvider {
         addDummyTranslationDataSet();
         return this;
     }
+
+
 }

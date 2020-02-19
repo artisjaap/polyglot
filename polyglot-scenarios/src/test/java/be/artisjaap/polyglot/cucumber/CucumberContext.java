@@ -1,19 +1,15 @@
 package be.artisjaap.polyglot.cucumber;
 
-import be.artisjaap.document.DocumentbeheerApplication;
-import be.artisjaap.polyglot.PolyglotApplication;
-import be.artisjaap.properties.PropertiesApplication;
-import cucumber.api.CucumberOptions;
-import cucumber.api.junit.Cucumber;
+import io.cucumber.junit.Cucumber;
+import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
-import org.springframework.test.context.ContextConfiguration;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(monochrome = true
-, features="classpath:scenarios"
-, glue = "be.artisjaap"
-, dryRun = false
-, plugin={"html:build/reports/cucumber", "pretty", "json:build/reports/cucumber/report.json", "be.artisjaap.polyglot.cucumber.PrettyReport:build/reports/cucumber"})
+@CucumberOptions(features = "classpath:scenarios"
+       // , tags = {"@Only"}
+        , extraGlue = {"be.artisjaap.document.cucumber", "be.artisjaap.common.cucumber", "be.artisjaap.backup.cucumber",
+        "be.artisjaap.i18n.cucumber", "be.artisjaap.mail.cucumber", "be.artisjaap.properties.cucumber", "be.artisjaap.schedule.cucumber"}
+        /*, plugin = {"html:build/reports/cucumber", "pretty", "json:build/reports/cucumber/report.json", "be.artisjaap.polyglot.cucumber.PrettyReport:build/reports/cucumber"}*/)
 public class CucumberContext {
 
 }

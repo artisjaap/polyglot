@@ -3,9 +3,8 @@ package be.artisjaap.schedule.cucumber;
 import be.artisjaap.common.CommonApplication;
 import be.artisjaap.migrate.MigrateApplication;
 import be.artisjaap.schedule.ScheduleApplication;
-import cucumber.api.CucumberOptions;
-import cucumber.api.java.Before;
-import cucumber.api.junit.Cucumber;
+import io.cucumber.junit.Cucumber;
+import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 

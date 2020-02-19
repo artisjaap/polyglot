@@ -37,10 +37,10 @@ public class JournalPracticeResults {
         return languagePracticeJournalRepository.findByFilters(journalFilterTO)
                 .map(languagePracticeJournalAssembler::assembleTO)
                 .orElseGet(() -> LanguagePracticeJournalTO.newBuilder()
-                        .withUserId(journalFilterTO.userId())
-                        .withLanguagePairId(journalFilterTO.languagePairId())
-                        .withFrom(journalFilterTO.from())
-                        .withUntil(journalFilterTO.until())
+                        .withUserId(journalFilterTO.getUserId())
+                        .withLanguagePairId(journalFilterTO.getLanguagePairId())
+                        .withFrom(journalFilterTO.getFrom())
+                        .withUntil(journalFilterTO.getUntil())
                         .build());
     }
 

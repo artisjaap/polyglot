@@ -3,6 +3,7 @@ package be.artisjaap.polyglot.core.action.to;
 import be.artisjaap.common.model.ReferenceableTO;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,8 +11,8 @@ public class LanguagePracticeJournalTO extends ReferenceableTO {
 
     private String userId;
     private String languagePairId;
-    private LocalDate from;
-    private LocalDate until;
+    private LocalDateTime from;
+    private LocalDateTime until;
     private List<TranslationJournalTO> translationJournalList;
 
     private LanguagePracticeJournalTO(Builder builder) {
@@ -45,11 +46,11 @@ public class LanguagePracticeJournalTO extends ReferenceableTO {
         return languagePairId;
     }
 
-    public LocalDate from() {
+    public LocalDateTime from() {
         return from;
     }
 
-    public LocalDate until() {
+    public LocalDateTime until() {
         return until;
     }
 
@@ -57,11 +58,35 @@ public class LanguagePracticeJournalTO extends ReferenceableTO {
         return translationJournalList;
     }
 
+    public JournalStatisticsTO calculateStatistics() {
+        int total = totalAnswers();
+        int correct = correctAnswers();
+        int incorrect = total - correct;
+        float percentage = correct / total;
+
+        return JournalStatisticsTO.newBuilder()
+                .withCorrectlyAnswered(correct)
+                .withIncorrectlyAnswered(incorrect)
+                .withNumerOfQuestions(total)
+                .withPercentageCorrect(percentage)
+                .build();
+    }
+
+    private int totalAnswers() {
+        return translationJournalList.size();
+    }
+
+    private int correctAnswers() {
+        return Long.valueOf(translationJournalList.stream().filter(TranslationJournalTO::correct).count()).intValue();
+    }
+
+
+
     public static final class Builder extends AbstractBuilder<Builder> {
         private String userId;
         private String languagePairId;
-        private LocalDate from;
-        private LocalDate until;
+        private LocalDateTime from;
+        private LocalDateTime until;
         private List<TranslationJournalTO> translationJournalList = new ArrayList<>();
 
         private Builder() {
@@ -77,12 +102,12 @@ public class LanguagePracticeJournalTO extends ReferenceableTO {
             return this;
         }
 
-        public Builder withFrom(LocalDate val) {
+        public Builder withFrom(LocalDateTime val) {
             from = val;
             return this;
         }
 
-        public Builder withUntil(LocalDate val) {
+        public Builder withUntil(LocalDateTime val) {
             until = val;
             return this;
         }

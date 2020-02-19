@@ -5,8 +5,8 @@ import be.artisjaap.i18n.action.I18nFindTranslation;
 import be.artisjaap.i18n.action.I18nTranslationBundle;
 import be.artisjaap.i18n.action.I18nTranslationCache;
 import be.artisjaap.i18n.action.to.NewTranslationTO;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.When;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.When;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +27,13 @@ public class I18nStepDefinition {
     private I18nTranslationCache i18nTranslationCache;
 
 
-    @Given("^A i18n service$")
+    @Given("A i18n service")
     public void backupService() {
         System.out.println("i18n Service");
     }
 
 
-    @Given("^A translation with key (.*) has value (.*) in (.*)$")
+    @Given("A translation with key {translationKey} has value {translation} in {userLanguage}")
     public void aTranslationWithKeyMessageHasValueBoodschapInNL(String key, String value, String language) {
         i18nCreateTranslation.forTranslation(NewTranslationTO.builder()
                 .key(key)
@@ -43,7 +43,7 @@ public class I18nStepDefinition {
                 .build());
     }
 
-    @When("^The translation of key (.*) in (.*) has value (.*)$")
+    @When("The translation of key {translationKey} in {userLanguage} has value {translation}")
     public void iRequestTranslationOfKeyMessageInNLItHasValueBoodschap(String key, String language, String value) {
         Optional<String> translation = i18nFindTranslation.translationForKey(key, language);
         Assert.assertThat(translation.get(), CoreMatchers.is(value));

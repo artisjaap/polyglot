@@ -1,6 +1,6 @@
 package be.artisjaap.mail.cucumber;
 
-import cucumber.api.java.Before;
+import io.cucumber.java.Before;
 
 public class CucumberHooks extends CucumberInMemoryTestParent {
     @Before

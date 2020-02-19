@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
@@ -86,18 +87,23 @@ public class LanguagePracticeJournalRepositoryImpl implements LanguagePracticeJo
 
     @Override
     public Optional<LanguagePracticeJournal> findByFilters(JournalFilterTO journalFilterTO) {
-        Criteria criteria = Criteria.where("userId").is(new ObjectId(journalFilterTO.userId()));
-        if(journalFilterTO.lessonId() != null) {
-            criteria.and("translationJournalList.lessonId").is(new ObjectId(journalFilterTO.lessonId()));
+        Criteria criteria = Criteria.where("userId").is(new ObjectId(journalFilterTO.getUserId()));
+        if(journalFilterTO.getLessonId() != null) {
+            criteria.and("translationJournalList.lessonId").is(new ObjectId(journalFilterTO.getLessonId()));
         }
-        if(journalFilterTO.from() != null){
-            if(journalFilterTO.until() != null){
-                criteria.and("translationJournalList.timestamp").gte(journalFilterTO.from()).lte(journalFilterTO.until());
+
+        if(journalFilterTO.getErrorsOnly()){
+            criteria.and("translationJournalList.correct").is(false);
+        }
+
+        if(journalFilterTO.getFrom() != null){
+            if(journalFilterTO.getUntil() != null){
+                criteria.and("translationJournalList.timestamp").gte(journalFilterTO.getFrom()).lte(journalFilterTO.getUntil());
             }else {
-                criteria.and("translationJournalList.timestamp").gte(journalFilterTO.from());
+                criteria.and("translationJournalList.timestamp").gte(journalFilterTO.getFrom());
             }
-        }else if(journalFilterTO.until() != null){
-            criteria.and("translationJournalList.timestamp").lte(journalFilterTO.until());
+        }else if(journalFilterTO.getUntil() != null){
+            criteria.and("translationJournalList.timestamp").lte(journalFilterTO.getUntil());
         }
 
         List<AggregationOperation> operations = new ArrayList<>();

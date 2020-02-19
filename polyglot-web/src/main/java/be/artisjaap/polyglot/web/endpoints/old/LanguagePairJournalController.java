@@ -6,6 +6,7 @@ import be.artisjaap.polyglot.core.action.documents.GenerateReportForJournal;
 import be.artisjaap.polyglot.core.action.journal.JournalPracticeResults;
 import be.artisjaap.polyglot.core.action.to.JournalFilterTO;
 import be.artisjaap.polyglot.core.action.to.LanguagePracticeJournalTO;
+import be.artisjaap.polyglot.core.action.to.LanguagePracticeReportTO;
 import be.artisjaap.polyglot.web.endpoints.old.request.JournalReportRequest;
 import be.artisjaap.polyglot.web.endpoints.old.response.LanguagePracticeJournalResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,25 +34,26 @@ public class LanguagePairJournalController {
     @RequestMapping(value = "/result", method = RequestMethod.POST)
     public @ResponseBody
     ResponseEntity<LanguagePracticeJournalResponse> findAllJournalForFilter(@RequestBody JournalReportRequest reportRequest)  {
-        LanguagePracticeJournalTO journalFor = journalPracticeResults.findJournalFor(JournalFilterTO.newBuilder()
-                .withFrom(LocalDateUtils.parseDateFromYYYYMMDDString(reportRequest.getFrom()))
-                .withLanguagePairId(reportRequest.getLanguagePairId())
-                .withLessonId(reportRequest.getLessonId())
-                .withUntil(LocalDateUtils.parseDateFromYYYYMMDDString(reportRequest.getUntil()))
-                .withUserId(reportRequest.getUserId())
+        LanguagePracticeJournalTO journalFor = journalPracticeResults.findJournalFor(JournalFilterTO.builder()
+                .from(LocalDateUtils.parseDateFromYYYYMMDDString(reportRequest.getFrom(), true))
+                .languagePairId(reportRequest.getLanguagePairId())
+                .lessonId(reportRequest.getLessonId())
+                .until(LocalDateUtils.parseDateFromYYYYMMDDString(reportRequest.getUntil(), false))
+                .userId(reportRequest.getUserId())
                 .build());
         return ResponseEntity.ok(LanguagePracticeJournalResponse.from(journalFor));
     }
 
     @RequestMapping(value = "/result/pdf", method = RequestMethod.POST)
     public void findAllJournalForFilterToPDF(HttpServletResponse response, @RequestBody JournalReportRequest reportRequest) throws IOException {
-        LanguagePracticeJournalTO journalFor = journalPracticeResults.findJournalFor(JournalFilterTO.newBuilder()
-                .withFrom(LocalDateUtils.parseDateFromYYYYMMDDString(reportRequest.getFrom()))
-                .withLanguagePairId(reportRequest.getLanguagePairId())
-                .withLessonId(reportRequest.getLessonId())
-                .withUntil(LocalDateUtils.parseDateFromYYYYMMDDString(reportRequest.getUntil()))
-                .withUserId(reportRequest.getUserId())
-                .build());
+        LanguagePracticeReportTO journalFor = LanguagePracticeReportTO.builder()
+                .from(LocalDateUtils.parseDateFromYYYYMMDDString(reportRequest.getFrom(), true))
+                .languagePairId(reportRequest.getLanguagePairId())
+                .lessonId(reportRequest.getLessonId())
+                .until(LocalDateUtils.parseDateFromYYYYMMDDString(reportRequest.getUntil(), false))
+                .userId(reportRequest.getUserId())
+                .build();
+
         Optional<byte[]> bytes = generateReportForJournal.withData(journalFor);
 
         OutputStream outputStream = WebUtils.maakOutputstreamVoorXlsxFile(response, "test");

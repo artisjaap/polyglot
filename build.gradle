@@ -1,7 +1,4 @@
 buildscript {
-    ext {
-        springBootVersion = '2.2.0.RELEASE'
-    }
     repositories {
         mavenCentral()
         jcenter()
@@ -31,7 +28,7 @@ subprojects {
     apply plugin: 'io.spring.dependency-management'
     apply plugin: 'jacoco'
 
-    sourceCompatibility = 1.8
+    sourceCompatibility = 1.12
 
 
     repositories {
@@ -57,12 +54,55 @@ subprojects {
         testArtifacts testJar
     }
 
-    dependencies {
-        testCompile('org.springframework.boot:spring-boot-starter-test')
+    dependencyManagement {
+        dependencies {
 
-        compileOnly("org.projectlombok:lombok:1.18.10")
-        testCompileOnly("org.projectlombok:lombok:1.18.10")
-        annotationProcessor("org.projectlombok:lombok:1.18.10")
+            dependency "com.google.zxing:core:3.3.3"
+            dependency "com.google.zxing:javase:3.3.3"
+            dependency "org.apache.pdfbox:pdfbox:2.0.10"
+            dependency "com.itextpdf:itextpdf:5.5.13"
+
+            dependency "com.opencsv:opencsv:4.2"
+
+            dependency "commons-io:commons-io:2.5"
+
+            dependencySet(group: "io.cucumber", version: "$cucumberVersion") {
+                entry "cucumber-junit"
+                entry "cucumber-core"
+                entry "cucumber-java"
+                entry "cucumber-spring"
+            }
+
+            dependencySet(group: "fr.opensagres.xdocreport", version: "2.0.2") {
+                entry "fr.opensagres.xdocreport.core"
+                entry "fr.opensagres.xdocreport.template"
+                entry "fr.opensagres.xdocreport.document"
+                entry "fr.opensagres.xdocreport.document.docx"
+                entry "fr.opensagres.xdocreport.document.pptx"
+                entry "fr.opensagres.xdocreport.document.odt"
+                entry "fr.opensagres.xdocreport.template.velocity"
+                entry "fr.opensagres.xdocreport.converter"
+                entry "fr.opensagres.xdocreport.converter.docx.xwpf"
+                entry "fr.opensagres.xdocreport.converter.odt.odfdom"
+            }
+            dependency "fr.opensagres.xdocreport:org.apache.poi.xwpf.converter.pdf:1.0.6"
+        }
+    }
+
+    dependencies {
+
+        compile "org.apache.commons:commons-lang3"
+        compile "commons-io:commons-io:2.5"
+        testCompile 'org.springframework.boot:spring-boot-starter-test'
+
+        compileOnly "org.projectlombok:lombok"
+        testCompileOnly "org.projectlombok:lombok"
+        annotationProcessor "org.projectlombok:lombok"
+
+        testImplementation "io.cucumber:cucumber-junit"
+        testImplementation "io.cucumber:cucumber-core"
+        testImplementation "io.cucumber:cucumber-java"
+        testImplementation "io.cucumber:cucumber-spring"
 
     }
 

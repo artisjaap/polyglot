@@ -21,15 +21,19 @@ dependencies {
     compile project(':artisjaap-document')
     testCompile project(path: ":artisjaap-document", configuration: 'testArtifacts')
 
+    compile project(':artisjaap-i18n')
+    testCompile project(path: ":artisjaap-i18n", configuration: 'testArtifacts')
+
+    compile project(':artisjaap-schedule')
+    testCompile project(path: ":artisjaap-schedule", configuration: 'testArtifacts')
+
     compile project(':polyglot-core')
+
+    testCompile project(path: ":artisjaap-common", configuration: 'testArtifacts')
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('de.flapdoodle.embed:de.flapdoodle.embed.mongo')
     testCompile('org.springframework.security:spring-security-test')
 
-    //cucumber
-    testCompile "info.cukes:cucumber-java8:1.2.4"
-    testCompile "info.cukes:cucumber-spring:1.2.4"
-    testCompile "info.cukes:cucumber-junit:1.2.4"
-    compile group: 'net.masterthought', name: 'cucumber-reporting', version: '3.1.0'
+
 }

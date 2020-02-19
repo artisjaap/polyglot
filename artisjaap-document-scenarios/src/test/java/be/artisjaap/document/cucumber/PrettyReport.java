@@ -1,10 +1,11 @@
 package be.artisjaap.document.cucumber;
 
 
-import cucumber.api.SummaryPrinter;
-import cucumber.runtime.Runtime;
-import net.masterthought.cucumber.Configuration;
-import net.masterthought.cucumber.ReportBuilder;
+//import cucumber.api.SummaryPrinter;
+//import cucumber.runtime.Runtime;
+import io.cucumber.plugin.SummaryPrinter;
+//import net.masterthought.cucumber.Configuration;
+//import net.masterthought.cucumber.ReportBuilder;
 
 import java.io.File;
 import java.util.Collections;
@@ -21,9 +22,9 @@ this.htmlReportDir = htmlReportDir;
     public void print(Runtime runtime) {
         File buildDirectory = htmlReportDir.getAbsoluteFile().getParentFile().getParentFile();
         String projectDirectory = buildDirectory.getParentFile().getName();
-        Configuration configuration = new Configuration(htmlReportDir, projectDirectory);
-        ReportBuilder reportBuilder = new ReportBuilder(Collections.singletonList(htmlReportDir.getPath() + "/report.json"), configuration);
-        reportBuilder.generateReports();
+//        Configuration configuration = new Configuration(htmlReportDir, projectDirectory);
+//        ReportBuilder reportBuilder = new ReportBuilder(Collections.singletonList(htmlReportDir.getPath() + "/report.json"), configuration);
+//        reportBuilder.generateReports();
         
     }
 }

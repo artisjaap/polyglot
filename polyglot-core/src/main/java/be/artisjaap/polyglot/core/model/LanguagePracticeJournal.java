@@ -4,10 +4,12 @@ import be.artisjaap.common.model.AbstractDocument;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.CompoundIndexes;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Document(collection = "PolLanguagePracticeJournal")
 @CompoundIndexes({
         @CompoundIndex(name = "user_lang_month", def = "{'userId' : 1, 'languagePairId': 1, 'yearMonth': 1}")
 })

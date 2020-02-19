@@ -1,0 +1,95 @@
+= Gherkin grammar
+
+== Backup service
+
+=== Given
+
+A backup service
+
+== Document Service
+
+=== Given
+
+* A document service
+* an active template {file} with code {code} in language {language}
+* a template {file} is uploaded with code {code} in language {language}
+* template with code {code} is activated in language {language}
+* the combined template with code {code} is activated in language {language}
+* the document with code {code} has been set active in language {language}
+* a combined template with code {code} in language {language} consists of templates {listOfCodes}
+* a document {code} in language {language} exists of templates {listOfCodes}
+* today is {dateAndTime}
+
+=== Then
+
+* the template with code {code} is available
+* the template with code {code} is available
+* the combined template with code {code} is available
+* template with code {code} is active
+* the combined template with code {code} is active
+* the document with code {code} in language {language} can be generated using a default dataset
+* the document with code {code} in language {language} can be generated using a default dataset and are saved in MongoDB
+* the document with code {code} in language {language} can be generated using a default dataset and are saved in MongoDB with filename {listOfCodes}
+* the document with code {code} in language {language} can be generated using a default dataset and are saved in MongoDB and datasets {listOfCodes} are blacklisted
+* the document with code {code} in language {language} can be generated using a default dataset and are saved on absolute path {}
+* the document with code {code} in language {language} can be generated using a default dataset, are saved in absolute path {} and contain the following images
+* the document with code {code} in language {language} can be generated using a default dataset and are saved on relative path {}
+* the document with code {code} in language {language} can be generated using a default dataset, is saved on absolute path {} and has a QR code with following data {}
+* the document with code {code} in language {language} available with name {}
+* the document with code {code} in language {language} and ignored datasets are: {listOfCodes}
+
+== I18n
+
+=== Given
+
+* A i18n service
+* A translation with key {translationKey} has value {translation} in {userLanguage}
+* The translation of key {translationKey} in {userLanguage} has value {translation}
+
+== Mail
+
+=== Given
+
+* A mail service
+* A mail template with code {code}, subject: {string} and body
+
+== Properties
+
+=== Given
+
+* A properties service
+* a property {key} with value {value}
+* the property {key} is updated to {value}
+
+=== Then
+
+* when I request {key} it has value {value}
+
+== Schedule
+
+=== Given
+
+* A schedule service
+* there is {int} task scheduled
+
+=== Core
+
+== Given
+
+* a user named {username}
+* a user {username} with default dataset  (Remove)
+* the lesson {} is loaded for language pair {languagePair}
+* {username} creates language pair {languagePair}
+* {username} adds the following translations on language pair {languagePair}
+* {username} creates lesson with name {string} for {languagePair} aumatically with {int} words from practice list
+* {username} does test with name {string} without making any mistake
+* {username} uploads a list {file} for language pair {languagePair}
+* {username} starts practicing his words with following settings
+* {username} starts to practice in {languagePair} {order} order, {int} exercises, adding a new word every {int} turns
+* {username} practiced {int} words for language pair {languagePair}
+
+== Then
+
+* the document with code {code} in language {language} can be generated with default polyglot datasets
+* a document {} can be generated for language pair {languagePair}
+
