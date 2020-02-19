@@ -1,12 +1,10 @@
 package be.artisjaap.polyglot.web.endpoints;
 
+import be.artisjaap.common.utils.LocalDateUtils;
 import be.artisjaap.core.utils.WebUtils;
-import be.artisjaap.polyglot.core.action.journal.CreateJournalDocument;
 import be.artisjaap.polyglot.core.action.journal.CreateJournalPdf;
 import be.artisjaap.polyglot.core.action.to.CreateJournalPdfTO;
-import be.artisjaap.polyglot.core.action.to.CreatePracticePdfTO;
 import be.artisjaap.polyglot.web.endpoints.request.CreateJournalPdfRequest;
-import be.artisjaap.polyglot.web.endpoints.request.CreatePracticePdfRequest;
 import be.artisjaap.polyglot.web.security.SecurityUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,8 +29,8 @@ public class JournalController {
         Optional<byte[]> generatedPdf = createJournalPdf.forData(CreateJournalPdfTO.builder()
                 .languagePairId(createJournalPdfRequest.getLanguagePairId())
                 .lessonId(createJournalPdfRequest.getLessonId())
-                .from(createJournalPdfRequest.getFrom())
-                .to(createJournalPdfRequest.getTo())
+                .from(createJournalPdfRequest.getFrom().atStartOfDay())
+                .to(LocalDateUtils.endOfDay(createJournalPdfRequest.getTo()))
                 .userId(SecurityUtils.userId())
                 .build());
 

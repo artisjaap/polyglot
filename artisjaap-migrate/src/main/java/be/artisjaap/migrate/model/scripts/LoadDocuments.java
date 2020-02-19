@@ -4,22 +4,15 @@ import be.artisjaap.document.action.ActivateDocument;
 import be.artisjaap.document.action.ActivateSimpleOrCombinedTemplate;
 import be.artisjaap.document.action.AddDocument;
 import be.artisjaap.document.action.AddSimpleTemplate;
-import be.artisjaap.document.action.to.BriefCodeNieuwTO;
-import be.artisjaap.document.action.to.DocumentNewTO;
-import be.artisjaap.document.action.to.DocumentTO;
-import be.artisjaap.document.action.to.TemplateCodeNewTO;
-import be.artisjaap.document.action.to.TemplateCodeTO;
-import be.artisjaap.document.action.to.TemplateNewTO;
-import be.artisjaap.document.action.to.TemplateTO;
-import org.apache.commons.io.FileUtils;
+import be.artisjaap.document.action.DocumentLoader;
+import be.artisjaap.document.action.to.DocumentLoaderConfigTO;
+import be.artisjaap.document.action.to.TemplateLoaderConfigTO;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import java.io.File;
 import java.util.Arrays;
-import java.util.List;
 
 @Component
 public class LoadDocuments extends AbstractInitScript {
@@ -82,6 +75,17 @@ public class LoadDocuments extends AbstractInitScript {
                         .build()))
                 .build());
 
+
+        documentLoader.forConfig(DocumentLoaderConfigTO.builder()
+                .documentCode("REPORT_FOR_JOURNAL")
+                .description("List all the words practiced")
+                .language("NL")
+                .templates(Arrays.asList(TemplateLoaderConfigTO.builder()
+                        .templateCode("REPORT_FOR_JOURNAL")
+                        .description("Template that list all result from journal")
+                        .documentPath("documents/JournalReport.docx")
+                        .build()))
+                .build());
     }
 
 

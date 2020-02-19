@@ -16,7 +16,7 @@ public class ScheduleStepDefinition{
 
     }
 
-    @Given("^there is ([0-9]*) task scheduled$")
+    @Given("there is {int} task scheduled")
     public void countNumberOfScheduledTasks(int number){
         assertThat(listTasks.allTasks().size(), is(number));
     }

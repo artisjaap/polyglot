@@ -40,12 +40,35 @@ public class LocalDateUtils {
         return LocalDateTime.now(clock);
     }
 
+    public static LocalDate today() {
+        return LocalDate.now(clock);
+    }
+
+    public static LocalDateTime startOfToday(){
+        return today().atStartOfDay();
+    }
+
+    public static LocalDateTime endOfToday(){
+        return startOfToday().plusDays(1).minusNanos(1);
+    }
+
+
+
     public static YearMonth parseYearMonthFromYYYYMMString(String yearMonth) {
         return YearMonth.parse(yearMonth);
     }
 
     public static LocalDate parseDateFromYYYYMMDDString(String date) {
         return LocalDate.parse(date, dateFormatYYYYMMDD);
+    }
+
+    public static LocalDateTime parseDateFromYYYYMMDDString(String date, boolean startOfDay) {
+        if(startOfDay) {
+            return parseDateFromYYYYMMDDString(date).atStartOfDay();
+        }
+
+        return parseDateFromYYYYMMDDString(date).plusDays(1).atStartOfDay().minusNanos(1);
+
     }
 
     public static LocalDate parseDateFromDDMMYYYYString(String date) {
@@ -112,5 +135,9 @@ public class LocalDateUtils {
             return "0"+nr;
 
         return ""+nr;
+    }
+
+    public static LocalDateTime endOfDay(LocalDate date) {
+        return date.atStartOfDay().minusNanos(1);
     }
 }

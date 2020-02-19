@@ -33,6 +33,8 @@ import static org.junit.Assert.assertThat;
 
 public class DocumentbeheerStepsDefinition {
 
+    private final static String templateBaseResourceFolder = "templates/";
+
     @Autowired
     private AddSimpleTemplate addSimpleTemplate;
 
@@ -119,7 +121,7 @@ public class DocumentbeheerStepsDefinition {
 
     private byte[] bytesFromFile(String bestand) {
         ClassLoader classLoader = getClass().getClassLoader();
-        File file = new File(classLoader.getResource("templates/" + bestand).getFile());
+        File file = new File(classLoader.getResource(templateBaseResourceFolder + bestand).getFile());
         try {
             return FileUtils.readFileToByteArray(file);
         } catch (IOException e) {
@@ -139,7 +141,7 @@ public class DocumentbeheerStepsDefinition {
     }
 
 
-    @Given("vandaag is {dateAndTime}")
+    @Given("today is {dateAndTime}")
     public void vandaagIs(LocalDateTime dateAndTime) {
         LocalDateUtils.useFixedDate(dateAndTime);
     }

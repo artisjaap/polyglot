@@ -50,6 +50,28 @@ public class ParameterTypes {
         return LocalDateUtils.parseDateFromDDMMYYYYString(date).atTime(Integer.parseInt(hr), Integer.parseInt(min));
     }
 
+    @ParameterType("[a-z_]+")
+    public String key(String key){
+        return key;
+    }
+
+    @ParameterType(".*")
+    public String value(String value){
+        return value;
+    }
+
+    @ParameterType("[a-zA-Z/:-_].*")
+    public String path(String path){
+        return path;
+    }
+
+    @ParameterType(".*")
+    public String qrData(String data){
+        return data;
+    }
+
+
+
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @DefaultParameterTransformer

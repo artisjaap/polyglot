@@ -1,4 +1,4 @@
-package be.artisjaap.migrate.model.scripts;
+package be.artisjaap.document.action.to;
 
 import lombok.Builder;
 import lombok.Data;

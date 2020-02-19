@@ -16,6 +16,12 @@ public class ParameterTypes {
     }
 
     @ParameterType(".*")
+    public String lesson(String lesson){
+        return lesson;
+    }
+
+
+    @ParameterType(".*")
     public String username(String username){
         return username;
     }

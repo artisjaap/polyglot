@@ -2,6 +2,7 @@ package be.artisjaap.polyglot.document;
 
 import be.artisjaap.polyglot.core.action.documents.GenerateReportForJournal;
 import be.artisjaap.polyglot.core.action.to.LanguagePracticeJournalTO;
+import be.artisjaap.polyglot.core.action.to.LanguagePracticeReportTO;
 import be.artisjaap.polyglot.core.action.to.TranslationJournalTO;
 import be.artisjaap.polyglot.core.model.LanguagePair;
 import be.artisjaap.polyglot.core.model.Translation;
@@ -28,37 +29,17 @@ public class GenerateReportForJournalInMemoryTest  extends InMemoryTest {
     private LanguagePairPersister languagePairPersister;
 
     @Autowired
-    private TranslationPracticePersister translationPracticePersister;
-
-    @Autowired
-    private TranslationPersister translationPersister;
-
-    @Autowired
     private UserPersister userPersister;
 
     @Test
     public void test() throws IOException {
         LanguagePair languagePair = languagePairPersister.randomLanguagePair();
-        Translation translation = translationPersister.randomTranslationForLanguagePair(languagePair);
         User user = userPersister.randomUser();
 
-        Optional<byte[]> bytes = generateReportForJournal.withData(LanguagePracticeJournalTO.newBuilder()
-                .withLanguagePairId(languagePair.getId().toString())
-                .withUserId(user.getId().toString())
-                .withTranslationJournalList(Arrays.asList(TranslationJournalTO.newBuilder()
-                        .withTranslationId(translation.getId().toString())
-                        .withQuestion(translation.getLanguageA())
-                        .withGivenAnswer(translation.getLanguageB())
-                        .withExpectedAnswer(translation.getLanguageB())
-                        .withCorrect(false)
-                        .build(),TranslationJournalTO.newBuilder()
-                                .withTranslationId(translation.getId().toString())
-                                .withQuestion(translation.getLanguageA())
-                                .withGivenAnswer(translation.getLanguageB())
-                                .withExpectedAnswer(translation.getLanguageB())
-                                .withCorrect(true)
-                                .build())
-                        )
+        Optional<byte[]> bytes = generateReportForJournal.withData(LanguagePracticeReportTO.builder()
+                .languagePairId(languagePair.getId().toString())
+                .userId(user.getId().toString())
+
                 .build());
         FileUtils.writeByteArrayToFile(new File("c:/temp/test.pdf"), bytes.get());
 

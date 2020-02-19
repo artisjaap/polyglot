@@ -6,6 +6,7 @@ import be.artisjaap.polyglot.core.action.documents.DatasetProviderFactory;
 import be.artisjaap.polyglot.core.action.to.JournalStatisticsTO;
 import be.artisjaap.polyglot.core.action.to.LanguagePairTO;
 import be.artisjaap.polyglot.core.action.to.TranslationJournalTO;
+import be.artisjaap.polyglot.core.action.to.TranslationTO;
 import be.artisjaap.polyglot.core.action.to.UserTO;
 
 import java.util.List;
@@ -37,6 +38,11 @@ public abstract class AbstractDocumentConfig implements AllDatasets, DocumentDef
     @Override
     public AbstractDocumentConfig journalStatisticsDataSetFrom(JournalStatisticsTO journalStatistics) {
         datasetProviderFactory.journalStatisticsDataSetFrom(journalStatistics);
+        return this;
+    }
+
+    public AbstractDocumentConfig translationsDataSetFrom(List<TranslationTO> translations) {
+        datasetProviderFactory.translationsFrom(translations);
         return this;
     }
 

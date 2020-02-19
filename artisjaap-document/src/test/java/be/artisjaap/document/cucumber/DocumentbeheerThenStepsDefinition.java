@@ -145,7 +145,7 @@ public class DocumentbeheerThenStepsDefinition {
     }
 
 
-    @Then("the document with code {code} in language {language} can be generated using a default dataset and are saved on absolute path {}")
+    @Then("the document with code {code} in language {language} can be generated using a default dataset and are saved on absolute path {path}")
     public void kanDeBriefMetCodeInTaaldGegenereerdWordenMetEenDefaultSetVanDatasetsEnWordenOpgeslagenHetAbsolutePath(String code, String isoCode, String absolutePath) throws Throwable {
         BriefConfigTO briefConfigTO = BriefConfigTO.builder()
                 .code(code)
@@ -157,7 +157,7 @@ public class DocumentbeheerThenStepsDefinition {
         generateDocument.forDocument(briefConfigTO);
     }
 
-    @Then("the document with code {code} in language {language} can be generated using a default dataset, are saved in absolute path {} and contain the following images")
+    @Then("the document with code {code} in language {language} can be generated using a default dataset, are saved in absolute path {path} and contain the following images")
     public void kanDeBriefMetCodeInTaaldGegenereerdWordenMetEenDefaultSetVanDatasetsEnWordenOpgeslagenHetAbsolutePathMetImages(String code, String isoCode, String absolutePath, List<GherkinDocumentImage> images) throws Throwable {
         List<DocumentImage> documentImages = images.stream()
                 .map(image -> DocumentImage.newBuilder().withName(image.bookmarkNaam).withImage(bytesFromImage(image.image)).build())
@@ -175,7 +175,7 @@ public class DocumentbeheerThenStepsDefinition {
         generateDocument.forDocument(briefConfigTO);
     }
 
-    @Then("the document with code {code} in language {language} can be generated using a default dataset and are saved on relative path {}")
+    @Then("the document with code {code} in language {language} can be generated using a default dataset and are saved on relative path {path}")
     public void kanDeBriefMetCodeInTaalGegenereerdWordenMetEenDefaultSetVanDatasetsEnWordenOpgeslagenOpHetRelatievePath(String code, String isoCode, String relativePath) throws Throwable {
         BriefConfigTO briefConfigTO = BriefConfigTO.builder()
                 .code(code)
@@ -187,7 +187,7 @@ public class DocumentbeheerThenStepsDefinition {
         generateDocument.forDocument(briefConfigTO);
     }
 
-    @Then("the document with code {code} in language {language} can be generated using a default dataset, is saved on absolute path {} and has a QR code with following data {}")
+    @Then("the document with code {code} in language {language} can be generated using a default dataset, is saved on absolute path {path} and has a QR code with following data {qrData}")
     public void briefMetCodeInTaalMetDefaultDatasetsEnQrCodeData(String code, String isoCode, String absolutePath, String qrData) {
 
         BriefConfigTO.BriefConfigTOBuilder builder = BriefConfigTO.builder()
@@ -216,7 +216,7 @@ public class DocumentbeheerThenStepsDefinition {
     }
 
 
-    @Then("is het bestand {code} in taal {language} beschikbaar onder de naam {}")
+    @Then("the document with code {code} in language {language} available with name {file}")
     public void isHetBestandBeschikbaarOnderDeNaam(String documentCode, String isoCode, String bestandsnaam) throws Throwable {
         GegenereerdeBrief gegenereerdeBrief = zoekGegenereerdeBrief(documentCode, isoCode);
         assertThat(gegenereerdeBrief.getDocumentLocation().getGegenereerdeBestandsnaam(), is(bestandsnaam));
@@ -239,7 +239,7 @@ public class DocumentbeheerThenStepsDefinition {
         return byBriefCodeAndTaal.get(0);
     }
 
-    @Then("is het bestand {code} in taal {language} beschikbaar en de metadata van de volgende datasets is niet opgeslagen: {listOfCodes}")
+    @Then("the document with code {code} in language {language} and ignored datasets are: {listOfCodes}")
     public void isHetBestandMANDAAT_BRIEFInTaalNldBeschikbaarEnDeMetadataVanDeVolgendeDatasetsIsNietOpgeslagenLid(String code, String isoCode, List<String> blackList) throws Throwable {
         GegenereerdeBrief gegenereerdeBrief = zoekGegenereerdeBrief(code, isoCode);
         Set<String> datasets = gegenereerdeBrief.getDatasets().keySet();

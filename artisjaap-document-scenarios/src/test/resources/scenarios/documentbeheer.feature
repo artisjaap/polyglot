@@ -57,12 +57,12 @@ Feature: General document generation
     Then the document with code MANDAAT_BRIEF in language nld can be generated using a default dataset and are saved on relative path /docs/
 
   Scenario: De naam van de gegenereerde brief is standaard de code van de brief, de taal een en timestamp
-    Given vandaag is 26-06-2018 09:00
+    Given today is 26-06-2018 09:00
     And an active template MANDAAT_HEADER_FOOTER_NL.DOCX with code MANDAAT_HEADER_FOOTER in language nld
     And a document MANDAAT_BRIEF in language nld exists of templates MANDAAT_HEADER_FOOTER
     And the document with code MANDAAT_BRIEF has been set active in language nld
     And the document with code MANDAAT_BRIEF in language nld can be generated using a default dataset and are saved in MongoDB
-    Then is het bestand MANDAAT_BRIEF in taal nld beschikbaar onder de naam MANDAAT_BRIEF_NLD_20180626090000
+    Then the document with code MANDAAT_BRIEF in language nld available with name MANDAAT_BRIEF_NLD_20180626090000
 
 
   Scenario: De naam van de gegenereerde brief kan samengesteld worden uit de beschikbare datavelden
@@ -70,21 +70,21 @@ Feature: General document generation
     And a document MANDAAT_BRIEF in language nld exists of templates MANDAAT_HEADER_FOOTER
     And the document with code MANDAAT_BRIEF has been set active in language nld
     And the document with code MANDAAT_BRIEF in language nld can be generated using a default dataset and are saved in MongoDB with filename Lid.naam, Lid.voornaam
-    Then is het bestand MANDAAT_BRIEF in taal nld beschikbaar onder de naam NAAM_VOORNAAM
+    Then the document with code MANDAAT_BRIEF in language nld available with name NAAM_VOORNAAM
 
   Scenario: De velden van de brief zijn beschikbaar als metadata
     Given an active template MANDAAT_HEADER_FOOTER_NL.DOCX with code MANDAAT_HEADER_FOOTER in language nld
     And a document MANDAAT_BRIEF in language nld exists of templates MANDAAT_HEADER_FOOTER
     And the document with code MANDAAT_BRIEF has been set active in language nld
     And the document with code MANDAAT_BRIEF in language nld can be generated using a default dataset and are saved in MongoDB with filename BriefMeta.isoCode, BriefMeta.isoCode, BriefMeta.BriefCode
-    Then is het bestand MANDAAT_BRIEF in taal nld beschikbaar onder de naam NLD_NLD_MANDAAT_BRIEF
+    Then the document with code MANDAAT_BRIEF in language nld available with name NLD_NLD_MANDAAT_BRIEF
 
   Scenario: Bepaalde dataset kunnen geblacklist worden in het kader van GDPR
     Given an active template MANDAAT_HEADER_FOOTER_NL.DOCX with code MANDAAT_HEADER_FOOTER in language nld
     And a document MANDAAT_BRIEF in language nld exists of templates MANDAAT_HEADER_FOOTER
     And the document with code MANDAAT_BRIEF has been set active in language nld
     And the document with code MANDAAT_BRIEF in language nld can be generated using a default dataset and are saved in MongoDB and datasets Lid are blacklisted
-    Then is het bestand MANDAAT_BRIEF in taal nld beschikbaar en de metadata van de volgende datasets is niet opgeslagen: Lid
+    Then the document with code MANDAAT_BRIEF in language nld and ignored datasets are: Lid
 
   Scenario: Dynamische images kunnen vervangen worden door echte images
     Given an active template DUMMY_QR.DOCX with code DUMMY_QR in language nld

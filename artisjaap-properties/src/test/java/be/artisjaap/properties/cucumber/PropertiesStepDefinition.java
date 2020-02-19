@@ -21,18 +21,18 @@ public class PropertiesStepDefinition {
 
     }
 
-    @Given("^a property (.*) with value (.*)$")
+    @Given("a property {key} with value {value}")
     public void createAProperty(String key, String value) {
         setProperty.forKeyWithValue(key, value);
     }
 
-    @Then("^when I request (.*) it has value (.*)$")
+    @Then("when I request {key} it has value {value}")
     public void whenIRequestPropItHasValueVal(String key, String value) {
         String valFromDB = getProperty.valueForKey(key);
         Assert.assertThat(valFromDB, CoreMatchers.is(value));
     }
 
-    @When("^the property (.*) is updated to (.*)$")
+    @When("the property {key} is updated to {value}")
     public void thePropertyPropIsUpdatedToValue(String key, String value) {
         createAProperty(key, value);
     }

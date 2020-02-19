@@ -1,13 +1,11 @@
-package be.artisjaap.migrate.model.scripts;
+package be.artisjaap.document.action;
 
-import be.artisjaap.document.action.ActivateDocument;
-import be.artisjaap.document.action.ActivateSimpleOrCombinedTemplate;
-import be.artisjaap.document.action.AddDocument;
-import be.artisjaap.document.action.AddSimpleTemplate;
 import be.artisjaap.document.action.to.BriefCodeNieuwTO;
+import be.artisjaap.document.action.to.DocumentLoaderConfigTO;
 import be.artisjaap.document.action.to.DocumentNewTO;
 import be.artisjaap.document.action.to.DocumentTO;
 import be.artisjaap.document.action.to.TemplateCodeNewTO;
+import be.artisjaap.document.action.to.TemplateLoaderConfigTO;
 import be.artisjaap.document.action.to.TemplateNewTO;
 import be.artisjaap.document.action.to.TemplateTO;
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +32,7 @@ public class DocumentLoader {
         this.activateDocument = activateDocument;
     }
 
-    public void forConfig(DocumentLoaderConfigTO config){
+    public void forConfig(DocumentLoaderConfigTO config) {
         config.getTemplates().forEach(templateLoaderConfigTO -> {
             try {
                 addSimpleTemplate.withNewCode(TemplateCodeNewTO.builder()
@@ -52,7 +50,7 @@ public class DocumentLoader {
                         .build());
 
                 activateSimpleOrCombinedTemplate.activateTemplate(templateTO.getId());
-            }catch  (Exception e){
+            } catch (Exception e) {
                 log.error("Could not load WORD_PRACTICE_TEMPLATE", e);
             }
         });

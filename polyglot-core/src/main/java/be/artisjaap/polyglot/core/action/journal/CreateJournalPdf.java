@@ -33,12 +33,12 @@ public class CreateJournalPdf {
 
 
     public Optional<byte[]> forData(CreateJournalPdfTO journalPdfTO){
-        LanguagePracticeJournalTO journalData = journalPracticeResults.findJournalFor(JournalFilterTO.newBuilder()
-                .withLanguagePairId(journalPdfTO.getLanguagePairId())
-                .withFrom(journalPdfTO.getFrom())
-                .withUntil(journalPdfTO.getTo())
-                .withLessonId(journalPdfTO.getLessonId())
-                .withUserId(journalPdfTO.getUserId())
+        LanguagePracticeJournalTO journalData = journalPracticeResults.findJournalFor(JournalFilterTO.builder()
+                .languagePairId(journalPdfTO.getLanguagePairId())
+                .from(journalPdfTO.getFrom())
+                .until(journalPdfTO.getTo())
+                .lessonId(journalPdfTO.getLessonId())
+                .userId(journalPdfTO.getUserId())
                 .build());
 
 

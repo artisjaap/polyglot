@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NonNull;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Builder
 @Data
@@ -20,9 +21,9 @@ public class CreateJournalPdfTO {
 
     @NonNull
     @Builder.Default
-    private LocalDate from = LocalDateUtils.MIN_DATE;
+    private LocalDateTime from = LocalDateUtils.MIN_DATE.atStartOfDay();
 
     @NonNull
     @Builder.Default
-    private LocalDate to = LocalDateUtils.MAX_DATE;
+    private LocalDateTime to = LocalDateUtils.MAX_DATE.atStartOfDay();
 }

@@ -1,10 +1,15 @@
 package be.artisjaap.polyglot.cucumber;
 
+import be.artisjaap.common.utils.LocalDateUtils;
+import be.artisjaap.document.action.DocumentLoader;
 import be.artisjaap.document.action.GenerateDocument;
 import be.artisjaap.document.action.to.BriefConfigTO;
+import be.artisjaap.document.action.to.DocumentLoaderConfigTO;
+import be.artisjaap.document.action.to.TemplateLoaderConfigTO;
 import be.artisjaap.document.api.brieflocatie.BriefLocatieFactory;
 import be.artisjaap.document.api.filegeneratie.FileGeneratieFactory;
 import be.artisjaap.polyglot.core.action.documents.DatasetProviderFactory;
+import be.artisjaap.polyglot.core.action.documents.GenerateMistakesReport;
 import be.artisjaap.polyglot.core.action.lesson.CreateLesson;
 import be.artisjaap.polyglot.core.action.lesson.FindPracticeWords;
 import be.artisjaap.polyglot.core.action.lesson.SimpleNextWordStrategy;
@@ -13,6 +18,7 @@ import be.artisjaap.polyglot.core.action.pairs.CreateLanguagePair;
 import be.artisjaap.polyglot.core.action.pairs.FindLanguagePair;
 import be.artisjaap.polyglot.core.action.to.AnswerAndNextWordTO;
 import be.artisjaap.polyglot.core.action.to.LanguagePairTO;
+import be.artisjaap.polyglot.core.action.to.LanguagePracticeMistakesReportTO;
 import be.artisjaap.polyglot.core.action.to.NewAutomaticLessonTO;
 import be.artisjaap.polyglot.core.action.to.NewLanguagePairTO;
 import be.artisjaap.polyglot.core.action.to.NewSimpleTranslationPairTO;
@@ -33,6 +39,7 @@ import be.artisjaap.polyglot.core.action.translation.CreateTranslation;
 import be.artisjaap.polyglot.core.action.user.FindUser;
 import be.artisjaap.polyglot.core.action.user.RegisterUser;
 import be.artisjaap.polyglot.core.action.user.UpdateUserSettings;
+import be.artisjaap.polyglot.core.model.LanguagePair;
 import be.artisjaap.polyglot.core.model.Lesson;
 import be.artisjaap.polyglot.core.model.LessonRepository;
 import be.artisjaap.polyglot.cucumber.types.LanguagePairType;
@@ -40,16 +47,24 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.apache.commons.io.FileUtils;
 import org.bson.types.ObjectId;
+import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static org.junit.Assert.assertTrue;
+
 public class PolyglotCoreStepsDefinition {
+    private final static String templateBaseResourceFolder = "templates/";
     @Autowired
     private RegisterUser registerUser;
 
@@ -85,6 +100,12 @@ public class PolyglotCoreStepsDefinition {
 
     @Autowired
     private GenerateDocument generateDocument;
+
+    @Autowired
+    private DocumentLoader documentLoader;
+
+    @Autowired
+    private GenerateMistakesReport generateMistakesReport;
 
     @Given("a user named {username}")
     public void eenGebruikerMetNaam(String naam) {
@@ -280,8 +301,58 @@ public class PolyglotCoreStepsDefinition {
 
     }
 
-    @Then("a document {} can be generated for language pair {languagePair}")
+    @Then("a document {code} can be generated for language pair {languagePair}")
     public void a_document_TEST_can_be_generated_for_language_pair_Nederlands_Frans(String code, LanguagePairType languagePair) {
 
     }
+
+    @Given("a document {code} made in {language} of template {file}")
+    public void aDocumentMadeOfTemplate(String code, String language, String file) {
+        documentLoader.forConfig(DocumentLoaderConfigTO.builder()
+                .description("test document for " + code)
+                .language(language)
+                .documentCode(code)
+                .templates(List.of(TemplateLoaderConfigTO.builder()
+                        .templateCode(code)
+                        .description("test template for " + code)
+                        .documentPath(templateBaseResourceFolder + file)
+                        .build()))
+                .build());
+    }
+
+    @Given("{username} practiced {int} words for language pair {languagePair} and made {int} mistakes")
+    public void practicedWordsInLanguagePairWithErrors(String username, int words, LanguagePairType languagePairType, int errors){
+        UserTO user = findUser.byUsername(username).orElseThrow(() -> new IllegalStateException("Verwacht dat user bestaat"));
+        LanguagePairTO languagePair = findLanguagePair.pairForUser(user.id(), languagePairType.getFrom(), languagePairType.getTo()).orElseThrow(() -> new IllegalStateException("Expected language pair for user"));
+
+        PracticeWordTO practiceWordTO = findPracticeWords.nextWord(user.id(), languagePair.id(), OrderType.NORMAL);
+        for (int i = 0; i < words; i++) {
+            AnswerAndNextWordTO answerAndNextWordTO = findPracticeWords.checkAnswerAndGiveNext(PracticeWordCheckTO.newBuilder()
+                    .withUserId(user.id())
+                    .withTranslationId(practiceWordTO.translationId())
+                    .withAnswerOrderType(OrderType.NORMAL)
+                    .withAnswerGiven(i<errors?"I dunno":practiceWordTO.answer())
+                    .withNextOrderType(OrderType.NORMAL)
+                    .build());
+            practiceWordTO = answerAndNextWordTO.practiceWord();
+        }
+    }
+
+    @Given("{username} generates the document {code} for language pair {languagePair}")
+    public void generateTheDocument(String username, String code, LanguagePairType languagePairType) throws IOException {
+        UserTO user = findUser.byUsername(username).orElseThrow(() -> new IllegalStateException("Verwacht dat user bestaat"));
+        LanguagePairTO languagePair = findLanguagePair.pairForUser(user.id(), languagePairType.getFrom(), languagePairType.getTo()).orElseThrow(() -> new IllegalStateException("Expected language pair for user"));
+
+
+        Optional<byte[]> bytes = generateMistakesReport.withData(LanguagePracticeMistakesReportTO.builder()
+                .from(LocalDateUtils.startOfToday())
+                .until(LocalDateUtils.endOfToday())
+                .languagePairId(languagePair.id())
+                .userId(user.id())
+                .build());
+        assertTrue(bytes.isPresent());
+        FileUtils.writeByteArrayToFile(new File("c:/temp/mistakes.pdf"), bytes.get());
+
+    }
+
 }
