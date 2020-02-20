@@ -200,8 +200,6 @@ public class PolyglotCoreStepsDefinition {
         for (int i = 0; i < numberOfExercises; i++) {
             PracticeWordTO practiceWordTO = findPracticeWords.nextWord(user.id(), languagePairTO.id(), orderType);
 
-            System.out.println(practiceWordTO);
-
             findPracticeWords.practiced(user.id(), practiceWordTO.translationId(), practiceWordTO.reversed());
         }
 
@@ -338,8 +336,8 @@ public class PolyglotCoreStepsDefinition {
         }
     }
 
-    @Given("{username} generates the document {code} for language pair {languagePair}")
-    public void generateTheDocument(String username, String code, LanguagePairType languagePairType) throws IOException {
+    @Given("{username} generates the document PRACTICE_MISTAKES for language pair {languagePair}")
+    public void generateTheDocument(String username, LanguagePairType languagePairType) throws IOException {
         UserTO user = findUser.byUsername(username).orElseThrow(() -> new IllegalStateException("Verwacht dat user bestaat"));
         LanguagePairTO languagePair = findLanguagePair.pairForUser(user.id(), languagePairType.getFrom(), languagePairType.getTo()).orElseThrow(() -> new IllegalStateException("Expected language pair for user"));
 
@@ -351,6 +349,8 @@ public class PolyglotCoreStepsDefinition {
                 .userId(user.id())
                 .build());
         assertTrue(bytes.isPresent());
+
+        //FIXME use tmp folder and operating system specific file separator
         FileUtils.writeByteArrayToFile(new File("c:/temp/mistakes.pdf"), bytes.get());
 
     }

@@ -12,6 +12,7 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-web'
     compile 'org.springframework.boot:spring-boot-starter-websocket'
     compile "org.springframework.boot:spring-boot-starter-actuator"
+    implementation 'org.springframework.boot:spring-boot-starter-cache'
 
     compile 'org.springframework.boot:spring-boot-starter-freemarker'
 

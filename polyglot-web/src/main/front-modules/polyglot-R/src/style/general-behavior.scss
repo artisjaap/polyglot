@@ -12,6 +12,10 @@ a.action-link {
   text-decoration: none;
   font-weight: bold;
   color: $color-highlight;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .font-center {

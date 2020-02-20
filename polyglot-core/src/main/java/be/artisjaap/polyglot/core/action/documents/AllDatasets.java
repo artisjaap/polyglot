@@ -5,6 +5,7 @@ import be.artisjaap.polyglot.core.action.to.JournalStatisticsTO;
 import be.artisjaap.polyglot.core.action.to.LanguagePairTO;
 import be.artisjaap.polyglot.core.action.to.TranslationJournalTO;
 import be.artisjaap.polyglot.core.action.to.UserTO;
+import be.artisjaap.polyglot.core.action.to.mistakes.LanguageMistakeDetailTO;
 
 import java.util.List;
 
@@ -17,5 +18,7 @@ public interface AllDatasets {
     AbstractDocumentConfig userDataSetFrom(UserTO userTO);
 
     AbstractDocumentConfig journalStatisticsDataSetFrom(JournalStatisticsTO journalStatistics);
+
+    AbstractDocumentConfig mistakesDataSetFrom(List<LanguageMistakeDetailTO> mistakeDetailTO);
 
 }

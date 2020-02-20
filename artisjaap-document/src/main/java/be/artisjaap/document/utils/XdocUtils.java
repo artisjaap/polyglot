@@ -14,6 +14,7 @@ import fr.opensagres.xdocreport.document.registry.XDocReportRegistry;
 import fr.opensagres.xdocreport.template.IContext;
 import fr.opensagres.xdocreport.template.TemplateEngineKind;
 import fr.opensagres.xdocreport.template.formatter.FieldsMetadata;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,6 +23,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.Optional;
 
+@Slf4j
 public class XdocUtils {
 
     private static final Logger logger = LoggerFactory.getLogger(XdocUtils.class);
@@ -59,9 +61,9 @@ public class XdocUtils {
 
             IContext context = report.createContext();
 
-            for(String dataset : t.datasetNames()){
-                DatasetConfig datasetConfig = briefConfigTO.forDataset(dataset);
-                if(datasetConfig != null) {
+            for(String dataset : briefConfigTO.datasets()){
+                logger.info("in document {} found dataset with name {}", t.getCode(), dataset);
+                DatasetConfig datasetConfig = briefConfigTO.forDataset(dataset);if(datasetConfig != null) {
                     Object data = datasetConfig.data();
                     context.put(datasetConfig.metaName(), data);
 

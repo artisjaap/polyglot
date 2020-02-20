@@ -10,12 +10,14 @@ import java.util.zip.ZipInputStream;
 
 
 public class DocXAnalyser { //$BriefInfo.BriefCode
-	private final static Pattern MERGEFIELD_DOCX = Pattern.compile("MERGEFIELD\\s+(\\$([^.]+).([^\\s]+))");
+//	 final static Pattern MERGEFIELD_DOCX = Pattern.compile("MERGEFIELD\\s+\\$(?:<[^>]*>)*([^.<]+)(?:[^.]*).([a-zA-Z]+)");
+	final static Pattern MERGEFIELD_DOCX = Pattern.compile("MERGEFIELD\\s+\\$([^.]+).([a-zA-Z]+)");
+	final static Pattern STRIPE_TAGS = Pattern.compile("([^<]*)(?:<[^>]*>)?");
 	private final static Pattern MERGEFIELD_ODT = Pattern.compile("<text:database-display[^>]*column-name=\"(\\$([^.]+).([^\\s]+))\"");
 
 	private final static int MERGEFIELD_EXPRESSION = 1;
-	private final static int DATASET = 2;
-	private final static int VARIABLE_NAME = 3;
+	private final static int DATASET = 1;
+	private final static int VARIABLE_NAME = 2;
 
 
 	public static DatasetInfo findFields(DocType type, InputStream is)  {
@@ -59,12 +61,22 @@ public class DocXAnalyser { //$BriefInfo.BriefCode
 	}
 
 
-	private static void addMergefields(DatasetInfo mergeInfo, String text, Pattern pattern) {
+	public static void addMergefields(DatasetInfo mergeInfo, String text, Pattern pattern) {
 		Matcher matcher = pattern.matcher(text);
 		while(matcher.find()){
 
-			mergeInfo.addMergefield(matcher.group(DATASET), matcher.group(VARIABLE_NAME));
+			mergeInfo.addMergefield(stripeTags(matcher.group(DATASET)), stripeTags(matcher.group(VARIABLE_NAME)));
 		}
+	}
+
+	private static String stripeTags(String string){
+		Matcher matcher = STRIPE_TAGS.matcher(string);
+
+		StringBuffer sb = new StringBuffer();
+		while(matcher.find()){
+			sb.append(matcher.group(1));
+		}
+		return sb.toString();
 	}
 
 

@@ -26,6 +26,7 @@
         <a class="action-link"  [routerLink]="['/home', 'student', 'lesson', a.id, 'practice']">
           <i class="icofont-play-alt-1"></i>
         </a>
+
         <a class="action-link" (click)="generateLessonPdForLesson(a.id)" >
           <i class="icofont-magic"></i>
         </a>
@@ -37,12 +38,20 @@
 
   <mat-card>
     <mat-card-title>
-      Upload lesson
+      Actions
     </mat-card-title>
     <mat-card-content>
-      <input type="file"  #file (change)="onFilesAdded()" multiple>
+      <div class="flex-column">
+        <div class="flex-row">
+          <span>Upload lesson</span>
+          <input type="file"  #file (change)="onFilesAdded()" multiple>
+        </div>
+        <div class="flex-row">
+          <span>Download latest mistakes</span>
+        </div>
+      </div>
 
-      <input type="text" #newLesson> <button (click)="generateJournalPdf()">JOURNAL PDF</button>
+<!--      <input type="text" #newLesson> <button (click)="generateJournalPdf()">JOURNAL PDF</button>-->
     </mat-card-content>
   </mat-card>
 

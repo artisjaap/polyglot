@@ -10,6 +10,7 @@ import be.artisjaap.document.action.to.TemplateNewTO;
 import be.artisjaap.document.action.to.TemplateTO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -40,12 +41,15 @@ public class DocumentLoader {
                         .description(templateLoaderConfigTO.getDescription())
                         .build());
 
+
                 File file = new File(getClass().getClassLoader().getResource(templateLoaderConfigTO.getDocumentPath()).getFile());
+                byte[] bytes = IOUtils.toByteArray(getClass().getClassLoader().getResourceAsStream(templateLoaderConfigTO.getDocumentPath()));
 
                 TemplateTO templateTO = addSimpleTemplate.forNew(TemplateNewTO.builder()
                         .code(templateLoaderConfigTO.getTemplateCode())
                         .taal(config.getLanguage())
-                        .template(FileUtils.readFileToByteArray(file))
+                        .template(bytes)
+//                        .template(FileUtils.readFileToByteArray(file))
                         .originalFilename(file.getName())
                         .build());
 

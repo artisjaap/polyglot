@@ -14,4 +14,6 @@ public interface LanguagePracticeJournalRepositoryCustom {
     Optional<LanguagePracticeJournal> findByUserIdAndLessonId(ObjectId userId, ObjectId lessonId);
 
     Optional<LanguagePracticeJournal> findByFilters(JournalFilterTO journalFilterTO);
+
+    Optional<LanguagePairMistakes> findMistakesByFilters(JournalFilterTO journalFilterTO);
 }

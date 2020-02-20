@@ -39,6 +39,7 @@ public class BriefConfigTO implements DatasetConfigProvider {
     private List<DocumentImage> documentImages = new ArrayList<>();
     private boolean dryRun;
 
+    @Override
     public List<String> datasets() {
         return datasetProvider.datasetsMeta().stream().map(DatasetMeta::metaName).collect(Collectors.toList());
     }

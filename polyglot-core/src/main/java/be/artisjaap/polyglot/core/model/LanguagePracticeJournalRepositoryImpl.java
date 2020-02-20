@@ -4,6 +4,7 @@ import be.artisjaap.common.utils.LocalDateUtils;
 import be.artisjaap.polyglot.core.action.to.AnswerTO;
 import be.artisjaap.polyglot.core.action.to.JournalFilterTO;
 import com.mongodb.client.result.UpdateResult;
+import org.apache.commons.codec.language.bm.Lang;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -15,10 +16,10 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.time.LocalDateTime;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.*;
@@ -83,6 +84,56 @@ public class LanguagePracticeJournalRepositoryImpl implements LanguagePracticeJo
 
         throw new UnsupportedOperationException("Resultset is > 0");
 
+    }
+
+    public Optional<LanguagePairMistakes> findMistakesByFilters(JournalFilterTO journalFilterTO){
+        return findByFilters(journalFilterTO).map(this::toMistakes);
+
+    }
+
+    private LanguagePairMistakes toMistakes(LanguagePracticeJournal languagePracticeJournal) {
+
+        Map<ObjectId, List<TranslationJournal>> collect = languagePracticeJournal.getTranslationJournalList().stream()
+                .collect(Collectors.groupingBy(TranslationJournal::getTranslationId));
+
+        List<MistakeDetail> mistakeDetails = collect.values().stream().map(this::createDetail).collect(Collectors.toList());
+
+        List<LocalDateTime> times = languagePracticeJournal.getTranslationJournalList().stream().map(TranslationJournal::getTimestamp).sorted().collect(Collectors.toList());
+
+
+        return LanguagePairMistakes.builder()
+                .userId(languagePracticeJournal.getUserId())
+                .languagePairId(languagePracticeJournal.getLanguagePairId())
+                .from(times.get(0))
+                .to(times.get(times.size()-1))
+                .mistakes(mistakeDetails)
+                .build();
+    }
+
+    private MistakeDetail createDetail(List<TranslationJournal> journalItems){
+
+        TranslationJournal first = journalItems.get(0);
+        Set<String> givenAnwers = new HashSet<>();
+        int timesCorrect = 0;
+        int timesIncorrect = 0;
+        for(TranslationJournal item : journalItems){
+            if(item.getCorrect()){
+                timesCorrect++;
+            }else {
+                timesIncorrect++;
+                givenAnwers.add(item.getGivenAnswer());
+            }
+
+        }
+
+        return MistakeDetail.builder()
+                .correctAnswer(first.getExpectedAnswer())
+                .question(first.getQuestion())
+                .translationId(first.getTranslationId())
+                .givenAnswers(givenAnwers)
+                .timesCorrect(timesCorrect)
+                .timesIncorrect(timesIncorrect)
+                .build();
     }
 
     @Override

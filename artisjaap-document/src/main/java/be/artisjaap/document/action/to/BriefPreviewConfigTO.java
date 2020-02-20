@@ -13,6 +13,11 @@ import java.util.List;
 
 public class BriefPreviewConfigTO implements DatasetConfigProvider, DatasetProvider {
     @Override
+    public List<String> datasets() {
+        return new ArrayList<>();
+    }
+
+    @Override
     public DatasetConfig forDataset(String dataset) {
         return new DatasetConfigImpl(new IdentityHashMap<>(), dataset, IdentityHashMap.class, false);
     }
@@ -26,6 +31,7 @@ public class BriefPreviewConfigTO implements DatasetConfigProvider, DatasetProvi
     public DatasetConfig get(String dataset) {
         return new DatasetConfigImpl(new IdentityHashMap<>(), dataset, IdentityHashMap.class, false);
     }
+
 
     @Override
     public List<String> datasetNames() {

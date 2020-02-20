@@ -9,10 +9,8 @@ import be.artisjaap.polyglot.core.action.documents.docconfig.DocumentCode;
 import be.artisjaap.polyglot.core.action.documents.docconfig.DocumentForCodeFactory;
 import be.artisjaap.polyglot.core.action.journal.JournalPracticeResults;
 import be.artisjaap.polyglot.core.action.pairs.FindLanguagePair;
-import be.artisjaap.polyglot.core.action.to.JournalFilterTO;
-import be.artisjaap.polyglot.core.action.to.LanguagePairTO;
-import be.artisjaap.polyglot.core.action.to.LanguagePracticeJournalTO;
-import be.artisjaap.polyglot.core.action.to.LanguagePracticeMistakesReportTO;
+import be.artisjaap.polyglot.core.action.to.*;
+import be.artisjaap.polyglot.core.action.to.mistakes.LanguageMistakeTO;
 import be.artisjaap.polyglot.core.action.user.FindUser;
 import com.beust.jcommander.internal.Lists;
 import org.springframework.stereotype.Component;
@@ -43,7 +41,7 @@ public class GenerateMistakesReport {
 
     public Optional<byte[]> withData(LanguagePracticeMistakesReportTO data) {
         LanguagePairTO languagePairTO = findLanguagePair.byId(data.getLanguagePairId());
-        LanguagePracticeJournalTO journalFor = journalPracticeResults.findJournalFor(JournalFilterTO.builder()
+        LanguageMistakeTO journalFor = journalPracticeResults.findMistakesFor(JournalFilterTO.builder()
                 .from(data.getFrom())
                 .languagePairId(data.getLanguagePairId())
                 .lessonId(data.getLessonId())
@@ -53,7 +51,8 @@ public class GenerateMistakesReport {
                 .build());
 
         BriefConfigTO briefConfigTO = documentForCodeFactory.findForCode(DocumentCode.PRACTICE_MISTAKES)
-                .translationJournalDataSetFrom(journalFor.translationJournalList())
+                .mistakesDataSetFrom(journalFor.getMistakeDetails())
+                .translationsDataSetFrom(List.of(TranslationTO.newBuilder().withLanguageA("A").build()))
                 .languagePairDataSetFrom(languagePairTO)
                 .userDataSetFrom(findUser.byUserId(data.getUserId()))
                 .buildConfig()

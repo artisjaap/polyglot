@@ -5,6 +5,7 @@ import be.artisjaap.document.api.DatasetMeta;
 import be.artisjaap.document.api.DatasetProvider;
 import be.artisjaap.document.api.DatasetProviderImpl;
 import be.artisjaap.polyglot.core.action.to.*;
+import be.artisjaap.polyglot.core.action.to.mistakes.LanguageMistakeDetailTO;
 import be.artisjaap.polyglot.core.model.datasets.*;
 
 import java.util.List;
@@ -33,25 +34,33 @@ public class DatasetProviderFactory implements DatasetProvider {
     }
 
 
-
-    public DatasetProviderFactory languagePairDataSetFrom(LanguagePairTO languagePairTO) {
-        datasetProvider.add("languagePair", LanguagePairDataSet.from(languagePairTO));
+    public DatasetProviderFactory translationsFrom(List<TranslationTO> translations){
+        datasetProvider.add("translations", TranslationDataSet.from(translations), TranslationDataSet.class);
         return this;
     }
 
+    public DatasetProviderFactory mistakesDataSetFrom(List<LanguageMistakeDetailTO> translationJournals){
+        datasetProvider.add("mistakes", MistakeDataSet.from(translationJournals), MistakeDataSet.class) ;
+        return this;
+    }
 
     public DatasetProviderFactory translationDataSetFrom(List<TranslationJournalTO> translationJournals){
         datasetProvider.add("result", TranslationResultDataSet.from(translationJournals), TranslationResultDataSet.class) ;
         return this;
     }
 
-    public DatasetProviderFactory journalStatisticsDataSetFrom(JournalStatisticsTO journalStatisticsTO){
-        datasetProvider.add("journalstats", JournalStatisticsDataSet.from(journalStatisticsTO));
+    public DatasetProviderFactory journalTranslations(List<TranslationJournalTO> translationJournalList) {
+        datasetProvider.add("journalTranslations", JournalTranslationsDataSet.from(translationJournalList), JournalTranslationsDataSet.class);
         return this;
     }
 
-    public DatasetProviderFactory journalTranslations(List<TranslationJournalTO> translationJournalList) {
-        datasetProvider.add("journalTranslations", JournalTranslationsDataSet.from(translationJournalList), JournalTranslationsDataSet.class);
+    public DatasetProviderFactory languagePairDataSetFrom(LanguagePairTO languagePairTO) {
+        datasetProvider.add("languagePair", LanguagePairDataSet.from(languagePairTO));
+        return this;
+    }
+
+    public DatasetProviderFactory journalStatisticsDataSetFrom(JournalStatisticsTO journalStatisticsTO){
+        datasetProvider.add("journalstats", JournalStatisticsDataSet.from(journalStatisticsTO));
         return this;
     }
 
@@ -61,13 +70,16 @@ public class DatasetProviderFactory implements DatasetProvider {
     }
 
 
-    public DatasetProviderFactory translationsFrom(List<TranslationTO> translations){
-        datasetProvider.add("translations", TranslationDataSet.from(translations), TranslationDataSet.class);
+
+    //dummies
+
+    public DatasetProviderFactory addDummyTranslationDataSet(){
+        datasetProvider.add("translations", TranslationDataSet.dummyList(10), TranslationDataSet.class);
         return this;
     }
 
-    public DatasetProviderFactory addDummyLanguagePairDataSet(){
-        datasetProvider.add("languagePair", LanguagePairDataSet.dummy());
+    public DatasetProviderFactory addDummyMistakesDataSet(){
+        datasetProvider.add("mistakes", MistakeDataSet.dummyList(10), MistakeDataSet.class);
         return this;
     }
 
@@ -81,8 +93,8 @@ public class DatasetProviderFactory implements DatasetProvider {
         return this;
     }
 
-    public DatasetProviderFactory addDummyUserDataSet(){
-        datasetProvider.add("user", UserDataSet.dummy());
+    public DatasetProviderFactory addDummyLanguagePairDataSet(){
+        datasetProvider.add("languagePair", LanguagePairDataSet.dummy());
         return this;
     }
 
@@ -91,10 +103,20 @@ public class DatasetProviderFactory implements DatasetProvider {
         return this;
     }
 
-    public DatasetProviderFactory addDummyTranslationDataSet(){
-        datasetProvider.add("translations", TranslationDataSet.dummyList(10), TranslationDataSet.class);
+
+    public DatasetProviderFactory addDummyUserDataSet(){
+        datasetProvider.add("user", UserDataSet.dummy());
         return this;
     }
+
+
+
+
+
+
+
+
+
 
     public DatasetProvider addAllDummy() {
         addDummyLanguagePairDataSet();
@@ -102,6 +124,7 @@ public class DatasetProviderFactory implements DatasetProvider {
         addDummyUserDataSet();
         addDummyJournalStatisticsDataSet();
         addDummyTranslationDataSet();
+        addDummyMistakesDataSet();
         return this;
     }
 

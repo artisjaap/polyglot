@@ -8,6 +8,7 @@ import be.artisjaap.polyglot.core.action.to.LanguagePairTO;
 import be.artisjaap.polyglot.core.action.to.TranslationJournalTO;
 import be.artisjaap.polyglot.core.action.to.TranslationTO;
 import be.artisjaap.polyglot.core.action.to.UserTO;
+import be.artisjaap.polyglot.core.action.to.mistakes.LanguageMistakeDetailTO;
 
 import java.util.List;
 
@@ -16,6 +17,11 @@ public abstract class AbstractDocumentConfig implements AllDatasets, DocumentDef
 
     protected DatasetProviderFactory datasetProviderFactory = new DatasetProviderFactory();
 
+    @Override
+    public AbstractDocumentConfig mistakesDataSetFrom(List<LanguageMistakeDetailTO> mistakeDetailTO){
+        datasetProviderFactory.mistakesDataSetFrom(mistakeDetailTO);
+        return this;
+    }
 
     @Override
     public AbstractDocumentConfig languagePairDataSetFrom(LanguagePairTO languagePairTO) {
