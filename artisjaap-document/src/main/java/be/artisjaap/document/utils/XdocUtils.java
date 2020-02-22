@@ -64,12 +64,13 @@ public class XdocUtils {
                 if(datasetConfig != null) {
                     Object data = datasetConfig.data();
                     context.put(datasetConfig.metaName(), data);
-
+                    logger.info("dataset loaded: {} [{}] - list? {}", datasetConfig.metaName(), datasetConfig.metaClass(), datasetConfig.isAsList());
                     if(datasetConfig.isAsList()) {
                         fieldsMetadata.addFieldAsList(datasetConfig.metaName());
-                    } else {
-                        fieldsMetadata.load(datasetConfig.metaName(), datasetConfig.metaClass(), datasetConfig.isAsList());
                     }
+                        fieldsMetadata.load(datasetConfig.metaName(), datasetConfig.metaClass(), datasetConfig.isAsList());
+
+
                 }
                 if(context.get(dataset) == null ){
                     logger.error("Ontbrekende dataset in BriefConfiguratie: " + dataset);

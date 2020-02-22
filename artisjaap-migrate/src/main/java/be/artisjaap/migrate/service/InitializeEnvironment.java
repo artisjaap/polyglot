@@ -100,7 +100,7 @@ public class InitializeEnvironment {
 	}
 
 	private void voerScriptUit(InitScript script) {
-		logger.info("Script in uitvoering voor versie " + script.getVersion() + " : " + script.getClass());
+		logger.info("Script in uitvoering voor versie " + script.getVersion() + " : " + script.omschrijving());
 		script.execute();
 		versionRepository.zetVerwerkt(script);
 	}

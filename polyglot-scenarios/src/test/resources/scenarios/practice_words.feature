@@ -11,7 +11,6 @@ Feature: Practicing words
     When the property prop is updated to value2
     Then when I request prop it has value value2
 
-    @Only
   Scenario: practice some words and generate a document with only the errors
     Given a user named tom
     And tom creates language pair Nederlands-Frans

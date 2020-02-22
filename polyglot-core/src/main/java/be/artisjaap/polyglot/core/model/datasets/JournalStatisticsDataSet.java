@@ -3,13 +3,13 @@ package be.artisjaap.polyglot.core.model.datasets;
 import be.artisjaap.polyglot.core.action.to.JournalStatisticsTO;
 
 public class JournalStatisticsDataSet {
-    private String numerOfQuestions;
+    private String numberOfQuestions;
     private String correctlyAnswered;
     private String incorrectlyAnswered;
     private String percentageCorrect;
 
     private JournalStatisticsDataSet(Builder builder) {
-        numerOfQuestions = builder.numerOfQuestions;
+        numberOfQuestions = builder.numerOfQuestions;
         correctlyAnswered = builder.correctlyAnswered;
         incorrectlyAnswered = builder.incorrectlyAnswered;
         percentageCorrect = builder.percentageCorrect;
@@ -33,8 +33,8 @@ public class JournalStatisticsDataSet {
                 .build();
     }
 
-    public String getNumerOfQuestions() {
-        return numerOfQuestions;
+    public String getNumberOfQuestions() {
+        return numberOfQuestions;
     }
 
     public String getCorrectlyAnswered() {

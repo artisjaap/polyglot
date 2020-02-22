@@ -1,10 +1,8 @@
-package be.artisjaap.polyglot.demo.startup;
+package be.artisjaap.polyglot.scenario.startup;
 
 import be.artisjaap.common.utils.FileUtils;
 import be.artisjaap.document.action.FindAvailableDocuments;
 import be.artisjaap.document.action.GenerateFieldsXml;
-import be.artisjaap.document.action.ValidateCombinedTemplate;
-import be.artisjaap.document.action.to.BriefConfigTO;
 import be.artisjaap.migrate.model.scripts.AbstractInitScript;
 import be.artisjaap.polyglot.core.action.documents.DatasetProviderFactory;
 import org.slf4j.Logger;
@@ -46,6 +44,6 @@ public class GenerateFieldsXmls extends AbstractInitScript {
     public void execute() {
         byte[] bytes = generateFieldsXml.voorDatasets(DatasetProviderFactory.create().addAllDummy());
         File file = FileUtils.writeBytesToTempFile("fields.xml", bytes);
-        logger.debug("Fields XML saved at " + file.getAbsolutePath());
+        logger.info("Fields XML saved at " + file.getAbsolutePath());
     }
 }
