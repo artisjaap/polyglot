@@ -19,8 +19,8 @@ public class DatasetProviderImpl implements DatasetProvider {
         return this;
     }
 
-    public DatasetProviderImpl add(String datasetName, Object dataset, boolean isList) {
-        DatasetConfigImpl config = new DatasetConfigImpl(dataset, datasetName, dataset.getClass(), isList);
+    public DatasetProviderImpl add(String datasetName, Object dataset,  Class<?> collectionClass, boolean isList) {
+        DatasetConfigImpl config = new DatasetConfigImpl(dataset, datasetName, collectionClass, isList);
         datasets.put(datasetName, config);
         return this;
     }

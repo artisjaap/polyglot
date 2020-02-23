@@ -111,7 +111,7 @@ public class LocalDateUtils {
     }
 
     public static long durationInMiliseconds(LocalDateTime timestamp){
-        //FIXME currentTime - timestamp in ms
+        //FIXME
         return 0;
     }
 

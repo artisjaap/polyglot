@@ -113,7 +113,7 @@ public class GenerateDocument {
 
     private BriefConfigTO extendedDocumentConfig(BriefConfigTO briefConfig, Document document) {
         DatasetProviderImpl datasetProvider = DatasetProviderImpl.create();
-        briefConfig.getDatasetProvider().datasetNames().forEach(d -> datasetProvider.add(d, briefConfig.getDatasetProvider().get(d).data(), briefConfig.getDatasetProvider().get(d).isAsList()));
+        briefConfig.getDatasetProvider().datasetNames().forEach(d -> datasetProvider.add(d, briefConfig.getDatasetProvider().get(d).data(), briefConfig.getDatasetProvider().get(d).metaClass(), briefConfig.getDatasetProvider().get(d).isAsList()));
         datasetProvider.add("BriefMeta", BriefMetaDataset.fromBrief(documentAssembler.assembleTO(document)));
 
         return briefConfig.toBuilder()
