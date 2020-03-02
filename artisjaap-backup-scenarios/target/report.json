@@ -1,0 +1,47 @@
+[
+  {
+    "line": 1,
+    "elements": [
+      {
+        "start_timestamp": "2020-03-02T15:25:00.824Z",
+        "before": [
+          {
+            "result": {
+              "duration": 41886100,
+              "status": "passed"
+            },
+            "match": {
+              "location": "be.artisjaap.backup.cucumber.CucumberHooks.init()"
+            }
+          }
+        ],
+        "line": 2,
+        "name": "test backup",
+        "description": "",
+        "id": "managing-features;test-backup",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 9962800,
+              "status": "passed"
+            },
+            "line": 3,
+            "name": "A backup service",
+            "match": {
+              "location": "be.artisjaap.backup.cucumber.BackupStepDefinition.backupService()"
+            },
+            "keyword": "Given "
+          }
+        ]
+      }
+    ],
+    "name": "managing features",
+    "description": "",
+    "id": "managing-features",
+    "keyword": "Feature",
+    "uri": "classpath:scenarios/backup.feature",
+    "tags": []
+  }
+]

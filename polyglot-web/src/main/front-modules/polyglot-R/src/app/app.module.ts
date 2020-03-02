@@ -55,7 +55,7 @@ import {MatCardModule} from '@angular/material/card';
     // })
   ],
   providers: [
-    {provide: 'API_URL', useValue: 'http://localhost:8080/'},
+    {provide: 'API_URL', useValue: 'http://localhost/'},
     {provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]

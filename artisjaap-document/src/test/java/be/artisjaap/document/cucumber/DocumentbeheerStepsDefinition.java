@@ -15,6 +15,7 @@ import be.artisjaap.document.action.to.DocumentNewTO;
 import be.artisjaap.document.action.to.DocumentTO;
 import be.artisjaap.document.action.to.TemplateNewTO;
 import be.artisjaap.document.action.to.TemplateTO;
+import be.artisjaap.document.model.Document;
 import io.cucumber.java.ParameterType;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
@@ -59,9 +60,13 @@ public class DocumentbeheerStepsDefinition {
     @Autowired
     private AddDocument addDocument;
 
+    @Autowired
+    private DocumentWorld documentWorld;
+
     @Given("A document service")
     public void aDocumentService(){
-
+        documentWorld.save("doc", Document.newBuilder().build());
+        documentWorld.increase();
     }
 
     @Given("an active template {file} with code {code} in language {language}")

@@ -6,16 +6,16 @@ import {NewLessonHeaderRequest} from '../model/new-lesson-header-request';
 
 @Injectable()
 export class LessonHeaderService {
-  constructor(private httpClient: HttpClient,  @Inject('API_URL') private apiurl: string) {
+  constructor(private httpClient: HttpClient) {
 
   }
 
   public loadLessonsForLanguagePair(languagePairId: string): Observable<LessonHeaderResponse[]> {
     const params = new HttpParams().set('languagePairId', languagePairId);
-    return this.httpClient.get<LessonHeaderResponse[]>(this.apiurl + `api/lesson-headers` , {params});
+    return this.httpClient.get<LessonHeaderResponse[]>( `api/lesson-headers` , {params});
   }
 
   public createNewLesson(newLessonHeaderRequest: NewLessonHeaderRequest): Observable<LessonHeaderResponse> {
-    return this.httpClient.post<LessonHeaderResponse>(this.apiurl + `api/lesson-header` , newLessonHeaderRequest);
+    return this.httpClient.post<LessonHeaderResponse>( `api/lesson-header` , newLessonHeaderRequest);
   }
 }

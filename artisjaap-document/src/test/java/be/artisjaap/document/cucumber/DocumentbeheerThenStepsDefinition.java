@@ -21,6 +21,7 @@ import be.artisjaap.document.model.mongo.CombinedTemplateRepository;
 import be.artisjaap.document.model.mongo.GegenereerdeBriefRepository;
 import be.artisjaap.document.model.mongo.TemplateRepository;
 import be.artisjaap.document.utils.QrUtils;
+import io.cucumber.java.bs.A;
 import io.cucumber.java.en.Then;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +54,9 @@ public class DocumentbeheerThenStepsDefinition {
 
     @Autowired
     private GegenereerdeBriefRepository gegenereerdeBriefRepository;
+
+    @Autowired
+    private DocumentWorld documentWorld;
 
 
     @Then("the template with code {code} is available")

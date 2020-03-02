@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "classpath:scenarios", glue = "be.artisjaap")
+@CucumberOptions(features = "classpath:scenarios", glue = "be.artisjaap", plugin = {"pretty", "json:target/report.json", "de.monochromata.cucumber.report.PrettyReports:target/pretty-cucumber"})
 @ContextConfiguration(classes = {
         CommonApplication.class, ScheduleApplication.class, MigrateApplication.class})
 public class CucumberContext {

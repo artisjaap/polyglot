@@ -1,0 +1,112 @@
+[
+  {
+    "line": 1,
+    "elements": [
+      {
+        "start_timestamp": "2020-02-28T13:02:10.626Z",
+        "before": [
+          {
+            "result": {
+              "duration": 42886000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "be.artisjaap.polyglot.cucumber.CucumberHooks.clear()"
+            }
+          }
+        ],
+        "line": 3,
+        "name": "Check if all modules are available",
+        "description": "",
+        "id": "check-if-all-modules-are-available-in-feature-files;check-if-all-modules-are-available",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 9974100,
+              "status": "passed"
+            },
+            "line": 4,
+            "name": "A backup service",
+            "match": {
+              "location": "be.artisjaap.backup.cucumber.BackupStepDefinition.backupService()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 22938200,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "A document service",
+            "match": {
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.aDocumentService()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 13963000,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "A i18n service",
+            "match": {
+              "location": "be.artisjaap.i18n.cucumber.I18nStepDefinition.backupService()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 6984700,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "A mail service",
+            "match": {
+              "location": "be.artisjaap.mail.cucumber.MailStepDefinition.aMailService()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 8975700,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "A properties service",
+            "match": {
+              "location": "be.artisjaap.properties.cucumber.PropertiesStepDefinition.aPropertiesService()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 5986400,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "A schedule service",
+            "match": {
+              "location": "be.artisjaap.schedule.cucumber.ScheduleStepDefinition.aScheduleService()"
+            },
+            "keyword": "And "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@Only"
+          }
+        ]
+      }
+    ],
+    "name": "check if all modules are available in feature files",
+    "description": "",
+    "id": "check-if-all-modules-are-available-in-feature-files",
+    "keyword": "Feature",
+    "uri": "classpath:scenarios/all_available_modules.feature",
+    "tags": []
+  }
+]

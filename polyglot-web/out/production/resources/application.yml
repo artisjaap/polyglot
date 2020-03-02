@@ -1,5 +1,5 @@
 jwt:
-  secret: SECRET
+  secret: "SECRET"
   expiration: 36000000
 
 server:

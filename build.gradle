@@ -72,6 +72,7 @@ subprojects {
                 entry "cucumber-java"
                 entry "cucumber-spring"
             }
+            dependency "de.monochromata.cucumber:reporting-plugin:4.0.25"
 
             dependencySet(group: "fr.opensagres.xdocreport", version: "2.0.2") {
                 entry "fr.opensagres.xdocreport.core"
@@ -103,6 +104,8 @@ subprojects {
         testImplementation "io.cucumber:cucumber-core"
         testImplementation "io.cucumber:cucumber-java"
         testImplementation "io.cucumber:cucumber-spring"
+        testImplementation 'de.monochromata.cucumber:reporting-plugin'
+
 
     }
 
