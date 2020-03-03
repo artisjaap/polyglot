@@ -5,6 +5,6 @@ jar {
 
 dependencies {
     compile project(':artisjaap-common')
-
+    testCompile project(path: ":artisjaap-common", configuration: 'testArtifacts')
 
 }

@@ -5,6 +5,7 @@ import be.artisjaap.i18n.action.I18nFindTranslation;
 import be.artisjaap.i18n.action.I18nTranslationBundle;
 import be.artisjaap.i18n.action.I18nTranslationCache;
 import be.artisjaap.i18n.action.to.NewTranslationTO;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import org.hamcrest.CoreMatchers;
@@ -26,10 +27,15 @@ public class I18nStepDefinition {
     @Autowired
     private I18nTranslationCache i18nTranslationCache;
 
+    @Autowired
+    private I18nWorld i18nWorld;
 
     @Given("A i18n service")
     public void backupService() {
+        i18nWorld.increase();
+
         System.out.println("i18n Service");
+
     }
 
 
