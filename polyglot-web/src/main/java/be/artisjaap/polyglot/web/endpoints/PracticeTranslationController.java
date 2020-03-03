@@ -74,7 +74,7 @@ public class PracticeTranslationController extends BaseController {
     @RequestMapping(value = "/practice/results/current-month/{lessonId}", method = RequestMethod.POST)
     public @ResponseBody
     ResponseEntity<LanguagePracticeJournalResponse> practiceResultsForCurrentMonth(String lessonId) throws IOException {
-        journalPracticeResults.findJournalFor(userId(), lessonId, LocalDateUtils.nowYearMonth())
+        journalPracticeResults.findJournalFor(userId(), lessonId, LocalDateUtils.nowYearMonth());
         return ResponseEntity.ok(null);
     }
 
