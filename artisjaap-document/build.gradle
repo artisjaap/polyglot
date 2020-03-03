@@ -10,13 +10,13 @@ dependencies {
 
 
     //xdoc
-    compile 'fr.opensagres.xdocreport:fr.opensagres.xdocreport.document.docx'
-    compile 'fr.opensagres.xdocreport:fr.opensagres.xdocreport.document.pptx'
-    compile 'fr.opensagres.xdocreport:fr.opensagres.xdocreport.document.odt'
-    compile 'fr.opensagres.xdocreport:fr.opensagres.xdocreport.template.velocity'
-    compile 'fr.opensagres.xdocreport:fr.opensagres.xdocreport.converter.docx.xwpf'
-    compile 'fr.opensagres.xdocreport:fr.opensagres.xdocreport.converter.odt.odfdom'
-    compile 'fr.opensagres.xdocreport:org.apache.poi.xwpf.converter.pdf'
+    compile 'fr.opensagres.xdocreport:fr.opensagres.xdocreport.document.docx:1.0.6'
+    compile 'fr.opensagres.xdocreport:fr.opensagres.xdocreport.document.pptx:1.0.5'
+    compile 'fr.opensagres.xdocreport:fr.opensagres.xdocreport.document.odt:1.0.5'
+    compile 'fr.opensagres.xdocreport:fr.opensagres.xdocreport.template.velocity:1.0.6'
+    compile 'fr.opensagres.xdocreport:fr.opensagres.xdocreport.converter.docx.xwpf:1.0.6'
+    compile 'fr.opensagres.xdocreport:fr.opensagres.xdocreport.converter.odt.odfdom:1.0.6'
+    compile 'fr.opensagres.xdocreport:org.apache.poi.xwpf.converter.pdf:1.0.6'
 
     //QR
     compile "com.google.zxing:core"

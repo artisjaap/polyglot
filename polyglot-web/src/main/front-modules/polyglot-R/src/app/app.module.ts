@@ -19,8 +19,8 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
-
-
+import {AuthService} from './auth/auth.service';
+import {AuthGuard} from './auth/auth-guard';
 
 @NgModule({
   declarations: [
@@ -56,7 +56,7 @@ import {MatCardModule} from '@angular/material/card';
   ],
   providers: [
     {provide: 'API_URL', useValue: 'http://localhost/'},
-    {provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true},
   ],
   bootstrap: [AppComponent]
 })
