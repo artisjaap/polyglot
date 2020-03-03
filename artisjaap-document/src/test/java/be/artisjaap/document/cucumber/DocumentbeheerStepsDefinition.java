@@ -102,7 +102,7 @@ public class DocumentbeheerStepsDefinition {
         assertThat(documentTOS.size(), is(1));
         activateDocument.metId(documentTOS.get(0).getId());
     }
-
+//         a combined template with code MANDAA in language nld        consists of templates MANDAAT_HEADER_FOOTER, MANDAAT_BRIEF_NA_TELEFONISCH_CONTACT
     @When("a combined template with code {code} in language {language} consists of templates {listOfCodes}")
     public void eenGecombineerdeTemplateMetCodeWordtGemaaktUitDeTemplates(String code, String taal, List<String> templates) {
         CombinedTemplateNewTO combinatie = CombinedTemplateNewTO

@@ -109,7 +109,7 @@ public class DocumentbeheerThenStepsDefinition {
         assertNotNull(brief.get(0).getDocumentLocation().getDocument());
     }
 
-    @Then("the document with code {code} in language {language} can be generated using a default dataset and are saved in MongoDB with filename {listOfCodes}")
+    @Then("the document with code {code} in language {language} can be generated using a default dataset and are saved in MongoDB with filename {filenameParts}")
     public void kanDeBriefMetCodeInTaalGegenereerdWordenMetEenDefaultSetVanDatasetsEnWordenOpgeslagenInDeMongoDBMetBestandsnaam(String code, String isoCode, List<String> bestandsnaamDeel) throws Throwable {
         GenericFileName.Builder genericFilenameBuilder = FileGeneratieFactory.fromDatasets();
         bestandsnaamDeel.forEach(genericFilenameBuilder::withFilenameParts);
@@ -125,7 +125,7 @@ public class DocumentbeheerThenStepsDefinition {
 
     }
 
-    @Then("the document with code {code} in language {language} can be generated using a default dataset and are saved in MongoDB and datasets {listOfCodes} are blacklisted")
+    @Then("the document with code {code} in language {language} can be generated using a default dataset and are saved in MongoDB and datasets {filenameParts} are blacklisted")
     public void kanDeBriefMetCodeInTaalGegenereerdWordenMetEenDefaultSetVanDatasetsEnWordenOpgeslagenInDeMongoDBMetBlacklist(String code, String isoCode, List<String> blackList) throws Throwable {
         BriefConfigTO briefConfigTO = BriefConfigTO.builder()
                 .code(code)
@@ -239,7 +239,7 @@ public class DocumentbeheerThenStepsDefinition {
         return byBriefCodeAndTaal.get(0);
     }
 
-    @Then("the document with code {code} in language {language} and ignored datasets are: {listOfCodes}")
+    @Then("the document with code {code} in language {language} and ignored datasets are: {filenameParts}")
     public void isHetBestandMANDAAT_BRIEFInTaalNldBeschikbaarEnDeMetadataVanDeVolgendeDatasetsIsNietOpgeslagenLid(String code, String isoCode, List<String> blackList) throws Throwable {
         GegenereerdeBrief gegenereerdeBrief = zoekGegenereerdeBrief(code, isoCode);
         Set<String> datasets = gegenereerdeBrief.getDatasets().keySet();

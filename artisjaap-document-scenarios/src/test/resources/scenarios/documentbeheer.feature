@@ -8,6 +8,7 @@ Feature: General document generation
     When template with code MANDAAT_HEADER_FOOTER is activated in language nld
     Then template with code MANDAAT_HEADER_FOOTER is active
 
+    @Only
   Scenario: Stamping two templates on top of each other
     Given an active template MANDAAT_HEADER_FOOTER_NL.DOCX with code MANDAAT_HEADER_FOOTER in language nld
     And an active template TEMPLATE_MANDAAT_BRIEF_NA_TELEFONISCH_CONTACT_NL.DOCX with code MANDAAT_BRIEF_NA_TELEFONISCH_CONTACT in language nld

@@ -1,0 +1,2132 @@
+[
+  {
+    "line": 1,
+    "elements": [
+      {
+        "start_timestamp": "2020-03-03T20:23:31.530Z",
+        "before": [
+          {
+            "result": {
+              "duration": 110471000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "be.artisjaap.document.cucumber.CucumberHooks.clear()"
+            }
+          }
+        ],
+        "line": 2,
+        "name": "Loading a simple template",
+        "description": "",
+        "id": "general-document-generation;loading-a-simple-template",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 1226140000,
+              "status": "passed"
+            },
+            "line": 3,
+            "name": "a template MANDAAT_HEADER_FOOTER_NL.DOCX is uploaded with code MANDAAT_HEADER_FOOTER in language nld",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_HEADER_FOOTER_NL.DOCX",
+                  "offset": 11
+                },
+                {
+                  "val": "MANDAAT_HEADER_FOOTER",
+                  "offset": 63
+                },
+                {
+                  "val": "nld",
+                  "offset": 97
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.eenTemplateWordtOpgeladen(java.lang.String,java.lang.String,java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 94907000,
+              "status": "passed"
+            },
+            "line": 4,
+            "name": "the template with code MANDAAT_HEADER_FOOTER is available",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_HEADER_FOOTER",
+                  "offset": 23
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerThenStepsDefinition.isDeBriefMetCodeBeschikbaar(java.lang.String)"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-03-03T20:23:33.068Z",
+        "before": [
+          {
+            "result": {
+              "duration": 7239000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "be.artisjaap.document.cucumber.CucumberHooks.clear()"
+            }
+          }
+        ],
+        "line": 6,
+        "name": "Activating a template",
+        "description": "",
+        "id": "general-document-generation;activating-a-template",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 77048000,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "a template MANDAAT_HEADER_FOOTER_NL.DOCX is uploaded with code MANDAAT_HEADER_FOOTER in language nld",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_HEADER_FOOTER_NL.DOCX",
+                  "offset": 11
+                },
+                {
+                  "val": "MANDAAT_HEADER_FOOTER",
+                  "offset": 63
+                },
+                {
+                  "val": "nld",
+                  "offset": 97
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.eenTemplateWordtOpgeladen(java.lang.String,java.lang.String,java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 107618000,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "template with code MANDAAT_HEADER_FOOTER is activated in language nld",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_HEADER_FOOTER",
+                  "offset": 19
+                },
+                {
+                  "val": "nld",
+                  "offset": 66
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.deTemplateMetCodeActiefWordtGezet(java.lang.String,java.lang.String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 4891000,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "template with code MANDAAT_HEADER_FOOTER is active",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_HEADER_FOOTER",
+                  "offset": 19
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerThenStepsDefinition.staatDeTemplateMetCodeActief(java.lang.String)"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-03-03T20:23:33.285Z",
+        "before": [
+          {
+            "result": {
+              "duration": 5975000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "be.artisjaap.document.cucumber.CucumberHooks.clear()"
+            }
+          }
+        ],
+        "line": 11,
+        "name": "Stamping two templates on top of each other",
+        "description": "",
+        "id": "general-document-generation;stamping-two-templates-on-top-of-each-other",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 94046000,
+              "status": "passed"
+            },
+            "line": 12,
+            "name": "an active template MANDAAT_HEADER_FOOTER_NL.DOCX with code MANDAAT_HEADER_FOOTER in language nld",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_HEADER_FOOTER_NL.DOCX",
+                  "offset": 19
+                },
+                {
+                  "val": "MANDAAT_HEADER_FOOTER",
+                  "offset": 59
+                },
+                {
+                  "val": "nld",
+                  "offset": 93
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.eenBriefMetCodeInTaalDieActiefIs(java.lang.String,java.lang.String,java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 79696000,
+              "status": "passed"
+            },
+            "line": 13,
+            "name": "an active template TEMPLATE_MANDAAT_BRIEF_NA_TELEFONISCH_CONTACT_NL.DOCX with code MANDAAT_BRIEF_NA_TELEFONISCH_CONTACT in language nld",
+            "match": {
+              "arguments": [
+                {
+                  "val": "TEMPLATE_MANDAAT_BRIEF_NA_TELEFONISCH_CONTACT_NL.DOCX",
+                  "offset": 19
+                },
+                {
+                  "val": "MANDAAT_BRIEF_NA_TELEFONISCH_CONTACT",
+                  "offset": 83
+                },
+                {
+                  "val": "nld",
+                  "offset": 132
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.eenBriefMetCodeInTaalDieActiefIs(java.lang.String,java.lang.String,java.lang.String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 14,
+            "name": "a combined template with code MANDAAT_MET_HEADER_FOOTER in language nld consists of templates MANDAAT_HEADER_FOOTER, MANDAAT_BRIEF_NA_TELEFONISCH_CONTACT",
+            "match": {},
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 39000,
+              "status": "skipped"
+            },
+            "line": 15,
+            "name": "the combined template with code MANDAAT_MET_HEADER_FOOTER is available",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_MET_HEADER_FOOTER",
+                  "offset": 32
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerThenStepsDefinition.isDeGecombineerdeTemplateMetCodeBeschikbaar(java.lang.String)"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 24000,
+              "status": "skipped"
+            },
+            "line": 16,
+            "name": "the combined template with code MANDAAT_MET_HEADER_FOOTER is activated in language nld",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_MET_HEADER_FOOTER",
+                  "offset": 32
+                },
+                {
+                  "val": "nld",
+                  "offset": 83
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.deGecombineerdeTemplateMetCodeActiefWordtGezetInTaal(java.lang.String,java.lang.String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 25000,
+              "status": "skipped"
+            },
+            "line": 17,
+            "name": "the combined template with code MANDAAT_MET_HEADER_FOOTER is active",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_MET_HEADER_FOOTER",
+                  "offset": 32
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerThenStepsDefinition.staatDeGecombineerdeTemplateMetCodeActief(java.lang.String)"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-03-03T20:23:33.480Z",
+        "before": [
+          {
+            "result": {
+              "duration": 8364000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "be.artisjaap.document.cucumber.CucumberHooks.clear()"
+            }
+          }
+        ],
+        "line": 19,
+        "name": "A template can be used to generate a document",
+        "description": "",
+        "id": "general-document-generation;a-template-can-be-used-to-generate-a-document",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 97648000,
+              "status": "passed"
+            },
+            "line": 20,
+            "name": "an active template MANDAAT_HEADER_FOOTER_NL.DOCX with code MANDAAT_HEADER_FOOTER in language nld",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_HEADER_FOOTER_NL.DOCX",
+                  "offset": 19
+                },
+                {
+                  "val": "MANDAAT_HEADER_FOOTER",
+                  "offset": 59
+                },
+                {
+                  "val": "nld",
+                  "offset": 93
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.eenBriefMetCodeInTaalDieActiefIs(java.lang.String,java.lang.String,java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 89557000,
+              "status": "passed"
+            },
+            "line": 21,
+            "name": "a document MANDAAT_BRIEF in language nld exists of templates MANDAAT_HEADER_FOOTER",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_BRIEF",
+                  "offset": 11
+                },
+                {
+                  "val": "nld",
+                  "offset": 37
+                },
+                {
+                  "val": "MANDAAT_HEADER_FOOTER",
+                  "offset": 61
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.eenBriefInNldDieBestaatUitDeTemplates(java.lang.String,java.lang.String,java.util.List\u003cjava.lang.String\u003e)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 12978000,
+              "status": "passed"
+            },
+            "line": 22,
+            "name": "the document with code MANDAAT_BRIEF has been set active in language nld",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_BRIEF",
+                  "offset": 23
+                },
+                {
+                  "val": "nld",
+                  "offset": 69
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.deBriefMANDAAT_BRIEFWordtActiefGezet(java.lang.String,java.lang.String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "error_message": "java.lang.IllegalStateException: java.lang.AbstractMethodError: Missing implementation of resolved method \u0027abstract void init(org.apache.velocity.util.ExtProperties)\u0027 of abstract class org.apache.velocity.runtime.resource.loader.ResourceLoader.\n\tat be.artisjaap.document.utils.XdocUtils.maakDocument(XdocUtils.java:52)\n\tat be.artisjaap.document.action.GenerateSimpleTemplate.maakTemplateTO(GenerateSimpleTemplate.java:31)\n\tat be.artisjaap.document.action.GenerateSimpleTemplate.voor(GenerateSimpleTemplate.java:26)\n\tat be.artisjaap.document.action.GenerateCombinedTemplate.generate(GenerateCombinedTemplate.java:39)\n\tat be.artisjaap.document.action.GenerateDocument.lambda$forDocument$1(GenerateDocument.java:50)\n\tat java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)\n\tat java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1621)\n\tat java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)\n\tat java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)\n\tat java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)\n\tat java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)\n\tat java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)\n\tat be.artisjaap.document.action.GenerateDocument.forDocument(GenerateDocument.java:50)\n\tat be.artisjaap.document.cucumber.DocumentbeheerThenStepsDefinition.kanDeBriefMetCodeMANDAAT_BRIEFGegenereerdWordenMetEenDefaultSetVanDatasets(DocumentbeheerThenStepsDefinition.java:96)\n\tat ✽.the document with code MANDAAT_BRIEF in language nld can be generated using a default dataset(classpath:scenarios/documentbeheer.feature:23)\nCaused by: fr.opensagres.xdocreport.core.XDocReportException: java.lang.AbstractMethodError: Missing implementation of resolved method \u0027abstract void init(org.apache.velocity.util.ExtProperties)\u0027 of abstract class org.apache.velocity.runtime.resource.loader.ResourceLoader.\n\tat fr.opensagres.xdocreport.template.AbstractTemplateEngine.process(AbstractTemplateEngine.java:152)\n\tat fr.opensagres.xdocreport.template.AbstractTemplateEngine.process(AbstractTemplateEngine.java:83)\n\tat fr.opensagres.xdocreport.document.AbstractXDocReport.processTemplateEngine(AbstractXDocReport.java:772)\n\tat fr.opensagres.xdocreport.document.AbstractXDocReport.convert(AbstractXDocReport.java:700)\n\tat be.artisjaap.document.utils.XdocUtils.maakDocument(XdocUtils.java:41)\n\tat be.artisjaap.document.action.GenerateSimpleTemplate.maakTemplateTO(GenerateSimpleTemplate.java:31)\n\tat be.artisjaap.document.action.GenerateSimpleTemplate.voor(GenerateSimpleTemplate.java:26)\n\tat be.artisjaap.document.action.GenerateCombinedTemplate.generate(GenerateCombinedTemplate.java:39)\n\tat be.artisjaap.document.action.GenerateDocument.lambda$forDocument$1(GenerateDocument.java:50)\n\tat java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)\n\tat java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1621)\n\tat java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)\n\tat java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)\n\tat java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)\n\tat java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)\n\tat java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)\n\tat be.artisjaap.document.action.GenerateDocument.forDocument(GenerateDocument.java:50)\n\tat be.artisjaap.document.cucumber.DocumentbeheerThenStepsDefinition.kanDeBriefMetCodeMANDAAT_BRIEFGegenereerdWordenMetEenDefaultSetVanDatasets(DocumentbeheerThenStepsDefinition.java:96)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:567)\n\tat io.cucumber.java.Invoker.invoke(Invoker.java:27)\n\tat io.cucumber.java.JavaStepDefinition.execute(JavaStepDefinition.java:27)\n\tat io.cucumber.core.runner.PickleStepDefinitionMatch.runStep(PickleStepDefinitionMatch.java:63)\n\tat io.cucumber.core.runner.TestStep.executeStep(TestStep.java:64)\n\tat io.cucumber.core.runner.TestStep.run(TestStep.java:49)\n\tat io.cucumber.core.runner.PickleStepTestStep.run(PickleStepTestStep.java:46)\n\tat io.cucumber.core.runner.TestCase.run(TestCase.java:51)\n\tat io.cucumber.core.runner.Runner.runPickle(Runner.java:66)\n\tat io.cucumber.junit.PickleRunners$NoStepDescriptions.run(PickleRunners.java:149)\n\tat io.cucumber.junit.FeatureRunner.runChild(FeatureRunner.java:83)\n\tat io.cucumber.junit.FeatureRunner.runChild(FeatureRunner.java:24)\n\tat org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)\n\tat org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)\n\tat org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)\n\tat org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)\n\tat org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)\n\tat org.junit.runners.ParentRunner.run(ParentRunner.java:363)\n\tat io.cucumber.junit.Cucumber.runChild(Cucumber.java:185)\n\tat io.cucumber.junit.Cucumber.runChild(Cucumber.java:83)\n\tat org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)\n\tat org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)\n\tat org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)\n\tat org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)\n\tat org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)\n\tat io.cucumber.junit.Cucumber$RunCucumber.evaluate(Cucumber.java:219)\n\tat org.junit.runners.ParentRunner.run(ParentRunner.java:363)\n\tat org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.runTestClass(JUnitTestClassExecutor.java:110)\n\tat org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:58)\n\tat org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:38)\n\tat org.gradle.api.internal.tasks.testing.junit.AbstractJUnitTestClassProcessor.processTestClass(AbstractJUnitTestClassProcessor.java:62)\n\tat org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:51)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:567)\n\tat org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)\n\tat org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)\n\tat org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)\n\tat org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94)\n\tat com.sun.proxy.$Proxy5.processTestClass(Unknown Source)\n\tat org.gradle.api.internal.tasks.testing.worker.TestWorker.processTestClass(TestWorker.java:118)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:567)\n\tat org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)\n\tat org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)\n\tat org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:182)\n\tat org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:164)\n\tat org.gradle.internal.remote.internal.hub.MessageHub$Handler.run(MessageHub.java:412)\n\tat org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)\n\tat org.gradle.internal.concurrent.ManagedExecutorImpl$1.run(ManagedExecutorImpl.java:48)\n\tat java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)\n\tat java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)\n\tat org.gradle.internal.concurrent.ThreadFactoryImpl$ManagedThreadRunnable.run(ThreadFactoryImpl.java:56)\n\tat java.base/java.lang.Thread.run(Thread.java:830)\nCaused by: java.lang.AbstractMethodError: Missing implementation of resolved method \u0027abstract void init(org.apache.velocity.util.ExtProperties)\u0027 of abstract class org.apache.velocity.runtime.resource.loader.ResourceLoader.\n\tat org.apache.velocity.runtime.resource.ResourceManagerImpl.initialize(ResourceManagerImpl.java:139)\n\tat org.apache.velocity.runtime.RuntimeInstance.initializeResourceManager(RuntimeInstance.java:784)\n\tat org.apache.velocity.runtime.RuntimeInstance.init(RuntimeInstance.java:261)\n\tat org.apache.velocity.runtime.RuntimeInstance.init(RuntimeInstance.java:706)\n\tat org.apache.velocity.app.VelocityEngine.init(VelocityEngine.java:123)\n\tat fr.opensagres.xdocreport.template.velocity.internal.VelocityTemplateEngine.initializeVelocityEngine(VelocityTemplateEngine.java:131)\n\tat fr.opensagres.xdocreport.template.velocity.internal.VelocityTemplateEngine.getVelocityEngine(VelocityTemplateEngine.java:118)\n\tat fr.opensagres.xdocreport.template.velocity.internal.VelocityTemplateEngine.processNoCache(VelocityTemplateEngine.java:108)\n\tat fr.opensagres.xdocreport.template.AbstractTemplateEngine.process(AbstractTemplateEngine.java:118)\n\t... 77 more\n",
+              "duration": 495298000,
+              "status": "failed"
+            },
+            "line": 23,
+            "name": "the document with code MANDAAT_BRIEF in language nld can be generated using a default dataset",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_BRIEF",
+                  "offset": 23
+                },
+                {
+                  "val": "nld",
+                  "offset": 49
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerThenStepsDefinition.kanDeBriefMetCodeMANDAAT_BRIEFGegenereerdWordenMetEenDefaultSetVanDatasets(java.lang.String,java.lang.String)"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-03-03T20:23:34.202Z",
+        "before": [
+          {
+            "result": {
+              "duration": 10095000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "be.artisjaap.document.cucumber.CucumberHooks.clear()"
+            }
+          }
+        ],
+        "line": 25,
+        "name": "Verschillende templates kunnen gebruikt worden in een brief en deze brief kan dan gegenereerd worden",
+        "description": "",
+        "id": "general-document-generation;verschillende-templates-kunnen-gebruikt-worden-in-een-brief-en-deze-brief-kan-dan-gegenereerd-worden",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 110716000,
+              "status": "passed"
+            },
+            "line": 26,
+            "name": "an active template MANDAAT_HEADER_FOOTER_NL.DOCX with code MANDAAT_HEADER_FOOTER in language nld",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_HEADER_FOOTER_NL.DOCX",
+                  "offset": 19
+                },
+                {
+                  "val": "MANDAAT_HEADER_FOOTER",
+                  "offset": 59
+                },
+                {
+                  "val": "nld",
+                  "offset": 93
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.eenBriefMetCodeInTaalDieActiefIs(java.lang.String,java.lang.String,java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 69627000,
+              "status": "passed"
+            },
+            "line": 27,
+            "name": "an active template TEMPLATE_MANDAAT_BRIEF_NA_TELEFONISCH_CONTACT_NL.DOCX with code MANDAAT_BRIEF_NA_TELEFONISCH_CONTACT in language nld",
+            "match": {
+              "arguments": [
+                {
+                  "val": "TEMPLATE_MANDAAT_BRIEF_NA_TELEFONISCH_CONTACT_NL.DOCX",
+                  "offset": 19
+                },
+                {
+                  "val": "MANDAAT_BRIEF_NA_TELEFONISCH_CONTACT",
+                  "offset": 83
+                },
+                {
+                  "val": "nld",
+                  "offset": 132
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.eenBriefMetCodeInTaalDieActiefIs(java.lang.String,java.lang.String,java.lang.String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 28,
+            "name": "a document MANDAAT_BRIEF in language nld exists of templates MANDAAT_HEADER_FOOTER, MANDAAT_BRIEF_NA_TELEFONISCH_CONTACT",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 31000,
+              "status": "skipped"
+            },
+            "line": 29,
+            "name": "the document with code MANDAAT_BRIEF has been set active in language nld",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_BRIEF",
+                  "offset": 23
+                },
+                {
+                  "val": "nld",
+                  "offset": 69
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.deBriefMANDAAT_BRIEFWordtActiefGezet(java.lang.String,java.lang.String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 28000,
+              "status": "skipped"
+            },
+            "line": 30,
+            "name": "the document with code MANDAAT_BRIEF in language nld can be generated using a default dataset",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_BRIEF",
+                  "offset": 23
+                },
+                {
+                  "val": "nld",
+                  "offset": 49
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerThenStepsDefinition.kanDeBriefMetCodeMANDAAT_BRIEFGegenereerdWordenMetEenDefaultSetVanDatasets(java.lang.String,java.lang.String)"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-03-03T20:23:34.403Z",
+        "before": [
+          {
+            "result": {
+              "duration": 5781000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "be.artisjaap.document.cucumber.CucumberHooks.clear()"
+            }
+          }
+        ],
+        "line": 32,
+        "name": "Gecombineerde templates en andere templates kunnen gebruikt worden in een brief en deze brief kan dan gegenereerd worden",
+        "description": "",
+        "id": "general-document-generation;gecombineerde-templates-en-andere-templates-kunnen-gebruikt-worden-in-een-brief-en-deze-brief-kan-dan-gegenereerd-worden",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 107703000,
+              "status": "passed"
+            },
+            "line": 33,
+            "name": "an active template MANDAAT_HEADER_FOOTER_NL.DOCX with code MANDAAT_HEADER_FOOTER in language nld",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_HEADER_FOOTER_NL.DOCX",
+                  "offset": 19
+                },
+                {
+                  "val": "MANDAAT_HEADER_FOOTER",
+                  "offset": 59
+                },
+                {
+                  "val": "nld",
+                  "offset": 93
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.eenBriefMetCodeInTaalDieActiefIs(java.lang.String,java.lang.String,java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 101096000,
+              "status": "passed"
+            },
+            "line": 34,
+            "name": "an active template TEMPLATE_MANDAAT_BRIEF_NA_TELEFONISCH_CONTACT_NL.DOCX with code MANDAAT_BRIEF_NA_TELEFONISCH_CONTACT in language nld",
+            "match": {
+              "arguments": [
+                {
+                  "val": "TEMPLATE_MANDAAT_BRIEF_NA_TELEFONISCH_CONTACT_NL.DOCX",
+                  "offset": 19
+                },
+                {
+                  "val": "MANDAAT_BRIEF_NA_TELEFONISCH_CONTACT",
+                  "offset": 83
+                },
+                {
+                  "val": "nld",
+                  "offset": 132
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.eenBriefMetCodeInTaalDieActiefIs(java.lang.String,java.lang.String,java.lang.String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 35,
+            "name": "a combined template with code MANDAAT_MET_HEADER_FOOTER in language nld consists of templates MANDAAT_HEADER_FOOTER, MANDAAT_BRIEF_NA_TELEFONISCH_CONTACT",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 127000,
+              "status": "skipped"
+            },
+            "line": 36,
+            "name": "the combined template with code MANDAAT_MET_HEADER_FOOTER is activated in language nld",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_MET_HEADER_FOOTER",
+                  "offset": 32
+                },
+                {
+                  "val": "nld",
+                  "offset": 83
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.deGecombineerdeTemplateMetCodeActiefWordtGezetInTaal(java.lang.String,java.lang.String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 197000,
+              "status": "skipped"
+            },
+            "line": 37,
+            "name": "a document MANDAAT_BRIEF in language nld exists of templates MANDAAT_MET_HEADER_FOOTER",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_BRIEF",
+                  "offset": 11
+                },
+                {
+                  "val": "nld",
+                  "offset": 37
+                },
+                {
+                  "val": "MANDAAT_MET_HEADER_FOOTER",
+                  "offset": 61
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.eenBriefInNldDieBestaatUitDeTemplates(java.lang.String,java.lang.String,java.util.List\u003cjava.lang.String\u003e)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 232000,
+              "status": "skipped"
+            },
+            "line": 38,
+            "name": "the document with code MANDAAT_BRIEF has been set active in language nld",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_BRIEF",
+                  "offset": 23
+                },
+                {
+                  "val": "nld",
+                  "offset": 69
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.deBriefMANDAAT_BRIEFWordtActiefGezet(java.lang.String,java.lang.String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 132000,
+              "status": "skipped"
+            },
+            "line": 39,
+            "name": "the document with code MANDAAT_BRIEF in language nld can be generated using a default dataset",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_BRIEF",
+                  "offset": 23
+                },
+                {
+                  "val": "nld",
+                  "offset": 49
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerThenStepsDefinition.kanDeBriefMetCodeMANDAAT_BRIEFGegenereerdWordenMetEenDefaultSetVanDatasets(java.lang.String,java.lang.String)"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-03-03T20:23:34.643Z",
+        "before": [
+          {
+            "result": {
+              "duration": 9094000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "be.artisjaap.document.cucumber.CucumberHooks.clear()"
+            }
+          }
+        ],
+        "line": 41,
+        "name": "Gegenereerde brieven kunnen opgeslagen worden in de database",
+        "description": "",
+        "id": "general-document-generation;gegenereerde-brieven-kunnen-opgeslagen-worden-in-de-database",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 99148000,
+              "status": "passed"
+            },
+            "line": 42,
+            "name": "an active template MANDAAT_HEADER_FOOTER_NL.DOCX with code MANDAAT_HEADER_FOOTER in language nld",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_HEADER_FOOTER_NL.DOCX",
+                  "offset": 19
+                },
+                {
+                  "val": "MANDAAT_HEADER_FOOTER",
+                  "offset": 59
+                },
+                {
+                  "val": "nld",
+                  "offset": 93
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.eenBriefMetCodeInTaalDieActiefIs(java.lang.String,java.lang.String,java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 4891000,
+              "status": "passed"
+            },
+            "line": 43,
+            "name": "a document MANDAAT_BRIEF in language nld exists of templates MANDAAT_HEADER_FOOTER",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_BRIEF",
+                  "offset": 11
+                },
+                {
+                  "val": "nld",
+                  "offset": 37
+                },
+                {
+                  "val": "MANDAAT_HEADER_FOOTER",
+                  "offset": 61
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.eenBriefInNldDieBestaatUitDeTemplates(java.lang.String,java.lang.String,java.util.List\u003cjava.lang.String\u003e)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 20258000,
+              "status": "passed"
+            },
+            "line": 44,
+            "name": "the document with code MANDAAT_BRIEF has been set active in language nld",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_BRIEF",
+                  "offset": 23
+                },
+                {
+                  "val": "nld",
+                  "offset": 69
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.deBriefMANDAAT_BRIEFWordtActiefGezet(java.lang.String,java.lang.String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "error_message": "java.lang.IllegalStateException: java.lang.AbstractMethodError: Missing implementation of resolved method \u0027abstract void init(org.apache.velocity.util.ExtProperties)\u0027 of abstract class org.apache.velocity.runtime.resource.loader.ResourceLoader.\n\tat be.artisjaap.document.utils.XdocUtils.maakDocument(XdocUtils.java:52)\n\tat be.artisjaap.document.action.GenerateSimpleTemplate.maakTemplateTO(GenerateSimpleTemplate.java:31)\n\tat be.artisjaap.document.action.GenerateSimpleTemplate.voor(GenerateSimpleTemplate.java:26)\n\tat be.artisjaap.document.action.GenerateCombinedTemplate.generate(GenerateCombinedTemplate.java:39)\n\tat be.artisjaap.document.action.GenerateDocument.lambda$forDocument$1(GenerateDocument.java:50)\n\tat java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)\n\tat java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1621)\n\tat java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)\n\tat java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)\n\tat java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)\n\tat java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)\n\tat java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)\n\tat be.artisjaap.document.action.GenerateDocument.forDocument(GenerateDocument.java:50)\n\tat be.artisjaap.document.cucumber.DocumentbeheerThenStepsDefinition.kanDeBriefMetCodeMANDAAT_BRIEFGegenereerdWordenMetEenDefaultSetVanDatasets(DocumentbeheerThenStepsDefinition.java:96)\n\tat ✽.the document with code MANDAAT_BRIEF in language nld can be generated using a default dataset(classpath:scenarios/documentbeheer.feature:45)\nCaused by: fr.opensagres.xdocreport.core.XDocReportException: java.lang.AbstractMethodError: Missing implementation of resolved method \u0027abstract void init(org.apache.velocity.util.ExtProperties)\u0027 of abstract class org.apache.velocity.runtime.resource.loader.ResourceLoader.\n\tat fr.opensagres.xdocreport.template.AbstractTemplateEngine.process(AbstractTemplateEngine.java:152)\n\tat fr.opensagres.xdocreport.template.AbstractTemplateEngine.process(AbstractTemplateEngine.java:83)\n\tat fr.opensagres.xdocreport.document.AbstractXDocReport.processTemplateEngine(AbstractXDocReport.java:772)\n\tat fr.opensagres.xdocreport.document.AbstractXDocReport.convert(AbstractXDocReport.java:700)\n\tat be.artisjaap.document.utils.XdocUtils.maakDocument(XdocUtils.java:41)\n\tat be.artisjaap.document.action.GenerateSimpleTemplate.maakTemplateTO(GenerateSimpleTemplate.java:31)\n\tat be.artisjaap.document.action.GenerateSimpleTemplate.voor(GenerateSimpleTemplate.java:26)\n\tat be.artisjaap.document.action.GenerateCombinedTemplate.generate(GenerateCombinedTemplate.java:39)\n\tat be.artisjaap.document.action.GenerateDocument.lambda$forDocument$1(GenerateDocument.java:50)\n\tat java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)\n\tat java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1621)\n\tat java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)\n\tat java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)\n\tat java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)\n\tat java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)\n\tat java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)\n\tat be.artisjaap.document.action.GenerateDocument.forDocument(GenerateDocument.java:50)\n\tat be.artisjaap.document.cucumber.DocumentbeheerThenStepsDefinition.kanDeBriefMetCodeMANDAAT_BRIEFGegenereerdWordenMetEenDefaultSetVanDatasets(DocumentbeheerThenStepsDefinition.java:96)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:567)\n\tat io.cucumber.java.Invoker.invoke(Invoker.java:27)\n\tat io.cucumber.java.JavaStepDefinition.execute(JavaStepDefinition.java:27)\n\tat io.cucumber.core.runner.PickleStepDefinitionMatch.runStep(PickleStepDefinitionMatch.java:63)\n\tat io.cucumber.core.runner.TestStep.executeStep(TestStep.java:64)\n\tat io.cucumber.core.runner.TestStep.run(TestStep.java:49)\n\tat io.cucumber.core.runner.PickleStepTestStep.run(PickleStepTestStep.java:46)\n\tat io.cucumber.core.runner.TestCase.run(TestCase.java:51)\n\tat io.cucumber.core.runner.Runner.runPickle(Runner.java:66)\n\tat io.cucumber.junit.PickleRunners$NoStepDescriptions.run(PickleRunners.java:149)\n\tat io.cucumber.junit.FeatureRunner.runChild(FeatureRunner.java:83)\n\tat io.cucumber.junit.FeatureRunner.runChild(FeatureRunner.java:24)\n\tat org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)\n\tat org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)\n\tat org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)\n\tat org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)\n\tat org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)\n\tat org.junit.runners.ParentRunner.run(ParentRunner.java:363)\n\tat io.cucumber.junit.Cucumber.runChild(Cucumber.java:185)\n\tat io.cucumber.junit.Cucumber.runChild(Cucumber.java:83)\n\tat org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)\n\tat org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)\n\tat org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)\n\tat org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)\n\tat org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)\n\tat io.cucumber.junit.Cucumber$RunCucumber.evaluate(Cucumber.java:219)\n\tat org.junit.runners.ParentRunner.run(ParentRunner.java:363)\n\tat org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.runTestClass(JUnitTestClassExecutor.java:110)\n\tat org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:58)\n\tat org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:38)\n\tat org.gradle.api.internal.tasks.testing.junit.AbstractJUnitTestClassProcessor.processTestClass(AbstractJUnitTestClassProcessor.java:62)\n\tat org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:51)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:567)\n\tat org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)\n\tat org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)\n\tat org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)\n\tat org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94)\n\tat com.sun.proxy.$Proxy5.processTestClass(Unknown Source)\n\tat org.gradle.api.internal.tasks.testing.worker.TestWorker.processTestClass(TestWorker.java:118)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:567)\n\tat org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)\n\tat org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)\n\tat org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:182)\n\tat org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:164)\n\tat org.gradle.internal.remote.internal.hub.MessageHub$Handler.run(MessageHub.java:412)\n\tat org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)\n\tat org.gradle.internal.concurrent.ManagedExecutorImpl$1.run(ManagedExecutorImpl.java:48)\n\tat java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)\n\tat java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)\n\tat org.gradle.internal.concurrent.ThreadFactoryImpl$ManagedThreadRunnable.run(ThreadFactoryImpl.java:56)\n\tat java.base/java.lang.Thread.run(Thread.java:830)\nCaused by: java.lang.AbstractMethodError: Missing implementation of resolved method \u0027abstract void init(org.apache.velocity.util.ExtProperties)\u0027 of abstract class org.apache.velocity.runtime.resource.loader.ResourceLoader.\n\tat org.apache.velocity.runtime.resource.ResourceManagerImpl.initialize(ResourceManagerImpl.java:139)\n\tat org.apache.velocity.runtime.RuntimeInstance.initializeResourceManager(RuntimeInstance.java:784)\n\tat org.apache.velocity.runtime.RuntimeInstance.init(RuntimeInstance.java:261)\n\tat org.apache.velocity.runtime.RuntimeInstance.requireInitialization(RuntimeInstance.java:348)\n\tat org.apache.velocity.runtime.RuntimeInstance.parse(RuntimeInstance.java:1232)\n\tat org.apache.velocity.runtime.RuntimeInstance.evaluate(RuntimeInstance.java:1340)\n\tat org.apache.velocity.app.VelocityEngine.evaluate(VelocityEngine.java:240)\n\tat fr.opensagres.xdocreport.template.velocity.internal.VelocityTemplateEngine.processNoCache(VelocityTemplateEngine.java:109)\n\tat fr.opensagres.xdocreport.template.AbstractTemplateEngine.process(AbstractTemplateEngine.java:118)\n\t... 77 more\n",
+              "duration": 70553000,
+              "status": "failed"
+            },
+            "line": 45,
+            "name": "the document with code MANDAAT_BRIEF in language nld can be generated using a default dataset",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_BRIEF",
+                  "offset": 23
+                },
+                {
+                  "val": "nld",
+                  "offset": 49
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerThenStepsDefinition.kanDeBriefMetCodeMANDAAT_BRIEFGegenereerdWordenMetEenDefaultSetVanDatasets(java.lang.String,java.lang.String)"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-03-03T20:23:34.868Z",
+        "before": [
+          {
+            "result": {
+              "duration": 4937000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "be.artisjaap.document.cucumber.CucumberHooks.clear()"
+            }
+          }
+        ],
+        "line": 47,
+        "name": "Gegenereerde brieven kunnen opgeslagen worden in een absoluut path",
+        "description": "",
+        "id": "general-document-generation;gegenereerde-brieven-kunnen-opgeslagen-worden-in-een-absoluut-path",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 104730000,
+              "status": "passed"
+            },
+            "line": 48,
+            "name": "an active template MANDAAT_HEADER_FOOTER_NL.DOCX with code MANDAAT_HEADER_FOOTER in language nld",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_HEADER_FOOTER_NL.DOCX",
+                  "offset": 19
+                },
+                {
+                  "val": "MANDAAT_HEADER_FOOTER",
+                  "offset": 59
+                },
+                {
+                  "val": "nld",
+                  "offset": 93
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.eenBriefMetCodeInTaalDieActiefIs(java.lang.String,java.lang.String,java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 15790000,
+              "status": "passed"
+            },
+            "line": 49,
+            "name": "a document MANDAAT_BRIEF in language nld exists of templates MANDAAT_HEADER_FOOTER",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_BRIEF",
+                  "offset": 11
+                },
+                {
+                  "val": "nld",
+                  "offset": 37
+                },
+                {
+                  "val": "MANDAAT_HEADER_FOOTER",
+                  "offset": 61
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.eenBriefInNldDieBestaatUitDeTemplates(java.lang.String,java.lang.String,java.util.List\u003cjava.lang.String\u003e)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 40006000,
+              "status": "passed"
+            },
+            "line": 50,
+            "name": "the document with code MANDAAT_BRIEF has been set active in language nld",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_BRIEF",
+                  "offset": 23
+                },
+                {
+                  "val": "nld",
+                  "offset": 69
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.deBriefMANDAAT_BRIEFWordtActiefGezet(java.lang.String,java.lang.String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "error_message": "java.lang.IllegalStateException: java.lang.AbstractMethodError: Missing implementation of resolved method \u0027abstract void init(org.apache.velocity.util.ExtProperties)\u0027 of abstract class org.apache.velocity.runtime.resource.loader.ResourceLoader.\n\tat be.artisjaap.document.utils.XdocUtils.maakDocument(XdocUtils.java:52)\n\tat be.artisjaap.document.action.GenerateSimpleTemplate.maakTemplateTO(GenerateSimpleTemplate.java:31)\n\tat be.artisjaap.document.action.GenerateSimpleTemplate.voor(GenerateSimpleTemplate.java:26)\n\tat be.artisjaap.document.action.GenerateCombinedTemplate.generate(GenerateCombinedTemplate.java:39)\n\tat be.artisjaap.document.action.GenerateDocument.lambda$forDocument$1(GenerateDocument.java:50)\n\tat java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)\n\tat java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1621)\n\tat java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)\n\tat java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)\n\tat java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)\n\tat java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)\n\tat java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)\n\tat be.artisjaap.document.action.GenerateDocument.forDocument(GenerateDocument.java:50)\n\tat be.artisjaap.document.cucumber.DocumentbeheerThenStepsDefinition.kanDeBriefMetCodeMANDAAT_BRIEFGegenereerdWordenMetEenDefaultSetVanDatasets(DocumentbeheerThenStepsDefinition.java:96)\n\tat ✽.the document with code MANDAAT_BRIEF in language nld can be generated using a default dataset(classpath:scenarios/documentbeheer.feature:51)\nCaused by: fr.opensagres.xdocreport.core.XDocReportException: java.lang.AbstractMethodError: Missing implementation of resolved method \u0027abstract void init(org.apache.velocity.util.ExtProperties)\u0027 of abstract class org.apache.velocity.runtime.resource.loader.ResourceLoader.\n\tat fr.opensagres.xdocreport.template.AbstractTemplateEngine.process(AbstractTemplateEngine.java:152)\n\tat fr.opensagres.xdocreport.template.AbstractTemplateEngine.process(AbstractTemplateEngine.java:83)\n\tat fr.opensagres.xdocreport.document.AbstractXDocReport.processTemplateEngine(AbstractXDocReport.java:772)\n\tat fr.opensagres.xdocreport.document.AbstractXDocReport.convert(AbstractXDocReport.java:700)\n\tat be.artisjaap.document.utils.XdocUtils.maakDocument(XdocUtils.java:41)\n\tat be.artisjaap.document.action.GenerateSimpleTemplate.maakTemplateTO(GenerateSimpleTemplate.java:31)\n\tat be.artisjaap.document.action.GenerateSimpleTemplate.voor(GenerateSimpleTemplate.java:26)\n\tat be.artisjaap.document.action.GenerateCombinedTemplate.generate(GenerateCombinedTemplate.java:39)\n\tat be.artisjaap.document.action.GenerateDocument.lambda$forDocument$1(GenerateDocument.java:50)\n\tat java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)\n\tat java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1621)\n\tat java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)\n\tat java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)\n\tat java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)\n\tat java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)\n\tat java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)\n\tat be.artisjaap.document.action.GenerateDocument.forDocument(GenerateDocument.java:50)\n\tat be.artisjaap.document.cucumber.DocumentbeheerThenStepsDefinition.kanDeBriefMetCodeMANDAAT_BRIEFGegenereerdWordenMetEenDefaultSetVanDatasets(DocumentbeheerThenStepsDefinition.java:96)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:567)\n\tat io.cucumber.java.Invoker.invoke(Invoker.java:27)\n\tat io.cucumber.java.JavaStepDefinition.execute(JavaStepDefinition.java:27)\n\tat io.cucumber.core.runner.PickleStepDefinitionMatch.runStep(PickleStepDefinitionMatch.java:63)\n\tat io.cucumber.core.runner.TestStep.executeStep(TestStep.java:64)\n\tat io.cucumber.core.runner.TestStep.run(TestStep.java:49)\n\tat io.cucumber.core.runner.PickleStepTestStep.run(PickleStepTestStep.java:46)\n\tat io.cucumber.core.runner.TestCase.run(TestCase.java:51)\n\tat io.cucumber.core.runner.Runner.runPickle(Runner.java:66)\n\tat io.cucumber.junit.PickleRunners$NoStepDescriptions.run(PickleRunners.java:149)\n\tat io.cucumber.junit.FeatureRunner.runChild(FeatureRunner.java:83)\n\tat io.cucumber.junit.FeatureRunner.runChild(FeatureRunner.java:24)\n\tat org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)\n\tat org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)\n\tat org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)\n\tat org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)\n\tat org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)\n\tat org.junit.runners.ParentRunner.run(ParentRunner.java:363)\n\tat io.cucumber.junit.Cucumber.runChild(Cucumber.java:185)\n\tat io.cucumber.junit.Cucumber.runChild(Cucumber.java:83)\n\tat org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)\n\tat org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)\n\tat org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)\n\tat org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)\n\tat org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)\n\tat io.cucumber.junit.Cucumber$RunCucumber.evaluate(Cucumber.java:219)\n\tat org.junit.runners.ParentRunner.run(ParentRunner.java:363)\n\tat org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.runTestClass(JUnitTestClassExecutor.java:110)\n\tat org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:58)\n\tat org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:38)\n\tat org.gradle.api.internal.tasks.testing.junit.AbstractJUnitTestClassProcessor.processTestClass(AbstractJUnitTestClassProcessor.java:62)\n\tat org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:51)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:567)\n\tat org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)\n\tat org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)\n\tat org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)\n\tat org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94)\n\tat com.sun.proxy.$Proxy5.processTestClass(Unknown Source)\n\tat org.gradle.api.internal.tasks.testing.worker.TestWorker.processTestClass(TestWorker.java:118)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:567)\n\tat org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)\n\tat org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)\n\tat org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:182)\n\tat org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:164)\n\tat org.gradle.internal.remote.internal.hub.MessageHub$Handler.run(MessageHub.java:412)\n\tat org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)\n\tat org.gradle.internal.concurrent.ManagedExecutorImpl$1.run(ManagedExecutorImpl.java:48)\n\tat java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)\n\tat java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)\n\tat org.gradle.internal.concurrent.ThreadFactoryImpl$ManagedThreadRunnable.run(ThreadFactoryImpl.java:56)\n\tat java.base/java.lang.Thread.run(Thread.java:830)\nCaused by: java.lang.AbstractMethodError: Missing implementation of resolved method \u0027abstract void init(org.apache.velocity.util.ExtProperties)\u0027 of abstract class org.apache.velocity.runtime.resource.loader.ResourceLoader.\n\tat org.apache.velocity.runtime.resource.ResourceManagerImpl.initialize(ResourceManagerImpl.java:139)\n\tat org.apache.velocity.runtime.RuntimeInstance.initializeResourceManager(RuntimeInstance.java:784)\n\tat org.apache.velocity.runtime.RuntimeInstance.init(RuntimeInstance.java:261)\n\tat org.apache.velocity.runtime.RuntimeInstance.requireInitialization(RuntimeInstance.java:348)\n\tat org.apache.velocity.runtime.RuntimeInstance.parse(RuntimeInstance.java:1232)\n\tat org.apache.velocity.runtime.RuntimeInstance.evaluate(RuntimeInstance.java:1340)\n\tat org.apache.velocity.app.VelocityEngine.evaluate(VelocityEngine.java:240)\n\tat fr.opensagres.xdocreport.template.velocity.internal.VelocityTemplateEngine.processNoCache(VelocityTemplateEngine.java:109)\n\tat fr.opensagres.xdocreport.template.AbstractTemplateEngine.process(AbstractTemplateEngine.java:118)\n\t... 77 more\n",
+              "duration": 85584000,
+              "status": "failed"
+            },
+            "line": 51,
+            "name": "the document with code MANDAAT_BRIEF in language nld can be generated using a default dataset",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_BRIEF",
+                  "offset": 23
+                },
+                {
+                  "val": "nld",
+                  "offset": 49
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerThenStepsDefinition.kanDeBriefMetCodeMANDAAT_BRIEFGegenereerdWordenMetEenDefaultSetVanDatasets(java.lang.String,java.lang.String)"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-03-03T20:23:35.131Z",
+        "before": [
+          {
+            "result": {
+              "duration": 4844000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "be.artisjaap.document.cucumber.CucumberHooks.clear()"
+            }
+          }
+        ],
+        "line": 53,
+        "name": "Gegenereerde brieven kunnen opgeslagen worden in een relatief path",
+        "description": "",
+        "id": "general-document-generation;gegenereerde-brieven-kunnen-opgeslagen-worden-in-een-relatief-path",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 120473000,
+              "status": "passed"
+            },
+            "line": 54,
+            "name": "an active template MANDAAT_HEADER_FOOTER_NL.DOCX with code MANDAAT_HEADER_FOOTER in language nld",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_HEADER_FOOTER_NL.DOCX",
+                  "offset": 19
+                },
+                {
+                  "val": "MANDAAT_HEADER_FOOTER",
+                  "offset": 59
+                },
+                {
+                  "val": "nld",
+                  "offset": 93
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.eenBriefMetCodeInTaalDieActiefIs(java.lang.String,java.lang.String,java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 19798000,
+              "status": "passed"
+            },
+            "line": 55,
+            "name": "a document MANDAAT_BRIEF in language nld exists of templates MANDAAT_HEADER_FOOTER",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_BRIEF",
+                  "offset": 11
+                },
+                {
+                  "val": "nld",
+                  "offset": 37
+                },
+                {
+                  "val": "MANDAAT_HEADER_FOOTER",
+                  "offset": 61
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.eenBriefInNldDieBestaatUitDeTemplates(java.lang.String,java.lang.String,java.util.List\u003cjava.lang.String\u003e)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 32589000,
+              "status": "passed"
+            },
+            "line": 56,
+            "name": "the document with code MANDAAT_BRIEF has been set active in language nld",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_BRIEF",
+                  "offset": 23
+                },
+                {
+                  "val": "nld",
+                  "offset": 69
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.deBriefMANDAAT_BRIEFWordtActiefGezet(java.lang.String,java.lang.String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "error_message": "java.lang.IllegalStateException: java.lang.AbstractMethodError: Missing implementation of resolved method \u0027abstract void init(org.apache.velocity.util.ExtProperties)\u0027 of abstract class org.apache.velocity.runtime.resource.loader.ResourceLoader.\n\tat be.artisjaap.document.utils.XdocUtils.maakDocument(XdocUtils.java:52)\n\tat be.artisjaap.document.action.GenerateSimpleTemplate.maakTemplateTO(GenerateSimpleTemplate.java:31)\n\tat be.artisjaap.document.action.GenerateSimpleTemplate.voor(GenerateSimpleTemplate.java:26)\n\tat be.artisjaap.document.action.GenerateCombinedTemplate.generate(GenerateCombinedTemplate.java:39)\n\tat be.artisjaap.document.action.GenerateDocument.lambda$forDocument$1(GenerateDocument.java:50)\n\tat java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)\n\tat java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1621)\n\tat java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)\n\tat java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)\n\tat java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)\n\tat java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)\n\tat java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)\n\tat be.artisjaap.document.action.GenerateDocument.forDocument(GenerateDocument.java:50)\n\tat be.artisjaap.document.cucumber.DocumentbeheerThenStepsDefinition.kanDeBriefMetCodeInTaalGegenereerdWordenMetEenDefaultSetVanDatasetsEnWordenOpgeslagenOpHetRelatievePath(DocumentbeheerThenStepsDefinition.java:191)\n\tat ✽.the document with code MANDAAT_BRIEF in language nld can be generated using a default dataset and are saved on relative path /docs/(classpath:scenarios/documentbeheer.feature:57)\nCaused by: fr.opensagres.xdocreport.core.XDocReportException: java.lang.AbstractMethodError: Missing implementation of resolved method \u0027abstract void init(org.apache.velocity.util.ExtProperties)\u0027 of abstract class org.apache.velocity.runtime.resource.loader.ResourceLoader.\n\tat fr.opensagres.xdocreport.template.AbstractTemplateEngine.process(AbstractTemplateEngine.java:152)\n\tat fr.opensagres.xdocreport.template.AbstractTemplateEngine.process(AbstractTemplateEngine.java:83)\n\tat fr.opensagres.xdocreport.document.AbstractXDocReport.processTemplateEngine(AbstractXDocReport.java:772)\n\tat fr.opensagres.xdocreport.document.AbstractXDocReport.convert(AbstractXDocReport.java:700)\n\tat be.artisjaap.document.utils.XdocUtils.maakDocument(XdocUtils.java:41)\n\tat be.artisjaap.document.action.GenerateSimpleTemplate.maakTemplateTO(GenerateSimpleTemplate.java:31)\n\tat be.artisjaap.document.action.GenerateSimpleTemplate.voor(GenerateSimpleTemplate.java:26)\n\tat be.artisjaap.document.action.GenerateCombinedTemplate.generate(GenerateCombinedTemplate.java:39)\n\tat be.artisjaap.document.action.GenerateDocument.lambda$forDocument$1(GenerateDocument.java:50)\n\tat java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)\n\tat java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1621)\n\tat java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)\n\tat java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)\n\tat java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)\n\tat java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)\n\tat java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)\n\tat be.artisjaap.document.action.GenerateDocument.forDocument(GenerateDocument.java:50)\n\tat be.artisjaap.document.cucumber.DocumentbeheerThenStepsDefinition.kanDeBriefMetCodeInTaalGegenereerdWordenMetEenDefaultSetVanDatasetsEnWordenOpgeslagenOpHetRelatievePath(DocumentbeheerThenStepsDefinition.java:191)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:567)\n\tat io.cucumber.java.Invoker.invoke(Invoker.java:27)\n\tat io.cucumber.java.JavaStepDefinition.execute(JavaStepDefinition.java:27)\n\tat io.cucumber.core.runner.PickleStepDefinitionMatch.runStep(PickleStepDefinitionMatch.java:63)\n\tat io.cucumber.core.runner.TestStep.executeStep(TestStep.java:64)\n\tat io.cucumber.core.runner.TestStep.run(TestStep.java:49)\n\tat io.cucumber.core.runner.PickleStepTestStep.run(PickleStepTestStep.java:46)\n\tat io.cucumber.core.runner.TestCase.run(TestCase.java:51)\n\tat io.cucumber.core.runner.Runner.runPickle(Runner.java:66)\n\tat io.cucumber.junit.PickleRunners$NoStepDescriptions.run(PickleRunners.java:149)\n\tat io.cucumber.junit.FeatureRunner.runChild(FeatureRunner.java:83)\n\tat io.cucumber.junit.FeatureRunner.runChild(FeatureRunner.java:24)\n\tat org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)\n\tat org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)\n\tat org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)\n\tat org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)\n\tat org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)\n\tat org.junit.runners.ParentRunner.run(ParentRunner.java:363)\n\tat io.cucumber.junit.Cucumber.runChild(Cucumber.java:185)\n\tat io.cucumber.junit.Cucumber.runChild(Cucumber.java:83)\n\tat org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)\n\tat org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)\n\tat org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)\n\tat org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)\n\tat org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)\n\tat io.cucumber.junit.Cucumber$RunCucumber.evaluate(Cucumber.java:219)\n\tat org.junit.runners.ParentRunner.run(ParentRunner.java:363)\n\tat org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.runTestClass(JUnitTestClassExecutor.java:110)\n\tat org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:58)\n\tat org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:38)\n\tat org.gradle.api.internal.tasks.testing.junit.AbstractJUnitTestClassProcessor.processTestClass(AbstractJUnitTestClassProcessor.java:62)\n\tat org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:51)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:567)\n\tat org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)\n\tat org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)\n\tat org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)\n\tat org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94)\n\tat com.sun.proxy.$Proxy5.processTestClass(Unknown Source)\n\tat org.gradle.api.internal.tasks.testing.worker.TestWorker.processTestClass(TestWorker.java:118)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:567)\n\tat org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)\n\tat org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)\n\tat org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:182)\n\tat org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:164)\n\tat org.gradle.internal.remote.internal.hub.MessageHub$Handler.run(MessageHub.java:412)\n\tat org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)\n\tat org.gradle.internal.concurrent.ManagedExecutorImpl$1.run(ManagedExecutorImpl.java:48)\n\tat java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)\n\tat java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)\n\tat org.gradle.internal.concurrent.ThreadFactoryImpl$ManagedThreadRunnable.run(ThreadFactoryImpl.java:56)\n\tat java.base/java.lang.Thread.run(Thread.java:830)\nCaused by: java.lang.AbstractMethodError: Missing implementation of resolved method \u0027abstract void init(org.apache.velocity.util.ExtProperties)\u0027 of abstract class org.apache.velocity.runtime.resource.loader.ResourceLoader.\n\tat org.apache.velocity.runtime.resource.ResourceManagerImpl.initialize(ResourceManagerImpl.java:139)\n\tat org.apache.velocity.runtime.RuntimeInstance.initializeResourceManager(RuntimeInstance.java:784)\n\tat org.apache.velocity.runtime.RuntimeInstance.init(RuntimeInstance.java:261)\n\tat org.apache.velocity.runtime.RuntimeInstance.requireInitialization(RuntimeInstance.java:348)\n\tat org.apache.velocity.runtime.RuntimeInstance.parse(RuntimeInstance.java:1232)\n\tat org.apache.velocity.runtime.RuntimeInstance.evaluate(RuntimeInstance.java:1340)\n\tat org.apache.velocity.app.VelocityEngine.evaluate(VelocityEngine.java:240)\n\tat fr.opensagres.xdocreport.template.velocity.internal.VelocityTemplateEngine.processNoCache(VelocityTemplateEngine.java:109)\n\tat fr.opensagres.xdocreport.template.AbstractTemplateEngine.process(AbstractTemplateEngine.java:118)\n\t... 77 more\n",
+              "duration": 72030000,
+              "status": "failed"
+            },
+            "line": 57,
+            "name": "the document with code MANDAAT_BRIEF in language nld can be generated using a default dataset and are saved on relative path /docs/",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_BRIEF",
+                  "offset": 23
+                },
+                {
+                  "val": "nld",
+                  "offset": 49
+                },
+                {
+                  "val": "/docs/",
+                  "offset": 125
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerThenStepsDefinition.kanDeBriefMetCodeInTaalGegenereerdWordenMetEenDefaultSetVanDatasetsEnWordenOpgeslagenOpHetRelatievePath(java.lang.String,java.lang.String,java.lang.String)"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-03-03T20:23:35.392Z",
+        "before": [
+          {
+            "result": {
+              "duration": 5537000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "be.artisjaap.document.cucumber.CucumberHooks.clear()"
+            }
+          }
+        ],
+        "line": 59,
+        "name": "De naam van de gegenereerde brief is standaard de code van de brief, de taal een en timestamp",
+        "description": "",
+        "id": "general-document-generation;de-naam-van-de-gegenereerde-brief-is-standaard-de-code-van-de-brief--de-taal-een-en-timestamp",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 1086000,
+              "status": "passed"
+            },
+            "line": 60,
+            "name": "today is 26-06-2018 09:00",
+            "match": {
+              "arguments": [
+                {
+                  "val": "26-06-2018 09:00",
+                  "offset": 9
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.vandaagIs(java.time.LocalDateTime)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 84077000,
+              "status": "passed"
+            },
+            "line": 61,
+            "name": "an active template MANDAAT_HEADER_FOOTER_NL.DOCX with code MANDAAT_HEADER_FOOTER in language nld",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_HEADER_FOOTER_NL.DOCX",
+                  "offset": 19
+                },
+                {
+                  "val": "MANDAAT_HEADER_FOOTER",
+                  "offset": 59
+                },
+                {
+                  "val": "nld",
+                  "offset": 93
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.eenBriefMetCodeInTaalDieActiefIs(java.lang.String,java.lang.String,java.lang.String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 3916000,
+              "status": "passed"
+            },
+            "line": 62,
+            "name": "a document MANDAAT_BRIEF in language nld exists of templates MANDAAT_HEADER_FOOTER",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_BRIEF",
+                  "offset": 11
+                },
+                {
+                  "val": "nld",
+                  "offset": 37
+                },
+                {
+                  "val": "MANDAAT_HEADER_FOOTER",
+                  "offset": 61
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.eenBriefInNldDieBestaatUitDeTemplates(java.lang.String,java.lang.String,java.util.List\u003cjava.lang.String\u003e)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 6398000,
+              "status": "passed"
+            },
+            "line": 63,
+            "name": "the document with code MANDAAT_BRIEF has been set active in language nld",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_BRIEF",
+                  "offset": 23
+                },
+                {
+                  "val": "nld",
+                  "offset": 69
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.deBriefMANDAAT_BRIEFWordtActiefGezet(java.lang.String,java.lang.String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "error_message": "java.lang.IllegalStateException: java.lang.AbstractMethodError: Missing implementation of resolved method \u0027abstract void init(org.apache.velocity.util.ExtProperties)\u0027 of abstract class org.apache.velocity.runtime.resource.loader.ResourceLoader.\n\tat be.artisjaap.document.utils.XdocUtils.maakDocument(XdocUtils.java:52)\n\tat be.artisjaap.document.action.GenerateSimpleTemplate.maakTemplateTO(GenerateSimpleTemplate.java:31)\n\tat be.artisjaap.document.action.GenerateSimpleTemplate.voor(GenerateSimpleTemplate.java:26)\n\tat be.artisjaap.document.action.GenerateCombinedTemplate.generate(GenerateCombinedTemplate.java:39)\n\tat be.artisjaap.document.action.GenerateDocument.lambda$forDocument$1(GenerateDocument.java:50)\n\tat java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)\n\tat java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1621)\n\tat java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)\n\tat java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)\n\tat java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)\n\tat java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)\n\tat java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)\n\tat be.artisjaap.document.action.GenerateDocument.forDocument(GenerateDocument.java:50)\n\tat be.artisjaap.document.cucumber.DocumentbeheerThenStepsDefinition.kanDeBriefMetCodeInTaalGegenereerdWordenMetEenDefaultSetVanDatasetsEnWordenOpgeslagenInDeMongoDB(DocumentbeheerThenStepsDefinition.java:109)\n\tat ✽.the document with code MANDAAT_BRIEF in language nld can be generated using a default dataset and are saved in MongoDB(classpath:scenarios/documentbeheer.feature:64)\nCaused by: fr.opensagres.xdocreport.core.XDocReportException: java.lang.AbstractMethodError: Missing implementation of resolved method \u0027abstract void init(org.apache.velocity.util.ExtProperties)\u0027 of abstract class org.apache.velocity.runtime.resource.loader.ResourceLoader.\n\tat fr.opensagres.xdocreport.template.AbstractTemplateEngine.process(AbstractTemplateEngine.java:152)\n\tat fr.opensagres.xdocreport.template.AbstractTemplateEngine.process(AbstractTemplateEngine.java:83)\n\tat fr.opensagres.xdocreport.document.AbstractXDocReport.processTemplateEngine(AbstractXDocReport.java:772)\n\tat fr.opensagres.xdocreport.document.AbstractXDocReport.convert(AbstractXDocReport.java:700)\n\tat be.artisjaap.document.utils.XdocUtils.maakDocument(XdocUtils.java:41)\n\tat be.artisjaap.document.action.GenerateSimpleTemplate.maakTemplateTO(GenerateSimpleTemplate.java:31)\n\tat be.artisjaap.document.action.GenerateSimpleTemplate.voor(GenerateSimpleTemplate.java:26)\n\tat be.artisjaap.document.action.GenerateCombinedTemplate.generate(GenerateCombinedTemplate.java:39)\n\tat be.artisjaap.document.action.GenerateDocument.lambda$forDocument$1(GenerateDocument.java:50)\n\tat java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)\n\tat java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1621)\n\tat java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)\n\tat java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)\n\tat java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)\n\tat java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)\n\tat java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)\n\tat be.artisjaap.document.action.GenerateDocument.forDocument(GenerateDocument.java:50)\n\tat be.artisjaap.document.cucumber.DocumentbeheerThenStepsDefinition.kanDeBriefMetCodeInTaalGegenereerdWordenMetEenDefaultSetVanDatasetsEnWordenOpgeslagenInDeMongoDB(DocumentbeheerThenStepsDefinition.java:109)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:567)\n\tat io.cucumber.java.Invoker.invoke(Invoker.java:27)\n\tat io.cucumber.java.JavaStepDefinition.execute(JavaStepDefinition.java:27)\n\tat io.cucumber.core.runner.PickleStepDefinitionMatch.runStep(PickleStepDefinitionMatch.java:63)\n\tat io.cucumber.core.runner.TestStep.executeStep(TestStep.java:64)\n\tat io.cucumber.core.runner.TestStep.run(TestStep.java:49)\n\tat io.cucumber.core.runner.PickleStepTestStep.run(PickleStepTestStep.java:46)\n\tat io.cucumber.core.runner.TestCase.run(TestCase.java:51)\n\tat io.cucumber.core.runner.Runner.runPickle(Runner.java:66)\n\tat io.cucumber.junit.PickleRunners$NoStepDescriptions.run(PickleRunners.java:149)\n\tat io.cucumber.junit.FeatureRunner.runChild(FeatureRunner.java:83)\n\tat io.cucumber.junit.FeatureRunner.runChild(FeatureRunner.java:24)\n\tat org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)\n\tat org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)\n\tat org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)\n\tat org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)\n\tat org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)\n\tat org.junit.runners.ParentRunner.run(ParentRunner.java:363)\n\tat io.cucumber.junit.Cucumber.runChild(Cucumber.java:185)\n\tat io.cucumber.junit.Cucumber.runChild(Cucumber.java:83)\n\tat org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)\n\tat org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)\n\tat org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)\n\tat org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)\n\tat org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)\n\tat io.cucumber.junit.Cucumber$RunCucumber.evaluate(Cucumber.java:219)\n\tat org.junit.runners.ParentRunner.run(ParentRunner.java:363)\n\tat org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.runTestClass(JUnitTestClassExecutor.java:110)\n\tat org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:58)\n\tat org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:38)\n\tat org.gradle.api.internal.tasks.testing.junit.AbstractJUnitTestClassProcessor.processTestClass(AbstractJUnitTestClassProcessor.java:62)\n\tat org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:51)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:567)\n\tat org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)\n\tat org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)\n\tat org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)\n\tat org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94)\n\tat com.sun.proxy.$Proxy5.processTestClass(Unknown Source)\n\tat org.gradle.api.internal.tasks.testing.worker.TestWorker.processTestClass(TestWorker.java:118)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:567)\n\tat org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)\n\tat org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)\n\tat org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:182)\n\tat org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:164)\n\tat org.gradle.internal.remote.internal.hub.MessageHub$Handler.run(MessageHub.java:412)\n\tat org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)\n\tat org.gradle.internal.concurrent.ManagedExecutorImpl$1.run(ManagedExecutorImpl.java:48)\n\tat java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)\n\tat java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)\n\tat org.gradle.internal.concurrent.ThreadFactoryImpl$ManagedThreadRunnable.run(ThreadFactoryImpl.java:56)\n\tat java.base/java.lang.Thread.run(Thread.java:830)\nCaused by: java.lang.AbstractMethodError: Missing implementation of resolved method \u0027abstract void init(org.apache.velocity.util.ExtProperties)\u0027 of abstract class org.apache.velocity.runtime.resource.loader.ResourceLoader.\n\tat org.apache.velocity.runtime.resource.ResourceManagerImpl.initialize(ResourceManagerImpl.java:139)\n\tat org.apache.velocity.runtime.RuntimeInstance.initializeResourceManager(RuntimeInstance.java:784)\n\tat org.apache.velocity.runtime.RuntimeInstance.init(RuntimeInstance.java:261)\n\tat org.apache.velocity.runtime.RuntimeInstance.requireInitialization(RuntimeInstance.java:348)\n\tat org.apache.velocity.runtime.RuntimeInstance.parse(RuntimeInstance.java:1232)\n\tat org.apache.velocity.runtime.RuntimeInstance.evaluate(RuntimeInstance.java:1340)\n\tat org.apache.velocity.app.VelocityEngine.evaluate(VelocityEngine.java:240)\n\tat fr.opensagres.xdocreport.template.velocity.internal.VelocityTemplateEngine.processNoCache(VelocityTemplateEngine.java:109)\n\tat fr.opensagres.xdocreport.template.AbstractTemplateEngine.process(AbstractTemplateEngine.java:118)\n\t... 77 more\n",
+              "duration": 46892000,
+              "status": "failed"
+            },
+            "line": 64,
+            "name": "the document with code MANDAAT_BRIEF in language nld can be generated using a default dataset and are saved in MongoDB",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_BRIEF",
+                  "offset": 23
+                },
+                {
+                  "val": "nld",
+                  "offset": 49
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerThenStepsDefinition.kanDeBriefMetCodeInTaalGegenereerdWordenMetEenDefaultSetVanDatasetsEnWordenOpgeslagenInDeMongoDB(java.lang.String,java.lang.String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 23000,
+              "status": "skipped"
+            },
+            "line": 65,
+            "name": "the document with code MANDAAT_BRIEF in language nld available with name MANDAAT_BRIEF_NLD_20180626090000",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_BRIEF",
+                  "offset": 23
+                },
+                {
+                  "val": "nld",
+                  "offset": 49
+                },
+                {
+                  "val": "MANDAAT_BRIEF_NLD_20180626090000",
+                  "offset": 73
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerThenStepsDefinition.isHetBestandBeschikbaarOnderDeNaam(java.lang.String,java.lang.String,java.lang.String)"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-03-03T20:23:35.555Z",
+        "before": [
+          {
+            "result": {
+              "duration": 25422000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "be.artisjaap.document.cucumber.CucumberHooks.clear()"
+            }
+          }
+        ],
+        "line": 68,
+        "name": "De naam van de gegenereerde brief kan samengesteld worden uit de beschikbare datavelden",
+        "description": "",
+        "id": "general-document-generation;de-naam-van-de-gegenereerde-brief-kan-samengesteld-worden-uit-de-beschikbare-datavelden",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 154253000,
+              "status": "passed"
+            },
+            "line": 69,
+            "name": "an active template MANDAAT_HEADER_FOOTER_NL.DOCX with code MANDAAT_HEADER_FOOTER in language nld",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_HEADER_FOOTER_NL.DOCX",
+                  "offset": 19
+                },
+                {
+                  "val": "MANDAAT_HEADER_FOOTER",
+                  "offset": 59
+                },
+                {
+                  "val": "nld",
+                  "offset": 93
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.eenBriefMetCodeInTaalDieActiefIs(java.lang.String,java.lang.String,java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 4799000,
+              "status": "passed"
+            },
+            "line": 70,
+            "name": "a document MANDAAT_BRIEF in language nld exists of templates MANDAAT_HEADER_FOOTER",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_BRIEF",
+                  "offset": 11
+                },
+                {
+                  "val": "nld",
+                  "offset": 37
+                },
+                {
+                  "val": "MANDAAT_HEADER_FOOTER",
+                  "offset": 61
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.eenBriefInNldDieBestaatUitDeTemplates(java.lang.String,java.lang.String,java.util.List\u003cjava.lang.String\u003e)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 9453000,
+              "status": "passed"
+            },
+            "line": 71,
+            "name": "the document with code MANDAAT_BRIEF has been set active in language nld",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_BRIEF",
+                  "offset": 23
+                },
+                {
+                  "val": "nld",
+                  "offset": 69
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.deBriefMANDAAT_BRIEFWordtActiefGezet(java.lang.String,java.lang.String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 72,
+            "name": "the document with code MANDAAT_BRIEF in language nld can be generated using a default dataset and are saved in MongoDB with filename Lid.naam, Lid.voornaam",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 22000,
+              "status": "skipped"
+            },
+            "line": 73,
+            "name": "the document with code MANDAAT_BRIEF in language nld available with name NAAM_VOORNAAM",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_BRIEF",
+                  "offset": 23
+                },
+                {
+                  "val": "nld",
+                  "offset": 49
+                },
+                {
+                  "val": "NAAM_VOORNAAM",
+                  "offset": 73
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerThenStepsDefinition.isHetBestandBeschikbaarOnderDeNaam(java.lang.String,java.lang.String,java.lang.String)"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-03-03T20:23:35.762Z",
+        "before": [
+          {
+            "result": {
+              "duration": 14283000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "be.artisjaap.document.cucumber.CucumberHooks.clear()"
+            }
+          }
+        ],
+        "line": 75,
+        "name": "De velden van de brief zijn beschikbaar als metadata",
+        "description": "",
+        "id": "general-document-generation;de-velden-van-de-brief-zijn-beschikbaar-als-metadata",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 74975000,
+              "status": "passed"
+            },
+            "line": 76,
+            "name": "an active template MANDAAT_HEADER_FOOTER_NL.DOCX with code MANDAAT_HEADER_FOOTER in language nld",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_HEADER_FOOTER_NL.DOCX",
+                  "offset": 19
+                },
+                {
+                  "val": "MANDAAT_HEADER_FOOTER",
+                  "offset": 59
+                },
+                {
+                  "val": "nld",
+                  "offset": 93
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.eenBriefMetCodeInTaalDieActiefIs(java.lang.String,java.lang.String,java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 4444000,
+              "status": "passed"
+            },
+            "line": 77,
+            "name": "a document MANDAAT_BRIEF in language nld exists of templates MANDAAT_HEADER_FOOTER",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_BRIEF",
+                  "offset": 11
+                },
+                {
+                  "val": "nld",
+                  "offset": 37
+                },
+                {
+                  "val": "MANDAAT_HEADER_FOOTER",
+                  "offset": 61
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.eenBriefInNldDieBestaatUitDeTemplates(java.lang.String,java.lang.String,java.util.List\u003cjava.lang.String\u003e)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 7335000,
+              "status": "passed"
+            },
+            "line": 78,
+            "name": "the document with code MANDAAT_BRIEF has been set active in language nld",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_BRIEF",
+                  "offset": 23
+                },
+                {
+                  "val": "nld",
+                  "offset": 69
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.deBriefMANDAAT_BRIEFWordtActiefGezet(java.lang.String,java.lang.String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 79,
+            "name": "the document with code MANDAAT_BRIEF in language nld can be generated using a default dataset and are saved in MongoDB with filename BriefMeta.isoCode, BriefMeta.isoCode, BriefMeta.BriefCode",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 11000,
+              "status": "skipped"
+            },
+            "line": 80,
+            "name": "the document with code MANDAAT_BRIEF in language nld available with name NLD_NLD_MANDAAT_BRIEF",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_BRIEF",
+                  "offset": 23
+                },
+                {
+                  "val": "nld",
+                  "offset": 49
+                },
+                {
+                  "val": "NLD_NLD_MANDAAT_BRIEF",
+                  "offset": 73
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerThenStepsDefinition.isHetBestandBeschikbaarOnderDeNaam(java.lang.String,java.lang.String,java.lang.String)"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-03-03T20:23:35.872Z",
+        "before": [
+          {
+            "result": {
+              "duration": 4998000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "be.artisjaap.document.cucumber.CucumberHooks.clear()"
+            }
+          }
+        ],
+        "line": 82,
+        "name": "Bepaalde dataset kunnen geblacklist worden in het kader van GDPR",
+        "description": "",
+        "id": "general-document-generation;bepaalde-dataset-kunnen-geblacklist-worden-in-het-kader-van-gdpr",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 84884000,
+              "status": "passed"
+            },
+            "line": 83,
+            "name": "an active template MANDAAT_HEADER_FOOTER_NL.DOCX with code MANDAAT_HEADER_FOOTER in language nld",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_HEADER_FOOTER_NL.DOCX",
+                  "offset": 19
+                },
+                {
+                  "val": "MANDAAT_HEADER_FOOTER",
+                  "offset": 59
+                },
+                {
+                  "val": "nld",
+                  "offset": 93
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.eenBriefMetCodeInTaalDieActiefIs(java.lang.String,java.lang.String,java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 25109000,
+              "status": "passed"
+            },
+            "line": 84,
+            "name": "a document MANDAAT_BRIEF in language nld exists of templates MANDAAT_HEADER_FOOTER",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_BRIEF",
+                  "offset": 11
+                },
+                {
+                  "val": "nld",
+                  "offset": 37
+                },
+                {
+                  "val": "MANDAAT_HEADER_FOOTER",
+                  "offset": 61
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.eenBriefInNldDieBestaatUitDeTemplates(java.lang.String,java.lang.String,java.util.List\u003cjava.lang.String\u003e)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 40154000,
+              "status": "passed"
+            },
+            "line": 85,
+            "name": "the document with code MANDAAT_BRIEF has been set active in language nld",
+            "match": {
+              "arguments": [
+                {
+                  "val": "MANDAAT_BRIEF",
+                  "offset": 23
+                },
+                {
+                  "val": "nld",
+                  "offset": 69
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.deBriefMANDAAT_BRIEFWordtActiefGezet(java.lang.String,java.lang.String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 86,
+            "name": "the document with code MANDAAT_BRIEF in language nld can be generated using a default dataset and are saved in MongoDB and datasets Lid are blacklisted",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 87,
+            "name": "the document with code MANDAAT_BRIEF in language nld and ignored datasets are: Lid",
+            "match": {},
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-03-03T20:23:36.045Z",
+        "before": [
+          {
+            "result": {
+              "duration": 7699000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "be.artisjaap.document.cucumber.CucumberHooks.clear()"
+            }
+          }
+        ],
+        "line": 89,
+        "name": "Dynamische images kunnen vervangen worden door echte images",
+        "description": "",
+        "id": "general-document-generation;dynamische-images-kunnen-vervangen-worden-door-echte-images",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 54946000,
+              "status": "passed"
+            },
+            "line": 90,
+            "name": "an active template DUMMY_QR.DOCX with code DUMMY_QR in language nld",
+            "match": {
+              "arguments": [
+                {
+                  "val": "DUMMY_QR.DOCX",
+                  "offset": 19
+                },
+                {
+                  "val": "DUMMY_QR",
+                  "offset": 43
+                },
+                {
+                  "val": "nld",
+                  "offset": 64
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.eenBriefMetCodeInTaalDieActiefIs(java.lang.String,java.lang.String,java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 4099000,
+              "status": "passed"
+            },
+            "line": 91,
+            "name": "a document BRIEF_MET_QR in language nld exists of templates DUMMY_QR",
+            "match": {
+              "arguments": [
+                {
+                  "val": "BRIEF_MET_QR",
+                  "offset": 11
+                },
+                {
+                  "val": "nld",
+                  "offset": 36
+                },
+                {
+                  "val": "DUMMY_QR",
+                  "offset": 60
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.eenBriefInNldDieBestaatUitDeTemplates(java.lang.String,java.lang.String,java.util.List\u003cjava.lang.String\u003e)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 19818000,
+              "status": "passed"
+            },
+            "line": 92,
+            "name": "the document with code BRIEF_MET_QR has been set active in language nld",
+            "match": {
+              "arguments": [
+                {
+                  "val": "BRIEF_MET_QR",
+                  "offset": 23
+                },
+                {
+                  "val": "nld",
+                  "offset": 68
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.deBriefMANDAAT_BRIEFWordtActiefGezet(java.lang.String,java.lang.String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "error_message": "java.lang.IllegalStateException: java.lang.AbstractMethodError: Missing implementation of resolved method \u0027abstract void init(org.apache.velocity.util.ExtProperties)\u0027 of abstract class org.apache.velocity.runtime.resource.loader.ResourceLoader.\n\tat be.artisjaap.document.utils.XdocUtils.maakDocument(XdocUtils.java:52)\n\tat be.artisjaap.document.action.GenerateSimpleTemplate.maakTemplateTO(GenerateSimpleTemplate.java:31)\n\tat be.artisjaap.document.action.GenerateSimpleTemplate.voor(GenerateSimpleTemplate.java:26)\n\tat be.artisjaap.document.action.GenerateCombinedTemplate.generate(GenerateCombinedTemplate.java:39)\n\tat be.artisjaap.document.action.GenerateDocument.lambda$forDocument$1(GenerateDocument.java:50)\n\tat java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)\n\tat java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1621)\n\tat java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)\n\tat java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)\n\tat java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)\n\tat java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)\n\tat java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)\n\tat be.artisjaap.document.action.GenerateDocument.forDocument(GenerateDocument.java:50)\n\tat be.artisjaap.document.cucumber.DocumentbeheerThenStepsDefinition.kanDeBriefMetCodeInTaaldGegenereerdWordenMetEenDefaultSetVanDatasetsEnWordenOpgeslagenHetAbsolutePathMetImages(DocumentbeheerThenStepsDefinition.java:179)\n\tat ✽.the document with code BRIEF_MET_QR in language nld can be generated using a default dataset, are saved in absolute path c:/temp/docs/ and contain the following images(classpath:scenarios/documentbeheer.feature:93)\nCaused by: fr.opensagres.xdocreport.core.XDocReportException: java.lang.AbstractMethodError: Missing implementation of resolved method \u0027abstract void init(org.apache.velocity.util.ExtProperties)\u0027 of abstract class org.apache.velocity.runtime.resource.loader.ResourceLoader.\n\tat fr.opensagres.xdocreport.template.AbstractTemplateEngine.process(AbstractTemplateEngine.java:152)\n\tat fr.opensagres.xdocreport.template.AbstractTemplateEngine.process(AbstractTemplateEngine.java:83)\n\tat fr.opensagres.xdocreport.document.AbstractXDocReport.processTemplateEngine(AbstractXDocReport.java:772)\n\tat fr.opensagres.xdocreport.document.AbstractXDocReport.convert(AbstractXDocReport.java:700)\n\tat be.artisjaap.document.utils.XdocUtils.maakDocument(XdocUtils.java:41)\n\tat be.artisjaap.document.action.GenerateSimpleTemplate.maakTemplateTO(GenerateSimpleTemplate.java:31)\n\tat be.artisjaap.document.action.GenerateSimpleTemplate.voor(GenerateSimpleTemplate.java:26)\n\tat be.artisjaap.document.action.GenerateCombinedTemplate.generate(GenerateCombinedTemplate.java:39)\n\tat be.artisjaap.document.action.GenerateDocument.lambda$forDocument$1(GenerateDocument.java:50)\n\tat java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)\n\tat java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1621)\n\tat java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)\n\tat java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)\n\tat java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)\n\tat java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)\n\tat java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)\n\tat be.artisjaap.document.action.GenerateDocument.forDocument(GenerateDocument.java:50)\n\tat be.artisjaap.document.cucumber.DocumentbeheerThenStepsDefinition.kanDeBriefMetCodeInTaaldGegenereerdWordenMetEenDefaultSetVanDatasetsEnWordenOpgeslagenHetAbsolutePathMetImages(DocumentbeheerThenStepsDefinition.java:179)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:567)\n\tat io.cucumber.java.Invoker.invoke(Invoker.java:27)\n\tat io.cucumber.java.JavaStepDefinition.execute(JavaStepDefinition.java:27)\n\tat io.cucumber.core.runner.PickleStepDefinitionMatch.runStep(PickleStepDefinitionMatch.java:63)\n\tat io.cucumber.core.runner.TestStep.executeStep(TestStep.java:64)\n\tat io.cucumber.core.runner.TestStep.run(TestStep.java:49)\n\tat io.cucumber.core.runner.PickleStepTestStep.run(PickleStepTestStep.java:46)\n\tat io.cucumber.core.runner.TestCase.run(TestCase.java:51)\n\tat io.cucumber.core.runner.Runner.runPickle(Runner.java:66)\n\tat io.cucumber.junit.PickleRunners$NoStepDescriptions.run(PickleRunners.java:149)\n\tat io.cucumber.junit.FeatureRunner.runChild(FeatureRunner.java:83)\n\tat io.cucumber.junit.FeatureRunner.runChild(FeatureRunner.java:24)\n\tat org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)\n\tat org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)\n\tat org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)\n\tat org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)\n\tat org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)\n\tat org.junit.runners.ParentRunner.run(ParentRunner.java:363)\n\tat io.cucumber.junit.Cucumber.runChild(Cucumber.java:185)\n\tat io.cucumber.junit.Cucumber.runChild(Cucumber.java:83)\n\tat org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)\n\tat org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)\n\tat org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)\n\tat org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)\n\tat org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)\n\tat io.cucumber.junit.Cucumber$RunCucumber.evaluate(Cucumber.java:219)\n\tat org.junit.runners.ParentRunner.run(ParentRunner.java:363)\n\tat org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.runTestClass(JUnitTestClassExecutor.java:110)\n\tat org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:58)\n\tat org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:38)\n\tat org.gradle.api.internal.tasks.testing.junit.AbstractJUnitTestClassProcessor.processTestClass(AbstractJUnitTestClassProcessor.java:62)\n\tat org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:51)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:567)\n\tat org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)\n\tat org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)\n\tat org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)\n\tat org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94)\n\tat com.sun.proxy.$Proxy5.processTestClass(Unknown Source)\n\tat org.gradle.api.internal.tasks.testing.worker.TestWorker.processTestClass(TestWorker.java:118)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:567)\n\tat org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)\n\tat org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)\n\tat org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:182)\n\tat org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:164)\n\tat org.gradle.internal.remote.internal.hub.MessageHub$Handler.run(MessageHub.java:412)\n\tat org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)\n\tat org.gradle.internal.concurrent.ManagedExecutorImpl$1.run(ManagedExecutorImpl.java:48)\n\tat java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)\n\tat java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)\n\tat org.gradle.internal.concurrent.ThreadFactoryImpl$ManagedThreadRunnable.run(ThreadFactoryImpl.java:56)\n\tat java.base/java.lang.Thread.run(Thread.java:830)\nCaused by: java.lang.AbstractMethodError: Missing implementation of resolved method \u0027abstract void init(org.apache.velocity.util.ExtProperties)\u0027 of abstract class org.apache.velocity.runtime.resource.loader.ResourceLoader.\n\tat org.apache.velocity.runtime.resource.ResourceManagerImpl.initialize(ResourceManagerImpl.java:139)\n\tat org.apache.velocity.runtime.RuntimeInstance.initializeResourceManager(RuntimeInstance.java:784)\n\tat org.apache.velocity.runtime.RuntimeInstance.init(RuntimeInstance.java:261)\n\tat org.apache.velocity.runtime.RuntimeInstance.requireInitialization(RuntimeInstance.java:348)\n\tat org.apache.velocity.runtime.RuntimeInstance.parse(RuntimeInstance.java:1232)\n\tat org.apache.velocity.runtime.RuntimeInstance.evaluate(RuntimeInstance.java:1340)\n\tat org.apache.velocity.app.VelocityEngine.evaluate(VelocityEngine.java:240)\n\tat fr.opensagres.xdocreport.template.velocity.internal.VelocityTemplateEngine.processNoCache(VelocityTemplateEngine.java:109)\n\tat fr.opensagres.xdocreport.template.AbstractTemplateEngine.process(AbstractTemplateEngine.java:118)\n\t... 77 more\n",
+              "duration": 126047000,
+              "status": "failed"
+            },
+            "line": 93,
+            "name": "the document with code BRIEF_MET_QR in language nld can be generated using a default dataset, are saved in absolute path c:/temp/docs/ and contain the following images",
+            "match": {
+              "arguments": [
+                {
+                  "val": "BRIEF_MET_QR",
+                  "offset": 23
+                },
+                {
+                  "val": "nld",
+                  "offset": 48
+                },
+                {
+                  "val": "c:/temp/docs/",
+                  "offset": 121
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerThenStepsDefinition.kanDeBriefMetCodeInTaaldGegenereerdWordenMetEenDefaultSetVanDatasetsEnWordenOpgeslagenHetAbsolutePathMetImages(java.lang.String,java.lang.String,java.lang.String,java.util.List\u003cbe.artisjaap.document.cucumber.GherkinDocumentImage\u003e)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "bookmark naam",
+                  "image"
+                ]
+              },
+              {
+                "cells": [
+                  "qr",
+                  "qr.png"
+                ]
+              }
+            ],
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-03-03T20:23:36.271Z",
+        "before": [
+          {
+            "result": {
+              "duration": 5614000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "be.artisjaap.document.cucumber.CucumberHooks.clear()"
+            }
+          }
+        ],
+        "line": 98,
+        "name": "Een QR code kan eenvoudig toevoegd worden op een document",
+        "description": "",
+        "id": "general-document-generation;een-qr-code-kan-eenvoudig-toevoegd-worden-op-een-document",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 30238000,
+              "status": "passed"
+            },
+            "line": 99,
+            "name": "an active template DUMMY_QR.DOCX with code DUMMY_QR in language nld",
+            "match": {
+              "arguments": [
+                {
+                  "val": "DUMMY_QR.DOCX",
+                  "offset": 19
+                },
+                {
+                  "val": "DUMMY_QR",
+                  "offset": 43
+                },
+                {
+                  "val": "nld",
+                  "offset": 64
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.eenBriefMetCodeInTaalDieActiefIs(java.lang.String,java.lang.String,java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 37989000,
+              "status": "passed"
+            },
+            "line": 100,
+            "name": "an active template TEMPLATE_MANDAAT_BRIEF_NA_TELEFONISCH_CONTACT_NL.DOCX with code MANDAAT_BRIEF_NA_TELEFONISCH_CONTACT in language nld",
+            "match": {
+              "arguments": [
+                {
+                  "val": "TEMPLATE_MANDAAT_BRIEF_NA_TELEFONISCH_CONTACT_NL.DOCX",
+                  "offset": 19
+                },
+                {
+                  "val": "MANDAAT_BRIEF_NA_TELEFONISCH_CONTACT",
+                  "offset": 83
+                },
+                {
+                  "val": "nld",
+                  "offset": 132
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.eenBriefMetCodeInTaalDieActiefIs(java.lang.String,java.lang.String,java.lang.String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 101,
+            "name": "a combined template with code TEMPLATE_MET_QR in language nld consists of templates DUMMY_QR, MANDAAT_BRIEF_NA_TELEFONISCH_CONTACT",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 25000,
+              "status": "skipped"
+            },
+            "line": 102,
+            "name": "the combined template with code TEMPLATE_MET_QR is activated in language nld",
+            "match": {
+              "arguments": [
+                {
+                  "val": "TEMPLATE_MET_QR",
+                  "offset": 32
+                },
+                {
+                  "val": "nld",
+                  "offset": 73
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.deGecombineerdeTemplateMetCodeActiefWordtGezetInTaal(java.lang.String,java.lang.String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 18000,
+              "status": "skipped"
+            },
+            "line": 103,
+            "name": "a document BRIEF_MET_QR in language nld exists of templates TEMPLATE_MET_QR",
+            "match": {
+              "arguments": [
+                {
+                  "val": "BRIEF_MET_QR",
+                  "offset": 11
+                },
+                {
+                  "val": "nld",
+                  "offset": 36
+                },
+                {
+                  "val": "TEMPLATE_MET_QR",
+                  "offset": 60
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.eenBriefInNldDieBestaatUitDeTemplates(java.lang.String,java.lang.String,java.util.List\u003cjava.lang.String\u003e)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 18000,
+              "status": "skipped"
+            },
+            "line": 104,
+            "name": "the document with code BRIEF_MET_QR has been set active in language nld",
+            "match": {
+              "arguments": [
+                {
+                  "val": "BRIEF_MET_QR",
+                  "offset": 23
+                },
+                {
+                  "val": "nld",
+                  "offset": 68
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.deBriefMANDAAT_BRIEFWordtActiefGezet(java.lang.String,java.lang.String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 17000,
+              "status": "skipped"
+            },
+            "line": 105,
+            "name": "the document with code BRIEF_MET_QR in language nld can be generated using a default dataset, is saved on absolute path c:/temp/docs/ and has a QR code with following data {test:data, wa_rommel:rommel}",
+            "match": {
+              "arguments": [
+                {
+                  "val": "BRIEF_MET_QR",
+                  "offset": 23
+                },
+                {
+                  "val": "nld",
+                  "offset": 48
+                },
+                {
+                  "val": "c:/temp/docs/",
+                  "offset": 120
+                },
+                {
+                  "val": "{test:data, wa_rommel:rommel}",
+                  "offset": 172
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerThenStepsDefinition.briefMetCodeInTaalMetDefaultDatasetsEnQrCodeData(java.lang.String,java.lang.String,java.lang.String,java.lang.String)"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-03-03T20:23:36.382Z",
+        "before": [
+          {
+            "result": {
+              "duration": 22254000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "be.artisjaap.document.cucumber.CucumberHooks.clear()"
+            }
+          }
+        ],
+        "line": 108,
+        "name": "Een QR code kan eenvoudig toevoegd worden op een document een qr code met veel data",
+        "description": "",
+        "id": "general-document-generation;een-qr-code-kan-eenvoudig-toevoegd-worden-op-een-document-een-qr-code-met-veel-data",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 61899000,
+              "status": "passed"
+            },
+            "line": 109,
+            "name": "an active template DUMMY_QR.DOCX with code DUMMY_QR in language nld",
+            "match": {
+              "arguments": [
+                {
+                  "val": "DUMMY_QR.DOCX",
+                  "offset": 19
+                },
+                {
+                  "val": "DUMMY_QR",
+                  "offset": 43
+                },
+                {
+                  "val": "nld",
+                  "offset": 64
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.eenBriefMetCodeInTaalDieActiefIs(java.lang.String,java.lang.String,java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 74302000,
+              "status": "passed"
+            },
+            "line": 110,
+            "name": "an active template TEMPLATE_MANDAAT_BRIEF_NA_TELEFONISCH_CONTACT_NL.DOCX with code MANDAAT_BRIEF_NA_TELEFONISCH_CONTACT in language nld",
+            "match": {
+              "arguments": [
+                {
+                  "val": "TEMPLATE_MANDAAT_BRIEF_NA_TELEFONISCH_CONTACT_NL.DOCX",
+                  "offset": 19
+                },
+                {
+                  "val": "MANDAAT_BRIEF_NA_TELEFONISCH_CONTACT",
+                  "offset": 83
+                },
+                {
+                  "val": "nld",
+                  "offset": 132
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.eenBriefMetCodeInTaalDieActiefIs(java.lang.String,java.lang.String,java.lang.String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 111,
+            "name": "a combined template with code TEMPLATE_MET_QR in language nld consists of templates DUMMY_QR, MANDAAT_BRIEF_NA_TELEFONISCH_CONTACT",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 13000,
+              "status": "skipped"
+            },
+            "line": 112,
+            "name": "the combined template with code TEMPLATE_MET_QR is activated in language nld",
+            "match": {
+              "arguments": [
+                {
+                  "val": "TEMPLATE_MET_QR",
+                  "offset": 32
+                },
+                {
+                  "val": "nld",
+                  "offset": 73
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.deGecombineerdeTemplateMetCodeActiefWordtGezetInTaal(java.lang.String,java.lang.String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 14000,
+              "status": "skipped"
+            },
+            "line": 113,
+            "name": "a document BRIEF_MET_QR in language nld exists of templates TEMPLATE_MET_QR",
+            "match": {
+              "arguments": [
+                {
+                  "val": "BRIEF_MET_QR",
+                  "offset": 11
+                },
+                {
+                  "val": "nld",
+                  "offset": 36
+                },
+                {
+                  "val": "TEMPLATE_MET_QR",
+                  "offset": 60
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.eenBriefInNldDieBestaatUitDeTemplates(java.lang.String,java.lang.String,java.util.List\u003cjava.lang.String\u003e)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 11000,
+              "status": "skipped"
+            },
+            "line": 114,
+            "name": "the document with code BRIEF_MET_QR has been set active in language nld",
+            "match": {
+              "arguments": [
+                {
+                  "val": "BRIEF_MET_QR",
+                  "offset": 23
+                },
+                {
+                  "val": "nld",
+                  "offset": 68
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerStepsDefinition.deBriefMANDAAT_BRIEFWordtActiefGezet(java.lang.String,java.lang.String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 13000,
+              "status": "skipped"
+            },
+            "line": 115,
+            "name": "the document with code BRIEF_MET_QR in language nld can be generated using a default dataset, is saved on absolute path c:/temp/docs/ and has a QR code with following data er staat heel wat data in deze qr code, de vraag is of die goed gelezen wordt als er zoveel data in wordt opgeslagen? Wordt de code niet te klein om te lezen en is dit moeilijk te parsen?",
+            "match": {
+              "arguments": [
+                {
+                  "val": "BRIEF_MET_QR",
+                  "offset": 23
+                },
+                {
+                  "val": "nld",
+                  "offset": 48
+                },
+                {
+                  "val": "c:/temp/docs/",
+                  "offset": 120
+                },
+                {
+                  "val": "er staat heel wat data in deze qr code, de vraag is of die goed gelezen wordt als er zoveel data in wordt opgeslagen? Wordt de code niet te klein om te lezen en is dit moeilijk te parsen?",
+                  "offset": 172
+                }
+              ],
+              "location": "be.artisjaap.document.cucumber.DocumentbeheerThenStepsDefinition.briefMetCodeInTaalMetDefaultDatasetsEnQrCodeData(java.lang.String,java.lang.String,java.lang.String,java.lang.String)"
+            },
+            "keyword": "Then "
+          }
+        ]
+      }
+    ],
+    "name": "General document generation",
+    "description": "",
+    "id": "general-document-generation",
+    "keyword": "Feature",
+    "uri": "classpath:scenarios/documentbeheer.feature",
+    "tags": []
+  }
+]
