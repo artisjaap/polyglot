@@ -1,0 +1,28 @@
+server:
+  port: 8999
+
+spring:
+  data:
+    mongodb:
+      port: 27028
+      database: polyglot
+
+
+management:
+  endpoints:
+      web:
+        exposure:
+          include: "*"
+  endpoint:
+    beans:
+      enabled: true
+    health:
+      enabled: true
+
+
+jwt:
+  secret: "SECRET"
+  expiration: 36000000
+
+
+

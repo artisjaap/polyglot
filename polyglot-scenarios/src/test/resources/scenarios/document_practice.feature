@@ -1,6 +1,5 @@
 Feature: create document for training
 
-  @Only
   Scenario: create a new pdf
     Given a user named stijn
     Given an active template word-practice-answers-template.docx with code WORD_PRACTICE_ANSWERS in language nld

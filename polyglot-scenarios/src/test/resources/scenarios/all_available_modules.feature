@@ -1,4 +1,5 @@
 Feature: check if all modules are available in feature files
+  @Only
   Scenario: Check if all modules are available
     Given A backup service
     And A document service

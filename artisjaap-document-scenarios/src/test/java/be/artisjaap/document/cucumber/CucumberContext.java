@@ -5,7 +5,7 @@ import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "classpath:scenarios", glue = "be.artisjaap", plugin = {"html:c:/temp/cucumber", "json"})
+@CucumberOptions(features = "classpath:scenarios", glue = "be.artisjaap")
 public class CucumberContext {
 
 

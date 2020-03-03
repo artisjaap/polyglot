@@ -10,6 +10,6 @@ export class AuthService {
               @Inject('API_URL') private apiurl: string) { }
 
   public authenticate(username:string, password:string):Observable<UserLoginResponse>{
-    return this.httpClient.get<UserLoginResponse>(this.apiurl + `public/api/login/${username}/${password}`);
+    return this.httpClient.get<UserLoginResponse>( `public/api/login/${username}/${password}`);
   }
 }

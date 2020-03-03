@@ -22,14 +22,23 @@
         </form>
       </div>
 
-      <div class="flex flex-row flex-row-reverse flex-row-wrap-reverse">
-        <div *ngFor="let t of lesson.translations" class="flex-item flex-col-2">
-          <a class="action-link" (click)="removeWordFromLesson(t.id, lesson.id)">
-            <i class="icofont-bin"></i>
-          </a>
-          <span>{{t.languageA}} - {{t.languageB}}</span>
+      <div class="flex flex-row">
+        <div class="flex flex-row flex-row-reverse flex-row-wrap-reverse">
+          <div *ngFor="let t of lesson.translations" class="flex-item flex-col-2">
+            <a class="action-link" (click)="removeWordFromLesson(t.id, lesson.id)">
+              <i class="icofont-bin"></i>
+            </a>
+            <span>{{t.languageA}} - {{t.languageB}}</span>
+          </div>
         </div>
+
+        <div class="flex">
+          mistakes
+        </div>
+
       </div>
+
+
     </div>
 
   </mat-card-content>

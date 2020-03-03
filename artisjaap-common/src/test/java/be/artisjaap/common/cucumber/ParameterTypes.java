@@ -16,13 +16,23 @@ import java.util.stream.Collectors;
 
 public class ParameterTypes {
 
-    @ParameterType("[A-Z_,]*")
+    @ParameterType("[A-Z_, ]*")
     public List<String> listOfCodes(String string){
         return Arrays.asList(string.split(",")).
         stream()
         .map(String::trim)
         .collect(Collectors.toList());
     }
+
+    @ParameterType("[A-Za-z._, ]*")
+    public List<String> filenameParts(String string){
+        return Arrays.asList(string.split(",")).
+                stream()
+                .map(String::trim)
+                .collect(Collectors.toList());
+    }
+
+
 
     @ParameterType(".*")
     public String file(String file){
