@@ -1,0 +1,50 @@
+<div class="card-row">
+  <mat-card>
+    <mat-card-title>
+      latest words
+    </mat-card-title>
+    <mat-card-content>
+      <div *ngFor="let a of latestTranslations$ | async" class="flex flex-row">
+        <span>{{a.languageA}}</span>
+        <span>{{a.languageB}}</span>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-title>
+      lessons
+    </mat-card-title>
+    <mat-card-content>
+      <div *ngFor="let a of lessonHeaders$ | async" class="flex flex-row">
+        <a class="action-link" (click)="deleteLesson(a)">
+          <i class="icofont-bin"></i>
+        </a>
+
+        <span class="link" [routerLink]="['/home', 'student', 'lesson', a.id]">{{a.name}}</span>
+
+        <a class="action-link"  [routerLink]="['/home', 'student', 'lesson', a.id, 'practice']">
+          <i class="icofont-play-alt-1"></i>
+        </a>
+        <a class="action-link" (click)="generateLessonPdForLesson(a.id)" >
+          <i class="icofont-magic"></i>
+        </a>
+
+      </div>
+      <input type="text" #newLesson> <button (click)="createLesson(newLesson)">create</button>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-title>
+      Upload lesson
+    </mat-card-title>
+    <mat-card-content>
+      <input type="file"  #file (change)="onFilesAdded()" multiple>
+
+      <input type="text" #newLesson> <button (click)="generateJournalPdf()">JOURNAL PDF</button>
+    </mat-card-content>
+  </mat-card>
+
+</div>
+

@@ -1,0 +1,34 @@
+.practice-word{
+  .question {
+    font-size: 30px;
+  }
+
+  .answer{
+    input {
+
+      font-size: 30px;
+      border: none;
+      border-bottom: 1px solid;
+
+
+    }
+  }
+
+  .previous-solution {
+    margin: 9px 0 0 0;
+
+    .correct-answer{
+      color:$color-true;
+    }
+
+    .incorrect-answer, .incorrect-answer-strikethrough{
+      color:$color-false;
+    }
+
+    .incorrect-answer-strikethrough {
+      text-decoration-line: line-through;
+
+    }
+
+  }
+}

@@ -1,0 +1,38 @@
+
+<mat-card class="flex-item center main-content-large practice-word" *ngIf="lesson$ | async as lesson ">
+  <mat-card-title>
+    {{lesson.title}}
+  </mat-card-title>
+  <mat-card-content>
+    <div class="question font-center">{{translation?.languageA}}</div>
+    <div class="answer flex flex-row">
+      <div class="flex flex-column flex-item">
+        <input class="flex-item default-focus" type="text" #answer (keyup.enter)="check(answer)">
+
+        <div class="flex flex-row">
+        <div class="flex flex-item flex-column">
+          <span>#opgelost: {{stats.aantalOpgelost}}</span>
+          <span>#juist: {{stats.aantalJuist}}</span>
+          <span>#fout: {{stats.aantalFout}}</span>
+          <span>#score: {{stats.aantalOpgelost == 0?100:stats.aantalJuist*100 / stats.aantalOpgelost}}%</span>
+        </div>
+
+        <div class="flex-item font-right previous-solution" *ngIf="previousAnswer$ |async as previousAnswer">
+          <span *ngIf="previousAnswer.correctAnswer">
+            <i class="icofont-check-alt correct-answer"></i>{{previousAnswer.question}}: <span class="correct-answer">{{previousAnswer.expectedAnswer }} </span> </span>
+          <span *ngIf="!previousAnswer.correctAnswer">
+            <i class="icofont-close-line incorrect-answer"></i>{{previousAnswer.question}}: <span class="incorrect-answer-strikethrough">{{previousAnswer.givenAnswer}} </span> <span class="correct-answer">{{previousAnswer.expectedAnswer }} </span> </span>
+        </div>
+
+        </div>
+      </div>
+      <button mat-button (click)="check(answer)">
+        <i class="icofont-check-circled icofont-3x"></i>
+      </button>
+    </div>
+
+
+
+  </mat-card-content>
+</mat-card>
+

@@ -1,0 +1,27 @@
+plugins {
+  id "com.github.node-gradle.node" version "2.2.3"
+}
+
+node {
+  version = '13.0.1'
+  npmVersion = '6.12.0'
+  download = true
+}
+
+project.afterEvaluate {
+  tasks."npm_run_build${environmentToBuild}".inputs.files fileTree("src")
+  tasks."npm_run_build${environmentToBuild}".inputs.file "package.json"
+  tasks."npm_run_build${environmentToBuild}".inputs.file "package-lock.json"
+  tasks."npm_run_build${environmentToBuild}".outputs.dir "dist"
+}
+
+println "Applying environment '${environmentToBuild}' for frontend."
+jar.dependsOn "npm_run_build${environmentToBuild}"
+
+jar {
+  from 'dist/frontend' into 'public'
+}
+
+clean {
+  delete "dist"
+}

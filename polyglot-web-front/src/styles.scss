@@ -1,0 +1,28 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "style/colors";
+@import "style/general-behavior";
+@import "style/component-navigation";
+@import "style/component-practice-word";
+@import "style/layout-flex";
+@import "style/component-login";
+@import "style/component-mat-card";
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
+background-color: $color-main-2}
+
+
+
+
+.card-row{
+  display: flex;
+  flex-direction: row;
+
+  mat-card {
+    flex: 1;
+    margin: 5px 10px;
+  }
+}
+

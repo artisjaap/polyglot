@@ -1,0 +1,29 @@
+@import "colors";
+
+span.link {
+  margin: 1px 5px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+a.action-link {
+  text-decoration: none;
+  font-weight: bold;
+  color: $color-highlight;
+}
+
+.font-center {
+  text-align: center;
+}
+
+
+.font-right {
+  text-align: right;
+}
+
+
+button {
+  cursor: pointer
+}

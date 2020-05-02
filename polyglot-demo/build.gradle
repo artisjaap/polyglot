@@ -9,6 +9,7 @@ dependencies {
 
     compile project(':polyglot-web-swagger')
     compile project(':artisjaap-properties')
+    implementation project(':polyglot-web-front')
 
     compile('de.flapdoodle.embed:de.flapdoodle.embed.mongo')
 
@@ -18,4 +19,9 @@ dependencies {
     compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
     compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
 
+}
+
+
+springBoot {
+    mainClassName = 'be.artisjaap.polyglot.demo.DemoApplication'
 }

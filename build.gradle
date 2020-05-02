@@ -1,3 +1,7 @@
+ext {
+    environmentToBuild = project.findProperty("targetEnv")? targetEnv: "demo"
+}
+
 buildscript {
     repositories {
         mavenCentral()

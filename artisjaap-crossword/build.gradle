@@ -1,0 +1,10 @@
+jar {
+    archiveBaseName = 'artisjaap-crossword'
+    archiveVersion = '0.0.1-SNAPSHOT'
+}
+
+dependencies {
+    compile project(':artisjaap-common')
+    testCompile project(path: ":artisjaap-common", configuration: 'testArtifacts')
+
+}
