@@ -1,4 +1,5 @@
 Feature: Practicing words
+  @Only
   Scenario: A list of words is available for practice and users starts to practice
     Given a user named Tom
     And Tom creates language pair NL-FR

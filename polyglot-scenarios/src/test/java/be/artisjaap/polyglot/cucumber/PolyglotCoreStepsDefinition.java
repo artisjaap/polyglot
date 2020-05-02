@@ -36,6 +36,7 @@ import be.artisjaap.polyglot.core.action.to.test.TestResultTO;
 import be.artisjaap.polyglot.core.action.to.test.TestSolutionTO;
 import be.artisjaap.polyglot.core.action.to.test.WordSolutionTO;
 import be.artisjaap.polyglot.core.action.translation.CreateTranslation;
+import be.artisjaap.polyglot.core.action.translationloader.CreateTranslationsFromFile;
 import be.artisjaap.polyglot.core.action.user.FindUser;
 import be.artisjaap.polyglot.core.action.user.RegisterUser;
 import be.artisjaap.polyglot.core.action.user.UpdateUserSettings;
@@ -106,6 +107,9 @@ public class PolyglotCoreStepsDefinition {
 
     @Autowired
     private GenerateMistakesReport generateMistakesReport;
+
+    @Autowired
+    private CreateTranslationsFromFile createTranslationsFromFile;
 
     @Given("a user named {username}")
     public void eenGebruikerMetNaam(String naam) {
@@ -256,7 +260,7 @@ public class PolyglotCoreStepsDefinition {
         UserTO user = findUser.byUsername(username).orElseThrow(() -> new IllegalStateException("Verwacht dat user bestaat"));
         LanguagePairTO languagePair = findLanguagePair.pairForUser(user.id(), languagePairType.getFrom(), languagePairType.getTo()).orElseThrow(() -> new IllegalStateException("Expected language pair for user"));
 
-        createTranslation.forAllWords(NewTranslationForUserFromFileTO.newBuilder()
+        createTranslationsFromFile.saveTranslations(NewTranslationForUserFromFileTO.newBuilder()
                 .withUserId(user.id())
                 .withLanguagePairId(languagePair.id())
                 .withReader(new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream("data/" + file)))

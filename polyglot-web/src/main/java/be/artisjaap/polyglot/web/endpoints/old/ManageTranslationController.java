@@ -7,6 +7,7 @@ import be.artisjaap.polyglot.core.action.to.*;
 import be.artisjaap.polyglot.core.action.translation.CreateTranslation;
 import be.artisjaap.polyglot.core.action.translation.FindTranslationsFiltered;
 import be.artisjaap.polyglot.core.action.translation.UpdateTranslation;
+import be.artisjaap.polyglot.core.action.translationloader.CreateTranslationsFromFile;
 import be.artisjaap.polyglot.web.endpoints.old.request.LanguagePairRequest;
 import be.artisjaap.polyglot.web.endpoints.old.request.NewTranslationsForUserRequest;
 import be.artisjaap.polyglot.web.endpoints.old.request.UpdateTranslationRequest;
@@ -45,6 +46,9 @@ public class ManageTranslationController {
 
     @Autowired
     private FindTranslationsFiltered findTranslationsFiltered;
+
+    @Autowired
+    private CreateTranslationsFromFile createTranslationsFromFile;
 
     @RequestMapping(value = "/pairs/user/{userId}", method = RequestMethod.GET)
     public @ResponseBody
@@ -110,7 +114,7 @@ public class ManageTranslationController {
     public @ResponseBody
     ResponseEntity<TranslationsForUserResponse> uploadTranslationsByFile(@PathVariable String userId, @PathVariable String languagePairId, @RequestParam MultipartFile file) {
         try(InputStreamReader val = new InputStreamReader(file.getInputStream())) {
-            TranslationsForUserTO translationsForUserTO = createTranslation.forAllWords(NewTranslationForUserFromFileTO.newBuilder()
+            TranslationsForUserTO translationsForUserTO = createTranslationsFromFile.saveTranslations(NewTranslationForUserFromFileTO.newBuilder()
                     .withUserId(userId)
                     .withLanguagePairId(languagePairId)
                     .withReader(val)

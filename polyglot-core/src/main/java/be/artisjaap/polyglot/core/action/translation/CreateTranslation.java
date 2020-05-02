@@ -40,9 +40,6 @@ public class CreateTranslation {
     private FindTranslations findTranslations;
 
     @Autowired
-    private CreateLesson createLesson;
-
-    @Autowired
     private CreateNewWordForLesson createNewWordForLesson;
 
     public TranslationTO forTranslation(NewTranslationTO to) {
@@ -93,101 +90,7 @@ public class CreateTranslation {
                 .collect(Collectors.toList());
     }
 
-    public TranslationsForUserTO forAllWords(NewTranslationForUserFromFileTO to) {
-
-        ProxyReader pr = new ProxyReader(to.reader());
 
 
-        List<TranslationRecord> translationRecords = new CsvToBeanBuilder(pr.getReader())
-                .withType(TranslationRecord.class).build().parse();
 
-        NewTranslationsForUserTO newTranslationsForUserTO = NewTranslationsForUserTO.newBuilder()
-                .withLanguagePairId(to.languagePairId())
-                .withUserId(to.userId())
-                .withTranslations(translationRecords.stream().map(r -> NewSimpleTranslationPairTO.newBuilder()
-                        .withLanguageFrom(r.getLanguageA())
-                        .withLanguageTO(r.getLanguageB())
-                        .build()).collect(Collectors.toList()))
-                .build();
-
-        TranslationsForUserTO translationsForUserTO = forAllWords(newTranslationsForUserTO);
-
-        if( pr.lessonName().isPresent()) {
-
-            LessonTO lessonTO = createLesson.create(NewLessonTO.builder()
-                    .name(pr.lessonName().get())
-                    .languagePairId(to.languagePairId())
-                    .userId(to.userId())
-                    .translationsIds(translationsForUserTO.translations().stream().map(TranslationTO::id).collect(Collectors.toList()))
-                    .tags(pr.tags())
-                    .build());
-            translationsForUserTO.setLessonHeader(LessonHeaderTO.newBuilder()
-                    .withId(lessonTO.id())
-                    .withLanguagePairId(lessonTO.languagePairId())
-                    .withName(lessonTO.name())
-                    .withUserId(lessonTO.userId())
-                    .build()
-            );
-        }
-
-
-        return translationsForUserTO;
-    }
-}
-
-class ProxyReader {
-
-    private final BufferedReader reader;
-    private String lessonName = null;
-    private Set<String> tags = new HashSet<>();
-
-    public Optional<String> lessonName() {
-        return Optional.ofNullable(lessonName);
-    }
-
-    public Set<String> tags() {
-        return tags;
-    }
-
-    public ProxyReader(Reader reader) {
-        this.reader = new BufferedReader(reader);
-
-    }
-
-    public Reader getReader() {
-        byte[] bytes = findBytes();
-
-        return new InputStreamReader(new ByteArrayInputStream(bytes));
-    }
-
-    private byte[] findBytes() {
-        String line = null;
-        try {
-            line = reader.readLine();
-
-            StringBuilder sb = new StringBuilder();
-
-            while (line != null) {
-                if (line.startsWith("@")) {
-                    if (line.startsWith("@Lesson")) {
-                        lessonName = line.substring(8);
-                    }
-                    if (line.startsWith("@Tags")) {
-                        tags = Arrays.asList(line.substring(6).split(","))
-                                .stream()
-                                .collect(Collectors.toSet());
-                    }
-                } else {
-                    sb.append(line).append("\r\n");
-                }
-                line = reader.readLine();
-            }
-
-            return sb.toString().getBytes();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return new byte[0];
-    }
 }

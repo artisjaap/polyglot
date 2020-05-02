@@ -7,6 +7,7 @@ import be.artisjaap.polyglot.core.action.translation.CreateTranslation;
 import be.artisjaap.polyglot.core.action.translation.FindTranslations;
 import be.artisjaap.polyglot.core.action.translation.RemoveTranslation;
 import be.artisjaap.polyglot.core.action.translation.UpdateTranslation;
+import be.artisjaap.polyglot.core.action.translationloader.CreateTranslationsFromFile;
 import be.artisjaap.polyglot.web.endpoints.old.response.TranslationsForUserResponse;
 import be.artisjaap.polyglot.web.endpoints.request.NewTranslationForLessonRequest;
 import be.artisjaap.polyglot.web.endpoints.request.UpdateTranslationForLessonRequest;
@@ -49,6 +50,9 @@ public class TranslationController extends BaseController {
 
     @Resource
     private TranslationsLoadedByFileResponseMapper translationsLoadedByFileResponseMapper;
+
+    @Resource
+    private CreateTranslationsFromFile createTranslationsFromFile;
 
     @RequestMapping(value = "/translations", method = RequestMethod.GET)
     public @ResponseBody
@@ -124,7 +128,7 @@ public class TranslationController extends BaseController {
     public @ResponseBody
     ResponseEntity<TranslationsLoadedByFileResponse> uploadTranslationsByFile(@PathVariable String languagePairId, @RequestParam MultipartFile file) {
         try(InputStreamReader val = new InputStreamReader(file.getInputStream())) {
-            TranslationsForUserTO translationsForUserTO = createTranslation.forAllWords(NewTranslationForUserFromFileTO.newBuilder()
+            TranslationsForUserTO translationsForUserTO = createTranslationsFromFile.saveTranslations(NewTranslationForUserFromFileTO.newBuilder()
                     .withUserId(userId())
                     .withLanguagePairId(languagePairId)
                     .withReader(val)
