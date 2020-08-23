@@ -11,7 +11,7 @@ import java.util.Set;
 public class LanguageMistakeDetailTO {
     private String translationId;
     private String question;
-    private String correctAnswer;
+    private Set<String> correctAnswer;
     private Set<String> givenAnswers;
     private int timesCorrect;
     private int timesIncorrect;

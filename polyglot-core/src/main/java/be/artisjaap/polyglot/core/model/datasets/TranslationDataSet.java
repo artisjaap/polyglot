@@ -5,17 +5,18 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Builder
 @Data
 public class TranslationDataSet {
-    private String languageA;
-    private String languageB;
+    private Set<String> languageA;
+    private Set<String> languageB;
 
     public static TranslationDataSet dummy() {
-        return TranslationDataSet.builder().languageA("DUTCH").languageB("FRENCH").build();
+        return TranslationDataSet.builder().languageA(Set.of("DUTCH")).languageB(Set.of("FRENCH")).build();
     }
 
     public static List<TranslationDataSet> dummyList(int i) {

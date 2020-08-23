@@ -1,19 +1,21 @@
 package be.artisjaap.polyglot.core.action.to;
 
+import java.util.Set;
+
 public class TranslationPairTO {
     private String id;
-    private String languageA;
-    private String languageB;
+    private Set<String> languageA;
+    private Set<String> languageB;
 
     public String id() {
         return id;
     }
 
-    public String languageA() {
+    public Set<String> languageA() {
         return languageA;
     }
 
-    public String languageB() {
+    public Set<String> languageB() {
         return languageB;
     }
 
@@ -30,8 +32,8 @@ public class TranslationPairTO {
 
     public static final class Builder {
         private String id;
-        private String languageA;
-        private String languageB;
+        private Set<String> languageA;
+        private Set<String> languageB;
 
         private Builder() {
         }
@@ -41,12 +43,12 @@ public class TranslationPairTO {
             return this;
         }
 
-        public Builder withLanguageA(String languageA) {
+        public Builder withLanguageA(Set<String> languageA) {
             this.languageA = languageA;
             return this;
         }
 
-        public Builder withLanguageB(String languageB) {
+        public Builder withLanguageB(Set<String> languageB) {
             this.languageB = languageB;
             return this;
         }

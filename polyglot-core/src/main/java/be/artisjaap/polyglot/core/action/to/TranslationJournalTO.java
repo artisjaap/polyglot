@@ -1,13 +1,14 @@
 package be.artisjaap.polyglot.core.action.to;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 public class TranslationJournalTO {
     private LocalDateTime timestamp;
     private String translationId;
     private String question;
     private String givenAnswer;
-    private String expectedAnswer;
+    private Set<String> expectedAnswer;
     private Boolean correct;
 
     private TranslationJournalTO(Builder builder) {
@@ -39,7 +40,7 @@ public class TranslationJournalTO {
         return givenAnswer;
     }
 
-    public String expectedAnswer() {
+    public Set<String> expectedAnswer() {
         return expectedAnswer;
     }
 
@@ -52,7 +53,7 @@ public class TranslationJournalTO {
         private String translationId;
         private String question;
         private String givenAnswer;
-        private String expectedAnswer;
+        private Set<String> expectedAnswer;
         private Boolean correct;
 
         private Builder() {
@@ -78,7 +79,7 @@ public class TranslationJournalTO {
             return this;
         }
 
-        public Builder withExpectedAnswer(String val) {
+        public Builder withExpectedAnswer(Set<String> val) {
             expectedAnswer = val;
             return this;
         }

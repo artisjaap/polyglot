@@ -52,7 +52,7 @@ public class GenerateMistakesReport {
 
         BriefConfigTO briefConfigTO = documentForCodeFactory.findForCode(DocumentCode.PRACTICE_MISTAKES)
                 .mistakesDataSetFrom(journalFor.getMistakeDetails())
-                .translationsDataSetFrom(List.of(TranslationTO.newBuilder().withLanguageA("A").build()))
+               //FIXME .translationsDataSetFrom(List.of(TranslationTO.newBuilder().withLanguageA("A").build()))
                 .languagePairDataSetFrom(languagePairTO)
                 .userDataSetFrom(findUser.byUserId(data.getUserId()))
                 .buildConfig()

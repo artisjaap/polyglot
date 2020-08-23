@@ -16,6 +16,7 @@ import com.opencsv.bean.CsvToBeanBuilder;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -67,8 +68,8 @@ public class CreateTranslationsFromFile {
                     .withLanguagePairId(to.languagePairId())
                     .withUserId(to.userId())
                     .withTranslations(translationRecords.stream().map(r -> NewSimpleTranslationPairTO.newBuilder()
-                            .withLanguageFrom(r.getLanguageA())
-                            .withLanguageTO(r.getLanguageB())
+                            .withLanguageFrom(Set.of(r.getLanguageA().split("|")))
+                            .withLanguageTO(Set.of(r.getLanguageB().split("|")))
                             .build()).collect(Collectors.toList()))
                     .build();
 

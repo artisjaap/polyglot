@@ -105,15 +105,15 @@ public class FindPracticeWords {
                 translationPractice.answerCorrect();
                 updateLanguagePairHealth.updateCorrect(languagePairTO.id());
                 answerTOBuilder.withCorrectAnswer(true)
-                        .withExpectedAnswer(translation.getLanguageB())
-                        .withQuestion(translation.getLanguageA());
+                        .withExpectedAnswers(translation.getLanguageB())
+                        .withQuestion(practiceWordCheckTO.questionGiven());
 
             } else {
                 translationPractice.answerIncorrect();
                 updateLanguagePairHealth.updateIncorrect(languagePairTO.id());
                 answerTOBuilder.withCorrectAnswer(false)
-                        .withExpectedAnswer(translation.getLanguageB())
-                        .withQuestion(translation.getLanguageA());
+                        .withExpectedAnswers(translation.getLanguageB())
+                        .withQuestion(practiceWordCheckTO.questionGiven());
 
             }
 
@@ -123,16 +123,16 @@ public class FindPracticeWords {
                 updateLanguagePairHealth.updateCorrect(languagePairTO.id());
 
                 answerTOBuilder.withCorrectAnswer(true)
-                        .withExpectedAnswer(translation.getLanguageA())
-                        .withQuestion(translation.getLanguageB());
+                        .withExpectedAnswers(translation.getLanguageA())
+                        .withQuestion(practiceWordCheckTO.questionGiven());
 
             } else {
                 translationPractice.answerIncorrectReverse();
                 updateLanguagePairHealth.updateIncorrect(languagePairTO.id());
 
                 answerTOBuilder.withCorrectAnswer(false)
-                        .withExpectedAnswer(translation.getLanguageA())
-                        .withQuestion(translation.getLanguageB());
+                        .withExpectedAnswers(translation.getLanguageA())
+                        .withQuestion(practiceWordCheckTO.questionGiven());
 
             }
 

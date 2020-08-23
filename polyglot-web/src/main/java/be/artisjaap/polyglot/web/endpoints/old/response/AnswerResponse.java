@@ -2,11 +2,13 @@ package be.artisjaap.polyglot.web.endpoints.old.response;
 
 import be.artisjaap.polyglot.core.action.to.AnswerTO;
 
+import java.util.Set;
+
 public class AnswerResponse {
     private String translationId;
     private String question;
     private String givenAnswer;
-    private String expectedAnswer;
+    private Set<String> expectedAnswer;
     private Boolean correctAnswer;
 
     private AnswerResponse(Builder builder) {
@@ -29,7 +31,7 @@ public class AnswerResponse {
         return givenAnswer;
     }
 
-    public String getExpectedAnswer() {
+    public Set<String> getExpectedAnswer() {
         return expectedAnswer;
     }
 
@@ -55,7 +57,7 @@ public class AnswerResponse {
         private String translationId;
         private String question;
         private String givenAnswer;
-        private String expectedAnswer;
+        private Set<String> expectedAnswer;
         private Boolean correctAnswer;
 
         private Builder() {
@@ -76,7 +78,7 @@ public class AnswerResponse {
             return this;
         }
 
-        public Builder withExpectedAnswer(String val) {
+        public Builder withExpectedAnswer(Set<String> val) {
             expectedAnswer = val;
             return this;
         }

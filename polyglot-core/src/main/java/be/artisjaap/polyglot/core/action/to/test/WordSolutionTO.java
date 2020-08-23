@@ -1,9 +1,11 @@
 package be.artisjaap.polyglot.core.action.to.test;
 
+import java.util.Set;
+
 public class WordSolutionTO {
     private String translationId;
     private String answerLanguage;
-    private String answer;
+    private Set<String> answer;
     private String question;
 
     private WordSolutionTO(Builder builder) {
@@ -25,7 +27,7 @@ public class WordSolutionTO {
         return answerLanguage;
     }
 
-    public String answer() {
+    public Set<String> answer() {
         return answer;
     }
 
@@ -37,7 +39,7 @@ public class WordSolutionTO {
     public static final class Builder {
         private String translationId;
         private String answerLanguage;
-        private String answer;
+        private Set<String> answer;
         private String question;
 
         private Builder() {
@@ -53,7 +55,7 @@ public class WordSolutionTO {
             return this;
         }
 
-        public Builder withAnswer(String val) {
+        public Builder withAnswer(Set<String> val) {
             answer = val;
             return this;
         }

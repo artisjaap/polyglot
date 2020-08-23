@@ -1,6 +1,7 @@
 package be.artisjaap.common.utils;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class ListUtils {
@@ -38,5 +39,9 @@ public class ListUtils {
         T element = list.remove(index);
         list.add(element);
         return list;
+    }
+
+    public static <T> T getRandomFromCollection(Collection<T> collection){
+        return collection.iterator().next();
     }
 }

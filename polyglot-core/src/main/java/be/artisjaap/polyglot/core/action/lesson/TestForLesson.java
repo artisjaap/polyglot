@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -104,16 +105,16 @@ public class TestForLesson {
         List<WordResultTO> results = translations.stream().map(translation -> {
             WordSolutionTO wordSolutionTO = collect.get(translation.getId().toString());
 
-            String expectedAnswer = languagePair.getLanguageFrom().equals(wordSolutionTO.answerLanguage()) ?
+            Set<String> expectedAnswer = languagePair.getLanguageFrom().equals(wordSolutionTO.answerLanguage()) ?
                     translation.getLanguageA() : translation.getLanguageB();
 
 
-            boolean isCorrect = expectedAnswer.equalsIgnoreCase(wordSolutionTO.answer());
+            boolean isCorrect = expectedAnswer.contains(wordSolutionTO.answer());
 
             return WordResultTO.newBuilder()
                     .withTranslationId(translation.getId().toString())
                     .withQuestion(wordSolutionTO.question())
-                    .withGivenAnswer(wordSolutionTO.answer())
+                    .withGivenAnswer(wordSolutionTO.answer().iterator().next())
                     .withExpectedAnswer(expectedAnswer)
                     .withCorrect(isCorrect)
                     .build();

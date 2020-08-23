@@ -5,6 +5,7 @@ import be.artisjaap.polyglot.core.action.to.TranslationJournalTO;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class TranslationJournalResponse {
@@ -13,7 +14,7 @@ public class TranslationJournalResponse {
     private String translationId;
     private String question;
     private String givenAnswer;
-    private String expectedAnswer;
+    private Set<String> expectedAnswer;
     private Boolean correct;
 
     public static TranslationJournalResponse from(TranslationJournalTO to){
@@ -61,7 +62,7 @@ public class TranslationJournalResponse {
         return givenAnswer;
     }
 
-    public String getExpectedAnswer() {
+    public Set<String> getExpectedAnswer() {
         return expectedAnswer;
     }
 
@@ -74,7 +75,7 @@ public class TranslationJournalResponse {
         private String translationId;
         private String question;
         private String givenAnswer;
-        private String expectedAnswer;
+        private Set<String> expectedAnswer;
         private Boolean correct;
 
         private Builder() {
@@ -100,7 +101,7 @@ public class TranslationJournalResponse {
             return this;
         }
 
-        public Builder withExpectedAnswer(String val) {
+        public Builder withExpectedAnswer(Set<String> val) {
             expectedAnswer = val;
             return this;
         }

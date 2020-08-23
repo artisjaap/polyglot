@@ -1,14 +1,16 @@
 package be.artisjaap.polyglot.core.action.to;
 
-public class NewSimpleTranslationPairTO {
-    private String languageFrom;
-    private String languageTO;
+import java.util.Set;
 
-    public String languageFrom() {
+public class NewSimpleTranslationPairTO {
+    private Set<String> languageFrom;
+    private Set<String> languageTO;
+
+    public Set<String> languageFrom() {
         return languageFrom;
     }
 
-    public String languageTO() {
+    public Set<String> languageTO() {
         return languageTO;
     }
 
@@ -23,18 +25,18 @@ public class NewSimpleTranslationPairTO {
 
 
     public static final class Builder {
-        private String languageFrom;
-        private String languageTO;
+        private Set<String> languageFrom;
+        private Set<String> languageTO;
 
         private Builder() {
         }
 
-        public Builder withLanguageFrom(String languageFrom) {
+        public Builder withLanguageFrom(Set<String> languageFrom) {
             this.languageFrom = languageFrom;
             return this;
         }
 
-        public Builder withLanguageTO(String languageTO) {
+        public Builder withLanguageTO(Set<String> languageTO) {
             this.languageTO = languageTO;
             return this;
         }

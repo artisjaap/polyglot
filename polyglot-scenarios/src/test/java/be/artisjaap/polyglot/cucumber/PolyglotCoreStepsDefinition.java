@@ -56,10 +56,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertTrue;
@@ -138,8 +135,8 @@ public class PolyglotCoreStepsDefinition {
 
 
         List<NewSimpleTranslationPairTO> translationParams = translations.stream()
-                .map(t -> NewSimpleTranslationPairTO.newBuilder().withLanguageFrom(t.languageA)
-                        .withLanguageTO(t.languageB).build()).collect(Collectors.toList());
+                .map(t -> NewSimpleTranslationPairTO.newBuilder().withLanguageFrom(Set.of(t.languageA))
+                        .withLanguageTO(Set.of(t.languageB)).build()).collect(Collectors.toList());
 
         createTranslation.forAllWords(NewTranslationsForUserTO.newBuilder()
                 .withUserId(user.id())
@@ -278,7 +275,7 @@ public class PolyglotCoreStepsDefinition {
                     .withUserId(user.id())
                     .withTranslationId(practiceWordTO.translationId())
                     .withAnswerOrderType(OrderType.NORMAL)
-                    .withAnswerGiven(practiceWordTO.answer())
+                    .withAnswerGiven(practiceWordTO.answer().iterator().next())
                     .withNextOrderType(OrderType.NORMAL)
                     .build());
             practiceWordTO = answerAndNextWordTO.practiceWord();
@@ -333,7 +330,7 @@ public class PolyglotCoreStepsDefinition {
                     .withUserId(user.id())
                     .withTranslationId(practiceWordTO.translationId())
                     .withAnswerOrderType(OrderType.NORMAL)
-                    .withAnswerGiven(i<errors?"I dunno":practiceWordTO.answer())
+                    .withAnswerGiven(i<errors?"I dunno":practiceWordTO.answer().iterator().next())
                     .withNextOrderType(OrderType.NORMAL)
                     .build());
             practiceWordTO = answerAndNextWordTO.practiceWord();

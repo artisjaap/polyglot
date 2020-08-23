@@ -4,6 +4,8 @@ package be.artisjaap.polyglot.web.endpoints.response;
 import be.artisjaap.i18n.action.to.TranslationTO;
 import lombok.*;
 
+import java.util.Set;
+
 @Builder
 @Getter
 @Setter
@@ -14,8 +16,8 @@ public class TranslationForLessonResponse {
     private String id;
     private String lessonId;
     @NonNull
-    private String languageA;
+    private Set<String> languageA;
     @NonNull
-    private String languageB;
+    private Set<String> languageB;
 
 }

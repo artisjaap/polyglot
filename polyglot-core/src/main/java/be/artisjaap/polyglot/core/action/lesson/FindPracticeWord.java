@@ -1,5 +1,6 @@
 package be.artisjaap.polyglot.core.action.lesson;
 
+import be.artisjaap.common.utils.ListUtils;
 import be.artisjaap.common.validation.ValidationException;
 import be.artisjaap.polyglot.core.action.pairs.FindLanguagePair;
 import be.artisjaap.polyglot.core.action.to.LanguagePairTO;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -127,10 +129,11 @@ public class FindPracticeWord {
     }
 
     private String deriveQuestion(Translation translation, OrderType orderType) {
-        return orderType == NORMAL ? translation.getLanguageA() : translation.getLanguageB();
+        return orderType == NORMAL ? ListUtils.getRandomFromCollection(translation.getLanguageA()) :
+                ListUtils.getRandomFromCollection(translation.getLanguageB());
     }
 
-    private String deriveAnswer(Translation translation, OrderType orderType) {
+    private Set<String> deriveAnswer(Translation translation, OrderType orderType) {
         return orderType == NORMAL ? translation.getLanguageB() : translation.getLanguageA();
     }
 }

@@ -1,24 +1,26 @@
 package be.artisjaap.polyglot.web.endpoints.old.request;
 
+import java.util.Set;
+
 public class NewSimpleTranslationRequest {
-    private String question;
-    private String solution;
+    private Set<String> question;
+    private Set<String> solution;
 
     public NewSimpleTranslationRequest(){}
 
-    public String getQuestion() {
+    public Set<String> getQuestion() {
         return question;
     }
 
-    public void setQuestion(String question) {
+    public void setQuestion(Set<String> question) {
         this.question = question;
     }
 
-    public String getSolution() {
+    public Set<String> getSolution() {
         return solution;
     }
 
-    public void setSolution(String solution) {
+    public void setSolution(Set<String> solution) {
         this.solution = solution;
     }
 
@@ -33,18 +35,18 @@ public class NewSimpleTranslationRequest {
 
 
     public static final class Builder {
-        private String question;
-        private String solution;
+        private Set<String> question;
+        private Set<String> solution;
 
         private Builder() {
         }
 
-        public Builder question(String val) {
+        public Builder question(Set<String> val) {
             question = val;
             return this;
         }
 
-        public Builder solution(String val) {
+        public Builder solution(Set<String> val) {
             solution = val;
             return this;
         }

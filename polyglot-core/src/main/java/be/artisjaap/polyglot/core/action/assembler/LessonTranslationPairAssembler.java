@@ -1,6 +1,7 @@
 package be.artisjaap.polyglot.core.action.assembler;
 
 import be.artisjaap.common.action.Assembler;
+import be.artisjaap.common.utils.ListUtils;
 import be.artisjaap.common.validation.ValidationException;
 import be.artisjaap.polyglot.core.action.to.LessonTranslationPairTO;
 import be.artisjaap.polyglot.core.model.LanguagePair;
@@ -8,6 +9,8 @@ import be.artisjaap.polyglot.core.model.LanguagePairRepository;
 import be.artisjaap.polyglot.core.model.Translation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.Set;
 
 @Component
 public class LessonTranslationPairAssembler implements Assembler<LessonTranslationPairTO, Translation> {
@@ -26,8 +29,8 @@ public class LessonTranslationPairAssembler implements Assembler<LessonTranslati
                 .withLanguageFrom(languagePair.getLanguageFrom())
                 .withLanguageTo(languagePair.getLanguageTo())
                 .withIsReverse(false)
-                .withQuestion(translation.getLanguageA())
-                .withSolution(includeSolution?translation.getLanguageB():"")
+                .withQuestion(ListUtils.getRandomFromCollection(translation.getLanguageA()))
+                .withSolution(includeSolution?translation.getLanguageB(): Set.of())
                 .withTranslationId(translation.getId().toString())
                 .build();
     }
@@ -40,6 +43,8 @@ public class LessonTranslationPairAssembler implements Assembler<LessonTranslati
     public LessonTranslationPairTO assembleTOWithoutSolution(Translation translation) {
         return assembleTO(translation, false);
     }
+
+
 
 
 }

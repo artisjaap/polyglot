@@ -1,10 +1,12 @@
 package be.artisjaap.polyglot.web.endpoints.old.request;
 
+import java.util.Set;
+
 public class UpdateTranslationRequest {
 
     private String translationId;
-    private String languageFrom;
-    private String languageTo;
+    private Set<String> languageFrom;
+    private Set<String> languageTo;
 
     private UpdateTranslationRequest(Builder builder) {
         translationId = builder.translationId;
@@ -24,26 +26,26 @@ public class UpdateTranslationRequest {
         this.translationId = translationId;
     }
 
-    public String getLanguageFrom() {
+    public Set<String> getLanguageFrom() {
         return languageFrom;
     }
 
-    public void setLanguageFrom(String languageFrom) {
+    public void setLanguageFrom(Set<String> languageFrom) {
         this.languageFrom = languageFrom;
     }
 
-    public String getLanguageTo() {
+    public Set<String> getLanguageTo() {
         return languageTo;
     }
 
-    public void setLanguageTo(String languageTo) {
+    public void setLanguageTo(Set<String> languageTo) {
         this.languageTo = languageTo;
     }
 
     public static final class Builder {
         private String translationId;
-        private String languageFrom;
-        private String languageTo;
+        private Set<String> languageFrom;
+        private Set<String> languageTo;
 
         private Builder() {
         }
@@ -53,12 +55,12 @@ public class UpdateTranslationRequest {
             return this;
         }
 
-        public Builder withLanguageFrom(String val) {
+        public Builder withLanguageFrom(Set<String> val) {
             languageFrom = val;
             return this;
         }
 
-        public Builder withLanguageTo(String val) {
+        public Builder withLanguageTo(Set<String> val) {
             languageTo = val;
             return this;
         }

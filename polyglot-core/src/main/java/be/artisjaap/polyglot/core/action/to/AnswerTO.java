@@ -1,12 +1,14 @@
 package be.artisjaap.polyglot.core.action.to;
 
+import java.util.Set;
+
 public class AnswerTO {
     private String translationId;
     private String userId;
     private String languagePairId;
     private String question;
     private String givenAnswer;
-    private String expectedAnswer;
+    private Set<String> expectedAnswers;
     private Boolean correctAnswer;
 
     public String translationId() {
@@ -21,8 +23,8 @@ public class AnswerTO {
         return givenAnswer;
     }
 
-    public String expectedAnswer() {
-        return expectedAnswer;
+    public Set<String> expectedAnswer() {
+        return expectedAnswers;
     }
 
     public Boolean correctAnswer() {
@@ -41,7 +43,7 @@ public class AnswerTO {
         translationId = builder.translationId;
         question = builder.question;
         givenAnswer = builder.givenAnswer;
-        expectedAnswer = builder.expectedAnswer;
+        expectedAnswers = builder.expectedAnswers;
         correctAnswer = builder.correctAnswer;
         userId = builder.userId;
         languagePairId = builder.languagePairId;
@@ -58,7 +60,7 @@ public class AnswerTO {
         private String languagePairId;
         private String question;
         private String givenAnswer;
-        private String expectedAnswer;
+        private Set<String> expectedAnswers;
         private Boolean correctAnswer;
 
         private Builder() {
@@ -79,8 +81,8 @@ public class AnswerTO {
             return this;
         }
 
-        public Builder withExpectedAnswer(String val) {
-            expectedAnswer = val;
+        public Builder withExpectedAnswers(Set<String> val) {
+            expectedAnswers = val;
             return this;
         }
 

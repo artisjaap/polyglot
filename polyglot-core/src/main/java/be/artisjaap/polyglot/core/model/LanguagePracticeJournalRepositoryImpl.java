@@ -37,7 +37,7 @@ public class LanguagePracticeJournalRepositoryImpl implements LanguagePracticeJo
         TranslationJournal journal = TranslationJournal.newBuilder()
                 .withLessonId(lessonId)
                 .withCorrect(answer.correctAnswer())
-                .withExpectedAnswer(answer.expectedAnswer())
+                .withExpectedAnswers(answer.expectedAnswer())
                 .withGivenAnswer(answer.givenAnswer())
                 .withQuestion(answer.question())
                 .withTranslationId(new ObjectId(answer.translationId()))

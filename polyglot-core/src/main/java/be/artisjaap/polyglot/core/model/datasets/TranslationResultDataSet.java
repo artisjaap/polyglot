@@ -3,12 +3,13 @@ package be.artisjaap.polyglot.core.model.datasets;
 import be.artisjaap.polyglot.core.action.to.TranslationJournalTO;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class TranslationResultDataSet {
     private String question;
-    private String answer;
+    private Set<String> answer;
     private String givenAnswer;
     private Boolean correct;
 
@@ -35,7 +36,7 @@ public class TranslationResultDataSet {
     public static TranslationResultDataSet dummy() {
         return newBuilder()
                 .withQuestion("Question")
-                .withAnswer("Answer")
+                .withAnswer(Set.of("Answer"))
                 .withGivenAnswer("Given Answer")
                 .withCorrect(false)
                 .build();
@@ -49,7 +50,7 @@ public class TranslationResultDataSet {
         return question;
     }
 
-    public String getAnswer() {
+    public Set<String> getAnswer() {
         return answer;
     }
 
@@ -74,7 +75,7 @@ public class TranslationResultDataSet {
 
     public static final class Builder {
         private String question;
-        private String answer;
+        private Set<String> answer;
         private String givenAnswer;
         private Boolean correct;
 
@@ -86,7 +87,7 @@ public class TranslationResultDataSet {
             return this;
         }
 
-        public Builder withAnswer(String val) {
+        public Builder withAnswer(Set<String> val) {
             answer = val;
             return this;
         }

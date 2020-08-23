@@ -7,6 +7,7 @@ public class PracticeWordCheckTO {
     private String userId;
     private String translationId;
     private String answerGiven;
+    private String questionGiven;
     private OrderType answerOrderType;
     private OrderType nextOrderType;
 
@@ -17,6 +18,7 @@ public class PracticeWordCheckTO {
         answerGiven = builder.answerGiven;
         answerOrderType = builder.answerOrderType;
         nextOrderType = builder.nextOrderType;
+        questionGiven = builder.questionGiven;
     }
 
     public static Builder newBuilder() {
@@ -33,6 +35,10 @@ public class PracticeWordCheckTO {
 
     public String answerGiven() {
         return answerGiven;
+    }
+
+    public String questionGiven() {
+        return questionGiven;
     }
 
     public OrderType answerOrderType() {
@@ -52,6 +58,7 @@ public class PracticeWordCheckTO {
         private String userId;
         private String translationId;
         private String answerGiven;
+        private String questionGiven;
         private OrderType answerOrderType;
         private OrderType nextOrderType;
 
@@ -70,6 +77,11 @@ public class PracticeWordCheckTO {
 
         public Builder withAnswerGiven(String val) {
             answerGiven = val;
+            return this;
+        }
+
+        public Builder withQuestionGiven(String val) {
+            questionGiven = val;
             return this;
         }
 

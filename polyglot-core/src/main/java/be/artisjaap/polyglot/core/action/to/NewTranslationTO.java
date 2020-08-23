@@ -4,6 +4,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NonNull;
 
+import java.util.Set;
+
 @Builder
 @Getter
 public class NewTranslationTO {
@@ -12,7 +14,7 @@ public class NewTranslationTO {
     @NonNull
     private String languagePairId;
     @NonNull
-    private String languageFrom;
+    private Set<String> languageFrom;
     @NonNull
-    private String languageTo;
+    private Set<String> languageTo;
 }

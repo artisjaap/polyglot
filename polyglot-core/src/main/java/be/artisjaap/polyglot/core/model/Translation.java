@@ -4,19 +4,23 @@ import be.artisjaap.common.model.AbstractDocument;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Document(collection = "PolTranslation")
 public class Translation extends AbstractDocument {
 
     private ObjectId languagePairId;
 
-    private String languageA;
-    private String languageB;
+    private Set<String> languageA = new HashSet<>();
 
-    public String getLanguageA() {
+    private Set<String> languageB = new HashSet<>();
+
+    public Set<String> getLanguageA() {
         return languageA;
     }
 
-    public String getLanguageB() {
+    public Set<String> getLanguageB() {
         return languageB;
     }
 
@@ -24,11 +28,11 @@ public class Translation extends AbstractDocument {
         return languagePairId;
     }
 
-    public void setLanguageA(String languageA) {
+    public void setLanguageA(Set<String> languageA) {
         this.languageA = languageA;
     }
 
-    public void setLanguageB(String languageB) {
+    public void setLanguageB(Set<String> languageB) {
         this.languageB = languageB;
     }
 
@@ -47,8 +51,8 @@ public class Translation extends AbstractDocument {
 
     public static final class Builder extends AbstractBuilder<Builder>{
         private ObjectId languagePairId;
-        private String languageA;
-        private String languageB;
+        private Set<String> languageA = new HashSet<>();
+        private Set<String> languageB = new HashSet<>();
 
         private Builder() {
         }
@@ -59,11 +63,21 @@ public class Translation extends AbstractDocument {
         }
 
         public Builder withLanguageA(String languageA) {
-            this.languageA = languageA;
+            this.languageA.add(languageA);
             return this;
         }
 
         public Builder withLanguageB(String languageB) {
+            this.languageB.add(languageB);
+            return this;
+        }
+
+        public Builder withLanguageA(Set<String> languageA) {
+            this.languageA = languageA;
+            return this;
+        }
+
+        public Builder withLanguageB(Set<String> languageB) {
             this.languageB = languageB;
             return this;
         }

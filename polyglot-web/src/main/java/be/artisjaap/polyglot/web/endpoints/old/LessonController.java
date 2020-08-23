@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 //@RestController
@@ -128,7 +129,7 @@ public class LessonController {
                 .withSolutions(testSolutionRequest.getSolutions().stream()
                         .map(s -> WordSolutionTO.newBuilder()
                                 .withTranslationId(s.getTranslationId())
-                                .withAnswer(s.getAnswer())
+                                .withAnswer(Set.of(s.getAnswer()))
                                 .withQuestion(s.getQuestion())
                                 .withAnswerLanguage(s.getAnswerLanguage())
                                 .build()).collect(Collectors.toList()))

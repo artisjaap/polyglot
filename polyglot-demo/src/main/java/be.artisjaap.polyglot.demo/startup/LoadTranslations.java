@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.io.InputStreamReader;
+import java.util.Set;
 
 @Component
 public class LoadTranslations extends AbstractInitScript {
@@ -91,16 +92,16 @@ public class LoadTranslations extends AbstractInitScript {
         TranslationsForUserTO translationsForUserTO = createTranslation.forAllWords(NewTranslationsForUserTO.newBuilder()
                 .withLanguagePairId(languagePairToNlEn.id())
                 .withUserId(languagePairToNlEn.userId())
-                .addTranslation(NewSimpleTranslationPairTO.newBuilder().withLanguageFrom("EEN").withLanguageTO("ONE").build())
-                .addTranslation(NewSimpleTranslationPairTO.newBuilder().withLanguageFrom("TWEE").withLanguageTO("TWO").build())
-                .addTranslation(NewSimpleTranslationPairTO.newBuilder().withLanguageFrom("DRIE").withLanguageTO("THREE").build())
-                .addTranslation(NewSimpleTranslationPairTO.newBuilder().withLanguageFrom("VIER").withLanguageTO("FOUR").build())
-                .addTranslation(NewSimpleTranslationPairTO.newBuilder().withLanguageFrom("VIJF").withLanguageTO("FIVE").build())
-                .addTranslation(NewSimpleTranslationPairTO.newBuilder().withLanguageFrom("ZES").withLanguageTO("SIX").build())
-                .addTranslation(NewSimpleTranslationPairTO.newBuilder().withLanguageFrom("ZEVEN").withLanguageTO("SEVEN").build())
-                .addTranslation(NewSimpleTranslationPairTO.newBuilder().withLanguageFrom("ACHT").withLanguageTO("EIGHT").build())
-                .addTranslation(NewSimpleTranslationPairTO.newBuilder().withLanguageFrom("NEGEN").withLanguageTO("NINE").build())
-                .addTranslation(NewSimpleTranslationPairTO.newBuilder().withLanguageFrom("TIEN").withLanguageTO("TEN").build())
+                .addTranslation(NewSimpleTranslationPairTO.newBuilder().withLanguageFrom(Set.of("EEN")).withLanguageTO(Set.of("ONE")).build())
+                .addTranslation(NewSimpleTranslationPairTO.newBuilder().withLanguageFrom(Set.of("TWEE")).withLanguageTO(Set.of("TWO")).build())
+                .addTranslation(NewSimpleTranslationPairTO.newBuilder().withLanguageFrom(Set.of("DRIE")).withLanguageTO(Set.of("THREE")).build())
+                .addTranslation(NewSimpleTranslationPairTO.newBuilder().withLanguageFrom(Set.of("VIER")).withLanguageTO(Set.of("FOUR")).build())
+                .addTranslation(NewSimpleTranslationPairTO.newBuilder().withLanguageFrom(Set.of("VIJF")).withLanguageTO(Set.of("FIVE")).build())
+                .addTranslation(NewSimpleTranslationPairTO.newBuilder().withLanguageFrom(Set.of("ZES")).withLanguageTO(Set.of("SIX")).build())
+                .addTranslation(NewSimpleTranslationPairTO.newBuilder().withLanguageFrom(Set.of("ZEVEN")).withLanguageTO(Set.of("SEVEN")).build())
+                .addTranslation(NewSimpleTranslationPairTO.newBuilder().withLanguageFrom(Set.of("ACHT")).withLanguageTO(Set.of("EIGHT")).build())
+                .addTranslation(NewSimpleTranslationPairTO.newBuilder().withLanguageFrom(Set.of("NEGEN")).withLanguageTO(Set.of("NINE")).build())
+                .addTranslation(NewSimpleTranslationPairTO.newBuilder().withLanguageFrom(Set.of("TIEN")).withLanguageTO(Set.of("TEN")).build())
                 .build());
 
 

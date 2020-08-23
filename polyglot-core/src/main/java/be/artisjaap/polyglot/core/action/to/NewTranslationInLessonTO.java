@@ -4,13 +4,15 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NonNull;
 
+import java.util.Set;
+
 @Builder
 @Getter
 public class NewTranslationInLessonTO {
     @NonNull
     private String lessonId;
     @NonNull
-    private String languageFrom;
+    private Set<String> languageFrom;
     @NonNull
-    private String languageTO;
+    private Set<String> languageTO;
 }

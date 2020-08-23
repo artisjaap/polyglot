@@ -2,11 +2,13 @@ package be.artisjaap.polyglot.core.model;
 
 import org.bson.types.ObjectId;
 
+import java.util.Set;
+
 public class WordResult {
 
     private ObjectId translationId;
     private String question;
-    private String expectedAnswer;
+    private Set<String> expectedAnswer;
     private String givenAnswer;
     private Boolean correct;
 
@@ -32,7 +34,7 @@ public class WordResult {
         return question;
     }
 
-    public String getExpectedAnswer() {
+    public Set<String> getExpectedAnswer() {
         return expectedAnswer;
     }
 
@@ -47,7 +49,7 @@ public class WordResult {
     public static final class Builder {
         private ObjectId translationId;
         private String question;
-        private String expectedAnswer;
+        private Set<String> expectedAnswer;
         private String givenAnswer;
         private Boolean correct;
 
@@ -64,7 +66,7 @@ public class WordResult {
             return this;
         }
 
-        public Builder withExpectedAnswer(String val) {
+        public Builder withExpectedAnswer(Set<String> val) {
             expectedAnswer = val;
             return this;
         }

@@ -3,6 +3,7 @@ package be.artisjaap.polyglot.web.endpoints.old.response;
 import be.artisjaap.polyglot.core.action.to.PracticeWordTO;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class PracticeWordResponse {
@@ -10,7 +11,7 @@ public class PracticeWordResponse {
     private String translationId;
     private String question;
     private String questionLanguage;
-    private String answer;
+    private Set<String> answer;
     private String anwserLanguage;
     private WordStatsResponse wordStatsTO;
 
@@ -60,7 +61,7 @@ public class PracticeWordResponse {
         return questionLanguage;
     }
 
-    public String getAnswer() {
+    public Set<String> getAnswer() {
         return answer;
     }
 
@@ -77,7 +78,7 @@ public class PracticeWordResponse {
         private String translationId;
         private String question;
         private String questionLanguage;
-        private String answer;
+        private Set<String> answer;
         private String anwserLanguage;
         private WordStatsResponse wordStatsTO;
 
@@ -104,7 +105,7 @@ public class PracticeWordResponse {
             return this;
         }
 
-        public Builder withAnswer(String val) {
+        public Builder withAnswer(Set<String> val) {
             answer = val;
             return this;
         }

@@ -3,6 +3,7 @@ package be.artisjaap.polyglot.web.endpoints.old.response;
 import be.artisjaap.polyglot.core.action.to.LessonTranslationPairTO;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LessonTranslationPairResponse {
@@ -10,8 +11,8 @@ public class LessonTranslationPairResponse {
     private Boolean isReverse;
     private String languageFrom;
     private String languageTo;
-    private String question;
-    private String solution;
+    private Set<String> question;
+    private Set<String> solution;
     private String translationId;
 
 
@@ -30,8 +31,8 @@ public class LessonTranslationPairResponse {
         return newBuilder()
                 .withLanguageFrom(to.languageFrom())
                 .withLanguageTo(to.languageTo())
-                .withQuestion(to.question())
-                .withSolution(to.solution())
+                .withQuestion(Set.of(to.question()))
+                .withSolution(to.solutions())
                 .withTranslationId(to.translationId())
                 .withIsReverse(to.isReverse())
             .build();
@@ -46,11 +47,11 @@ public class LessonTranslationPairResponse {
         return languageTo;
     }
 
-    public String getQuestion() {
+    public Set<String> getQuestion() {
         return question;
     }
 
-    public String getSolution() {
+    public Set<String> getSolution() {
         return solution;
     }
 
@@ -70,8 +71,8 @@ public class LessonTranslationPairResponse {
         private Boolean isReverse;
         private String languageFrom;
         private String languageTo;
-        private String question;
-        private String solution;
+        private Set<String> question;
+        private Set<String> solution;
         private String translationId;
 
         private Builder() {
@@ -87,12 +88,12 @@ public class LessonTranslationPairResponse {
             return this;
         }
 
-        public Builder withQuestion(String val) {
+        public Builder withQuestion(Set<String> val) {
             question = val;
             return this;
         }
 
-        public Builder withSolution(String val) {
+        public Builder withSolution(Set<String> val) {
             solution = val;
             return this;
         }

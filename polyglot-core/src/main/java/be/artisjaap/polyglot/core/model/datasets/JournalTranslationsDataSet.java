@@ -7,6 +7,7 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -17,7 +18,7 @@ public class JournalTranslationsDataSet {
     private String translationId;
     private String question;
     private String givenAnswer;
-    private String expectedAnswer;
+    private Set<String> expectedAnswer;
     private Boolean correct;
 
     public static List<JournalTranslationsDataSet> dummyList(int i) {
@@ -30,7 +31,7 @@ public class JournalTranslationsDataSet {
                 .translationId("id")
                 .question("Question")
                 .givenAnswer("Answer")
-                .expectedAnswer(correct?"Answer":"Given Answer")
+                .expectedAnswer(correct?Set.of("Answer"):Set.of("Given Answer"))
                 .correct(correct)
                 .build();
     }

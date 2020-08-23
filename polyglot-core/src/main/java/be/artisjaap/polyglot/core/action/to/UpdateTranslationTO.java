@@ -1,10 +1,12 @@
 package be.artisjaap.polyglot.core.action.to;
 
+import java.util.Set;
+
 public class UpdateTranslationTO {
 
     private String translationId;
-    private String languageFrom;
-    private String languageTo;
+    private Set<String> languageFrom;
+    private Set<String> languageTo;
 
     private UpdateTranslationTO(Builder builder) {
         translationId = builder.translationId;
@@ -20,18 +22,18 @@ public class UpdateTranslationTO {
         return translationId;
     }
 
-    public String languageFrom() {
+    public Set<String> languageFrom() {
         return languageFrom;
     }
 
-    public String languageTo() {
+    public Set<String> languageTo() {
         return languageTo;
     }
 
     public static final class Builder {
         private String translationId;
-        private String languageFrom;
-        private String languageTo;
+        private Set<String> languageFrom;
+        private Set<String> languageTo;
 
         private Builder() {
         }
@@ -41,12 +43,12 @@ public class UpdateTranslationTO {
             return this;
         }
 
-        public Builder withLanguageFrom(String val) {
+        public Builder withLanguageFrom(Set<String> val) {
             languageFrom = val;
             return this;
         }
 
-        public Builder withLanguageTo(String val) {
+        public Builder withLanguageTo(Set<String> val) {
             languageTo = val;
             return this;
         }

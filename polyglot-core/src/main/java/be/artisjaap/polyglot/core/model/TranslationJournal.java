@@ -4,6 +4,7 @@ import be.artisjaap.common.utils.LocalDateUtils;
 import org.bson.types.ObjectId;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 public class TranslationJournal {
     private LocalDateTime timestamp;
@@ -11,7 +12,7 @@ public class TranslationJournal {
     private ObjectId lessonId;
     private String question;
     private String givenAnswer;
-    private String expectedAnswer;
+    private Set<String> expectedAnswer;
     private Boolean correct;
 
     private TranslationJournal(){}
@@ -32,7 +33,7 @@ public class TranslationJournal {
         return givenAnswer;
     }
 
-    public String getExpectedAnswer() {
+    public Set<String> getExpectedAnswer() {
         return expectedAnswer;
     }
 
@@ -65,7 +66,7 @@ public class TranslationJournal {
         private ObjectId lessonId;
         private String question;
         private String givenAnswer;
-        private String expectedAnswer;
+        private Set<String> expectedAnswer;
         private Boolean correct;
 
         private Builder() {
@@ -91,7 +92,7 @@ public class TranslationJournal {
             return this;
         }
 
-        public Builder withExpectedAnswer(String val) {
+        public Builder withExpectedAnswers(Set<String> val) {
             expectedAnswer = val;
             return this;
         }

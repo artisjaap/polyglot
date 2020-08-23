@@ -1,12 +1,15 @@
 package be.artisjaap.polyglot.core.action.to;
 
 
+import java.util.Set;
+import java.util.stream.Collectors;
+
 public class PracticeWordTO {
     private Boolean isReversed;
     private String translationId;
     private String question;
     private String questionLanguage;
-    private String answer;
+    private Set<String> answers;
     private String anwserLanguage;
     private WordStatsTO wordStatsTO;
 
@@ -37,15 +40,15 @@ public class PracticeWordTO {
         questionLanguage = builder.questionLanguage;
         anwserLanguage = builder.anwserLanguage;
         wordStatsTO = builder.wordStatsTO;
-        answer = builder.answer;
+        answers = builder.answers;
     }
 
     public WordStatsTO wordStatsTO() {
         return wordStatsTO;
     }
 
-    public String answer() {
-        return answer;
+    public Set<String> answer() {
+        return answers;
     }
 
     @Override
@@ -55,7 +58,7 @@ public class PracticeWordTO {
                 ", translationId='" + translationId + '\'' +
                 ", question='" + question + '\'' +
                 ", questionLanguage='" + questionLanguage + '\'' +
-                ", answer='" + answer + '\'' +
+                ", answer='" + answers.stream().collect(Collectors.joining(", ")) + '\'' +
                 ", anwserLanguage='" + anwserLanguage + '\'' +
                 ", wordStatsTO=" + wordStatsTO +
                 '}';
@@ -69,7 +72,7 @@ public class PracticeWordTO {
         private Boolean isReversed;
         private String translationId;
         private String question;
-        private String answer;
+        private Set<String> answers;
         private String questionLanguage;
         private String anwserLanguage;
         private WordStatsTO wordStatsTO;
@@ -108,8 +111,8 @@ public class PracticeWordTO {
         }
 
 
-        public Builder withAnswer(String answer) {
-            this.answer = answer;
+        public Builder withAnswer(Set<String> answers) {
+            this.answers = answers;
             return this;
         }
 

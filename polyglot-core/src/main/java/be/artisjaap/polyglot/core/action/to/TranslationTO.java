@@ -2,23 +2,24 @@ package be.artisjaap.polyglot.core.action.to;
 
 import be.artisjaap.common.model.ReferenceableTO;
 
+import java.util.Set;
 
 
 public class TranslationTO extends ReferenceableTO {
 
     private String languagePairId;
-    private String languageA;
-    private String languageB;
+    private Set<String> languageA;
+    private Set<String> languageB;
 
     public String languagePairId() {
         return languagePairId;
     }
 
-    public String languageA() {
+    public Set<String> languageA() {
         return languageA;
     }
 
-    public String languageB() {
+    public Set<String> languageB() {
         return languageB;
     }
 
@@ -36,8 +37,8 @@ public class TranslationTO extends ReferenceableTO {
 
     public static final class Builder extends AbstractBuilder<Builder> {
         private String languagePairId;
-        private String languageA;
-        private String languageB;
+        private Set<String> languageA;
+        private Set<String> languageB;
 
         private Builder() {
         }
@@ -47,12 +48,12 @@ public class TranslationTO extends ReferenceableTO {
             return this;
         }
 
-        public Builder withLanguageA(String val) {
+        public Builder withLanguageA(Set<String> val) {
             languageA = val;
             return this;
         }
 
-        public Builder withLanguageB(String val) {
+        public Builder withLanguageB(Set<String> val) {
             languageB = val;
             return this;
         }

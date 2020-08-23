@@ -3,13 +3,14 @@ package be.artisjaap.polyglot.web.endpoints.old.response;
 import be.artisjaap.polyglot.core.action.to.test.WordResultTO;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class WordResultResponse {
 
     private String translationId;
     private String question;
-    private String expectedAnswer;
+    private Set<String> expectedAnswer;
     private String givenAnswer;
     private Boolean correct;
 
@@ -47,7 +48,7 @@ public class WordResultResponse {
         return question;
     }
 
-    public String getExpectedAnswer() {
+    public Set<String> getExpectedAnswer() {
         return expectedAnswer;
     }
 
@@ -62,7 +63,7 @@ public class WordResultResponse {
     public static final class Builder {
         private String translationId;
         private String question;
-        private String expectedAnswer;
+        private Set<String> expectedAnswer;
         private String givenAnswer;
         private Boolean correct;
 
@@ -79,7 +80,7 @@ public class WordResultResponse {
             return this;
         }
 
-        public Builder withExpectedAnswer(String val) {
+        public Builder withExpectedAnswer(Set<String> val) {
             expectedAnswer = val;
             return this;
         }

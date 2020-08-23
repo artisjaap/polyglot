@@ -69,7 +69,7 @@ public class CreateTranslation {
     public TranslationsForUserTO forAllWords(NewTranslationsForUserTO to) {
         List<Translation> translations = newTranslationForUserAssembler.assembleAllEntities(to);
 
-        List<String> languageA = translations.stream().map(Translation::getLanguageA).collect(Collectors.toList());
+        List<String> languageA = translations.stream().map(Translation::getLanguageA).flatMap(Set::stream).collect(Collectors.toList());
         List<TranslationTO> duplicates = findTranslations.containing(to.languagePairId(), languageA);
 
         List<Translation> newTranslations = filterDuplicate(translations, duplicates);
@@ -84,7 +84,7 @@ public class CreateTranslation {
     }
 
     private List<Translation> filterDuplicate(List<Translation> translations, List<TranslationTO> duplicates) {
-        List<String> languageA = duplicates.stream().map(TranslationTO::languageA).collect(Collectors.toList());
+        List<String> languageA = duplicates.stream().map(TranslationTO::languageA).flatMap(Set::stream).collect(Collectors.toList());
 
         return translations.stream().filter(translation -> !languageA.contains(translation.getLanguageA()))
                 .collect(Collectors.toList());

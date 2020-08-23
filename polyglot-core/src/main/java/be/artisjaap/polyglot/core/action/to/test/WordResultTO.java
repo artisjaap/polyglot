@@ -1,9 +1,11 @@
 package be.artisjaap.polyglot.core.action.to.test;
 
+import java.util.Set;
+
 public class WordResultTO {
     private String translationId;
     private String question;
-    private String expectedAnswer;
+    private Set<String> expectedAnswer;
     private String givenAnswer;
     private Boolean correct;
 
@@ -27,7 +29,7 @@ public class WordResultTO {
         return question;
     }
 
-    public String expectedAnswer() {
+    public Set<String> expectedAnswer() {
         return expectedAnswer;
     }
 
@@ -42,7 +44,7 @@ public class WordResultTO {
     public static final class Builder {
         private String translationId;
         private String question;
-        private String expectedAnswer;
+        private Set<String> expectedAnswer;
         private String givenAnswer;
         private Boolean correct;
 
@@ -59,7 +61,7 @@ public class WordResultTO {
             return this;
         }
 
-        public Builder withExpectedAnswer(String val) {
+        public Builder withExpectedAnswer(Set<String> val) {
             expectedAnswer = val;
             return this;
         }

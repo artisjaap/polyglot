@@ -3,6 +3,8 @@ package be.artisjaap.polyglot.web.endpoints.response;
 
 import lombok.*;
 
+import java.util.Set;
+
 @Builder
 @Getter
 @Setter
@@ -10,6 +12,6 @@ import lombok.*;
 @NoArgsConstructor
 public class TranslationResponse {
     private String id;
-    private String languageA;
-    private String languageB;
+    private Set<String> languageA;
+    private Set<String> languageB;
 }

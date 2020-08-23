@@ -15,14 +15,14 @@ import java.util.stream.IntStream;
 public class MistakeDataSet {
     private String translationId;
     private String question;
-    private String correctAnswer;
+    private Set<String> correctAnswer;
     private Set<String> givenAnswers;
     private int timesCorrect;
     private int timesIncorrect;
     private int total;
 
     public static MistakeDataSet dummy() {
-        return MistakeDataSet.builder().question("Q").correctAnswer("A").build();
+        return MistakeDataSet.builder().question("Q").correctAnswer(Set.of("A")).build();
     }
 
     public static List<MistakeDataSet> dummyList(int i) {

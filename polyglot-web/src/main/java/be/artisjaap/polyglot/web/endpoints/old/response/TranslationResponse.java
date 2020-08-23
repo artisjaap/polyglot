@@ -3,13 +3,14 @@ package be.artisjaap.polyglot.web.endpoints.old.response;
 import be.artisjaap.polyglot.core.action.to.TranslationTO;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class TranslationResponse {
     private String id;
     private String languagePairId;
-    private String languageA;
-    private String languageB;
+    private Set<String> languageA;
+    private Set<String> languageB;
 
 
 
@@ -41,11 +42,11 @@ public class TranslationResponse {
         return languagePairId;
     }
 
-    public String getLanguageA() {
+    public Set<String> getLanguageA() {
         return languageA;
     }
 
-    public String getLanguageB() {
+    public Set<String> getLanguageB() {
         return languageB;
     }
 
@@ -55,8 +56,8 @@ public class TranslationResponse {
 
     public static final class Builder {
         private String languagePairId;
-        private String languageA;
-        private String languageB;
+        private Set<String> languageA;
+        private Set<String> languageB;
         private String id;
 
         private Builder() {
@@ -67,12 +68,12 @@ public class TranslationResponse {
             return this;
         }
 
-        public Builder withLanguageA(String val) {
+        public Builder withLanguageA(Set<String> val) {
             languageA = val;
             return this;
         }
 
-        public Builder withLanguageB(String val) {
+        public Builder withLanguageB(Set<String> val) {
             languageB = val;
             return this;
         }
