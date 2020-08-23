@@ -10,7 +10,7 @@ public class UpdateVersionScript extends AbstractInitScript {
 
 	@Override
 	public String getVersion() {
-		return "0.2";
+		return "1.0.0";
 	}
 	
 	@Override
