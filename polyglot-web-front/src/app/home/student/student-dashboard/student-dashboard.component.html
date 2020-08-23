@@ -1,0 +1,11 @@
+<div class="flex flex-row flex-wrap ">
+  <div class="flex-child-5" *ngFor="let pair of languagePairs$ | async">
+    <app-language-pair-card [languagePair]="pair"></app-language-pair-card>
+  </div>
+
+  <div class="flex-child-5">
+    <app-language-pair-card ></app-language-pair-card>
+
+  </div>
+</div>
+

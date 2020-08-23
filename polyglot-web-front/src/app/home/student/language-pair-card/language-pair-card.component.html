@@ -1,0 +1,52 @@
+<mat-card class="language-pair-card mat-elevation-z10" *ngIf="mode === 'VIEW'">
+  <mat-card-title>
+    <div class="flex flex-column center">
+      <div> {{languagePair?.languageA}}</div>
+     <div> <mat-icon>link</mat-icon></div>
+      <div>{{languagePair?.languageB}}</div>
+
+    </div>
+
+  </mat-card-title>
+  <mat-card-content>
+
+
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button color="warn" (click)="removePair()">
+      <i class="icofont-bin icofont-2x"></i>
+    </button>
+    <button mat-button color="primary" [routerLink]="['..', 'language-pair', languagePair.id]">
+      <i class="icofont-folder-open icofont-2x"></i>
+    </button>
+  </mat-card-actions>
+
+</mat-card>
+
+
+<mat-card class="language-pair-card mat-elevation-z10" *ngIf="mode === 'NEW'">
+  <mat-card-title>
+    <div class="flex flex-column center">
+    Add new
+    </div>
+  </mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="form" class="create-card-form">
+      <div class="flex flex-column">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Language from" formControlName="languageA">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Language to" formControlName="languageB">
+        </mat-form-field>
+      </div>
+
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button color="primary" (click)="createPair()" >
+      <mat-icon class="add-course-btn" >add</mat-icon>
+    </button>
+  </mat-card-actions>
+
+</mat-card>

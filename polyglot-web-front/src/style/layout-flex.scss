@@ -1,0 +1,104 @@
+@import "mixin-media-query";
+
+
+.flex {
+  display: flex;
+
+  &.flex-column {
+    flex-direction: column;
+  }
+
+  &.flex-row {
+    flex-direction: row;
+    align-items: center;
+    margin: 4px 0;
+
+    span {
+      flex: 1
+    }
+  }
+
+  &.flex-row-reverse {
+    flex-direction: row-reverse;
+    align-items: center;
+    margin: 4px 0;
+
+    span {
+      flex: 1
+    }
+  }
+
+  &.flex-row-wrap-reverse {
+    flex-wrap: wrap-reverse;
+  }
+
+
+
+  &.flex-wrap {
+    flex-wrap: wrap;
+  }
+
+  &.text-align{
+    align-items: center;
+  }
+
+  &.center {
+    text-align: center;
+  }
+
+  @include xs-screen {
+    .flex-child-responsive-10-2 {
+      width: 100%;
+
+    }
+  }
+
+  @include s-screen {
+    .flex-child-responsive-10-2 {
+      width: 50%;
+
+    }
+  }
+
+  @include l-screen {
+    .flex-child-responsive-10-2 {
+      width: 25%;
+
+    }
+  }
+
+  @include xl-screen {
+    .flex-child-responsive-10-2 {
+      width: 12.5%;
+
+    }
+  }
+
+
+  @include xxl-screen {
+    .flex-child-responsive-10-2 {
+      width: 10%;
+
+    }
+  }
+}
+
+.flex-item {
+  flex: 1;
+
+  &.flex-col-4 {
+    flex: none;
+    width: 25%;
+  }
+
+  &.flex-col-2 {
+    flex: none;
+    width: 50%;
+  }
+
+  &.default-focus{
+    &:active{
+      border-bottom-color: rebeccapurple;
+    }
+  }
+}

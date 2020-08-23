@@ -1,0 +1,51 @@
+@Lesson=Thema theātrum
+
+de vriend,amicus 
+de vriendin,amīca
+de god,deus
+de godin,dea
+de meester[m],dominus
+de meester[v],domina
+het paard,equus
+de zoon,filius
+de dochter,filia
+de slaaf,servus
+de slavin,serva
+het water,aqua
+het gezin,familia
+de weg,via
+het monument,monumentum
+de tempel,templum
+de wijn,vinium
+de vader,pater
+de oude man,senex
+de maagd,virgō
+de stem,vōx
+de rivier,flūmen
+de ster,sīdus
+de vrouw,fērmina
+de hond,canis
+de jongeman,iuvenis
+de handelaar,merc-ator
+de soldaat,miles
+de senator,senātor
+de nacht,nox 
+het hoofd,caput
+is,est
+zijn,sunt
+daar,ibi
+dikwijls,saepe
+of,aut
+en ook,et
+en,-que
+maar,sed
+de grootvader,avus
+de roos,rosa
+het geschenk,dōnum
+de leider,dux
+de moeder,māter
+het lichaam,corpus
+al dadelijk,iam
+soms,interdum
+ook,quoq
+want,enim
