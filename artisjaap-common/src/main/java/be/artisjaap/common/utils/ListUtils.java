@@ -15,6 +15,24 @@ public class ListUtils {
         return randomList;
     }
 
+    public static <T> T getRandomElement(List<T> list) {
+        if(list.isEmpty()){
+            throw new IllegalStateException("empty list");
+        }
+        return shuffle(list).iterator().next();
+    }
+
+    public static <T> T getRandomElement(List<T> list, double chanceOnFirstElement) {
+        if(list.isEmpty()){
+            throw new IllegalStateException("empty list");
+        }
+        
+        if(Math.random() < chanceOnFirstElement){
+            return list.iterator().next();
+        }
+        return shuffle(list.subList(1, list.size())).iterator().next();
+    }
+
     private static <T> List<T> moveRandomElement(List<T> list) {
         int index = Double.valueOf(Math.floor(Math.random() * list.size())).intValue();
         T element = list.remove(index);

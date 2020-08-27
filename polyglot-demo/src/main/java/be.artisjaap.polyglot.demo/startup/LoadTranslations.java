@@ -7,6 +7,7 @@ import be.artisjaap.polyglot.core.action.pairs.FindLanguagePair;
 import be.artisjaap.polyglot.core.action.to.*;
 import be.artisjaap.polyglot.core.action.translation.CreateTranslation;
 import be.artisjaap.polyglot.core.action.translation.UpdateStatusTranslation;
+import be.artisjaap.polyglot.core.action.translationloader.CreateTranslationsFromFile;
 import be.artisjaap.polyglot.core.action.user.FindUser;
 import be.artisjaap.polyglot.core.model.ProgressStatus;
 import lombok.extern.log4j.Log4j;
@@ -24,6 +25,9 @@ public class LoadTranslations extends AbstractInitScript {
 
     @Resource
     private CreateTranslation createTranslation;
+
+    @Resource
+    private CreateTranslationsFromFile createTranslationsFromFile;
 
     @Autowired
     private UpdateStatusTranslation updateStatusTranslation;
@@ -112,19 +116,19 @@ public class LoadTranslations extends AbstractInitScript {
 
 
 
-        createTranslation.forAllWords(NewTranslationForUserFromFileTO.newBuilder()
+        createTranslationsFromFile.saveTranslations(NewTranslationForUserFromFileTO.newBuilder()
                 .withUserId(userId)
                 .withLanguagePairId(languagePairToNlFr.id())
                 .withReader(new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream("lessons/QE6b-planet-magasin.csv")))
                 .build());
 
-        createTranslation.forAllWords(NewTranslationForUserFromFileTO.newBuilder()
+        createTranslationsFromFile.saveTranslations(NewTranslationForUserFromFileTO.newBuilder()
                 .withUserId(userId)
                 .withLanguagePairId(languagePairToNlFr.id())
                 .withReader(new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream("lessons/QE6b-planet-7-Carnaval.csv")))
                 .build());
 
-        createTranslation.forAllWords(NewTranslationForUserFromFileTO.newBuilder()
+        createTranslationsFromFile.saveTranslations(NewTranslationForUserFromFileTO.newBuilder()
                 .withUserId(userId)
                 .withLanguagePairId(languagePairToNlLa.id())
                 .withReader(new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream("lessons/Lat1-thema-theatrum.txt")))

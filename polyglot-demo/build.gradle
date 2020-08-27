@@ -25,3 +25,16 @@ dependencies {
 springBoot {
     mainClassName = 'be.artisjaap.polyglot.demo.DemoApplication'
 }
+
+
+bootJar {
+    launchScript()
+    archiveBaseName = 'meldingen-server'
+    archiveClassifier = "bootable-${project.environmentToBuild}"
+}
+
+
+bootRun {
+    println "Using target environment as spring.profile: ${project.environmentToBuild}"
+    args = ["--spring.profiles.active=${project.environmentToBuild}"]
+}
