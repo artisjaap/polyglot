@@ -62,6 +62,7 @@ public class PracticeTranslationController extends BaseController {
                 .languagePairId(generatePracticePdfRequest.getLanguagePairId())
                 .lessonId(generatePracticePdfRequest.getLessonId())
                 .numberOfWords(generatePracticePdfRequest.getNumberOfWords())
+                .reversed(generatePracticePdfRequest.getReversed())
                 .build());
 
 

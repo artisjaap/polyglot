@@ -43,7 +43,7 @@ public class CreatePracticePdf {
                 .mapToObj(i -> (TranslationTO) infinitRandomDataStreamer.next())
                 .collect(Collectors.toList());
 
-        LanguagePairTO languagePairTO = findLanguagePair.byId(practicePdfTO.getLanguagePairId());
+        LanguagePairTO languagePairTO = findLanguagePair(practicePdfTO);
 
         return generateDocument.forDocument(BriefConfigTO.builder()
                 .code("WORD_PRACTICE_SHEET_WITH_ANSWERS")
@@ -57,10 +57,21 @@ public class CreatePracticePdf {
 
     }
 
-    private List<TranslationTO> findTranslationsForSettings(CreatePracticePdfTO practicePdfTO) {
-        if(practicePdfTO.getLessonId() != null){
-            return findTranslations.allWordsForLesson(practicePdfTO.getLessonId());
+    private LanguagePairTO findLanguagePair(CreatePracticePdfTO practicePdfTO) {
+        LanguagePairTO languagePairTO = findLanguagePair.byId(practicePdfTO.getLanguagePairId());
+        if(practicePdfTO.getReversed()){
+            return languagePairTO.reverseLanguages();
         }
-        return findTranslations.allWordsForLanguagePair(practicePdfTO.getLanguagePairId());
+        return languagePairTO;
+    }
+
+    private List<TranslationTO> findTranslationsForSettings(CreatePracticePdfTO practicePdfTO) {
+        List<TranslationTO> translationTOS = (practicePdfTO.getLessonId() != null)?
+             findTranslations.allWordsForLesson(practicePdfTO.getLessonId()):findTranslations.allWordsForLanguagePair(practicePdfTO.getLanguagePairId());
+
+        if(practicePdfTO.getReversed()){
+            return translationTOS.stream().map(TranslationTO::switchLanguages).collect(Collectors.toList());
+        }
+        return translationTOS;
     }
 }

@@ -63,6 +63,19 @@ public class LanguagePairTO extends ReferenceableTO {
         return new Builder();
     }
 
+    public LanguagePairTO reverseLanguages() {
+        return LanguagePairTO.newBuilder()
+                .withUserId(userId)
+                .withLanguageFrom(languageTo)
+                .withLanguageTo(languageFrom)
+                .withTurnsDone(turnsDone)
+                .withTurnsDoneReverse(turnsDoneReverse)
+                .withLastTurn(lastTurn)
+                .withLastTurnReverse(lastTurnReverse)
+                .withPracticeHealth(practiceHealth)
+                .build();
+    }
+
 
     public static final class Builder extends AbstractBuilder<Builder> {
         private String userId;

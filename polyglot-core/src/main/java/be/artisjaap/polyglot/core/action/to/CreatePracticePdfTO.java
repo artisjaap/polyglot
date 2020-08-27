@@ -9,4 +9,6 @@ public class CreatePracticePdfTO {
     private String languagePairId;
     private String lessonId;
     private Integer numberOfWords;
+    @Builder.Default
+    private Boolean reversed = Boolean.FALSE;
 }

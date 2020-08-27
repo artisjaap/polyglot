@@ -13,4 +13,5 @@ public class CreatePracticePdfRequest {
     private String languagePairId;
     private String lessonId;
     private Integer numberOfWords;
+    private Boolean reversed;
 }

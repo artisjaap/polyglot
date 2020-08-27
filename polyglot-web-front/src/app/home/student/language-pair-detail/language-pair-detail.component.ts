@@ -76,11 +76,12 @@ export class LanguagePairDetailComponent implements OnInit {
     }).subscribe(data => this.fileSaverService.save(data.body, 'test.pdf'));
   }
 
-  generateLessonPdForLesson(lessonId: string) {
+  generateLessonPdForLesson(lessonId: string, reversed: boolean) {
     this.practiceAnswerService.createPracticePdf({
       languagePairId: this.languagePairId,
       lessonId,
-      numberOfWords: 0
+      numberOfWords: 0,
+      reversed
     }).subscribe(data => this.fileSaverService.save(data.body, 'test.pdf'));
   }
 

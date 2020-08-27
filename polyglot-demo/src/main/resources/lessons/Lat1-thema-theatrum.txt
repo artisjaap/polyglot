@@ -1,5 +1,4 @@
 @Lesson=Thema theātrum
-
 de vriend,amicus 
 de vriendin,amīca
 de god,deus
@@ -26,7 +25,7 @@ de ster,sīdus
 de vrouw,fērmina
 de hond,canis
 de jongeman,iuvenis
-de handelaar,merc-ator
+de handelaar,mercātor
 de soldaat,miles
 de senator,senātor
 de nacht,nox 

@@ -67,9 +67,11 @@ public class CreateTranslationsFromFile {
             NewTranslationsForUserTO newTranslationsForUserTO = NewTranslationsForUserTO.newBuilder()
                     .withLanguagePairId(to.languagePairId())
                     .withUserId(to.userId())
-                    .withTranslations(translationRecords.stream().map(r -> NewSimpleTranslationPairTO.newBuilder()
-                            .withLanguageFrom(Set.of(r.getLanguageA().split("|")))
-                            .withLanguageTO(Set.of(r.getLanguageB().split("|")))
+                    .withTranslations(translationRecords.stream()
+                            .filter(r -> r.getLanguageA() != null && r.getLanguageB() != null)
+                            .map(r -> NewSimpleTranslationPairTO.newBuilder()
+                            .withLanguageFrom(Set.of(r.getLanguageA().split("\\|")))
+                            .withLanguageTO(Set.of(r.getLanguageB().split("\\|")))
                             .build()).collect(Collectors.toList()))
                     .build();
 

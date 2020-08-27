@@ -26,10 +26,12 @@
         <a class="action-link"  [routerLink]="['/home', 'student', 'lesson', a.id, 'practice']">
           <i class="icofont-play-alt-1"></i>
         </a>
-        <a class="action-link" (click)="generateLessonPdForLesson(a.id)" >
+        <a class="action-link" (click)="generateLessonPdForLesson(a.id, false)" >
           <i class="icofont-magic"></i>
         </a>
-
+        <a class="action-link" (click)="generateLessonPdForLesson(a.id, true)" >
+          <i class="icofont-magic"></i>
+        </a>
       </div>
       <input type="text" #newLesson> <button (click)="createLesson(newLesson)">create</button>
     </mat-card-content>

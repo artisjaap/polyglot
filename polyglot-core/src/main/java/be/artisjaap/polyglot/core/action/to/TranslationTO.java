@@ -30,6 +30,14 @@ public class TranslationTO extends ReferenceableTO {
         languageB = builder.languageB;
     }
 
+    public TranslationTO switchLanguages(){
+        return TranslationTO.newBuilder()
+                .withLanguageA(languageB())
+                .withLanguageB(languageA())
+                .withLanguagePairId(languagePairId())
+                .build();
+    }
+
     public static Builder newBuilder() {
         return new Builder();
     }

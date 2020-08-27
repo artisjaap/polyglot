@@ -12,25 +12,29 @@ import java.util.stream.IntStream;
 @Builder
 @Data
 public class TranslationDataSet {
-    private Set<String> languageA;
-    private Set<String> languageB;
+    private String languageA;
+    private String languageB;
 
     public static TranslationDataSet dummy() {
-        return TranslationDataSet.builder().languageA(Set.of("DUTCH")).languageB(Set.of("FRENCH")).build();
+        return TranslationDataSet.builder().languageA("DUTCH").languageB("FRENCH").build();
     }
 
     public static List<TranslationDataSet> dummyList(int i) {
         return IntStream.rangeClosed(0, i).mapToObj(j -> TranslationDataSet.dummy()).collect(Collectors.toList());
     }
 
-    public static TranslationDataSet from(TranslationTO to) {
-        return builder().languageA(to.languageA())
-                .languageB(to.languageB())
-                .build();
+    public static Set<TranslationDataSet> from(TranslationTO to) {
+        return to.languageA().stream()
+                .map(languageA -> TranslationDataSet.builder()
+                        .languageA(languageA)
+                        .languageB(to.languageB().stream().collect(Collectors.joining(" / ")))
+                        .build())
+                .collect(Collectors.toSet());
+
     }
 
     public static List<TranslationDataSet> from(List<TranslationTO> translations) {
-        return translations.stream().map(TranslationDataSet::from).collect(Collectors.toList());
+        return translations.stream().flatMap(translation -> from(translation).stream()).collect(Collectors.toList());
     }
 
 }

@@ -33,7 +33,7 @@ public class LoadTranslations extends AbstractInitScript {
     @Autowired
     private UpdateStatusTranslation updateStatusTranslation;
 
-    @Autowired
+    @Resource
     private CreateLesson createLesson;
 
     @Resource
