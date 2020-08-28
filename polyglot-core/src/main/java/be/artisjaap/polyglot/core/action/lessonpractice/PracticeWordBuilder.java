@@ -1,5 +1,6 @@
 package be.artisjaap.polyglot.core.action.lessonpractice;
 
+import be.artisjaap.common.utils.ListUtils;
 import be.artisjaap.polyglot.core.action.pairs.FindLanguagePair;
 import be.artisjaap.polyglot.core.action.to.LanguagePairTO;
 import be.artisjaap.polyglot.core.action.to.PracticeWordTO;
@@ -11,6 +12,8 @@ import be.artisjaap.polyglot.core.model.TranslationPracticeRepository;
 import be.artisjaap.polyglot.core.model.TranslationRepository;
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Component;
+
+import java.util.Set;
 
 import static be.artisjaap.polyglot.core.action.to.test.OrderType.NORMAL;
 import static be.artisjaap.polyglot.core.action.to.test.OrderType.REVERSE;
@@ -88,10 +91,11 @@ public class PracticeWordBuilder {
     }
 
     private String deriveQuestion(Translation translation, OrderType orderType) {
-        return orderType == NORMAL ? translation.getLanguageA() : translation.getLanguageB();
+        return orderType == NORMAL ? ListUtils.getRandomFromCollection(translation.getLanguageA()) :
+                ListUtils.getRandomFromCollection(translation.getLanguageB());
     }
 
-    private String deriveAnswer(Translation translation, OrderType orderType) {
+    private Set<String> deriveAnswer(Translation translation, OrderType orderType) {
         return orderType == NORMAL ? translation.getLanguageB() : translation.getLanguageA();
     }
 }
