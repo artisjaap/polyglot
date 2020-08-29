@@ -40,7 +40,7 @@ public class DoLessonPractice {
     }
     
     public AnswerAndNextWordTO evaluateResultAndGetNext(PracticeWordCheckTO answer) {
-        AnswerTO answerTO = findPracticeWords.checkAnswer(PracticeWordCheckTO.newBuilder().build());
+        AnswerTO answerTO = findPracticeWords.checkAnswer(answer);
         LessonPractice lessonPractice = findOrCreateLessonPractice(new ObjectId(answer.lessonId()));
         ObjectId translationId = lessonPractice.updateStatus(new ObjectId(answerTO.translationId()), answerTO.correctAnswer());
         PracticeWordTO practiceWordTO = practiceWordBuilder.forTranslation(translationId.toString(), answer.nextOrderType());

@@ -4,7 +4,7 @@
     {{lesson.title}}
   </mat-card-title>
   <mat-card-content>
-    <div class="question font-center">{{translation?.languageA}}</div>
+    <div class="question font-center">{{question?.question}}</div>
     <div class="answer flex flex-row">
       <div class="flex flex-column flex-item">
         <input class="flex-item default-focus" type="text" #answer (keyup.enter)="check(answer)">

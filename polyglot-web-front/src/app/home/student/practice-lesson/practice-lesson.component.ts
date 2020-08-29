@@ -13,6 +13,11 @@ import {PreviousAnswer} from './previous-answer';
 import {selectPracticeLesson} from '../reducers';
 import {PracticeAnswerResponse} from '../../model/practice-answer-response';
 import {ArrayTools} from '../../../tools/ArrayTools';
+import {LessonPracticeTranslationService} from '../../services/lesson-practice-translation.service';
+import {PracticeWordResponse} from '../../model/practice-word-response';
+import {first} from 'rxjs/operators';
+import {PracticeWordCheckRequest} from '../../model/practice-word-check-request';
+import {AnswerResponse} from '../../model/answer-response';
 
 @Component({
   selector: 'app-practice-lesson',
@@ -21,20 +26,24 @@ import {ArrayTools} from '../../../tools/ArrayTools';
 })
 export class PracticeLessonComponent implements OnInit {
 
-  private translation: TranslationForLessonResponse;
   private lesson$: Observable<LessonResponse>;
   private lesson: LessonResponse = new LessonResponse();
   private currentTranslationQueue: TranslationForLessonResponse[] = [];
+  private lessonId: string;
 
 
-  private previousAnswer$: Observable<PracticeAnswerResponse>;
+
+
 
   private stats = {aantalOpgelost: 0, aantalJuist: 0, aantalFout: 0};
 
-  constructor(private store: Store<AppState>, private route: ActivatedRoute) {
-    const lessonId = route.snapshot.params.lessonId;
+  private question: PracticeWordResponse;
+  private previousAnswer$: Observable<AnswerResponse>;
 
-    this.lesson$ = store.select(lessonById, {lessonId});
+  constructor(private store: Store<AppState>, private route: ActivatedRoute,private lessonPracticeTranslationService: LessonPracticeTranslationService) {
+    this.lessonId = route.snapshot.params.lessonId;
+
+    this.lesson$ = store.select(lessonById, {lessonId : this.lessonId});
     this.lesson$.subscribe(l => this.lesson = l);
 
     this.previousAnswer$ = store.select(previousAnswer, {});
@@ -44,19 +53,11 @@ export class PracticeLessonComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadTranslation();
+    this.lessonPracticeTranslationService.requestWordForLesson(this.lessonId, "NORMAL")
+      .pipe(first())
+      .subscribe(question => this.question = question);
   }
 
-  loadTranslation() {
-    if (this.currentTranslationQueue.length === 0) {
-      this.currentTranslationQueue = ArrayTools.copy(this.lesson.translations);
-    }
-
-    if (this.currentTranslationQueue.length > 0) {
-      this.translation = this.currentTranslationQueue.splice(Math.floor(Math.random() * this.currentTranslationQueue.length), 1)[0];
-    }
-
-  }
 
 
 
@@ -65,12 +66,27 @@ export class PracticeLessonComponent implements OnInit {
   check(answer: HTMLInputElement) {
     const practiceAnswer: PracticeAnswerValidateRequest = {
       lessonId: this.lesson.id,
-      translationId: this.translation.id,
+      translationId: this.question.translationId,
       answerGiven: answer.value,
       answerOrderType: 'NORMAL'
     };
 
-    this.store.dispatch(StudentActions.checkPracticeWordAnswer({practiceAnswer}));
+
+    this.lessonPracticeTranslationService.validatePracticeResult(new PracticeWordCheckRequest(
+      this.lesson.id,
+      "",
+      this.question.translationId,
+      answer.value,
+      'NORMAL',
+      'NORMAL'
+    )).pipe(first())
+      .subscribe(question => {
+        this.updateStats(question.answerResponse);
+        this.previousAnswer$ = of(question.answerResponse);
+        this.question = question.practiceWordResponse;
+      });
+
+    // COMMENT this.store.dispatch(StudentActions.checkPracticeWordAnswer({practiceAnswer}));
 
     // const previousAnswer = new PreviousAnswer();
     // previousAnswer.question = this.translation.languageA;
@@ -83,11 +99,11 @@ export class PracticeLessonComponent implements OnInit {
 
 
 
-    this.loadTranslation();
+    // this.loadTranslation();
 
   }
 
-  private updateStats(practiceAnswer: PracticeAnswerResponse) {
+  private updateStats(practiceAnswer: AnswerResponse) {
     if (practiceAnswer) {
 
       this.stats.aantalOpgelost++;
