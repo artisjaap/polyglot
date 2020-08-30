@@ -7,6 +7,7 @@ import lombok.Data;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.sql.SQLOutput;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -65,11 +66,13 @@ public class LessonPractice extends AbstractDocument {
             return false;
         }
 
-        if(translationStatus.stream()
+        Optional<LessonPracticeTranslationStatus> lowRate = translationStatus.stream()
                 .filter(translationStatus -> translationStatus.getStatus() == ProgressStatus.IN_PROGRESS)
-                .filter(translationStatus -> translationStatus.percentage() < 70)
-                .findFirst()
+                .filter(translationStatus -> translationStatus.percentage() < 50)
+                .findFirst();
+        if(lowRate
                 .isPresent()){
+            System.out.println(lowRate.get().percentage());
             return false;
         }
         return true;
@@ -86,7 +89,8 @@ public class LessonPractice extends AbstractDocument {
                 .filter(translationStatus -> !translationStatus.getTranslationId().equals(previousTranslationId))
                 .sorted(Comparator.comparing(LessonPracticeTranslationStatus::knowledgeStatus))
                 .collect(Collectors.toList());
-        
+
+        System.out.println(collect.stream().map(LessonPracticeTranslationStatus::print).collect(Collectors.joining(";")));
         return ListUtils.getRandomElement(collect.stream().limit(5).map(LessonPracticeTranslationStatus::getTranslationId).collect(Collectors.toList()), 0.5);
         
     }

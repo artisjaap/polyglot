@@ -136,5 +136,17 @@ public class LoadTranslations extends AbstractInitScript {
                 .build());
 
 
+        createTranslationsFromFile.saveTranslations(NewTranslationForUserFromFileTO.newBuilder()
+                .withUserId(userId)
+                .withLanguagePairId(languagePairToNlLa.id())
+                .withReader(new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream("lessons/Lat1-3.csv")))
+                .build());
+
+        createTranslationsFromFile.saveTranslations(NewTranslationForUserFromFileTO.newBuilder()
+                .withUserId(userId)
+                .withLanguagePairId(languagePairToNlLa.id())
+                .withReader(new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream("lessons/Lat1-4.csv")))
+                .build());
+
     }
 }

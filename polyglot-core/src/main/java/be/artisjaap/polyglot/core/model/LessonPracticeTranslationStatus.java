@@ -17,16 +17,19 @@ public class LessonPracticeTranslationStatus {
     
     public int knowledgeStatus() {
         if(percentage() > 70 && asked > 4){
-            return percentage() + 10;
+            return customPercentage(5) + 10;
         }
-        return percentage();
+        return customPercentage(5);
+    }
+    private int customPercentage(int minAsked) {
+        return correct * 100 / Math.max(minAsked, asked);
     }
     
     public int percentage() {
         if(correct == 0){
             return 0;
         }
-        return asked * 100 / correct;
+        return correct * 100 / asked;
     }
     
     public void updateWith(boolean correct){

@@ -40,7 +40,7 @@ export class PracticeLessonComponent implements OnInit {
   private question: PracticeWordResponse;
   private previousAnswer$: Observable<AnswerResponse>;
 
-  constructor(private store: Store<AppState>, private route: ActivatedRoute,private lessonPracticeTranslationService: LessonPracticeTranslationService) {
+  constructor(private store: Store<AppState>, private route: ActivatedRoute, private lessonPracticeTranslationService: LessonPracticeTranslationService) {
     this.lessonId = route.snapshot.params.lessonId;
 
     this.lesson$ = store.select(lessonById, {lessonId : this.lessonId});
