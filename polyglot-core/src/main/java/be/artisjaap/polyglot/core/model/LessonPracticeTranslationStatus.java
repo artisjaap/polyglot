@@ -37,8 +37,16 @@ public class LessonPracticeTranslationStatus {
         if(correct){
             this.correct++;
         }
+
+        updateStatus();
     }
-    
+
+    private void updateStatus() {
+        if(asked >= 8 && percentage() > 70){
+            setStatus(ProgressStatus.KNOWN);
+        }
+    }
+
     public String print(){
         return String.format("%s[%s] - %s/%s - (%s/%s) ", translationId, status, asked, correct, percentage(), knowledgeStatus());
     }

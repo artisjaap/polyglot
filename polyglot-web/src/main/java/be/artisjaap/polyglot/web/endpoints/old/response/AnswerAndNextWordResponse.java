@@ -5,10 +5,12 @@ import be.artisjaap.polyglot.core.action.to.AnswerAndNextWordTO;
 public class AnswerAndNextWordResponse {
     private PracticeWordResponse practiceWordResponse;
     private AnswerResponse answerResponse;
+    private LessonPracticeStatusResponse lessonPracticeStatusResponse;
 
     private AnswerAndNextWordResponse(Builder builder) {
         practiceWordResponse = builder.practiceWordResponse;
         answerResponse = builder.answerResponse;
+        lessonPracticeStatusResponse = builder.lessonPracticeStatusResponse;
     }
 
 
@@ -16,6 +18,7 @@ public class AnswerAndNextWordResponse {
         return newBuilder()
                 .withAnswerResponse(AnswerResponse.from(answerAndNextWordTO.answer()))
                 .withPracticeWordResponse(PracticeWordResponse.from(answerAndNextWordTO.practiceWord()))
+                .withLessonPracticeStatusResponse(LessonPracticeStatusResponse.from(answerAndNextWordTO.lessonPracticeStatus()))
                 .build();
     }
 
@@ -26,6 +29,10 @@ public class AnswerAndNextWordResponse {
     public AnswerResponse getAnswerResponse() {
         return answerResponse;
     }
+    
+    public LessonPracticeStatusResponse getLessonPracticeStatusResponse() {
+        return lessonPracticeStatusResponse;
+    }
 
     public static Builder newBuilder() {
         return new Builder();
@@ -35,6 +42,7 @@ public class AnswerAndNextWordResponse {
     public static final class Builder {
         private PracticeWordResponse practiceWordResponse;
         private AnswerResponse answerResponse;
+        private LessonPracticeStatusResponse lessonPracticeStatusResponse;
 
         private Builder() {
         }
@@ -48,6 +56,14 @@ public class AnswerAndNextWordResponse {
             answerResponse = val;
             return this;
         }
+        
+        
+        public Builder withLessonPracticeStatusResponse(LessonPracticeStatusResponse val) {
+            lessonPracticeStatusResponse = val;
+            return this;
+        }
+        
+        
 
         public AnswerAndNextWordResponse build() {
             return new AnswerAndNextWordResponse(this);

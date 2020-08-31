@@ -1,23 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {Observable, of, Subscriber} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {LessonResponse} from '../../model/lesson-response';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../../reducers';
 import {ActivatedRoute} from '@angular/router';
 import {lessonById, previousAnswer} from '../student.selectors';
 import {TranslationForLessonResponse} from '../../model/translation-for-lesson-response';
-import {StudentActions} from '../action-types';
 import {PracticeAnswerValidateRequest} from '../../model/practice-answer-validate-request';
-import {PreviousAnswer} from './previous-answer';
-import {selectPracticeLesson} from '../reducers';
-import {PracticeAnswerResponse} from '../../model/practice-answer-response';
-import {ArrayTools} from '../../../tools/ArrayTools';
 import {LessonPracticeTranslationService} from '../../services/lesson-practice-translation.service';
 import {PracticeWordResponse} from '../../model/practice-word-response';
 import {first} from 'rxjs/operators';
 import {PracticeWordCheckRequest} from '../../model/practice-word-check-request';
 import {AnswerResponse} from '../../model/answer-response';
+import {LessonPracticeStatusResponse} from '../../model/lesson-practice-status-response';
+import {LessonPracticeTransationStatusResponse} from '../../model/lesson-practice-transation-status-response';
 
 @Component({
   selector: 'app-practice-lesson',
@@ -32,7 +29,9 @@ export class PracticeLessonComponent implements OnInit {
   private lessonId: string;
 
 
+  public lessonPracticeStatus: LessonPracticeStatusResponse;
 
+  private form: FormGroup;
 
 
   private stats = {aantalOpgelost: 0, aantalJuist: 0, aantalFout: 0};
@@ -40,27 +39,30 @@ export class PracticeLessonComponent implements OnInit {
   private question: PracticeWordResponse;
   private previousAnswer$: Observable<AnswerResponse>;
 
-  constructor(private store: Store<AppState>, private route: ActivatedRoute, private lessonPracticeTranslationService: LessonPracticeTranslationService) {
+  constructor(private store: Store<AppState>,
+              private route: ActivatedRoute,
+              private lessonPracticeTranslationService: LessonPracticeTranslationService,
+              private formBuilder: FormBuilder) {
     this.lessonId = route.snapshot.params.lessonId;
 
-    this.lesson$ = store.select(lessonById, {lessonId : this.lessonId});
+    this.lesson$ = store.select(lessonById, {lessonId: this.lessonId});
     this.lesson$.subscribe(l => this.lesson = l);
 
     this.previousAnswer$ = store.select(previousAnswer, {});
     this.previousAnswer$.subscribe(previous => {
       this.updateStats(previous);
     });
+
+    this.form = formBuilder.group({
+      reversed: [false]
+    });
   }
 
   ngOnInit() {
-    this.lessonPracticeTranslationService.requestWordForLesson(this.lessonId, "NORMAL")
+    this.lessonPracticeTranslationService.requestWordForLesson(this.lessonId, this.form.value.reversed ? 'REVERSE' : 'NORMAL')
       .pipe(first())
       .subscribe(question => this.question = question);
   }
-
-
-
-
 
 
   check(answer: HTMLInputElement) {
@@ -68,22 +70,22 @@ export class PracticeLessonComponent implements OnInit {
       lessonId: this.lesson.id,
       translationId: this.question.translationId,
       answerGiven: answer.value,
-      answerOrderType: 'NORMAL'
+      answerOrderType: this.question.isReversed ? 'REVERSE' : 'NORMAL'
     };
-
 
     this.lessonPracticeTranslationService.validatePracticeResult(new PracticeWordCheckRequest(
       this.lesson.id,
-      "",
+      '',
       this.question.translationId,
       answer.value,
-      'NORMAL',
-      'NORMAL'
+      this.form.value.reversed ? 'REVERSE' : 'NORMAL',
+      this.form.value.reversed ? 'REVERSE' : 'NORMAL'
     )).pipe(first())
       .subscribe(question => {
         this.updateStats(question.answerResponse);
         this.previousAnswer$ = of(question.answerResponse);
         this.question = question.practiceWordResponse;
+        this.lessonPracticeStatus = question.lessonPracticeStatusResponse;
       });
 
     // COMMENT this.store.dispatch(StudentActions.checkPracticeWordAnswer({practiceAnswer}));
@@ -95,8 +97,6 @@ export class PracticeLessonComponent implements OnInit {
     answer.value = '';
     //
     // this.updateStats(previousAnswer);
-
-
 
 
     // this.loadTranslation();
@@ -116,4 +116,11 @@ export class PracticeLessonComponent implements OnInit {
       }
     }
   }
+
+  lessonPracticeTranslationsInStatus(status: string): LessonPracticeTransationStatusResponse[] {
+    if (this.lessonPracticeStatus) {
+      return this.lessonPracticeStatus.translationstatusses.filter(translation => translation.status === status);
+    }
+  }
+
 }

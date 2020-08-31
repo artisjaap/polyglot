@@ -8,6 +8,7 @@ import be.artisjaap.polyglot.core.action.to.AnswerAndNextWordTO;
 import be.artisjaap.polyglot.core.action.to.AnswerTO;
 import be.artisjaap.polyglot.core.action.to.PracticeWordCheckTO;
 import be.artisjaap.polyglot.core.action.to.PracticeWordTO;
+import be.artisjaap.polyglot.core.action.to.lessonpractice.LessonPracticeStatusTO;
 import be.artisjaap.polyglot.core.action.to.test.OrderType;
 import be.artisjaap.polyglot.core.model.Lesson;
 import be.artisjaap.polyglot.core.model.LessonPractice;
@@ -23,19 +24,24 @@ public class DoLessonPractice {
     private final LessonRepository lessonRepository;
     private final FindPracticeWords findPracticeWords;
     private final PracticeWordBuilder practiceWordBuilder;
+    private final LessonPracticeStatus lessonPracticeStatus;
     
     private DoLessonPractice(LessonPracticeRepository lessonPracticeRepository, 
                              final LessonRepository lessonRepository,
                              final PracticeWordBuilder practiceWordBuilder,
-                             final FindPracticeWords findPracticeWords){
+                             final FindPracticeWords findPracticeWords,
+                             final LessonPracticeStatus lessonPracticeStatus){
         this.lessonPracticeRepository = lessonPracticeRepository;
         this.lessonRepository = lessonRepository;
         this.findPracticeWords = findPracticeWords;
         this.practiceWordBuilder = practiceWordBuilder;
+        this.lessonPracticeStatus = lessonPracticeStatus;
     }
     
     public PracticeWordTO nextWordForLesson(String lessonId, OrderType orderType){
-        ObjectId translationId = findOrCreateLessonPractice(new ObjectId(lessonId)).nextTranslationId();
+        LessonPractice lessonPractice = findOrCreateLessonPractice(new ObjectId(lessonId));
+        ObjectId translationId = lessonPractice.nextTranslationId();
+        lessonPracticeRepository.save(lessonPractice);
         return practiceWordBuilder.forTranslation(translationId.toString(), orderType);
     }
     
@@ -45,11 +51,15 @@ public class DoLessonPractice {
         ObjectId translationId = lessonPractice.updateStatus(new ObjectId(answerTO.translationId()), answerTO.correctAnswer());
         PracticeWordTO practiceWordTO = practiceWordBuilder.forTranslation(translationId.toString(), answer.nextOrderType());
         lessonPracticeRepository.save(lessonPractice);
+        LessonPracticeStatusTO lessonPracticeStatusTO = lessonPracticeStatus.forLesson(answer.lessonId());
         return AnswerAndNextWordTO.newBuilder()
                 .withAnswer(answerTO)
                 .withPracticeWord(practiceWordTO)
+                .withLessonPracticeStatus(lessonPracticeStatusTO)
                 .build();
     }
+    
+    
     
     
     public void resetLessonPractice(String lessonId) {

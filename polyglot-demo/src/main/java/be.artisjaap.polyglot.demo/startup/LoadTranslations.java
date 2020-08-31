@@ -14,10 +14,19 @@ import lombok.extern.log4j.Log4j;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URL;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Component
@@ -117,36 +126,56 @@ public class LoadTranslations extends AbstractInitScript {
 
 
 
-        createTranslationsFromFile.saveTranslations(NewTranslationForUserFromFileTO.newBuilder()
-                .withUserId(userId)
-                .withLanguagePairId(languagePairToNlFr.id())
-                .withReader(new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream("lessons/QE6b-planet-magasin.csv")))
-                .build());
-
-        createTranslationsFromFile.saveTranslations(NewTranslationForUserFromFileTO.newBuilder()
-                .withUserId(userId)
-                .withLanguagePairId(languagePairToNlFr.id())
-                .withReader(new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream("lessons/QE6b-planet-7-Carnaval.csv")))
-                .build());
-
-        createTranslationsFromFile.saveTranslations(NewTranslationForUserFromFileTO.newBuilder()
-                .withUserId(userId)
-                .withLanguagePairId(languagePairToNlLa.id())
-                .withReader(new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream("lessons/Lat1-thema-theatrum.txt")))
-                .build());
 
 
-        createTranslationsFromFile.saveTranslations(NewTranslationForUserFromFileTO.newBuilder()
-                .withUserId(userId)
-                .withLanguagePairId(languagePairToNlLa.id())
-                .withReader(new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream("lessons/Lat1-3.csv")))
-                .build());
+       
 
-        createTranslationsFromFile.saveTranslations(NewTranslationForUserFromFileTO.newBuilder()
-                .withUserId(userId)
-                .withLanguagePairId(languagePairToNlLa.id())
-                .withReader(new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream("lessons/Lat1-4.csv")))
-                .build());
 
+        try {
+            getResourceFiles("/lessons/nlla").forEach(file -> 
+            createTranslationsFromFile.saveTranslations(NewTranslationForUserFromFileTO.newBuilder()
+                    .withUserId(userId)
+                    .withLanguagePairId(languagePairToNlLa.id())
+                    .withReader(new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream("lessons/nlla/" + file), Charset.forName("UTF-8")))
+                    .build()));
+
+            getResourceFiles("/lessons/nlfr").forEach(file ->
+                    createTranslationsFromFile.saveTranslations(NewTranslationForUserFromFileTO.newBuilder()
+                            .withUserId(userId)
+                            .withLanguagePairId(languagePairToNlFr.id())
+                            .withReader(new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream("lessons/nlla/" + file), Charset.forName("UTF-8")))
+                            .build()));
+            
+        } catch (Exception e) {
+            logger.error(e);
+        }
+        ;
+    }
+
+    private List<String> getResourceFiles(String path) throws IOException {
+        List<String> filenames = new ArrayList<>();
+
+        try (
+                InputStream in = getResourceAsStream(path);
+                BufferedReader br = new BufferedReader(new InputStreamReader(in))) {
+            String resource;
+
+            while ((resource = br.readLine()) != null) {
+                filenames.add(resource);
+            }
+        }
+
+        return filenames;
+    }
+
+    private InputStream getResourceAsStream(String resource) {
+        final InputStream in
+                = getContextClassLoader().getResourceAsStream(resource);
+
+        return in == null ? getClass().getResourceAsStream(resource) : in;
+    }
+
+    private ClassLoader getContextClassLoader() {
+        return Thread.currentThread().getContextClassLoader();
     }
 }

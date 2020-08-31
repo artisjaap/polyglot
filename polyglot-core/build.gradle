@@ -9,7 +9,7 @@ jar {
 
 
 dependencies {
-    compile project(':artisjaap-framework')
+    api project(':artisjaap-framework')
     compile project(':artisjaap-document')
     compile project(':artisjaap-backup')
     compile project(':artisjaap-properties')
