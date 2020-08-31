@@ -1,4 +1,4 @@
-rootProject.name = 'polyglot'
+rootProject.name = 'polyglot-web'
 
 include 'artisjaap-backup'
 include 'artisjaap-backup-scenarios'

@@ -15,27 +15,21 @@ buildscript {
 }
 
 
-allprojects {
-    repositories {
-        mavenCentral()
-        jcenter()
-    }
-
-    apply plugin: 'java'
-
-
-
-}
 
 subprojects {
     apply plugin: "java-library"
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
     apply plugin: 'jacoco'
+    apply plugin: 'java'
 
     sourceCompatibility = 1.12
 
-
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
+        options.compilerArgs += ["-parameters"]
+    }
+    
     repositories {
         mavenCentral()
     }

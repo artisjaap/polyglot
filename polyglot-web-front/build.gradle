@@ -19,9 +19,10 @@ println "Applying environment '${environmentToBuild}' for frontend."
 jar.dependsOn "npm_run_build${environmentToBuild}"
 
 jar {
-  from 'dist/frontend' into 'public'
+  from 'dist/polyglot-R' into 'public'
 }
 
 clean {
   delete "dist"
 }
+

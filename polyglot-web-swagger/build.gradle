@@ -8,7 +8,8 @@ jar {
 
 dependencies {
 
-    compile project(':polyglot-web')
+    implementation project(':polyglot-core')
+    implementation project(':polyglot-web')
 
     compile('org.springframework.boot:spring-boot-starter-security')
     compile('org.springframework.boot:spring-boot-starter-actuator')

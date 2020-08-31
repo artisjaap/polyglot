@@ -7,17 +7,35 @@ jar {
 
 dependencies {
 
-    compile project(':polyglot-web-swagger')
-    compile project(':artisjaap-properties')
+    implementation project(':polyglot-core')
+    implementation project(':artisjaap-migrate')
+    implementation project(':artisjaap-document-web')
+    implementation project(':artisjaap-backup-web')
+    implementation project(':artisjaap-i18n')
+    implementation project(':artisjaap-i18n-web')
+    implementation project(':artisjaap-mail-web')
+    implementation project(':artisjaap-properties-web')
+    implementation project(':artisjaap-schedule')
+    implementation project(':artisjaap-schedule-web')
+    implementation project(':artisjaap-document')
+    implementation project(':artisjaap-backup')
+    implementation project(':artisjaap-mail')
+    implementation project(':polyglot-web-swagger')
+    implementation project(':polyglot-web')
+    implementation project(':polyglot-web-front')
+    
+    
+    
+    
     implementation project(':polyglot-web-front')
 
-    compile('de.flapdoodle.embed:de.flapdoodle.embed.mongo')
+    implementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo'
 
 
 
     // swagger
-    compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
-    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+    implementation 'io.springfox:springfox-swagger2:2.9.2'
+    implementation 'io.springfox:springfox-swagger-ui:2.9.2'
 
 }
 
@@ -31,6 +49,7 @@ bootJar {
     launchScript()
     archiveBaseName = 'meldingen-server'
     archiveClassifier = "bootable-${project.environmentToBuild}"
+    enabled = true
 }
 
 
@@ -38,3 +57,4 @@ bootRun {
     println "Using target environment as spring.profile: ${project.environmentToBuild}"
     args = ["--spring.profiles.active=${project.environmentToBuild}"]
 }
+
