@@ -1,6 +1,5 @@
-import { NgModule } from '@angular/core';
+import {ModuleWithProviders, NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {StudentModule} from './student/student.module';
 import { HomeComponent } from './home/home.component';
 import {HomeRoutingModule} from './home-routing.module';
 import {TranslationService} from './services/translation-service';

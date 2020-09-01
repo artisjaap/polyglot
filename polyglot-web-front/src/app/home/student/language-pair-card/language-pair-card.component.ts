@@ -11,9 +11,9 @@ import {StudentActions} from '../action-types';
   styleUrls: ['./language-pair-card.component.scss']
 })
 export class LanguagePairCardComponent implements OnInit {
-  private form: FormGroup;
+  form: FormGroup;
 
-  private mode: 'VIEW' | 'NEW';
+  mode: 'VIEW' | 'NEW';
 
   @Input()
   languagePair: LanguagePairResponse;

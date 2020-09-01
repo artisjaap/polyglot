@@ -3,8 +3,8 @@ plugins {
 }
 
 node {
-  version = '13.0.1'
-  npmVersion = '6.12.0'
+  version = '14.8.0'
+  npmVersion = '6.14.7'
   download = true
 }
 

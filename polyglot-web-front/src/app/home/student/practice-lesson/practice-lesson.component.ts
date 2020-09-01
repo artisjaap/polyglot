@@ -23,7 +23,7 @@ import {LessonPracticeTransationStatusResponse} from '../../model/lesson-practic
 })
 export class PracticeLessonComponent implements OnInit {
 
-  private lesson$: Observable<LessonResponse>;
+  lesson$: Observable<LessonResponse>;
   private lesson: LessonResponse = new LessonResponse();
   private currentTranslationQueue: TranslationForLessonResponse[] = [];
   private lessonId: string;
@@ -31,13 +31,13 @@ export class PracticeLessonComponent implements OnInit {
 
   public lessonPracticeStatus: LessonPracticeStatusResponse;
 
-  private form: FormGroup;
+  form: FormGroup;
 
 
-  private stats = {aantalOpgelost: 0, aantalJuist: 0, aantalFout: 0};
+  stats = {aantalOpgelost: 0, aantalJuist: 0, aantalFout: 0};
 
-  private question: PracticeWordResponse;
-  private previousAnswer$: Observable<AnswerResponse>;
+  question: PracticeWordResponse;
+  previousAnswer$: Observable<AnswerResponse>;
 
   constructor(private store: Store<AppState>,
               private route: ActivatedRoute,

@@ -16,8 +16,8 @@ import {NewTranslationForLessonRequest} from '../../model/new-translation-for-le
   styleUrls: ['./lesson-detail.component.scss']
 })
 export class LessonDetailComponent implements OnInit {
-  private form: FormGroup;
-  private lesson$: Observable<LessonResponse>;
+  form: FormGroup;
+  lesson$: Observable<LessonResponse>;
 
 
   constructor(private store: Store<AppState>, private route: ActivatedRoute, private fb: FormBuilder) {
