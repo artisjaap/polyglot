@@ -3,6 +3,8 @@ import {createEntityAdapter, EntityState, Update} from '@ngrx/entity';
 import {StudentActions} from '../action-types';
 import {LessonResponse} from '../../model/lesson-response';
 import {act} from '@ngrx/effects';
+import {logout} from '../../../auth/auth.actions';
+import {AuthActions} from '../../../auth/action-types';
 
 
 export const lessonFeatureKey = 'lesson';
@@ -45,7 +47,7 @@ const lessonReducer = createReducer(
         changes: action.lesson
       }
       return adapter.updateOne(update, state);
-  })
+  }),
 
 
 

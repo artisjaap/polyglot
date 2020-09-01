@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -127,7 +128,7 @@ public class TranslationController extends BaseController {
     @RequestMapping(value = "/upload-translations/{languagePairId}", method = RequestMethod.POST)
     public @ResponseBody
     ResponseEntity<TranslationsLoadedByFileResponse> uploadTranslationsByFile(@PathVariable String languagePairId, @RequestParam MultipartFile file) {
-        try(InputStreamReader val = new InputStreamReader(file.getInputStream())) {
+        try(InputStreamReader val = new InputStreamReader(file.getInputStream(), Charset.forName("UTF-8"))) {
             TranslationsForUserTO translationsForUserTO = createTranslationsFromFile.saveTranslations(NewTranslationForUserFromFileTO.newBuilder()
                     .withUserId(userId())
                     .withLanguagePairId(languagePairId)

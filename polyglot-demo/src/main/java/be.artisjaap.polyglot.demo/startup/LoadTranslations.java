@@ -14,20 +14,29 @@ import lombok.extern.log4j.Log4j;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Stream;
 
 @Component
 public class LoadTranslations extends AbstractInitScript {
@@ -39,7 +48,7 @@ public class LoadTranslations extends AbstractInitScript {
     @Resource
     private CreateTranslationsFromFile createTranslationsFromFile;
 
-    @Autowired
+    @Resource
     private UpdateStatusTranslation updateStatusTranslation;
 
     @Resource
@@ -53,6 +62,9 @@ public class LoadTranslations extends AbstractInitScript {
 
     @Resource
     private FindLanguagePair findLanguagePair;
+
+    @Autowired
+    private ApplicationContext applicationContext;
 
     @Override
     public String omschrijving() {
@@ -128,23 +140,44 @@ public class LoadTranslations extends AbstractInitScript {
 
 
 
-       
 
+
+        
 
         try {
-            getResourceFiles("/lessons/nlla").forEach(file -> 
-            createTranslationsFromFile.saveTranslations(NewTranslationForUserFromFileTO.newBuilder()
-                    .withUserId(userId)
-                    .withLanguagePairId(languagePairToNlLa.id())
-                    .withReader(new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream("lessons/nlla/" + file), Charset.forName("UTF-8")))
-                    .build()));
+            System.out.println("CURRENT PATH: " + new File("./lessons/nlla").getAbsolutePath());
+            Arrays.asList(applicationContext.getResources("/lessons")).forEach(file -> logger.info("App resource: " + file));
+            getResourceFiles("/lessons").forEach(file -> logger.info("Resource " + file));
 
-            getResourceFiles("/lessons/nlfr").forEach(file ->
-                    createTranslationsFromFile.saveTranslations(NewTranslationForUserFromFileTO.newBuilder()
-                            .withUserId(userId)
-                            .withLanguagePairId(languagePairToNlFr.id())
-                            .withReader(new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream("lessons/nlla/" + file), Charset.forName("UTF-8")))
-                            .build()));
+            getResourceFiles("/lessons/nlla").forEach(file -> createTranslationsFromFile.saveTranslations(NewTranslationForUserFromFileTO.newBuilder()
+                                    .withUserId(userId)
+                                    .withLanguagePairId(languagePairToNlLa.id())
+                                    .withReader(new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream("lessons/nlla/"  + file), Charset.forName("UTF-8")))
+                                    .build()));
+
+            getResourceFiles("/lessons/nlfr").forEach(file -> createTranslationsFromFile.saveTranslations(NewTranslationForUserFromFileTO.newBuilder()
+                    .withUserId(userId)
+                    .withLanguagePairId(languagePairToNlFr.id())
+                    .withReader(new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream("lessons/nlfr/"  + file), Charset.forName("UTF-8")))
+                    .build()));
+            
+            Files.walk(Path.of(new File("./lessons/nlla").toURI())).forEach(path -> {
+                System.out.println("processing.." + path);
+
+                try {
+                    if (path.toFile().isFile()){
+                        createTranslationsFromFile.saveTranslations(NewTranslationForUserFromFileTO.newBuilder()
+                                .withUserId(userId)
+                                .withLanguagePairId(languagePairToNlLa.id())
+                                .withReader(new InputStreamReader(new FileInputStream(path.toFile()), Charset.forName("UTF-8")))
+                                .build());
+                    }
+                    
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+
+            });
             
         } catch (Exception e) {
             logger.error(e);
