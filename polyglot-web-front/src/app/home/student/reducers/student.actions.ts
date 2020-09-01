@@ -1,14 +1,14 @@
 import {createAction, props} from '@ngrx/store';
-import {LanguagePairResponse} from '../model/language-pair-response';
-import {LessonHeaderResponse} from '../model/lesson-header-response';
-import {LessonResponse} from '../model/lesson-response';
-import {TranslationForLessonResponse} from '../model/translation-for-lesson-response';
-import {NewTranslationForLessonRequest} from '../model/new-translation-for-lesson-request';
-import {NewLessonHeaderRequest} from '../model/new-lesson-header-request';
-import {TranslationsLoadedByFileResponse} from '../model/translations-loaded-by-file-response';
-import {FileUpload} from '../model/file-upload';
-import {PracticeAnswerResponse} from '../model/practice-answer-response';
-import {PracticeAnswerValidateRequest} from '../model/practice-answer-validate-request';
+import {LanguagePairResponse} from '../../model/language-pair-response';
+import {LessonHeaderResponse} from '../../model/lesson-header-response';
+import {LessonResponse} from '../../model/lesson-response';
+import {TranslationForLessonResponse} from '../../model/translation-for-lesson-response';
+import {NewTranslationForLessonRequest} from '../../model/new-translation-for-lesson-request';
+import {NewLessonHeaderRequest} from '../../model/new-lesson-header-request';
+import {TranslationsLoadedByFileResponse} from '../../model/translations-loaded-by-file-response';
+import {FileUpload} from '../../model/file-upload';
+import {PracticeAnswerResponse} from '../../model/practice-answer-response';
+import {PracticeAnswerValidateRequest} from '../../model/practice-answer-validate-request';
 
 
 

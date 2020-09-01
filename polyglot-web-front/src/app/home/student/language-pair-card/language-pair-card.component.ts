@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {LanguagePairResponse} from '../../model/language-pair-response';
-import {AppState} from '../../../reducers';
+import {AppState} from '../../../reducers/app.reducer';
 import {Store} from '@ngrx/store';
 import {StudentActions} from '../action-types';
 

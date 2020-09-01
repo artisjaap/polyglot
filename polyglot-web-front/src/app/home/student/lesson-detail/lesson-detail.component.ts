@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {select, Store} from '@ngrx/store';
-import {AppState} from '../../../reducers';
+import {AppState} from '../../../reducers/app.reducer';
 import {ActivatedRoute} from '@angular/router';
 import {StudentActions} from '../action-types';
 import {Update} from '@ngrx/entity/src/models';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {LessonResponse} from '../../model/lesson-response';
-import {lessonById} from '../student.selectors';
+import {lessonById} from '../reducers/student.selectors';
 import {NewTranslationForLessonRequest} from '../../model/new-translation-for-lesson-request';
 
 @Component({

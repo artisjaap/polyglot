@@ -1,3 +1,3 @@
-import * as StudentActions from './student.actions';
+import * as StudentActions from './reducers/student.actions';
 
 export {StudentActions}

@@ -15,13 +15,14 @@ import {LanguagePairComponent} from './language-pair/language-pair.component';
 import {LanguagePairDetailComponent} from './language-pair-detail/language-pair-detail.component';
 import {StudentMainComponent} from './student-main/student-main.component';
 import {EffectsModule} from '@ngrx/effects';
-import {StudentEffects} from './student.effects';
+import {StudentEffects} from './reducers/student.effects';
 import { StoreModule } from '@ngrx/store';
-import * as fromStudent from './reducers';
+import * as fromStudent from './reducers/student.reducer';
 import { LessonDetailComponent } from './lesson-detail/lesson-detail.component';
 import { PracticeLessonComponent } from './practice-lesson/practice-lesson.component';
-import {FileSaverModule} from "ngx-filesaver";
+import {FileSaverModule} from 'ngx-filesaver';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+// import {studentModuleMetaReduder} from './reducers/student.reducer';
 
 
 const entityMetadata: EntityMetadataMap = {

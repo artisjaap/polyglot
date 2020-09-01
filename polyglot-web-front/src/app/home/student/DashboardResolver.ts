@@ -3,9 +3,9 @@ import {Observable, of} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {filter, finalize, first, tap} from 'rxjs/operators';
 import {select, Store} from '@ngrx/store';
-import {allLanguagePairsLoaded} from './student.selectors';
+import {allLanguagePairsLoaded} from './reducers/student.selectors';
 import {StudentActions} from './action-types';
-import {AppState} from '../../reducers';
+import {AppState} from '../../reducers/app.reducer';
 
 @Injectable()
 export class DashboardResolver implements Resolve<boolean> {

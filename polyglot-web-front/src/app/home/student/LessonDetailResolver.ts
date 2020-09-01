@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
 import {Observable, of} from 'rxjs';
 import {select, Store} from '@ngrx/store';
-import {AppState} from '../../reducers';
-import {isLessonLoaded} from './student.selectors';
+import {AppState} from '../../reducers/app.reducer';
+import {isLessonLoaded} from './reducers/student.selectors';
 
 import {filter, finalize, first, tap} from 'rxjs/operators';
 import {StudentActions} from './action-types';

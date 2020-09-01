@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
 import {Store} from '@ngrx/store';
-import {AppState} from '../../../reducers';
-import {languagePairs} from '../student.selectors';
+import {AppState} from '../../../reducers/app.reducer';
+import {languagePairs} from '../reducers/student.selectors';
 import {LanguagePairService} from '../../services/language-pair.service';
 import {LanguagePairResponse} from '../../model/language-pair-response';
 

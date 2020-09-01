@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
-import { reducers, metaReducers } from './reducers';
+import { reducers, metaReducers } from './reducers/app.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import {AuthModule} from './auth/auth.module';
@@ -60,4 +60,6 @@ import {MatCardModule} from '@angular/material/card';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+}

@@ -1,2 +1,2 @@
-import * as AuthActions from './auth.actions'
+import * as AuthActions from './reducers/auth.actions';
 export {AuthActions}

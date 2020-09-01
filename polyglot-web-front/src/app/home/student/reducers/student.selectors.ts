@@ -1,14 +1,12 @@
 import {createFeatureSelector, createSelector} from '@ngrx/store';
-import * as fromStudent from './reducers/index';
-import * as fromLanguagePair from './reducers/language-pair.reducer';
-import * as fromLessonHeader from './reducers/lesson-header.reducer';
+import * as fromLanguagePair from './language-pair.reducer';
 import {
   selectLanguagePair,
   selectLesson,
   selectLessonHeader,
   selectLatestTranslations,
   selectPracticeLesson
-} from './reducers/index';
+} from './student.reducer';
 
 
 export const allLanguagePairsLoaded = createSelector(

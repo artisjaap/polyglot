@@ -3,13 +3,13 @@ import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/rou
 import {merge, Observable} from 'rxjs';
 import {filter, finalize, first, tap} from 'rxjs/operators';
 import {select, Store} from '@ngrx/store';
-import {AppState} from '../../reducers';
+import {AppState} from '../../reducers/app.reducer';
 import {StudentActions} from './action-types';
 import {
   latestTranslationsForLanguagePair,
   latestTranslationsLoadedForLanguagePair,
   lessonHeaersLoadedForLanguagePair
-} from './student.selectors';
+} from './reducers/student.selectors';
 
 @Injectable()
 export class LanguagePairDetailResolver implements Resolve<boolean> {

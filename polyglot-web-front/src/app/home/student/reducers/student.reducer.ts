@@ -2,7 +2,7 @@ import {
   ActionReducer,
   ActionReducerMap,
   createFeatureSelector,
-  createSelector,
+  createSelector, INIT,
   MetaReducer
 } from '@ngrx/store';
 
@@ -12,6 +12,9 @@ import * as fromLesson from './lesson.reducer';
 import * as fromLanguagePair from './language-pair.reducer';
 import * as fromFileUpload from './file-upload.reducer';
 import * as fromPracticeLesson from './practice-lesson.reducer';
+import {environment} from '../../../../environments/environment';
+import {AppState, logger} from '../../../reducers/app.reducer';
+import {AuthActions} from '../../../auth/action-types';
 
 export const studentFeatureKey = 'student';
 
@@ -59,3 +62,19 @@ export const selectLanguagePair = createSelector(
 export const selectPracticeLesson = createSelector(
   selectStudentState, (state: StudentState) => state[fromPracticeLesson.practiceLessonFeatureKey]
 );
+
+
+// export function studentLogout(reducer: ActionReducer<any>): ActionReducer<any>{
+//   return (state, action) => {
+//
+//
+//     if ( action != null && action.type === AuthActions.logout.type) {
+//       return reducer( undefined, {type: INIT});
+//     }
+//
+//     return reducer(state, action);
+//
+//   }
+// };
+//
+// export const studentModuleMetaReduder: MetaReducer<StudentState>[] = !environment.production ? [studentLogout] : [];

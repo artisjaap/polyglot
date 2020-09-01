@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
 import {act, Actions, createEffect, ofType} from '@ngrx/effects';
-import {StudentActions} from './action-types';
+import {StudentActions} from '../action-types';
 import {concatMap, map} from 'rxjs/operators';
-import {TranslationService} from '../services/translation-service';
-import {LessonHeaderService} from '../services/lesson-header.service';
-import {LessonService} from '../services/lesson-service';
-import {LanguagePairService} from '../services/language-pair.service';
+import {TranslationService} from '../../services/translation-service';
+import {LessonHeaderService} from '../../services/lesson-header.service';
+import {LessonService} from '../../services/lesson-service';
+import {LanguagePairService} from '../../services/language-pair.service';
 import {HttpEventType, HttpResponse} from '@angular/common/http';
-import {PracticeAnswerService} from '../services/practice-answer.service';
+import {PracticeAnswerService} from '../../services/practice-answer.service';
 
 @Injectable()
 export class StudentEffects {

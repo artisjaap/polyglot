@@ -2,9 +2,6 @@ import {Action, createReducer, on} from '@ngrx/store';
 import {createEntityAdapter, EntityState, Update} from '@ngrx/entity';
 import {StudentActions} from '../action-types';
 import {LessonResponse} from '../../model/lesson-response';
-import {act} from '@ngrx/effects';
-import {logout} from '../../../auth/auth.actions';
-import {AuthActions} from '../../../auth/action-types';
 
 
 export const lessonFeatureKey = 'lesson';
@@ -38,8 +35,8 @@ const lessonReducer = createReducer(
             action.translation]}}};
     }),
 
-  //could be more perfomant, now, delete of a word in a lesson returns the complete lesson from the server
-  //it would be faster to return jus the word deleted
+  // could be more perfomant, now, delete of a word in a lesson returns the complete lesson from the server
+  // it would be faster to return jus the word deleted
   on(StudentActions.translationFromLessonDeleted,
     (state, action) => {
       const update: Update<LessonResponse> = {

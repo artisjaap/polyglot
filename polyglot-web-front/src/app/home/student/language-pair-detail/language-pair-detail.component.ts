@@ -1,8 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {AppState} from '../../../reducers';
+import {AppState} from '../../../reducers/app.reducer';
 import {Store} from '@ngrx/store';
 import {ActivatedRoute, ActivatedRouteSnapshot} from '@angular/router';
-import {latestTranslationsForLanguagePair, lessonHeadersForLanguagePair} from '../student.selectors';
+import {latestTranslationsForLanguagePair, lessonHeadersForLanguagePair} from '../reducers/student.selectors';
 import {LessonHeaderResponse} from '../../model/lesson-header-response';
 import {Observable} from 'rxjs';
 import {StudentActions} from '../action-types';
