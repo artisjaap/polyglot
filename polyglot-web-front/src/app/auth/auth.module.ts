@@ -31,11 +31,10 @@ import {MatButtonModule} from '@angular/material/button';
 })
 export class AuthModule {
 
-  static forRoot() {
+  static forRoot(): ModuleWithProviders<AuthModule> {
     return {
-      ngModule: AuthModule,
-
-      providers: [AuthService, AuthGuard]
+        ngModule: AuthModule,
+        providers: [AuthService, AuthGuard]
     };
-  }
+}
 }

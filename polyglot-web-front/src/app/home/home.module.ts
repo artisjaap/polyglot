@@ -31,11 +31,10 @@ import {JournalService} from './services/journal.service';
 })
 export class HomeModule {
 
-  static forRoot() {
+  static forRoot(): ModuleWithProviders<HomeModule> {
     return {
-      ngModule: HomeModule,
-
-      providers: []
+        ngModule: HomeModule,
+        providers: []
     };
-  }
+}
 }
