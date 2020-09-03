@@ -1,13 +1,16 @@
 package be.artisjaap.polyglot.core.action.translationloader;
 
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.*;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-
+@Slf4j
 public class TranslationFileLoader {
 
     private final List<TranslationTag> tags;
@@ -20,14 +23,14 @@ public class TranslationFileLoader {
 
     public Reader getReader() {
 
-        return new InputStreamReader(new ByteArrayInputStream(translations));
+        return new InputStreamReader(new ByteArrayInputStream(translations), Charset.forName("UTF-8"));
     }
 
     private byte[] parseTranslations(BufferedReader reader) {
         String line = null;
         try {
             line = reader.readLine();
-
+            
             StringBuilder sb = new StringBuilder();
 
             while (line != null) {
@@ -40,7 +43,7 @@ public class TranslationFileLoader {
                 line = reader.readLine();
             }
 
-            return sb.toString().getBytes();
+            return sb.toString().getBytes(Charset.forName("UTF-8"));
 
         } catch (IOException e) {
             e.printStackTrace();

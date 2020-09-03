@@ -11,7 +11,7 @@ import { environment } from '../environments/environment';
 import {AuthModule} from './auth/auth.module';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
-import { EntityDataModule } from '@ngrx/data';
+import {EntityDataModule, EntityDefinitionService} from '@ngrx/data';
 import { entityConfig } from './entity-metadata';
 import {AuthenticationInterceptor} from './interceptors/authentication-interceptor';
 import {ReactiveFormsModule} from '@angular/forms';
@@ -19,6 +19,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
+import {FaIconLibrary, FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 
 
@@ -36,6 +37,7 @@ import {MatCardModule} from '@angular/material/card';
     MatButtonModule,
     MatIconModule,
     MatCardModule,
+    FontAwesomeModule,
     AuthModule.forRoot(),
     StoreModule.forRoot(reducers, {
       metaReducers,
@@ -61,5 +63,6 @@ import {MatCardModule} from '@angular/material/card';
   bootstrap: [AppComponent]
 })
 export class AppModule {
+
 
 }

@@ -25,7 +25,7 @@ const latestTranslationsReducer = createReducer(
       const languagePairId = action.languagePairId;
       const latestTranslations = action.latestTranslations.map(translation => translation.id);
 
-      return adapter.addAll(action.latestTranslations, {
+      return adapter.setAll(action.latestTranslations, {
         ...state,
         loadedLanguagePairs: {...state.loadedLanguagePairs,
           [languagePairId]: latestTranslations}
@@ -37,30 +37,13 @@ const latestTranslationsReducer = createReducer(
     (state, action) => {
       const languagePairId = action.loadedTranslationsFronFile.languagePairId;
       const latestTranslationIds = action.loadedTranslationsFronFile.translations.map(translation => translation.id);
-      return adapter.addAll(action.loadedTranslationsFronFile.translations, {
+      return adapter.setAll(action.loadedTranslationsFronFile.translations, {
           ...state,
           loadedLanguagePairs : {...state.loadedLanguagePairs,
             [languagePairId] :  latestTranslationIds}
         });
-
-      // loadedLanguagePairs : {...state.loadedLanguagePairs,
-      //   [languagePairId] : [...state.loadedLanguagePairs[languagePairId].filter(t => t !== action.lessonHeader.id)]}});
-
     })
 
-  /*Learn:
-  * when the latest words are loadedm the state in the store is updated
-  * a new state is returned, containing the new translation entities in the store
-  * and a new translation pair in the dictionary containing the translation keys for this translationPairId*/
-  /*on(latestWordsLoaded,
-    (state, action) => {
-      return adapter.addAll(
-        action.translations,
-        {
-          ...state,
-          loadedLanguagePairs: {...state.loadedLanguagePairs, ...{[action.translationPairId]: action.translations.map(t => t.id)}}
-        })
-    }),*/
 );
 
 export function reducer(state: State | undefined, action: Action) {

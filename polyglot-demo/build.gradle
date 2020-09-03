@@ -47,7 +47,7 @@ springBoot {
 
 bootJar {
     launchScript()
-    archiveBaseName = 'meldingen-server'
+    archiveBaseName = 'polyglot'
     archiveClassifier = "bootable-${project.environmentToBuild}"
     enabled = true
 }

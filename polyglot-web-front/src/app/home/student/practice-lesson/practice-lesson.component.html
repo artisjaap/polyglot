@@ -13,11 +13,17 @@
           <div class="flex flex-column flex-item">
             <div style="display: flex; flex-direction: row">
               <input class="flex-item default-focus" type="text" #answer (keyup.enter)="check(answer)">
+
               <button mat-button (click)="check(answer)">
                 <i class="icofont-check-circled icofont-3x"></i>
               </button>
             </div>
-
+            <div class="input-buttons">
+              <button mat-button (click)="answer.value = answer.value + 'ā'; answer.focus()">ā</button>
+              <button mat-button (click)="answer.value = answer.value + 'ī'; answer.focus()">ī</button>
+              <button mat-button (click)="answer.value = answer.value + 'ō'; answer.focus()">ō</button>
+              <button mat-button (click)="answer.value = answer.value + 'ū'; answer.focus()">ū</button>
+            </div>
             <div class="flex flex-row">
               <div class="flex flex-item flex-column">
                 <form [formGroup]="form">

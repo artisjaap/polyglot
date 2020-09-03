@@ -22,7 +22,9 @@ import { LessonDetailComponent } from './lesson-detail/lesson-detail.component';
 import { PracticeLessonComponent } from './practice-lesson/practice-lesson.component';
 import {FileSaverModule} from 'ngx-filesaver';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-// import {studentModuleMetaReduder} from './reducers/student.reducer';
+import {FaIconLibrary, FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+import { faCoffee as faCoffeeDuo } from '@fortawesome/pro-duotone-svg-icons';
 
 
 const entityMetadata: EntityMetadataMap = {
@@ -35,28 +37,31 @@ const entityMetadata: EntityMetadataMap = {
 
 @NgModule({
   declarations: [StudentDashboardComponent, LanguagePairCardComponent, LanguagePairComponent, LanguagePairDetailComponent, StudentMainComponent, LessonDetailComponent, PracticeLessonComponent],
-    imports: [
-        CommonModule,
-        StudentRoutingModule,
-        MatIconModule,
-        MatCardModule,
-        MatButtonModule,
-        ReactiveFormsModule,
-        MatInputModule,
-        MatFormFieldModule,
-        MatSelectModule,
-        FileSaverModule,
-        EffectsModule.forFeature([StudentEffects]),
-        StoreModule.forFeature(fromStudent.studentFeatureKey, fromStudent.reducers),
-        MatCheckboxModule
-    ],
+  imports: [
+    CommonModule,
+    StudentRoutingModule,
+    MatIconModule,
+    MatCardModule,
+    MatButtonModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    FileSaverModule,
+    EffectsModule.forFeature([StudentEffects]),
+    StoreModule.forFeature(fromStudent.studentFeatureKey, fromStudent.reducers),
+    MatCheckboxModule,
+    FontAwesomeModule
+  ],
   providers: []
 })
 
 export class StudentModule {
 
-  constructor(private eds: EntityDefinitionService) {
+  constructor(private eds: EntityDefinitionService, library: FaIconLibrary) {
     eds.registerMetadataMap(entityMetadata);
+    library.addIcons(faCoffee, faCoffeeDuo);
+
   }
 
 }

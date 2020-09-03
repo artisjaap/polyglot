@@ -64,17 +64,3 @@ export const selectPracticeLesson = createSelector(
 );
 
 
-// export function studentLogout(reducer: ActionReducer<any>): ActionReducer<any>{
-//   return (state, action) => {
-//
-//
-//     if ( action != null && action.type === AuthActions.logout.type) {
-//       return reducer( undefined, {type: INIT});
-//     }
-//
-//     return reducer(state, action);
-//
-//   }
-// };
-//
-// export const studentModuleMetaReduder: MetaReducer<StudentState>[] = !environment.production ? [studentLogout] : [];
