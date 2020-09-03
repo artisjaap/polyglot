@@ -135,11 +135,11 @@ export class StudentEffects {
     () => this.actions$.pipe(
       ofType(StudentActions.loadLatestTranslations),
       concatMap(action => this.translationService.loadLatestTranslationsForLanguagePair(action.languagePairId).pipe(
-        map(translations =>{
+        map(translations => {
           return {languagePairId: action.languagePairId, latestTranslations: translations};
         })
       )),
-      map(translations=> StudentActions.latestTranslationsLoaded({languagePairId: translations.languagePairId,
+      map(translations => StudentActions.latestTranslationsLoaded({languagePairId: translations.languagePairId,
         latestTranslations: translations.latestTranslations
       }))
     )
@@ -161,7 +161,7 @@ export class StudentEffects {
     () => this.actions$.pipe(
       ofType(StudentActions.deleteLesson),
       concatMap( action => this.lessonService.deleteLesson(action.lessonId)),
-      map(lessonHeader => StudentActions.lessonDeleted({lessonHeader}))
+      map(lessonResponse => StudentActions.lessonDeleted({lessonResponse}))
     )
   );
 

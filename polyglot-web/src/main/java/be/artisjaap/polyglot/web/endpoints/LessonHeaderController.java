@@ -50,13 +50,5 @@ public class LessonHeaderController extends BaseController {
         return ResponseEntity.ok(lessonHeaderResponseLessonMapper.map(lessonTO));
     }
 
-    @RequestMapping(value = "/lesson-header/{lessonId}", method = RequestMethod.DELETE)
-    public @ResponseBody
-    ResponseEntity<LessonHeaderResponse> removeLesson(@PathVariable String lessonId) {
-        //FIXME not yet implemented
-
-
-        return ResponseEntity.ok(null);
-    }
 
 }

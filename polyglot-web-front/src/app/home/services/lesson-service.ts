@@ -21,8 +21,8 @@ export class LessonService {
 
   }
 
-  deleteLesson(lessonId: string): Observable<LessonHeaderResponse> {
-    return this.httpClient.delete<LessonHeaderResponse>(this.apiurl + `api/lesson/${lessonId}/${lessonId}` );
+  deleteLesson(lessonId: string): Observable<LessonResponse> {
+    return this.httpClient.delete<LessonResponse>(this.apiurl + `api/lesson/${lessonId}` );
   }
 
 }

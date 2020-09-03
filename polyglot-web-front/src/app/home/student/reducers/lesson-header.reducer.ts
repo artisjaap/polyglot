@@ -35,7 +35,7 @@ const lessonReducer = createReducer(
   on(StudentActions.lessonDeleted,
     (state, action) => {
       const loadedLanguagePairs = state.loadedLanguagePairs;
-      return adapter.removeOne(action.lessonHeader.id, {
+      return adapter.removeOne(action.lessonResponse.id, {
         ...state,
       });
   }),

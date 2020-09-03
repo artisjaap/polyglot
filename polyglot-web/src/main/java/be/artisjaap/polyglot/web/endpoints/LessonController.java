@@ -1,6 +1,7 @@
 package be.artisjaap.polyglot.web.endpoints;
 
 
+import be.artisjaap.polyglot.core.action.lesson.DeleteLesson;
 import be.artisjaap.polyglot.core.action.lesson.FindLesson;
 import be.artisjaap.polyglot.core.action.lesson.UpdateLesson;
 import be.artisjaap.polyglot.core.action.to.LessonTO;
@@ -20,6 +21,9 @@ public class LessonController {
     private FindLesson findLesson;
 
     @Resource
+    private DeleteLesson deleteLesson;
+
+    @Resource
     private LessonResponseMapper lessonResponseMapper;
 
     @Resource
@@ -32,6 +36,16 @@ public class LessonController {
         return ResponseEntity.ok(lessonResponseMapper.map(lessonTO));
 
     }
+
+    @RequestMapping(value = "/lesson/{lessonId}", method = RequestMethod.DELETE)
+    public @ResponseBody
+    ResponseEntity<LessonResponse> deleteLesson(@PathVariable String lessonId) {
+        LessonTO lessonTO = findLesson.forPracticing(lessonId);
+        deleteLesson.deleteLesson(lessonId);
+        return ResponseEntity.ok(lessonResponseMapper.map(lessonTO));
+
+    }
+
 
 
     @RequestMapping(value = "/lesson/{lessonId}/translation/{translationId}", method = RequestMethod.DELETE)

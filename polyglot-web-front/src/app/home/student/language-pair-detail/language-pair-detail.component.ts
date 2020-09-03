@@ -12,6 +12,7 @@ import {TranslationForLessonResponse} from '../../model/translation-for-lesson-r
 import {PracticeAnswerService} from '../../services/practice-answer.service';
 import {FileSaverService} from 'ngx-filesaver';
 import {JournalService} from '../../services/journal.service';
+import {filter, map} from "rxjs/operators";
 
 @Component({
   selector: 'app-language-pair-detail',
@@ -36,7 +37,8 @@ export class LanguagePairDetailComponent implements OnInit {
 
   ngOnInit() {
     this.languagePairId = this.route.snapshot.params.languagePairId;
-    this.lessonHeaders$ = this.store.select(lessonHeadersForLanguagePair, {languagePairId: this.languagePairId});
+    this.lessonHeaders$ = this.store.select(lessonHeadersForLanguagePair, {languagePairId: this.languagePairId}).pipe(
+      map(list => list.filter(item => !!item)));
     this.latestTranslations$ = this.store.select(latestTranslationsForLanguagePair, {languagePairId: this.languagePairId});
   }
 

@@ -23,8 +23,9 @@ import { PracticeLessonComponent } from './practice-lesson/practice-lesson.compo
 import {FileSaverModule} from 'ngx-filesaver';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {FaIconLibrary, FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
-import { faCoffee as faCoffeeDuo } from '@fortawesome/pro-duotone-svg-icons';
+import {faCoffee, faRedo, faUndo} from '@fortawesome/free-solid-svg-icons';
+import {TranslationEditorComponent} from './components/translation-editor/translation-editor.component';
+
 
 
 const entityMetadata: EntityMetadataMap = {
@@ -36,7 +37,7 @@ const entityMetadata: EntityMetadataMap = {
 
 
 @NgModule({
-  declarations: [StudentDashboardComponent, LanguagePairCardComponent, LanguagePairComponent, LanguagePairDetailComponent, StudentMainComponent, LessonDetailComponent, PracticeLessonComponent],
+  declarations: [StudentDashboardComponent, LanguagePairCardComponent, LanguagePairComponent, LanguagePairDetailComponent, StudentMainComponent, LessonDetailComponent, PracticeLessonComponent, TranslationEditorComponent],
   imports: [
     CommonModule,
     StudentRoutingModule,
@@ -60,7 +61,7 @@ export class StudentModule {
 
   constructor(private eds: EntityDefinitionService, library: FaIconLibrary) {
     eds.registerMetadataMap(entityMetadata);
-    library.addIcons(faCoffee, faCoffeeDuo);
+    library.addIcons(faUndo, faRedo);
 
   }
 

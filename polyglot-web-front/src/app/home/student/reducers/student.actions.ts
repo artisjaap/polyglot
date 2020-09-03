@@ -90,7 +90,7 @@ export const deleteLesson = createAction(
 
 export const lessonDeleted = createAction(
   '[] lesson deleted',
-  props<{lessonHeader: LessonHeaderResponse}>()
+  props<{lessonResponse: LessonResponse}>()
 );
 
 export const addNewTranslationToLesson = createAction(
@@ -132,6 +132,7 @@ export const practiceWordAnswerChecked = createAction(
   '[Practice Lesson] practice word answer checked',
   props<{practiceAnswerResponse: PracticeAnswerResponse}>()
 );
+
 
 
 

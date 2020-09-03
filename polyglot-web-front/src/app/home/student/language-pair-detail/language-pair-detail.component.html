@@ -27,10 +27,10 @@
           <i class="icofont-play-alt-1"></i>
         </a>
         <a class="action-link" (click)="generateLessonPdForLesson(a.id, false)" >
-          <i class="icofont-magic"></i>
+          <fa-icon [icon]="['fas', 'redo']"></fa-icon>
         </a>
         <a class="action-link" (click)="generateLessonPdForLesson(a.id, true)" >
-          <fa-duotone-icon [icon]="['fad','coffee']" [primaryColor]="'red'"  secondaryColor="blue" ></fa-duotone-icon>
+          <fa-icon [icon]="['fas', 'undo']"></fa-icon>
         </a>
       </div>
       <input type="text" #newLesson> <button (click)="createLesson(newLesson)">create</button>

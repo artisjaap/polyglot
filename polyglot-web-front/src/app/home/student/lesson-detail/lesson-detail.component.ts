@@ -41,8 +41,8 @@ export class LessonDetailComponent implements OnInit {
     const translation: NewTranslationForLessonRequest = {
       languagePairId: lesson.languagePairId,
       lessonId: lesson.id,
-      languageA: this.form.value.question,
-      languageB: this.form.value.solution
+      languageA: [this.form.value.question],
+      languageB: [this.form.value.solution]
     };
 
     this.store.dispatch(StudentActions.addNewTranslationToLesson({translation}));

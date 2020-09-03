@@ -25,7 +25,6 @@
     "@fortawesome/angular-fontawesome": "^0.7.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
     "@fortawesome/free-solid-svg-icons": "^5.14.0",
-    "@fortawesome/pro-duotone-svg-icons": "^5.14.0",
     "@ngrx/data": "^10.0.0",
     "@ngrx/effects": "^10.0.0",
     "@ngrx/entity": "^10.0.0",

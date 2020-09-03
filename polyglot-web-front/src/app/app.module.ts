@@ -24,43 +24,44 @@ import {FaIconLibrary, FontAwesomeModule} from '@fortawesome/angular-fontawesome
 
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    MatMenuModule,
-    MatButtonModule,
-    MatIconModule,
-    MatCardModule,
-    FontAwesomeModule,
-    AuthModule.forRoot(),
-    StoreModule.forRoot(reducers, {
-      metaReducers,
-      runtimeChecks: {
-        strictStateImmutability: true,
-        strictActionImmutability: true,
-        strictActionSerializability: false,
-        strictStateSerializability: false
-      }
-    }),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    EffectsModule.forRoot([]),
-    EntityDataModule.forRoot(entityConfig),
-    // StoreRouterConnectionModule.forRoot({
-    //   stateKey: 'router',
-    //   routerState: RouterState.Minimal
-    // })
-  ],
-  providers: [
-    {provide: 'API_URL', useValue: 'http://localhost:8080/'},
-    {provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true}
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        MatMenuModule,
+        MatButtonModule,
+        MatIconModule,
+        MatCardModule,
+        FontAwesomeModule,
+        AuthModule.forRoot(),
+        StoreModule.forRoot(reducers, {
+            metaReducers,
+            runtimeChecks: {
+                strictStateImmutability: true,
+                strictActionImmutability: true,
+                strictActionSerializability: false,
+                strictStateSerializability: false
+            }
+        }),
+        StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
+        EffectsModule.forRoot([]),
+        EntityDataModule.forRoot(entityConfig),
+        // StoreRouterConnectionModule.forRoot({
+        //   stateKey: 'router',
+        //   routerState: RouterState.Minimal
+        // })
+    ],
+    providers: [
+        {provide: 'API_URL', useValue: 'http://localhost:8080/'},
+        {provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true}
+    ],
+    exports: [],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 
