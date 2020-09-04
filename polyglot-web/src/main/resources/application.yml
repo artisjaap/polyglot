@@ -3,4 +3,11 @@ jwt:
   expiration: 36000000
 
 server:
-  port: 8081
+  port: 8080
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://polyglotdemo:polyglotdemo123@ds119572.mlab.com:19572/polyglot?authSource=polyglot&retryWrites=false
+
+  

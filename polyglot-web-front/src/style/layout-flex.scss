@@ -86,6 +86,13 @@
 .flex-item {
   flex: 1;
 
+  .minimal {
+    flex: 0
+  }
+
+  margin-right: 5px;
+  margin-left: 5px;
+
   &.flex-col-4 {
     flex: none;
     width: 25%;

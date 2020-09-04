@@ -6,31 +6,15 @@
 
 
     <div class="flex flex-column">
-      <div class="flex">
-        <form [formGroup]="form" class="create-card-form">
-          <div class="flex flex-row">
-            <mat-form-field class="full-width">
-              <input matInput placeholder="Language from" formControlName="question">
-            </mat-form-field>
-            <mat-form-field class="full-width">
-              <input matInput placeholder="Language to" formControlName="solution">
-            </mat-form-field>
-            <button mat-button color="warn" (click)="createTranslation(lesson)">
-              <i class="icofont-plus"></i>
-            </button>
-          </div>
-        </form>
+
+
+      <div *ngFor="let t of lesson.translations" class="flex-item flex-col-2">
+        <app-translation-editor [languageA]="t.languageA.join(';')" [languageB]="t.languageB.join(';')" [lessonId]="lesson.id"
+                                [languagePairId]="lesson.languagePairId"
+                                [translationId]="t.id"></app-translation-editor>
       </div>
 
-      <div class="flex flex-row flex-row-reverse flex-row-wrap-reverse">
-        <div *ngFor="let t of lesson.translations" class="flex-item flex-col-2">
-          <a class="action-link" (click)="removeWordFromLesson(t.id, lesson.id)">
-            <i class="icofont-bin"></i>
-          </a>
-          <span>{{t.languageA}} - {{t.languageB}}</span>
-          <app-translation-editor [languageA]="t.languageA" [languageB]="t.languageB"></app-translation-editor>
-        </div>
-      </div>
+      <fa-icon [icon]="['fas','plus']" size="4x" (click)="newPotentialTranslation(lesson)"></fa-icon>
     </div>
 
   </mat-card-content>

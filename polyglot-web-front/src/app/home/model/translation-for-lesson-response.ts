@@ -1,6 +1,6 @@
 export class TranslationForLessonResponse {
-  id: string;
-  lessonId: string;
-  languageA: string;
-  languageB: string;
+  constructor(readonly id: string,
+              readonly lessonId: string,
+              readonly languageA: string[],
+              readonly languageB: string[]){}
 }

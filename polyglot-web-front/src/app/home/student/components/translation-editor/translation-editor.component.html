@@ -1,11 +1,22 @@
-<form [formGroup]="form">
+<form [formGroup]="form" class="flex flex-row" style="position: relative">
 
-  <mat-form-field class="full-width">
-    <input matInput  formControlName="languageA">
-  </mat-form-field>
-  <mat-form-field class="full-width">
-    <input matInput formControlName="languageB">
-  </mat-form-field>
+
+
+    <fa-icon class="button flex-item minimal" [icon]="['fas', 'trash-alt']" (click)="removeWordFromLesson()"></fa-icon>
+
+
+    <mat-form-field class="full-width flex-item">
+      <input matInput  formControlName="languageA">
+    </mat-form-field>
+
+    <mat-form-field class="full-width flex-item">
+      <input matInput formControlName="languageB">
+    </mat-form-field>
+
+
+
+  <fa-icon style="position: absolute; right: 5px" *ngIf="form.dirty" [icon]="['fas', 'spinner']" [spin]="true"></fa-icon>
 
 
 </form>
+B_#s69!ceN4hR38

@@ -15,10 +15,17 @@ dependencies {
     implementation project(':artisjaap-migrate')
     implementation project(':artisjaap-document-web')
     implementation project(':artisjaap-backup-web')
+    implementation project(':artisjaap-i18n')
     implementation project(':artisjaap-i18n-web')
     implementation project(':artisjaap-mail-web')
     implementation project(':artisjaap-properties-web')
+    implementation project(':artisjaap-schedule')
     implementation project(':artisjaap-schedule-web')
+    implementation project(':artisjaap-document')
+    implementation project(':artisjaap-backup')
+    implementation project(':artisjaap-mail')
+    implementation project(':polyglot-web-swagger')
+    implementation project(':polyglot-web-front')
 
 
 

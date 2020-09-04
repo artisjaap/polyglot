@@ -5,4 +5,6 @@ export class LessonResponse {
   title: string;
   languagePairId: string;
   translations: TranslationForLessonResponse[];
+
+
 }

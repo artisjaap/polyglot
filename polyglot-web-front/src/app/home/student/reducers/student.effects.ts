@@ -176,8 +176,29 @@ export class StudentEffects {
   newTranslationForLesson$ = createEffect(
     () => this.actions$.pipe(
       ofType(StudentActions.addNewTranslationToLesson),
-      concatMap(payload => this.translationService.createNewTranslation(payload.translation)),
-      map(translation => StudentActions.newTranslationAdded({translation}))
+      concatMap(payload => this.translationService.createNewTranslation(payload.translation).pipe(
+        map(savedTranslation => {
+          return {
+            savedTranslation,
+            uuid: payload.uuid
+          }
+        })
+      )),
+      map(translation => StudentActions.newTranslationAdded({translation: translation.savedTranslation, uuid: translation.uuid}))
+    )
+  );
+
+  updateTranslation$ = createEffect(
+    () => this.actions$.pipe(
+      ofType(StudentActions.updateTranslation),
+      concatMap(payload => this.translationService.updateTranslation(payload.translation).pipe(
+        map(savedTranslation => {return {
+          savedTranslation,
+          uuid: payload.uuid
+        }})
+      )),
+      //array issue...
+      map(translation => StudentActions.translationUpdated({translation: translation.savedTranslation, uuid: translation.uuid}))
     )
   );
 

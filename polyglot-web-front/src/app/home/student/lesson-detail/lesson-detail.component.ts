@@ -9,6 +9,7 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {LessonResponse} from '../../model/lesson-response';
 import {lessonById} from '../reducers/student.selectors';
 import {NewTranslationForLessonRequest} from '../../model/new-translation-for-lesson-request';
+import {NewPotentialTranslation} from '../../model/new-potential-translation';
 
 @Component({
   selector: 'app-lesson-detail',
@@ -37,40 +38,13 @@ export class LessonDetailComponent implements OnInit {
 
   }
 
-  createTranslation(lesson: LessonResponse) {
-    const translation: NewTranslationForLessonRequest = {
-      languagePairId: lesson.languagePairId,
-      lessonId: lesson.id,
-      languageA: [this.form.value.question],
-      languageB: [this.form.value.solution]
-    };
+  newPotentialTranslation(lesson: LessonResponse) {
+    const translation = new NewPotentialTranslation(lesson.id, lesson.languagePairId);
 
-    this.store.dispatch(StudentActions.addNewTranslationToLesson({translation}));
+    this.store.dispatch(StudentActions.addNewPotentialTranslationToLesson({translation}));
   }
 
-  removeWordFromLesson(translationId: string, lessonId: string) {
-    this.store.dispatch(StudentActions.deleteTranslationFromLesson({translationId, lessonId}));
-  }
 
-  // removeWord(translationId: string, lessonId: string, lesson: Lesson) {
-  //   const updatedLesson: Update<Lesson> = {
-  //     id: lessonId,
-  //     changes: {...lesson, translations: lesson.translations.filter(t => t.translationId !== translationId)}
-  //   };
-  //   this.store.dispatch(StudentActions.removeTranslationFromLesson({translationId, lessonId, updatedLesson}));
-  // }
-  //
-  // createTranslation(lesson: Lesson) {
-  //   const data = this.form.value;
-  //
-  //   const updatedLesson = {
-  //     ...lesson,
-  //     translations: [...lesson.translations, data]
-  //   }
-  //   this.store.dispatch(StudentActions.addNewTranslation({
-  //     lessonId: lesson.id,
-  //     translation: data,
-  //     updatedLesson: updatedLesson
-  //   }))
-  // }
+
+
 }

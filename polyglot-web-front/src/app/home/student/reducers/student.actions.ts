@@ -9,6 +9,9 @@ import {TranslationsLoadedByFileResponse} from '../../model/translations-loaded-
 import {FileUpload} from '../../model/file-upload';
 import {PracticeAnswerResponse} from '../../model/practice-answer-response';
 import {PracticeAnswerValidateRequest} from '../../model/practice-answer-validate-request';
+import {UpdateTranslationForLessonRequest} from '../../model/update-translation-for-lesson-request';
+import {NewPotentialTranslation} from '../../model/new-potential-translation';
+import {UpdateTranslationForLessonAction} from '../../model/update-translation-for-lesson-action';
 
 
 
@@ -95,12 +98,27 @@ export const lessonDeleted = createAction(
 
 export const addNewTranslationToLesson = createAction(
   '[] add translation to lesson',
-  props<{ translation: NewTranslationForLessonRequest }>()
+  props<{ translation: NewTranslationForLessonRequest, uuid: string }>()
 );
 
 export const newTranslationAdded = createAction(
   '[] new translation added to lesson',
-  props<{translation: TranslationForLessonResponse}>()
+  props<{translation: TranslationForLessonResponse, uuid: string}>()
+);
+
+export const addNewPotentialTranslationToLesson = createAction(
+  '[] add new potential translation',
+  props<{translation: NewPotentialTranslation}>()
+);
+
+export const updateTranslation = createAction(
+  '[] update translation',
+  props<{ translation: UpdateTranslationForLessonRequest, uuid: string }>()
+);
+
+export const translationUpdated = createAction(
+  '[] translation updated',
+  props<{ translation: TranslationForLessonResponse, uuid: string }>()
 );
 
 export const deleteTranslationFromLesson = createAction(
