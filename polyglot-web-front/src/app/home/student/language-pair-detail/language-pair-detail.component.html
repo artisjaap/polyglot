@@ -32,6 +32,13 @@
         <a class="action-link" (click)="generateLessonPdForLesson(a.id, true)" >
           <fa-icon [icon]="['fas', 'undo']"></fa-icon>
         </a>
+        <a class="action-link" (click)="downloadLesson(a.id)" >
+          <fa-icon [icon]="['fas', 'download']"></fa-icon>
+        </a>
+        <a class="action-link" (click)="resetLessonPractice(a.id)" >
+          <fa-icon [icon]="['fas', 'recycle']"></fa-icon>
+        </a>
+
       </div>
       <input type="text" #newLesson> <button (click)="createLesson(newLesson)">create</button>
     </mat-card-content>

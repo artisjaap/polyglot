@@ -8,6 +8,7 @@ public class LessonTranslationPairTO {
     private String languageFrom;
     private String languageTo;
     private String question;
+    private Set<String> questions;
     private Set<String> solutions;
 
 
@@ -18,6 +19,7 @@ public class LessonTranslationPairTO {
         languageTo = builder.languageTo;
         question = builder.question;
         solutions = builder.solutions;
+        questions = builder.questions;
     }
 
     public static Builder newBuilder() {
@@ -40,6 +42,10 @@ public class LessonTranslationPairTO {
         return question;
     }
 
+    public Set<String> questions() {
+        return questions;
+    }
+
     public Set<String> solutions() {
         return solutions;
     }
@@ -55,6 +61,7 @@ public class LessonTranslationPairTO {
         private String languageTo;
         private String question;
         private Set<String> solutions;
+        private Set<String> questions;
 
         private Builder() {
         }
@@ -79,7 +86,12 @@ public class LessonTranslationPairTO {
             return this;
         }
 
-        public Builder withSolution(Set<String> val) {
+        public Builder withQuestions(Set<String> val) {
+            questions = val;
+            return this;
+        }
+
+        public Builder withSolutions(Set<String> val) {
             solutions = val;
             return this;
         }

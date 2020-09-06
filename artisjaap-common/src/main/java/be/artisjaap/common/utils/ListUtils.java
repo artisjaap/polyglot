@@ -27,6 +27,9 @@ public class ListUtils {
         if(list.isEmpty()){
             throw new IllegalStateException("empty list");
         }
+        if(list.size() == 1){
+            return list.iterator().next();
+        }
         
         if(Math.random() < chanceOnFirstElement){
             return list.iterator().next();

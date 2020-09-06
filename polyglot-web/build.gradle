@@ -24,7 +24,6 @@ dependencies {
     implementation project(':artisjaap-document')
     implementation project(':artisjaap-backup')
     implementation project(':artisjaap-mail')
-    implementation project(':polyglot-web-swagger')
     implementation project(':polyglot-web-front')
 
 

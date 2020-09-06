@@ -23,4 +23,9 @@ export class LessonPracticeTranslationService {
   public validatePracticeResult(practiceAnswerValidateRequest: PracticeWordCheckRequest): Observable<AnswerAndNextWordResponse> {
     return this.httpClient.post<AnswerAndNextWordResponse>(this.apiurl + `api/practice-lesson/check-and-next`, practiceAnswerValidateRequest );
   }
+
+  public resetLessonPractice(lessonId: string): Observable<any>{
+    return this.httpClient.get<PracticeWordResponse>(this.apiurl + `api/practice-lesson/${lessonId}/reset` );
+
+  }
 }

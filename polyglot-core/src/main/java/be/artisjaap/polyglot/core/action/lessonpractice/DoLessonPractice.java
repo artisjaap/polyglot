@@ -40,7 +40,8 @@ public class DoLessonPractice {
     
     public PracticeWordTO nextWordForLesson(String lessonId, OrderType orderType){
         LessonPractice lessonPractice = findOrCreateLessonPractice(new ObjectId(lessonId));
-        ObjectId translationId = lessonPractice.nextTranslationId();
+        LessonPracticeEvaluator lessonPracticeEvaluator = LessonPracticeEvaluator.forLessonPractice(lessonPractice);
+        ObjectId translationId = lessonPracticeEvaluator.nextTranslationId();
         lessonPracticeRepository.save(lessonPractice);
         return practiceWordBuilder.forTranslation(translationId.toString(), orderType);
     }
@@ -48,7 +49,8 @@ public class DoLessonPractice {
     public AnswerAndNextWordTO evaluateResultAndGetNext(PracticeWordCheckTO answer) {
         AnswerTO answerTO = findPracticeWords.checkAnswer(answer);
         LessonPractice lessonPractice = findOrCreateLessonPractice(new ObjectId(answer.lessonId()));
-        ObjectId translationId = lessonPractice.updateStatus(new ObjectId(answerTO.translationId()), answerTO.correctAnswer());
+        LessonPracticeEvaluator lessonPracticeEvaluator = LessonPracticeEvaluator.forLessonPractice(lessonPractice);
+        ObjectId translationId = lessonPracticeEvaluator.updateStatus(new ObjectId(answerTO.translationId()), answerTO.correctAnswer());
         PracticeWordTO practiceWordTO = practiceWordBuilder.forTranslation(translationId.toString(), answer.nextOrderType());
         lessonPracticeRepository.save(lessonPractice);
         LessonPracticeStatusTO lessonPracticeStatusTO = lessonPracticeStatus.forLesson(answer.lessonId());

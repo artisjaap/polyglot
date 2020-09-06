@@ -56,6 +56,8 @@ public class RegisterUsers extends AbstractInitScript {
         collectionInfo.allCollections();
 
         UserTO userTO = registerUser.newUser(NewUserTO.newBuilder().withUsername("stijn").withPassword("abc").withRole("STUDENT").build());
+        registerUser.newUser(NewUserTO.newBuilder().withUsername("emma").withPassword("abc").withRole("STUDENT").build());
+         registerUser.newUser(NewUserTO.newBuilder().withUsername("tibo").withPassword("abc").withRole("STUDENT").build());
         logger.info("User created with id: " + userTO.id());
 
 

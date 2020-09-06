@@ -57,5 +57,12 @@ public class LessonPracticeController {
         return ResponseEntity.ok(AnswerAndNextWordResponse.from(answerAndNextWordTO));
     }
 
-    
+    @RequestMapping(value = "/practice-lesson/{lessonId}/reset", method = RequestMethod.GET)
+    public @ResponseBody
+    ResponseEntity<?> resetPracticeLesson(@PathVariable String lessonId) {
+        this.doLessonPractice.resetLessonPractice(lessonId);
+        return ResponseEntity.ok().build();
+    }
+
+
 }

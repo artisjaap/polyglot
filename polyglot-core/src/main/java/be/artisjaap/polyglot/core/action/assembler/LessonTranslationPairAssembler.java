@@ -30,7 +30,8 @@ public class LessonTranslationPairAssembler implements Assembler<LessonTranslati
                 .withLanguageTo(languagePair.getLanguageTo())
                 .withIsReverse(false)
                 .withQuestion(ListUtils.getRandomFromCollection(translation.getLanguageA()))
-                .withSolution(includeSolution?translation.getLanguageB(): Set.of())
+                .withQuestions(translation.getLanguageA())
+                .withSolutions(includeSolution?translation.getLanguageB(): Set.of())
                 .withTranslationId(translation.getId().toString())
                 .build();
     }

@@ -107,5 +107,8 @@
     &:active{
       border-bottom-color: rebeccapurple;
     }
+    &:focus {
+      outline: none;
+    }
   }
 }

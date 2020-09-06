@@ -38,11 +38,11 @@ public class LessonPracticeTranslationStatus {
             this.correct++;
         }
 
-        updateStatus();
+
     }
 
-    private void updateStatus() {
-        if(asked >= 8 && percentage() > 70){
+    public void updateStatus(int timesAsked, int percentage) {
+        if(asked >= timesAsked && percentage() > percentage){
             setStatus(ProgressStatus.KNOWN);
         }
     }

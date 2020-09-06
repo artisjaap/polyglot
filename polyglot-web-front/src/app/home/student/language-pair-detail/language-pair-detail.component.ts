@@ -12,7 +12,9 @@ import {TranslationForLessonResponse} from '../../model/translation-for-lesson-r
 import {PracticeAnswerService} from '../../services/practice-answer.service';
 import {FileSaverService} from 'ngx-filesaver';
 import {JournalService} from '../../services/journal.service';
-import {filter, map} from "rxjs/operators";
+import {filter, first, map} from "rxjs/operators";
+import {LessonService} from "../../services/lesson-service";
+import {LessonPracticeTranslationService} from "../../services/lesson-practice-translation.service";
 
 @Component({
   selector: 'app-language-pair-detail',
@@ -32,6 +34,8 @@ export class LanguagePairDetailComponent implements OnInit {
               , private route: ActivatedRoute
               , private practiceAnswerService: PracticeAnswerService
               , private fileSaverService: FileSaverService
+              , private lessonService: LessonService,
+  private lessonPracticeTranslationService: LessonPracticeTranslationService
   ,           private journalService: JournalService) {
   }
 
@@ -84,7 +88,22 @@ export class LanguagePairDetailComponent implements OnInit {
       lessonId,
       numberOfWords: 0,
       reversed
-    }).subscribe(data => this.fileSaverService.save(data.body, 'test.pdf'));
+    }).pipe(first())
+      .subscribe(data => this.fileSaverService.save(data.body, 'test.pdf'));
+  }
+
+  downloadLesson(lessonId: string) {
+    this.lessonService.downloadLesson(lessonId)
+      .pipe(first())
+      .subscribe(data => {
+        this.fileSaverService.save(data.body, "les.lesson")
+      });
+  }
+
+  resetLessonPractice(lessonId: string){
+    this.lessonPracticeTranslationService.resetLessonPractice(lessonId)
+      .pipe(first())
+      .subscribe();
   }
 
 

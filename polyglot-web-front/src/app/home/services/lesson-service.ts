@@ -1,6 +1,6 @@
 import {Inject, Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpParams, HttpResponse} from '@angular/common/http';
 import {LessonResponse} from '../model/lesson-response';
 import {LessonHeaderResponse} from '../model/lesson-header-response';
 import {NewLessonHeaderRequest} from '../model/new-lesson-header-request';
@@ -23,6 +23,10 @@ export class LessonService {
 
   deleteLesson(lessonId: string): Observable<LessonResponse> {
     return this.httpClient.delete<LessonResponse>(this.apiurl + `api/lesson/${lessonId}` );
+  }
+
+  downloadLesson(lessonId: string): Observable<HttpResponse<Blob>> {
+    return this.httpClient.get(this.apiurl + `api/lesson/${lessonId}/download`,{observe: 'response', responseType: 'blob'});
   }
 
 }
