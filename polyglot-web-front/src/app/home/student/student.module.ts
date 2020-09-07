@@ -34,6 +34,7 @@ import {
   faUndo
 } from '@fortawesome/free-solid-svg-icons';
 import {TranslationEditorComponent} from './components/translation-editor/translation-editor.component';
+import { PracticeLessonMultipleChoiceComponent } from './practice-lesson-multiple-choice/practice-lesson-multiple-choice.component';
 
 
 
@@ -46,7 +47,7 @@ const entityMetadata: EntityMetadataMap = {
 
 
 @NgModule({
-  declarations: [StudentDashboardComponent, LanguagePairCardComponent, LanguagePairComponent, LanguagePairDetailComponent, StudentMainComponent, LessonDetailComponent, PracticeLessonComponent, TranslationEditorComponent],
+  declarations: [StudentDashboardComponent, LanguagePairCardComponent, LanguagePairComponent, LanguagePairDetailComponent, StudentMainComponent, LessonDetailComponent, PracticeLessonComponent, TranslationEditorComponent, PracticeLessonMultipleChoiceComponent],
   imports: [
     CommonModule,
     StudentRoutingModule,

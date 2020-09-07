@@ -26,6 +26,10 @@
         <a class="action-link"  [routerLink]="['/home', 'student', 'lesson', a.id, 'practice']">
           <i class="icofont-play-alt-1"></i>
         </a>
+
+        <a class="action-link"  [routerLink]="['/home', 'student', 'lesson', a.id, 'practice', 'multiple-choice']">
+          <i class="icofont-play-alt-1"></i>
+        </a>
         <a class="action-link" (click)="generateLessonPdForLesson(a.id, false)" >
           <fa-icon [icon]="['fas', 'redo']"></fa-icon>
         </a>

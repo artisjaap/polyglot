@@ -8,6 +8,7 @@ import {LanguagePairDetailResolver} from './LanguagePairDetailResolver';
 import {LessonDetailResolver} from './LessonDetailResolver';
 import {LessonDetailComponent} from './lesson-detail/lesson-detail.component';
 import {PracticeLessonComponent} from './practice-lesson/practice-lesson.component';
+import {PracticeLessonMultipleChoiceComponent} from './practice-lesson-multiple-choice/practice-lesson-multiple-choice.component';
 
 
 const routes: Routes = [
@@ -31,6 +32,10 @@ const routes: Routes = [
       },
       {
         path: 'lesson/:lessonId/practice', component: PracticeLessonComponent,
+        resolve: {LessonDetail: LessonDetailResolver}
+      },
+      {
+        path: 'lesson/:lessonId/practice/multiple-choice', component: PracticeLessonMultipleChoiceComponent,
         resolve: {LessonDetail: LessonDetailResolver}
       }
     ]
