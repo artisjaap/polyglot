@@ -26,6 +26,7 @@ export class PracticeLessonMultipleChoiceComponent implements OnInit, OnDestroy 
   lesson$: Observable<LessonResponse>;
   private lesson: LessonResponse = new LessonResponse();
   private lessonId: string;
+  languagePairId: string;
 
 
   public lessonPracticeStatus: LessonPracticeStatusResponse;
@@ -44,6 +45,7 @@ export class PracticeLessonMultipleChoiceComponent implements OnInit, OnDestroy 
               private lessonPracticeTranslationService: LessonPracticeTranslationService,
               private formBuilder: FormBuilder) {
     this.lessonId = route.snapshot.params.lessonId;
+    this.languagePairId = route.snapshot.params.languagePairId;
 
     this.lesson$ = store.select(lessonById, {lessonId: this.lessonId});
     this.lesson$.subscribe(l => this.lesson = l);

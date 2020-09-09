@@ -27,6 +27,7 @@ export class PracticeLessonComponent implements OnInit {
   private lesson: LessonResponse = new LessonResponse();
   private currentTranslationQueue: TranslationForLessonResponse[] = [];
   private lessonId: string;
+   languagePairId: string;
 
 
   public lessonPracticeStatus: LessonPracticeStatusResponse;
@@ -46,6 +47,7 @@ export class PracticeLessonComponent implements OnInit {
               private lessonPracticeTranslationService: LessonPracticeTranslationService,
               private formBuilder: FormBuilder) {
     this.lessonId = route.snapshot.params.lessonId;
+    this.languagePairId = route.snapshot.params.languagePairId;
 
     this.lesson$ = store.select(lessonById, {lessonId: this.lessonId});
     this.lesson$.subscribe(l => this.lesson = l);

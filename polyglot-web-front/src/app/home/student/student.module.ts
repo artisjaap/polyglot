@@ -24,8 +24,10 @@ import {FileSaverModule} from 'ngx-filesaver';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {FaIconLibrary, FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {
+  faChevronLeft,
+  faCircle,
   faCoffee,
-  faDownload,
+  faDownload, faEdit, faFilePdf, faList, faPlay,
   faPlus,
   faRecycle,
   faRedo,
@@ -35,6 +37,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import {TranslationEditorComponent} from './components/translation-editor/translation-editor.component';
 import { PracticeLessonMultipleChoiceComponent } from './practice-lesson-multiple-choice/practice-lesson-multiple-choice.component';
+import {MatMenuModule} from '@angular/material/menu';
 
 
 
@@ -54,6 +57,7 @@ const entityMetadata: EntityMetadataMap = {
     MatIconModule,
     MatCardModule,
     MatButtonModule,
+    MatMenuModule,
     ReactiveFormsModule,
     MatInputModule,
     MatFormFieldModule,
@@ -71,7 +75,7 @@ export class StudentModule {
 
   constructor(private eds: EntityDefinitionService, library: FaIconLibrary) {
     eds.registerMetadataMap(entityMetadata);
-    library.addIcons(faUndo, faRedo, faSpinner, faTrashAlt, faPlus, faDownload, faRecycle);
+    library.addIcons(faUndo, faRedo, faSpinner, faTrashAlt, faPlus, faDownload, faRecycle, faPlay, faFilePdf, faDownload, faCircle, faList, faEdit, faChevronLeft);
 
   }
 

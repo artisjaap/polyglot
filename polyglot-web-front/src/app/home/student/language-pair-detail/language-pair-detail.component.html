@@ -14,6 +14,10 @@
   <mat-card>
     <mat-card-title>
       lessons
+
+
+
+
     </mat-card-title>
     <mat-card-content>
       <div *ngFor="let a of lessonHeaders$ | async" class="flex flex-row">
@@ -23,28 +27,69 @@
 
         <span class="link" [routerLink]="['/home', 'student', 'lesson', a.id]">{{a.name}}</span>
 
-        <a class="action-link"  [routerLink]="['/home', 'student', 'lesson', a.id, 'practice']">
-          <i class="icofont-play-alt-1"></i>
-        </a>
 
-        <a class="action-link"  [routerLink]="['/home', 'student', 'lesson', a.id, 'practice', 'multiple-choice']">
-          <i class="icofont-play-alt-1"></i>
-        </a>
-        <a class="action-link" (click)="generateLessonPdForLesson(a.id, false)" >
-          <fa-icon [icon]="['fas', 'redo']"></fa-icon>
-        </a>
-        <a class="action-link" (click)="generateLessonPdForLesson(a.id, true)" >
-          <fa-icon [icon]="['fas', 'undo']"></fa-icon>
-        </a>
-        <a class="action-link" (click)="downloadLesson(a.id)" >
-          <fa-icon [icon]="['fas', 'download']"></fa-icon>
-        </a>
-        <a class="action-link" (click)="resetLessonPractice(a.id)" >
-          <fa-icon [icon]="['fas', 'recycle']"></fa-icon>
-        </a>
+
+
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+
+          <button mat-menu-item  [routerLink]="['/home', 'student', 'lesson', languagePairId, a.id, 'practice']">
+            <fa-layers fixedWidth="true" >
+              <fa-icon [icon]="['fas','play']" ></fa-icon>
+              <fa-icon [icon]="['fas','edit']" [inverse]="true"  transform="shrink-10" ></fa-icon>
+            </fa-layers>
+            <span>Practice</span>
+          </button>
+          <button mat-menu-item  [routerLink]="['/home', 'student', 'lesson', languagePairId, a.id, 'practice', 'multiple-choice']">
+            <fa-layers fixedWidth="true" >
+              <fa-icon [icon]="['fas','play']" ></fa-icon>
+              <fa-icon [icon]="['fas','list']" [inverse]="true"  transform="shrink-10" ></fa-icon>
+            </fa-layers>
+            <span>Practice Multiple choice</span>
+          </button>
+          <button mat-menu-item  (click)="generateLessonPdForLesson(a.id, false)" >
+            <fa-layers fixedWidth="true" >
+              <fa-icon [icon]="['fas','redo']" ></fa-icon>
+              <fa-icon [icon]="['fas','circle']"  transform="shrink-6" ></fa-icon>
+              <fa-icon [icon]="['fas','file-pdf']" [inverse]="true"  transform="shrink-10"></fa-icon>
+            </fa-layers>
+            <span>Pdf practice</span>
+          </button>
+          <button mat-menu-item  (click)="generateLessonPdForLesson(a.id, true)" >
+            <fa-layers fixedWidth="true" >
+              <fa-icon [icon]="['fas','undo']" ></fa-icon>
+              <fa-icon [icon]="['fas','circle']"  transform="shrink-6" ></fa-icon>
+              <fa-icon [icon]="['fas','file-pdf']" [inverse]="true"  transform="shrink-10"></fa-icon>
+            </fa-layers>
+            <span>Pdf practice reversed</span>
+          </button>
+          <button mat-menu-item  (click)="downloadLesson(a.id)" >
+            <fa-layers fixedWidth="true" >
+            <fa-icon [icon]="['fas','download']"></fa-icon>
+            </fa-layers>
+            <span>Download Lesson</span>
+          </button>
+          <button mat-menu-item  (click)="resetLessonPractice(a.id)" >
+            <fa-layers fixedWidth="true" >
+            <fa-icon [icon]="['fas','recycle']"></fa-icon>
+            </fa-layers>
+            <span>Reset</span>
+          </button>
+
+
+        </mat-menu>
+
 
       </div>
-      <input type="text" #newLesson> <button (click)="createLesson(newLesson)">create</button>
+      <div class="flex flex-column">
+        <div class="flex flex-row">
+          <input type="text" #newLesson> <button (click)="createLesson(newLesson)">create</button>
+        </div>
+      <input type="file"  #file (change)="onFilesAdded()" multiple>
+
+      </div>
     </mat-card-content>
   </mat-card>
 
@@ -53,9 +98,9 @@
       Upload lesson
     </mat-card-title>
     <mat-card-content>
-      <input type="file"  #file (change)="onFilesAdded()" multiple>
 
-      <input type="text" #newLesson> <button (click)="generateJournalPdf()">JOURNAL PDF</button>
+
+       <button (click)="generateJournalPdf()">JOURNAL PDF</button>
     </mat-card-content>
   </mat-card>
 

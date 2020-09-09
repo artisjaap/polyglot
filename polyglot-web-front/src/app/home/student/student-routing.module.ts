@@ -31,11 +31,11 @@ const routes: Routes = [
         resolve: {LessonDetail: LessonDetailResolver}
       },
       {
-        path: 'lesson/:lessonId/practice', component: PracticeLessonComponent,
+        path: 'lesson/:languagePairId/:lessonId/practice', component: PracticeLessonComponent,
         resolve: {LessonDetail: LessonDetailResolver}
       },
       {
-        path: 'lesson/:lessonId/practice/multiple-choice', component: PracticeLessonMultipleChoiceComponent,
+        path: 'lesson/:languagePairId/:lessonId/practice/multiple-choice', component: PracticeLessonMultipleChoiceComponent,
         resolve: {LessonDetail: LessonDetailResolver}
       }
     ]

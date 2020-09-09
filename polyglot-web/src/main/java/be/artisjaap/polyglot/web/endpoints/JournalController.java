@@ -12,15 +12,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
 public class JournalController {
 
+    @Resource
     private CreateJournalPdf createJournalPdf;
 
     @RequestMapping(value = "/journal/generate-pdf", method = RequestMethod.POST)
@@ -29,8 +33,10 @@ public class JournalController {
         Optional<byte[]> generatedPdf = createJournalPdf.forData(CreateJournalPdfTO.builder()
                 .languagePairId(createJournalPdfRequest.getLanguagePairId())
                 .lessonId(createJournalPdfRequest.getLessonId())
-                .from(createJournalPdfRequest.getFrom().atStartOfDay())
-                .to(LocalDateUtils.endOfDay(createJournalPdfRequest.getTo()))
+//                .from(createJournalPdfRequest.getFrom().atStartOfDay())
+                .from(LocalDateTime.MIN)
+//                .to(LocalDateUtils.endOfDay(createJournalPdfRequest.getTo()))
+                .to(LocalDateTime.MAX)
                 .userId(SecurityUtils.userId())
                 .build());
 

@@ -1,6 +1,7 @@
 <mat-card class="flex-item center main-content-large practice-word" *ngIf="lesson$ | async as lesson ">
   <mat-card-title>
-    {{lesson.title}}
+        <fa-icon [icon]="['fas','chevron-left']"  [routerLink]="['/home', 'student', 'language-pair', languagePairId]"></fa-icon>
+     {{lesson.title}}
   </mat-card-title>
   <mat-card-content>
     <div style="display:flex; flex-direction: row; ">
