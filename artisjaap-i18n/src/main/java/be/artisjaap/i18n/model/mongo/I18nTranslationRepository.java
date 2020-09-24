@@ -9,6 +9,7 @@ import java.util.Optional;
 
 public interface I18nTranslationRepository extends MongoRepository<Translation, ObjectId> {
     List<Translation> findAllByBundleName(String bundleName);
+    List<Translation> findAllByLanguageIsoCodeAndBundleName(String language, String bundleName);
 
     Optional<Translation> findByKeyAndLanguageIsoCode(String key, String language);
 }

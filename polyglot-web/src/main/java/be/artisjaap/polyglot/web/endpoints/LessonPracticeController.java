@@ -52,6 +52,7 @@ public class LessonPracticeController {
                 .withNextOrderType(practiceWordCheck.getNextOrderType())
                 .withTranslationId(practiceWordCheck.getTranslationId())
                 .withUserId(SecurityUtils.userId())
+                .withNormalized(practiceWordCheck.getNormalized())
                 .build();
         AnswerAndNextWordTO answerAndNextWordTO = this.doLessonPractice.evaluateResultAndGetNext(practiceWordCheckTO);
         return ResponseEntity.ok(AnswerAndNextWordResponse.from(answerAndNextWordTO));

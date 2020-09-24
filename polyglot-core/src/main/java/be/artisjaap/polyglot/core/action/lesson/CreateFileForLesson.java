@@ -24,7 +24,7 @@ public class CreateFileForLesson {
 
         lessonTO.translations().forEach(translation -> {
             sb.append(translation.questions().stream().collect(Collectors.joining("|")));
-            sb.append("=");
+            sb.append(",");
             sb.append(translation.solutions().stream().collect(Collectors.joining("|")));
             sb.append("\n");
 

@@ -1,0 +1,14 @@
+jar {
+    archiveBaseName = 'artisjaap-event'
+    archiveVersion = '0.0.1-SNAPSHOT'
+}
+
+dependencies {
+    compile project(':artisjaap-common')
+    
+
+    implementation 'com.google.cloud:google-cloud-texttospeech:1.2.1'
+
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+
+}

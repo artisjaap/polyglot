@@ -28,5 +28,12 @@ public class I18nTranslationBundle {
         return i18nTranslationAssembler.assembleTOs(allByBundleName);
     }
 
+    public List<TranslationTO> findAllForLanguageAndBundle(String language, String bundleName){
+        List<Translation> allByBundleName = i18nTranslationRepository.findAllByLanguageIsoCodeAndBundleName(language, bundleName);
+        return i18nTranslationAssembler.assembleTOs(allByBundleName);
+    }
+
+    
+
 }
 

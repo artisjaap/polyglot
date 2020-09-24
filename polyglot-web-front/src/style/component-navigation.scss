@@ -5,5 +5,16 @@ nav {
     background-color: $color-main;
     border-bottom: 1px solid black;
     color: $color-main-inv;
+    display: flex;
+    flex-direction: row;
+
+    .spacer {
+      flex: 1
+    }
+
+    .language{
+      margin: 5px;
+      cursor: pointer;
+    }
   }
 }

@@ -81,7 +81,6 @@ public class FindPracticeWords {
         TranslationPractice translationPractice = translationPracticeRepository.findByUserIdAndTranslationId(new ObjectId(practiceWordCheckTO.userId()), new ObjectId(practiceWordCheckTO.translationId()));
         Translation translation = translationRepository.findById(new ObjectId(practiceWordCheckTO.translationId())).orElseThrow(IllegalStateException::new);
         LanguagePairTO languagePairTO = findLanguagePair.byId(translation.getLanguagePairId().toString());
-        PracticeWordTO practiceWordTO = nextWord(practiceWordCheckTO.userId(), languagePairTO.id(), practiceWordCheckTO.nextOrderType());
 
 
         AnswerTO answerTO = checkPracticeAnswer(practiceWordCheckTO, translationPractice, translation, languagePairTO);
@@ -101,7 +100,7 @@ public class FindPracticeWords {
                 .withGivenAnswer(practiceWordCheckTO.answerGiven());
 
         if (practiceWordCheckTO.answerOrderType() == NORMAL) {
-            if (answerChecker.checkFor(translation.getLanguageB(), practiceWordCheckTO.answerGiven())) {
+            if (answerChecker.checkFor(translation.getLanguageB(), practiceWordCheckTO.answerGiven(), practiceWordCheckTO.getNormalized())) {
                 translationPractice.answerCorrect();
                 updateLanguagePairHealth.updateCorrect(languagePairTO.id());
                 answerTOBuilder.withCorrectAnswer(true)
@@ -118,7 +117,7 @@ public class FindPracticeWords {
             }
 
         } else if (practiceWordCheckTO.answerOrderType() == REVERSE) {
-            if (answerChecker.checkFor(translation.getLanguageA(), practiceWordCheckTO.answerGiven())) {
+            if (answerChecker.checkFor(translation.getLanguageA(), practiceWordCheckTO.answerGiven(), practiceWordCheckTO.getNormalized())) {
                 translationPractice.answerCorrectReverse();
                 updateLanguagePairHealth.updateCorrect(languagePairTO.id());
 

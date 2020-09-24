@@ -78,12 +78,6 @@ export class PracticeLessonMultipleChoiceComponent implements OnInit, OnDestroy 
 
   checkResult(val: string) {
 
-    const practiceAnswer: PracticeAnswerValidateRequest = {
-      lessonId: this.lesson.id,
-      translationId: this.question.translationId,
-      answerGiven: val,
-      answerOrderType: this.question.isReversed ? 'REVERSE' : 'NORMAL'
-    };
 
     this.lessonPracticeTranslationService.validatePracticeResult(new PracticeWordCheckRequest(
       this.lesson.id,
@@ -91,7 +85,8 @@ export class PracticeLessonMultipleChoiceComponent implements OnInit, OnDestroy 
       this.question.translationId,
       val,
       this.form.value.reversed ? 'REVERSE' : 'NORMAL',
-      this.form.value.reversed ? 'REVERSE' : 'NORMAL'
+      this.form.value.reversed ? 'REVERSE' : 'NORMAL',
+      false
     )).pipe(first())
       .subscribe(question => {
         this.updateStats(question.answerResponse);

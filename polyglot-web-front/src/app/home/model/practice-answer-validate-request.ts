@@ -4,4 +4,5 @@ export class PracticeAnswerValidateRequest {
   translationId: string;
   answerGiven: string;
   answerOrderType: string;
+  normalized: boolean;
 }

@@ -1,10 +1,19 @@
 <nav class="main-nav">
 <!--  <button mat-button [routerLink]="['']"><mat-icon>home</mat-icon> Home </button>-->
-  <button mat-button [routerLink]="['login']" *ngIf="isLoggedOut$ | async"> <i class="icofont-login icofont-2x"></i> login</button>
-  <button mat-button [routerLink]="['home']" *ngIf="isLoggedIn$ | async"><i class="icofont-home icofont-2x"></i> home </button>
-  <button mat-button [routerLink]="['home','student','dashboard']"*ngIf="isLoggedIn$ | async"> <i class="icofont-dashboard icofont-2x"></i> home/student</button>
-  <button mat-button (click)="logout()"*ngIf="isLoggedIn$ | async"><i class="icofont-logout icofont-2x"></i> logout</button>
+  <button mat-button [routerLink]="['login']" *ngIf="isLoggedOut$ | async"> <i class="icofont-login icofont-2x"></i>  {{'MAIN_LOGIN' | translate}}</button>
+  <button mat-button [routerLink]="['home']" *ngIf="isLoggedIn$ | async"><i class="icofont-home icofont-2x"></i>  {{'MAIN_HOME' | translate}} </button>
+  <button mat-button [routerLink]="['home','student','dashboard']"*ngIf="isLoggedIn$ | async"> <i class="icofont-dashboard icofont-2x"></i>  {{'MAIN_STUDENTS' | translate}} </button>
+  <button mat-button (click)="logout()"*ngIf="isLoggedIn$ | async"><i class="icofont-logout icofont-2x"></i>  {{'MAIN_LOGOUT' | translate}} </button>
+
+
+  <span class="spacer"></span>
+
+  <span (click)="changeLanguage('nl')" class="language"> <img src="assets/languages/belgium-flag-3d-round-icon-32.png"/></span>
+  <span (click)="changeLanguage('en')" class="language"> <img src="assets/languages/united-states-of-america-flag-3d-round-icon-32.png"/></span>
 </nav>
 
 <router-outlet></router-outlet>
+
+
+
 

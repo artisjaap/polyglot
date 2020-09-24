@@ -9,7 +9,7 @@ import { reducers, metaReducers } from './reducers/app.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import {AuthModule} from './auth/auth.module';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
 import {EntityDataModule, EntityDefinitionService} from '@ngrx/data';
 import { entityConfig } from './entity-metadata';
@@ -19,9 +19,28 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
-import {FaIconLibrary, FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {TextToSpeechModule} from './common/text-to-speech/text-to-speech.module';
+import {ServerSentEventsModule} from './common/server-sent-events/server-sent-events.module';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {TranslationLoaderService} from './common/translations/translation-loader.service';
+import {Observable} from 'rxjs';
+import {AppTranslations} from './common/translations/app-translations';
 
+export function createPolyglotTranslationLoader(translationLoaderService: TranslationLoaderService){
+  return new PolyglotTranslationLoader(translationLoaderService);
+}
 
+export class PolyglotTranslationLoader implements TranslateLoader {
+
+  constructor(private translationLoaderService: TranslationLoaderService) {
+  }
+
+  public getTranslation(language: string): Observable<AppTranslations> {
+    return this.translationLoaderService.forLanguage(language);
+  }
+}
 
 @NgModule({
     declarations: [
@@ -38,6 +57,8 @@ import {FaIconLibrary, FontAwesomeModule} from '@fortawesome/angular-fontawesome
         MatIconModule,
         MatCardModule,
         FontAwesomeModule,
+        TextToSpeechModule.forRoot(),
+        ServerSentEventsModule.forRoot(),
         AuthModule.forRoot(),
         StoreModule.forRoot(reducers, {
             metaReducers,
@@ -51,6 +72,14 @@ import {FaIconLibrary, FontAwesomeModule} from '@fortawesome/angular-fontawesome
         StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
         EffectsModule.forRoot([]),
         EntityDataModule.forRoot(entityConfig),
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useFactory: createPolyglotTranslationLoader,
+            deps: [TranslationLoaderService]
+          },
+          defaultLanguage: 'nl'
+        })
         // StoreRouterConnectionModule.forRoot({
         //   stateKey: 'router',
         //   routerState: RouterState.Minimal

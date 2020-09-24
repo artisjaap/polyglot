@@ -49,6 +49,12 @@
             </fa-layers>
             <span>Practice Multiple choice</span>
           </button>
+          <button mat-menu-item  [routerLink]="['/home', 'student', 'lesson', languagePairId, a.id, 'practice', 'speech']">
+            <fa-layers fixedWidth="true" >
+              <fa-icon [icon]="['fas','play']" ></fa-icon>
+            </fa-layers>
+            <span>Autoplay speech</span>
+          </button>
           <button mat-menu-item  (click)="generateLessonPdForLesson(a.id, false)" >
             <fa-layers fixedWidth="true" >
               <fa-icon [icon]="['fas','redo']" ></fa-icon>
@@ -95,12 +101,43 @@
 
   <mat-card>
     <mat-card-title>
-      Upload lesson
+      Language pair
     </mat-card-title>
     <mat-card-content>
+      <div class="flex flex-column">
+        <form [formGroup]="form">
+          <div class="flex flex-row">
+
+            <mat-form-field class="example-full-width">
+              <mat-label>Language A</mat-label>
+              <input type="text" matInput formControlName="languageA" [matAutocomplete]="auto">
+              <mat-autocomplete #auto="matAutocomplete" >
+                <mat-option *ngFor="let option of listAllVoices()" [value]="option">
+                  {{option.name}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
 
 
-       <button (click)="generateJournalPdf()">JOURNAL PDF</button>
+          </div>
+          <div class="flex flex-row">
+
+
+            <mat-form-field class="example-full-width">
+              <mat-label>Language B</mat-label>
+              <input type="text" matInput formControlName="languageB" [matAutocomplete]="auto2">
+              <mat-autocomplete #auto2="matAutocomplete" >
+                <mat-option *ngFor="let option of listAllVoices()" [value]="option">
+                  {{option.name}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+
+        </form>
+      </div>
+
+
     </mat-card-content>
   </mat-card>
 

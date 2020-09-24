@@ -8,6 +8,7 @@ public class PracticeWordCheckTO {
     private String translationId;
     private String answerGiven;
     private String questionGiven;
+    private Boolean normalized;
     private OrderType answerOrderType;
     private OrderType nextOrderType;
 
@@ -19,6 +20,7 @@ public class PracticeWordCheckTO {
         answerOrderType = builder.answerOrderType;
         nextOrderType = builder.nextOrderType;
         questionGiven = builder.questionGiven;
+        normalized = builder.normalized;
     }
 
     public static Builder newBuilder() {
@@ -52,6 +54,10 @@ public class PracticeWordCheckTO {
     public String lessonId() {
         return lessonId;
     }
+    
+    public Boolean getNormalized(){
+        return normalized;
+    }
 
     public static final class Builder {
         private String lessonId;
@@ -59,6 +65,7 @@ public class PracticeWordCheckTO {
         private String translationId;
         private String answerGiven;
         private String questionGiven;
+        private Boolean normalized;
         private OrderType answerOrderType;
         private OrderType nextOrderType;
 
@@ -99,6 +106,10 @@ public class PracticeWordCheckTO {
             return this;
         }
 
+        public Builder withNormalized(Boolean val){
+            normalized = val;
+            return this;
+        }
 
 
         public PracticeWordCheckTO build() {

@@ -12,9 +12,12 @@ import {TranslationForLessonResponse} from '../../model/translation-for-lesson-r
 import {PracticeAnswerService} from '../../services/practice-answer.service';
 import {FileSaverService} from 'ngx-filesaver';
 import {JournalService} from '../../services/journal.service';
-import {filter, first, map} from "rxjs/operators";
-import {LessonService} from "../../services/lesson-service";
-import {LessonPracticeTranslationService} from "../../services/lesson-practice-translation.service";
+import {filter, first, map} from 'rxjs/operators';
+import {LessonService} from '../../services/lesson-service';
+import {LessonPracticeTranslationService} from '../../services/lesson-practice-translation.service';
+import {TextToSpeechService} from '../../../common/text-to-speech/services/text-to-speech.service';
+import {BrowserLanguage} from '../../../common/text-to-speech/model/browser-language';
+import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-language-pair-detail',
@@ -30,13 +33,22 @@ export class LanguagePairDetailComponent implements OnInit {
   @ViewChild('file', {static: true}) file;
   public files: Set<File> = new Set();
 
-  constructor(private store: Store<AppState>
-              , private route: ActivatedRoute
-              , private practiceAnswerService: PracticeAnswerService
-              , private fileSaverService: FileSaverService
-              , private lessonService: LessonService,
-  private lessonPracticeTranslationService: LessonPracticeTranslationService
-  ,           private journalService: JournalService) {
+  form: FormGroup;
+
+  constructor(private store: Store<AppState>,
+              private route: ActivatedRoute,
+              private practiceAnswerService: PracticeAnswerService,
+              private fileSaverService: FileSaverService,
+              private lessonService: LessonService,
+              private lessonPracticeTranslationService: LessonPracticeTranslationService,
+              private journalService: JournalService,
+              private textToSpeechService: TextToSpeechService,
+              private fb: FormBuilder) {
+
+    this.form = fb.group({
+      languageA: [],
+      languageB: []
+    });
   }
 
   ngOnInit() {
@@ -96,7 +108,7 @@ export class LanguagePairDetailComponent implements OnInit {
     this.lessonService.downloadLesson(lessonId)
       .pipe(first())
       .subscribe(data => {
-        this.fileSaverService.save(data.body, "les.lesson")
+        this.fileSaverService.save(data.body, 'les.lesson');
       });
   }
 
@@ -106,6 +118,9 @@ export class LanguagePairDetailComponent implements OnInit {
       .subscribe();
   }
 
+  listAllVoices(): BrowserLanguage[] {
+    return this.textToSpeechService.listAvailableVoices();
+  }
 
 }
 

@@ -7,6 +7,7 @@ public class PracticeWordCheckRequest {
     private String userId;
     private String translationId;
     private String answerGiven;
+    private Boolean normalized;
     private OrderType answerOrderType;
     private OrderType nextOrderType;
 
@@ -19,6 +20,7 @@ public class PracticeWordCheckRequest {
         answerGiven = builder.answerGiven;
         answerOrderType = builder.answerOrderType;
         nextOrderType = builder.nextOrderType;
+        normalized = builder.normalized;
     }
 
     public static Builder newBuilder() {
@@ -48,12 +50,17 @@ public class PracticeWordCheckRequest {
     public String getLessonId() {
         return lessonId;
     }
+    
+    public Boolean getNormalized() {
+        return normalized;
+    }
 
     public static final class Builder {
         private String lessonId;
         private String userId;
         private String translationId;
         private String answerGiven;
+        private Boolean normalized = true;
         private OrderType answerOrderType;
         private OrderType nextOrderType;
 
@@ -90,6 +97,11 @@ public class PracticeWordCheckRequest {
             return this;
         }
 
+        public Builder withNormalized(Boolean val) {
+            normalized = val;
+            return this;
+        }
+        
         public PracticeWordCheckRequest build() {
             return new PracticeWordCheckRequest(this);
         }

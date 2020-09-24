@@ -4,6 +4,7 @@ export class PracticeWordCheckRequest {
               readonly translationId: string,
               readonly answerGiven: string,
               readonly answerOrderType: string,
-              readonly nextOrderType: string) {
+              readonly nextOrderType: string,
+              readonly normalized: boolean) {
   }
 }

@@ -38,6 +38,8 @@ import {
 import {TranslationEditorComponent} from './components/translation-editor/translation-editor.component';
 import { PracticeLessonMultipleChoiceComponent } from './practice-lesson-multiple-choice/practice-lesson-multiple-choice.component';
 import {MatMenuModule} from '@angular/material/menu';
+import { PracticeLessonSpeechComponent } from './practice-lesson-speech/practice-lesson-speech.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 
 
@@ -50,24 +52,26 @@ const entityMetadata: EntityMetadataMap = {
 
 
 @NgModule({
-  declarations: [StudentDashboardComponent, LanguagePairCardComponent, LanguagePairComponent, LanguagePairDetailComponent, StudentMainComponent, LessonDetailComponent, PracticeLessonComponent, TranslationEditorComponent, PracticeLessonMultipleChoiceComponent],
-  imports: [
-    CommonModule,
-    StudentRoutingModule,
-    MatIconModule,
-    MatCardModule,
-    MatButtonModule,
-    MatMenuModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    FileSaverModule,
-    EffectsModule.forFeature([StudentEffects]),
-    StoreModule.forFeature(fromStudent.studentFeatureKey, fromStudent.reducers),
-    MatCheckboxModule,
-    FontAwesomeModule
-  ],
+  declarations: [StudentDashboardComponent, LanguagePairCardComponent, LanguagePairComponent, LanguagePairDetailComponent, StudentMainComponent, LessonDetailComponent, PracticeLessonComponent, TranslationEditorComponent, PracticeLessonMultipleChoiceComponent, PracticeLessonSpeechComponent],
+    imports: [
+        CommonModule,
+        StudentRoutingModule,
+        MatAutocompleteModule,
+        MatIconModule,
+        MatCardModule,
+        MatButtonModule,
+        MatMenuModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        FileSaverModule,
+        EffectsModule.forFeature([StudentEffects]),
+        StoreModule.forFeature(fromStudent.studentFeatureKey, fromStudent.reducers),
+        MatCheckboxModule,
+        FontAwesomeModule,
+        MatAutocompleteModule
+    ],
   providers: []
 })
 

@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
 import {isLoggedIn, isLoggedOut} from './auth/reducers/auth.selectors';
 import {login} from './auth/reducers/auth.actions';
 import {AuthActions} from './auth/action-types';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,7 @@ export class AppComponent implements OnInit {
   isLoggedIn$: Observable<boolean>;
   isLoggedOut$: Observable<boolean>;
 
-  constructor(private store: Store<AppState>) {
+  constructor(private store: Store<AppState>, private translate: TranslateService) {
 
   }
 
@@ -40,5 +41,10 @@ export class AppComponent implements OnInit {
 
   logout() {
     this.store.dispatch(AuthActions.logout());
+  }
+
+
+  changeLanguage(lang: string){
+    this.translate.use(lang);
   }
 }

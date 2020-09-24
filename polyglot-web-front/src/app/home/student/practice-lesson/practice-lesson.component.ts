@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {Observable, of, Subscription} from 'rxjs';
+import {noop, Observable, of, Subscription} from 'rxjs';
 import {LessonResponse} from '../../model/lesson-response';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../../reducers/app.reducer';
@@ -15,6 +15,7 @@ import {PracticeWordCheckRequest} from '../../model/practice-word-check-request'
 import {AnswerResponse} from '../../model/answer-response';
 import {LessonPracticeStatusResponse} from '../../model/lesson-practice-status-response';
 import {LessonPracticeTransationStatusResponse} from '../../model/lesson-practice-transation-status-response';
+import {TextToSpeechService} from '../../../common/text-to-speech/services/text-to-speech.service';
 
 @Component({
   selector: 'app-practice-lesson',
@@ -37,15 +38,25 @@ export class PracticeLessonComponent implements OnInit {
 
   stats = {aantalOpgelost: 0, aantalJuist: 0, aantalFout: 0};
 
-  question: PracticeWordResponse;
+  _question: PracticeWordResponse;
   previousAnswer$: Observable<AnswerResponse>;
+
+  get question() {
+    return this._question;
+  }
+
+  set question(q){
+    this._question = q;
+    this.textToSpeechService.talk(q.question, 'fr').subscribe(noop, noop, () => console.log("completed"));
+  }
 
   private settingsChangedSubscription: Subscription;
 
   constructor(private store: Store<AppState>,
               private route: ActivatedRoute,
               private lessonPracticeTranslationService: LessonPracticeTranslationService,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private textToSpeechService: TextToSpeechService) {
     this.lessonId = route.snapshot.params.lessonId;
     this.languagePairId = route.snapshot.params.languagePairId;
 
@@ -58,7 +69,8 @@ export class PracticeLessonComponent implements OnInit {
     });
 
     this.form = formBuilder.group({
-      reversed: [false]
+      reversed: [false],
+      normalized: [false]
     });
 
     this.settingsChangedSubscription = this.form.valueChanges.subscribe(v => {
@@ -76,12 +88,7 @@ export class PracticeLessonComponent implements OnInit {
 
 
   check(answer: HTMLInputElement) {
-    const practiceAnswer: PracticeAnswerValidateRequest = {
-      lessonId: this.lesson.id,
-      translationId: this.question.translationId,
-      answerGiven: answer.value,
-      answerOrderType: this.question.isReversed ? 'REVERSE' : 'NORMAL'
-    };
+
 
     this.lessonPracticeTranslationService.validatePracticeResult(new PracticeWordCheckRequest(
       this.lesson.id,
@@ -89,7 +96,8 @@ export class PracticeLessonComponent implements OnInit {
       this.question.translationId,
       answer.value,
       this.form.value.reversed ? 'REVERSE' : 'NORMAL',
-      this.form.value.reversed ? 'REVERSE' : 'NORMAL'
+      this.form.value.reversed ? 'REVERSE' : 'NORMAL',
+      this.form.value.normalized
     )).pipe(first())
       .subscribe(question => {
         this.updateStats(question.answerResponse);
