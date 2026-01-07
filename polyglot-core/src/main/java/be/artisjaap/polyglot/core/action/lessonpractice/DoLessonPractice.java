@@ -17,6 +17,8 @@ import be.artisjaap.polyglot.core.model.LessonRepository;
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 public class DoLessonPractice {
 
@@ -41,17 +43,17 @@ public class DoLessonPractice {
     public PracticeWordTO nextWordForLesson(String lessonId, OrderType orderType){
         LessonPractice lessonPractice = findOrCreateLessonPractice(new ObjectId(lessonId));
         LessonPracticeEvaluator lessonPracticeEvaluator = LessonPracticeEvaluator.forLessonPractice(lessonPractice);
-        ObjectId translationId = lessonPracticeEvaluator.nextTranslationId();
+        Optional<ObjectId> translationId = lessonPracticeEvaluator.nextTranslationId();
         lessonPracticeRepository.save(lessonPractice);
-        return practiceWordBuilder.forTranslation(translationId.toString(), orderType);
+        return practiceWordBuilder.forTranslation(translationId.map(ObjectId::toString).orElse(null), orderType);
     }
     
     public AnswerAndNextWordTO evaluateResultAndGetNext(PracticeWordCheckTO answer) {
         AnswerTO answerTO = findPracticeWords.checkAnswer(answer);
         LessonPractice lessonPractice = findOrCreateLessonPractice(new ObjectId(answer.lessonId()));
         LessonPracticeEvaluator lessonPracticeEvaluator = LessonPracticeEvaluator.forLessonPractice(lessonPractice);
-        ObjectId translationId = lessonPracticeEvaluator.updateStatus(new ObjectId(answerTO.translationId()), answerTO.correctAnswer());
-        PracticeWordTO practiceWordTO = practiceWordBuilder.forTranslation(translationId.toString(), answer.nextOrderType());
+        Optional<ObjectId> translationId = lessonPracticeEvaluator.updateStatus(new ObjectId(answerTO.translationId()), answerTO.correctAnswer());
+        PracticeWordTO practiceWordTO = practiceWordBuilder.forTranslation(translationId.map(ObjectId::toString).orElse(null), answer.nextOrderType());
         lessonPracticeRepository.save(lessonPractice);
         LessonPracticeStatusTO lessonPracticeStatusTO = lessonPracticeStatus.forLesson(answer.lessonId());
         return AnswerAndNextWordTO.newBuilder()

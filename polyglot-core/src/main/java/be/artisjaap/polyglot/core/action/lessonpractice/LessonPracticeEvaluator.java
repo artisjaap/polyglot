@@ -34,22 +34,22 @@ public class LessonPracticeEvaluator {
         return new LessonPracticeEvaluator(lessonPractice);
     }
 
-    public ObjectId nextTranslationId(){
+    public Optional<ObjectId> nextTranslationId(){
         return nextTranslationId(null);
     }
 
 
-    public ObjectId nextTranslationId(ObjectId previousTranslationId) {
+    public Optional<ObjectId> nextTranslationId(ObjectId previousTranslationId) {
         if(itemsInStatus(ProgressStatus.IN_PROGRESS) < START_NUMBER_OF_WORDS){
-            return revealNewWord().orElseGet(() -> randomWordInProgress(previousTranslationId));
+            return Optional.ofNullable(revealNewWord().orElseGet(() -> randomWordInProgress(previousTranslationId).orElseGet(null)));
         }else if(scoreGoodEnough()){
-            return revealNewWord().orElseGet(() -> randomWordInProgress(previousTranslationId));
+            return Optional.ofNullable(revealNewWord().orElseGet(() -> randomWordInProgress(previousTranslationId).orElseGet(null)));
         }else {
             return randomWordInProgress(previousTranslationId);
         }
     }
 
-    public ObjectId updateStatus(ObjectId translationId, boolean correct) {
+    public Optional<ObjectId> updateStatus(ObjectId translationId, boolean correct) {
         lessonPractice.getTranslationStatus().stream().filter(translationStatus -> translationStatus.getTranslationId().equals(translationId))
                 .findFirst()
                 .ifPresent(t -> {
@@ -84,15 +84,17 @@ public class LessonPracticeEvaluator {
         return lessonPractice.getTranslationStatus().stream().filter(translationStatus -> translationStatus.getStatus() == status).count();
     }
 
-    private ObjectId randomWordInProgress(ObjectId previousTranslationId) {
+    private Optional<ObjectId> randomWordInProgress(ObjectId previousTranslationId) {
         List<LessonPracticeTranslationStatus> collect = lessonPractice.getTranslationStatus().stream()
                 .filter(translationStatus -> translationStatus.getStatus() == ProgressStatus.IN_PROGRESS)
                 .filter(translationStatus -> !translationStatus.getTranslationId().equals(previousTranslationId))
                 .sorted(Comparator.comparing(LessonPracticeTranslationStatus::knowledgeStatus))
                 .collect(Collectors.toList());
 
-        System.out.println(collect.stream().map(LessonPracticeTranslationStatus::print).collect(Collectors.joining(";")));
-        return ListUtils.getRandomElement(collect.stream().limit(5).map(LessonPracticeTranslationStatus::getTranslationId).collect(Collectors.toList()), 0.5);
+        if(collect.isEmpty()){
+            return Optional.empty();
+        }
+        return Optional.of(ListUtils.getRandomElement(collect.stream().limit(5).map(LessonPracticeTranslationStatus::getTranslationId).collect(Collectors.toList()), 0.5));
 
     }
 

@@ -5,6 +5,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class PracticeWordTO {
+    private Boolean ended;
     private Boolean isReversed;
     private String translationId;
     private String question;
@@ -41,6 +42,7 @@ public class PracticeWordTO {
         anwserLanguage = builder.anwserLanguage;
         wordStatsTO = builder.wordStatsTO;
         answers = builder.answers;
+        ended = builder.ended;
     }
 
     public WordStatsTO wordStatsTO() {
@@ -61,6 +63,7 @@ public class PracticeWordTO {
                 ", answer='" + answers.stream().collect(Collectors.joining(", ")) + '\'' +
                 ", anwserLanguage='" + anwserLanguage + '\'' +
                 ", wordStatsTO=" + wordStatsTO +
+                ", ended=" + ended +
                 '}';
     }
 
@@ -70,6 +73,7 @@ public class PracticeWordTO {
 
     public static final class Builder {
         private Boolean isReversed;
+        private Boolean ended;
         private String translationId;
         private String question;
         private Set<String> answers;
@@ -113,6 +117,11 @@ public class PracticeWordTO {
 
         public Builder withAnswer(Set<String> answers) {
             this.answers = answers;
+            return this;
+        }
+
+        public Builder withEnded(Boolean ended) {
+            this.ended = ended;
             return this;
         }
 

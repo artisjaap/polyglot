@@ -5,24 +5,24 @@ jar {
 }
 
 
-apply plugin: 'org.asciidoctor.convert'
-
-asciidoctor {
-    backends 'html5'
-    sourceDir = file('asciidoc')
-    sources {
-        include '**/*.adoc'
-    }
-    outputDir = file('build/docs')
-
-
-    attributes    'icons' : 'font' ,
-    'linkcss' : 'false' ,
-    'source-highlighter' : 'coderay' ,
-    'coderay-css' : 'class' ,
-    'toc' : 'left' ,
-    'toclevels' : '2' ,
-    'sectnums' : 'true' ,
-    'sectanchors' : 'true' ,
-    'sectlinks' : 'true'
-}
+//apply plugin: 'org.asciidoctor.convert'
+//
+//asciidoctor {
+//    backends 'html5'
+//    sourceDir = file('asciidoc')
+//    sources {
+//        include '**/*.adoc'
+//    }
+//    outputDir = file('build/docs')
+//
+//
+//    attributes    'icons' : 'font' ,
+//    'linkcss' : 'false' ,
+//    'source-highlighter' : 'coderay' ,
+//    'coderay-css' : 'class' ,
+//    'toc' : 'left' ,
+//    'toclevels' : '2' ,
+//    'sectnums' : 'true' ,
+//    'sectanchors' : 'true' ,
+//    'sectlinks' : 'true'
+//}

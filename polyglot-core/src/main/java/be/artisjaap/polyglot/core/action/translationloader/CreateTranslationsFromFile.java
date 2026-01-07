@@ -55,7 +55,8 @@ public class CreateTranslationsFromFile {
 
             createOrUpdateVerb.forVerb(newOrUpdateVerbTO);
 
-            return TranslationsForUserTO.newBuilder().build();
+            return TranslationsForUserTO.newBuilder()
+                    .build();
         }else{
 
 

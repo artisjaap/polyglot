@@ -8,6 +8,6 @@ server:
 spring:
   data:
     mongodb:
-      uri: mongodb://polyglotdemo:polyglotdemo123@ds119572.mlab.com:19572/polyglot?authSource=polyglot&retryWrites=false
+      uri: mongodb://localhost:27017/polyglot?authSource=polyglot&retryWrites=false
 
   

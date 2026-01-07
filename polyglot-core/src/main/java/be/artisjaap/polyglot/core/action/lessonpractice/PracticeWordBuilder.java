@@ -35,6 +35,10 @@ public class PracticeWordBuilder {
 
     public PracticeWordTO forTranslation(String translationId, OrderType orderType) {
 
+        if (null == translationId) {
+            return PracticeWordTO.newBuilder().withEnded(true).build();
+        }
+
         ObjectId translationObjectId = new ObjectId(translationId);
         TranslationPractice translationPractice = translationPracticeRepository.findByTranslationId(translationObjectId).orElseThrow();
         Translation translation = translationRepository.findById(translationObjectId).orElseThrow();
@@ -69,6 +73,7 @@ public class PracticeWordBuilder {
                 .build();
 
         return PracticeWordTO.newBuilder()
+                .withEnded(false)
                 .withQuestionLanguage(languageFrom)
                 .withAnwserLanguage(languageTo)
                 .withQuestion(deriveQuestion(translation, orderWithoutRandom))
